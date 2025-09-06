@@ -1,0 +1,168 @@
+\part{Grundlagen und Kontext}
+\chapterimage{Bilder_und_Co/a_magnifying_glass_which_points_out_a_neuronal_network_surrounded_by_computer_code_and_a_question_ma_296098326.png} % Chapter heading image
+%----------------------------------------------------------------------------------------
+\chapter{Radar in der Luftfahrt}
+
+
+\section{Radar Grundlagen}
+
+\subsection{Prinzip}
+Senden–Empfangen von EM-Wellen, 
+Laufzeit => Entfernung, 
+Doppler => Relativgeschwindigkeit, 
+Antenne/Beam => Winkel.
+
+\subsection{Wichtige Größen}
+SNR, PRF, Pulsbreite, 
+Bandbreite/Entfernungsauflösung, 
+Dopplerauflösung, Beamwidth, 
+CFAR (Konstante Falschalarmrate).
+
+\subsection{Datenformen}
+I/Q-Daten → Range-Doppler-Map (RD) → 
+ggf. Range-Doppler-Angle (RDA) → Detektionen/Tracks.
+
+\subsection{Leistungskennzahlen}
+Entdeckungswahrscheinlichkeit Pd, Falschalarmrate Pfa, 
+Reichweite, Aktualisierungsrate, Latenz.
+
+\subsection{Limits und Störer}
+Clutter (Boden/Meer/Wetter), Mehrwege, RFI, 
+Abschattung, Ambiguitäten (Range/Doppler).
+
+
+
+\section{Radar im Luftfahrtkontext}
+
+\subsection{Bodenradar}
+Primärradar (PSR), 
+Sekundärradar (SSR/Mode A/C/S), 
+Multilateration/ADS-B (kooperativ).
+
+\subsection{Bordradar}
+Wetterradar (WXR), 
+Kollisionsvermeidung/TAWS-Umfeld, 
+Hinderniserkennung.
+
+\subsection{Typischer Signalpfad}
+Rohdaten → Pulskompression/FFT → CFAR → Clustering → Tracking → HMI.
+
+\subsection{Leistungsanforderungen}
+Abdeckung von Terminal/En-Route, Track-Kontinuität, 
+Koexistenz mit ADS-B/TCAS, Verfügbarkeit/Redundanz.
+
+
+\section{Wichtiges mitzunehmen}
+\subsection{Merksatz}
+Gute Klassifikation ist nur so gut wie die Stabilität von RD/RDA und der Track-Qualität.
+
+
+
+
+
+
+
+
+\chapter{Sicherheit in der Luftfahrt}
+\section{Sicherheit Grundlagen} 
+
+\subsection{Safety vs. Security}
+Unbeabsichtigte Fehler vs. absichtliche Angriffe.
+
+\subsection{Risikobegriff}
+Schweregrad × Eintrittswahrscheinlichkeit; fail-safe vs. fail-operational.
+
+\subsection{Methoden}
+Hazard-Analyse (FHA), FMEA/FMECA, Fault-Tree, Bow-Tie; „Defense in Depth“.
+
+\subsection{Prozesse}
+Anforderungen → Architektur → Verifikation/Validierung → Betrieb/Änderungsmanagement.
+
+
+
+\section{Luftfahrt-spezifische Sicherheit} 
+
+\subsection{Safety-Entwicklung}
+ARP4754A (System), ARP4761 (Safety), DO-178C (Software), DO-254 (Hardware).
+
+\subsection{Assurance Level}
+DAL A–E je nach Kritikalität (z. B. Kollision vermeiden => hoch).
+
+\subsection{Security-Framework}
+DO-326A/356A/355A (Airworthiness Security, Methoden, Betrieb).
+
+\subsection{Betrieb}
+Continuing Airworthiness, Konfigurationskontrolle, Audits, Incident-Response.
+
+\subsection{Metriken und Evidenz}
+Nachweisbarkeit, Rückverfolgbarkeit (Requirements <-> Tests), Abdeckungsgrade.
+
+
+
+
+\section{Wichtiges mitzunehmen}
+\subsection{Merksatz}
+In der Luftfahrt zählt nicht nur „funktioniert“, sondern „ist nachweislich sicher und beherrschbar“.
+
+
+
+
+
+
+
+
+
+
+
+\chapter{KI in der Luftfahrt}
+\section{Use-Cases} 
+
+
+
+
+
+
+
+
+
+
+
+\chapter{KI Sicherheit}
+\section{Begriffe} 
+
+\subsection{AI Safety}
+= beherrschbares, verlässliches Verhalten (funktionale Sicherheit, Fehlertoleranz).
+
+\subsection{AI Security}
+= Schutz der KI vor Angriffen (Poisoning, Adversarial, Model Theft).
+
+\subsection{Airworthiness Security}
+= luftfahrtspezifische Security-Prozesse.
+
+
+
+
+\section{Risiken}
+Safety-Fehler (Fehlklassifikation, schlechte Kalibrierung, OOD-Blindheit) 
+vs. Security-Angriffe (Jamming/DRFM auf Sensor-Ebene, Backdoors/Adversarial auf ML-Ebene).
+
+\section{Design-Prinzipien}
+\subsection{Safety}
+Kalibrierung, Unsicherheits-Schätzung, Abstain/Unknown, Safety-Cage/Simplex, erklärbare Features.
+
+\subsection{Security}
+Daten-Governance, signierte Modelle/secure boot, OOD/Anomalie-Wächter, adversarial Training, Red-Team-Tests.
+
+\section{Metriken und Evidenz}
+ECE/Brier, OOD-Rate, adversarial Erfolgsrate, J/S-Robustheit, Traceability (Req <-> Test <-> Befund).
+
+
+
+
+
+
+
+
+
+
+

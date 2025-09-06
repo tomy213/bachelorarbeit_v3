@@ -1,49 +1,51 @@
 \part{KI in Radarsystemen}
 \chapterimage{Bilder_und_Co/safety_sign_with_computer_code_and_a_airplane_in_the_background_1958542794.png} % Chapter heading image
 %----------------------------------------------------------------------------------------
-\chapter{KI Grundlagen}
+\chapter{KI in Radarsystemen}
 
-\section{Begriffe}
+\section{KI Grundlagen}
+
+\subsection{Begriffe}
 ML vs. DL, überwachtes/teil-/unüberwachtes Lernen, Features vs. End-to-End.
 
-\section{Datenpraxis}
+\subsection{Datenpraxis}
 Train/Valid/Test, saubere Splits (keine Leckagen), Domain Shift, Augmentation.
 
-\section{Bewertung}
+\subsection{Bewertung}
 Precision/Recall/F1 pro Klasse, ROC/PR, Kalibrierung (ECE/Brier), Latenz/Throughput.
 
-\section{Verlässlichkeit}
+\subsection{Verlässlichkeit}
 Unsicherheitsabschätzung, OOD-Erkennung, „Abstain/Unknown“, Erklärbarkeit (Saliency/Prototypen).
 
-\section{Fehlermodi}
+\subsection{Fehlermodi}
 Overfitting, Datenbias, Verteilungsdrift, Spurious Correlations.
 
 
 
 
-\chapter{KI im Radar}
+\section{KI im Radar}
 
-\section{Einsatzfelder}
+\subsection{Einsatzfelder}
 Clutter-Unterdrückung, Detektion, Objektklassifikation (z. B. Flugzeug/Heli/UAS/Vogel), 
 Tracking/Track-Fusion, Ressourcen-Management (Waveform Scheduling).
 
-\section{Eingaben}
+\subsection{Eingaben}
 RD/RDA-Tensors, Mikro-Doppler-Spektrogramme, Track-Sequenzen; 
 physikgeleitete Features (RCS, Spektralbreite, Manöver).
 
-\section{Modelle}
+\subsection{Modelle}
 2D/3D-CNN/ViT (bildartig), LSTM/TCN/Transformer (zeitlich), hybride physik-informierte Netze.
 
-\section{Runtime und Architektur}
+\subsection{Runtime und Architektur}
 Latenzbudgets, Quantisierung/Pruning für FPGA/SoC, Safety-Cage/Simplex als Fallback.
 
-\section{Security-Basics}
+\subsection{Security-Basics}
 Adversarial Examples (RD-Domäne), Data-Poisoning/Backdoors, Model-Stealing; 
 harte vs. weiche Abwehrmaßnahmen.
 
 
 
 
-\chapter{Wichtiges mitzunehmen}
-\section{Merksatz}
+\section{Wichtiges mitzunehmen}
+\subsection{Merksatz}
 In sicherheitskritischen Radaranwendungen ist KI kalibriert, OOD-fähig und in eine sichere Runtime-Architektur eingebettet.
