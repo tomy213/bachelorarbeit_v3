@@ -1,0 +1,96 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{book_key}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=fe029b528ba66e49e3ae47b4ae5b5380}{%
+           family={Person},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=58bacff7f49731631afb5d6d9be1a6fc}{%
+           family={Person},
+           familyi={P\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {A Publsher}%
+      }
+      \strng{namehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{fullhash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{fullhashraw}{99ae6290593e32e61840bb4a997030a3}
+      \strng{bibnamehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authorbibnamehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authornamehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authorfullhash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authorfullhashraw}{99ae6290593e32e61840bb4a997030a3}
+      \field{extraname}{1}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9781458725448}
+      \field{title}{A book about a great thing}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb github.com/PIX3LFLUX/HSK-Latex-Skript-Template
+      \endverb
+      \verb{url}
+      \verb github.com/PIX3LFLUX/HSK-Latex-Skript-Template
+      \endverb
+    \endentry
+    \entry{article_key}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=fe029b528ba66e49e3ae47b4ae5b5380}{%
+           family={Person},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=58bacff7f49731631afb5d6d9be1a6fc}{%
+           family={Person},
+           familyi={P\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{fullhash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{fullhashraw}{99ae6290593e32e61840bb4a997030a3}
+      \strng{bibnamehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authorbibnamehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authornamehash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authorfullhash}{99ae6290593e32e61840bb4a997030a3}
+      \strng{authorfullhashraw}{99ae6290593e32e61840bb4a997030a3}
+      \field{extraname}{2}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{a Journal}
+      \field{number}{1}
+      \field{title}{A great article about a great thing}
+      \field{volume}{1}
+      \field{year}{2022}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

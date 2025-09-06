@@ -1,0 +1,161 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Important note:
+% Chapter heading images should have a 2:1 width:height ratio,
+% e.g. 920px width and 460px height.
+%
+% The original template (the Legrand Orange Book Template) can be found here --> http://www.latextemplates.com/template/the-legrand-orange-book
+%
+% Original author of the Legrand Orange Book Template:
+% Mathias Legrand (legrand.mathias@gmail.com) with modifications by: Vel (vel@latextemplates.com)
+%
+% Original License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%----------------------------------------------------------------------------------------
+%	CETNTRAL VARIABLES
+%----------------------------------------------------------------------------------------
+\input{definitions.tex}
+
+\newcommand{\scriptTitle}{\meinTitel}
+\newcommand{\scriptAuthor}{Tomy Hebel 78280}
+\newcommand{\scriptSubject}{\meinTitel}
+\newcommand{\scriptKeywords}{25sose\_Bachelor\_Thesis}
+\newcommand{\scriptFaculty}{Maschinenbau und Mechatronik}
+\newcommand{\scriptCourse}{Bachelor Thesis Sommersemester 2025}
+\newcommand{\scriptPublisher}{Tomy Hebel}
+\newcommand{\scriptWebsite}{https://ilias.h-ka.de}
+\newcommand{\scriptLicense}{CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)}
+\newcommand{\scriptEdition}{Erste Ausgabe, Stand: April 2025}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[11pt,fleqn, oneside]{book} % Default font size and left-justified equations
+
+\input{structure.tex} % Insert the structure.tex file which contains the majority of the structure behind the template
+
+\input{customcommands.tex} % Insert the customcommands.tex file which contains the custom made commands, functions, etc.
+
+% PDF Metadata
+\hypersetup{
+	pdftitle={\scriptTitle},
+	pdfauthor={\scriptAuthor},
+	pdfsubject={\scriptSubject},
+	pdfkeywords={\scriptKeywords}
+}
+
+\date{\today}
+
+		
+%----------------------------------------------------------------------------------------
+%	Color Style (depending on Faculty)
+%----------------------------------------------------------------------------------------
+% please uncomment the desired color:
+
+%\definecolor{ThemeColor}{RGB}{ 40,135, 50} % Elektro- und Informationstechnik
+%\definecolor{ThemeColor}{RGB}{ 25,130,130} % Architektur- und Bauwesen
+\definecolor{ThemeColor}{RGB}{ 40,105,175} % Maschinenbau und Mechatronik
+%\definecolor{ThemeColor}{RGB}{ 30, 70,150} % Wirtschaftswissenschaften
+%\definecolor{ThemeColor}{RGB}{100, 55,140} % Informatik und Wirtschaftsinformatik
+%\definecolor{ThemeColor}{RGB}{140, 45,130} %Informationsmanagement und Medien
+
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+% Titel Seite
+\createTikZTitlePage{\scriptFaculty}   
+{{\huge\textbf{\scriptTitle\\}}{Stand \today}}   
+{\scriptAuthor}
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\newpage
+~\vfill
+\thispagestyle{empty}
+
+\noindent Copyright \copyright\ 2025 \scriptAuthor % Copyright notice
+
+\noindent {Published by \scriptPublisher} % Publisher
+
+\noindent {\url{\scriptWebsite}} % URL
+
+\noindent
+Dieses Skript wird als Lehrmaterial für die Vorlesung \scriptCourse\ an der Hochschule Karlsruhe verwendet.
+Das Skript wird unter der folgenden Lizenz veröffentlicht: \scriptLicense.
+
+\noindent \textit{\scriptEdition} % Printing/edition date
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\usechapterimagefalse % If you don't want to include a chapter image, use this to toggle images off - it can be enabled later with \usechapterimagetrue
+
+%v\chapterimage{Pictures/csm_HKA_Image_2017_EIT_9006_92a30c9926.jpg} % Table of contents heading image
+\chapterimage{Bilder_und_Co/ai_safety_landscape.png} % Table of contents heading image
+
+\pagestyle{empty} % Disable headers and footers for the following pages
+
+\tableofcontents % Print the table of contents itself
+
+\cleardoublepage % Forces the first chapter to start on an odd page so it's on the right side of the book
+
+\pagestyle{fancy} % Enable headers and footers again
+\input{erklaerung.tex}
+\input{abkuerzungen.tex}
+\input{Abbildungsverzeichnis.tex}
+
+%----------------------------------------------------------------------------------------
+%  Teil 1
+
+%----------------------------------------------------------------------------------------
+
+\input{01_einleitung.tex} 
+\input{02_was_ist_ki.tex} 
+\input{03_Radarsysteme.tex}
+\input{04_Sicherheit.tex}
+\input{05_News.tex}
+\input{06_Mögliche_Einsatzgebiete.tex}
+\input{07_ISO_8800.tex}
+\input{08_State_of_the_Art.tex}
+\input{09_Hardware.tex}
+\input{10_fazit.tex}
+
+
+%\input{examples.tex}	% TODO: uncomment for final version!
+
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+\cleardoublepage
+\part*{Bibliography}
+\chapterimage{Bilder_und_Co/bibliography_3467130032.png} % Chapter heading image
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{\textcolor{ThemeColor}{Bibliography}} % Add a Bibliography heading to the table of contents
+\fancyhead[LE,LO]{\sffamily\normalsize\thepage} % Header - Odd-Even Page - Left side - show page numbers 
+\fancyhead[RE,RO]{\textbf \bibname} % Header - Odd-Even Page - Right side - show Bibliography text
+\printbibliography[heading=bibempty]
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+%\cleardoublepage % Make sure the index starts on an odd (right side) page
+%\phantomsection
+%\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+%\addcontentsline{toc}{chapter}{\textcolor{ThemeColor}{Index}} % Add an Index heading to the table of contents
+%\printindex % Output the index
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
