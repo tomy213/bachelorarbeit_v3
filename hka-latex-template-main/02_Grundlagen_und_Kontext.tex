@@ -32,21 +32,22 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
   \item \textbf{Scanprinzip}:
     \begin{itemize}
       \item \textbf{Mechanisch geschwenkt} $\Rightarrow$ Standard bei klassischen Primärradaren oder älteren Bordradaren.
-      \item \textbf{Elektronisch geschwenkt (AESA/DBF/MIMO)} $\Rightarrow$ mehrkanalig für präzisere Winkelmessung,
+      \item \textbf{Elektronisch geschwenkt} $\Rightarrow$ mehrkanalig für präzisere Winkelmessung,
             zunehmend bei modernen Wetterradaren und im militärischen Bereich.
     \end{itemize}
 \end{itemize}
 
-\subsection{Luftfahrtkontext (kurz)}
+\subsection{Luftfahrtkontext}
 \begin{itemize}
-  \item \textbf{ATC-Bodenradar}: Primärradar (PSR) zur Detektion nicht-kooperativer Ziele;
-        Sekundärradar (SSR/Mode A/C/S) für kooperative Abfrage; ADS-B/Multilateration ergänzen kooperative Zielverfolgung.
+  \item \textbf{Bodenradar}: Primärradar (PSR) zur Detektion nicht-kooperativer Ziele;
+        Sekundärradar (SSR/Mode A/C/S) für kooperative Abfrage. (Bei einer Kooperativen Anfrage wird das Radar zur Kommunikation genutzt)
   \item \textbf{Bordradar}: Wetterradar (WXR) zur Gewitter- und Niederschlagserkennung; Umfeld für Kollisionswarnsysteme.
   \item \textbf{Radarhöhenmesser}: FMCW-basiert, liefert die Höhe über Grund für Anflug/Landung und Systemlogik.
-  \item \textbf{Koexistenz}: Gleichzeitiger Betrieb mit SSR/ADS-B, Funk- und Navigationsdiensten erfordert robuste Störfestigkeit.
 \end{itemize}
 
 \subsection{Störquellen und Szenarien}
+Radare heb viele mögliche Störquellen und Szenarien, die die Effektivität einschränken können.
+Einige Beispiele sind:
 \begin{itemize}
   \item \textbf{Thermisches Rauschen}: Fundamentales Hintergrundrauschen der Empfangselektronik; begrenzt die minimale detektierbare Signalstärke.
   \item \textbf{RFI (Radio Frequency Interference)}: Störungen durch andere Funksender oder Systeme (z.\,B. Kommunikationsfunk, Navigationshilfen, benachbarte Radare).
@@ -69,7 +70,7 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
 
 \begin{tikzpicture}[node distance=1.5cm]
   % Hauptkette
-  \node[block] (raw) {1) Roh-IQ};
+  \node[block] (raw) {1) Rohdaten};
   \node[explain, right=1cm of raw] {Basisbandsignale (I/Q-Samples) direkt vom Radar-Frontend. Ausgangspunkt aller weiteren Schritte.};
 
   \node[block, below=of raw] (range) {2) Pulskompression / Range-FFT};
@@ -87,7 +88,7 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
   \node[block, below=of cfar] (cluster) {6) Clustering};
   \node[explain, right=1cm of cluster] {Gruppiert benachbarte Detektionen zu kohärenten Objekten, z.\,B. zu einem Flugzeugziel.};
 
-  \node[block, below=of cluster] (track) {7) Tracking (Kalman / JPDA)};
+  \node[block, below=of cluster] (track) {7) Tracking (Kalman)};
   \node[explain, right=1cm of track] {Verfolgt Objekte über die Zeit, glättet Messrauschen und löst Mehrziel-Konflikte. Grundlage für stabile Trajektorien.};
 
   \node[block, below=of track] (hmi) {8) HMI / Interfaces};
@@ -103,21 +104,11 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
   \draw[arrow] (track) -- (hmi);
 \end{tikzpicture}
 
-\subsection{Detektion \& CFAR}
-\begin{itemize}
-  \item Ein Radar empfängt neben echten Zielen immer auch Rauschen, Clutter und Störsignale.
-        Daher muss entschieden werden, ob das Echo ein echtes Ziel oder nur Zufall bzw.\ Clutter ist.
-        Bei zu niedrigem Schwellenwert steigen zwar die Treffer, aber auch die Fehlalarme;
-        bei zu hohem Schwellenwert sinken Fehlalarme, schwache Ziele gehen verloren.
-  \item \textbf{Funktionsweise CFAR:}
-        \begin{enumerate}
-          \item Einteilung in Reichweitenzellen (Range Bins).
-          \item Lokale Schätzung der Stör- bzw.\ Clutterleistung (z.\,B.\ Mittelung der Nachbarzellen).
-          \item Adaptiver Schwellenwert, der die lokale Falschalarmrate konstant hält.
-          \item Überschreitung der Schwelle $\Rightarrow$ Detektion eines Ziels.
-        \end{enumerate}
-  \item \textbf{Performancegrößen}: Entdeckungswahrscheinlichkeit (Pd), Falschalarmwahrscheinlichkeit (Pfa), ROC-Kurve als Trade-off-Darstellung.
-\end{itemize}
+\subsection{Detektion \& CFAR (Constant False Alarm Rate)}
+Ein Radar empfängt neben echten Zielen immer auch Rauschen, Clutter und Störsignale.
+Daher muss entschieden werden, ob das Echo ein echtes Ziel oder nur Zufall bzw.\ Clutter ist.
+Bei zu niedrigem Schwellenwert steigen zwar die Treffer, aber auch die Fehlalarme;
+bei zu hohem Schwellenwert sinken Fehlalarme, schwache Ziele gehen verloren.
 
 \subsection{Auflösungen und Messfehler}
 \begin{itemize}
@@ -127,17 +118,15 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
         und Anzahl der ausgewerteten Pulse.
   \item \textbf{Winkelauflösung}: Fähigkeit, Ziele im Azimut oder in der Elevation zu trennen; abhängig von Antennenapertur und Verfahren der Winkelschätzung.
   \item \textbf{Reichweitenmessfehler}: Zufällige Abweichungen der gemessenen Entfernung; beeinflusst durch SNR und Pulskompression.
-  \item \textbf{Geschwindigkeitsmessfehler}: Unsicherheit in der Doppler-Schätzung; abhängig von SNR, Beobachtungsdauer und Senderstabilität.
+  \item \textbf{Geschwindigkeitsmessfehler}: Unsicherheit in der Doppler-Schätzung; abhängig von SNR (Signal-Rausch-Verhältnis), Beobachtungsdauer und Senderstabilität.
   \item \textbf{Winkelmessfehler}: Abweichung zwischen gemessenem und tatsächlichem Zielwinkel; abhängig von SNR, Antennengröße und Verfahren.
 \end{itemize}
 
 \subsection{Typische Trade-offs}
 \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
 \textbf{Reichweite vs.\ Auflösung} & Mehr Bandbreite verbessert die Entfernungsauflösung, erhöht aber Rauschbandbreite, Datenrate und Systemkomplexität. \\[0.5em]
-\textbf{PRF-Wahl} & Niedrige PRF begünstigt große unambige Reichweite, erschwert aber unambige Geschwindigkeitsmessung; hohe PRF umgekehrt. Staggered/Multiple PRFs verringern Ambiguitäten, erhöhen jedoch Verarbeitungsaufwand. \\[0.5em]
-\textbf{Winkelauflösung vs.\ Antennengröße} & Schmalere Beams (höhere Frequenz, größere Apertur, Mehrkanal/AESA) trennen Ziele besser, steigern aber Kosten, Leistungsaufnahme und Integrationsaufwand. \\[0.5em]
 \textbf{CPI-Länge} & Längere Beobachtung verbessert Dopplerauflösung und Empfindlichkeit, erhöht aber Latenz und kann bei stark manövrierenden Zielen zu Unschärfe führen. \\[0.5em]
-\textbf{Zeit–Frequenz–Unschärfe} & Kurze Signale lokalisieren Ereignisse gut in der Zeit (gut für Reichweite), verlieren aber Frequenzpräzision (schlechter für Geschwindigkeit); lange Signale umgekehrt. \\[0.5em]
+\textbf{Zeit–Frequenz–Unschärfe} & Oder Heisenbergsche Unschärferelation: Kurze Signale lokalisieren ein oder mehrere Ziele gut (gut für Reichweite), verlieren aber Frequenzpräzision (schlechter um die Geschwindigkeit von Zielen zu bestimmen); lange Signale umgekehrt. \\[0.5em]
 \textbf{Detektionsschwelle vs.\ Fehlalarme} & Niedriger Schwellenwert steigert die Entdeckungswahrscheinlichkeit, aber auch die Falschalarmrate; höherer Schwellenwert reduziert Fehlalarme, kann schwache Ziele verpassen. CFAR gleicht dies adaptiv aus. \\[0.5em]
 \textbf{Clutter-Unterdrückung vs.\ Zielerhalt} & Aggressive Filterung (z.\,B.\ MTI, Wettermasken) reduziert Störungen, riskiert aber langsame oder schwache Ziele zu dämpfen. \\[0.5em]
 \textbf{Datenrate/Kompression vs.\ Informationsgehalt} & Hohe Abtastraten, viele Kanäle und feine Raster liefern reichhaltige RD(A)-Daten, treiben aber Schnittstellenlast, Speicher und Latenz. Kompression/Dezimierung spart Ressourcen, verliert aber Details. \\[0.5em]
@@ -331,42 +320,50 @@ Da der Fokus auf Safety liegt, wird Security nicht genauer durchleutet.
 \section{Luftfahrt-spezifische Sicherheit}
 
 \subsection{Regulatorischer Rahmen und Akteure}
-\textit{Ziel:} Einordnung von EASA/FAA, Zulassungswegen (z.\,B. TSO/ETSO, Part 21) und Rollen der Organisationen.
+Der regulatorische Rahmen legt fest, \emph{wer} wofür verantwortlich ist und \emph{wie} Safety nachzuweisen ist. 
+In der Praxis bedeutet das: klare Rollen, definierte Zulassungswege und akzeptierte Nachweisformen – damit ein System nicht nur technisch funktioniert, sondern zulassungsfähig und dauerhaft sicher betrieben werden kann.
+
+\paragraph{Akteure und Rollen.}
+\begin{itemize}
+  \item \textbf{Behörden:} EASA (EU) und FAA (USA) setzen Regeln, legen die Zertifizierungsbasis fest und erteilen Zulassungen.
+  \item \textbf{Applicant/Hersteller:} Verantwortlich für den Safety-Nachweis und die vollständige Dokumentation.
+\end{itemize}
+
+Der Rahmen bestimmt, \emph{welche} Safety-Ziele gelten, \emph{welche Evidenzen} akzeptiert werden und \emph{wer} sie freigibt. 
+So wird aus Technik ein zulassungsfähiges, im Betrieb überwachtes und dauerhaft sicheres System.
+Regularien die erfüllt werden müssen um die benötigten Zertifikate zu erhalten sind in Normen wie z.B. DO 187C festgehlten.
 
 \subsection{Safety-Standards und Prozesse (Überblick)}
-\textit{Ziel:} Welche Normfamilien den Safety-Prozess leiten.
-\textit{Inhalt:} ARP4754A (Systementwicklung), ARP4761A (Safety-Analysen), DO-178C (Software), DO-254 (Hardware), DO-160 (Umwelteinflüsse).
+Diese Normfamilien geben vor, \emph{wie} Safety geplant, entwickelt, nachgewiesen und dokumentiert wird – von der Systemebene bis zu Software/Hardware und Umwelttests.
+
+\paragraph{Wichtige Normen}
+\begin{itemize}
+  \item \textbf{DO-178C} — Software: entwicklungs- und prüfprozess für luftfahrtzugelassene Software; Ziele und Evidenztiefe abhängig vom \emph{DAL}.
+  \item \textbf{DO-330} — Software Tool Qualification Considerations: Leitfaden zur Qualifizierung von Entwicklungs- und Verifikationstools; definiert Tool Qualification Levels (TQL 1–5) und wird als Supplement gemeinsam mit DO-178C/DO-254 angewandt.
+  \item (\textbf{ISO/PAS 8800} — Road vehicles — Safety and artificial intelligence: neuer Automotive-Standard für KI-bezogene Sicherheitsanforderungen; Verweis in die Automobilbranche und Ergänzung zu ISO 26262 (Functional Safety) sowie ISO 21448 (SOTIF).)
+\end{itemize}
+
+Diese Standards definieren akzeptierte Nachweiswege und die nötige Strenge – ohne sie gibt es keine Zulassungsfähigkeit und keinen verlässlichen Betrieb.
 
 \subsection{Development Assurance Levels (DAL)}
-\textit{Ziel:} Zusammenhang von Hazard-Schweregrad und Entwicklungs-/Nachweisstrenge.
-\textit{Inhalt:} DAL A–E, Unabhängigkeit, Nachweisintensität, Auswirkungen auf Prozesse/Tests.
+DAL verknüpfen die Schwere möglicher Fehlfunktionen mit der Strenge von Entwicklung, Verifikation und Nachweisen: je gravierender die Auswirkung, desto höher der geforderte DAL und desto strenger Prozesse, Tests und Unabhängigkeit der Prüfung.
+\begin{itemize}
+  \item \textbf{DAL A} — katastrophal (z.\,B. Verlust des Flugzeugs/Lebensgefahr)
+  \item \textbf{DAL B} — hazardous / severe-major (schwere Sicherheitsminderung)
+  \item \textbf{DAL C} — major (deutliche Sicherheitsminderung/Workload)
+  \item \textbf{DAL D} — minor (geringe Beeinträchtigung)
+  \item \textbf{DAL E} — no safety effect (kein Safety-Einfluss)
+\end{itemize}
+\textbf{Auswirkung auf Prozesse/Tests:} Höherer DAL verlangt mehr Unabhängigkeit, strengere Reviews, lückenlose Traceability, höhere Testabdeckung und belastbare Nachweise.
 
-\subsection{Safety-Assessments im Entwicklungsfluss}
-\textit{Ziel:} Wie Safety systematisch in die Entwicklung integriert wird.
-\textit{Inhalt:} FHA (Functional Hazard Assessment), PSSA (Preliminary System Safety Assessment), SSA (System Safety Assessment),
-CCA (Common Cause Analysis inkl. Zonal/Particular Risks); Inputs/Outputs und Verknüpfung zu Anforderungen.
+\textit{Einordnung Objektklassifizierung:} Praktisch liegt Objektklassifizierung meist bei \textbf{DAL C}, weil Fehlklassifikationen typischerweise „major“ Effekte (falsche Anzeige/erhöhte Arbeitslast) haben, während Detektion/Tracking und Operator-Bestätigung als Barrieren katastrophale Folgen verhindern; bei automatischer Wirkung wäre mindestens \textbf{DAL B} zu prüfen.
 
-\subsection{Architekturprinzipien in der Avionikpraxis}
-\textit{Ziel:} Safety-fördernde Umsetzungen in realen Systemen.
-\textit{Inhalt:} Partitionierung (z.\,B. zeit-/raumgetrennte Ausführung), deterministische Netzwerke (z.\,B. AFDX/TTEthernet), Zeit-Synchronisation,
-Built-In Tests, Wartbarkeit/Fehlerisolierung.
-
-\subsection{Verifikation/Validierung in der Luftfahrt}
-\textit{Ziel:} Branchenspezifische Erwartungen an V\&V.
-\textit{Inhalt:} Unabhängige Verifikation, Abdeckungsanforderungen (z.\,B. hohe Testtiefe), Nachweisarten und Compliance-Dokumente.
-
-\subsection{Betrieb und Continuing Airworthiness}
-\textit{Ziel:} Safety nach der Zulassung sichern.
-\textit{Inhalt:} Vorkommnismeldungen, Service Bulletins/Airworthiness Directives, Patch-/Änderungsmanagement, Konfigurationskontrolle.
-
-\subsection{Human Factors, SOPs und Training}
-\textit{Ziel:} Safety in Betrieb und Bedienung verankern.
-\textit{Inhalt:} Crew-/Maintenance-Training, klare SOPs, Umgang mit Degradations-/Fallback-Modi und Alarmen.
-
-\subsection{Brücke zu KI/ML (Vorschau mit Safety-Fokus)}
-\textit{Ziel:} Kurz ankündigen, wie die Safety-Grundsätze auf KI/ML angewendet werden (Kalibrierung, OOD/Abstain, Safety-Cage, Nachweise) – Details im KI-Kapitel.
-
-
+\subsection{Brücke zu KI/ML}
+Sicherheit für KI bedarf auf Grund ihrer nicht deterministischen Natur besondere Anforderungen.
+Nach ISO TR5469 soll KI als normales mathematisches Modell mit probabilistischen Verhalten behandelt werden.
+Derzeit gibt es in der Luftfahrt keine Norm, die sich mit KI beschäftigt. 
+Aber im letzten Jahr (2024) gab es große Fortschritte diesbezüglich in der Automobilindustrie, wie z.B. bei wichtige Normen erwähnt die ISO 8800.
+Weiter hat in den letzten Jahren die EASA sich mit diesem Thema beschäftigt, mehr dazu in späteren Kapiteln.
 
 
 
