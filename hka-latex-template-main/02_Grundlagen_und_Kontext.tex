@@ -374,7 +374,96 @@ Weiter hat in den letzten Jahren die EASA sich mit diesem Thema beschäftigt, me
 
 
 \chapter{KI in der Luftfahrt}
-\section{Use-Cases} 
+\section{Potential} 
+Die Luftfahrt ist eine sicherheitskritische Domäne mit sehr dynamischen und komplexen Bedingungen. 
+Klassische Verfahren stoßen dabei an ihre Grenzen:
+\begin{itemize}
+  \item Begrenzte skalierung bei wachsenden Datenmengen moderner Sensorik.
+  \item Unzureichende Abdeckung schwer modellierbarer nichtlinearer Bedingungen.
+  \item Hoher Aufwand bei der Anpassung an neue oder veränderte Umgebungen und Szenarien.
+\end{itemize}
+KI adressiert diese Schwächen, indem sie Muster in hochdimensionalen Daten lernt. Und somit die 
+Datenverarbeitungssoftware keinen Bottleneck mehr dastellt bei großen Datenmengen oder komplexen Daten.
+
+Ein Beispiel ist, dass KI auch im Clutter Muster erkennen kann. Clutter wird bei klassischen Methoden 
+unterdrückt und kann somit erst später Objekte erkennen.
+
+\section{Usecases}
+KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendung – von Sensorik und Bordfunktionen 
+über den Flugbetrieb bis zum Luftraummanagement. Für dieses Thema besonders relevant sind die datengetriebenen 
+Funktionen in der Wahrnehmungs- und Entscheidungs­kette sicherheitskritischer Systeme.
+\subsection{Sensorik und Wahrnehmung (On-/Off-Board)}
+\textit{Radar-Objekterkennung und -klassifikation.} 
+Um Ziele wie Vögel, kleine UAS (Unmaned Aircraft System), Hubschrauber oder Wetter-/Clutter zu unterscheiden. Gegenüber rein schwellenbasierten 
+Pipelines können KI-Modelle schwache oder verdeckte Signaturen besser erfassen.
+ypische Einsatzszenarien:
+\begin{itemize}
+  \item \textit{Sense-and-Avoid (SAA) für UAS:} zuverlässige Unterscheidung „Luftfahrzeug vs. Vogel/Clutter“ als Basis für Konfliktvermeidung.
+  \item \textit{Bodenüberwachung (A-SMGCS):} Erkennen/Klassifizieren von Objekten auf Runways (Luftfahrzeuge, Fahrzeuge, Personen) bei schlechter Sicht.
+  \item \textit{Bird-Strike-Mitigation:} Erkennung von Vogelschwärmen.
+  \item \textit{Wetter-/Clutter-Unterdrückung:} Trennung von Wetter Signaturen und relevanten Zielen.
+  \item \textit{Sensorfusion.} KI unterstützt die fusionierte Auswertung von Radar mit Infrarot, LiDAR und ADS-B/MLAT (Überwachung in nicht durch Radar abgedeckten Raum). 
+\end{itemize}
+\subsection{Flugführung, Assistenz und Autonomie}
+\textit{Pilot-Assist und autonome Funktionen.}
+Erkennung und Vorhersage von Verkehrssituationen, Umgebungs- und Hinderniswahrnehmung, 
+Unterstützung bei z.B. Anflug mit eingeschränkter Sicht.
+
+\textit{Konflikterkennung/Kollisionsvermeidung.} 
+KI-Modelle nutzen Zielklassen (z. B. „motordriven aircraft“ vs. „unpowered“ vs. „bird“) zur Priorisierung und zur Wahl von Ausweichlogiken.
+\subsection{Air Traffic Management (ATM) und U-Space}
+\textit{Traffic-Flow-Management und Prognosen.} 
+Zeitreihen- und Graphmodelle unterstützen Zeitplanung-Planung und Kapazitätsprognosen um Personal zu entlasten.
+\subsection{Betrieb am Boden (Airside/Landside)}
+\textit{Bodenverkehrs-Safety und Effizienz.}
+Erkennung und Klassifikation von Fahrzeugen, Personen, Objekten und Tieren in sicherheitskritischen Zonen wie Runways.
+\subsection{Zuverlässigkeit und Instandhaltung}
+\textit{Predictive Maintenance und Anomalieerkennung.} 
+Abseits unmittelbarer Wahrnehmung nutzen Airlines und OEMs KI zur Früherkennung von Systemdegradation durch Telemetrie-/Schwingungsdaten. 
+\subsection{Fertigung, Qualität, Prüfprozesse}
+\textit{Non-Destructive Testing (NDT)} und Qualitätsprüfung mit Bild-/Signalanalysen (z. B. Ultraschall oder Wirbelstrom). 
+
+\section{Besonderheiten der Luftfahrt für KI}
+\subsection{Safety-Kritikalität und Normenumfeld}
+Für Software ist die DO-178C besonders wichtig, mit Ergänzungen DO-330 für Werkzeugqualifikation, 
+DO-331 bis DO-333 für Modell- und formale Methoden.
+Aber KI spezifische Normen in der Luftfahrt gibt es noch keine.
+\subsection{Datenherausforderungen}
+Luftfahrt leidet unter seltenen Ereignissen und unausgewogenen Klassen. Beispiele sind:
+\begin{itemize}
+  \item Selten auftretende kritische Near-Miss-Situations
+  \item Gewichts- und Größenunterschiede: z.B. ein Airbus A380 im Vergleich zu einer Taube
+  \item Geschwindigkeitsunterschiede: z.B. ein in der Luft stehender Helikopter oder ein Jet mit Überschaallgeschwindigkeit
+\end{itemize}
+Seltene Ereignisse erschweren das Trainieren von KIs und begünstigen Overfitting. Große Unterschiede in den Daten erschwerden 
+das Generalisieren und können die Performance einschränken.
+\subsection{Hardware}
+Abhängig von der KI kann die Anforderung an die Hardware deutlich höher sein im Vergleich zu klasssischen Methoden.
+Um die gewünschte Funktion der KI zu erreichen können mehrere CPU Kerne oder gar eine Grafikkarte notwendig sein. 
+Diese Komponenten benötigen ebenfalls Zulassungen für den Betrieb in einem Flugzeug, was bisher noch sehr eingeschränkt ist.
+
+\section{Chance und Risiken}
+KI bietet einige Möglichkeiten Funktionen und Abläufe zu Ergänzen oder Verbessern. Sie bringt aber 
+auch Risiken und Herausforderungen mit sich. Ein paaar wichtige im Bezug auf Radar und Objektklassifizierung sind:
+
+\begin{tabular}{p{0.4\textwidth} p{0.55\textwidth}}
+\textbf{Chancen} & \textbf{Risiken und Herausforderungen} \\ \hline
+Bessere Trennung Ziel/Clutter & Falsche Sicherheit bei Regen- oder See-Clutter \\[0.5em]
+
+Frühe Erkennung (z.B. UAS) & Verpasste Gefahrenklasse (erhöhte False-Negative-Rate) \\[0.5em]
+
+Sensorfusion robust & Fehlerfortpflanzung über mehrere Sensorkanäle \\[0.5em]
+
+Anpassbarkeit durch Re-Training ohne Pipeline Neuentwicklung & Erneuter Zulassungsbedarf, Daten-Drift während des Betriebs \\[0.5em]
+
+Neue Muster erkennen & Abhängigkeit von Daten\\[0.5em]
+
+Entlastung von Personal & Automation-Bias\\
+\end{tabular}
+
+\section{Zwischenfazit}
+KI ist in der Luftfahrt vielversprechend, aber ihre Einführung ist ein Assurance-Problem, nicht nur ein Trainingsproblem. 
+Gleichzeitig verschiebt sich der Maßstab von „hoher Genauigkeit“ zu „sicher genug“.
 
 
 
@@ -382,46 +471,28 @@ Weiter hat in den letzten Jahren die EASA sich mit diesem Thema beschäftigt, me
 
 
 
-
-
-
-
-\chapter{KI Sicherheit}
-\section{Begriffe} 
-
-\subsection{AI Safety}
-= beherrschbares, verlässliches Verhalten (funktionale Sicherheit, Fehlertoleranz).
-
-\subsection{AI Security}
-= Schutz der KI vor Angriffen (Poisoning, Adversarial, Model Theft).
-
-\subsection{Airworthiness Security}
-= luftfahrtspezifische Security-Prozesse.
-
-
-
-
-\section{Risiken}
-Safety-Fehler (Fehlklassifikation, schlechte Kalibrierung, OOD-Blindheit) 
-vs. Security-Angriffe (Jamming/DRFM auf Sensor-Ebene, Backdoors/Adversarial auf ML-Ebene).
-
-\section{Design-Prinzipien}
-\subsection{Safety}
-Kalibrierung, Unsicherheits-Schätzung, Abstain/Unknown, Safety-Cage/Simplex, erklärbare Features.
-
-\subsection{Security}
-Daten-Governance, signierte Modelle/secure boot, OOD/Anomalie-Wächter, adversarial Training, Red-Team-Tests.
-
-\section{Metriken und Evidenz}
-ECE/Brier, OOD-Rate, adversarial Erfolgsrate, J/S-Robustheit, Traceability (Req <-> Test <-> Befund).
-
-
-
-
-
-
-
-
-
-
-
+\chapter{Wichtiges zu KI Sicherheit}
+\section{ODD (Operational Design Domain) und Annahmen}
+Für KI Sicherheit ist es besonders wichtig die Domäne bzw. den Einsatzbereich genau zu definieren. 
+Für diesen Gültigkeitsbereich wir die KI erstellt und innerhalb dieser Grenzen muss die KI operieren 
+und die Sicherheitsanforderungen und Leistung erfüllen. Daher sind konkret definierte Annahmen und 
+die Messbarkeit dieser sehr wichtig. Denn ohne Nachweisbarkeit, dass die KI die Anforderungen erfüllt 
+welche auch die Sicherheit gewährleisten kann man nicht sicherstellen, dass die KI sicher ist.
+\section{Assurance statt „viel hilft viel“}
+Klassische Methoden die Performance eines Neuronalen Netzes zu verbessern ist es, dieses größer zu machen 
+und mit mehr Daten zu füttern. Aber um sicher zu gehen, dass eine KI sicher ist, ist es besser auf 
+Performance zu verzichten und ein Fokus auf Assurance Arguments, Testbarkeit und Erklärbarkeit zu setzen.\\
+Weiter ist hier die Datenpflege ebenfalls besonders wichtig, denn eine Regel gilt immer bei KI: "trash in = trash out".
+Anders als bei LLMs wo mehr Texte bzw. Daten als Input auch bessere Resultate geliefert haben, gilt 
+hier, dass alles abgedeckt ist und alle Anforderungen erfüllt sind. Daher wird auch auf Edge Cases 
+und OOD (Out Of Distribution) getestet um Sicherheit auch in Aussnahmesituationen zu gewährleisten.
+\section{Toolchain-Assurance und Reproduzierbarkeit}
+Nicht nur die KI sondern auch die verwendeten Tools bzw. die verwendete Sofware um diese zu erstellen 
+und trainieren muss sicher sein.
+\section{Betrieb und Änderungen}
+Nur weil eine KI heute sicher ist, heißt dass nicht, dass sie morgen immer noch sicher ist. 
+Beispiele, dass eine KI nicht mehr sicher sein kann, sind Umgebungsveränderungen auf die nicht trainiert wurden 
+oder Drift welcher auftaucht, wenn sich die realen Daten über die Zeit verändern. 
+Dadurch wird KI Sicherheit zu einem Thema der Sicherheit über den gesammten Lebenszyklus. 
+Die Automotiv Branche hat hierfür seit 2022 eine SOTIF Norm ISO 26262, eine solche Norm besitzt die Luftfahrt ebenfalls nicht, 
+da bisher diese Themen in den Anforderungen festgehlten wurden und nicht gesondert betrachtet wurden.
