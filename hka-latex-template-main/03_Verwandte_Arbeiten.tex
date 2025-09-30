@@ -9,19 +9,19 @@
 \section{Normen und Behörden}
 \begin{itemize}
   \item ISO/PAS 8800:2024 – Automotive-Rahmenwerk für AI Safety als Ergänzung zu ISO 26262/SOTIF.\\
-  \ann{Definiert AI-Sicherheitslebenszyklus und Work-Products (Daten/Modell/V\&V/Betrieb).}
+  \ann{Definiert AI-Sicherheitslebenszyklus und Work-Products.}
       {Prozess-Blaupause für KI-Assurance. Deckt die gleichen Bausteine bzw. Assurance Elemente ab, die im EASA AI Concept Paper gefordert werden.}
       {Automotive-Kontext; keine luftfahrtspezifischen DO-Norm Bezüge. Bezüge auf SOTIF Normen, die es so nicht in der Luftfahrt gibt.}
 
   \item ISO/IEC TR 5469:2024 – AI$\times$Funktionale Sicherheit.\\
   \ann{Ordnet KI im Kontext Funktionaler Sicherheit ein und führt Usage Levels (Nutzungsstufen) und AI-Technologieklassen ein, deren Kombination die Risikolage und die erforderliche Nachweistiefe für KI in sicherheitsrelevanten Funktionen strukturiert.}
-      {Dient als Brücke zwischen Domänen,da sie nicht an eine gekoppelt ist. Und liefert genau die Argumentationsstruktur, die EASA für „Assurance-Evidenzen“ erwartet und ist somit ideal als Prozess-Rahmen neben DO-178C/ARP-Prozessen.
+      {Dient als Brücke zwischen Domänen, da sie nicht an eine gekoppelt ist. Und liefert genau die Argumentationsstruktur, die EASA für „Assurance-Evidenzen“ erwartet und ist somit ideal als Prozess-Rahmen neben DO-178C.
       Zudem ist sie konsistent mit der ISO 8800, da auf die Usage Level der ISO 5469 verwiesen werden.}
       {Sehr High-level; Keine Domänen Bezüge und kann daher nicht direkt angewandt werden.}
 
   \item ISO 21448 (SOTIF) – Safety of the Intended Functionality.\\
   \ann{Adressiert „insufficient performance“ und vorhersehbaren Fehlgebrauch via Szenarien/ODD.}
-      {Adressiert Risikin obwohl kein Defekt vorliegt. Begründet die Wichtigkeit von ODD, OOD und mehr.}
+      {Adressiert Risiken obwohl kein Defekt vorliegt. Begründet die Wichtigkeit von ODD, OOD und mehr.}
       {Kein Bezug zur Luftfahrt; Ergänzt die ISO 26262.}
 
   \item ISO 26262 – Teil 1 (Begriffe) \& Teil 6 (Software-Entwicklung).\\
@@ -31,28 +31,28 @@
 
   \item ISO/IEC 22989 – AI: Begriffe und Konzepte.\\
   \ann{KI Terminologie vereinheitlicht.}
-      {Sorgt für konsistente Begriffsverwendung in Anforderung/Reporting. Ebenfalls Branchen unabhängig.}
+      {Sorgt für konsistente Begriffsverwendung in den Anforderungen und dient als Nachlagewerk. Ebenfalls Branchen unabhängig.}
       {Nur für Definitionen.}
 
       
   \item DO-178C – Software Considerations in Airborne Systems \& Equipment.\\
   \ann{Nachweisweg für Luftfahrt-Software (DAL, Unabhängigkeit, DO-330 Tools).}
-      {Definiert Ziele und Artefakte über den gesamten Software-Lebenszyklus. Anerkannt in der Luftfahrt}
+      {Definiert Ziele und erzeugt Ergebnisse (Daten, Dokumente, Softwarekomponenten) über den gesamten Software-Lebenszyklus. Anerkannt in der Luftfahrt}
       {Behandelt KI nicht explizit. Muss ergänzt werden durch DO 330.}
 
   \item DO-330 – Software Tool Qualification Considerations.\\
-  \ann{Legt Qualifikationsziele und -artefakte für Entwicklungs-/Verifikationstools fest.}
-      {Ermöglicht einen prüfbaren Nachweis für KI-Toolchain-Schritte (Data-Prep, Labeling, Training, Model-Konvertierung/Quantisierung), sofern deren Ergebnisse nicht vollständig anderweitig verifiziert werden können.}
-      {Kein Algorithmusstandard; TQL wird pro Tool hergeleitet (nicht starr aus DAL).}
+  \ann{Legt Qualifikationsziele und Ergebnisse für Entwicklungs-/Verifikationstools fest.}
+      {Ermöglicht einen prüfbaren Nachweis für KI-Toolchain-Schritte (Data-Prep, Labeling, Training), sofern deren Ergebnisse nicht vollständig anderweitig verifiziert werden können.}
+      {Kein Algorithmusstandard; Qualifizierungs Level wird pro Tool hergeleitet.}
 
   \item EASA AI Concept Paper, Issue~2 (2024).\\
-  \ann{Guidance für Level-1/2: ODD, Learning Assurance, Kalibrierung, Monitoring.}
-      {Direkter Maßstab für „Assurance-Evidenzen“.}
-      {Policy/Guidance, keine Algorithmen.}
+  \ann{Guidance für Level-1/2: ODD, Learning Assurance, Monitoring.}
+      {Maßstab für „Assurance-Evidenzen“.}
+      {Keine Algorithmen, nur definieren von geforderten Bausteinen.}
 
   \item EASA AI Roadmap 2.0 (2023).\\
   \ann{Vision/Fahrplan für vertrauenswürdige KI, Lebenszyklus-Betrachtung.}
-      {Rahmen, in den du dein Sicherheitsargument einordnest.}
+      {Rahmen, um Sicherheitsargumente ein zu ordnen.}
       {Strategisch, nicht technisch.}
 
 
@@ -62,37 +62,31 @@
       {Guidance/Empfehlung, keine bindende Regel; Fokus auf Level-1/2-Anwendungen.}
 \end{itemize}
 
-\paragraph{Hinweis} Die oben genannten Quellen stützen v.\,a. Kapitel \S\ref{sec:grundlagen_radar_cls} (Rahmen) und die Sicherheitsabschnitte zu ODD/Kalibrierung.
 
 \section{Luftfahrt-Zertifizierung und Forschung}
 \begin{itemize}
   \item \textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024).\\
-  \ann{Identifiziert Hürden: fehlende ODD-Disziplin, Kalibrierung, OOD/Abstain, Runtime.}
+  \ann{Identifiziert Hürden: fehlende ODD-Disziplin, OOD/Abstain, Verifizierung.}
       {Beleg, warum Performance \emph{allein} nicht genügt.}
       {Übersicht; keine Radar-spezifischen Ergebnisse.}
 
   \item \textit{Towards certifiable AI in aviation} (2024).\\
-  \ann{Landscape der Assurance-Bausteine (Traceability, Toolchain, Runtime).}
-      {Checkliste für dein Evidenzpaket.}
+  \ann{State of the Art Statement zur Zertifizierung.}
+      {Checkliste für Evidenzpakete.}
       {Vorwiegend konzeptionell.}
-
-  \item \textit{AI in Aviation Collegiate Education: Simple to Complex}.\\
-  \ann{Curriculum/CBTA-Kontext.}
-      {Optionaler Human-Factors-Beleg.}
-      {Kein technischer Assurance-Nachweis.}
 \end{itemize}
 
 \section{Militärische Perspektive}
 \begin{itemize}
   \item \textit{Standardization and certification on military AI applications} (JATM, 2024).\\
-  \ann{Skizziert militärische Anforderungen und Lücken.}
-      {Motiviert Defense-in-Depth als Kontext.}
+  \ann{State of the Art zur Zertifizierung und Standartisierung von KI in der Luftfahrt.}
+      {Orientierung an Zivilluftfahrt und Einordnung in Militärkontext.}
       {Keine zivile Zulassung.}
 
   \item ECRS Mk1 (Eurofighter-Radar, HENSOLDT/Indra).\\
   \ann{Industriekontext \& Trend zu AI-gestützter Klassifikation.}
       {Einordnung, keine offenen Leistungsdaten.}
-      {Öffentlich wenig technisch belastbar.}
+      {Öffentlich wenig technisch belastbar. Keine zivilluftfahrtliche Zulassung.}
 \end{itemize}
 
 \section{Radar-Objektklassifikation (Range-Doppler \& Mikro-Doppler)}

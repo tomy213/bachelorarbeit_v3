@@ -46,14 +46,14 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
 \end{itemize}
 
 \subsection{Störquellen und Szenarien}
-Radare heb viele mögliche Störquellen und Szenarien, die die Effektivität einschränken können.
+Radare haben viele mögliche Störquellen und Szenarien, die die Effektivität einschränken können.
 Einige Beispiele sind:
 \begin{itemize}
   \item \textbf{Thermisches Rauschen}: Fundamentales Hintergrundrauschen der Empfangselektronik; begrenzt die minimale detektierbare Signalstärke.
   \item \textbf{RFI (Radio Frequency Interference)}: Störungen durch andere Funksender oder Systeme (z.\,B. Kommunikationsfunk, Navigationshilfen, benachbarte Radare).
   \item \textbf{Mehrwegeausbreitung (Multipath)}: Reflexionen am Boden oder an Strukturen führen zu Mehrwege-Signalen, die Phasenfehler und Geisterziele verursachen können.
   \item \textbf{Clutter (Boden, See, Wetter)}: Starke Reflexionen stationärer Flächen erschweren die Detektion bewegter Ziele.
-  \item \textbf{Regen / Dämpfung (Attenuation)}: Besonders in höheren Frequenzbändern relevant; starke Niederschläge dämpfen das Signal und erzeugen zusätzlichen Clutter.
+  \item \textbf{Regen / Dämpfung}: Besonders in höheren Frequenzbändern relevant; starke Niederschläge dämpfen das Signal und erzeugen zusätzlichen Clutter.
   \item \textbf{Jamming / Deception}: Überlagerung des Empfangssignals mit breitbandigem Rauschen oder absichtliche Erzeugung falscher Ziele (z.\,B. per DRFM), um das Radarsystem zu stören.
   \item \textbf{Zielschwankungen}: Die Reflektionsstärke (Radar Cross Section, RCS) schwankt abhängig von Geometrie, Material und Ausrichtung des Ziels.
   \item \textbf{Interferenzen durch kooperative Systeme}: Sekundärradar- und ADS-B-Signale können sich überlagern und Störungen erzeugen.
@@ -136,8 +136,8 @@ bei zu hohem Schwellenwert sinken Fehlalarme, schwache Ziele gehen verloren.
 
 \subsection{Leistungskennzahlen (System \& Messung)}
 \begin{tabular}{p{0.3\textwidth} p{0.65\textwidth}}
-\textbf{Entdeckungswahrscheinlichkeit (Pd)} & Wahrscheinlichkeit, dass ein tatsächlich vorhandenes Ziel erkannt wird; hoher Wert bedeutet zuverlässige Detektion. \\[0.5em]
-\textbf{Falschalarmwahrscheinlichkeit (Pfa)} & Wahrscheinlichkeit, dass ein Ziel gemeldet wird, obwohl keines existiert (z.\,B.\ durch Rauschen oder Clutter). \\[0.5em]
+\textbf{Entdeckungs- wahrscheinlichkeit (Pd)} & Wahrscheinlichkeit, dass ein tatsächlich vorhandenes Ziel erkannt wird; hoher Wert bedeutet zuverlässige Detektion. \\[0.5em]
+\textbf{Falschalarm- wahrscheinlichkeit (Pfa)} & Wahrscheinlichkeit, dass ein Ziel gemeldet wird, obwohl keines existiert (z.\,B.\ durch Rauschen oder Clutter). \\[0.5em]
 \textbf{ROC-Kurve} & Zeigt den Zusammenhang zwischen Pd und Pfa; macht den Trade-off sichtbar. \\[0.5em]
 \textbf{Messfehler (Range, Geschwindigkeit, Winkel)} & Zufällige Abweichungen zwischen gemessenen und wahren Werten; beeinflusst durch SNR, Integrationszeit und Systemstabilität. \\[0.5em]
 \textbf{Update-Rate / Latenz} & Zeitliche Aktualisierung der Messungen; höhere Raten verbessern Situationsbewusstsein, können jedoch die Verweilzeit reduzieren. \\[0.5em]
@@ -263,7 +263,7 @@ Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen früh zu erkennen, ihr 
   \item \textbf{Pflegen:} Über den Lebenszyklus regelmäßig aktualisieren.
 \end{enumerate}
 
-\paragraph{Methoden (kurz erklärt).}
+\paragraph{Methoden}
 \begin{itemize}
   \item \textbf{Hazard Identification (HAZID):} Strukturierte Sammlung von Gefährdungen per Workshops, Checklisten und Erfahrungswissen. Ergebnis: Hazard-Liste mit Ursachen, Wirkungen und Annahmen.
   \item \textbf{FMEA/FMECA:} \emph{Bottom-up} auf Komponenten- oder Funktionsebene: Welche Ausfallarten gibt es, was passiert dann, wie wird es entdeckt? FMECA ergänzt eine Kritikalitätsbewertung, um Prioritäten zu setzen.
@@ -390,38 +390,22 @@ unterdrückt und kann somit erst später Objekte erkennen.
 
 \section{Usecases}
 KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendung – von Sensorik und Bordfunktionen 
-über den Flugbetrieb bis zum Luftraummanagement. Für dieses Thema besonders relevant sind die datengetriebenen 
-Funktionen in der Wahrnehmungs- und Entscheidungs­kette sicherheitskritischer Systeme.
-\subsection{Sensorik und Wahrnehmung (On-/Off-Board)}
-\textit{Radar-Objekterkennung und -klassifikation.} 
-Um Ziele wie Vögel, kleine UAS (Unmaned Aircraft System), Hubschrauber oder Wetter-/Clutter zu unterscheiden. Gegenüber rein schwellenbasierten 
-Pipelines können KI-Modelle schwache oder verdeckte Signaturen besser erfassen.
-ypische Einsatzszenarien:
-\begin{itemize}
-  \item \textit{Sense-and-Avoid (SAA) für UAS:} zuverlässige Unterscheidung „Luftfahrzeug vs. Vogel/Clutter“ als Basis für Konfliktvermeidung.
-  \item \textit{Bodenüberwachung (A-SMGCS):} Erkennen/Klassifizieren von Objekten auf Runways (Luftfahrzeuge, Fahrzeuge, Personen) bei schlechter Sicht.
-  \item \textit{Bird-Strike-Mitigation:} Erkennung von Vogelschwärmen.
-  \item \textit{Wetter-/Clutter-Unterdrückung:} Trennung von Wetter Signaturen und relevanten Zielen.
-  \item \textit{Sensorfusion.} KI unterstützt die fusionierte Auswertung von Radar mit Infrarot, LiDAR und ADS-B/MLAT (Überwachung in nicht durch Radar abgedeckten Raum). 
-\end{itemize}
-\subsection{Flugführung, Assistenz und Autonomie}
-\textit{Pilot-Assist und autonome Funktionen.}
-Erkennung und Vorhersage von Verkehrssituationen, Umgebungs- und Hinderniswahrnehmung, 
-Unterstützung bei z.B. Anflug mit eingeschränkter Sicht.
+über den Flugbetrieb bis zum Luftraummanagement. Nach einer Studie aus ML meets aerospace, sind die meisten 
+veröffentlichten Paper bezüglich KI in der Luftfahrt folgenden Vier Themen zuzuordnen:
 
-\textit{Konflikterkennung/Kollisionsvermeidung.} 
-KI-Modelle nutzen Zielklassen (z. B. „motordriven aircraft“ vs. „unpowered“ vs. „bird“) zur Priorisierung und zur Wahl von Ausweichlogiken.
-\subsection{Air Traffic Management (ATM) und U-Space}
-\textit{Traffic-Flow-Management und Prognosen.} 
-Zeitreihen- und Graphmodelle unterstützen Zeitplanung-Planung und Kapazitätsprognosen um Personal zu entlasten.
-\subsection{Betrieb am Boden (Airside/Landside)}
-\textit{Bodenverkehrs-Safety und Effizienz.}
-Erkennung und Klassifikation von Fahrzeugen, Personen, Objekten und Tieren in sicherheitskritischen Zonen wie Runways.
-\subsection{Zuverlässigkeit und Instandhaltung}
-\textit{Predictive Maintenance und Anomalieerkennung.} 
-Abseits unmittelbarer Wahrnehmung nutzen Airlines und OEMs KI zur Früherkennung von Systemdegradation durch Telemetrie-/Schwingungsdaten. 
-\subsection{Fertigung, Qualität, Prüfprozesse}
-\textit{Non-Destructive Testing (NDT)} und Qualitätsprüfung mit Bild-/Signalanalysen (z. B. Ultraschall oder Wirbelstrom). 
+\subsection{Vorhersagende Instandhaltung; 34\%}
+Nutzt Daten von Flugzeugsensoren, um potenzielle Ausfälle vorherzusagen. 
+Dadurch wird die Zuverlässigkeit und Sicherheit erhöht und gleichzeitig Wartungskosten sowie Ausfallzeiten reduziert.
+\subsection{Luftverkehrsmanagement; 4\%}
+Steuerung der Flugzeugbewegungen in der Luft und am Boden, um einen sicheren und effizienten Verkehrsfluss zu gewährleisten. 
+Beteiligt sind Fluglotsen, Piloten, Flughäfen und verschiedene Technologien.
+\subsection{Flugmanagement und -betrieb; 39\%}
+Umfasst Planung, Durchführung und Überwachung der Flugphasen, einschließlich Routenplanung, Treibstoffmanagement, 
+Navigation und Kommunikation mit der Flugsicherung. Ziel ist die Optimierung von Flügen, die Erhöhung der Sicherheit 
+und die Reduktion von Betriebskosten.
+\subsection{Sicherheit und Überwachung; 23\%}
+Luft- und Raumfahrtsysteme sind stark auf Netzwerke und Software angewiesen und dadurch anfällig für Cyberangriffe und Sicherheitsverletzungen. 
+Maschinelles Lernen erhöht die Sicherheit durch fortschrittliche Erkennungs-, Präventions- und Reaktionsmechanismen.
 
 \section{Besonderheiten der Luftfahrt für KI}
 \subsection{Safety-Kritikalität und Normenumfeld}
@@ -439,7 +423,7 @@ Seltene Ereignisse erschweren das Trainieren von KIs und begünstigen Overfittin
 das Generalisieren und können die Performance einschränken.
 \subsection{Hardware}
 Abhängig von der KI kann die Anforderung an die Hardware deutlich höher sein im Vergleich zu klasssischen Methoden.
-Um die gewünschte Funktion der KI zu erreichen können mehrere CPU Kerne oder gar eine Grafikkarte notwendig sein. 
+Um die gewünschte Funktion der KI erreichen zu können, können mehrere CPU Kerne oder gar eine GPU notwendig sein. 
 Diese Komponenten benötigen ebenfalls Zulassungen für den Betrieb in einem Flugzeug, was bisher noch sehr eingeschränkt ist.
 
 \section{Chance und Risiken}
@@ -477,7 +461,8 @@ Für KI Sicherheit ist es besonders wichtig die Domäne bzw. den Einsatzbereich 
 Für diesen Gültigkeitsbereich wir die KI erstellt und innerhalb dieser Grenzen muss die KI operieren 
 und die Sicherheitsanforderungen und Leistung erfüllen. Daher sind konkret definierte Annahmen und 
 die Messbarkeit dieser sehr wichtig. Denn ohne Nachweisbarkeit, dass die KI die Anforderungen erfüllt 
-welche auch die Sicherheit gewährleisten kann man nicht sicherstellen, dass die KI sicher ist.
+welche auch die Sicherheit gewährleisten kann man nicht sicherstellen, dass die KI sicher ist. 
+Klar definierte Anforderungen sind hier von besonderer Bedeutung.
 \section{Assurance statt „viel hilft viel“}
 Klassische Methoden die Performance eines Neuronalen Netzes zu verbessern ist es, dieses größer zu machen 
 und mit mehr Daten zu füttern. Aber um sicher zu gehen, dass eine KI sicher ist, ist es besser auf 
@@ -494,5 +479,5 @@ Nur weil eine KI heute sicher ist, heißt dass nicht, dass sie morgen immer noch
 Beispiele, dass eine KI nicht mehr sicher sein kann, sind Umgebungsveränderungen auf die nicht trainiert wurden 
 oder Drift welcher auftaucht, wenn sich die realen Daten über die Zeit verändern. 
 Dadurch wird KI Sicherheit zu einem Thema der Sicherheit über den gesammten Lebenszyklus. 
-Die Automotiv Branche hat hierfür seit 2022 eine SOTIF Norm ISO 26262, eine solche Norm besitzt die Luftfahrt ebenfalls nicht, 
-da bisher diese Themen in den Anforderungen festgehlten wurden und nicht gesondert betrachtet wurden.
+Die Automotiv Branche hat für diese Themen seit 2022 die SOTIF Norm ISO 26262. Eine solche Norm besitzt die Luftfahrt ebenfalls nicht, 
+da bisher diese Themen in den Anforderungen festgehalten wurden und nicht gesondert betrachtet wurden.
