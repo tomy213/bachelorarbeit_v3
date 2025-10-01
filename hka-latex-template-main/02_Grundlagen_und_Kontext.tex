@@ -5,9 +5,9 @@
 
 \usetikzlibrary{arrows.meta, positioning}
 
-\section{Radar – Grundlagen (allgemein)}
+\section{Radar – Grundlagen (allgemeine Funktion)}
 
-\subsection{Prinzip}
+\subsection{Funktion}
 Ein Radar sendet elektromagnetische Wellen aus und misst Laufzeit,
 Frequenzverschiebung und Einfallswinkel der Echos.
 Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
@@ -39,10 +39,10 @@ Daraus folgen Entfernung, Geschwindigkeit und Winkel der detektierten Objekte.
 
 \subsection{Luftfahrtkontext}
 \begin{itemize}
-  \item \textbf{Bodenradar}: Primärradar (PSR) zur Detektion nicht-kooperativer Ziele;
-        Sekundärradar (SSR/Mode A/C/S) für kooperative Abfrage. (Bei einer Kooperativen Anfrage wird das Radar zur Kommunikation genutzt)
-  \item \textbf{Bordradar}: Wetterradar (WXR) zur Gewitter- und Niederschlagserkennung; Umfeld für Kollisionswarnsysteme.
-  \item \textbf{Radarhöhenmesser}: FMCW-basiert, liefert die Höhe über Grund für Anflug/Landung und Systemlogik.
+  \item \textbf{Bodenradar}: Primärradar zur Detektion nicht-kooperativer Ziele;
+        Sekundärradar für kooperative Abfrage. (Bei einer Kooperativen Anfrage wird das Radar zur Kommunikation genutzt)
+  \item \textbf{Bordradar}: Wetterradar zur Gewitter- und Niederschlagserkennung; Umfeld für Kollisionswarnsysteme.
+  \item \textbf{Radarhöhenmesser}: FMCW-basiert (Frequenz Modulated Constant Wave), liefert die Höhe über Grund für Anflug/Landung und Systemlogik.
 \end{itemize}
 
 \subsection{Störquellen und Szenarien}
@@ -147,7 +147,7 @@ bei zu hohem Schwellenwert sinken Fehlalarme, schwache Ziele gehen verloren.
 
 \section{Radar – Grundlagen für Objektklassifizierung}
 
-\subsection{Wichtige Datenpunkte für Objektklassifikation}
+\subsection{Wichtige Datenpunkte für Objektklassifikation} %optional nicht so wichtig
 \begin{tabular}{p{0.35\textwidth} p{0.6\textwidth}}
 \textbf{Reichweite (Entfernung)} & Basisinformation für die Position eines Objekts relativ zum Radar; zentral für Lagebestimmung und Tracking. \\[0.5em]
 \textbf{Relativgeschwindigkeit (Doppler)} & Erkennt Bewegung auf das Radar zu oder davon weg. Wichtig, um bewegte von statischen Objekten zu unterscheiden. \\[0.5em]
@@ -185,15 +185,15 @@ bei zu hohem Schwellenwert sinken Fehlalarme, schwache Ziele gehen verloren.
   \item \textbf{Stabilität vor KI:} Saubere Detektion, verlässliche RD/RDA-Daten und stabile Tracks sind die Basis guter Klassifikation.
   \item \textbf{Zeit schlägt Einzelbild:} Sequenzen und Trajektorien glätten Rauschen und offenbaren Muster besser als Einzelscans.
   \item \textbf{Mikrodoppler als Fingerabdruck:} Rotor- und Flügelschlag-Signaturen trennen Drohnen, Helikopter und Vögel – abhängig von SNR und Aspekt.
-  \item \textbf{Quality-in-the-loop:} SNR, CFAR-Masken, Clutter- und Jamming-Flags als zusätzliche Eingabekanäle erhöhen Robustheit.
+  \item \textbf{Quality-in-the-loop:} SNR, CFAR-Masken, Clutter- und Jamming-Flags als zusätzliche Eingabekanäle erhöhen Robustheit.                          %optionel
   \item \textbf{Offene Welt akzeptieren:} Eine \emph{Unknown}-Option und OOD-Detektion sind Pflicht – lieber aussetzen als falsch sicher sein.
   \item \textbf{Konfidenz muss stimmen:} Kalibrierte Wahrscheinlichkeiten und klare Abstain-Schwellen sind wichtiger als maximale Top-1-Quote.
-  \item \textbf{Physik hilft:} Physikgeleitete Merkmale (z.\,B.\ kinematische Plausibilität, Spektralbreite, RCS-Trends) stabilisieren datengetriebene Modelle.
+  \item \textbf{Physik hilft:} Physikgeleitete Merkmale (z.\,B.\ kinematische Plausibilität, Spektralbreite, RCS-Trends) stabilisieren datengetriebene Modelle. %optional
   \item \textbf{Szenariodeckung vor „Overall-Accuracy“:} Leistung immer nach SNR, Entfernung, Aspekt und Umgebung berichten – sonst täuscht Mittelung.
   \item \textbf{Splits ohne Leckage:} Trainings-/Testtrennung nach Szenarien (Standorte, Aspekte, Wetterlagen) verhindert zu optimistische Ergebnisse.
-  \item \textbf{HMI klärt Erwartungen:} Anzeige von Top-k, Konfidenz und OOD/Qualitätsflags verhindert Fehlinterpretationen im Betrieb.
+  \item \textbf{HMI klärt Erwartungen:} Anzeige von Top-k, Konfidenz und OOD/Qualitätsflags verhindert Fehlinterpretationen im Betrieb.                         %optional
   \item \textbf{Vorverarbeitung prägt Merkmale:} Wahl von CFAR, Filterung und Normalisierung bestimmt, was das Modell überhaupt „sehen“ kann.
-  \item \textbf{Robust denken:} Klassifikation muss mit Clutter, RFI und sporadischen Aussetzern umgehen – Fallbacks gehören zum Design.
+  \item \textbf{Robust denken:} Klassifikation muss mit Clutter, RFI und sporadischen Aussetzern umgehen – Fallbacks gehören zum Design.                        %optional
 \end{itemize}
 
 
@@ -254,7 +254,7 @@ Die Argumentation ist der Kern der Dokumentation und dient als Nachweis das etwa
 \subsection{Gefahrenanalyse und Risikoermittlung}
 Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen früh zu erkennen, ihr Risiko grob einzuordnen und wirksame Gegenmaßnahmen abzuleiten. Das Ergebnis ist eine priorisierte Liste von Risiken mit klaren Safety-Zielen und abgeleiteten Anforderungen – und ein Plan, wie diese nachgewiesen werden.
 
-\paragraph{Ablauf in Kurzform.}
+\paragraph{Ablauf in Kurzform:}
 \begin{enumerate}
   \item \textbf{Sammeln:} Mögliche Gefährdungen identifizieren (Technik, Mensch, Umfeld, Betrieb).
   \item \textbf{Einordnen:} Schweregrad und Eintrittswahrscheinlichkeit bewerten (Risikomatrix).
@@ -331,7 +331,7 @@ In der Praxis bedeutet das: klare Rollen, definierte Zulassungswege und akzeptie
 
 Der Rahmen bestimmt, \emph{welche} Safety-Ziele gelten, \emph{welche Evidenzen} akzeptiert werden und \emph{wer} sie freigibt. 
 So wird aus Technik ein zulassungsfähiges, im Betrieb überwachtes und dauerhaft sicheres System.
-Regularien die erfüllt werden müssen um die benötigten Zertifikate zu erhalten sind in Normen wie z.B. DO 187C festgehlten.
+Regularien die erfüllt werden müssen um die benötigten Zertifikate zu erhalten sind in Normen wie z.B. DO 178C festgehlten.
 
 \subsection{Safety-Standards und Prozesse (Überblick)}
 Diese Normfamilien geben vor, \emph{wie} Safety geplant, entwickelt, nachgewiesen und dokumentiert wird – von der Systemebene bis zu Software/Hardware und Umwelttests.
@@ -417,7 +417,7 @@ Luftfahrt leidet unter seltenen Ereignissen und unausgewogenen Klassen. Beispiel
 \begin{itemize}
   \item Selten auftretende kritische Near-Miss-Situations
   \item Gewichts- und Größenunterschiede: z.B. ein Airbus A380 im Vergleich zu einer Taube
-  \item Geschwindigkeitsunterschiede: z.B. ein in der Luft stehender Helikopter oder ein Jet mit Überschaallgeschwindigkeit
+  \item Geschwindigkeitsunterschiede: z.B. ein in der Luft stehender Helikopter oder ein Jet mit Überschallgeschwindigkeit
 \end{itemize}
 Seltene Ereignisse erschweren das Trainieren von KIs und begünstigen Overfitting. Große Unterschiede in den Daten erschwerden 
 das Generalisieren und können die Performance einschränken.
