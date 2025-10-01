@@ -3,6 +3,21 @@
 %----------------------------------------------------------------------------------------
 \chapter{Luftfahrt}
 
+% ==== Luftfahrt ====
+\subsection{Ziel, Motivation und Scope (Luftfahrt)}
+\paragraph{Ziel.}
+Einordnung, wie „sicher genug“ für KI-Funktionen in der Luftfahrt regulatorisch begründet und nachgewiesen wird: Rolle von EASA (AI Roadmap, Concept Paper Issue~2), MLEAP-Ergebnissen und etablierten Standards (z.B. DO-178C). Klarstellung: KI-Guidance ergänzt, ersetzt aber nicht die klassische Assurance; keine Erleichterung der Nachweisstrenge.
+
+\paragraph{Motivation.}
+KI hält in sicherheitsrelevanten Avionikfunktionen Einzug (z.\,B.\ Radar-Objektklassifizierung). Für den Einsatz im Flugbetrieb braucht es eine belastbare Begründung „sicher genug“ – auf Basis der etablierten Luftfahrt-Standards, ergänzt um KI-spezifische Evidenzen. Gleichzeitig bleiben zentrale Fragen offen (Generalisierung und Drift, Daten-/Modell-Governance, Updates im Betrieb, OOD/Abstain). Ein kurzer Seitenblick auf militärische Anwendungen ist hilfreich, weil dort Degradation, Resilienz gegen Störungen (Jamming/Täuschung) und konsequente Human-in-the-Loop-Konzepte geschärft sind; diese Aspekte liefern Anregungen, stehen hier aber nicht im Mittelpunkt der zivilen Zulassung.
+
+\paragraph{Scope.}
+Fokus auf Safety-Aspekte von KI in der Avionik, insbesondere \emph{Radar-Objektklassifizierung} als Beispielanwendung. Abdeckung der EASA-Guidance zu Level~1/2 (Assistenz, Human-AI-Teaming), \emph{offline} trainierten, zur Freigabe eingefrorenen Modellen.
+
+
+
+
+
 \section{EASA AI-Roadmap – aktueller Stand}
 Die EASA positioniert KI als „human-centric“ und staffelt Anwendungen nach Autorität: \textbf{Level 1} (Assistenz), 
 \textbf{Level 2} (Human-AI-Teaming) und später \textbf{Level 3} (fortgeschrittene Automatisierung). 
@@ -16,43 +31,46 @@ und skizziert einen gestuften Zulassungspfad. \emph{Kernbotschaft:} KI ergänzt,
 \end{itemize}
 
 
-\section{Concept Paper Issue 2: Guidance für Level 1 \& 2}
-Das \emph{Concept Paper Issue 2} (03/2024) konkretisiert Anforderungen für \textbf{Level 1} (Assistenzfunktionen) 
-und erweitert auf \textbf{Level 2} (Human-AI-Teaming: Kooperation/Kollaboration unter menschlicher Aufsicht). 
-Es vertieft „Learning Assurance“, Erklärbarkeit und ethikbasierte Bewertung, ohne die klassischen Safety-Prozesse zu ersetzen. 
-\paragraph{Folgende Punkte stehen im Fokus:}
+\section{EASA AI-Guidance 2024 (Concept Paper Issue 2) – Level 1 \& 2}
+Das \emph{Concept Paper Issue 2} (03/2024) beschreibt die schrittweise Einführung von KI in sicherheitsrelevanten Anwendungen: zuerst \textbf{Level 1} (Assistenzfunktionen), anschließend ausgewählte \textbf{Level 2}-Anwendungen (\emph{Human–AI Teaming} unter klarer menschlicher Aufsicht). Die Guidance ergänzt das bestehende Safety-Regelwerk (z.\,B.\ DO-178C) um KI-spezifische Bausteine wie \emph{Learning Assurance}, Erklärbarkeit, präzise Einsatzgrenzen (ODD) und betriebliches Monitoring – ohne die klassischen Nachweise zu ersetzen.
+
+\paragraph{Schwerpunkte.}
 \begin{itemize}
-    \item \textbf{Klare Rollenverteilung:} L1 = Unterstützung, L2 = Kooperation mit dem Menschen; Autorität und Eingriffsrechte müssen beschrieben sein.
-    \item \textbf{Einsatzbereich festnageln:} Definition von Scope/Use Cases, Datenbasis und Grenzen (wann „Abstain/Unknown“).
-    \item \textbf{Learning Assurance:} Herkunft/Qualität der Trainingsdaten, Änderungen am Modell, und wie Updates kontrolliert freigegeben werden.
-    \item \textbf{Erklärbarkeit \& HMI}: Begründbare Ausgaben, Konfidenz-/Qualitätsanzeigen, eindeutige Degradationsmodi.
-    \item \textbf{Betrieb \& Monitoring:} Drift-Überwachung, Logging, Eskalationswege; „living“ Safety Case statt Einmal-Nachweis.
+  \item \textbf{Klare Rollenverteilung:} L1 = Unterstützung; L2 = Kooperation mit dem Menschen. Autorität, Eingriffsrechte und Übersteuerbarkeit müssen beschrieben und gegeben sein.
+  \item \textbf{Einsatzbereich festlegen (ODD):} Scope, Use Cases, Datenbasis und Grenzen definieren – inkl.\ Regeln, wann „Abstain/Unknown“ zu ziehen ist.
+  \item \textbf{Learning Assurance:} Herkunft/Qualität der Trainingsdaten, kontrollierte Modelländerungen und Freigabeprozesse transparent darlegen.
+  \item \textbf{Erklärbarkeit \& HMI:} Begründbare Ausgaben, Konfidenz-/Qualitätsanzeigen und eindeutige Degradationsmodi.
+  \item \textbf{Betrieb \& Monitoring:} Drift-Überwachung, Logging, Eskalationswege; \emph{„living“ Safety Case} statt Einmal-Nachweis.
 \end{itemize}
 
-
-\section{Guidance 2024 (Level 1 \& 2) – frühe Einsatzgrenzen}
-Frühe Guidance setzt bewusst enge Grenzen: zuerst \textbf{Level 1}, anschließend ausgewählte \textbf{Level 2}-Anwendungen 
-mit klarer menschlicher Aufsicht. Zuvor war der Fokus bei L1 auf \emph{offline} gelernten, „eingefrorenen“ Modellen 
-und (überwiegend) \emph{supervised} Verfahren; Issue 2 erweitert den Rahmen für L2, behält aber strikte Nachweis- 
-und Governance-Erwartungen bei.
 \paragraph{Frühe Einsatzgrenzen.}
 \begin{itemize}
-  \item \textbf{Autorität begrenzt:} L1 = Mensch entscheidet und handelt; L2 = System darf Aktionen ausführen, aber immer unter Aufsicht und jederzeit übersteuerbar.
-  \item \textbf{Kein Online-Lernen:} Zulässig sind \emph{offline} gelernte, zur Freigabe „eingefrorene“ Modelle; \emph{Online-/Continual Learning} ist ausdrücklich (noch) ausgeschlossen.
-  \item \textbf{OD/ODD verpflichtend:} Einsatzbereich (Operational Domain/Design Domain) ist eng zu definieren; bei OoD/OoD-Daten sind Monitoring, Warnung und sicheres Verhalten gefordert.
-  \item \textbf{Assurance bleibt maßgeblich:} KI-spezifische Learning-Assurance kommt \emph{on top}; Software-/Hardware-Entwicklungsassurance (z.\,B. DO-178C) bleibt anwendbar.
-  \item \textbf{„Mindestens so sicher“ wie traditionell:} Ziel ist ein Sicherheitsniveau, das dem konventioneller Lösungen entspricht; es gibt keinen faktischen „Assurance-Rabatt“.
+  \item \textbf{Begrenzte Autorität:} L1 = Mensch entscheidet und handelt; L2 = System darf handeln, bleibt aber jederzeit übersteuerbar.
+  \item \textbf{Kein Online-Lernen:} Zulässig sind \emph{offline} gelernte, zur Freigabe \emph{eingefrorene} Modelle; Online-/Continual Learning ist (noch) ausgeschlossen.
+  \item \textbf{ODD \& OOD:} Der Einsatzbereich ist eng zu beschreiben; für \emph{außerhalb der ODD}/\emph{Out-of-Distribution} sind Monitoring, Warnung und sicheres Verhalten gefordert.
+  \item \textbf{Nachweisstrenge bleibt:} KI-spezifische Evidenzen kommen \emph{on top}; die Software-/Hardware-Assurance (z.\,B.\ DO-178C/DO-254) bleibt vollumfänglich anwendbar – es gibt keine Erleichterung der Nachweisstrenge.
+  \item \textbf{Zielniveau:} Mindestens das Sicherheitsniveau konventioneller Lösungen.
 \end{itemize}
 
-\paragraph{Bedeutung}
+
+
+
+\section{MLEAP Final Report (2024) – Kernaussagen und Relevanz}
+Der \emph{Final Report} des EASA-Forschungsprojekts \textbf{MLEAP} (Machine Learning Application Approval) bündelt Methoden- und Werkzeugempfehlungen zur \emph{Learning Assurance} und zeigt, wie der EASA-\emph{W-Shape} (lernprozessspezifische Ergänzung zum V-Modell) praktisch umgesetzt werden kann. Schwerpunkte sind \textbf{Datenrepräsentativität}, \textbf{Generalisierung} und \textbf{Robustheit/Stabilität} von ML-Modellen; ergänzt wird dies durch eine generische Entwicklungs-Pipeline im Sinne des W-Shape. Die Ergebnisse fließen in das \emph{EASA AI Concept Paper Issue 2} ein.
+
+\paragraph{Kerninhalte.}
 \begin{itemize}
-  \item \textbf{Scope festnageln:} L1/L2 klar trennen (Rollen, Eingriffsrechte, HMI) und den ODD so präzise beschreiben, dass „Unknown/Abstain“ und Fallbacks eindeutig sind.
-  \item \textbf{Offline-Modelle annehmen:} Updates nur kontrolliert (Freigabe \& Rollback); kein Online-Lernen – stattdessen Betriebsmonitoring und Drift-Erkennung.
-  \item \textbf{Assurance-Argument führen:} Learning-Assurance \emph{zusätzlich} zu System-/SW-/HW-Assurance darstellen (Kompatibilität, Nachweise, Traceability).
-  \item \textbf{OOD-Strategie zeigen:} Erkennung außerdomäniger Daten, saubere Warnungen, konservatives Verhalten und transparente Konfidenz-/Qualitätsanzeigen in der HMI.
+  \item \textbf{W-Shape als Rahmen:} Abgrenzung System-Ebene vs.\ KI-Ebene; spezifische Ziele und Verifikationen für Datenmanagement, Lernprozess, Modellverifikation und Integration werden entlang des Lernzyklus verankert. 
+  \item \textbf{Drei technische Achsen:} (1) \emph{Datenvollständigkeit \& Repräsentativität} inkl.\ Corner-/Edge-Cases und Auswahlraster für Datenqualifikationsmethoden; (2) \emph{Generalisierung} (Vermeidung von Unter/Überanpassung, Abschätzung/Bounds, prozessnahe Maßnahmen); (3) \emph{Robustheit \& Stabilität} gegenüber Störungen/Rauschen inkl.\ Ansätzen von empirischen bis formalen Verfahren. 
+  \item \textbf{Generische Pipeline:} Ein praktikabler Ablauf zur Umsetzung des W-Shape mit klaren Prüfbausteinen (Daten-, Lern-, Performance- und Integrationsverifikationen) wird vorgeschlagen. 
+  \item \textbf{Use-Cases (Evidenz):} \emph{ATC-Speech-to-Text}, \emph{Automated Visual Inspection} (In-Service-Schadenerkennung) und \emph{ACAS Xu} (UAS-Air-to-Air-Avoidance) wurden untersucht, um Methoden und Empfehlungen an realen Luftfahrtaufgaben zu validieren. 
 \end{itemize}
 
-\section{DO-178C (ED-12C) – Rolle im KI-Kontext}
+
+
+
+
+\section{DO-178C – Rolle im KI-Kontext}
 \textbf{DO-178C} bleibt die \emph{Baseline} für Software-Assurance in der Avionik: Ziele und Evidenzen skalieren mit 
 \textbf{DAL A–E}. EASA verweist explizit auf die DO-178C-Daten/Liefergegenstände (inkl. Tool-Qualifikation) als Nachweisgrundlage; 
 KI-spezifische Guidance kommt \emph{zusätzlich} obenauf (z.\,B. Learning Assurance), ändert aber die Software-Pflichten nicht. 
@@ -69,6 +87,8 @@ KI-spezifische Guidance kommt \emph{zusätzlich} obenauf (z.\,B. Learning Assura
 Die DO 178C und 330 nehmen kein Bezug zu KI und ist für Software und Tools im Allgemeinen. Anzumerken ist, dass deterministischer code 
 oder MC/DC Coverage stark empfohlen wird und als best practise gilt. Diese Punkte sind bei KI nicht erfüllbar und werden nicht in dieser 
 Norm ausdrücklich gefordert. Das Fazit dazu ist, dass KI nach diesen Standards möglich ist, aber die Anforderungen an Nachweisen steigen.
+
+
 
 
 
@@ -215,12 +235,28 @@ Betrieb \& Resilienz & „Fail-safe“/„fail-operational“ nach Hazard; klare
 \textit{Hinweis:} Cybersecurity (ISO 21434, UNECE R155/R156) wird nur als Betriebsrandbedingung erwähnt und ist \emph{nicht} Teil dieser Thesis.
 \textit{Gremien in einem Satz:} UNECE/WP.29 regelt Betrieb/Updates; ISO/SAE/IEEE standardisieren – Details hier nachrangig.
 
-\section{Normen-Panorama (kurz)}
+\subsection{Begriffe \& Standards – Schnellvergleich}
+\begin{center}
+\begin{tabular}{p{0.38\textwidth} p{0.25\textwidth} p{0.25\textwidth}}
+\hline
+\textbf{Aspekt} & \textbf{Luftfahrt} & \textbf{Automotive} \\
+\hline
+Safety-Level & DAL A–E & ASIL A–D \\
+System-Safety & ARP4754A / ARP4761A & ISO 26262 (HARA, Safety Concept) / ISO 21448 (SOTIF) \\
+Software-Assurance & DO-178C & ISO 26262 Teil SW \\
+Hardware-Assurance & DO-254 & ISO 26262 Teil HW \\
+KI-Guidance & EASA AI Level 1/2 (Guidance) & ISO/PAS 8800 \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Normen-Panorama}
 \begin{itemize}
   \item \textbf{ISO 26262 (Functional Safety, ASIL A–D):} Lebenszyklus- und Nachweisrahmen für E/E-Systeme.
   \item \textbf{ISO 21448 (SOTIF):} Umgang mit Funktions-/Wahrnehmungs­insuffizienzen und Szenario-Lücken.
-  \item \textbf{ISO/PAS 8800:} KI-spezifische Ergänzung zu 26262/SOTIF (Daten-/Modell-Governance, ODD/OOD, Kalibrierung, Betrieb/Updates).
-  \item \textbf{ISO/IEC TR 5469:} Domänenübergreifender Leitfaden \emph{Funktionale Sicherheit \& KI} – Eigenschaften, Risiken, Methoden/Prozesse.
+  \item \textbf{ISO 8800:} KI-spezifische Ergänzung zu 26262/SOTIF (Daten-/Modell-Governance, ODD/OOD, Kalibrierung, Betrieb/Updates).
+  \item \textbf{ISO TR 5469:} Domänenübergreifender Leitfaden \emph{Funktionale Sicherheit \& KI} – Eigenschaften, Risiken, Methoden/Prozesse.
+  \item \textbf{ISO 22989:} Domänenübergreifende Sammlung an KI Begriffen und Konzepten, die zur Vereinheitlichung dient.
 \end{itemize}
 
 \section{Deep Dive: ISO/PAS 8800}
@@ -262,23 +298,7 @@ Betrieb \& Resilienz & „Fail-safe“/„fail-operational“ nach Hazard; klare
   \item Umgebungen: Luftfahrt eher kontrolliert/hochintegriert; Automotive breit gestreute ODDs (urban/land/\ldots).
 \end{itemize}
 
-\subsection{Begriffe \& Standards – Schnellvergleich}
-\begin{center}
-\begin{tabular}{p{0.38\textwidth} p{0.25\textwidth} p{0.25\textwidth}}
-\hline
-\textbf{Aspekt} & \textbf{Luftfahrt} & \textbf{Automotive} \\
-\hline
-Safety-Level & DAL A–E & ASIL A–D \\
-System-Safety & ARP4754A / ARP4761A & ISO 26262 (HARA, Safety Concept) / ISO 21448 (SOTIF) \\
-Software-Assurance & DO-178C (ED-12C) & ISO 26262 Teil SW \\
-Hardware-Assurance & DO-254 & ISO 26262 Teil HW \\
-Umwelt/EMV & DO-160 & Automotive Umwelt-/EMV-Normen \\
-KI-Guidance & EASA AI Level 1/2 (Guidance) & ISO/PAS 8800 \\
-Einsatzgrenzen & Operational Envelope & ODD (Operational Design Domain) \\
-Betrieb/Änderungen & Continuing Airworthiness & Typgenehmigung + (R156) Updates \\
-\hline
-\end{tabular}
-\end{center}
+
 
 \section{V\&V-Strategie (Automotive-konkret)}
 \textit{Leitplanken:} Szenario-basiertes Testen je ODD-Segment; Kalibrierung \& OOD-Rate als Pflichtmetriken; KPI-Berichte pro Klasse/Szene/SNR/Range; Latenz- \& Degradationsregeln dokumentieren.
