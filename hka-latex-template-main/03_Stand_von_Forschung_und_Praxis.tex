@@ -2,13 +2,139 @@
 \chapterimage{Bilder_und_Co/safety_sign_with_computer_code_and_a_airplane_in_the_background_1958542794.png} % Chapter heading image
 %----------------------------------------------------------------------------------------
 % --- KAPITEL: LITERATUR- UND PRAXISÜBERBLICK ---
-\chapter{Literatur- und Praxisüberblick}\label{sec:literatur}
+\chapter{Stand von Forschung und Praxis}\label{chap:state-of-practice}
 
-\section{Forschungsstand zu AI Safety}\label{sec:fs-safety}
-Der Diskurs zu AI Safety bündelt Konzepte wie Daten-/Label-Governance, Robustheit gegenüber Verteilungsverschiebungen, Erklärbarkeit, Monitoring sowie Tool-/Prozessabsicherung. Ziel dieses Abschnitts ist eine geordnete Übersicht ohne Bewertung einzelner Verfahren. Relevante Muster werden später in der Coverage-Analyse aufgegriffen. % TODO: Gliederung + Schlüsselpapers
+Dieses Kapitel skizziert, wie KI heute im Luftfahrtumfeld eingesetzt wird, welche Schwerpunkte der
+Forschungsdiskurs zu \emph{AI Safety} setzt und welche wiederkehrenden Praxisprobleme auftreten.
+Die Darstellung ist bewusst bewertungsfrei und dient als \emph{Context-Setting} zwischen den
+\emph{Grundlagen} und den \emph{Anforderungen und Szenarien} (Kap.~\ref{sec:anforderungen}).
 
+% ----------------------------------------------------
+\section{Überblick: Einsatzfelder}\label{sec:sop-ueberblick}
+KI wird in der Luftfahrt überwiegend für datengetriebene \emph{Unterstützungsfunktionen} eingesetzt.
+Häufig sichtbare Felder (Literatur und Praxis) sind:
+\begin{itemize}
+  \item \textbf{Vorhersagende Instandhaltung (Predictive Maintenance):} Zustandsdiagnose, Failure Prediction und Flottenanalysen auf Basis von Sensordaten.
+  \item \textbf{Flugmanagement und -betrieb (Operations):} Routen-/Treibstoffoptimierung, Turnaround- und Dispositionsplanung, Prognosen für Pünktlichkeit.
+  \item \textbf{Sicherheit und Überwachung:} Anomalieerkennung in Netzen/Prozessen, sicherheitsrelevante Muster in Betriebsdaten, Compliance-Monitoring.
+  \item \textbf{Luftverkehrsmanagement (ATM/ATC):} Sequencing/Staffelung, Slot-/Flow-Optimierung, Bodenbewegungen.
+  \item \textbf{Sensorik \& Wahrnehmung (u.\,a.\ Radar, EO/IR):} Detektion, Klassifikation, Clutter-Trennung, Sensordatenfusion und Qualitätsbewertung.
+\end{itemize}
+
+\subsection*{Use-Cases und Publikationsanteile (Literaturüberblick)}
+% Quelle: Nutzerangabe „ML meets aerospace“; bitte konkrete Referenz ergänzen.
+Die Verteilung veröffentlichter Arbeiten (indikativ) deutet auf folgende Schwerpunkte hin:
+\begin{itemize}
+  \item \textbf{Flugmanagement und -betrieb} — \emph{39\,\%}
+  \item \textbf{Vorhersagende Instandhaltung} — \emph{34\,\%}
+  \item \textbf{Sicherheit und Überwachung} — \emph{23\,\%}
+  \item \textbf{Luftverkehrsmanagement} — \emph{4\,\%}
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\caption{Publikationsanteile nach Einsatzfeld (indikativ; Literaturüberblick)}
+\begin{tabular}{p{0.46\textwidth}r}
+\toprule
+\textbf{Einsatzfeld} & \textbf{Anteil} \\
+\midrule
+Flugmanagement und -betrieb & 39\,\% \\
+Vorhersagende Instandhaltung & 34\,\% \\
+Sicherheit und Überwachung & 23\,\% \\
+Luftverkehrsmanagement & 4\,\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Einordnung für Radar/Klassifikation.}
+Für diese Arbeit sind die Bereiche \emph{Sicherheit/Überwachung} und \emph{Sensorik \& Wahrnehmung}
+besonders relevant: die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutter-Trennung,
+Mikrodoppler) fällt genau hier hinein. Die Publikationsschwerpunkte stützen die thematische Fokussierung,
+ersetzen aber keine sicherheitstechnische Bewertung.
+
+% ----------------------------------------------------
+\section{Forschungsstand zu AI Safety (kompakt)}\label{sec:fs-safety}
+Der AI-Safety-Diskurs priorisiert \emph{Assurance} gegenüber reiner Benchmark-Optimierung. Wiederkehrende Motive: % TODO \cite{...}
+\begin{itemize}
+  \item \textbf{Daten-/Label-Governance:} Herkunft, Qualität, Annotation, Versionierung, Freigabeprozesse; auditable Artefakte (Datasheets/Model Cards).
+  \item \textbf{ODD und Annahmenmanagement:} explizite Gültigkeitsgrenzen, Szenariendefinitionen, messbare Annahmen; segmentiertes Reporting statt „Overall-Accuracy“.
+  \item \textbf{Robustheit und Verteilungssprünge:} Stress-/Sensitivitätstests (Clutter/Noise/RFI), OOD-Erkennung, konservative Meldestrategien (Abstain).
+  \item \textbf{Unsicherheit/Kalibrierung:} kalibrierte Konfidenzen (z.\,B.\ ECE/Brier), Fehlerbänder, Freigabekriterien je ODD-Segment.
+  \item \textbf{Erklärbarkeit/Auditierbarkeit:} zweckgebundene XAI zur Plausibilisierung (kein Ersatz für V\&V), reproduzierbare Auswertungen für Reviews.
+  \item \textbf{Toolchain-Assurance \& Reproduzierbarkeit:} kontrollierte Abhängigkeiten, deterministische Trainings-/Eval-Läufe, signierte Artefakte; ggf.\ Toolqualifizierung (DO-330-Gedanke).
+  \item \textbf{Lebenszyklus/Änderungen:} Monitoring im Betrieb, Drift-/OOD-Erkennung, Degradation/Fallback, kontrolliertes Re-Training mit erneuter Freigabe.
+\end{itemize}
+\textit{Trend:} International verschiebt sich der Maßstab sichtbar von „Accuracy“ zu \emph{Assurance} (ODD-Schnitte, Kalibrierung, Reproduzierbarkeit, klare Freigabekriterien). % TODO \cite{...}
+
+% ----------------------------------------------------
 \section{KI in (Luftfahrt-)Radarsystemen}\label{sec:ki-radar-stand}
-Veröffentlichte Anwendungen und Studien zeigen unterschiedliche Reifegrade und Integrationspfade. Für die vorliegende Arbeit sind diese Beiträge als Indikatoren für Potenziale und typische Hürden zu verstehen. Eine Detailbewertung erfolgt nicht, die Ableitung erfolgt über Anforderungsfelder. % TODO: 5–8 Quellen, sehr kurz zusammenfassen
+Veröffentlichungen und Praxisbeiträge zeigen unterschiedliche Reifegrade und Integrationspfade—vom \emph{Frontloading}
+(Entwicklung, Test, Evidenzerzeugung) bis hin zu \emph{Inline}-Funktionen mit unmittelbarer Wirkung. Relevante Beobachtungen: % TODO 5–8 Quellen \cite{...}
+\begin{itemize}
+  \item \textbf{Use-Cases:} Detektion/Klassifikation (inkl.\ Mikrodoppler), Clutter-Trennung, Sensorfusion, Qualitätsbewertung von Radarprodukten.
+  \item \textbf{Besonderheiten:} Datenknappheit seltener Ereignisse (Class Imbalance), distributionssensible Eingaben (Wetter/Clutter/RFI/Aspekt), Anforderungen an Latenz/Verfügbarkeit.
+  \item \textbf{Integrationsmuster:} Inline erfordert HMI-/Konfidenzkommunikation (Unknown/Abstain, Qualitätsflags) und Latenzgarantien; Frontloading fokussiert Reproduzierbarkeit, Audit-Trails und belastbare Evidenzüberführung.
+  \item \textbf{Reporting-Praxis:} Zunehmend segmentiertes Reporting nach ODD-Schnitten (SNR/Entfernung/Wetter/Clutter) statt nur Gesamtmetriken; Kalibrierungsangaben werden häufiger eingefordert.
+\end{itemize}
 
-\section{Praxisbeobachtungen zu Problemen beim KI-Einsatz}\label{sec:praxis}
-Praxisberichte verdeutlichen, dass Fehler häufig auf Daten-/Label-Probleme, unzureichende Domänenabdeckung oder fehlende Auditierbarkeit zurückgehen. Die Beispiele werden domänenübergreifend gesammelt, um wiederkehrende Anforderungsfelder zu markieren. Ziel ist die Ableitung übertragbarer Lessons Learned. % TODO: Tabelle "Fall – betroffenes Feld – Lesson"
+% ----------------------------------------------------
+\section{Praxis-Trends}\label{sec:sop-trends}
+Aus Projekten und Veröffentlichungen zeichnen sich Querschnittstrends ab, die Anforderungen und Nachweise prägen:
+\begin{itemize}
+  \item \textbf{Shift: Accuracy $\rightarrow$ Assurance} (ODD, Kalibrierung, Reproduzierbarkeit, Freigabekriterien; vgl.~Kap.~\ref{sec:grundlagen-ki}).
+  \item \textbf{Szenarienbasiertes Reporting} (Segmentierung nach SNR/Entfernung/Wetter/Clutter, Aspekt; vgl.~Kap.~\ref{sec:radar-kpis}).
+  \item \textbf{Unknown/Abstain als Pflicht} (OOD-Erkennung, konservative Meldestrategien).
+  \item \textbf{Toolchain- \& Daten-Governance} (Versionierung, Audit-Trails, ggf.\ Toolqualifizierung; vgl.~Kap.~\ref{sec:sicherheitsprinzipien}).
+  \item \textbf{Inline vs.\ Frontloading} (strenge Echtzeit/HMI vs.\ Evidenz-/Repro-Fokus).
+\end{itemize}
+
+% ----------------------------------------------------
+\section{Typische Hürden}\label{sec:sop-huerden}
+\begin{itemize}
+  \item \textbf{Seltene Ereignisse und Class Imbalance:} begrenzte Abdeckung extremer Szenarien; Risiko von Overfitting/Scheingenauigkeit.
+  \item \textbf{Verteilungssprünge (Shift):} Wetter/Clutter/RFI und Aspektabhängigkeiten verschieben Datenverteilungen; Kalibrierung kann erodieren.
+  \item \textbf{Traceability \& Reproduzierbarkeit:} Ende-zu-Ende-Verfolgbarkeit (Daten $\rightarrow$ Modell $\rightarrow$ Tests $\rightarrow$ Release) als Voraussetzung für Audits.
+  \item \textbf{Drift im Betrieb:} saisonale/plattformbedingte Verschiebungen erfordern Monitoring, Re-Kalibrierung und kontrollierte Re-Trainings mit erneuter Freigabe.
+  \item \textbf{Integration/HMI:} Qualitätsflags, Konfidenzen und Unknown/Abstain müssen für Operatoren interpretierbar übertragen werden.
+\end{itemize}
+
+% ----------------------------------------------------
+\section{Praxisbeobachtungen (abstrahiert)}\label{sec:praxis}
+\begin{table}[h]
+\centering
+\caption{Beobachtete Problemklassen beim KI-Einsatz und abgeleitete Lessons Learned (abstrahiert)}
+\begin{tabular}{p{0.33\textwidth}p{0.27\textwidth}p{0.32\textwidth}}
+\toprule
+\textbf{Fallbeispiel (abstrahiert)} & \textbf{Betroffene Felder} & \textbf{Lesson Learned} \\
+\midrule
+Leistungseinbruch in Starkregen/See-Clutter & ODD/Abdeckung; Robustheit/Shift & Segmentiertes Testen/Reporting; konservative Schwellen/Abstain \\
+\midrule
+Überoptimistische Genauigkeit durch Daten-Leckage & Daten-/Label-Governance; Traceability & Szenariobasierte Splits; Pipeline-Reviews \\
+\midrule
+Fehlkalibrierte Konfidenzen bei niedriger SNR & Unsicherheit/Kalibrierung & ECE/Brier je ODD-Segment verpflichtend \\
+\midrule
+Nicht reproduzierbare Trainingsergebnisse & Toolchain-Assurance; Repro & Versionierung/Signierung, deterministische Seeds, Audit-Trails \\
+\midrule
+Drift im Betrieb (Saison/Plattformwechsel) & Monitoring/Degradation; Change/Freigabe & Laufzeitmetriken/OOD-Rate, Re-Kalibrierung, kontrolliertes Re-Training \\
+\midrule
+Fehlinterpretation durch Bediener & Schnittstellen/HMI; XAI/Audit & Top-$k$, Konfidenz, Unknown/OOD-Flags; zweckgebundene XAI \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ----------------------------------------------------
+\section{Implikationen für Anforderungen und Nachweis}\label{sec:sop-implikationen}
+Aus dem Überblick ergeben sich für Kap.~\ref{sec:anforderungen} folgende Leitlinien:
+\begin{enumerate}
+  \item \textbf{ODD-/Szenarioabdeckung zuerst:} Anforderungen und Nachweise sind je ODD-Segment zu definieren und zu berichten.
+  \item \textbf{Konfidenz/Kalibrierung verpflichtend:} Freigabekriterien umfassen Unsicherheitsangaben, nicht nur Punktmetriken.
+  \item \textbf{Robustheits- und OOD-Tests:} Stress-/Störtests und Unknown/Abstain sind integraler Bestandteil.
+  \item \textbf{Toolchain-/Daten-Governance:} Reproduzierbarkeit, Signierung/Versionierung und Audit-Trails als verbindliche Anforderungen.
+  \item \textbf{Lifecycle-Sicht:} Monitoring, Drift-Erkennung und Change/Freigabeprozesse als Betriebsanforderungen definieren.
+\end{enumerate}
+
+\medskip
+\noindent\textit{Übergang.}
+Im nächsten Kapitel (\ref{sec:anforderungen}) werden Szenarien konkretisiert, Anforderungsfelder präzisiert
+und mit Erwartungen aus Standards/Leitlinien verknüpft, um sie anschließend (u.\,a.\ entlang ISO/PAS~8800)
+systematisch auf Abdeckung und Lücken zu prüfen.

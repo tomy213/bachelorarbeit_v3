@@ -971,3 +971,185 @@ Die sicherheitstechnische Einordnung einzelner Radar- und KI-Funktionen (z.\,B.\
 systemspezifisch und hängt von Architektur, Barrieren und automatischer Wirkung ab. Unabhängig davon
 bleiben ODD-Definition, Mess-/Reportingdisziplin und lebenszyklusorientiertes Monitoring zentrale Bausteine
 für eine tragfähige Assurance.
+
+
+\section{Radar–Grundlagen für Objektklassifizierung}\label{sec:radar-objklass}
+Für die spätere Einordnung von KI-gestützter Objektklassifizierung im Radar-Kontext sind die verfügbaren
+Messgrößen, ihre Qualität und ihr Kontext entscheidend. Die folgende Zusammenstellung dient als Brücke
+zwischen Radarsensorik (RD/RDA-Domäne, Tracks) und nachgelagerten Klassifikationsfunktionen.
+
+\subsection{Wichtige Datenpunkte für Objektklassifikation}\label{sec:radar-objklass-daten}
+\begin{table}[h]
+\centering
+\caption{Radar-Merkmale und Kontextinformationen für Objektklassifikation (Auswahl)}
+\begin{tabular}{p{0.32\textwidth}p{0.58\textwidth}}
+\toprule
+\textbf{Reichweite (Entfernung)} & Position relativ zum Radar; Basis für Lagebestimmung und Tracking. \\
+\midrule
+\textbf{Relativgeschwindigkeit (Doppler)} & Trennung bewegter von statischen Objekten; Hinweis auf Verhaltensklassen. \\
+\midrule
+\textbf{Winkel (Azimut/Elevation)} & Räumliche Lokalisierung; Voraussetzung für Zieltrennung in dichten Szenen. \\
+\midrule
+\textbf{Radar Cross Section (RCS)} & Rückstreustärke (Größe/Material/Geometrie); Typ- und Größenindizien. \\
+\midrule
+\textbf{Doppler-/Mikrodoppler-Signatur} & Feinstrukturen durch bewegte Teile (Rotor, Flügelschlag); starke Trennmerkmale. \\
+\midrule
+\textbf{Zeitliche Historie / Tracks} & Trajektorien, Persistenz und Manöver; robustere Merkmalsbildung als Einzelscans. \\
+\midrule
+\textbf{Spektrale Eigenschaften} & Verteilung der Rückstreuung (Frequenz/Polarisation); Material-/Strukturhinweise. \\
+\midrule
+\textbf{Clutter-Kontext} & Umwelt (Boden/See/Wetter) beeinflusst Unsicherheit und Fehlklassifikationen. \\
+\midrule
+\textbf{SNR und Qualitätsmetriken} & SNR, CFAR-Masken, lokale Störschätzer; Gewichtung unsicherer Messungen. \\
+\midrule
+\textbf{Sensor-/Modus-Metadaten} & Wellenform, PRF, Antennen-Aspect, Scanmodus; Einordnung und Normalisierung. \\
+\midrule
+\textbf{Konsistenz über Zeit} & Track-Confidence, Aussetzer, Plausibilitätschecks (kinematische Grenzen). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Merksätze zu Radar-Grundlagen}\label{sec:radar-merksätze}
+\begin{itemize}
+  \item \textbf{Physik zuerst:} Das Signal-Rausch-Verhältnis setzt die Grenzen; alles Weitere baut darauf auf.
+  \item \textbf{Qualität wandert nach unten:} Stabilität von Range–Doppler–Angle prägt alle Folgeschritte.
+  \item \textbf{PRF ist ein Hebel:} Pulsfolge steuert den Kompromiss Reichweite vs.\ Geschwindigkeit.
+  \item \textbf{Bandbreite kostet:} Bessere Auflösung \(\rightarrow\) höhere Datenrate/Rechenlast/Hardwareanforderungen.
+  \item \textbf{Antenne = Winkel:} Größere Apertur/elektronisches Schwenken verbessert Winkeltrennung, erhöht Komplexität.
+  \item \textbf{Zeit vs.\ Latenz:} Längere Integration schärft Doppler, erhöht Latenz/Bewegungsunschärfe.
+  \item \textbf{CFAR steuert $P_{fa}$:} Zu niedrige Schwellen \(\uparrow P_{fa}\), zu hohe verpassen schwache Ziele.
+  \item \textbf{Clutter ist der Hauptgegner:} Filter aggressiv genug wählen, ohne langsame/schwache Ziele zu verlieren.
+  \item \textbf{Mehrwege/Atmosphäre erzeugen Geister:} Tracking und Konsistenzprüfungen enttarnen Scheinziele.
+  \item \textbf{Koexistenz beachten:} SSR/ADS-B, Funk- und Navigationsdienste können überlagern.
+  \item \textbf{Kalibrierung hält ehrlich:} Regelmäßige Checks/Health-Monitoring verhindern Drift.
+  \item \textbf{Metadaten sind Gold:} PRF-/Modus-/Antenne-Infos gehören ins Dataset für Interpretierbarkeit.
+\end{itemize}
+
+\subsection{Merksätze zur Objektklassifizierung}\label{sec:klass-merksätze}
+\begin{itemize}
+  \item \textbf{Stabilität vor KI:} Gute Klassifikation braucht saubere Detektion, stabile RD/RDA-Daten und verlässliche Tracks.
+  \item \textbf{Zeit schlägt Einzelbild:} Sequenzen/Trajektorien offenbaren Muster robuster als Einzelscans.
+  \item \textbf{Mikrodoppler als Fingerabdruck:} Rotorrate/Flügelschlag trennen Drohnen, Helikopter, Vögel — SNR- und Aspect-abhängig.
+  \item \textbf{Quality-in-the-loop:} SNR, CFAR-Masken, Clutter-/RFI-Flags als Features erhöhen Robustheit.
+  \item \textbf{Offene Welt akzeptieren:} \emph{Unknown}-Klasse und OOD-Detektion sind Pflicht; lieber abstain als falsch sicher.
+  \item \textbf{Konfidenz muss stimmen:} Kalibrierte Wahrscheinlichkeiten und klare Abstain-Schwellen > Top-1-Quote.
+  \item \textbf{Physik hilft:} Kinematik-/Spektral-Checks stabilisieren datengetriebene Modelle.
+  \item \textbf{Szenariodeckung statt „Overall-Accuracy“:} Leistung nach SNR/Entfernung/Aspekt/Wetter berichten.
+  \item \textbf{Splits ohne Leckage:} Szenarien (Standort/Aspekt/Wetter) strikt zwischen Train/Test trennen.
+  \item \textbf{Robust denken:} Clutter, RFI, Aussetzer einplanen; Fallbacks gehören zum Design.
+  \item \textbf{HMI klärt Erwartungen:} Top-k, Konfidenz und OOD-/Qualitätsflags reduzieren Fehlinterpretationen.
+\end{itemize}
+
+\vspace{0.25em}
+\noindent\textit{Hinweis.}
+Die hier zusammengefassten Datenpunkte und Merksätze liefern im nächsten Kapitel den direkten Anknüpfungspunkt
+für die \emph{KI-gestützte Objektklassifizierung} und die Herleitung der \emph{Anforderungsfelder} (ODD-Schnitte,
+Leistungs-/Unsicherheitsmetriken, Toolchain-/Daten-Governance, Monitoring/Degradation).
+
+
+
+
+
+\chapter{Sicherheit in der Luftfahrt}\label{sec:safety-aviation}
+
+\section{Sicherheit – Grundlagen}\label{sec:safety-basics}
+\textbf{Begriffsrahmen.} Sicherheit (\emph{Safety}) ist die Freiheit von unvertretbaren Risiken. Risiko ergibt sich aus \emph{Eintrittswahrscheinlichkeit} und \emph{Schadensschwere}; Ziel ist ein \emph{tolerierbares Restrisiko} (ALARP).
+
+\subsection{Safety vs.\ Security}\label{sec:safety-vs-security}
+\emph{Safety} adressiert unbeabsichtigte Fehler/Versagen; \emph{Security} absichtliche Angriffe/Manipulationen. Security wird hier nur abgegrenzt; eine Vertiefung erfolgt nicht.
+
+\subsection{Von Gefährdung zu Nachweis}\label{sec:risk-to-proof}
+\textbf{Schutzziele (Safety Goals).} Aus Gefährdungen werden zu verhindernde gefährliche Zustände/effektive Barrieren abgeleitet.  
+\textbf{Abgeleitete Anforderungen.} Schutzziele werden in mess- und prüfbare Anforderungen überführt (Reaktionszeiten, Verfügbarkeit, Fehlertoleranz).  
+\textbf{Risikominderung.} Präventiv (robuste Architektur/Redundanz), detektierend (Überwachung/Plausibilisierung), korrektiv (Fallback/sichere Abschaltung).  
+\textbf{Akzeptanz und Nachweis.} Kriterien definieren, wann Restrisiko tragbar ist; Nachweise durch Tests/Analysen/Inspektionen \(\rightarrow\) dokumentierte Traceability (Gefährdung \(\rightarrow\) Ziel \(\rightarrow\) Anforderung \(\rightarrow\) Evidenz).
+
+\subsection{Assurance Case (Safety Case)}\label{sec:assurance-case}
+Strukturiert die Behauptung „\emph{sicher genug}“ unter spezifiziertem Kontext:  
+\emph{Claim} (was gilt), \emph{Begründung/Strategie} (warum plausibel), \emph{Kontext/Annahmen} (unter welchen Bedingungen), \emph{Evidenz} (wodurch belegt). Für KI gehören Daten-/Label-Governance, ODD-Abdeckung, Kalibrierung/Unsicherheit und Tool-/Prozessnachweise zur Evidenz.
+
+\subsection{Gefahrenanalyse (Auswahl)}\label{sec:hazard-analysis}
+\textbf{HAZID:} strukturierte Sammlung von Gefährdungen \(\rightarrow\) Hazard-Liste.  
+\textbf{FMEA/FMECA:} bottom-up Ausfallarten/Wirken/Entdeckung + Kritikalität.  
+\textbf{FTA:} top-down Ursachenbaum zum unerwünschten Top-Event.  
+\textbf{STPA:} systemtheoretisch; unsichere Steueraktionen, Kontext, HMI/Prozeduren.
+
+\subsection{Architekturprinzipien}\label{sec:arch-principles}
+\textbf{Redundanz/Diversität:} Mehrkanaligkeit und dissimilare Ausprägungen zur Vermeidung gemeinsamer Fehler.  
+\textbf{Trennung/Partitionierung:} räumlich/zeitliche Isolation kritischer Anteile.  
+\textbf{Fail-Safe vs.\ Fail-Operational:} sicherer Zustand vs.\ Weiterbetrieb in degradierter Form.  
+\textbf{Deterministisches Zeitverhalten:} begrenzte Latenzen/Jitter, Prioritäten, Synchronisation.
+
+\subsection{Verifikation und Validierung}\label{sec:vv}
+\textbf{Verifikation:} korrekt gegen Spezifikation gebaut?  
+\textbf{Validierung:} das richtige Artefakt für die ODD?  
+Mehrstufig (Unit/Integration/System/Abnahme), mit klaren Kriterien, Unabhängigkeit und durchgängiger Traceability. \emph{Ohne dokumentierte Ergebnisse keine Evidenz.}
+
+\subsection{Lebenszyklus und Human Factors}\label{sec:lifecycle-hf}
+Safety gilt über den gesamten Lebenszyklus (Änderungen, Updates, Betrieb, Reparaturen). Human Factors/HMI: Systeme müssen für den Menschen sicher bedienbar sein (Informationsdarstellung, Workload, Alarmierung, Training).
+
+\section{Luftfahrt-spezifischer Rahmen}\label{sec:aviation-specific}
+\subsection{Regulatorischer Rahmen und Rollen}\label{sec:reg-frame}
+\textbf{Behörden} (z.\,B.\ EASA/FAA) setzen Regeln, definieren Zertifizierungsbasis, erteilen Zulassungen.  
+\textbf{Applicant/Hersteller} verantwortet Safety-Nachweis und vollständige Dokumentation.  
+Der Rahmen bestimmt, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenz akzeptiert wird und \emph{wer} freigibt.
+
+\subsection{Standards/Prozesse (Überblick)}\label{sec:standards}
+\textbf{DO-178C} (Software; Evidenztiefe nach DAL), \textbf{DO-330} (Tool-Qualifizierung als Supplement), sowie DO-331…DO-333 (modellbasiert, objektorientiert, formal).  
+\textbf{Hinweis:} KI-spezifische Luftfahrt-Normen existieren aktuell nicht; externe Bezugsfolie u.\,a.\ \emph{ISO/PAS 8800} (Automotive, KI-bezogene Safety) – ohne Geltungsanspruch für Luftfahrt.
+
+\subsection{Development Assurance Levels (DAL)}\label{sec:dal}
+Schwere möglicher Fehlfunktionen \(\rightarrow\) Strenge von Entwicklung, Verifikation und Unabhängigkeit:
+\begin{itemize}
+  \item \textbf{DAL A} — katastrophal (z.\,B.\ Verlust des Flugzeugs/Leben)
+  \item \textbf{DAL B} — hazardous/severe-major
+  \item \textbf{DAL C} — major
+  \item \textbf{DAL D} — minor
+  \item \textbf{DAL E} — kein Safety-Einfluss
+\end{itemize}
+\textit{Hinweis zur Klassifikation:} Ohne unmittelbare automatische Wirkung und mit vorgelagerten/parallel wirkenden Barrieren kann Objektklassifizierung \emph{typischerweise} im Bereich \textbf{DAL C} liegen; bei automatischer Wirkung ist mindestens \textbf{DAL B} zu prüfen. Konkrete Einordnung ist systemspezifisch.
+
+\subsection{Brücke zu KI/ML}\label{sec:bridge-ml}
+KI zeigt probabilistisches Verhalten und verlangt zusätzliche Evidenz (ODD/Annahmen, Daten-/Label-Governance, Unsicherheit/Kalibrierung, Toolchain-Assurance, Monitoring/Drift/Änderungsmanagement). In der Luftfahrt existiert derzeit kein direktes KI-Normenpendant; Erwartungen werden über Anforderungen/Prozesse adressiert. Externe Orientierung (z.\,B.\ ISO/PAS 8800) kann helfen, ersetzt aber keine luftfahrtspezifische Bewertung.
+
+
+
+
+
+\chapter{Zusammenfassung der Grundlagen}\label{chap:grundlagen-summary}
+Dieses Kapitel fasst die zentralen Ergebnisse der Grundlagen zusammen und markiert den Übergang zur
+Analyse spezifischer Anforderungen, Szenarien und Bewertungsmethoden.
+
+\paragraph{KI und AI Safety (Kap.~\ref{sec:grundlagen-ki}).}
+Wir haben geklärt, dass die Bewertung von KI in sicherheitskritischen Anwendungen nicht über
+Benchmark-Metriken erfolgt, sondern über \emph{Assurance}: klar definierte ODD-Grenzen und Annahmen,
+testbare Anforderungen, belastbare Evidenzketten, kalibrierte Unsicherheiten, eine vertrauenswürdige
+Toolchain und ein lebenszyklusorientiertes Monitoring (inkl.\ Drift/OOD-Erkennung und kontrollierter
+Änderungen). Security wurde abgegrenzt, aber nicht vertieft.
+
+\paragraph{Radarsysteme in der Luftfahrt (Kap.~\ref{sec:grundlagen-radar}).}
+Radar liefert essenzielle Informationen für Lagebild, Wettervermeidung und Navigation. Wir haben
+Funktionsprinzipien (Entfernung–Doppler–Winkel), typische Architekturen und Modi, die
+Signalverarbeitungskette (RD/CFAR/Tracking), Leistungskennzahlen ($P_d$, $P_{fa}$, ROC, Auflösung,
+Latenz, Verfügbarkeit) sowie Betriebsbedingungen (Clutter, RFI, Multipath, Atmosphärik) umrissen.
+Für die spätere Klassifikation sind die relevanten Merkmale (z.\,B.\ Mikrodoppler, RCS, Tracks) und
+deren Qualitätskontext herausgestellt.
+
+\paragraph{Sicherheit in der Luftfahrt (Kap.~\ref{sec:safety-aviation}).}
+Safety wurde als Freiheit von unvertretbaren Risiken eingeordnet (ALARP). Wir haben die Kette
+\emph{Gefährdung} $\rightarrow$ \emph{Schutzziel} $\rightarrow$ \emph{Anforderung} $\rightarrow$ \emph{Nachweis}
+sowie den \emph{Assurance Case} (Claim/Begründung/Kontext/Evidenz) skizziert, grundlegende
+Analyse- und Architekturmuster (HAZID, FMEA/FMECA, FTA, STPA; Redundanz, Diversität, Partitionierung,
+Fail-Safe/Fail-Operational) aufgeführt und den regulatorischen Rahmen mit DAL-Logik umrissen. 
+Konkrete KI-Normen existieren in der Luftfahrt derzeit nicht; externe Bezugsfolien (z.\,B.\ ISO/PAS~8800)
+werden später als Vergleich herangezogen, ohne Übertragungsanspruch.
+
+\medskip
+\noindent\textbf{Takeaway.}  
+Die Grundlagen definieren drei feste Ankerpunkte für die weitere Arbeit:
+(i) \textit{KI-Assurance} als Maßstab „sicher genug“,  
+(ii) \textit{Radar-Spezifika} als anwendungsnaher Daten- und Leistungskontext,  
+(iii) \textit{Luftfahrt-Safety} als Prozess- und Nachweisrahmen.  
+Darauf aufbauend werden im nächsten Teil domänenspezifische \emph{Anforderungen und Szenarien}
+hergeleitet und anschließend entlang eines Referenzrahmens (u.\,a.\ ISO/PAS~8800) die \emph{Abdeckung}
+und \emph{Lücken} systematisch bewertet.
