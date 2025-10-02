@@ -1,0 +1,70 @@
+\part{Anforderungen, Analyse und Bewertung}
+\chapterimage{Bilder_und_Co/safety_sign_with_computer_code_and_a_airplane_in_the_background_1958542794.png} % Chapter heading image
+%----------------------------------------------------------------------------------------
+% --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
+\chapter{Anforderungen und Szenarien für Radarsysteme}\label{sec:anforderungen}
+
+\section{Szenarienrahmen}\label{sec:szenarien}
+Der Szenarienrahmen strukturiert typische Nutzungslagen und Entwicklungs-/Nachweisprozesse, ohne auf plattformspezifische Details einzugehen. Er dient als Referenz, um Forderungen an Evidenz und Abdeckung einzuordnen. % TODO: 3–5 Szenario-Typen stichwortartig
+
+\section{Anforderungsfelder}\label{sec:anforderungsfelder}
+Die Anforderungsfelder fassen wiederkehrende Sicherheitsbedarfe zusammen: Daten-/Label-Governance, Domänen-/ODD-Abdeckung, Robustheit/Shift, Erklärbarkeit/Audit, Monitoring/Degradation (für Inline), Tool-/Prozessqualifizierung (für Frontloading), Supply-Chain-Security sowie Traceability/Versionierung. Diese Felder bilden die Zeilen der späteren Coverage-Matrix. % TODO: je Feld 2–3 Sätze Definition
+
+\section{Referenzierung auf Standards und Leitlinien}\label{sec:ref-standards}
+Etablierte Sicherheitsstandards und behördliche Leitlinien formulieren Erwartungen an Prozesse, Nachweise und Evidenz. Für die Einordnung werden einschlägige Forderungen den Anforderungsfeldern zugeordnet, ohne Anspruch auf Vollständigkeit. Diese Referenz bildet die Brücke zur Analyse entlang ISO~8800. % TODO: Mini-Tabelle Feld→Forderungsquelle
+
+
+
+
+
+
+
+
+
+
+% --- KAPITEL: AUSGEWÄHLTE KI-MODELLE ---
+\chapter{Ausgewählte KI-Modelle: Kurze Erläuterungen}\label{sec:modelle}
+
+\section{Modellsteckbriefe und typische Fehlerbilder}\label{sec:steckbriefe}
+Die folgenden Steckbriefe skizzieren ausgewählte Modellklassen mit Blick auf Ein-/Ausgaben, typische Stärken und Fehlerbilder. Ziel ist eine gemeinsame Sprache für spätere Verweise, keine technische Vertiefung. Relevante Begriffe zu Unsicherheit und Kalibrierung werden konsistent verwendet. % TODO: 3–4 Modelle auswählen
+
+\section{Erklärbarkeit und Nachvollziehbarkeit}\label{sec:xai}
+Erklärbarkeit dient der fachlichen Plausibilisierung und unterstützt Audit und Nachweisführung. Dabei sind Reichweite und Grenzen post-hoc Methoden zu beachten; entscheidend ist die Einbettung in Prozesse und Evidenzketten. Dieser Abschnitt definiert die Rolle von XAI als unterstützendes, nicht allein tragendes Element. % TODO: 1–2 Beispiele nennen
+
+
+
+
+
+
+
+
+
+
+
+% --- KAPITEL: ANALYSE ENTLANG ISO 8800 ---
+\chapter{Analyse bestehender AI-Safety-Ansätze entlang ISO 8800}\label{sec:iso-analyse}
+
+\section{Vorgehen der Analyse}\label{sec:analyse-vorgehen}
+Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern welche Ansätze zur Absicherung gefordert werden und in welchem Umfang Abdeckung erkennbar ist. Grundlage ist ein Mapping von Anforderungsfeldern zu Forderungsquellen und praktikabler Abdeckung. % TODO: kurze Methodengrafik/Abb.
+
+\section{Anforderungs- und Coverage-Matrix}\label{sec:coverage}
+Die Matrix verknüpft je Anforderungsfeld die geforderten Ansätze mit dem beobachtbaren Abdeckungsgrad und einer kurzen Begründung. Sie dient als zentrales Artefakt zur strukturierten Einordnung. Hinweise auf geeignete Evidenzformen ergänzen die Einträge. % TODO: Tabelle anlegen
+
+\section{Diskussion der Abdeckung}\label{sec:abdeckung-diskussion}
+Die Diskussion verdichtet Muster über alle Felder: Wo bestehen tragfähige Anknüpfungspunkte, wo Unsicherheiten bei Evidenztiefe, Zertifizierbarkeit und Integration? Die Einordnung bleibt domänen- und produktneutral. % TODO: 3–5 Kernaussagen formulieren
+
+
+
+
+
+
+
+
+
+
+\chapter{Bewertung der Übertragbarkeit}\label{sec:uebertragbarkeit}
+Die Übertragbarkeit bewertet, inwieweit geforderte Ansätze unter den Rahmenbedingungen von Radarsystemen plausibel adressiert sind. Unterschiede zwischen Frontloading-Szenarien und Inline-Funktionen werden benannt, ohne eine Zulassungsbewertung vorzunehmen. % TODO: 2–3 Hauptargumente + Verweis auf Matrix
+
+  \section{Frontloading-Use-Cases (exemplarisch)}
+  \section{Inline-Funktionen (Überblick)}
+  \section{Zusammenführende Bewertung}

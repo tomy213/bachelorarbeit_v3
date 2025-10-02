@@ -1,6 +1,7 @@
-\part{Grundlagen und Kontext}
+\part{Theoretische und technische Grundlagen}
 \chapterimage{Bilder_und_Co/a_magnifying_glass_which_points_out_a_neuronal_network_surrounded_by_computer_code_and_a_question_ma_296098326.png} % Chapter heading image
 %----------------------------------------------------------------------------------------
+\begin{comment}
 \chapter{Radar in der Luftfahrt}
 
 \usetikzlibrary{arrows.meta, positioning}
@@ -481,3 +482,492 @@ oder Drift welcher auftaucht, wenn sich die realen Daten über die Zeit verände
 Dadurch wird KI Sicherheit zu einem Thema der Sicherheit über den gesammten Lebenszyklus. 
 Die Automotiv Branche hat für diese Themen seit 2022 die SOTIF Norm ISO 26262. Eine solche Norm besitzt die Luftfahrt ebenfalls nicht, 
 da bisher diese Themen in den Anforderungen festgehalten wurden und nicht gesondert betrachtet wurden.
+\end{comment}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Künstliche Intelligenz und AI Safety}\label{sec:grundlagen-ki}
+Dieses Kapitel legt die begriffliche und methodische Basis für die spätere Einordnung der Sicherheit von KI im Radar-Kontext. Zunächst werden zentrale KI-Konzepte skizziert, anschließend Prinzipien der Sicherheitsargumentation (Assurance/Nachweisführung) erläutert und gegenüber \emph{Security} sowie \emph{Zuverlässigkeit/Robustheit} abgegrenzt. Abschließend werden Kernelemente der KI-Sicherheit verdichtet, die später als Anforderungsfelder in der Coverage-Analyse dienen.
+
+\section{Begriffe und Konzepte}\label{sec:begriffe-konzepte}
+Unter \emph{Künstlicher Intelligenz (KI)} werden Verfahren verstanden, die aus Daten Muster ableiten und darauf basierend Entscheidungen, Klassifikationen oder Vorhersagen treffen. Technisch prägend sind \emph{Machine Learning (ML)} und dessen Teilbereich \emph{Deep Learning (DL)} mit tiefen, meist neuronalen Architekturen. Für diese Arbeit steht weniger die interne Modellmechanik im Vordergrund als das Zusammenspiel von \emph{Datenraum}, \emph{Annahmen} und resultierender \emph{Verlässlichkeit}.
+
+\paragraph{Lernparadigmen.}
+Beim \emph{überwachten Lernen} (Supervised) liegen Eingabe–Ausgabe-Paare vor (Klassifikation, Regression); \emph{unüberwachtes Lernen} (Unsupervised) erschließt Struktur ohne Labels (Clustering, Dichteschätzung). \emph{Selbstüberwachtes} und \emph{verstärkendes Lernen} (Self-/Reinforcement Learning) ergänzen das Spektrum; in sicherheitskritischen Domänen sind sie aufgrund von Stabilitäts- und Nachweisfragen besonders zu begründen.
+
+\paragraph{Daten- und Lebenszyklusbegriffe.}
+Zentral sind \emph{Datensatz}, \emph{Label} und die saubere Trennung in \emph{Training}, \emph{Validierung} und \emph{Test}. Der \emph{Lebenszyklus} umfasst Datenerhebung/Kuratierung, Modellentwurf, Training, Evaluation, Freigabe sowie Betrieb (\emph{Inferenz}) und Pflege. Als Domänenbezug dient die \emph{Operating Design Domain (ODD)}: der Bereich, für den Annahmen, Daten und Anforderungen gelten. \emph{Generalisation} bezeichnet die Fähigkeit, auch in neuen, ODD-konformen Situationen verlässlich zu entscheiden.
+
+\paragraph{Verteilungen, Bias und Qualität.}
+\emph{Verteilungssprung} (Distribution Shift) beschreibt Abweichungen zwischen Trainings- und Einsatzbedingungen und ist eine häufige Ursache für Leistungseinbußen. \emph{Bias} kann aus Messung, Auswahl oder Labeling entstehen und systematische Fehler nach sich ziehen. \emph{Datenqualität} umfasst Vollständigkeit, Relevanz, Rauschverhalten, Konsistenz und Reproduzierbarkeit der Aufbereitung.
+
+\paragraph{Unsicherheit, Kalibrierung und Leistungsmaßstab.}
+Es ist hilfreich, \emph{aleatorische} (stochastische, irreduzible) und \emph{epistemische} (wissensbedingte, prinzipiell reduzierbare) Unsicherheit zu unterscheiden. Für sicherheitskritische Kontexte sind \emph{kalibrierte Konfidenzen}, \emph{Plausibilisierung} und \emph{Nachvollziehbarkeit} der Entscheidungsgrundlagen wesentlich. Maßstab ist nicht maximale Benchmark-Genauigkeit, sondern \emph{sicher genug} innerhalb der ODD – belegt durch nachvollziehbare Evidenz und belastbare Grenzen.
+
+\begin{table}[h]
+  \centering
+  \caption{Unsicherheitsbegriffe (Kurzüberblick)}
+  \begin{tabular}{p{0.28\textwidth}p{0.65\textwidth}}
+    \toprule
+    \textbf{Aleatorische Unsicherheit} & Variabilität des Phänomens/der Messung; durch mehr Daten nicht eliminierbar, nur zu modellieren (z.\,B.\ Rauschen, Wettervariabilität).\\
+    \midrule
+    \textbf{Epistemische Unsicherheit} & Wissenslücken im Modell/System; durch zusätzliche Evidenz, Daten oder Modellanpassung reduzierbar (z.\,B.\ neue Szenarien, bessere ODD-Abdeckung).\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\section{Sicherheitsprinzipien und Nachweisführung}\label{sec:sicherheitsprinzipien}
+\textbf{Grundidee.} \emph{Safety} adressiert die Vermeidung unvertretbarer Risiken, die aus unbeabsichtigten Fehlern,
+Fehlfunktionen oder unzureichend beherrschten Unsicherheiten entstehen. Für KI bedeutet das: Nicht nur
+Leistungszahlen zählen, sondern eine belastbare \emph{Assurance}, die Annahmen, Evidenz und Grenzen transparent macht.
+
+\paragraph{Assurance Case: Behauptung, Begründung, Bedingungen, Belege.}
+Ein \emph{Safety/Assurance Case} strukturiert die Aussage, dass eine Funktion unter definierten Einsatzbedingungen
+\emph{sicher genug} ist. Er verknüpft (i) \emph{Claims} (was gilt), (ii) \emph{Strategien/Begründungen} (warum das plausibel ist),
+(iii) \emph{Kontext/Annahmen} (unter welchen Bedingungen es gilt) und (iv) \emph{Evidenz} (wodurch es belegt ist).
+Für KI umfasst die Evidenz neben klassischen Tests insbesondere Daten-/Label-Governance, Domänenabdeckung (ODD),
+Kalibrierung/Unsicherheit und Prozess-/Tool-Nachweise.
+
+\paragraph{Verifikation und Validierung (V\&V).}
+\emph{Verifikation} prüft die korrekte Realisierung gemäß Spezifikation (Artefakte „richtig gebaut“),
+\emph{Validierung} die Eignung für den vorgesehenen Zweck/ODD (das „richtige“ Artefakt).
+Für KI schließt V\&V u.\,a.\ ein: repräsentative Datenschnitte zur ODD, Robustheits- und Sensitivitätstests
+(inkl.\ plausibler Verteilungssprünge), Fehlermodellierung, Metriken mit Konfidenz/Kalibrierung
+sowie nachvollziehbare Freigabekriterien.
+
+\paragraph{Traceability und Reproduzierbarkeit.}
+Rückverfolgbarkeit verbindet Anforderungen, Gefährdungen/Schutzziele, Datenstände, Modell-/Konfigurationsversionen,
+Trainingsläufe, Auswertungen und Releases. \emph{Reproduzierbarkeit} (identische Ergebnisse bei kontrolliertem Neuaufbau)
+und \emph{Wiederholbarkeit} (vergleichbare Ergebnisse über Zeit/Plattformen) erhöhen die Beweiskraft der Evidenz.
+
+\paragraph{Toolchain-Assurance.}
+Die Vertrauenswürdigkeit der Toolchain (Datenpipelines, Trainings-/Eval-Stacks, Build-Systeme) ist Teil der Assurance:
+Versionierung und Signierung, kontrollierte Abhängigkeiten, reproduzierbare Läufe, dokumentierte Freigaben
+und – wo erforderlich – \emph{Toolqualifizierung} analog etablierten Leitfäden (z.\,B.\ DO-330-Gedanke).
+
+\paragraph{Betrieb, Monitoring und Änderungen.}
+Assurance endet nicht mit der Inbetriebnahme. Für operativ eingesetzte Funktionen sind Laufzeit-Monitoring,
+OOD-/Drift-Erkennung, Plausibilitätsprüfungen, definierte Degradation/Fallback und kontrollierte Änderungsprozesse
+(inkl.\ Re-Training und erneuter Freigabe) notwendig. Alle Änderungen sind im Safety Case zu reflektieren.
+
+\paragraph{Kurzhinweis zu Rahmenwerken.}
+Spezifische Luftfahrt-Normen für KI existieren derzeit nicht; zuständige Behörden adressieren KI vornehmlich konzeptionell.
+Als externe Bezugsfolie kann u.\,a.\ \emph{ISO/PAS 8800} (Automotive, KI-bezogene Safety) dienen—ohne Übertragungsanspruch—,
+während dieses Werk später als Referenz für die Coverage-Analyse herangezogen wird.
+
+\section{Abgrenzung zu Security und Zuverlässigkeit}\label{sec:abgrenzung}
+\textbf{Safety vs.\ Security.}
+\emph{Safety} adressiert unbeabsichtigte Schäden durch Fehler, Fehlfunktionen oder unzureichend beherrschte
+Unsicherheiten. \emph{Security} betrifft absichtliche Angriffe und Manipulationen (z.\,B.\ Eingriffe in Daten,
+Modelle oder Toolchains). Security-Schwächen können Safety-Nachweise indirekt gefährden (Integrität/Authentizität
+von Daten und Artefakten). \textit{Hinweis:} Diese Arbeit fokussiert auf \emph{Safety}; Security wird hier
+nur abgegrenzt und nicht weiter vertieft.
+
+\paragraph{Zuverlässigkeit und Robustheit.}
+\emph{Zuverlässigkeit} beschreibt die Fähigkeit eines Systems, spezifizierte Funktionen über Zeit unter
+definierten Bedingungen zu erfüllen. \emph{Robustheit} fokussiert die Stabilität unter Variation (inkl.\
+plausibler Verteilungssprünge, Messrauschen, Umweltbedingungen). Für KI sind zusätzlich
+\emph{Konfidenzkalibrierung} und \emph{Erklärbarkeit/Nachvollziehbarkeit} wesentlich, um Entscheidungen
+fachlich zu bewerten und Grenzen transparent zu machen.
+
+\paragraph{Rollenklärung.}
+Safety, Security und Reliability sind komplementär: Reliability adressiert Ausfälle/Alterung,
+Security schützt vor absichtlicher Beeinflussung, Safety begründet die zulässige Risikoposition und
+erforderliche Nachweise. In dieser Arbeit wird Security lediglich als Randbedingung anerkannt; die
+analytische Tiefe liegt auf Safety (inkl.\ Robustheit, Kalibrierung und Evidenzketten).
+
+\section{Kernelemente der KI-Sicherheit}\label{sec:ai-safety-kern}
+Die folgenden Elemente fassen wiederkehrende Anforderungen an die Absicherung von KI zusammen.
+Sie bilden später die Zeilen der Anforderungs- und Coverage-Matrix und dienen als Referenzrahmen
+für die Einordnung im Radar-Kontext.
+
+\subsection{ODD (Operational Design Domain) und Annahmen}\label{sec:odd}
+Zentral ist die präzise Definition der \emph{Operating Design Domain (ODD)}: Einsatzbereich, Bedingungen
+und Einschränkungen, für die Anforderungen, Daten und Annahmen gelten. Innerhalb dieser Grenzen muss
+die KI die spezifizierten Sicherheits- und Leistungsziele erfüllen. Annahmen sind explizit zu machen,
+messbar zu formulieren und durch Evidenz abzusichern; andernfalls ist eine Aussage \emph{sicher genug}
+nicht belastbar.
+
+\subsection{Assurance statt „viel hilft viel“}\label{sec:assurance}
+Mehr Parameter und mehr Daten verbessern häufig Metriken, ersetzen aber keine \emph{Assurance}.
+Im Vordergrund stehen testbare Anforderungen, nachvollziehbare Evidenzketten, kalibrierte
+Unsicherheiten und ausreichende Erklärbarkeit — nicht die Maximierung einzelner Benchmark-Kennzahlen.
+Datenpflege ist dabei essenziell (\emph{„trash in, trash out“}). Neben Durchschnittswerten sind die
+\emph{ODD-Abdeckung}, \emph{Edge-Cases} und \emph{Out-of-Distribution (OOD)}-Tests zu priorisieren,
+um Grenzfallverhalten zu verstehen und abzusichern. Ein reiner „mehr Daten = sicherer“-Ansatz (wie
+teils bei allgemeinen Sprachmodellen) ist für sicherheitskritische Anwendungen nicht ausreichend.
+
+\subsection{Toolchain-Assurance und Reproduzierbarkeit}\label{sec:toolchain}
+Die Vertrauenswürdigkeit der gesamten ML-Lieferkette (Datenpipelines, Trainings-/Eval-Stacks,
+Build-Systeme) ist Teil der Safety-Argumentation: Versionierung und Signierung von Artefakten,
+kontrollierte Abhängigkeiten, reproduzierbare Trainingsläufe, dokumentierte Freigaben und Audit-Trails
+über den gesamten Lebenszyklus. Wo erforderlich, ist eine formale \emph{Toolqualifizierung} (analog
+etablierter Leitfäden wie DO-330) zu berücksichtigen.
+
+\subsection{Betrieb, Monitoring und Änderungen (Lebenszyklus)}\label{sec:betrieb-drift}
+Eine heute freigegebene KI kann durch veränderte Datenverteilungen, ODD-Verschiebungen oder neue
+Szenarien morgen unsicher sein. Erforderlich sind Laufzeit-Monitoring relevanter Leistungs- und
+Kalibrierungsmetriken, OOD-/Drift-Erkennung, definierte Degradation/Fallback-Mechanismen und
+kontrollierte Änderungsprozesse (inkl.\ Re-Training und erneuter Freigabe). Änderungen sind
+konsistent im Safety Case zu dokumentieren. Hinweise aus anderen Domänen (z.\,B.\ SOTIF-Gedanke:
+Aspekte jenseits reiner Fehlfunktionen) können als Orientierung dienen, ohne direkte Übertragung.
+
+\subsection{Erklärbarkeit und Auditierbarkeit}\label{sec:xai-audit}
+Erklärbarkeit (XAI) dient der fachlichen Plausibilisierung, unterstützt Reviews/Audits und hilft,
+Grenzen sichtbar zu machen. Sie ersetzt keine Verifikation/Validierung, sondern ergänzt sie.
+Wesentlich ist die prozessuale Verankerung: klare Verwendungszwecke, dokumentierte Einschränkungen
+und konsistente Einbindung in Freigabeentscheidungen.
+
+\subsection{Leistungs- und Unsicherheitsmetriken}\label{sec:metrics}
+Domänengerechte Metriken (z.\,B.\ Detektions-/Fehlerraten unter Randbedingungen, Kalibrierungsmaße)
+sind mit Konfidenzangaben und Freigabekriterien zu kombinieren. Konservative Schätzungen, belastbare
+Messprotokolle und definierte Mindestleistungen pro ODD-Segment schaffen Nachvollziehbarkeit und
+Vergleichbarkeit der Evidenz.
+
+\vspace{0.5em}
+\noindent\textbf{Takeaway.}
+KI-Sicherheit basiert auf klaren Domänengrenzen (ODD), testbaren Anforderungen und Evidenzketten,
+vertrauenswürdigen Toolchains sowie lebenszyklusorientiertem Monitoring und Änderungsmanagement.
+Erklärbarkeit und kalibrierte Unsicherheit vervollständigen die Nachweisführung — Benchmark-Höchstwerte
+allein genügen nicht.
+
+
+
+
+
+
+
+
+
+% --- KAPITEL: GRUNDLAGEN / RADAR ---
+\chapter{Radarsysteme in der Luftfahrt}\label{sec:grundlagen-radar}
+
+\section{Aufgaben und Einsatzspektrum}\label{sec:radar-aufgaben}
+Radarsysteme liefern wetter- und umgebungsbezogene Informationen und unterstützen taktische wie operationelle Entscheidungen.
+Typische Aufgaben umfassen:
+\begin{itemize}
+  \item \textbf{Detektion und Verfolgung von Objekten:} Erkennung, Lokalisierung und Bahn-/Geschwindigkeitsschätzung (z.\,B.\ Luftfahrzeuge, Hindernisse, UAS).
+  \item \textbf{Wettererfassung und -darstellung:} Identifikation von Niederschlagszonen, Turbulenzindikatoren und Gewitterzellen zur Routen-/Höhenplanung.
+  \item \textbf{Kartierung und Navigationsunterstützung:} Boden-/Geländedarstellung (Mapping) als Ergänzung zu weiteren Navigationsquellen.
+  \item \textbf{Luftraum- und Bodenüberwachung:} Unterstützung von Verkehrsfluss, Staffelung und Situational Awareness am Boden und in der Luft.
+\end{itemize}
+
+\paragraph{Luftfahrtkontext (Beispiele).}
+\begin{itemize}
+  \item \textbf{Bodenradar:} \emph{Primärradar} (nicht-kooperative Detektion); \emph{Sekundärradar} (kooperative Abfrage/Antwort) – Koexistenz kann zu Überlagerungen führen.
+  \item \textbf{Bordradar:} v.\,a.\ \emph{Wetterradar} zur Gewitter-/Niederschlagserkennung; Umfeldinformationen für kollisionsvermeidende Funktionen.
+  \item \textbf{Radarhöhenmesser:} meist \emph{FMCW}-basiert, liefert Höhe über Grund für Anflug/Landung und logikführende Systeme.
+\end{itemize}
+
+\noindent
+Je nach Plattform (airborne vs.\ ground) und Missionsprofil unterscheiden sich Reichweite, Aktualisierungsrate, Auflösung und Integrationsgrad.
+Aus Safety-Sicht sind besonders relevant: (i) stabile Leistung unter variablen Umgebungsbedingungen,
+(ii) zuverlässige Trennung relevanter Ziele von Clutter/Störungen und (iii) qualifizierte, auditierbare Informationen
+für nachgelagerte Funktionen und Crews.
+
+\section{Funktionsprinzipien und Signalpfad}\label{sec:signalpfad}
+Radare senden elektromagnetische Energie aus und werten Echos aus, um \emph{Entfernung}, \emph{Relativgeschwindigkeit}
+und \emph{Richtung} von Objekten zu bestimmen. Drei Grundbeziehungen strukturieren die Messung:
+\begin{itemize}
+  \item \textbf{Laufzeit $\rightarrow$ Entfernung:} Aus der Zeit zwischen Aussendung und Empfang folgt die Distanz.
+  \item \textbf{Doppler $\rightarrow$ Relativgeschwindigkeit:} Frequenzverschiebung durch Relativbewegung entlang der Sichtlinie.
+  \item \textbf{Antenne/Beam $\rightarrow$ Winkel:} Richtwirkung bzw.\ Phasen-/Amplitudenunterschiede erlauben die Winkelschätzung.
+\end{itemize}
+Diese Größen werden über eine Verarbeitungskette erschlossen, die – abhängig von Architektur und Modus –
+variieren kann, in der Luftfahrt aber typischerweise die folgenden Schritte umfasst.
+
+\subsection{Signalverarbeitungskette (High-Level)}\label{sec:signal-kette}
+% HINWEIS: Für die Grafik werden tikz + arrows.meta + positioning benötigt.
+
+ \usetikzlibrary{arrows.meta,positioning}
+% Optional: \usepackage{booktabs} (anderswo bereits genutzt)
+\tikzset{
+  block/.style = {rectangle, draw, rounded corners, minimum width=5cm, minimum height=1cm, align=center},
+  arrow/.style = {thick, -{Stealth[]}},
+  explain/.style = {align=left, text width=8cm}
+}
+
+\begin{tikzpicture}[node distance=1.5cm]
+  % Hauptkette
+  \node[block] (raw) {1) Rohdaten (I/Q)};
+  \node[explain, right=1cm of raw] {Basisband-Samples vom Frontend; Ausgangspunkt aller weiteren Verarbeitungsschritte.};
+
+  \node[block, below=of raw] (range) {2) Pulskompression / Range-FFT};
+  \node[explain, right=1cm of range] {Matched Filtering bzw.\ Range-FFT zur Empfindlichkeitssteigerung und feineren Entfernungsauflösung.};
+
+  \node[block, below=of range] (doppler) {3) Doppler-FFT über Pulse};
+  \node[explain, right=1cm of doppler] {Auswertung der Frequenzverschiebung über die Pulsfolge; liefert Radialgeschwindigkeiten.};
+
+  \node[block, below=of doppler] (rdmap) {4) Range–Doppler-Map (RD)};
+  \node[explain, right=1cm of rdmap] {Entfernung vs.\ Geschwindigkeit; Grundlage für Detektion, Maskierung und spätere Klassifikation.};
+
+  \node[block, below=of rdmap] (cfar) {5) Detektion (CFAR) und Maskierung};
+  \node[explain, right=1cm of cfar] {Adaptive Schwellwertbildung mit lokaler Störschätzung; konstante Falschalarmrate trotz Clutter/Rauschen.};
+
+  \node[block, below=of cfar] (cluster) {6) Clustering};
+  \node[explain, right=1cm of cluster] {Gruppierung benachbarter Detektionen zu Objekt-Hypothesen (z.\,B.\ Flugzeugziel).};
+
+  \node[block, below=of cluster] (track) {7) Tracking (z.\,B.\ Kalman)};
+  \node[explain, right=1cm of track] {Zeitliche Verfolgung und Glättung; Konfliktlösung bei Mehrziel-Lagen und Konsistenzprüfungen.};
+
+  \node[block, below=of track] (hmi) {8) HMI / Interfaces};
+  \node[explain, right=1cm of hmi] {Aufbereitung/Visualisierung (z.\,B.\ Wetterradar-Anzeige) und Übergabe an Avionik-/Bordnetze.};
+
+  % Verbindungen
+  \draw[arrow] (raw) -- (range);
+  \draw[arrow] (range) -- (doppler);
+  \draw[arrow] (doppler) -- (rdmap);
+  \draw[arrow] (rdmap) -- (cfar);
+  \draw[arrow] (cfar) -- (cluster);
+  \draw[arrow] (cluster) -- (track);
+  \draw[arrow] (track) -- (hmi);
+\end{tikzpicture}
+
+\subsection{Detektion und CFAR}\label{sec:cfar}
+Neben echten Zielen enthalten Radardaten Rauschen, Clutter und Störanteile.
+Die Detektion entscheidet, ob ein Echo zielbedingt ist oder nicht. Die Wahl der Schwellen ist dabei
+ein Kompromiss: zu niedrig $\rightarrow$ mehr Treffer, aber hohe Falschalarmrate; zu hoch $\rightarrow$
+weniger Fehlalarme, aber Verlust schwacher Ziele. \emph{CFAR} (Constant False Alarm Rate) hält die
+Falschalarmrate durch lokale Störschätzung adaptiv konstant und ist daher ein zentraler Baustein für
+stabile Detektion – insbesondere in Umgebungen mit variierendem Clutter (z.\,B.\ Wetter, See, Boden).
+
+\section{Systemarchitekturen und Betriebsmodi}\label{sec:radar-architektur}
+Radarsysteme unterscheiden sich hinsichtlich Geometrie, Wellenform und Abtaststrategie. Die Wahl der Architektur
+prägt Messcharakteristika, Integrationsaufwand und Evidenzanforderungen in der Safety-Argumentation.
+
+\subsection{Systemklassen: Mono-, Bi- und Multistatik}
+\begin{itemize}
+  \item \textbf{Monostatisch} (in der Luftfahrt dominierend): Sende- und Empfangsantenne am selben Ort.
+        Vorteile: kompakte Integration, eindeutige Geometrie; einfacher Nachweis. 
+  \item \textbf{Bistatisch}: Sende- und Empfangsposition getrennt. 
+        Vorteile: spezielle Geometrien/Signaturvorteile; Nachteile: komplexere Auswertung/ODD, Synchronisation.
+  \item \textbf{Multistatisch}: mehrere, verteilte Empfänger/Sender. 
+        Vorteile: Redundanz, Winkel-/Positionsgenauigkeit; Nachteile: hoher Daten-/Zeitabgleich, komplexe Evidenzführung.
+\end{itemize}
+
+\subsection{Wellenformen}
+\begin{itemize}
+  \item \textbf{Gepulst / Puls-Doppler}: Zeitdiskrete Aussendung; Reichweite aus Laufzeit, Geschwindigkeit aus Doppler über Pulsfolgen.
+        \emph{Standard} für Entfernungsbestimmung (z.\,B.\ Primärradar, viele Bordradare).
+  \item \textbf{CW (Continuous Wave)}: kontinuierliche Aussendung; misst primär Geschwindigkeit (Doppler).
+        Ohne Modulation keine Entfernungsschätzung.
+  \item \textbf{FMCW (Frequency-Modulated CW)}: Frequenzrampe zur gleichzeitigen Reichweiten- und Geschwindigkeitsbestimmung.
+        \emph{Weit verbreitet} bei Radarhöhenmessern; zunehmend in Kurz-/Mittelreichweite (z.\,B.\ UAS).
+\end{itemize}
+
+\subsection{Scanprinzipien}
+\begin{itemize}
+  \item \textbf{Mechanisches Schwenken}: physisches Drehen/Kippen der Antenne; bewährt, kosteneffizient,
+        aber begrenzte Abdeckungsrate und höhere Latenzen.
+  \item \textbf{Elektronisches Schwenken (Phased Array/AESA)}: Richtungsänderung durch Phasen-/Amplitudensteuerung.
+        Vorteile: schnelle Strahllenkung, vielseitige Modi, Mehrkanal-Auswertung; höhere Komplexität und Datenraten.
+\end{itemize}
+
+\subsection{Beispiele im Luftfahrtkontext}
+\begin{itemize}
+  \item \textbf{Boden-Primärradar} (gepulst/Puls-Doppler, meist mechanisch oder hybrid): nicht-kooperative Luftraumüberwachung.
+  \item \textbf{Sekundärradar} (kooperativ): Abfrage/Antwort-Verfahren; Koexistenz mit Primärradar beachten.
+  \item \textbf{Bord-Wetterradar} (gepulst/Puls-Doppler, zunehmend elektronisch geschwenkt): Gewitter-/Niederschlagserkennung, Turbulenzhinweise.
+  \item \textbf{Radarhöhenmesser} (FMCW): Höhe über Grund für Anflug/Landung und Systemlogik.
+\end{itemize}
+
+\paragraph{Hinweis zur Safety-Einordnung.}
+Architektur- und Moduswahl beeinflussen Evidenzanforderungen: Datenraten, Latenzen, Verteilungsvariabilität
+(Clutter, Multipath) und Synchronisationsbedarf schlagen auf Nachweise für Robustheit, Traceability und
+Kalibrierung durch. Diese Aspekte werden in den Leistungskennzahlen und Betriebsbedingungen weiter konkretisiert.
+
+\section{Leistungskennzahlen und Qualitätsmaße}\label{sec:radar-kpis}
+Leistungskennzahlen (KPIs) dienen als Schnittstelle zwischen Technik und Nachweisführung: Sie
+quantifizieren, ob das Radarsystem in seinen Einsatzbedingungen die geforderten Funktionen
+verlässlich erbringt. Für sicherheitskritische Kontexte ist neben dem Zahlenwert insbesondere
+die \emph{qualifizierte Herleitung}, die \emph{Messmethodik} und die \emph{Auditierbarkeit} relevant.
+
+\subsection{Kernmetriken für Detektion und Betrieb}\label{sec:kernmetriken}
+\begin{table}[h]
+\centering
+\caption{Typische Metriken für Radarleistung (Auswahl)}
+\begin{tabular}{p{0.28\textwidth}p{0.62\textwidth}}
+\toprule
+\textbf{Entdeckungswahrscheinlichkeit ($P_d$)} & Wahrscheinlichkeit, dass ein tatsächlich vorhandenes Ziel detektiert wird; abhängig u.\,a.\ von SNR, Entfernung, Aspekt und Clutter. \\
+\midrule
+\textbf{Falschalarmwahrscheinlichkeit ($P_{fa}$)} & Wahrscheinlichkeit, dass ein Ziel gemeldet wird, obwohl keines existiert (Rauschen/Clutter/Interferenzen). CFAR hält $P_{fa}$ adaptiv konstant. \\
+\midrule
+\textbf{ROC-Kurve} & Zusammenhang zwischen $P_d$ und $P_{fa}$ über variierende Schwellen; zeigt den Trade-off und erlaubt Betriebs­punkt­wahl nach Einsatzprioritäten. \\
+\midrule
+\textbf{Update-Rate / Latenz} & Zeitliche Aktualisierung und Verzögerung der Messungen; bestimmt Reaktionsfähigkeit und Track-Stabilität. \\
+\midrule
+\textbf{Verfügbarkeit / Zuverlässigkeit} & Anteil der Zeit, in der spezifizierte Leistung erreicht wird (inkl.\ MTBF/MTTR-Aspekten); relevant für Dauerbetrieb und Safety-Argumentation. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Auflösungen und Messfehler}\label{sec:aufl-messfehler}
+\begin{itemize}
+  \item \textbf{Entfernungsauflösung:} minimal trennbare Reichweiten­differenz; geprägt durch Puls-/Signalbandbreite (Pulskompression/Range-FFT).
+  \item \textbf{Geschwindigkeitsauflösung:} kleinste unterscheidbare Radialgeschwindigkeit; abhängig von Beobachtungszeit (CPI-Länge) und Anzahl der Pulse (Doppler-FFT).
+  \item \textbf{Winkelauflösung:} Trennung im Azimut/Elevation; abhängig von Antennenapertur, SNR und Winkelschätzverfahren (z.\,B.\ Monopulse/DBF).
+  \item \textbf{Reichweitenmessfehler:} zufällige Abweichungen der Distanzschätzung; beeinflusst durch SNR, Pulskompression und Synchronisation.
+  \item \textbf{Geschwindigkeitsmessfehler:} Unsicherheit der Doppler­schätzung; abhängig von SNR, Beobachtungsdauer, PRF-Stabilität.
+  \item \textbf{Winkelmessfehler:} Abweichung zwischen geschätztem und tatsächlichem Winkel; Funktion von SNR, Apertur, Array-Kalibrierung und Verfahren.
+\end{itemize}
+
+\subsection{Typische Trade-offs}\label{sec:tradeoffs}
+\begin{table}[h]
+\centering
+\caption{Wesentliche Trade-offs in Radarsystemen}
+\begin{tabular}{p{0.35\textwidth}p{0.55\textwidth}}
+\toprule
+\textbf{Reichweite vs.\ Auflösung} & Mehr Bandbreite verbessert Entfernungsauflösung, erhöht aber Rauschbandbreite, Datenrate und Systemkomplexität. \\
+\midrule
+\textbf{CPI-Länge (Beobachtungszeit)} & Längere Integration schärft Dopplerauflösung/SNR, erhöht aber Latenz und erzeugt Unschärfe bei manövrierenden Zielen. \\
+\midrule
+\textbf{Zeit–Frequenz–Unschärfe} & Kurze Signale lokalisieren gut in Reichweite, verlieren Frequenzpräzision (Geschwindigkeit) – und umgekehrt. \\
+\midrule
+\textbf{Detektionsschwelle vs.\ $P_{fa}$} & Niedrige Schwellen steigern $P_d$, aber auch $P_{fa}$; hohe Schwellen senken Fehlalarme, verpassen schwache Ziele. CFAR balanciert adaptiv. \\
+\midrule
+\textbf{Clutter-Unterdrückung vs.\ Zielerhalt} & Aggressive Filter (z.\,B.\ MTI, Wettermasken) reduzieren Störungen, riskieren aber langsame/schwache Ziele zu dämpfen. \\
+\midrule
+\textbf{Datenrate/Kompression vs.\ Informationsgehalt} & Feine Raster, viele Kanäle und hohe Abtastraten erhöhen Aussagekraft, treiben jedoch Schnittstellen, Speicher und Rechenlast. \\
+\midrule
+\textbf{Wellenform-Komplexität vs.\ Robustheit} & Komplexe Modulationen bieten bessere Auflösung/Anti-Jam, erhöhen aber Implementierungsaufwand und Modellempfindlichkeiten. \\
+\midrule
+\textbf{Abdeckungsrate vs.\ Verweilzeit} & Schnelles Scannen erhöht Volumenabdeckung/Aktualität, reduziert Verweilzeit und SNR; längere Verweilzeiten umgekehrt. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Mess- und Reportinghinweise}\label{sec:reporting}
+Für die Vergleichbarkeit und Auditierbarkeit sind Messbedingungen und Auswerteprotokolle explizit zu
+dokumentieren:
+\begin{itemize}
+  \item \textbf{Szenariokonditionen:} SNR/Entfernung/Aspekt, Clutter- und Wetterlage, Interferenzsituation.
+  \item \textbf{Betriebsmodus/Parameter:} Wellenform (PRF/Bandbreite), Scanmodus, Integrationszeiten, CFAR-Variante und Parameter.
+  \item \textbf{ODD-Schnitt:} Berichte getrennt nach relevanten ODD-Segmenten (z.\,B.\ Reichweitenbänder, SNR-Bins, Wetterklassen) statt nur „Overall“-Mittelwerten.
+  \item \textbf{Konfidenzen/Kalibrierung:} Neben Punktwerten Unsicherheiten/Intervalle angeben; Kalibrierung der Detektions-/Klassifikationskonfidenzen dokumentieren.
+  \item \textbf{Traceability:} Datenstände, Preprocessing, Modell-/SW-Versionen und Testskripte versioniert festhalten.
+\end{itemize}
+
+\vspace{0.25em}
+\noindent\textit{Takeaway.}
+Metriken wie $P_d$ und $P_{fa}$ sind nur im Kontext von ODD-Schnitten, Messbedingungen und Trade-offs aussagekräftig.
+Für Safety zählen \emph{belastbare Messprotokolle}, \emph{kalibrierte Unsicherheiten} und \emph{nachvollziehbare
+Freigabekriterien} mindestens so viel wie die numerischen Werte selbst.
+
+\section{Betriebsbedingungen und Herausforderungen}\label{sec:radar-conditions}
+Radarsysteme operieren in wechselhaften Umgebungen. Neben fundamentalen Rauschgrenzen wirken
+Störeinflüsse und Szenariovariabilität direkt auf SNR, Detektionsleistung und Messfehler ein.
+Für die spätere KI-Einordnung ist wesentlich: Viele Effekte verschieben die \emph{Datenverteilung}
+und erzeugen \emph{Randfälle}, die in ODD/Tests explizit abzudecken sind.
+
+\subsection{Störquellen und Szenarien (Überblick)}\label{sec:stoerquellen}
+\begin{itemize}
+  \item \textbf{Thermisches Rauschen:} Fundamentale Hintergrundbegrenzung der Empfangselektronik; bestimmt die minimal detektierbare Signalstärke (SNR-Schwelle).
+  \item \textbf{RFI (Radio Frequency Interference):} Einflüsse benachbarter Funkdienste oder anderer Radare; kann SNR reduzieren und Falschalarmrate erhöhen.
+  \item \textbf{Mehrwegeausbreitung (Multipath):} Reflexionen an Boden/Strukturen erzeugen geisterhafte Ziele oder Phasenfehler; verschlechtern Winkel-/Reichweitenkonsistenz.
+  \item \textbf{Clutter (Boden, See, Wetter):} Starke, oft strukturierte Rückstreuung; erschwert die Trennung schwacher/langsamer Ziele und erhöht $P_{fa}$.
+  \item \textbf{Regen / Dämpfung:} Besonders in höheren Frequenzen relevant; dämpft Nutzsignal und produziert Wetterclutter (Spektralverbreiterung).
+  \item \textbf{Jamming / Deception:} Absichtliche Störung (Rauscheinträge) bzw.\ Täuschung (falsche Ziele, z.\,B.\ mittels DRFM); erschwert verlässliche Detektion/Tracking.
+  \item \textbf{Zielschwankungen (RCS):} Rückstreuquerschnitt variiert mit Geometrie, Material und Aspekt; führt zu SNR-Fluktuationen und intermittierenden Detektionen.
+  \item \textbf{Interferenzen kooperativer Systeme:} Überlagerungen durch Sekundärradar/ADS-B in räumlich/frequenznahen Szenarien; Artefakte und Überdeckung möglich.
+  \item \textbf{Atmosphärische Effekte:} Refraktion, Duktung, Turbulenz verändern die Ausbreitung; scheinbare Positionsverschiebungen und Reichweitenanomalien sind möglich.
+\end{itemize}
+
+\subsection{Auswirkungen auf Messkette und Nachweis}\label{sec:auswirkungen}
+Viele der genannten Einflüsse wirken \emph{vor} der Detektion (SNR, Spektralform), propagieren durch
+\emph{CFAR/Maskierung} und prägen die Qualität von \emph{Clustering/Tracking}. Für KI-Funktionen
+(Objektklassifizierung) heißt das: Eingaben (RD/RDA, Merkmalsvektoren) variieren distributionsseitig,
+Konfidenzen können fehlkalibriert sein, und OOD-Fälle treten gehäuft in Randbedingungen auf.
+
+\begin{table}[h]
+\centering
+\caption{Störeinflüsse: Auswirkung und typische Gegenmaßnahmen (Auswahl)}
+\begin{tabular}{p{0.25\textwidth}p{0.38\textwidth}p{0.28\textwidth}}
+\toprule
+\textbf{Einfluss} & \textbf{Auswirkung auf Messung/Verarbeitung} & \textbf{Typische Gegenmaßnahmen} \\
+\midrule
+Thermisches Rauschen & SNR-Limit, höhere $P_{fa}$ bei niedrigen Schwellen & Integrationszeit, Bandbreitenwahl, Kühlung/Rauschzahl \\
+\midrule
+RFI & Erhöhte Grundlinie, Spektralartefakte & Frequenzkoordination, Notch-Filter, Zeit-/Frequenzdither \\
+\midrule
+Multipath & Geisterziele, Winkel-/Range-Bias & Elevations-/Geometriewahl, Track-Plausibilisierung, CFAR-Guard \\
+\midrule
+Clutter (Boden/See/Wetter) & Zielmaskierung, lokale $P_{fa}$-Spitzen & MTI/DBF, adaptives CFAR, Wettermasken, dynamische Schwellen \\
+\midrule
+Regen/Dämpfung & Nutzsignal-Dämpfung, Spektralverbreiterung & Frequenz-/PRF-Anpassung, Kalibrierung, Fusionshinweise \\
+\midrule
+Jamming/Deception & Falsche Ziele, SNR-Kollaps & Anti-Jam-Wellenformen, Konsistenz-/Track-Checks, Alarmierung \\
+\midrule
+RCS-Schwankungen & Intermittierende Detektion, SNR-Fluktuation & Mehrblickwinkel, Track-Integrität, Feature-Normalisierung \\
+\midrule
+SSR/ADS-B-Überlagerung & Artefakte, Messlücken & Kanal-/Zeitentkopplung, Filterung, Koexistenzmanagement \\
+\midrule
+Atmosphärik (Refraktion/Duktung) & Reichweiten-/Höhenanomalien & Umweltmodelle, Plausibilisierung, konservative Schwellen \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.25em}
+\noindent\textit{Hinweis für die KI-Einordnung.}
+Die oben skizzierten Effekte definieren \emph{ODD-Schnitte} (z.\,B.\ SNR-Bins, Wetterklassen, Aspektbereiche),
+für die Leistung, Konfidenz und Fehlerraten getrennt zu berichten und zu kalibrieren sind. Für die
+Assurance von Klassifikationsfunktionen sind außerdem OOD-Erkennung, konservative Schwellen und
+Fallback-Strategien (Abstain) zentrale Bausteine.
+
+\section{Sicherheitsrelevanz und Rolle im Gesamtsystem}\label{sec:radar-safetyrolle}
+Radar liefert Primärinformationen für situatives Lagebild, Wettervermeidung und kollisionsrelevante
+Entscheidungen. Entsprechend wirken Qualität, Aktualität und Plausibilisierung der Radardaten direkt auf
+das Gesamtrisiko. Für sicherheitskritische Anwendungen ergeben sich daraus drei Schwerpunkte:
+
+\paragraph{Informationsqualität und Plausibilisierung.}
+Detektion, Messfehler und Clutter-Situation bestimmen, wie belastbar Reichweite, Geschwindigkeit und
+Winkel sind. Plausibilisierungen (z.\,B.\ Konsistenz über Zeit/Aspekt, Track-Integrität, kinematische
+Grenzprüfungen) sind notwendig, um Geisterziele, Ausreißer und degradierte Bedingungen zu erkennen und
+angemessen zu behandeln (Degradation/Fallback).
+
+\paragraph{Integration und Schnittstellen.}
+Radar steht selten isoliert: Daten fließen in weitere Avionikfunktionen (z.\,B.\ Navigation, Warn-/Assistenz-
+Systeme) und HMI. Anforderungen an \emph{Latenz}, \emph{Update-Rate}, \emph{Synchronisation} und
+\emph{Determinismus} der Kommunikation sind daher explizit zu spezifizieren und nachzuweisen. 
+Traceability über Schnittstellen (Formate, Qualitätsflags, Konfidenzen) ist Voraussetzung für Auditierbarkeit.
+
+\paragraph{Rolle im Safety Case.}
+Aus Systemperspektive werden Radar-bezogene \emph{Schutzziele} abgeleitet (z.\,B.\ Mindestleistungen pro
+ODD-Segment, Erkennung/Grenzen von Degradationen) und in überprüfbare \emph{Anforderungen} überführt
+(Metriken, Testmethodik, Freigabekriterien). Evidenz umfasst Mess-/Testprotokolle, Kalibrierung,
+Konfigurations-/Versionsstände sowie Ergebnisse aus Integration und Betrieb (Monitoring/Health).
+
+\medskip
+\noindent\textit{Implikationen für KI-Funktionen.}
+Wird KI inline (z.\,B.\ zur Objektklassifizierung) genutzt, sind Konfidenzkalibrierung, OOD-Erkennung,
+Abstain-/Fallback-Strategien und die konsistente Weitergabe von Qualitätsindikatoren an nachgelagerte
+Funktionen wesentlich. Bei KI im Frontloading (z.\,B.\ Musteranalyse für Entwicklung/Verifikation) liegt der
+Fokus auf Tool-/Prozessassurance, Reproduzierbarkeit und der Überführbarkeit der Ergebnisse in belastbare
+Evidenz für den Safety Case.
+
+\medskip
+\noindent\textit{Hinweis zur Kritikalität.}
+Die sicherheitstechnische Einordnung einzelner Radar- und KI-Funktionen (z.\,B.\ Klassifikation) ist
+systemspezifisch und hängt von Architektur, Barrieren und automatischer Wirkung ab. Unabhängig davon
+bleiben ODD-Definition, Mess-/Reportingdisziplin und lebenszyklusorientiertes Monitoring zentrale Bausteine
+für eine tragfähige Assurance.
