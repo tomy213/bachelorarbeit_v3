@@ -1,10 +1,177 @@
 \part{Risiken, Empfehlungen und Abschluss}
 \chapterimage{Bilder_und_Co/safety_sign_with_computer_code_and_a_airplane_in_the_background_1958542794.png} % Chapter heading image
 %----------------------------------------------------------------------------------------
-\chapter{Sicherheitslücken und Risiken}\label{sec:luecken-risiken}
-Auf Basis der Analyse werden Lücken und Risiken konsolidiert und priorisiert. Die Darstellung orientiert sich an Anforderungsfeldern und benennt jeweils Ursache, Auswirkung und mögliche Gegenmaßnahmen auf hoher Ebene. % TODO: Liste/Matrix mit Priorität
-  \section{Konsolidierte Befunde}
-  \section{Priorisierung}
+% -------------------------
+% CHAPTER 12: Sicherheitslücken und Risiken
+% -------------------------
+\chapter{Sicherheitslücken und Risiken}\label{chap:risiken}
+
+Dieses Kapitel konsolidiert die in der Coverage-Analyse (Kap.~\ref{chap:coverage}) identifizierten Lücken
+und leitet daraus priorisierte Risiken ab. Die Einordnung folgt dem Meta-Ansatz dieser Arbeit:
+Bewertet wird nicht die Wirksamkeit einzelner Techniken, sondern ob die \emph{geforderten Ansätze}
+(Anforderungsfelder in Kap.~\ref{chap:anforderungen}) ausreichend abgedeckt sind, um Vertrauen zu stiften.
+
+\section{Konsolidierte Befunde}\label{sec:risiken-befunde}
+Die wichtigsten, kapitelübergreifend konsistenten Befunde lassen sich entlang der Anforderungsfelder bündeln:
+
+\begin{enumerate}[label=\textbf{B\arabic*}]
+  \item \textbf{Robustheit \& Verteilungssprünge (kritisch).}%
+    \label{befund:robustheit}
+    Systematische Stress-/Shift-Tests (RFI/Clutter/Noise, Domänen-Holdouts) sind häufig unvollständig; akzeptierte
+    Degradationskurven und Worst-Case-Kriterien fehlen (vgl.\ Matrix: \emph{Robustheit \& Verteilungssprünge}, \score{1}).
+
+  \item \textbf{Monitoring \& Degradation im Betrieb (kritisch).}%
+    \label{befund:monitoring}
+    Laufzeitmetriken, Drift-/OOD-Erkennung sowie definierte Fallback-/Degradationspfade sind nur rudimentär etabliert
+    (vgl.\ \emph{Monitoring/Degradation}, \score{1}). Dies betrifft insbesondere Inline-Funktionen.
+
+  \item \textbf{Segmentierte Kalibrierung \& Unsicherheitsreporting (hoch).}%
+    \label{befund:kalibrierung}
+    Konfidenzmetriken bestehen, jedoch nicht konsistent \emph{je ODD-Segment} mit dokumentierten Schwellen/Abstain-Regeln
+    (vgl.\ \emph{Konfidenzkalibrierung \& Unsicherheit}, \score{2}).
+
+  \item \textbf{ODD-/Szenarioabdeckung (hoch).}%
+    \label{befund:odd}
+    ODD-Schnitte sind definiert, aber das \emph{einheitliche} Unsicherheits-Reporting pro Segment und die Handhabung von
+    Unknown/Abstain sind uneinheitlich (vgl.\ \emph{ODD-/Szenarioabdeckung}, \score{2}).
+
+  \item \textbf{Daten-/Label-Governance \& Traceability (mittel).}%
+    \label{befund:governance}
+    Prozesse sind vorhanden, variieren aber in Tiefe/Strenge (IAA, versionierte/signierte Datenstände, lückenlose Links
+    Daten$\leftrightarrow$Modell) (vgl.\ \emph{Daten-/Label-Governance}, \score{2}; \emph{Traceability}, \score{2}).
+
+  \item \textbf{Toolchain-Assurance \& Qualifizierung (mittel).}%
+    \label{befund:toolchain}
+    Reproduzierbarkeit/Lockfiles/Signaturen sind zunehmend Standard, formale Toolqualifizierungen (wo relevant) sind
+    nicht durchgängig bewertet (vgl.\ \emph{Toolchain-Assurance}, \score{2}).
+
+  \item \textbf{XAI \& Auditierbarkeit (mittel).}%
+    \label{befund:xai}
+    XAI wird heterogen eingesetzt; Reproduzierbarkeit und auditierbare Ablage sind nicht konsistent geregelt
+    (vgl.\ \emph{XAI \& Auditierbarkeit}, \score{2}).
+
+  \item \textbf{Änderungs-/Freigabeprozesse (mittel).}%
+    \label{befund:change}
+    Trigger für Re-Training, Regression-Scope und Safety-Case-Updates sind nicht überall verbindlich definiert
+    (vgl.\ \emph{Änderungen/Freigabe}, \score{2}).
+\end{enumerate}
+
+\paragraph*{Frontloading vs.\ Inline.}
+Die Befunde \ref{befund:governance}–\ref{befund:toolchain} sind im Frontloading tendenziell besser adressierbar
+(Repro, Auditierbarkeit, Evidenzketten). Kritische Lücken liegen vorrangig in \ref{befund:robustheit} und \ref{befund:monitoring}
+(betriebsnah, Inline-bezogen).
+
+\section{Priorisierung}\label{sec:risiken-prio}
+Für die Priorisierung wird ein einfacher, transparent nachvollziehbarer Rubrik-Score verwendet:
+\[
+\text{Priorität} = \text{Auswirkung} \times \text{Eintrittswahrscheinlichkeit},
+\]
+wobei beide Faktoren auf einer 1–3-Skala bewertet werden (\emph{1=niedrig, 2=mittel, 3=hoch}).
+Die resultierende Priorität wird zusätzlich als Ampel visualisiert (\score{1}–\score{3}).
+
+\begin{table}[h]
+\centering
+\caption{Risikopriorisierung (Auswirkung $\times$ Eintrittswahrscheinlichkeit) und empfohlene Maßnahmen}
+\begin{tabular}{p{0.28\textwidth} p{0.07\textwidth} p{0.14\textwidth} p{0.10\textwidth} p{0.33\textwidth}}
+\toprule
+\textbf{Risiko (Kurzbezug)} & \textbf{Ref.} & \textbf{Auswirkung} & \textbf{Priorität} & \textbf{Empfohlene Maßnahmen (Verweis)} \\
+\midrule
+Robustheit: unzureichende Shift-/Stresstests (inkl.\ RFI/Clutter) & B1 & 3 & \score{3} &
+Testbatterie standardisieren (Worst-Case, Störarten-Katalog, Degradationskurven); Akzeptanzkriterien festlegen. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+Betrieb: fehlende Telemetrie/Degradationspfade (Inline) & B2 & 3 & \score{3} &
+Monitoring-Playbook (Metrik-Set, OOD/Drift-Tracker), Alarmierungslogik, getestete Fallbacks/HMI-Richtlinien. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+Kalibrierung: nicht segmentiertes Unsicherheitsreporting & B3 & 2 & \score{2} &
+Segmentierte Kalibrierung (ECE/Brier/NLL je ODD), CI/Bootstrap, dokumentierte Thresholds/Abstain-Regeln. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+ODD: uneinheitliche Unknown/Abstain-Kriterien & B4 & 2 & \score{2} &
+Verbindliches ODD-Template; Pflichtmetriken je Segment; Unknown/Abstain-Policy. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+Governance/Traceability: IAA/Versionierung/Links lückenhaft & B5 & 2 & \score{2} &
+Datasheets/Model Cards; IAA-Ziele; signierte Datenstände; Traceability-Matrix \& Artefakt-IDs in CI. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+Toolchain: fehlende TQL-Bewertungen (wo relevant) & B6 & 2 & \score{2} &
+TQL-Entscheidungsmatrix; deterministische Builds; Lockfiles/Signaturen; CI/CD-Gates. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+XAI/Auditierbarkeit: heterogene Praxis \& Repro-Defizite & B7 & 1--2 & \score{2} &
+XAI-Playbook; Seed/Env-Fixierung; Audit-Pipeline; Ablage im Safety Case. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\midrule
+Change/Freigabe: uneinheitliche Trigger/Regression & B8 & 1--2 & \score{2} &
+Fixe Trigger (Daten-/Shift-/Performance-Delta); definierter Regression-Scope; Safety-Case-Update. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph*{Hinweise zur Anwendung.}
+\begin{itemize}
+  \item \emph{Auswirkung} bezieht sich auf potenzielle Sicherheitsrelevanz (z.\,B.\ Fehlklassifikationen ohne sichere Degradation).
+  \item \emph{Eintrittswahrscheinlichkeit} ist als heutige Praxisnähe/Bekanntheit der Lücke zu lesen (keine statistische Häufigkeit).
+  \item Die Prioritäten bilden die Grundlage für Kap.~\ref{chap:empfehlungen} und die Reihenfolge der Maßnahmen (kurz/mittel/langfristig).
+\end{itemize}
+
+\section{Brücke zu Empfehlungen}\label{sec:risiken-bruecke}
+Die priorisierten Risiken \ref{befund:robustheit}–\ref{befund:change} werden in Kapitel~\ref{chap:empfehlungen}
+durch konkrete Maßnahmen adressiert. Schwerpunkte liegen auf (i) Standardisierung von Robustheits-/Shift-Evidenzen,
+(ii) Betriebsleitplanken für Monitoring/Degradation und (iii) konsistenten Evidenzformaten für Kalibrierung,
+Daten-/Toolchain-Governance und Traceability.
+
+
+
+
+
+
+
+
+
+% -------------------------
+% CHAPTER 13: Empfehlungen zur Anwendung
+% -------------------------
+\chapter{Empfehlungen zur Anwendung}\label{chap:empfehlungen}
+
+Die folgenden Empfehlungen leiten sich aus der Coverage-Analyse (Kap.~\ref{chap:coverage}) und der Priorisierung der
+Sicherheitslücken (Kap.~\ref{chap:risiken}) ab. Sie priorisieren Maßnahmen nach Umsetzbarkeit und Wirkung, ohne eine
+Zulassungsbewertung vorwegzunehmen.
+
+\section{Kurzfristige Maßnahmen (prozess- und evidenznah)}\label{sec:empfehlungen-kurzfristig}
+\begin{itemize}
+  \item \textbf{Verbindliche ODD-Templates} (\textit{B4}): ODD-Grenzen, Annahmen und segmentierte Reportingachsen
+  (z.\,B.\ SNR/Entfernung/Wetter/Clutter) standardisieren; Unknown/Abstain-Policy festlegen; Pflichtmetriken pro Segment (Pd/Pfa, ECE/Brier, NLL).
+  \item \textbf{Segmentierte Kalibrierung} (\textit{B3}): Kalibrierungsberichte je ODD-Segment inkl.\ Konfidenzintervallen (CI/Bootstrap);
+  dokumentierte Schwellen und Freigaberegeln.
+  \item \textbf{Daten-/Label-Governance stärken} (\textit{B5}): Datasheets/Model Cards, Label-Guidelines mit IAA-Zielen;
+  versionierte und signierte Datenstände; Freigabe-Checklisten.
+  \item \textbf{Toolchain-Assurance in CI/CD} (\textit{B6}): deterministische Builds, Lockfiles, Artefakt-Signaturen;
+  TQL-Entscheidungsmatrix für kritische Tools; verbindliche Artefakt-IDs.
+  \item \textbf{Traceability durchgängig machen} (\textit{B5}): End-to-end-Verknüpfungen Anforderung$\rightarrow$Daten$\rightarrow$Modell$\rightarrow$Tests$\rightarrow$Release;
+  Pflicht-Change-Logs und Review-Gates.
+  \item \textbf{XAI-Audit-Praxis standardisieren} (\textit{B7}): XAI-Playbook (zweckgebundene Methoden); Seeds/Umgebungen fixieren;
+  reproduzierbare Notebooks/Skripte im Safety Case ablegen.
+\end{itemize}
+
+\section{Mittelfristige Entwicklungspfade (Robustheit \& Betrieb)}\label{sec:empfehlungen-mittelfristig}
+\begin{itemize}
+  \item \textbf{Testbatterie Robustheit/Shift} (\textit{B1}): katalogisierte Stress-/Shift-Tests (inkl.\ RFI/Clutter/Noise),
+  Worst-Case-Definitionen, Degradationskurven, akzeptierte Akzeptanzkriterien; Reporting-Vorlage.
+  \item \textbf{Monitoring/Degradation-Playbook} (\textit{B2}): Telemetrie-Set (Leistung, Kalibrierung, OOD-Rate),
+  Drift-Detektoren, Alarmierungslogik, geprüfte Fallback-Pfade; HMI-Styleguide (Qualitätsflags/Konfidenz/Unknown).
+  \item \textbf{Standardisierte Evidenzpakete} (\textit{B3,B5,B7}): Formatvorlagen für Evidenz (Kalibrierung, Daten-/Toolchain-Governance,
+  XAI-Berichte) inkl.\ reproduzierbarer Notebooks, Seeds/Umgebungen und Artefakt-IDs.
+\end{itemize}
+
+\section{Langfristige Standardisierung (Harmonisierung \& Skalierung)}\label{sec:empfehlungen-langfristig}
+\begin{itemize}
+  \item \textbf{Harmonisierung von Leitlinien:} Weiterentwicklung konzeptioneller Vorgaben in Richtung konsentierter Evidenzanforderungen
+  für KI-Komponenten (z.\,B.\ akzeptierte Shift-/Robustheitsnachweise, Kalibrierungsreporting).
+  \item \textbf{Domänenübergreifende Transferformate:} kompatible Daten-/Evidenzformate zur Wiederverwendbarkeit von Frontloading-Nachweisen
+  und zur Skalierung auditierbarer Evidenzketten.
+\end{itemize}
+
+\section{Implikation}\label{sec:empfehlungen-implikation}
+Die Empfehlungen operationalisieren die \emph{geforderten Ansätze} in den Feldern ODD, Kalibrierung, Daten-/Toolchain-Governance sowie
+Robustheit \& Betrieb. Sie verringern die Lücke zwischen konzeptionellen Erwartungen und praktisch auditierbarer Evidenz und stärken die
+Grundlage für eine belastbare Einordnung der Leitfrage, ob der Einsatz von KI im luftfahrtspezifischen Kontext als \emph{hinreichend sicher}
+angesehen werden kann.
 
 
 
@@ -15,21 +182,98 @@ Auf Basis der Analyse werden Lücken und Risiken konsolidiert und priorisiert. D
 
 
 
-\chapter{Empfehlungen zur Anwendung}\label{sec:empfehlungen}
-Die Empfehlungen leiten pragmatische Maßnahmen für kurz-, mittel- und langfristige Zeithorizonte ab. Im Vordergrund stehen operationalisierbare Schritte zur Stärkung von Evidenzketten, Traceability und Prozessabsicherung. % TODO: 3–3–3 Maßnahmen (kurz)
-  \section{Kurzfristige Maßnahmen}
-  \section{Mittelfristige Entwicklungspfade}
-  \section{Langfristige Standardisierung}
+
+% -------------------------
+% CHAPTER 14: Fazit und Ausblick
+% -------------------------
+\chapter{Fazit und Ausblick}\label{chap:fazit}
+
+\section{Zusammenfassung der Ergebnisse}\label{sec:fazit-zusammenfassung}
+Diese Arbeit hat den Einsatz von KI im Kontext von Luftfahrtradarsystemen aus einer Meta-Perspektive betrachtet.
+Im Mittelpunkt stand nicht die Detailbewertung einzelner Verfahren, sondern die Frage, \emph{welche Ansätze zur Absicherung
+gefordert werden} und \emph{inwieweit diese abgedeckt} sind. Auf Basis eines plattformneutralen \emph{Szenarienrahmens}
+sowie \emph{ODD-Schnitten} (Kap.~\ref{chap:szenarien}) wurden \emph{Anforderungsfelder} definiert und typischen Erwartungen
+aus etablierten Leitlinien und Standards zugeordnet (Kap.~\ref{chap:anforderungen}). Die anschließende Coverage-Analyse entlang
+ISO/PAS~8800 (Kap.~\ref{chap:coverage}) hat gezeigt, dass prozessuale und evidenzbezogene Felder (z.\,B.\ Daten-/Label-Governance,
+Toolchain-Assurance, Traceability) \emph{weitgehend adressierbar} sind, während leistungs- und betriebskritische Felder
+(Robustheit \& Verteilungssprünge, Monitoring/Degradation) \emph{substantielle Lücken} aufweisen. Die Bewertung der Übertragbarkeit
+(Kap.~\ref{chap:uebertragbarkeit}) legt nahe, dass \emph{Frontloading}-Anwendungen heute plausibel evidenzfähig sind, während
+Inline-Funktionen konditionale Voraussetzungen (klare ODD-Grenzen, segmentierte Evidenz, geprüfte Degradationspfade) benötigen.
+
+\section{Antwort auf die Leitfrage}\label{sec:fazit-antwort}
+Die leitende Frage, ob der Einsatz von KI in Luftfahrtradarsystemen unter den aktuell verfügbaren Konzepten und Rahmenbedingungen
+als \emph{hinreichend sicher} zu betrachten ist, lässt sich \emph{nicht binär} beantworten. 
+\textbf{Konditional gilt:} Dort, wo die ODD eindeutig begrenzt ist, segmentierte Evidenzen für Leistung \emph{und} Kalibrierung vorliegen,
+Robustheit gegen relevante Störungen plausibel nachgewiesen ist und geprüfte Degradationspfade existieren, ist Vertrauen
+\emph{begründbar}. Außerhalb dieser Bedingungen besteht \emph{weiterer Evidenzbedarf}, insbesondere hinsichtlich systematischer
+Shift-/Stresstests und betriebskritischer Monitoring-/Fallback-Mechanismen.
+
+\section{Ausblick}\label{sec:fazit-ausblick}
+Für die Weiterentwicklung zeichnen sich drei Pfade ab:
+\begin{enumerate}
+  \item \textbf{Methodische Evidenzpakete:} Standardisierte Formate für Kalibrierung, Shift-/Robustheitsnachweise und Traceability
+  erleichtern die Auditierung und erhöhen die Wiederverwendbarkeit von Frontloading-Ergebnissen.
+  \item \textbf{Betriebsleitplanken:} Ein konsentiertes Monitoring-/Degradation-Playbook (Telemetrie-Set, OOD-/Drift-Detektoren,
+  Alarm-/Fallback-Regeln, HMI-Richtlinien) schafft die Grundlage für belastbare Inline-Evidenz.
+  \item \textbf{Harmonisierung von Leitlinien:} Die schrittweise Konkretisierung konzeptioneller Vorgaben (z.\,B.\ akzeptierte
+  Evidenzanforderungen für KI-Komponenten) stärkt die Anschlussfähigkeit an etablierte Safety-Prozesse.
+\end{enumerate}
+Damit liefert die Arbeit einen strukturierten Beitrag zur Einordnung der Frage „\emph{ist KI sicher genug?}“ und markiert
+konkrete Ansatzpunkte, an denen Evidenz und Praxis weiter zusammengeführt werden können.
 
 
 
 
 
+% -------------------------
+% CHAPTER: Executive Summary
+% -------------------------
+\chapter{Executive Summary}\label{chap:executive-summary}
 
+\section*{Thema und Zielsetzung}
+Diese Arbeit untersucht die Sicherheit von KI-Systemen im Kontext von Luftfahrtradarsystemen aus einer Meta-Perspektive.
+Im Mittelpunkt steht nicht die Bewertung einzelner Algorithmen, sondern die Frage, \emph{welche Ansätze zur Absicherung gefordert werden}
+(u.\,a.\ entlang ISO/PAS~8800 und behördlicher Leitlinien) und \emph{inwieweit diese heute abgedeckt} sind.
 
+\section*{Ausgangspunkt}
+KI ist in vielen Domänen etabliert. In der Luftfahrt gelten jedoch besonders hohe Anforderungen an \emph{Zuverlässigkeit, Robustheit}
+und \emph{Nachweisführung}. Für KI existieren überwiegend \emph{konzeptionelle Leitlinien}; akzeptierte Evidenzformate und konkrete
+Zulassungsnachweise sind im Aufbau.
 
+\section*{Vorgehen}
+\begin{enumerate}
+  \item Aufbau eines \textbf{Szenarienrahmens} mit \textbf{ODD-Schnitten} (kontextsensitives Reporting statt Durchschnittswerten).
+  \item Definition zentraler \textbf{Anforderungsfelder} (z.\,B.\ Daten-/Label-Governance, ODD-Abdeckung, Robustheit/Shift,
+  Kalibrierung, Toolchain, Traceability, Monitoring/Degradation, Change, HMI, Frontloading).
+  \item \textbf{Coverage-Analyse} entlang ISO/PAS~8800: Verknüpfung „geforderte Ansätze~$\leftrightarrow$~beobachtete Abdeckung“ inkl.\ Artefakte \& Maßnahmen.
+  \item \textbf{Bewertung der Übertragbarkeit} für Frontloading (offboard) und Inline-Funktionen (betrieblich).
+\end{enumerate}
 
+\section*{Kernbefunde}
+\begin{itemize}
+  \item \textbf{Weitgehend adressierbar:} prozess- und evidenznahe Felder — \emph{Daten-/Label-Governance}, \emph{Toolchain-Assurance},
+  \emph{Traceability}, \emph{segmentierte Kalibrierung} (mit Nacharbeit).
+  \item \textbf{Substantielle Lücken:} \emph{Robustheit \& Verteilungssprünge} (systematische Stress-/Shift-Tests, Degradationskurven) und
+  \emph{Monitoring/Degradation im Betrieb} (Telemetrie-Set, OOD/Drift, geprüfte Fallbacks/HMI).
+  \item \textbf{Frontloading $>$ Inline:} Evidenzen im Frontloading sind heute \emph{plausibel strukturierbar}; Inline-Funktionen benötigen
+  \emph{klare ODD-Grenzen}, \emph{segmentierte Evidenz} und \emph{getestete Degradationspfade}.
+\end{itemize}
 
+\section*{Empfehlungen (priorisiert)}
+\textbf{Kurzfristig:} ODD-Templates mit Unknown/Abstain-Policy; \emph{segmentierte Kalibrierung} (ECE/Brier/NLL je ODD);
+Datasheets/Model Cards mit IAA; deterministische CI/CD (Lockfiles, Signaturen); XAI-Audit-Playbook; durchgängige Traceability.\\
+\textbf{Mittelfristig:} katalogisierte \emph{Robustheits-/Shift-Testbatterie} (inkl.\ RFI/Clutter/Noise) mit akzeptierten Kriterien;
+\emph{Monitoring-/Degradation-Playbook} (Telemetrie, Drift/OOD, Alarm/Fallback, HMI-Styleguide); standardisierte \emph{Evidenzpakete}.\\
+\textbf{Langfristig:} \emph{Harmonisierung} von Leitlinien in Richtung \emph{konsentierter Evidenzanforderungen} und
+\emph{domänenübergreifender Transferformate}.
 
-\chapter{Fazit und Ausblick}\label{sec:fazit}
-Das Fazit bündelt die Antwort auf die Leitfrage im Rahmen der getroffenen Einordnung und verweist auf den weiteren Entwicklungsbedarf. Der Ausblick skizziert potenzielle Vertiefungen und den erwartbaren Reifegewinn durch Standardisierung und Best Practices. % TODO: 5–7 Sätze, konsistent mit Abstract/Ziel
+\section*{Antwort auf die Leitfrage}
+„\emph{Ist KI sicher genug?}“ — \textbf{konditional}: 
+Dort, wo ODD eindeutig begrenzt ist, segmentierte Evidenz für Leistung und Kalibrierung vorliegt, \emph{Robustheit} gegen relevante Störungen
+\emph{plausibel nachgewiesen} ist und \emph{Degradationspfade} geprüft sind, ist Vertrauen begründbar.
+Außerhalb dieser Bedingungen besteht weiterer Evidenzbedarf.
+
+\section*{Beitrag}
+Die Arbeit liefert eine strukturierte \emph{Abdeckungskarte} (Coverage) der geforderten Ansätze, ordnet \emph{Risiken} und \emph{Prioritäten} und
+skizziert \emph{konkrete Maßnahmen} zur Schließung der Lücken — eine pragmatische Grundlage für die schrittweise Integration von KI in
+Luftfahrtsysteme.

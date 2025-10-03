@@ -2,16 +2,183 @@
 \chapterimage{Bilder_und_Co/safety_sign_with_computer_code_and_a_airplane_in_the_background_1958542794.png} % Chapter heading image
 %----------------------------------------------------------------------------------------
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
-\chapter{Anforderungen und Szenarien für Radarsysteme}\label{sec:anforderungen}
+\chapter{Anforderungen und Szenarien für Radarsysteme}\label{chap:szenarien}
 
-\section{Szenarienrahmen}\label{sec:szenarien}
-Der Szenarienrahmen strukturiert typische Nutzungslagen und Entwicklungs-/Nachweisprozesse, ohne auf plattformspezifische Details einzugehen. Er dient als Referenz, um Forderungen an Evidenz und Abdeckung einzuordnen. % TODO: 3–5 Szenario-Typen stichwortartig
+\section{Ziel und Einordnung}\label{sec:szenarien-intro}
+Dieses Kapitel definiert einen \emph{Szenarienrahmen} für die spätere Bewertung und Nachweisführung. 
+Die Darstellung ist bewusst plattformneutral und dient dazu, Anforderungen und Leistungs-/Unsicherheitskriterien \emph{segmentiert} 
+zu berichten, anstatt über heterogene Bedingungen zu mitteln. 
+Die hier eingeführten Elemente (Szenario-Typen und ODD-Schnitte) bilden die Mess- und Berichtsachsen, 
+auf die sich die Anforderungsfelder in Kapitel~\ref{chap:anforderungen} und die Coverage-Analyse in Kapitel~\ref{chap:coverage} beziehen.
+
+\section{Szenarienrahmen}\label{sec:szenarien-rahmen}
+Der Szenarienrahmen strukturiert typische Nutzungslagen und Nachweisfälle, ohne auf plattformspezifische Details einzugehen.
+Ziel ist eine eindeutig mess- und prüfbare Zuordnung von Anforderungen zur \emph{Operating Design Domain (ODD)}. 
+Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} berichtet – nicht als Gesamtdurchschnitt.
+
+\subsection{Szenario-Typen (Auswahl)}\label{sec:szenarien-typen}
+\begin{itemize}
+  \item \textbf{Nominalbedingungen:} mittlere SNR, moderate Wetterlage, begrenzter Clutter, normale Verkehrsdichte.
+  \item \textbf{Clutter-intensiv:} ausgeprägter Boden-/Seeclutter, urbane Multipath-Situationen; lokal erhöhte $P_{fa}$-Tendenz.
+  \item \textbf{Adverse Weather:} starke Niederschläge/convective cells; Dämpfung, Spektralverbreiterung, Zielmaskierung.
+  \item \textbf{RFI/Koexistenz:} benachbarte Funkdienste, andere Radare, SSR/ADS-B-Überlagerung; Notch-/Filter-Betrieb.
+  \item \textbf{Dichte Verkehrslage:} viele Ziele, enge Winkelabstände, Datenassoziationsstress; Track-Kohärenz im Fokus.
+  \item \textbf{Aspekt-/Kinematik-Randfälle:} ungünstige Zielaspekte, stark manövrierende Ziele, intermittierende RCS.
+  \item \textbf{OOD/Unknown:} Szenarien/Klassen außerhalb der ODD; konservative Meldung (\emph{Abstain/Unknown}) verpflichtend.
+\end{itemize}
+
+\subsection{ODD-Schnitte (Reportingachsen)}\label{sec:szenarien-odd}
+Für die Mess- und Berichtspflicht werden Szenarien entlang objektiver Schnitte ausgewertet:
+\begin{itemize}
+  \item \textit{Reichweite/SNR:} z.\,B.\ Entfernung in Bins, SNR-Bänder.
+  \item \textit{Wetter/Umwelt:} Niederschlagsklassen, Clutter-Typen (Boden/See/Wetter).
+  \item \textit{Geometrie:} Azimut-/Elevationssektoren, Aspektbereiche.
+  \item \textit{Dichte/Komplexität:} Zielanzahl pro Volumen/Zeiteinheit, Überschneidungsgrade.
+  \item \textit{RFI/Koexistenz:} Präsenz/Level, eingesetzte Notch-/Filter-Parameter.
+\end{itemize}
+Alle Leistungs-, Unsicherheits- und Freigabekriterien sind \emph{pro ODD-Segment} zu berichten. 
+Damit bleibt die Bewertung kontextsensitiv und vermeidet irreführende Mittelwerte über heterogene Bedingungen.
+
+\section{Brücke zu Anforderungsfeldern und Coverage}\label{sec:szenarien-bruecke}
+Die in Abschnitt~\ref{sec:szenarien-typen} definierten Szenario-Typen und die Reportingachsen aus Abschnitt~\ref{sec:szenarien-odd}
+bilden die Grundlage für die segmentierte Bewertung der Anforderungsfelder. 
+Kapitel~\ref{chap:anforderungen} fasst diese Anforderungsfelder zusammen und ordnet ihnen typische Erwartungen aus etablierten 
+Leitlinien und Standards zu. 
+Darauf aufbauend verknüpft Kapitel~\ref{chap:coverage} die \emph{geforderten Ansätze} mit dem beobachtbaren Abdeckungsgrad (Coverage-Analyse) 
+und diskutiert die Ergebnisse.
+
+
+% -------------------------
+% Anforderungsfelder & Referenzrahmen
+% -------------------------
+\chapter{Anforderungsfelder \& Referenzrahmen}\label{chap:anforderungen}
+
+\section{Ziel des Kapitels}\label{sec:anforderungen-intro}
+Dieses Kapitel fasst wiederkehrende Sicherheitsbedarfe als \emph{Anforderungsfelder} zusammen und ordnet ihnen
+\emph{typische Erwartungen} aus etablierten Leitlinien und Standards zu (konzeptionell; ohne Anspruch auf Vollständigkeit).
+Die Felder bilden die Zeilen der Coverage-Analyse in Kapitel~\ref{chap:coverage}. 
+Alle Leistungs-, Unsicherheits- und Freigabekriterien sind entlang der in Kapitel~\ref{chap:szenarien} eingeführten ODD-Segmente zu berichten.
 
 \section{Anforderungsfelder}\label{sec:anforderungsfelder}
-Die Anforderungsfelder fassen wiederkehrende Sicherheitsbedarfe zusammen: Daten-/Label-Governance, Domänen-/ODD-Abdeckung, Robustheit/Shift, Erklärbarkeit/Audit, Monitoring/Degradation (für Inline), Tool-/Prozessqualifizierung (für Frontloading), Supply-Chain-Security sowie Traceability/Versionierung. Diese Felder bilden die Zeilen der späteren Coverage-Matrix. % TODO: je Feld 2–3 Sätze Definition
+\begin{enumerate}
+  \item \textbf{Daten-/Label-Governance:} Herkunft, Qualität, Annotation und Freigabeprozesse sind zu definieren, zu versionieren und zu auditieren. 
+  Datasheets/Model Cards und annotatorspezifische Qualitätsmetriken (Inter-Annotator Agreement) sind verbindlich zu führen.
+
+  \item \textbf{ODD- und Szenarioabdeckung:} ODD-Grenzen und Annahmen sind messbar zu formulieren; Leistung und Unsicherheit sind je ODD-Segment nachzuweisen.
+  Änderungen der ODD bedingen eine erneute Bewertung (inkl.\ Regressionstestplan).
+
+  \item \textbf{Robustheit \& Verteilungssprünge:} Sensitivitäts-/Stresstests (z.\,B.\ Clutter/Noise/RFI) und Szenarien-Injektionen prüfen Stabilität.
+  OOD-Erkennung mit konservativen Schwellen (\emph{Abstain}) ist verpflichtend.
+
+  \item \textbf{Konfidenzkalibrierung \& Unsicherheit:} Wahrscheinlichkeiten müssen kalibriert sein (z.\,B.\ ECE/Brier); Freigabekriterien umfassen Konfidenz-/Fehlerbänder je Segment.
+  Epistemische vs.\ aleatorische Unsicherheit sind, soweit praktikabel, zu trennen.
+
+  \item \textbf{Erklärbarkeit \& Auditierbarkeit:} XAI dient der Plausibilisierung für Reviews – zweckgebunden, reproduzierbar und mit dokumentierten Grenzen.
+  Ergebnisse sind als auditable Artefakte in den Safety Case zu übernehmen.
+
+  \item \textbf{Toolchain-Assurance \& Reproduzierbarkeit:} Trainings-/Eval-Läufe müssen reproduzierbar sein (Seeds, Umgebungen), Artefakte signiert und Abhängigkeiten kontrolliert.
+  Wo erforderlich, ist eine formale Toolqualifizierung vorzusehen.
+
+  \item \textbf{Traceability/Versionierung:} Ende-zu-Ende-Rückverfolgbarkeit von Anforderungen $\rightarrow$ Daten $\rightarrow$ Modelle $\rightarrow$ Tests $\rightarrow$ Releases.
+  Konfigurations- und Änderungsstände sind prüfbar zu dokumentieren.
+
+  \item \textbf{Monitoring/Degradation (Betrieb):} Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate) und Drift-Erkennung sind zu etablieren.
+  Degradations-/Fallback-Logiken (inkl.\ Alarmierung) sind zu definieren und nachzuweisen.
+
+  \item \textbf{Änderungs-/Freigabeprozesse:} Re-Training/Updates erfolgen kontrolliert (Datenänderung, Hyperparameter, Code).
+  Regressionstests und erneute Freigaben inkl.\ Safety-Case-Update sind verpflichtend.
+
+  \item \textbf{Schnittstellen/HMI (Inline):} Qualitätsflags, Konfidenz und \emph{Unknown/Abstain} sind maschinen- und menschlesbar zu übertragen.
+  HMI muss die Interpretation (Top-$k$, Konfidenz, OOD-Hinweise) unterstützen.
+
+  \item \textbf{Frontloading-spezifisch:} Reproduzierbarkeit, Audit-Trails und die belastbare Überführung analytischer Ergebnisse in Evidenz (kein „Blindflug“ der Datenanalyse).
+\end{enumerate}
 
 \section{Referenzierung auf Standards und Leitlinien}\label{sec:ref-standards}
-Etablierte Sicherheitsstandards und behördliche Leitlinien formulieren Erwartungen an Prozesse, Nachweise und Evidenz. Für die Einordnung werden einschlägige Forderungen den Anforderungsfeldern zugeordnet, ohne Anspruch auf Vollständigkeit. Diese Referenz bildet die Brücke zur Analyse entlang ISO~8800. % TODO: Mini-Tabelle Feld→Forderungsquelle
+Etablierte Standards und Leitlinien definieren Erwartungen an Prozesse, Nachweise und Evidenz. 
+Zur Einordnung werden typische Erwartungen den Anforderungsfeldern zugeordnet; dies bildet die Brücke zur Coverage-Analyse
+(u.\,a.\ entlang ISO/PAS~8800).
+
+\begin{table}[h]
+\centering
+\caption{Anforderungsfelder und beispielhafte Referenzquellen (nicht abschließend)}
+\begin{tabular}{p{0.36\textwidth}p{0.56\textwidth}}
+\toprule
+\textbf{Anforderungsfeld} & \textbf{Beispielhafte Referenzen/Erwartungen} \\
+\midrule
+Daten-/Label-Governance & Lebenszyklus-Dokumentation; Datasheets/Model Cards; Freigabeprozesse \\
+ODD-/Szenarioabdeckung & Explizite ODD; szenarienbasiertes Testen/Reporting; Annahmenmanagement \\
+Robustheit/Shift & Stress-/Störtests; Sensitivität ggü.\ Clutter/RFI; OOD-Erkennung/Abstain \\
+Konfidenz/Unsicherheit & Kalibrierungsmetriken (ECE/Brier), Fehlerbänder, Freigabekriterien \\
+XAI/Auditierbarkeit & Zweckgebundene Erklärungen; Repro-Nachweise; Review-Artefakte \\
+Toolchain-Assurance & Reproduzierbarkeit; kontrollierte Abhängigkeiten; ggf.\ Toolqualifizierung \\
+Traceability/Versionierung & Ende-zu-Ende-Rückverfolgbarkeit; Konfigurationsmanagement \\
+Monitoring/Degradation & Laufzeitmetriken; Drift-/OOD-Alarme; Fallback-Logik \\
+Change/Freigabe & Prozesse für Re-Training; Regression; erneute Freigabe; Safety-Case-Update \\
+Schnittstellen/HMI & Qualitätsflags/Konfidenz/Unknown; Operator-Information \\
+Frontloading & Audit-Trails; Evidenzüberführung in den Safety Case \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Konkrete Quellen (z.\,B.\ behördliche Konzepte, ISO/PAS~8800, DO-178C/DO-330 als Kontext) werden im Rahmen der Coverage-Analyse pro Feld präzisiert.
+
+\section{Brücke zur Coverage-Analyse}\label{sec:anforderungen-bruecke}
+Die in diesem Kapitel definierten Anforderungsfelder und ihre typischen Erwartungen werden in Kapitel~\ref{chap:coverage}
+zu einer \emph{Coverage-Analyse} verdichtet. Die Matrix verknüpft je Feld die \emph{geforderten Ansätze} mit dem
+beobachtbaren Abdeckungsgrad sowie geeigneten Evidenzf
+
+
+
+
+
+
+% -------------------------
+% NEW CHAPTER: Ausgewählte KI-Modelle
+% -------------------------
+\chapter{Ausgewählte KI-Modelle: knappe Erläuterungen}\label{chap:modelle}
+
+\section{Ziel und Einordnung}\label{sec:modelle-intro}
+Dieses Kapitel liefert \emph{kurze, zweckgebundene} Steckbriefe ausgewählter Modellklassen. Es dient einer gemeinsamen
+Sprache für spätere Verweise (Kalibrierung, Unsicherheit, typische Fehlerbilder) und ersetzt keine technische Vertiefung.
+Die Rolle von Erklärbarkeit wird als \emph{auditierbares, aber nicht allein tragendes} Element im Assurance-Kontext beschrieben.
+
+\section{Modellsteckbriefe \& typische Fehlerbilder}\label{sec:steckbriefe}
+\begin{description}
+  \item[Entscheidungsbäume / Random Forests] \hfill\\
+  \textit{Charakter:} interpretierbar, robuste Basis für tabellarische Daten. 
+  \textit{Typische Fehler:} Overfitting bei vielen Features, inkonsistente Kalibrierung. 
+  \textit{Assurance-Hinweise:} Feature-Governance, Kalibrierung (Platt/Isotonic), Reproduzierbarkeit (Seeds).
+
+  \item[Gradient Boosting (XGBoost/LightGBM)] \hfill\\
+  \textit{Charakter:} starke Performance für strukturierte Daten. 
+  \textit{Typische Fehler:} Leakage-Risiko, Sensitivität auf Daten-Shift. 
+  \textit{Assurance-Hinweise:} strikte Train/Val/ Test-Trennung, SHAP nur als Audit-Hilfe, nicht als Safety-Nachweis; segmentierte Kalibrierung.
+
+  \item[CNN-Varianten] \hfill\\
+  \textit{Charakter:} Mustererkennung auf Bild-/Spektralrepräsentationen. 
+  \textit{Typische Fehler:} Black-Box-Charakter, OOD-Sensitivität, Spurious Correlations. 
+  \textit{Assurance-Hinweise:} OOD-/Shift-Tests, Kalibrierung je ODD-Segment, Replaybare Trainingspipelines.
+
+  \item[Autoencoder / One-Class-Methoden] \hfill\\
+  \textit{Charakter:} Anomalie-/Neuheitserkennung. 
+  \textit{Typische Fehler:} schwellengetrieben, empfindlich für Verteilungsänderungen (False Alarms). 
+  \textit{Assurance-Hinweise:} Schwellen-Audit, Kostenmetriken (FA/MD), dokumentierte Degradationspfade (Abstain/Review).
+\end{description}
+
+\section{Erklärbarkeit \& Auditierbarkeit}\label{sec:xai}
+Erklärbarkeit (XAI) unterstützt die \emph{Plausibilisierung} für Reviews und Audits. Wirksamkeit ist \emph{zweckgebunden} und 
+liegt in der \emph{Prozessintegration} (Reproduzierbarkeit, Artefaktablage, Versionierung):
+\begin{itemize}
+  \item \textbf{Scope:} lokale Attributionen (z.\,B.\ Grad-CAM, Feature-Importance) für Fallanalysen; globale Charakterisierung für Modellverhalten.
+  \item \textbf{Grenzen:} post-hoc Methoden sind nicht beweiskräftig; sie \emph{ergänzen} Evidenzen (Metriken, Tests), ersetzen sie aber nicht.
+  \item \textbf{Audit-Praxis:} reproduzierbare Notebooks/Skripte, fixe Seeds/Umgebungen, Ablage der XAI-Reports im Safety Case.
+\end{itemize}
+
+\section{Brücke zur Coverage-Analyse}\label{sec:modelle-bruecke}
+Die Steckbriefe stützen die Einordnung in Kapitel~\ref{chap:coverage}: Kalibrierung, OOD-/Shift-Tests, Reproduzierbarkeit und
+Auditierbarkeit werden dort als \emph{geforderte Ansätze} den Anforderungsfeldern zugeordnet und hinsichtlich Abdeckung bewertet.
 
 
 
@@ -20,51 +187,196 @@ Etablierte Sicherheitsstandards und behördliche Leitlinien formulieren Erwartun
 
 
 
-
-
-% --- KAPITEL: AUSGEWÄHLTE KI-MODELLE ---
-\chapter{Ausgewählte KI-Modelle: Kurze Erläuterungen}\label{sec:modelle}
-
-\section{Modellsteckbriefe und typische Fehlerbilder}\label{sec:steckbriefe}
-Die folgenden Steckbriefe skizzieren ausgewählte Modellklassen mit Blick auf Ein-/Ausgaben, typische Stärken und Fehlerbilder. Ziel ist eine gemeinsame Sprache für spätere Verweise, keine technische Vertiefung. Relevante Begriffe zu Unsicherheit und Kalibrierung werden konsistent verwendet. % TODO: 3–4 Modelle auswählen
-
-\section{Erklärbarkeit und Nachvollziehbarkeit}\label{sec:xai}
-Erklärbarkeit dient der fachlichen Plausibilisierung und unterstützt Audit und Nachweisführung. Dabei sind Reichweite und Grenzen post-hoc Methoden zu beachten; entscheidend ist die Einbettung in Prozesse und Evidenzketten. Dieser Abschnitt definiert die Rolle von XAI als unterstützendes, nicht allein tragendes Element. % TODO: 1–2 Beispiele nennen
-
-
-
-
-
-
-
-
-
-
-
-% --- KAPITEL: ANALYSE ENTLANG ISO 8800 ---
-\chapter{Analyse bestehender AI-Safety-Ansätze entlang ISO 8800}\label{sec:iso-analyse}
+% -------------------------
+% CHAPTER 6: Coverage-Analyse entlang ISO/PAS 8800
+% -------------------------
+\chapter{Coverage-Analyse entlang ISO/PAS 8800}\label{chap:coverage}
 
 \section{Vorgehen der Analyse}\label{sec:analyse-vorgehen}
-Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern welche Ansätze zur Absicherung gefordert werden und in welchem Umfang Abdeckung erkennbar ist. Grundlage ist ein Mapping von Anforderungsfeldern zu Forderungsquellen und praktikabler Abdeckung. % TODO: kurze Methodengrafik/Abb.
+Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern \emph{welche Ansätze zur Absicherung gefordert werden}
+(u.\,a.\ aus ISO/PAS~8800 sowie konzeptionellen Leitlinien) und \emph{in welchem Umfang Abdeckung erkennbar ist}.
+Als Anker dienen die in Kapitel~\ref{chap:anforderungen} definierten \emph{Anforderungsfelder}. 
+Für jedes Feld wird (i) der Bezug zu Forderungsquellen notiert, (ii) typische Evidenz/Artefakte skizziert, 
+(iii) ein Abdeckungsgrad bewertet und (iv) eine kurze Maßnahme abgeleitet. 
+Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} entlang der in Kapitel~\ref{chap:szenarien} eingeführten ODD-Segmente berichtet.
 
 \section{Anforderungs- und Coverage-Matrix}\label{sec:coverage}
-Die Matrix verknüpft je Anforderungsfeld die geforderten Ansätze mit dem beobachtbaren Abdeckungsgrad und einer kurzen Begründung. Sie dient als zentrales Artefakt zur strukturierten Einordnung. Hinweise auf geeignete Evidenzformen ergänzen die Einträge. % TODO: Tabelle anlegen
+
+% ===== Bewertungsrubrik & Ampel (neu) =====
+\definecolor{ampelgruen}{RGB}{0,153,0}
+\definecolor{ampelgelb}{RGB}{232,168,0}
+\definecolor{ampelrot}{RGB}{194,0,0}
+
+\newcommand{\ampelDot}[1]{%
+  \begingroup
+  \def\c{#1}%
+  \ifx\c\relax \fbox{?}\else
+  \ifx\c\empty \fbox{?}\else
+  \ifx\c G {\color{ampelgruen}\Large$\bullet$}\fi
+  \ifx\c Y {\color{ampelgelb}\Large$\bullet$}\fi
+  \ifx\c R {\color{ampelrot}\Large$\bullet$}\fi
+  \fi\fi\endgroup
+}
+
+% 0–3 Skala mit Ampelpunkt (0=R, 1=Y, 2=Y, 3=G)
+\newcommand{\score}[1]{%
+  \ifnum#1=0 \ampelDot{R}\,#1\fi%
+  \ifnum#1=1 \ampelDot{Y}\,#1\fi%
+  \ifnum#1=2 \ampelDot{Y}\,#1\fi%
+  \ifnum#1=3 \ampelDot{G}\,#1\fi%
+}
+
+\newcommand{\ampelLegende}{%
+\textbf{Bewertungsrubrik:} \score{0} = nicht adressiert,\;
+\score{1} = partiell,\;
+\score{2} = weitgehend,\;
+\score{3} = adressiert \& nachweisbar.%
+}
+
+% Marker für Fokus (Frontloading/Inline)
+\newcommand{\F}{\textsuperscript{F}} % Frontloading-bezogen
+\newcommand{\I}{\textsuperscript{I}} % Inline-bezogen
+
+\begin{table}[h]
+\centering
+\caption{Coverage-Analyse (ISO/PAS~8800 \textrightarrow\ Anforderungsfelder)}
+\begin{tabular}{p{0.20\textwidth} p{0.22\textwidth} p{0.25\textwidth} p{0.07\textwidth} p{0.26\textwidth}}
+\toprule
+\textbf{Anforderungsfeld} & \textbf{ISO/PAS~8800 Bezug} & \textbf{Erwartete Artefakte / Nachweise} & \textbf{Abdeckung} & \textbf{Kommentar / Lücke / Maßnahmen} \\
+\midrule
+\textbf{ODD-/Szenarioabdeckung} & ODD, Annahmen, szenarienbasiertes Testen & ODD-Dokument, Szenariokatalog, segmentiertes Leistungs-/Unsicherheits\-reporting, Re-Assessment bei ODD-Änderung & \score{2} & ODD-Schnitte definiert; Unsicherheitsreporting teils uneinheitlich. \textbf{Maßn.:} verbindliches ODD-Template; Pflichtmetriken (Pd/Pfa, ECE/Brier) je Segment; Unknown/Abstain-Kriterien; Regression bei ODD-Änderung. \\
+\midrule
+\textbf{Daten-/Label-Governance}\F & Daten-Management, Dokumentation, Freigabeprozesse & Datasheets/Model Cards, Label-Guidelines, Inter-Annotator-Agreement, versionierte Datenstände (Signaturen) & \score{2} & Prozesse vorhanden, IAA/Reviewstiefe variiert. \textbf{Maßn.:} IAA-Ziel, Freigabe-Checkliste, Pipeline-Hashing/Signierung, Datenänderungslog. \\
+\midrule
+\textbf{Robustheit \& Verteilungssprünge} & Robustheitsprinzipien, Stresstests & Stress-/Sensitivitätstests (z.\,B.\ RFI/Clutter/Noise), Domänen-Holdouts, Degradationskurven & \score{1} & Systematische Stresstests lückenhaft; RFI/Multipath selten. \textbf{Maßn.:} Testbatterie inkl.\ Worst-Case, Katalog pro Störart, Akzeptanzkriterien. \\
+\midrule
+\textbf{Konfidenzkalibrierung \& Unsicherheit} & Unsicherheitsbehandlung, Freigabekriterien & Kalibrationsberichte (ECE, Brier, NLL) je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; CI/Bootstrap-Reporting. \\
+\midrule
+\textbf{Toolchain-Assurance \& Reproduzierbarkeit}\F & Tool-/Prozesskontrolle, ggf.\ Toolqualifizierung & deterministische Builds, Lockfiles, Artefakt-Signaturen, reproduzierbare Trainings-/Eval-Läufe, TQL-Bewertung & \score{2} & Repro besser, formale Toolqualifizierung teils offen. \textbf{Maßn.:} TQL-Entscheidungsmatrix, Build-Manifeste, CI/CD-Gates. \\
+\midrule
+\textbf{Monitoring/Degradation (Betrieb)}\I & Betriebsüberwachung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Monitoring rudimentär; Degradationspfade wenig erprobt. \textbf{Maßn.:} Telemetrie-Set, OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
+\midrule
+\textbf{Traceability/Versionierung}\F & Rückverfolgbarkeit, Konfigurationsmgmt. & End-to-end Links Anf.\,$\rightarrow$\,Daten\,$\rightarrow$\,Modell\,$\rightarrow$\,Tests\,$\rightarrow$\,Release; Änderungsprotokolle & \score{2} & Links vorhanden, Lücken bei Daten\,$\leftrightarrow$\,Modell. \textbf{Maßn.:} Traceability-Matrix, verbindliche Artefakt-IDs in CI. \\
+\midrule
+\textbf{XAI \& Auditierbarkeit}\F & nachvollziehbare Evidenz & zweckgebundene Erklärungen, reproduzierbare Notebooks/Skripte, Review-Artefakte & \score{2} & Heterogene XAI-Methoden, Repro schwankt. \textbf{Maßn.:} XAI-Playbook, Seed/Env-Fixierung, Audit-Pipeline. \\
+\midrule
+\textbf{Änderungen/Freigabe}\F & Änderungs- und Freigabekontrolle & Re-Training-Trigger, Regression-Testplan, Freigabeprotokoll, Safety-Case-Update & \score{2} & Trigger uneinheitlich, Regression ad hoc. \textbf{Maßn.:} feste Trigger (Daten-/Shift/Performance), definierter Regression-Scope. \\
+\midrule
+\textbf{Schnittstellen/HMI (Inline)}\I & Informationsübergabe, Interpretierbarkeit & Qualitätsflags, Konfidenz, Unknown/Abstain, HMI-Richtlinien (Top-$k$, OOD-Hinweise) & \score{2} & Flags vorhanden, Darstellung uneinheitlich. \textbf{Maßn.:} HMI-Styleguide, Operator-Validierung. \\
+\midrule
+\textbf{Frontloading-spezifisch}\F & Evidenzgenerierung, Transfer in Safety Case & Audit-Trails (Notebooks/Seeds/Datenstände), Evidenzpakete, Review mit Safety-Team & \score{2} & Evidenztransfer inkonsistent. \textbf{Maßn.:} Evidenz-Template, Freigabe-Checklist, gemeinsame Reviews. \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\ampelLegende\quad \F\,= Frontloading-bezogen,\; \I\,= Inline-bezogen.
+\end{table}
 
 \section{Diskussion der Abdeckung}\label{sec:abdeckung-diskussion}
-Die Diskussion verdichtet Muster über alle Felder: Wo bestehen tragfähige Anknüpfungspunkte, wo Unsicherheiten bei Evidenztiefe, Zertifizierbarkeit und Integration? Die Einordnung bleibt domänen- und produktneutral. % TODO: 3–5 Kernaussagen formulieren
+Die Coverage-Analyse zeigt ein differenziertes Bild über alle Anforderungsfelder hinweg. Insgesamt ist eine \textbf{weitgehende Abdeckung}
+in prozessualen und evidenzbezogenen Feldern erkennbar (z.\,B.\ Daten-/Label-Governance, Toolchain-Assurance, Traceability), während
+\textbf{leistungs- und betriebskritische Felder} (Robustheit \& Verteilungssprünge, Monitoring/Degradation) noch \textbf{substantielle Lücken}
+aufweisen. Die wichtigsten Beobachtungen sind:
+
+\paragraph{(1) ODD-/Szenarioabdeckung: weitgehend vorhanden, Unsicherheits-Reporting inkonsistent.}
+Die Definition der ODD und die szenarienbasierte Leistungsbewertung sind konzeptionell verankert. \textit{Schwachpunkte} liegen in der
+\textit{einheitlichen Berichterstattung von Unsicherheit} pro Segment (Kalibrierung, Konfidenzbänder) sowie in \textit{klaren Kriterien für Unknown/Abstain}.
+Eine verbindliche ODD-Vorlage und Pflichtmetriken (z.\,B.\ Pd/Pfa, ECE/Brier je Segment) würden die Nachvollziehbarkeit erhöhen und
+Re-Assessments bei ODD-Änderungen operationalisieren.
+
+\paragraph{(2) Daten-/Label-Governance: organisatorisch gut adressierbar, in der Tiefe heterogen.}
+Prozesse zu Herkunft, Qualität, Freigabe und Dokumentation sind \textbf{umsetzbar und auditierbar}. In der Praxis variieren jedoch
+\textbf{Label-Qualität (IAA)}, Versionierungstiefe und Freigabe-Checklisten. \textbf{Standardisierte Datasheets/Model Cards} und \textbf{signierte Datenstände}
+reduzieren Reproduzierbarkeits- und Integritätsrisiken insbesondere im Frontloading.
+
+\paragraph{(3) Robustheit \& Shift: größter Handlungsbedarf.}
+Systematische \textbf{Stress- und Shift-Tests} sind uneinheitlich etabliert; \textbf{RFI/Multipath/Clutter}-Spezifika werden häufig nur punktuell adressiert.
+Es fehlt eine \textbf{Testbatterie} mit Worst-Case-Definitionen und akzeptierten \textbf{Degradationskurven}. Solange diese Evidenzen nicht belastbar vorliegen,
+bleibt die Bewertung „sicher genug“ \textbf{konditional}.
+
+\paragraph{(4) Konfidenzkalibrierung \& Unsicherheit: verfügbar, aber nicht durchgängig segmentiert.}
+Konfidenzmetriken liegen vor; \textbf{Kalibrierung je ODD-Segment} und \textbf{Threshold-/Abstain-Regeln} sind jedoch nicht konsistent dokumentiert.
+Eine verpflichtende \textbf{segmentierte Kalibrierung} (inkl.\ CI/Bootstrap) stärkt die Freigabekriterien und erleichtert die Auditierung.
+
+\paragraph{(5) Toolchain-Assurance \& Traceability: solide Basis, Formalisierung ausbaufähig.}
+Reproduzierbare Builds, Lockfiles, Artefakt-Signaturen und End-to-End-Traceability sind vielfach vorhanden, jedoch \textbf{nicht lückenlos}.
+\textbf{TQL-Entscheidungsmatrizen} (wo relevant), verbindliche \textbf{Artefakt-IDs in CI/CD} und \textbf{Pflicht-Change-Logs} schließen typische Nachweislücken.
+
+\paragraph{(6) Monitoring/Degradation im Betrieb: reif für Leitplanken, noch nicht Standard.}
+Laufzeitmetriken und Drift-/OOD-Detektoren werden \textbf{rudimentär} genutzt; \textbf{klare Degradationspfade} (Alarmierung, Fallback) fehlen oft.
+Ein \textbf{Degradation-Playbook} mit Testfällen und Telemetrie-Set ist Voraussetzung für verlässliche Betriebsevidenz, insbesondere für Inline-Funktionen.
+
+\medskip
+\noindent\textbf{Frontloading vs.\ Inline.} Die Abdeckung ist im \textbf{Frontloading} (Daten-/Modellevidenz, Auditierbarkeit, Tool-/Prozesskontrolle)
+\textbf{deutlich stärker} ausgeprägt als für \textbf{Inline-Funktionen}, die \textbf{Echtzeit-Monitoring und sichere Degradation} verlangen.
+Die Matrix legt nahe, dass \textbf{Evidenzgenerierung und Nachweisführung} im Frontloading heute schon \textbf{plausibel strukturierbar} sind,
+während betriebsnahe Nachweise (Robustheit unter Störung, Laufzeit-Drift, HMI-Integrationsqualität) den Hauptteil des verbleibenden Risikos tragen.
+
+\medskip
+\noindent\textbf{Implikation für die Leitfrage.} Aus Meta-Sicht entsteht kein binäres „Ja/Nein“, sondern eine \textbf{konditionale Einschätzung}:
+Die \textbf{geforderten Ansätze} sind in mehreren Feldern \textbf{adressierbar} und \textbf{teilweise abgedeckt}; zugleich bestehen \textbf{wesentliche Evidenzlücken}
+bei Robustheit/Shift und im Betrieb (Monitoring/Degradation). Vertrauen ist dort begründbar, \textbf{wo} ODD klar begrenzt, Evidenzen \textbf{segmentiert}
+geführt und Degradationspfade definiert sind; darüber hinaus ist \textbf{gezielte Weiterentwicklung} erforderlich.
+
+\medskip
+\noindent\textbf{Überleitung.} Kapitel~\ref{chap:uebertragbarkeit} bewertet im Anschluss, inwieweit die geforderten Ansätze
+\textbf{unter den Rahmenbedingungen von Radarsystemen} (Frontloading und Inline) \textbf{plausibel übertragbar} sind, und leitet daraus
+\textbf{priorisierte Empfehlungen} ab.
 
 
 
 
 
 
+% -------------------------
+% CHAPTER 7: Bewertung der Übertragbarkeit
+% -------------------------
+\chapter{Bewertung der Übertragbarkeit}\label{chap:uebertragbarkeit}
 
+Dieses Kapitel bewertet, inwieweit die in Kapitel~\ref{chap:anforderungen} definierten Anforderungsfelder und die in
+Kapitel~\ref{chap:coverage} verdichtete Coverage-Analyse \emph{plausibel} unter den Rahmenbedingungen von
+Radarsystemen adressiert werden können. Die Einordnung bleibt produktneutral und folgt dem Meta-Ansatz:
+Im Fokus steht nicht die Wirksamkeit einzelner Techniken, sondern ob die \emph{geforderten Ansätze} mit
+heutigen Praktiken belastbar abgedeckt werden.
 
+\section{Frontloading-Use-Cases (exemplarisch)}\label{sec:uebertragbarkeit-frontloading}
+Frontloading-Anwendungen (außerhalb der Inline-Funktion; z.\,B.\ Datenaufbereitung, Musteranalyse, Validierung
+und Evidenzerstellung) zeigen eine hohe Anschlussfähigkeit an die geforderten Ansätze in den Feldern
+\emph{Daten-/Label-Governance}, \emph{Toolchain-Assurance \& Reproduzierbarkeit}, \emph{Traceability/Versionierung}
+und \emph{Konfidenzkalibrierung \& Unsicherheit}.
+\begin{itemize}
+  \item \textbf{Stärken:} Reproduzierbare Pipelines (Seeds/Umgebungen), versionierte und signierte Artefakte,
+  auditierbare Notebooks/Skripte und definierte Review-Prozesse ermöglichen belastbare Evidenzpakete
+  für den Safety Case.
+  \item \textbf{Schwachpunkte:} Die \emph{Tiefe der Robustheitsevidenz} gegenüber Verteilungssprüngen ist oft uneinheitlich;
+  Stress-/Shift-Testkataloge und Degradationskurven sind nicht immer standardisiert.
+  \item \textbf{Implikation:} Frontloading ist ein tragfähiges Vehikel zur \emph{Evidenzgenerierung}, sofern ODD-Schnitte,
+  segmentierte Kalibrierung und Freigabekriterien verbindlich festgelegt und konsequent in Evidenzpakete überführt werden.
+\end{itemize}
 
+\section{Inline-Funktionen (Überblick)}\label{sec:uebertragbarkeit-inline}
+Für Inline-Funktionen (laufzeitwirksame Nutzung im Betrieb) treten betriebsnahe Forderungen in den Vordergrund:
+\emph{Monitoring/Degradation}, robuste Performance unter Störung sowie \emph{schnittstellen- und HMI-seitige}
+Informationsqualität (Qualitätsflags, Konfidenz, Unknown/Abstain).
+\begin{itemize}
+  \item \textbf{Stärken:} Segmentierte Metriken und ODD-Begrenzung sind konzeptionell vorhanden; erste OOD-Indikatoren und
+  Konfidenzberichte werden genutzt.
+  \item \textbf{Schwachpunkte:} Es fehlen häufig integrierte \emph{Betriebsstrategien} mit eindeutigem Telemetrie-Set,
+  Alarmierungslogik und getesteten Degradationspfaden; systematische RFI/Clutter-Stresstests sind lückenhaft.
+  \item \textbf{Implikation:} Die Übertragbarkeit ist \emph{konditional}: klare ODD-Grenzen, definierte Abbruch-/Fallback-Regeln
+  und evidenzgestützte Kalibrierung im Zielbetrieb sind Voraussetzung.
+\end{itemize}
 
-\chapter{Bewertung der Übertragbarkeit}\label{sec:uebertragbarkeit}
-Die Übertragbarkeit bewertet, inwieweit geforderte Ansätze unter den Rahmenbedingungen von Radarsystemen plausibel adressiert sind. Unterschiede zwischen Frontloading-Szenarien und Inline-Funktionen werden benannt, ohne eine Zulassungsbewertung vorzunehmen. % TODO: 2–3 Hauptargumente + Verweis auf Matrix
+\section{Zusammenführende Bewertung}\label{sec:uebertragbarkeit-zusammen}
+In Summe ist die Übertragbarkeit der \emph{geforderten Ansätze} für Frontloading-Szenarien heute \emph{plausibel} und mit
+überschaubaren Ergänzungen (z.\,B.\ Standardisierung von Evidenzformaten, konsistente Kalibrierung je ODD-Segment)
+erreichbar. Für Inline-Funktionen bestehen weiterhin \emph{kritische Evidenzbedarfe} bei \emph{Robustheit \& Shift}
+sowie \emph{Monitoring/Degradation}. Die leitende Frage „\emph{ist KI sicher genug?}“ lässt sich daher nicht binär,
+sondern \emph{konditional} beantworten: Dort, wo ODD eindeutig begrenzt, segmentierte Evidenz vorliegt und
+Degradationspfade geprüft sind, ist Vertrauen begründbar; darüber hinaus bleibt gezielte Weiterentwicklung erforderlich.
 
-  \section{Frontloading-Use-Cases (exemplarisch)}
-  \section{Inline-Funktionen (Überblick)}
-  \section{Zusammenführende Bewertung}
+\section{Brücke zu Empfehlungen}\label{sec:uebertragbarkeit-bruecke}
+Die nachfolgenden Empfehlungen (Kapitel~\ref{chap:empfehlungen}) priorisieren Maßnahmen, die die in Kapitel~\ref{chap:coverage}
+sichtbar gewordenen Lücken (insbesondere Robustheit/Shift und Betriebsevidenz) adressieren und die Operationalisierung
+der geforderten Ansätze in Richtung auditierbarer Evidenzketten beschleunigen.
+
