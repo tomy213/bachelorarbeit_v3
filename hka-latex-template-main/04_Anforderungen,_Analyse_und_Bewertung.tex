@@ -137,7 +137,7 @@ beobachtbaren Abdeckungsgrad sowie geeigneten Evidenzf
 % -------------------------
 % NEW CHAPTER: Ausgewählte KI-Modelle
 % -------------------------
-\chapter{Ausgewählte KI-Modelle: knappe Erläuterungen}\label{chap:modelle}
+\chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
 
 \section{Ziel und Einordnung}\label{sec:modelle-intro}
 Dieses Kapitel liefert \emph{kurze, zweckgebundene} Steckbriefe ausgewählter Modellklassen. Es dient einer gemeinsamen
@@ -242,21 +242,21 @@ Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} entlang d
 \caption{Coverage-Analyse (ISO/PAS~8800 \textrightarrow\ Anforderungsfelder)}
 \begin{tabular}{p{0.20\textwidth} p{0.22\textwidth} p{0.25\textwidth} p{0.07\textwidth} p{0.26\textwidth}}
 \toprule
-\textbf{Anforderungsfeld} & \textbf{ISO/PAS~8800 Bezug} & \textbf{Erwartete Artefakte / Nachweise} & \textbf{Abdeckung} & \textbf{Kommentar / Lücke / Maßnahmen} \\
+\textbf{Anforderungsfeld} & \textbf{ISO/PAS~8800 Bezug} & \textbf{Erwartete Artefakte / Nachweise} & \textbf{Abde- ckung} & \textbf{Kommentar / Lücke / Maßnahmen} \\
 \midrule
-\textbf{ODD-/Szenarioabdeckung} & ODD, Annahmen, szenarienbasiertes Testen & ODD-Dokument, Szenariokatalog, segmentiertes Leistungs-/Unsicherheits\-reporting, Re-Assessment bei ODD-Änderung & \score{2} & ODD-Schnitte definiert; Unsicherheitsreporting teils uneinheitlich. \textbf{Maßn.:} verbindliches ODD-Template; Pflichtmetriken (Pd/Pfa, ECE/Brier) je Segment; Unknown/Abstain-Kriterien; Regression bei ODD-Änderung. \\
+\textbf{ODD-/Szenario- abdeckung} & ODD, Annahmen, szenarienbasiertes Testen & ODD-Dokument, Szenariokatalog, segmentiertes Leistungs-/Unsicherheits\-reporting, Re-Assessment bei ODD-Änderung & \score{2} & ODD-Schnitte definiert; Unsicherheitsreporting teils uneinheitlich. \textbf{Maßn.:} verbindliches ODD-Template; Pflichtmetriken (Pd/Pfa, ECE/Brier) je Segment; Unknown/Abstain-Kriterien; Regression bei ODD-Änderung. \\
 \midrule
 \textbf{Daten-/Label-Governance}\F & Daten-Management, Dokumentation, Freigabeprozesse & Datasheets/Model Cards, Label-Guidelines, Inter-Annotator-Agreement, versionierte Datenstände (Signaturen) & \score{2} & Prozesse vorhanden, IAA/Reviewstiefe variiert. \textbf{Maßn.:} IAA-Ziel, Freigabe-Checkliste, Pipeline-Hashing/Signierung, Datenänderungslog. \\
 \midrule
 \textbf{Robustheit \& Verteilungssprünge} & Robustheitsprinzipien, Stresstests & Stress-/Sensitivitätstests (z.\,B.\ RFI/Clutter/Noise), Domänen-Holdouts, Degradationskurven & \score{1} & Systematische Stresstests lückenhaft; RFI/Multipath selten. \textbf{Maßn.:} Testbatterie inkl.\ Worst-Case, Katalog pro Störart, Akzeptanzkriterien. \\
 \midrule
-\textbf{Konfidenzkalibrierung \& Unsicherheit} & Unsicherheitsbehandlung, Freigabekriterien & Kalibrationsberichte (ECE, Brier, NLL) je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; CI/Bootstrap-Reporting. \\
+\textbf{Konfidenzkali- brierung \& Unsicherheit} & Unsicherheitsbehandlung, Freigabekriterien & Kalibrationsberichte (ECE, Brier, NLL) je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; CI/Bootstrap-Reporting. \\
 \midrule
 \textbf{Toolchain-Assurance \& Reproduzierbarkeit}\F & Tool-/Prozesskontrolle, ggf.\ Toolqualifizierung & deterministische Builds, Lockfiles, Artefakt-Signaturen, reproduzierbare Trainings-/Eval-Läufe, TQL-Bewertung & \score{2} & Repro besser, formale Toolqualifizierung teils offen. \textbf{Maßn.:} TQL-Entscheidungsmatrix, Build-Manifeste, CI/CD-Gates. \\
 \midrule
-\textbf{Monitoring/Degradation (Betrieb)}\I & Betriebsüberwachung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Monitoring rudimentär; Degradationspfade wenig erprobt. \textbf{Maßn.:} Telemetrie-Set, OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
+\textbf{Monitoring/ Degradation (Betrieb)}\I & Betriebsüberwachung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Monitoring rudimentär; Degradationspfade wenig erprobt. \textbf{Maßn.:} Telemetrie-Set, OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
 \midrule
-\textbf{Traceability/Versionierung}\F & Rückverfolgbarkeit, Konfigurationsmgmt. & End-to-end Links Anf.\,$\rightarrow$\,Daten\,$\rightarrow$\,Modell\,$\rightarrow$\,Tests\,$\rightarrow$\,Release; Änderungsprotokolle & \score{2} & Links vorhanden, Lücken bei Daten\,$\leftrightarrow$\,Modell. \textbf{Maßn.:} Traceability-Matrix, verbindliche Artefakt-IDs in CI. \\
+\textbf{Traceability/ Versionierung}\F & Rückverfolgbarkeit, Konfigurationsmgmt. & End-to-end Links Anf.\,$\rightarrow$\,Daten\,$\rightarrow$\,Modell\,$\rightarrow$\, Tests\,$\rightarrow$\,Release; Änderungsprotokolle & \score{2} & Links vorhanden, Lücken bei Daten\,$\leftrightarrow$\,Modell. \textbf{Maßn.:} Traceability-Matrix, verbindliche Artefakt-IDs in CI. \\
 \midrule
 \textbf{XAI \& Auditierbarkeit}\F & nachvollziehbare Evidenz & zweckgebundene Erklärungen, reproduzierbare Notebooks/Skripte, Review-Artefakte & \score{2} & Heterogene XAI-Methoden, Repro schwankt. \textbf{Maßn.:} XAI-Playbook, Seed/Env-Fixierung, Audit-Pipeline. \\
 \midrule
