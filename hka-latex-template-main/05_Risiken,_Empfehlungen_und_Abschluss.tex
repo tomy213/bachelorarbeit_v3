@@ -11,6 +11,115 @@ und leitet daraus priorisierte Risiken ab. Die Einordnung folgt dem Meta-Ansatz 
 Bewertet wird nicht die Wirksamkeit einzelner Techniken, sondern ob die \emph{geforderten Ansätze}
 (Anforderungsfelder in Kap.~\ref{chap:anforderungen}) ausreichend abgedeckt sind, um Vertrauen zu stiften.
 
+
+
+
+
+
+%--------------------------------------------------------------------
+%komplett unsauber
+%--------------------------------------------------------------------
+
+
+
+\section{Lückenanalyse: Zertifizierungsfähigkeit von KI in der Luftfahrt}
+\textit{``ML meets aerospace: challenges of certifying airborne AI''} hat in den Überlegungen und Limitierungen einige Punkte heraus gedeutet:
+\subsection{Überlegungen:}
+\paragraph{(1) Geltung heutiger Prozesse für KI (Anwendbarkeit)}
+\textbf{Befund:} KI ist formal „nur“ eine Implementierungswahl, verhält sich aber probabilistisch und datenverteiltungsabhängig.  
+\textbf{Gap:} Klassische Nachweise decken „eingefrorene“ Leistungswerte ab, nicht jedoch das Verhalten auf \emph{unbekannten} Daten und unter \emph{Drift}. Der ODD-Begriff allein reicht nicht, wenn die reale Datenverteilung wandert.
+
+\paragraph{(2) Safety-Aspekte}
+\textbf{Befund:} Anforderungen können Zielwerte (z.\,B. Treffer-/Fehlerraten) vorgeben; Verifikation gelingt auf Validationsdaten.  
+\textbf{Gaps:} 
+\begin{itemize}
+  \item Übertragbarkeit auf \emph{unbekannte} Daten bleibt unsicher (Generalisierung/Drift).
+  \item Zwei Wege werden diskutiert: (1) wie bisher über Requirements \& Design Assurance \emph{ohne} probabilistische Systemintegration; (2) \emph{mit} expliziter Integration von Zuverlässigkeitswerten in Safety-Analysen – dafür fehlen heute belastbare Verfahren.
+  \item „DALgebra“ (Redundanz/Monitoring \(\rightarrow\) höherer DAL) ist für ML nur eingeschränkt übertragbar: Unabhängigkeit und verlässliche Erkennung „nicht-leistender“ Kanäle sind ungeklärt.
+\end{itemize}
+
+\paragraph{(3) System-Aspekte}
+\textbf{Befund:} Luftfahrtsysteme nutzen Redundanz und Dissimilarität zur Verringerung gemeinsamer Fehlerursachen.  
+\textbf{Gaps:}
+\begin{itemize}
+  \item \textit{Dissimilarität bei ML}: Was bedeutet „hinreichend verschieden“ bei Daten, Architektur, Hyperparametern, Initialisierung?
+  \item \textit{Runtime Assurance}: Umschalten auf einfachere Pfade ist richtig, aber \emph{Erkennung} von Fehlfunktionen, verlässliche Konfidenzen und OOD-Detektion sind weiterhin Forschungsfelder.
+\end{itemize}
+
+\paragraph{(4) Software-Aspekte (DO-178C-Logik)}
+\textbf{Befund:} Klassische Ebenen (System-, High-, Low-Level-Requirements), Traceability, Coverage und DAL-skalierte Evidenz.  
+\textbf{Gaps:}
+\begin{itemize}
+  \item \textit{Spezifikation}: ML-Verhalten wird \emph{indirekt} über Daten/Metriken beschrieben – wie wird diese „Zwischen-Spezifikation“ standardkonform geführt?
+  \item \textit{Traceability}: Vom High-Level-Requirement bis hinunter zu \emph{Datenanforderungen}, Datensätzen und Metriken – Lücke zwischen Spezifikation und tatsächlichem Modellverhalten.
+  \item \textit{Verifikation}: Nominal/off-nominal Testdateneigenschaften, Robustheit/Generalisierung – \emph{ausreichende Testtiefe} und \emph{Coverage-Maße} für ML sind offen.
+\end{itemize}
+
+\paragraph{(5) Probabilistische Systeme (Analogie)}
+\textbf{Befund:} GPS/ILS zeigen, wie probabilistische Leistungsanforderungen regulativ handhabbar sind (Schwellen, Tests, Konfidenzen).  
+\textbf{Gap:} Vergleichbare, anerkannte Verfahren fehlen für ML: Wann ist Testen „genug“, und wie wird probabilistische Leistung sicher argumentiert (inkl. OoD/Drift)?
+
+\paragraph{(6) Zertifizierungsprozess}
+\textbf{Befund:} Behörden geben Regeln vor; akzeptierte \emph{Means of Compliance} kommen aus Konsensstandards.  
+\textbf{Gaps:}
+\begin{itemize}
+  \item „Henne-Ei“: Reife Praxis entsteht erst im Betrieb, Flugbetrieb setzt aber Zulassung voraus.
+  \item Standardisierungszyklen vs.\ ML-Innovationsgeschwindigkeit: Risiko der Obsoleszenz.
+  \item Kontinuierliche Updates sind für ML essenziell, triggern aber (heute) Änderung/Zertifizierung – Guidance für \emph{kontinuierliche Re-Zertifizierung} fehlt.
+\end{itemize}
+
+\paragraph{(7) Tool-Qualifikation (DO-330)}
+\textbf{Befund:} TQL 1–5 je nach Toolkriterium und Ziel-DAL; Qualifikation nötig, wenn Prozesse ersetzt/reduziert werden.  
+\textbf{Gaps:}
+\begin{itemize}
+  \item ML-Toolchains (Datenmanagement, Training, Konvertierung, Deployment, OoD-Checks) sprengen die klassische Tool-Taxonomie.
+  \item „Output verifizieren statt Tool qualifizieren“ wird bei \emph{Massendaten} praktisch schwierig; führt ggf. zu Bedarf an \emph{Checker-Tools} (die selbst qualifiziert werden müssten).
+\end{itemize}
+
+\paragraph{Kurzfazit.}
+Aktuelle Luftfahrtstandards tragen die Grundidee von Assurance, stoßen bei ML aber an Grenzen: fehlende, anerkannte Verfahren für Generalisierung/Drift, Dissimilarität, ML-Coverage, probabilistische Leistungsnachweise, fortlaufende Updates und Tool-Einordnung.
+
+\subsection{Limitierungen:}
+Neben regulatorischen Lücken bestehen technologische Grenzen, die derzeit verhindern, System-Safety vollumfänglich zu garantieren. Die wichtigsten Punkte:
+
+\paragraph{(1) Spezifikation.}
+ML-Verhalten wird nur indirekt über Daten, Metriken und Lernverfahren beschrieben. ODD-Definitionen stoßen an Grenzen (Vollständigkeit, Terminologie, Annahmen, Edge-Cases); Off-Nominal-Bedingungen sind schwer abzudecken. Operative Daten können Spezifikationen nachschärfen, lösen aber selten Randfall-Probleme.
+
+\paragraph{(2) Datenabhängigkeit \& Nachvollziehbarkeit.}
+Leistung spiegelt Trainingsdaten (Bias, Lücken, Rauschen). Repräsentativität ist schwer sicherzustellen. Komplexe Pipelines (Preprocessing, Training, Konvertierung, Deployment) erschweren Traceability und Reproduzierbarkeit.
+
+\paragraph{(3) Verifikation.}
+Es fehlt ein allgemein akzeptiertes Maß für „ausreichendes Testen“. Formale Verfahren sind architektur-/aktivierungsabhängig und skaliert schwer. Struktur-Analogien (z.\,B. Neuron-Coverage) taugen nicht als SW-Coverage-Ersatz. XAI (lokal/global) hilft beim Verstehen/Debuggen, ersetzt aber keine belastbaren Test- und Robustheitsnachweise; Generalisierung und OoD bleiben offene Baustellen.
+
+\paragraph{(4) Safety-getriebenes Lernen.}
+Training optimiert meist Performance statt Sicherheit/Robustheit. Konfidenzwerte sind auf OoD-Daten unzuverlässig. Runtime-Assurance erfordert messbare Sicherheitskriterien und einfache, verifizierbare Fallback-Funktionen – bei komplexen Systemen schwer umzusetzen.
+
+\paragraph{(5) Nichtdeterminismus.}
+Variabilität entsteht durch Eingangsrauschen (Inference), parallelisierte Hardware (GPU/Multicore) und Trainingsstochasticität (Seeds, Shuffling). Erforderlich sind Monitoring/Logging, Sensitivitäts- und Robustheitsanalysen sowie Nachweise, dass Rest-Nichtdeterminismus vorhersehbar und akzeptabel begrenzt ist.
+
+\paragraph{(6) Transfer Learning \& COTS.}
+Transfer Learning reduziert Datenbedarf/Trainingszeit, birgt aber Risiken (negativer Transfer, Privatsphäre, Interpretierbarkeit). Fehlende Benchmarks behindern Vergleichbarkeit von Verifikationsmethoden. Für COTS-Modelle ist der bidirektionale Informationsfluss (Trainingsannahmen \(\leftrightarrow\) ODD) ungeklärt; unklar ist auch, wie nah der Prozess an klassischer Software-Integration liegt.
+
+\paragraph{(7) Kontinuierliche Entwicklung (MLOps).}
+ML benötigt laufendes Monitoring, Drift-Erkennung und kontrollierte Updates. Punktuelle Zertifizierungen passen schlecht zu häufigen Modelländerungen. Es fehlen klare Regeln, \emph{wann} retrainiert werden muss und \emph{welche} V\&V-Tiefe vor/nach Deployment erforderlich ist (Stichwort: kontinuierliche Re-Zertifizierung).
+
+\paragraph{Kurzfazit.}
+Ohne belastbare Verfahren für Spezifikation, Generalisierung/OoD, ML-Coverage, UQ, Runtime-Assurance, Traceability über die gesamte Pipeline und praktikable Re-Zertifizierungsprozesse bleibt „sicher genug“ für KI in der Luftfahrt eine offene Forschungs- und Standardisierungsaufgabe.
+
+
+
+
+
+
+%-----------------------------------------------------------------------
+%------------------------------------------------------------------------
+%----------------------------------------------------------------------
+
+
+
+
+
+
 \section{Konsolidierte Befunde}\label{sec:risiken-befunde}
 Die wichtigsten, kapitelübergreifend konsistenten Befunde lassen sich entlang der Anforderungsfelder bündeln:
 

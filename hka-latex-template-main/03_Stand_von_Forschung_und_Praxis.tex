@@ -69,6 +69,54 @@ Veröffentlichungen und Praxisbeiträge zeigen unterschiedliche Reifegrade und I
   \item \textbf{Reporting-Praxis:} Zunehmend segmentiertes Reporting nach ODD-Schnitten (SNR/Entfernung/Wetter/Clutter) statt nur Gesamtmetriken; Kalibrierungsangaben werden häufiger eingefordert.
 \end{itemize}
 
+%----------------------------------------------------
+\section{Militärische Perspektive – Hauptunterschiede zur zivilen Luftfahrt}\label{sec:militaer-perspektive}
+KI findet in der militärischen Luftfahrt bereits vielfältig Anwendung (u.\,a.\ Lagebilder, Sensorik/Wahrnehmung, Mission Support).
+ Mit Fokus dieser Arbeit wird z.B. bereits im Eurofighter 
+eine von Henshold entwickelte Objektklassifikations KI im Radar verwendet.
+Im Sinne von \emph{Dual-Use} ergeben sich Überschneidungen, von denen zivile und militärische Bereiche profitieren können.
+Öffentlich zugängliche Industrieangaben deuten auf KI-gestützte Radar-Funktionen im Eurofighter-Umfeld hin; belastbare technische
+Details sind jedoch nur eingeschränkt veröffentlicht.\parencite{ecrs-mk1-release}
+Militärische und zivile Verfahren unterscheiden sich grundlegend in Zielsetzung, Einsatzkontext, Regelwerk und Zertifizierung. 
+Zivile Luftfahrt priorisiert Passagiersicherheit, Transparenz und internationale Harmonisierung; militärische Luftfahrt fokussiert 
+Missionsfähigkeit, Resilienz und Geheimhaltung.
+\noindent
+Ein aktueller Überblick zur Standardisierung militärischer KI-Anwendungen fasst zentrale Unterschiede zwischen zivilem und militärischem
+Kontext wie folgt zusammen:\parencite{mil-ai-standards-2024}
+
+\begin{table}[h]
+\centering
+\caption{Zivil vs.\ Militär – stark verkürzter Vergleich zentraler Aspekte}
+\begin{tabular}{p{0.30\textwidth} p{0.30\textwidth} p{0.31\textwidth}}
+\toprule
+\textbf{Aspekt} & \textbf{Zivile Luftfahrt} & \textbf{Militärische Luftfahrt} \\
+\midrule
+Ziele \& Kontext & Sicherheit, Zuverlässigkeit, Interoperabilität im regulierten Linien-/Frachtbetrieb & Missionswirkung, Robustheit, Anpassungsfähigkeit unter widrigen Bedingungen \\
+Regulatorik \& Standards & EASA/FAA/ICAO; DO-178C, DO-254, DO-160; KI-Guidance ergänzt bestehende Safety-Regeln & EDA/NATO/nationale Ministerien; EMARs, MIL-STD-882E; missions-/fähigkeitsbezogene Ergänzungen \\
+Standardisierung & Breite Stakeholder-Beteiligung, öffentlich, iterativ & Begrenzte Stakeholder (Behörden, Auftragnehmer), teils klassifiziert \\
+Zertifizierung & Pflicht vor Einsatz; internationale Anerkennung; umfangreiche V\&V in kontrollierten Szenarien & EMAR-basiert und missionsbezogen; V\&V auch in Übungen/realitätsnahen Stresstests \\
+Transparenz \& Ethik & Hohe Transparenz, Nachvollziehbarkeit, öffentliche Rechenschaft & Abwägung mit Geheimhaltung; zusätzliche ethische Leitplanken (z.\,B.\ zu Autonomiegraden) \\
+Betrieb \& Resilienz & „Fail-safe“/„fail-operational“ nach Hazard; klarer Regelbetrieb & Starke Resilienzanforderungen (Jamming/Täuschung), \emph{graceful degradation} unter Störung \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Kernaussagen.}
+\begin{itemize}
+  \item \textbf{Ziele:} Zivil ist sicherheits- und compliance-getrieben (maximale Nachweisbarkeit); militärisch missions- und resilienzgetrieben (Wirksamkeit unter Störung).
+  \item \textbf{Regelwerke:} Zivil nutzt global harmonisierte, transparente Standards; militärische Regelungen sind stärker auf Einsatzanforderungen und Geheimschutz ausgerichtet.
+  \item \textbf{Nachweise:} Zivil erfolgt die Zertifizierung vor Inbetriebnahme mit international anerkannten Evidenzen; militärisch ergänzen realitätsnahe Stresstests/Übungen die V\&V.
+  \item \textbf{Transparenz/Ethik:} Zivil betont öffentliche Vertrauensbildung; militärisch wird Transparenz mit operativer Sicherheit und ethischen Leitplanken austariert.
+\end{itemize}
+
+\noindent
+\textit{Einordnung für diese Arbeit.} Die militärische Perspektive zeigt potenziell höhere Reifegrade einzelner KI-Funktionen (z.\,B.\ Radar),
+ist jedoch aufgrund anderer Ziele/Regelwerke nur eingeschränkt auf zivile Zulassung übertragbar. Für die nachfolgenden Anforderungen
+und die Coverage-Bewertung bleiben daher zivile Rahmen (EASA, DO-178C/DO-330) ausschlaggebend; militärische Entwicklungen dienen als
+Technologieradar, nicht als Zertifizierungsreferenz.
+
+
+
 % ----------------------------------------------------
 \section{Praxis-Trends}\label{sec:sop-trends}
 Aus Projekten und Veröffentlichungen zeichnen sich Querschnittstrends ab, die Anforderungen und Nachweise prägen:
@@ -176,3 +224,93 @@ KI ist in der Luftfahrt vielversprechend, aber ihre Einführung ist primär ein 
 Der Maßstab verschiebt sich von „hoher Genauigkeit“ hin zu „\emph{sicher genug}“: Entscheidend sind klare Einsatzgrenzen (ODD),
 segmentierte Evidenzen (Leistung \emph{und} Kalibrierung), robuste Nachweise unter Störung sowie geprüfte Degradationspfade.
 Diese Beobachtungen leiten direkt zu den \emph{Anforderungen und Szenarien} über.
+
+
+
+
+
+
+%--------------------------------------------------------------------------
+%komplett unsauber
+%------------------------------------------------------------------------------
+\chapter{Automobilbranche: KI \& Sicherheit}
+
+\section{Ziel \& Scope}
+\textit{Zweck:} Rahmen für KI-Safety im Fahrzeug (Perzeption/Entscheidung, z.\,B.\ Radar-Objektklassifikation), ohne Security-Vertiefung. 
+\textit{Hinweis:} Cybersecurity (ISO 21434, UNECE R155/R156) wird nur als Betriebsrandbedingung erwähnt und ist \emph{nicht} Teil dieser Thesis.
+\textit{Gremien in einem Satz:} UNECE/WP.29 regelt Betrieb/Updates; ISO/SAE/IEEE standardisieren – Details hier nachrangig.
+
+\subsection{Begriffe \& Standards – Schnellvergleich}
+\begin{center}
+\begin{tabular}{p{0.38\textwidth} p{0.25\textwidth} p{0.25\textwidth}}
+\hline
+\textbf{Aspekt} & \textbf{Luftfahrt} & \textbf{Automotive} \\
+\hline
+Safety-Level & DAL A–E & ASIL A–D \\
+System-Safety & ARP4754A / ARP4761A & ISO 26262 (HARA, Safety Concept) / ISO 21448 (SOTIF) \\
+Software-Assurance & DO-178C & ISO 26262 Teil SW \\
+Hardware-Assurance & DO-254 & ISO 26262 Teil HW \\
+KI-Guidance & EASA AI Level 1/2 (Guidance) & ISO/PAS 8800 \\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Normen-Panorama}
+\begin{itemize}
+  \item \textbf{ISO 26262 (Functional Safety, ASIL A–D):} Lebenszyklus- und Nachweisrahmen für E/E-Systeme.
+  \item \textbf{ISO 21448 (SOTIF):} Umgang mit Funktions-/Wahrnehmungs­insuffizienzen und Szenario-Lücken.
+  \item \textbf{ISO 8800:} KI-spezifische Ergänzung zu 26262/SOTIF (Daten-/Modell-Governance, ODD/OOD, Kalibrierung, Betrieb/Updates).
+  \item \textbf{ISO TR 5469:} Domänenübergreifender Leitfaden \emph{Funktionale Sicherheit \& KI} – Eigenschaften, Risiken, Methoden/Prozesse.
+  \item \textbf{ISO 22989:} Domänenübergreifende Sammlung an KI Begriffen und Konzepten, die zur Vereinheitlichung dient.
+\end{itemize}
+
+\section{Deep Dive: ISO/PAS 8800}
+\subsection{Positionierung \& Anwendungsbereich}
+\textit{Kernidee:} Ergänzt 26262/SOTIF; kein „Assurance-Rabatt“ für KI; relevant bei ML in sicherheitskritischen Funktionen.
+
+\subsection{Kernprinzipien (Stichworte)}
+\begin{itemize}
+  \item ODD/Use-Cases klar begrenzen; Unknown/Abstain + Fallback definieren.
+  \item Daten-/Modell-Governance (Lineage, Versionierung, Label-Qualität, Reproduzierbarkeit).
+  \item Unsicherheiten \& Kalibrierung; OOD-Erkennung als Pflichtbaustein.
+  \item Szenario-basierte V\&V pro ODD-Segment (statt Mittelwert-KPIs).
+  \item Betrieb/Monitoring \& kontrollierte Updates (inkl.\ Rollback).
+\end{itemize}
+
+\subsection{Artefakt-Checkliste für den Safety Case}
+\textit{Entwürfe:} ODD-Spezifikation; Data/Model-Lineage; Kalibrierungs- \& OOD-Nachweise; Szenariomatrix \& Abdeckung; Runtime-Monitoring-Konzept; Change-/Rollback-Prozess.
+
+\subsection{Beispiel: Radar-Objektklassifizierung}
+\textit{Skizze:} Daten (RD/RDA, Mikro-Doppler, Tracks), Szenarien (Nacht/Regen/urban), Fehlklassifikationskosten, Abstain-Trigger, Drift-Signale, Integration in Brems-/Fusion-Kette, Fail-safe vs.\ Fail-operational.
+
+\section{ISO/IEC TR 5469 – Brücke \& Ergänzung}
+\textit{Rolle:} Referenzrahmen für KI+Funktionale Sicherheit; klärt Einsatzarten (KI \emph{in} Safety-Funktion, Safety \emph{für} KI, KI \emph{für} Entwicklung) und methodische Bausteine (z.\,B.\ Diversität/Unabhängigkeit von KI-Kanälen). 
+\textit{Nutzen:} Ergänzt 8800/26262/SOTIF um Begriffe, Risikofaktoren und prozessuale Leitplanken – gut anschlussfähig an Luftfahrt-Argumentationsmuster.
+
+\section{Crosswalk: Luftfahrt \(\leftrightarrow\) Automotive}
+\subsection{Gemeinsamkeiten (kurz)}
+\begin{itemize}
+  \item Hazard-basierte Skalierung der Nachweisstrenge (DAL \(\leftrightarrow\) ASIL); kein „Assurance-Rabatt“ für KI.
+  \item Safety Case/Assurance Case als roter Faden (Claims, Strategie, Evidenz, Annahmen).
+  \item ODD/Operational Envelope als Einsatzgrenzen; Bedeutung von OOD/Unknown und Fallback/Degradation.
+  \item Traceability, V\&V über Szenarien; Tool-Betrachtungen bei ML-Toolchains.
+\end{itemize}
+
+\subsection{Unterschiede (kurz)}
+\begin{itemize}
+  \item Regulatorik: Luftfahrt (Zulassung vor Betrieb, starke Behördenbindung) vs.\ Automotive (EU Typgenehmigung/UNECE, USA Self-Certification) – kürzere OTA-Zyklen im Feld.
+  \item HMI \& Betrieb: Crew/Operator vs.\ Fahrer/Handover; höhere Variantenvielfalt, dichter Update-Betrieb im Automotive.
+  \item Umgebungen: Luftfahrt eher kontrolliert/hochintegriert; Automotive breit gestreute ODDs (urban/land/\ldots).
+\end{itemize}
+
+
+
+\section{V\&V-Strategie (Automotive-konkret)}
+\textit{Leitplanken:} Szenario-basiertes Testen je ODD-Segment; Kalibrierung \& OOD-Rate als Pflichtmetriken; KPI-Berichte pro Klasse/Szene/SNR/Range; Latenz- \& Degradationsregeln dokumentieren.
+
+\section{Betrieb \& Lebenszyklus}
+\textit{Kerngedanke:} Monitoring/Drift/Telemetrie festlegen; kontrollierte Updates mit Freigabe/Rollback; Pflege der Evidenz über Modellstände (Lineage). 
+\textit{Hinweis:} Security/OTA-Regeln nur als Randbedingung, keine Vertiefung.
+
+\section{Offene Punkte (normnah)}
+\textit{To watch:} ML-Coverage/„genug getestet“, belastbare UQ-Nachweise, Transfer-Learning/COTS-Transparenz, Nichtdeterminismus, praktikable Prozesse für häufige Modell-Änderungen (kontinuierliche Re-Zertifizierung).

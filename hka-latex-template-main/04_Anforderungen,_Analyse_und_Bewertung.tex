@@ -292,6 +292,113 @@ Die hier ergänzten Quellen werden in der Coverage-Analyse dort referenziert, wo
 oder die Begriffsschärfung (ISO/IEC~22989) konkret stützen.
 
 
+
+
+
+
+
+%---------------------------------------------
+%noch komplett unsauber
+%---------------------------------------------
+
+\chapter{Luftfahrtrahmenbedingungen}
+
+% ==== Luftfahrt ====
+\subsection{Ziel, Motivation und Scope (Luftfahrt)}
+\paragraph{Ziel.}
+Einordnung, wie „sicher genug“ für KI-Funktionen in der Luftfahrt regulatorisch begründet und nachgewiesen wird: Rolle von EASA (AI Roadmap, Concept Paper Issue~2), MLEAP-Ergebnissen und etablierten Standards (z.B. DO-178C). Klarstellung: KI-Guidance ergänzt, ersetzt aber nicht die klassische Assurance; keine Erleichterung der Nachweisstrenge.
+
+\paragraph{Motivation.}
+KI hält in sicherheitsrelevanten Avionikfunktionen Einzug (z.\,B.\ Radar-Objektklassifizierung). Für den Einsatz im Flugbetrieb braucht es eine belastbare Begründung „sicher genug“ – auf Basis der etablierten Luftfahrt-Standards, ergänzt um KI-spezifische Evidenzen. Gleichzeitig bleiben zentrale Fragen offen (Generalisierung und Drift, Daten-/Modell-Governance, Updates im Betrieb, OOD/Abstain). Ein kurzer Seitenblick auf militärische Anwendungen ist hilfreich, weil dort Degradation, Resilienz gegen Störungen (Jamming/Täuschung) und konsequente Human-in-the-Loop-Konzepte geschärft sind; diese Aspekte liefern Anregungen, stehen hier aber nicht im Mittelpunkt der zivilen Zulassung.
+
+\paragraph{Scope.}
+Fokus auf Safety-Aspekte von KI in der Avionik, insbesondere \emph{Radar-Objektklassifizierung} als Beispielanwendung. Abdeckung der EASA-Guidance zu Level~1/2 (Assistenz, Human-AI-Teaming), \emph{offline} trainierten, zur Freigabe eingefrorenen Modellen.
+
+
+
+
+
+\section{EASA AI-Roadmap – aktueller Stand}
+Die EASA positioniert KI als „human-centric“ und staffelt Anwendungen nach Autorität: \textbf{Level 1} (Assistenz), 
+\textbf{Level 2} (Human-AI-Teaming) und später \textbf{Level 3} (fortgeschrittene Automatisierung). 
+Roadmap 2.0 definiert Vertrauenswürdigkeits-Bausteine (u.\,a. Learning Assurance, Erklärbarkeit, Human Oversight) 
+und skizziert einen gestuften Zulassungspfad. \emph{Kernbotschaft:} KI ergänzt, aber ersetzt das bestehende Safety-Regelwerk nicht.
+\paragraph{Was das praktisch bedeutet.}
+\begin{itemize}
+  \item \textbf{Stufenweise Zulassung:} Erst Level-1, später Level-2 – jeweils mit klar definiertem Einsatzbereich und menschlicher Aufsicht. \emph{Kein „Assurance-Rabatt“:} Die Strenge der Nachweise richtet sich weiterhin nach Hazard/DAL.
+  \item \textbf{Zusatz statt Ersatz:} KI-spezifische Evidenzen (z.\,B. Daten-/Modell-Governance, Kalibrierung, OOD/Abstain, Monitoring) kommen \emph{on top} zur etablierten Software-/System-Assurance.
+  \item \textbf{Lebenszyklus im Blick:} Betriebliches Monitoring, kontrollierte Updates und nachvollziehbare Änderungen sind Teil des Sicherheitsarguments („living“ Safety Case).
+\end{itemize}
+
+
+\section{EASA AI-Guidance 2024 (Concept Paper Issue 2) – Level 1 \& 2}
+Das \emph{Concept Paper Issue 2} (03/2024) beschreibt die schrittweise Einführung von KI in sicherheitsrelevanten Anwendungen: zuerst \textbf{Level 1} (Assistenzfunktionen), anschließend ausgewählte \textbf{Level 2}-Anwendungen (\emph{Human–AI Teaming} unter klarer menschlicher Aufsicht). Die Guidance ergänzt das bestehende Safety-Regelwerk (z.\,B.\ DO-178C) um KI-spezifische Bausteine wie \emph{Learning Assurance}, Erklärbarkeit, präzise Einsatzgrenzen (ODD) und betriebliches Monitoring – ohne die klassischen Nachweise zu ersetzen.
+
+\paragraph{Schwerpunkte.}
+\begin{itemize}
+  \item \textbf{Klare Rollenverteilung:} L1 = Unterstützung; L2 = Kooperation mit dem Menschen. Autorität, Eingriffsrechte und Übersteuerbarkeit müssen beschrieben und gegeben sein.
+  \item \textbf{Einsatzbereich festlegen (ODD):} Scope, Use Cases, Datenbasis und Grenzen definieren – inkl.\ Regeln, wann „Abstain/Unknown“ zu ziehen ist.
+  \item \textbf{Learning Assurance:} Herkunft/Qualität der Trainingsdaten, kontrollierte Modelländerungen und Freigabeprozesse transparent darlegen.
+  \item \textbf{Erklärbarkeit \& HMI:} Begründbare Ausgaben, Konfidenz-/Qualitätsanzeigen und eindeutige Degradationsmodi.
+  \item \textbf{Betrieb \& Monitoring:} Drift-Überwachung, Logging, Eskalationswege; \emph{„living“ Safety Case} statt Einmal-Nachweis.
+\end{itemize}
+
+\paragraph{Frühe Einsatzgrenzen.}
+\begin{itemize}
+  \item \textbf{Begrenzte Autorität:} L1 = Mensch entscheidet und handelt; L2 = System darf handeln, bleibt aber jederzeit übersteuerbar.
+  \item \textbf{Kein Online-Lernen:} Zulässig sind \emph{offline} gelernte, zur Freigabe \emph{eingefrorene} Modelle; Online-/Continual Learning ist (noch) ausgeschlossen.
+  \item \textbf{ODD \& OOD:} Der Einsatzbereich ist eng zu beschreiben; für \emph{außerhalb der ODD}/\emph{Out-of-Distribution} sind Monitoring, Warnung und sicheres Verhalten gefordert.
+  \item \textbf{Nachweisstrenge bleibt:} KI-spezifische Evidenzen kommen \emph{on top}; die Software-/Hardware-Assurance (z.\,B.\ DO-178C/DO-254) bleibt vollumfänglich anwendbar – es gibt keine Erleichterung der Nachweisstrenge.
+  \item \textbf{Zielniveau:} Mindestens das Sicherheitsniveau konventioneller Lösungen.
+\end{itemize}
+
+
+
+
+\section{MLEAP Final Report (2024) – Kernaussagen und Relevanz}
+Der \emph{Final Report} des EASA-Forschungsprojekts \textbf{MLEAP} (Machine Learning Application Approval) bündelt Methoden- und Werkzeugempfehlungen zur \emph{Learning Assurance} und zeigt, wie der EASA-\emph{W-Shape} (lernprozessspezifische Ergänzung zum V-Modell) praktisch umgesetzt werden kann. Schwerpunkte sind \textbf{Datenrepräsentativität}, \textbf{Generalisierung} und \textbf{Robustheit/Stabilität} von ML-Modellen; ergänzt wird dies durch eine generische Entwicklungs-Pipeline im Sinne des W-Shape. Die Ergebnisse fließen in das \emph{EASA AI Concept Paper Issue 2} ein.
+
+\paragraph{Kerninhalte.}
+\begin{itemize}
+  \item \textbf{W-Shape als Rahmen:} Abgrenzung System-Ebene vs.\ KI-Ebene; spezifische Ziele und Verifikationen für Datenmanagement, Lernprozess, Modellverifikation und Integration werden entlang des Lernzyklus verankert. 
+  \item \textbf{Drei technische Achsen:} (1) \emph{Datenvollständigkeit \& Repräsentativität} inkl.\ Corner-/Edge-Cases und Auswahlraster für Datenqualifikationsmethoden; (2) \emph{Generalisierung} (Vermeidung von Unter/Überanpassung, Abschätzung/Bounds, prozessnahe Maßnahmen); (3) \emph{Robustheit \& Stabilität} gegenüber Störungen/Rauschen inkl.\ Ansätzen von empirischen bis formalen Verfahren. 
+  \item \textbf{Generische Pipeline:} Ein praktikabler Ablauf zur Umsetzung des W-Shape mit klaren Prüfbausteinen (Daten-, Lern-, Performance- und Integrationsverifikationen) wird vorgeschlagen. 
+  \item \textbf{Use-Cases (Evidenz):} \emph{ATC-Speech-to-Text}, \emph{Automated Visual Inspection} (In-Service-Schadenerkennung) und \emph{ACAS Xu} (UAS-Air-to-Air-Avoidance) wurden untersucht, um Methoden und Empfehlungen an realen Luftfahrtaufgaben zu validieren. 
+\end{itemize}
+
+
+
+
+
+\section{DO-178C – Rolle im KI-Kontext}
+\textbf{DO-178C} bleibt die \emph{Baseline} für Software-Assurance in der Avionik: Ziele und Evidenzen skalieren mit 
+\textbf{DAL A–E}. EASA verweist explizit auf die DO-178C-Daten/Liefergegenstände (inkl. Tool-Qualifikation) als Nachweisgrundlage; 
+KI-spezifische Guidance kommt \emph{zusätzlich} obenauf (z.\,B. Learning Assurance), ändert aber die Software-Pflichten nicht. 
+\emph{Praxis:} Daten-/Modell-Pipelines berühren Tool-Qualifikation (DO-330).
+
+\paragraph{Bezug zu KI Anwendungen und EASA}
+\begin{itemize}
+  \item \textbf{Airborne Software bleibt DO-178C-pflichtig:} Inferenz-Software, Laufzeit/Framework, Treiber und Integrationscode (inkl.\ Vor-/Nachverarbeitung) werden wie gewohnt gemäß DO-178C nachgewiesen; die KI-Guidance kommt \emph{on top} (kein „DAL-Rabatt“).
+  \item \textbf{Modelle sind konfigurationsgeführte Artefakte:} Gewichte/Graph/Quantisierung gelten als freigegebener Software-Stand („gefroren“ zur Zulassung) und werden wie Software-Daten behandelt; Updates sind kontrollierte Änderungen, kein Online-Lernen.
+  \item \textbf{Tool-Qualifikation denken:} Trainings-/Konvertierungs-/Code-Gen-Tools können qualifikationspflichtig sein (DO-330), wenn ihre Fehler unentdeckt ins Produkt wirken könnten.
+  \item \textbf{Traceability bleibt zentral:} Anforderungen \(\rightarrow\) Architektur/Code \(\rightarrow\) Tests/Analysen müssen lückenlos verknüpft sein; KI-spezifische Evidenz (z.\,B. Daten-/Modell-Governance, Kalibrierung, OOD/Abstain) wird \emph{zusätzlich} dokumentiert.
+\end{itemize}
+\paragraph{Wichtig:}
+Die DO 178C und 330 nehmen kein Bezug zu KI und ist für Software und Tools im Allgemeinen. Anzumerken ist, dass deterministischer code 
+oder MC/DC Coverage stark empfohlen wird und als best practise gilt. Diese Punkte sind bei KI nicht erfüllbar und werden nicht in dieser 
+Norm ausdrücklich gefordert. Das Fazit dazu ist, dass KI nach diesen Standards möglich ist, aber die Anforderungen an Nachweisen steigen.
+
+
+
+
+
+%----------------------------------------------------
+%----------------------------------------------------
+
+
+
+
+
 \section{Brücke zur Coverage-Analyse}\label{sec:anforderungen-bruecke}
 Die in diesem Kapitel definierten Anforderungsfelder und ihre typischen Erwartungen werden in Kapitel~\ref{chap:coverage}
 zu einer \emph{Coverage-Analyse} verdichtet. Die Matrix verknüpft je Feld die \emph{geforderten Ansätze} mit dem
