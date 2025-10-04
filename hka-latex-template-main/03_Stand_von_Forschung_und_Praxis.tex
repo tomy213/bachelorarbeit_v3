@@ -9,48 +9,40 @@ Forschungsdiskurs zu \emph{AI Safety} setzt und welche wiederkehrenden Praxispro
 Die Darstellung ist bewusst bewertungsfrei und dient als \emph{Context-Setting} zwischen den
 \emph{Grundlagen} und den \emph{Anforderungen und Szenarien} (Kap.~\ref{sec:anforderungen}).
 
+
+\section{Grenzen klassischer Verfahren und Motivation}\label{sec:motivation-classic-limits}
+Die Luftfahrt ist eine sicherheitskritische Domäne mit dynamischen und komplexen Bedingungen. Bewährte, regel- und modellbasierte Verfahren
+bilden den Grundstock, stoßen jedoch sichtbar an Grenzen:
+
+\begin{itemize}
+  \item \textbf{Skalierung:} Mit wachsenden Sensor-Datenraten steigen Pflege- und Rechenaufwände überproportional; komplexe Regel-/Filterketten werden zur Engstelle.
+  \item \textbf{Nichtlineare Bedingungen:} Hart verdrahtete Heuristiken erfassen stark nichtlineare Zusammenhänge und Interaktionen (z.\,B.\ Geometrie $\times$ Wetter $\times$ Clutter) nur grob.
+  \item \textbf{Hoher Anpassungsaufwand:} Neue Plattformen/Umgebungen erfordern wiederholtes Nachjustieren von Schwellen/Regeln; Nebenwirkungen sind schwer vorherzusagen.
+\end{itemize}
+
+\noindent
+\textbf{Motivation für KI.} KI lernt Muster in hochdimensionalen Daten und adressiert damit \emph{Nichtlinearität} und \emph{Adaptivität}
+(z.\,B.\ kontrolliertes Re-Training statt Regel-Neuentwurf). Im Radar-Kontext kann KI Muster \emph{im} Clutter erkennen, während klassische Verfahren
+Clutter primär unterdrücken und schwache Ziele ggf.\ später sichtbar werden. Voraussetzung für den Einsatz sind klar definierte Einsatzgrenzen (ODD),
+segmentierte Evidenzen und robuste Nachweise (Kalibrierung, Shift-/Stresstests).
+
+
 % ----------------------------------------------------
 \section{Überblick: Einsatzfelder}\label{sec:sop-ueberblick}
-KI wird in der Luftfahrt überwiegend für datengetriebene \emph{Unterstützungsfunktionen} eingesetzt.
-Häufig sichtbare Felder (Literatur und Praxis) sind:
-\begin{itemize}
-  \item \textbf{Vorhersagende Instandhaltung (Predictive Maintenance):} Zustandsdiagnose, Failure Prediction und Flottenanalysen auf Basis von Sensordaten.
-  \item \textbf{Flugmanagement und -betrieb (Operations):} Routen-/Treibstoffoptimierung, Turnaround- und Dispositionsplanung, Prognosen für Pünktlichkeit.
-  \item \textbf{Sicherheit und Überwachung:} Anomalieerkennung in Netzen/Prozessen, sicherheitsrelevante Muster in Betriebsdaten, Compliance-Monitoring.
-  \item \textbf{Luftverkehrsmanagement (ATM/ATC):} Sequencing/Staffelung, Slot-/Flow-Optimierung, Bodenbewegungen.
-  \item \textbf{Sensorik \& Wahrnehmung (u.\,a.\ Radar, EO/IR):} Detektion, Klassifikation, Clutter-Trennung, Sensordatenfusion und Qualitätsbewertung.
-\end{itemize}
+KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendung – von Sensorik und Bordfunktionen über den Flugbetrieb bis
+zum Luftraummanagement. Ein Literaturüberblick zeigt folgende Schwerpunkte (indikativ; nach \textcite{ml-meets-aerospace-2024}):
 
-\subsection*{Use-Cases und Publikationsanteile (Literaturüberblick)}
-% Quelle: Nutzerangabe „ML meets aerospace“; bitte konkrete Referenz ergänzen.
-Die Verteilung veröffentlichter Arbeiten (indikativ) deutet auf folgende Schwerpunkte hin:
 \begin{itemize}
-  \item \textbf{Flugmanagement und -betrieb} — \emph{39\,\%}
-  \item \textbf{Vorhersagende Instandhaltung} — \emph{34\,\%}
-  \item \textbf{Sicherheit und Überwachung} — \emph{23\,\%}
-  \item \textbf{Luftverkehrsmanagement} — \emph{4\,\%}
+  \item \textbf{Flugmanagement und -betrieb (39\,\%):} Routen-/Treibstoffoptimierung, Turnaround- und Dispositionsplanung, Pünktlichkeitsprognosen.
+  \item \textbf{Vorhersagende Instandhaltung (34\,\%):} Zustandsdiagnose, Failure Prediction und Flottenanalysen auf Basis von Sensordaten.
+  \item \textbf{Sicherheit und Überwachung (23\,\%):} Anomalieerkennung in Netzen/Prozessen, sicherheitsrelevante Muster in Betriebsdaten, Compliance-Monitoring.
+  \item \textbf{Luftverkehrsmanagement (4\,\%):} Sequencing/Staffelung, Slot-/Flow-Optimierung, Bodenbewegungen.
 \end{itemize}
-
-\begin{table}[h]
-\centering
-\caption{Publikationsanteile nach Einsatzfeld (indikativ; Literaturüberblick)}
-\begin{tabular}{p{0.46\textwidth}r}
-\toprule
-\textbf{Einsatzfeld} & \textbf{Anteil} \\
-\midrule
-Flugmanagement und -betrieb & 39\,\% \\
-Vorhersagende Instandhaltung & 34\,\% \\
-Sicherheit und Überwachung & 23\,\% \\
-Luftverkehrsmanagement & 4\,\% \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \paragraph{Einordnung für Radar/Klassifikation.}
-Für diese Arbeit sind die Bereiche \emph{Sicherheit/Überwachung} und \emph{Sensorik \& Wahrnehmung}
-besonders relevant: die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutter-Trennung,
-Mikrodoppler) fällt genau hier hinein. Die Publikationsschwerpunkte stützen die thematische Fokussierung,
-ersetzen aber keine sicherheitstechnische Bewertung.
+Für diese Arbeit sind \emph{Sicherheit/Überwachung} sowie \emph{Sensorik \& Wahrnehmung} besonders relevant:
+die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutter-Trennung, Mikrodoppler) fällt genau hier hinein.
+
 
 % ----------------------------------------------------
 \section{Forschungsstand zu AI Safety (kompakt)}\label{sec:fs-safety}
@@ -98,6 +90,45 @@ Aus Projekten und Veröffentlichungen zeichnen sich Querschnittstrends ab, die A
   \item \textbf{Integration/HMI:} Qualitätsflags, Konfidenzen und Unknown/Abstain müssen für Operatoren interpretierbar übertragen werden.
 \end{itemize}
 
+
+\section{Besonderheiten der Luftfahrt für KI}\label{sec:ki-besonderheiten}
+
+\subsection{Datenherausforderungen}\label{subsec:data-challenges}
+Die Luftfahrt ist geprägt von seltenen Ereignissen und unausgewogenen Klassen:
+\begin{itemize}
+  \item \textbf{Seltene kritische Situationen} (z.\,B.\ Near-Miss),
+  \item \textbf{starke Größen-/Signaturunterschiede} (z.\,B.\ Airbus~A380 vs.\ Vogel),
+  \item \textbf{große Geschwindigkeitsvariationen} (Schweben bis Überschall).
+\end{itemize}
+Seltene Ereignisse erschweren das Training (Klassenimbalance, Overfitting-Risiko); hohe intra-/interklassen-Variabilität erschwert Generalisierung.
+Das ist \emph{assurance-relevant}, weil Evidenz segmentiert (ODD-Schnitte) geführt werden muss.
+
+\subsection{Hardware}\label{subsec:hardware}
+Je nach Ansatz sind die Anforderungen höher als bei klassischen Verfahren (mehrere CPU-Kerne, ggf.\ GPU/Accelerator).
+Solche Komponenten unterliegen Zulassungsanforderungen; verfügbare, qualifizierte Hardware kann den Integrationspfad (Frontloading vs.\ Inline)
+und die Latenzbudgets maßgeblich bestimmen.
+
+
+\section{Chancen und Risiken (Radar/Objektklassifizierung)}\label{sec:ki-chancen-risiken}
+KI kann Funktionen und Abläufe ergänzen oder verbessern; zugleich entstehen neue Risiken und Herausforderungen:
+
+\begin{table}[h]
+\centering
+\caption{Chancen vs.\ Risiken/Herausforderungen (Radar/Objektklassifizierung)}
+\begin{tabular}{p{0.43\textwidth} p{0.50\textwidth}}
+\toprule
+\textbf{Chancen} & \textbf{Risiken und Herausforderungen} \\
+\midrule
+Bessere Trennung Ziel/Clutter & Scheinsicherheit bei Regen-/See-Clutter (fehlkalibrierte Konfidenzen) \\[0.3em]
+Frühe Erkennung (z.\,B.\ UAS) & Verpasste Gefahrenklasse (erhöhte False-Negative-Rate) \\[0.3em]
+Robustere Sensorfusion & Fehlerfortpflanzung über Sensorkanäle (Kohärenz, Unsicherheitsbehandlung) \\[0.3em]
+Anpassbarkeit via Re-Training (ohne Pipeline-Neuentwurf) & Erneuter Freigabe-/Zulassungsbedarf, Daten-Drift im Betrieb \\[0.3em]
+Erkennung neuer Muster & Abhängigkeit von Datenqualität/-repräsentativität \\[0.3em]
+Entlastung von Personal & Automation-Bias / Fehlinterpretation von Konfidenzen \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 % ----------------------------------------------------
 \section{Praxisbeobachtungen (abstrahiert)}\label{sec:praxis}
 \begin{table}[h]
@@ -138,3 +169,10 @@ Aus dem Überblick ergeben sich für Kap.~\ref{sec:anforderungen} folgende Leitl
 Im nächsten Kapitel (\ref{sec:anforderungen}) werden Szenarien konkretisiert, Anforderungsfelder präzisiert
 und mit Erwartungen aus Standards/Leitlinien verknüpft, um sie anschließend (u.\,a.\ entlang ISO/PAS~8800)
 systematisch auf Abdeckung und Lücken zu prüfen.
+
+
+\section{Zwischenfazit}\label{sec:ki-zwischenfazit}
+KI ist in der Luftfahrt vielversprechend, aber ihre Einführung ist primär ein \emph{Assurance-Problem}, nicht nur ein Trainingsproblem.
+Der Maßstab verschiebt sich von „hoher Genauigkeit“ hin zu „\emph{sicher genug}“: Entscheidend sind klare Einsatzgrenzen (ODD),
+segmentierte Evidenzen (Leistung \emph{und} Kalibrierung), robuste Nachweise unter Störung sowie geprüfte Degradationspfade.
+Diese Beobachtungen leiten direkt zu den \emph{Anforderungen und Szenarien} über.

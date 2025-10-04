@@ -1,94 +1,6 @@
 \part{Theoretische und technische Grundlagen}
 \chapterimage{Bilder_und_Co/part_2_theoretische_und_technische_grundlagen.jpg} % Chapter heading image
 %----------------------------------------------------------------------------------------
-\begin{comment}
-
-\chapter{KI in der Luftfahrt}
-\section{Potential} 
-Die Luftfahrt ist eine sicherheitskritische Domäne mit sehr dynamischen und komplexen Bedingungen. 
-Klassische Verfahren stoßen dabei an ihre Grenzen:
-\begin{itemize}
-  \item Begrenzte skalierung bei wachsenden Datenmengen moderner Sensorik.
-  \item Unzureichende Abdeckung schwer modellierbarer nichtlinearer Bedingungen.
-  \item Hoher Aufwand bei der Anpassung an neue oder veränderte Umgebungen und Szenarien.
-\end{itemize}
-KI adressiert diese Schwächen, indem sie Muster in hochdimensionalen Daten lernt. Und somit die 
-Datenverarbeitungssoftware keinen Bottleneck mehr dastellt bei großen Datenmengen oder komplexen Daten.
-
-Ein Beispiel ist, dass KI auch im Clutter Muster erkennen kann. Clutter wird bei klassischen Methoden 
-unterdrückt und kann somit erst später Objekte erkennen.
-
-\section{Usecases}
-KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendung – von Sensorik und Bordfunktionen 
-über den Flugbetrieb bis zum Luftraummanagement. Nach einer Studie aus ML meets aerospace, sind die meisten 
-veröffentlichten Paper bezüglich KI in der Luftfahrt folgenden Vier Themen zuzuordnen:
-
-\subsection{Vorhersagende Instandhaltung; 34\%}
-Nutzt Daten von Flugzeugsensoren, um potenzielle Ausfälle vorherzusagen. 
-Dadurch wird die Zuverlässigkeit und Sicherheit erhöht und gleichzeitig Wartungskosten sowie Ausfallzeiten reduziert.
-\subsection{Luftverkehrsmanagement; 4\%}
-Steuerung der Flugzeugbewegungen in der Luft und am Boden, um einen sicheren und effizienten Verkehrsfluss zu gewährleisten. 
-Beteiligt sind Fluglotsen, Piloten, Flughäfen und verschiedene Technologien.
-\subsection{Flugmanagement und -betrieb; 39\%}
-Umfasst Planung, Durchführung und Überwachung der Flugphasen, einschließlich Routenplanung, Treibstoffmanagement, 
-Navigation und Kommunikation mit der Flugsicherung. Ziel ist die Optimierung von Flügen, die Erhöhung der Sicherheit 
-und die Reduktion von Betriebskosten.
-\subsection{Sicherheit und Überwachung; 23\%}
-Luft- und Raumfahrtsysteme sind stark auf Netzwerke und Software angewiesen und dadurch anfällig für Cyberangriffe und Sicherheitsverletzungen. 
-Maschinelles Lernen erhöht die Sicherheit durch fortschrittliche Erkennungs-, Präventions- und Reaktionsmechanismen.
-
-\section{Besonderheiten der Luftfahrt für KI}
-
-\subsection{Datenherausforderungen}
-Luftfahrt leidet unter seltenen Ereignissen und unausgewogenen Klassen. Beispiele sind:
-\begin{itemize}
-  \item Selten auftretende kritische Near-Miss-Situations
-  \item Gewichts- und Größenunterschiede: z.B. ein Airbus A380 im Vergleich zu einer Taube
-  \item Geschwindigkeitsunterschiede: z.B. ein in der Luft stehender Helikopter oder ein Jet mit Überschallgeschwindigkeit
-\end{itemize}
-Seltene Ereignisse erschweren das Trainieren von KIs und begünstigen Overfitting. Große Unterschiede in den Daten erschwerden 
-das Generalisieren und können die Performance einschränken.
-\subsection{Hardware}
-Abhängig von der KI kann die Anforderung an die Hardware deutlich höher sein im Vergleich zu klasssischen Methoden.
-Um die gewünschte Funktion der KI erreichen zu können, können mehrere CPU Kerne oder gar eine GPU notwendig sein. 
-Diese Komponenten benötigen ebenfalls Zulassungen für den Betrieb in einem Flugzeug, was bisher noch sehr eingeschränkt ist.
-
-\section{Chance und Risiken}
-KI bietet einige Möglichkeiten Funktionen und Abläufe zu Ergänzen oder Verbessern. Sie bringt aber 
-auch Risiken und Herausforderungen mit sich. Ein paaar wichtige im Bezug auf Radar und Objektklassifizierung sind:
-
-\begin{tabular}{p{0.4\textwidth} p{0.55\textwidth}}
-\textbf{Chancen} & \textbf{Risiken und Herausforderungen} \\ \hline
-Bessere Trennung Ziel/Clutter & Falsche Sicherheit bei Regen- oder See-Clutter \\[0.5em]
-
-Frühe Erkennung (z.B. UAS) & Verpasste Gefahrenklasse (erhöhte False-Negative-Rate) \\[0.5em]
-
-Sensorfusion robust & Fehlerfortpflanzung über mehrere Sensorkanäle \\[0.5em]
-
-Anpassbarkeit durch Re-Training ohne Pipeline Neuentwicklung & Erneuter Zulassungsbedarf, Daten-Drift während des Betriebs \\[0.5em]
-
-Neue Muster erkennen & Abhängigkeit von Daten\\[0.5em]
-
-Entlastung von Personal & Automation-Bias\\
-\end{tabular}
-
-\section{Zwischenfazit}
-KI ist in der Luftfahrt vielversprechend, aber ihre Einführung ist ein Assurance-Problem, nicht nur ein Trainingsproblem. 
-Gleichzeitig verschiebt sich der Maßstab von „hoher Genauigkeit“ zu „sicher genug“.
-\end{comment}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \chapter{Künstliche Intelligenz und AI Safety}\label{sec:grundlagen-ki}
 Dieses Kapitel legt die begriffliche und methodische Basis für die spätere Einordnung der Sicherheit von KI im Radar-Kontext. Zunächst werden zentrale KI-Konzepte skizziert, anschließend Prinzipien der Sicherheitsargumentation (Assurance/Nachweisführung) erläutert und gegenüber \emph{Security} sowie \emph{Zuverlässigkeit/Robustheit} abgegrenzt. Abschließend werden Kernelemente der KI-Sicherheit verdichtet, die später als Anforderungsfelder in der Coverage-Analyse dienen.
@@ -969,6 +881,13 @@ Einstufung niedriger ausfallen; bei automatischer Wirkung oder geringer Fehlerto
 
 \subsection{Brücke zu KI/ML}\label{sec:bridge-ml}
 KI zeigt probabilistisches Verhalten und verlangt zusätzliche Evidenz (ODD/Annahmen, Daten-/Label-Governance, Unsicherheit/Kalibrierung, Toolchain-Assurance, Monitoring/Drift/Änderungsmanagement). In der Luftfahrt existiert derzeit kein direktes KI-Normenpendant; Erwartungen werden über Anforderungen/Prozesse adressiert. Externe Orientierung (z.\,B.\ ISO/PAS 8800) kann helfen, ersetzt aber keine luftfahrtspezifische Bewertung.
+
+\paragraph{SOTIF-Gedanke (ISO 21448).}
+ISO~21448 fokussiert Risiken aus der \emph{beabsichtigten Funktion} – also unsichere oder unzureichende Leistung
+\emph{ohne} vorliegenden Defekt/Fehler der Komponenten. Typische Ursachen sind unvollständige ODD-Abdeckung,
+mehrdeutige Umgebungen oder nicht antizipierte Szenarien. Für KI/Wahrnehmung bedeutet das: Sicherheit verlangt
+Evidenz über \emph{Leistungsgrenzen} und \emph{Kontexte}, nicht nur über Fehlerfreiheit der Teile.
+\parencite{iso-21448-sotif}
 
 
 

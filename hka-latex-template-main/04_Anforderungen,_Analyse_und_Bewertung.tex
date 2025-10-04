@@ -95,6 +95,20 @@ Alle Leistungs-, Unsicherheits- und Freigabekriterien sind entlang der in Kapite
 \end{enumerate}
 
 \section{Referenzierung auf Standards und Leitlinien}\label{sec:ref-standards}
+\noindent
+\textbf{Einordnung.} ISO/PAS~8800 adressiert weitgehend dieselben \emph{Assurance-Bausteine},
+wie sie im \emph{EASA AI Concept Paper, Issue~2} gefordert werden — insbesondere ODD/Annahmen,
+Daten-/Label-Governance, Robustheit/OOD, Unsicherheit/Kalibrierung, Monitoring/Degradation
+sowie Toolchain-/Traceability-Aspekte.\parencite{iso-pas-8800-2024,easa-ai-concept-issue2-2024}
+
+\noindent
+\textbf{Einordnung ISO/IEC TR 5469.}
+Die TR~5469 dient als domänenneutrale Brücke für \emph{Assurance} von KI und liefert eine anschlussfähige
+Argumentationsstruktur (Claims, Annahmen, Evidenz) neben DO\mbox{-}178C. Zugleich ist sie bewusst sehr high-level,
+ohne domänenspezifische Vorgaben, und daher nicht \emph{direkt} anwendbar ohne Konkretisierung im Luftfahrtkontext.
+\parencite{iso-iec-tr-5469-2024}
+
+
 Etablierte Standards und Leitlinien definieren Erwartungen an Prozesse, Nachweise und Evidenz. 
 Zur Einordnung werden typische Erwartungen den Anforderungsfeldern zugeordnet; dies bildet die Brücke zur Coverage-Analyse
 (u.\,a.\ entlang ISO/PAS~8800).
@@ -123,6 +137,160 @@ Frontloading & Audit-Trails; Evidenzüberführung in den Safety Case \\
 
 \noindent
 Konkrete Quellen (z.\,B.\ behördliche Konzepte, ISO/PAS~8800, DO-178C/DO-330 als Kontext) werden im Rahmen der Coverage-Analyse pro Feld präzisiert.
+
+
+% ===== Literatur-/Standards-Factsheets =====
+\subsection*{Factsheets: Leitlinien, Standards und ihre Rolle}
+Die nachfolgende Übersicht ordnet zentrale Referenzen ein. Ziel ist keine Bewertung der Wirksamkeit,
+sondern eine klare Rollenbeschreibung mit Stärken/Grenzen und der Nutzungsweise in dieser Arbeit.
+
+% Voraussetzung in der Präambel:
+% \usepackage{longtable}
+% \usepackage{booktabs}
+% \usepackage{array}
+
+\renewcommand{\arraystretch}{1.13} % optional, etwas mehr Zeilenhöhe
+
+\begin{longtable}{p{0.17\textwidth} p{0.23\textwidth} p{0.22\textwidth} p{0.22\textwidth} p{0.12\textwidth}}
+\caption{Factsheets: Leitlinien/Standards – Rolle, Stärken, Grenzen, Nutzung}\label{tab:factsheets}\\
+\toprule
+\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken} & \textbf{Grenzen} & \textbf{Nutzung hier} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken} & \textbf{Grenzen} & \textbf{Nutzung hier} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+\textbf{ISO/IEC TR 5469}\parencite{iso-iec-tr-5469-2024} &
+Domänenneutrale Brücke für \emph{Assurance} von KI; Prozess-Rahmen neben DO-178C &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Domain-agnostisch, anschlussfähig an verschiedene Industrien
+  \item Klare Argumentationsstruktur für Assurance-Evidenz
+  \item Terminologie/„Usage Level“ anschlussfähig zu ISO/PAS~8800
+\end{itemize} &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Sehr high-level; keine domänenspezifischen Vorgaben
+  \item Nicht direkt anwendbar ohne Domänenkonkretisierung
+\end{itemize} &
+Rahmen \& Vokabular für Coverage \\
+\midrule
+
+\textbf{ISO/PAS 8800}\parencite{iso-pas-8800-2024} &
+KI-bezogene Safety-Erwartungen (Automotive) als Orientierungsrahmen &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Konkrete Felder (ODD, Daten, Robustheit, Unsicherheit)
+  \item Gute Passung zu „Assurance statt Accuracy“
+\end{itemize} &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Automotive-Kontext; nicht luftfahrtspezifisch
+  \item Zulassungswege weichen vom Luftfahrtprozess ab
+\end{itemize} &
+Mapping auf Anforderungsfelder \\
+\midrule
+
+\textbf{EASA KI-Leitlinien/ Konzepte}\parencite{easa-ai-concept-issue2-2024} &
+Regulatorische Erwartungshaltung; konzeptionelle Leitplanken &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Behördliche Perspektive, Fokus auf Assurance
+  \item Klare Prinzipien (Transparenz, Nachweis, Monitoring)
+\end{itemize} &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item (Noch) keine normativen Detailanforderungen
+  \item Interpretationsspielräume bei Evidenzformen
+\end{itemize} &
+Regulatorischer Kontext \\
+\midrule
+
+\textbf{DO-178C / DO-330}\parencite{do-178c,do-330} &
+Software-Entwicklung/V\&V (DO-178C); Tool-Qualifizierung (DO-330) &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Etablierte Nachweiswege (DAL-abhängig)
+  \item Starke Prozess-/Traceability-Disziplin
+\end{itemize} &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Kein KI-spezifischer Fokus (Daten/Modelle/ODD fehlen)
+  \item Tool-Qualifizierung für ML-Stacks herausfordernd
+\end{itemize} &
+Querverweis Toolchain/Traceability \\
+\midrule
+
+\textbf{ISO 21448 (SOTIF)}\parencite{iso-21448-sotif} &
+Sicherheit der beabsichtigten Funktion (insb.\ Wahrnehmung) &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Fokus auf unzureichende Wahrnehmung/ODD
+  \item Szenario-/Abdeckungslogik anschlussfähig
+\end{itemize} &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Automotive; Luftfahrt-Transfer nicht 1:1
+  \item Keine luftfahrtspezifischen DAL/Prozesse
+\end{itemize} &
+ODD \& Szenariologie \\
+\midrule
+
+\textbf{DO-200B/ED-76}\parencite{do-200b-ed-76} &
+Datenqualität für Luftfahrt-Daten (Erzeugung/Verwaltung) &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Starker Fokus auf Daten-Assurance
+  \item Auditierbare Datenprozesse
+\end{itemize} &
+\begin{itemize}\setlength\itemsep{0.2em}
+  \item Nicht ML-spezifisch (Label-/Split-Themen fehlen)
+\end{itemize} &
+Daten-/Label-Governance \\
+
+\end{longtable}
+
+\section{Normen und Behörden — Ergänzungen zur Factsheet-Tabelle}
+
+\begin{itemize}
+  \item ISO 26262 — Road vehicles — Functional safety (Parts 1–12)\parencite{iso-26262}.\\
+  \ann{Prozessdisziplin der funktionalen Sicherheit (V-Modell, Unabhängigkeit in V\&V, ASIL-Einstufung).}
+      {Nützlich als Vergleichsfolie für Traceability, Rollen/Unabhängigkeit und Lebenszyklus — zur Einordnung von Toolchain- und Änderungsprozessen in dieser Arbeit.}
+      {Automotive-kontext; keine luftfahrtspezifischen DAL/DO-Bezüge und kein KI-spezifischer Fokus.}
+
+  \item ISO/IEC 22989 — Artificial Intelligence — Concepts and Terminology\parencite{iso-iec-22989}.\\
+  \ann{Einheitliche KI-Terminologie (Model, Dataset, Bias, Uncertainty etc.).}
+      {Sichert konsistente Begriffsverwendung über die Kapitel hinweg (z.\,B.\ ODD, Unsicherheit, Kalibrierung) und dient als Nachschlagewerk.}
+      {Reiner Definitionsstandard; keine Anforderungen/Nachweiswege.}
+
+  \item EASA AI Roadmap 2.0 (2023)\parencite{easa-ai-roadmap-2-2023}.\\
+  \ann{Strategische Einordnung: Stufenweiser Pfad zu vertrauenswürdiger KI (Level-1/2), Lebenszyklus-Blick, Forschungsbedarfe.}
+      {Rahmen, um die in dieser Arbeit verwendeten Assurance-Bausteine (ODD, Monitoring, Learning Assurance) regulatorisch zu verorten.}
+      {High-level; keine normativen Detailanforderungen oder DAL-Ableitung.}
+
+  \item EASA MLEAP Final Report (2024) — Machine Learning Application Approval\parencite{easa-mleap-final-2024}.\\
+  \ann{Konkrete Konzepte zu \emph{Learning Assurance}: Datenrepräsentativität, Generalisierung/Robustheit, OOD/Abstain — mit Luftfahrt-Use-Cases.}
+      {Behördennahe Referenz für Evidenzformen in dieser Arbeit (segmentiertes Reporting, Kalibrierung, ODD-Abdeckung, Degradationspfade).}
+      {Guidance/Empfehlung (nicht bindend); Fokus auf Level-1/2-Anwendungen.}
+\end{itemize}
+
+\section{Luftfahrt-Zertifizierung und Forschung — Ergänzungen}
+
+\begin{itemize}
+  \item \textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024)\parencite{ml-meets-aerospace-2024}.\\
+  \ann{Identifiziert Hürden: fehlende ODD-Disziplin, mangelnde OOD/Abstain-Strategien, Verifikationslücken.}
+      {Belegt die Verschiebung von „Accuracy“ zu \emph{Assurance} und stützt die Anforderungsfelder (ODD, Robustheit, Kalibrierung, Toolchain).}
+      {Übersichtsarbeit; keine radar-spezifischen Metriken oder Zulassungsfälle.}
+
+  \item \textit{Towards certifiable AI in aviation: landscape, challenges, and opportunities} (2024)\parencite{towards-certifiable-ai-aviation-2024}.\\
+  \ann{State-of-the-Art-Statement: Zertifizierungslandschaft, Evidenzbausteine, offene Punkte.}
+      {Praktische Checkliste/Strukturierungshilfe für Evidenzpakete und Coverage-Matrix in dieser Arbeit.}
+      {Vorwiegend konzeptionell; empirische Nachweise nur punktuell.}
+\end{itemize}
+
+\noindent
+Die hier ergänzten Quellen werden in der Coverage-Analyse dort referenziert, wo sie den Nachweisrahmen (Roadmap/MLEAP)
+oder die Begriffsschärfung (ISO/IEC~22989) konkret stützen.
+
 
 \section{Brücke zur Coverage-Analyse}\label{sec:anforderungen-bruecke}
 Die in diesem Kapitel definierten Anforderungsfelder und ihre typischen Erwartungen werden in Kapitel~\ref{chap:coverage}
