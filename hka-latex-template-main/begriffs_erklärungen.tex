@@ -1,0 +1,27 @@
+\thispagestyle{empty}
+% \renewcommand{\chapterheadstartvskip}{\vspace*{-\topskip}}
+% \renewcommand{\chapterheadendvskip}{%
+%   \vspace*{1\baselineskip plus .1\baselineskip minus .167\baselineskip}}
+
+\def\arp{\ac{ARP}\xspace}
+
+\chapter*{Begriffsverzeichnis}\label{cha:Begriffsverzeichnis}\index{Begriffsverzeichnis}
+
+\addcontentsline{toc}{chapter}{Begriffsverzeichnis}
+
+\begin{itemize}
+\item[Drift] Zeitliche Veränderung der Daten- oder Aufgabenbedingungen eines KI-Systems, sodass die im Training
+gelernten Annahmen im Betrieb nicht mehr gelten. Typen: \emph{Daten-/Covariate-Drift} (Eingangsverteilung ändert sich),
+\emph{Label-/Prior-Drift} (Klassenhäufigkeiten ändern sich) und \emph{Concept-Drift} (Abbildung Eingabe→Ausgabe ändert sich).
+Drift kann allmählich, sprunghaft oder saisonal auftreten. Erkennung z.\,B. über Fenstervergleiche und Maße wie
+PSI, KL-Divergenz, KS-Test oder Change-Point-Detection; Gegenmaßnahmen: Re-Kalibrierung, Re-Training,
+Abstain/OOD-Erkennung und Anpassung der ODD bzw.\ Freigabeschwellen.
+
+
+\end{itemize}
+
+
+
+
+
+\newpage

@@ -31,6 +31,10 @@ Maßnahmen lassen sich typischerweise in drei Kategorien gliedern:
 Akzeptanzkriterien definieren, wann ein Restrisiko als tragbar gilt. Die Erfüllung wird durch Analysen, Tests und Inspektionen nachgewiesen und über den gesamten Lebenszyklus dokumentiert (Traceability von Gefährdung $\rightarrow$ Schutzziel $\rightarrow$ Anforderung $\rightarrow$ Nachweis).
 Das ist essentiell für die Entwicklung von Komponenten und muss angemssen Dokumentiert werden in der Safety-Argumentation.
 
+%--------------------------------------------------------------
+---------------------------------------------------------------
+---------------------------------------------------------------
+
 \subsection{Safety-Argumentation (Assurance Case)}
 Ein \emph{Assurance Case} begründet systematisch und nachvollziehbar, dass ein System unter definierten Einsatzbedingungen \emph{sicher genug} ist. 
 Er verbindet nachvollziehbare Behauptungen (Claims/Goals) mit einer transparenten Argumentationsstruktur, dokumentierten Annahmen und geeigneten Nachweisen (Analysen, Tests).
@@ -773,35 +777,268 @@ Da der Fokus auf Safety liegt, wird Security hier nur abgegrenzt und nicht genau
 \textbf{Risikominderung.} Präventiv (robuste Architektur/Redundanz), detektierend (Überwachung/Plausibilisierung), korrektiv (Fallback/sichere Abschaltung).  
 \textbf{Akzeptanz und Nachweis.} Kriterien definieren, wann Restrisiko tragbar ist; Nachweise durch Tests/Analysen/Inspektionen \(\rightarrow\) dokumentierte Traceability (Gefährdung \(\rightarrow\) Ziel \(\rightarrow\) Anforderung \(\rightarrow\) Evidenz).
 
-\subsection{Assurance Case (Safety Case)}\label{sec:assurance-case}
-Strukturiert die Behauptung „\emph{sicher genug}“ unter spezifiziertem Kontext:  
-\emph{Claim} (was gilt), \emph{Begründung/Strategie} (warum plausibel), \emph{Kontext/Annahmen} (unter welchen Bedingungen), \emph{Evidenz} (wodurch belegt). Für KI gehören Daten-/Label-Governance, ODD-Abdeckung, Kalibrierung/Unsicherheit und Tool-/Prozessnachweise zur Evidenz.
+\subsection{Safety-Argumentation (Assurance Case)}\label{sec:assurance-case}
+Ein \emph{Assurance Case} begründet systematisch und nachvollziehbar, dass ein System unter definierten Einsatzbedingungen
+\emph{sicher genug} ist. Er verbindet klare Behauptungen (\emph{Claims/Goals}) mit einer transparenten Argumentationsstruktur,
+dokumentierten Annahmen und geeigneten Nachweisen (Analysen, Tests, Inspektionen).
 
-\subsection{Gefahrenanalyse (Auswahl)}\label{sec:hazard-analysis}
-\textbf{HAZID:} strukturierte Sammlung von Gefährdungen \(\rightarrow\) Hazard-Liste.  
-\textbf{FMEA/FMECA:} bottom-up Ausfallarten/Wirken/Entdeckung + Kritikalität.  
-\textbf{FTA:} top-down Ursachenbaum zum unerwünschten Top-Event.  
-\textbf{STPA:} systemtheoretisch; unsichere Steueraktionen, Kontext, HMI/Prozeduren.
+\paragraph{Zweck und Grundprinzip.}
+Ziel ist eine \emph{prüfbare} Argumentation, die vier Fragen beantwortet:
+\begin{itemize}
+  \item \emph{Was} wird behauptet? \hfill(\textbf{Claim/Goal})
+  \item \emph{Warum} ist das plausibel? \hfill(\textbf{Strategie/Begründung})
+  \item \emph{Unter welchen Bedingungen} gilt es? \hfill(\textbf{Kontext/Annahmen})
+  \item \emph{Wodurch} wird es gestützt? \hfill(\textbf{Evidenz})
+\end{itemize}
 
-\subsection{Architekturprinzipien}\label{sec:arch-principles}
-\textbf{Redundanz/Diversität:} Mehrkanaligkeit und dissimilare Ausprägungen zur Vermeidung gemeinsamer Fehler.  
-\textbf{Trennung/Partitionierung:} räumlich/zeitliche Isolation kritischer Anteile.  
-\textbf{Fail-Safe vs.\ Fail-Operational:} sicherer Zustand vs.\ Weiterbetrieb in degradierter Form.  
-\textbf{Deterministisches Zeitverhalten:} begrenzte Latenzen/Jitter, Prioritäten, Synchronisation.
+\paragraph{Evidenzbausteine im KI-Kontext.}
+Für KI-Komponenten umfasst die Evidenz u.\,a.\ (ohne Anspruch auf Vollständigkeit):
+\begin{itemize}
+  \item \textbf{ODD/Annahmen:} eindeutig definierte Gültigkeitsbereiche und Segmentierung.
+  \item \textbf{Daten-/Label-Governance:} Herkunft, Qualität, Versionierung, Freigaben.
+  \item \textbf{Leistung \& Unsicherheit:} segmentierte Metriken, Kalibrierung, Abstain/Unknown-Regeln.
+  \item \textbf{Robustheit/Shift:} Stress-/Szenariotests, Worst-Case-Kriterien.
+  \item \textbf{Toolchain/Traceability:} reproduzierbare Pipelines, Artefakt-IDs, Signaturen.
+  \item \textbf{Betrieb:} Monitoring, Drift-/OOD-Erkennung, Degradationspfade.
+\end{itemize}
 
-\subsection{Verifikation und Validierung}\label{sec:vv}
-\textbf{Verifikation:} korrekt gegen Spezifikation gebaut?  
-\textbf{Validierung:} das richtige Artefakt für die ODD?  
-Mehrstufig (Unit/Integration/System/Abnahme), mit klaren Kriterien, Unabhängigkeit und durchgängiger Traceability. \emph{Ohne dokumentierte Ergebnisse keine Evidenz.}
+\paragraph{Dokumentation und Pflege.}
+Der Assurance Case ist ein \emph{lebendes Dokument}: Er wird über den gesamten Lebenszyklus gepflegt und bei Änderungen
+(Daten, Modelle, Software, ODD) aktualisiert. Traceability verknüpft \emph{Gefährdung} $\rightarrow$ \emph{Schutzziel}
+$\rightarrow$ \emph{Anforderung} $\rightarrow$ \emph{Nachweis}.
 
-\subsection{Lebenszyklus und Human Factors}\label{sec:lifecycle-hf}
-Safety gilt über den gesamten Lebenszyklus (Änderungen, Updates, Betrieb, Reparaturen). Human Factors/HMI: Systeme müssen für den Menschen sicher bedienbar sein (Informationsdarstellung, Workload, Alarmierung, Training).
+\subsection{Gefahrenanalyse und Risikoermittlung}\label{sec:hazard-risk}
+Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen frühzeitig zu erkennen, ihr Risiko grob einzuordnen
+und wirksame Gegenmaßnahmen abzuleiten. Das Ergebnis ist eine priorisierte Liste von Risiken mit klaren
+Safety-Zielen, abgeleiteten Anforderungen und einem Plan für deren Nachweis.
 
-\section{Luftfahrt-spezifischer Rahmen}\label{sec:aviation-specific}
+\paragraph{Ablauf in Kurzform.}
+\begin{enumerate}
+  \item \textbf{Sammeln:} Mögliche Gefährdungen identifizieren (Technik, Mensch, Umfeld, Betrieb).
+  \item \textbf{Einordnen:} Schweregrad und Eintrittswahrscheinlichkeit bewerten (z.\,B.\ Risikomatrix).
+  \item \textbf{Maßnahmen ableiten:} präventiv, detektierend, korrektiv.
+  \item \textbf{Anforderungen festlegen:} messbar, überprüfbar, rückverfolgbar.
+  \item \textbf{Pflegen:} regelmäßig aktualisieren (Änderungen, Betriebserfahrungen, Updates).
+\end{enumerate}
+
+\paragraph{Methoden (Auswahl).}
+\begin{itemize}
+  \item \textbf{Hazard Identification (HAZID):} strukturierte Sammlung von Gefährdungen per Workshops, Checklisten
+        und Erfahrungswissen. Ergebnis: Hazard-Liste mit Ursachen, Wirkungen und Annahmen.
+  \item \textbf{FMEA/FMECA:} \emph{Bottom-up} auf Komponenten- oder Funktionsebene: Welche Ausfallarten gibt es,
+        was passiert dann, wie wird es entdeckt? FMECA ergänzt eine Kritikalitätsbewertung zur Priorisierung.
+  \item \textbf{Fault Tree Analysis (FTA):} \emph{Top-down} vom unerwünschten Ereignis (z.\,B.\ Verlust der Warnfunktion)
+        zu seinen Ursachen; geeignet, Ketten und Wechselwirkungen sichtbar zu machen.
+  \item \textbf{STPA:} systemtheoretischer Ansatz: Welche unsicheren Steueraktionen und Rahmenbedingungen führen
+        zu Gefährdungen – einschließlich Software, HMI und Prozeduren (nicht nur Hardware).
+\end{itemize}
+
+\paragraph{Leitprinzipien.}
+\begin{itemize}
+  \item \textbf{Kontextsensitiv:} Bewertung immer im vorgesehenen Einsatzkontext; Annahmen explizit dokumentieren.
+  \item \textbf{Evidenzorientiert:} Ergebnisse müssen in überprüfbare Anforderungen und Nachweise übersetzt werden.
+  \item \textbf{Lebendes Artefakt:} Gefahrenliste, Ziele und Maßnahmen werden über den Lebenszyklus fortgeschrieben.
+\end{itemize}
+
+
+\subsection{Architekturprinzipien der funktionalen Sicherheit}\label{sec:arch-fusa}
+Ziel dieser Prinzipien ist es, Risiken durch die Systemarchitektur zu senken: Fehler sollen gar nicht erst wirken,
+früh erkannt oder sicher beherrscht werden. Im Fokus stehen klare Strukturen, vorhersehbares Verhalten und
+kontrollierte Degradation statt Überraschungen.
+
+\paragraph{Redundanz und Diversität/Dissimilarität}
+\textbf{Redundanz} bedeutet, kritische Funktionen mehrfach vorzuhalten, sodass beim Ausfall einer Instanz eine andere übernimmt.
+\textbf{Diversität/Dissimilarität} ergänzt dies durch bewusst unterschiedliche Ausprägungen (z.\,B.\ verschiedene Hardware/Software
+oder unterschiedliche Algorithmen), damit ein gemeinsamer Fehler nicht alle Kanäle gleichzeitig trifft.\\
+\emph{Beispiel:} Zwei unabhängige Signalverarbeitungspfade; einer nutzt ein klassisches Verfahren, der andere ein ML-basiertes Verfahren.
+
+\paragraph{Trennung/Partitionierung}
+Trennung verhindert Fehlerfortpflanzung: sicherheitskritische Anteile laufen räumlich und zeitlich isoliert von weniger kritischen Funktionen.
+Partitionierung (z.\,B.\ per Betriebssystem mit Zeit-/Speichertrennung) stellt sicher, dass ein Fehler in einer Partition keine andere beeinträchtigt.\\
+\emph{Beispiel:} Klassifikations-KI in einer strikt begrenzten Partition; Kerndetektion, HMI und Logging in getrennten Partitionen.
+
+\paragraph{Fail-Safe vs.\ Fail-Operational}
+\textbf{Fail-Safe} bedeutet, bei einem Fehler in einen definiert sicheren Zustand zu wechseln (z.\,B.\ Abschalten einer Funktion,
+klare Warnung, konservatives Verhalten). \textbf{Fail-Operational} bedeutet, trotz eines Fehlers die Funktion weiter bereitzustellen – ggf.\ in
+degradiertem Modus –, weil ein Abbruch riskanter wäre.\\
+\emph{Beispiel:} Bei Sensorausfall Umschalten auf redundanten Kanal (fail-operational); bei inkonsistenten Daten Anzeige eines geprüften Minimalbildes mit Warnhinweis (fail-safe).
+
+\paragraph{Deterministisches Zeitverhalten und Kommunikation}
+Kommunikation und Zeitverhalten müssen vorhersagbar sein: feste oder begrenzte Latenzen, kontrollierter Jitter, klare Prioritäten
+und synchronisierte Uhren. So lassen sich Worst-Case-Reaktionszeiten planen und nachweisen.\\
+\emph{Beispiel:} Zeitgesteuerte Übertragung sicherheitskritischer Updates mit garantierter maximaler Verzögerung; priorisierte Bus-Slots.
+
+\paragraph{Fehlererkennung und Plausibilisierung}
+Frühe Erkennung reduziert Folgeschäden: kontinuierliche Plausibilitätsprüfungen, Bereichs-/Kohärenzchecks und Quervergleiche
+zwischen Kanälen detektieren inkonsistentes Verhalten.\\
+\emph{Beispiel:} Cross-Checks zwischen Track-Qualität, Konfidenzmeldungen und OOD-Indikatoren; Alarm bei widersprüchlichen Signalen.
+
+\paragraph{Degradation und Fallback-Strategien}
+Degradationspfade werden \emph{vorab} definiert, getestet und dokumentiert: Welche Teilfunktion wird in welchem Fehlerfall
+weitergeführt, welche wird abgeschaltet, welche Warnung wird ausgegeben?\\
+\emph{Beispiel:} Bei erhöhter Unsicherheit Umschalten auf konservative Schwellen und „Unknown/Abstain“ statt erzwungener Klassifikation.
+
+\paragraph{Health Monitoring und Watchdogs}
+Laufzeitüberwachung (Alive-/Timing-Monitoring, Ressourcenüberwachung) erkennt hängende oder aus dem Ruder laufende Komponenten frühzeitig.
+Watchdogs erzwingen definierte Wiederanläufe oder Degradationspfade, wenn Zustände verletzt werden.\\
+\emph{Beispiel:} Watchdog-Reset des Klassifikationsprozesses bei Zeitüberschreitung; Eskalation auf Fallback-Darstellung.
+
+\paragraph{Schnittstellenklarheit und Datenqualität}
+Schnittstellen müssen eindeutig spezifiziert sein (Formate, Einheiten, Latenzbudgets, Qualitätsflags).
+Eingehende Daten werden validiert; Qualitätskennzahlen (z.\,B.\ Konfidenz, Kalibrierungsstatus, OOD-Flags) werden mitgeführt und ausgewertet.\\
+\emph{Beispiel:} Weitergabe von Top-$k$-Hypothesen mit Konfidenz und „Unknown“-Kennzeichen statt nur einer Klasse.
+
+\paragraph{Sensorfusion und Kanalkohärenz}
+Fusion mehrerer Informationsquellen erhöht Robustheit – vorausgesetzt, die Fusion behandelt Unsicherheiten explizit
+und toleriert widersprüchliche Eingänge.\\
+\emph{Beispiel:} Fusion von Detektions- und Klassifikationspfad mit Unsicherheitsgewichten; Absenken des Einflusses unkalibrierter Quellen.
+
+\paragraph{Konfigurations- und Änderungsdisziplin}
+Architekturprinzipien wirken nur, wenn Konfigurationen kontrolliert sind und Änderungen nachvollziehbar freigegeben werden.
+Versionen, Abhängigkeiten und Artefakte müssen eindeutig identifizierbar sein.\\
+\emph{Beispiel:} Signierte Modelle und Datenstände; fixe Build-Umgebungen; dokumentierte Regressionstests vor Freigabe.
+
+\medskip
+\noindent
+Diese Architekturprinzipien schaffen die Grundlage, Fehlerwirkungen zu begrenzen, Laufzeitverhalten vorhersehbar zu halten
+und im Fehlerfall kontrolliert zu degradieren. Sie unterstützen somit die Ableitung prüfbarer Anforderungen und die Erstellung
+belastbarer Nachweise entlang des gesamten Lebenszyklus.
+
+
+\subsection{Verifikation und Validierung (V\&V)}\label{sec:vv}
+Ziel von V\&V ist es nachzuweisen, dass die spezifizierten Anforderungen korrekt umgesetzt sind (\emph{Verifikation})
+und dass das System im vorgesehenen Einsatz \emph{das Richtige} tut (\emph{Validierung}).
+
+\paragraph{Grundprinzip.}
+\textbf{Verifikation:} „Haben wir das Produkt \emph{richtig} gebaut?“ \quad
+\textbf{Validierung:} „Haben wir das \emph{richtige} Produkt gebaut?“
+Beide Perspektiven werden geplant, unabhängig überprüft und nachvollziehbar dokumentiert.
+
+\paragraph{Ebenen und Artefakte.}
+V\&V erfolgt mehrstufig mit klaren Akzeptanzkriterien:
+\begin{itemize}
+  \item \textbf{Unit-/Modultests:} Schnittstellen, Grenzwerte, Fehlermodi einzelner Komponenten.
+  \item \textbf{Integrationstests:} Zusammenspiel von Komponenten, Protokolle, Zeitverhalten.
+  \item \textbf{Systemtests:} End-to-End-Funktion, Performance, Ressourcen, Robustheit.
+  \item \textbf{Abnahmetests:} formale Nachweise gegen freigegebene Anforderungen.
+\end{itemize}
+Ergebnisse sind prüfbar abzulegen (Protokolle, Logs, Messdaten, Testfälle, Konfigurationen).
+
+\paragraph{Testentwurf und Abdeckung.}
+Tests müssen aus Anforderungen abgeleitet und messbar sein:
+\begin{itemize}
+  \item \textbf{Ableitung:} Jeder Testfall referenziert die zugehörige Anforderung und das erwartete Ergebnis.
+  \item \textbf{Abdeckung:} funktional (Anforderungsabdeckung), strukturell (Code/Model-Coverage, wo sinnvoll),
+        szenariobasiert (repräsentative und Rand-/Störfälle).
+  \item \textbf{Kriterien:} vorab definierte Pass/Fail-Regeln, Toleranzen, Unsicherheitsbänder.
+\end{itemize}
+
+\paragraph{Unabhängigkeit und Reproduzierbarkeit.}
+Unabhängige Reviews und reproduzierbare Umgebungen erhöhen die Beweiskraft:
+\begin{itemize}
+  \item \textbf{Rollen-Trennung:} Entwicklung vs.\ unabhängige Verifikation/Review.
+  \item \textbf{Reproduzierbarkeit:} feste Seeds/Versionen, deterministische Builds, dokumentierte Laufzeitumgebung.
+  \item \textbf{Artefakt-Integrität:} signierte Modelle/Datenstände, unveränderliche Test-Logs.
+\end{itemize}
+
+\paragraph{KI-spezifische V\&V-Aspekte.}
+Für KI-Komponenten sind zusätzliche Nachweise zweckmäßig:
+\begin{itemize}
+  \item \textbf{ODD-Segmentierung:} Leistung und Fehlerraten je Segment (z.\,B.\ SNR, Entfernung, Wetter, Clutter) statt Mittelwerten.
+  \item \textbf{Kalibrierung:} Konfidenzmetriken (z.\,B.\ ECE, Brier, NLL) und dokumentierte Schwellen/Abstain-Regeln.
+  \item \textbf{Robustheit/Shift:} Stress-/Holdout-Tests (RFI/Clutter/Noise, Domänenwechsel), Degradationskurven und Worst-Case-Kriterien.
+  \item \textbf{OOD/Unknown:} Nachweise zur Erkennung und konservativen Behandlung unbekannter Klassen/Situationen.
+  \item \textbf{Erklärbarkeit (XAI):} reproduzierbare, zweckgebundene Reports als Audit-Hilfe (keine Ersatz-Evidenz).
+\end{itemize}
+
+\paragraph{Daten- und Testdisziplin.}
+Testdaten sind mindestens so kontrolliert wie Code:
+\begin{itemize}
+  \item \textbf{Daten-Governance:} Herkunft, Freigaben, Versionierung, Label-Qualität (z.\,B.\ Inter-Annotator-Agreement).
+  \item \textbf{Split-Hygiene:} strikte Trennung von Train/Valid/Test; keine Leaks; dokumentierte Sampling-Strategie.
+  \item \textbf{Golden Sets:} eingefrorene Referenzdatensätze für Regressionstests.
+\end{itemize}
+
+\paragraph{Defekt- und Änderungsmanagement.}
+Auffälligkeiten werden erfasst, analysiert, behoben und regressionsgetestet:
+\begin{itemize}
+  \item \textbf{Befundkette:} Beobachtung $\rightarrow$ Analyse $\rightarrow$ Abstellmaßnahme $\rightarrow$ Verifikation.
+  \item \textbf{Änderungstrigger:} Daten-/Verteilungs-Shift, Performance-Drops, sicherheitsrelevante Befunde.
+  \item \textbf{Freigabe:} dokumentierte Entscheidung, aktualisierte Evidenz/Artefakte, Regressionsergebnisse.
+\end{itemize}
+
+\paragraph{Schlussfolgerung.}
+V\&V liefert prüfbare Evidenz entlang des Lebenszyklus. Für KI ist zentrale Voraussetzung, dass Tests \emph{segmentiert},
+\emph{reproduzierbar} und \emph{evidenzorientiert} gestaltet sind und Änderungen kontrolliert freigegeben werden.
+
+\subsection{Lebenszyklus}\label{sec:lifecycle}
+Safety ist kein einmaliger Zustand, sondern eine \emph{Eigenschaft über den gesamten Lebenszyklus}. 
+Änderungen an Anforderungen, Daten, Software/Modellen, Hardware oder Betriebskontext wirken direkt auf die Sicherheit 
+und müssen kontrolliert behandelt werden.
+
+\paragraph{Phasenüberblick.}
+\begin{itemize}
+  \item \textbf{Konzept \& Requirements:} Zweck, ODD, Schutzziele, Annahmen, Schnittstellen, erste Hazard-/Risikobetrachtung.
+  \item \textbf{Architektur \& Design:} Sicherheitsprinzipien (Redundanz, Trennung, Degradation), Daten-/Toolchain-Governance.
+  \item \textbf{Implementierung:} Coding-/Model-Standards, reproduzierbare Pipelines, deterministische Builds.
+  \item \textbf{V\&V \& Zulassung:} szenariobasierte Tests, Evidenzpakete, unabhängige Reviews, formale Freigaben.
+  \item \textbf{Betrieb \& Instandhaltung:} Monitoring, Ereignis-/Fehlermanagement, Wartung, Telemetrieauswertung.
+  \item \textbf{Änderungen \& Stilllegung:} kontrollierte Updates, Obsoleszenzmanagement, sichere Außerbetriebnahme.
+\end{itemize}
+
+\paragraph{Änderungs- und Konfigurationsmanagement.}
+\begin{itemize}
+  \item \textbf{Versionierung:} eindeutige Identitäten für Anforderungen, Datenstände, Modelle, Binärartefakte und Konfigurationen.
+  \item \textbf{Kontrollpunkte:} formale Änderungsanträge, Risiko-/Auswirkungsanalyse, definierter Regressionstest-Scope.
+  \item \textbf{Freigabe:} dokumentierte Entscheidung, aktualisierte Evidenz (inkl.\ Safety-Argumentation), rollierende Rückverfolgbarkeit.
+\end{itemize}
+
+\paragraph{Betriebliches Monitoring und Ereignismanagement.}
+\begin{itemize}
+  \item \textbf{Telemetrie-Set:} Laufzeitmetriken zu Leistung, Kalibrierung, OOD-/Drift-Rate, Ressourcen, Latenzen.
+  \item \textbf{Erkennung:} Detektoren für Daten-/Kontext-Shift, Konsistenz- und Plausibilitätsverletzungen, Watchdogs.
+  \item \textbf{Eskalation/Degradation:} definierte Alarme, Fallback-/Degradationspfade, HMI-Hinweise, sichere Recovery.
+  \item \textbf{Incident-Handling:} Erfassung, Analyse, Korrekturmaßnahme, Nachverifikation, Lessons Learned.
+\end{itemize}
+
+\paragraph{Daten- und Modellpflege (KI-spezifisch).}
+\begin{itemize}
+  \item \textbf{Daten-Governance:} Herkunft, Freigaben, Versionierung, Label-Qualität (z.\,B.\ Inter-Annotator-Agreement), Audit-Trails.
+  \item \textbf{Drift-Response:} klare Trigger für Neu-Training/Neu-Kalibrierung; reproduzierbare Pipelines, Golden Sets für Regression.
+  \item \textbf{Einsatzgrenzen:} Unknown/Abstain-Regeln, konservative Schwellen, ODD-Anpassung mit Re-Assessment.
+\end{itemize}
+
+\paragraph{Lieferkette und Obsoleszenz.}
+\begin{itemize}
+  \item \textbf{Supply Chain Integrity:} qualifizierte Tools/Komponenten, signierte Artefakte, Abhängigkeitskontrolle.
+  \item \textbf{Obsoleszenzmanagement:} Ersatzstrategien, Migrationspfade, Kompatibilitäts- und Rückwirkungsanalysen.
+\end{itemize}
+
+\paragraph{Dokumentation und Schulung.}
+\begin{itemize}
+  \item \textbf{Dokumentation:} konsistente Artefakte (Anforderungen, Architektur, Tests, Evidenzen, Betriebserfahrungen) als lebender Satz.
+  \item \textbf{Schulung/Training:} Rollen- und HMI-spezifische Trainings; Umgang mit Konfidenz, Unknown/Abstain und Alarmen.
+\end{itemize}
+
+\paragraph{Schlussfolgerung.}
+Ein wirksames Lebenszyklus-Management stellt sicher, dass \emph{Veränderungen} nicht zu verdeckten Sicherheitslücken führen.
+Kernbausteine sind kontrollierte Änderungen, reproduzierbare Evidenzketten, laufzeitnahes Monitoring und eine dokumentierte,
+geübte Degradations- und Incident-Response.
+
+\section{Luftfahrt-spezifische Sicherheit}\label{sec:aviation-specific}
+Der luftfahrtspezifische Rahmen definiert, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenzen akzeptiert werden
+und \emph{wer} Entscheidungen trifft. Ziel ist ein zulassungsfähiges System, das im Betrieb überwacht und über
+den Lebenszyklus sicher gehalten werden kann.
+
 \subsection{Regulatorischer Rahmen und Rollen}\label{sec:reg-frame}
-\textbf{Behörden} (z.\,B.\ EASA/FAA) setzen Regeln, definieren Zertifizierungsbasis, erteilen Zulassungen.  
-\textbf{Applicant/Hersteller} verantwortet Safety-Nachweis und vollständige Dokumentation.  
-Der Rahmen bestimmt, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenz akzeptiert wird und \emph{wer} freigibt.
+\textbf{Behörden} (z.\,B.\ EASA/FAA) setzen Regeln, definieren die Zertifizierungsbasis und erteilen Zulassungen.
+\textbf{Applicant/Hersteller} ist verantwortlich für Safety-Nachweise und vollständige, konsistente Dokumentation.
+Zentrale Elemente sind u.\,a.:
+\begin{itemize}
+  \item \textbf{Zertifizierungsbasis:} anwendbare Vorschriften, besondere Bedingungen, Auslegungsrichtlinien.
+  \item \textbf{Nachweisstrategie:} Kombination aus Analysen, Tests, Inspektionen und Inspektionen am Produkt.
+  \item \textbf{Konformitätsnachweis:} geprüfte Artefakte und Prüfberichte, die die Anforderungen abdecken.
+\end{itemize}
 
 \subsection{Standards/Prozesse (Überblick)}\label{sec:standards}
 \textbf{DO-178C} (Software; Evidenztiefe nach DAL), \textbf{DO-330} (Tool-Qualifizierung als Supplement), sowie DO-331…DO-333 (modellbasiert, objektorientiert, formal).  
@@ -809,7 +1046,7 @@ Der Rahmen bestimmt, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenz ak
 Diese Standards definieren akzeptierte Nachweiswege und die nötige Strenge – ohne sie gibt es keine Zulassungsfähigkeit und keinen verlässlichen Betrieb.
 
 \subsection{Development Assurance Levels (DAL)}\label{sec:dal}
-Schwere möglicher Fehlfunktionen \(\rightarrow\) Strenge von Entwicklung, Verifikation und Unabhängigkeit:
+Die Schwere möglicher Fehlfunktionen bestimmt die geforderte Strenge von Entwicklung, Verifikation und Unabhängigkeit:
 \begin{itemize}
   \item \textbf{DAL A} — katastrophal (z.\,B.\ Verlust des Flugzeugs/Leben)
   \item \textbf{DAL B} — hazardous/severe-major
@@ -817,6 +1054,9 @@ Schwere möglicher Fehlfunktionen \(\rightarrow\) Strenge von Entwicklung, Verif
   \item \textbf{DAL D} — minor
   \item \textbf{DAL E} — kein Safety-Einfluss
 \end{itemize}
+\textit{Einordnung:} Die konkrete DAL-Zuweisung ist systemspezifisch und erfolgt über die Hazard-/Risikobetrachtung.
+Wenn eine Funktion keinen unmittelbaren automatischen Einfluss ausübt und weitere Barrieren vorhanden sind, kann die
+Einstufung niedriger ausfallen; bei automatischer Wirkung oder geringer Fehlertoleranz sind strengere Stufen zu prüfen.
 \textit{Hinweis zur Klassifikation:} Ohne unmittelbare automatische Wirkung und mit vorgelagerten/parallel wirkenden Barrieren kann Objektklassifizierung \emph{typischerweise} im Bereich \textbf{DAL C} liegen; bei automatischer Wirkung ist mindestens \textbf{DAL B} zu prüfen. Konkrete Einordnung ist systemspezifisch.
 
 \subsection{Brücke zu KI/ML}\label{sec:bridge-ml}
