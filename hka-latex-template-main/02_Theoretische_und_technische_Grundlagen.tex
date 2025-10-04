@@ -3,128 +3,6 @@
 %----------------------------------------------------------------------------------------
 \begin{comment}
 
-\chapter{Sicherheit in der Luftfahrt}
-
-\section{Sicherheit – Grundlagen}
-
-\subsection{Risikobegriffe und Schutzziele}
-Risiko beschreibt die Kombination aus \emph{Schweregrad} einer möglichen Auswirkung und ihrer \emph{Eintrittswahrscheinlichkeit}. 
-Beide werden gemeinsam (z.\,B. in einer Risikomatrix) bewertet, um ein \emph{tolerierbares Restrisiko} festzulegen. 
-Ziel ist, Risiken durch geeignete Maßnahmen so weit zu mindern, dass sie akzeptabel sind (ALARP-Prinzip: as low as reasonably practicable).
-
-\paragraph{Schutzziele (Safety Goals).}
-Aus der Bewertung werden klare Schutzziele abgeleitet: Sie beschreiben, welche gefährlichen Zustände verhindert bzw.\ auf welche Weise sie beherrscht werden müssen (z.\,B.\ definierte Fallback-Zustände, Grenzen für Fehlalarme und Ausfälle).
-
-\paragraph{Abgeleitete Sicherheitsanforderungen.}
-Die Schutzziele werden in überprüfbare Anforderungen überführt (z.\,B.\ Reaktionszeiten, Verfügbarkeiten, Fehlertoleranz). 
-Diese Anforderungen sind rückverfolgbar zu den identifizierten Risiken und bilden die Grundlage für Verifikation und Validierung.
-
-\paragraph{Risikominderungsmaßnahmen.}
-Maßnahmen lassen sich typischerweise in drei Kategorien gliedern:
-\begin{itemize}
-  \item \textbf{Präventiv} (Fehler vermeiden): robuste Architektur, Redundanz, Partitionierung.
-  \item \textbf{Detektierend} (Fehler erkennen): Überwachung, Plausibilitätsprüfungen, Alarme.
-  \item \textbf{Korrektiv} (Fehler beherrschen): Fallbackmodus, sichere Abschaltung. 
-\end{itemize}
-
-\paragraph{Akzeptanzkriterien und Nachweis.}
-Akzeptanzkriterien definieren, wann ein Restrisiko als tragbar gilt. Die Erfüllung wird durch Analysen, Tests und Inspektionen nachgewiesen und über den gesamten Lebenszyklus dokumentiert (Traceability von Gefährdung $\rightarrow$ Schutzziel $\rightarrow$ Anforderung $\rightarrow$ Nachweis).
-Das ist essentiell für die Entwicklung von Komponenten und muss angemssen Dokumentiert werden in der Safety-Argumentation.
-
-%--------------------------------------------------------------
----------------------------------------------------------------
----------------------------------------------------------------
-
-\subsection{Safety-Argumentation (Assurance Case)}
-Ein \emph{Assurance Case} begründet systematisch und nachvollziehbar, dass ein System unter definierten Einsatzbedingungen \emph{sicher genug} ist. 
-Er verbindet nachvollziehbare Behauptungen (Claims/Goals) mit einer transparenten Argumentationsstruktur, dokumentierten Annahmen und geeigneten Nachweisen (Analysen, Tests).
-
-\paragraph{Zweck und Grundprinzip.}
-Ziel ist eine prüfbare Argumentation: 
-\begin{itemize}
-    \item \emph{Was} wird behauptet (Claim)
-    \item \emph{warum} ist das plausibel (Strategie/Begründung)
-    \item \emph{unter welchen Bedingungen} gilt es (Kontext/Annahmen)
-    \item \emph{wodurch} wird es gestützt (Evidenz)
-\end{itemize}
-Die Argumentation ist der Kern der Dokumentation und dient als Nachweis das etwas sicher genug ist.
-
-\subsection{Gefahrenanalyse und Risikoermittlung}
-Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen früh zu erkennen, ihr Risiko grob einzuordnen und wirksame Gegenmaßnahmen abzuleiten. Das Ergebnis ist eine priorisierte Liste von Risiken mit klaren Safety-Zielen und abgeleiteten Anforderungen – und ein Plan, wie diese nachgewiesen werden.
-
-\paragraph{Ablauf in Kurzform:}
-\begin{enumerate}
-  \item \textbf{Sammeln:} Mögliche Gefährdungen identifizieren (Technik, Mensch, Umfeld, Betrieb).
-  \item \textbf{Einordnen:} Schweregrad und Eintrittswahrscheinlichkeit bewerten (Risikomatrix).
-  \item \textbf{Maßnahmen ableiten:} Präventiv, detektierend, korrektiv.
-  \item \textbf{Anforderungen festlegen:} Messbar, überprüfbar, rückverfolgbar.
-  \item \textbf{Pflegen:} Über den Lebenszyklus regelmäßig aktualisieren.
-\end{enumerate}
-
-\paragraph{Methoden}
-\begin{itemize}
-  \item \textbf{Hazard Identification (HAZID):} Strukturierte Sammlung von Gefährdungen per Workshops, Checklisten und Erfahrungswissen. Ergebnis: Hazard-Liste mit Ursachen, Wirkungen und Annahmen.
-  \item \textbf{FMEA/FMECA:} \emph{Bottom-up} auf Komponenten- oder Funktionsebene: Welche Ausfallarten gibt es, was passiert dann, wie wird es entdeckt? FMECA ergänzt eine Kritikalitätsbewertung, um Prioritäten zu setzen.
-  \item \textbf{Fault Tree Analysis (FTA):} \emph{Top-down} vom unerwünschten Ereignis (z.\,B. Verlust der Warnfunktion) zu seinen Ursachen. Eignet sich, Ketten/Wechselwirkungen sichtbar zu machen.
-  \item \textbf{STPA:} Systemtheoretischer Ansatz: Welche \emph{unsicheren Steueraktionen} und Rahmenbedingungen führen zu Gefährdungen – inkl.\ Software, HMI und Prozeduren, nicht nur Hardware.
-\end{itemize}
-
-\subsection{Architekturprinzipien der funktionalen Sicherheit}
-Ziel dieser Prinzipien ist es, Risiken durch die Systemarchitektur zu senken: Fehler sollen gar nicht erst wirken, früh erkannt oder sicher beherrscht werden. Im Fokus stehen klare Strukturen, vorhersehbares Verhalten und beherrschte Degradation statt Überraschungen.
-
-\paragraph{Redundanz und Diversität/Dissimilarität}
-\textbf{Redundanz} bedeutet, kritische Funktionen mehrfach vorzuhalten (z.\,B.\ zwei unabhängige Empfangsketten oder Stromversorgungen), sodass beim Ausfall einer Instanz die andere übernimmt.
-\textbf{Diversität/Dissimilarität} ergänzt dies durch bewusst unterschiedliche Ausprägungen (z.\,B.\ verschiedene Hardware/Software oder unterschiedliche Algorithmen), damit ein gemeinsamer Fehler nicht alle Kanäle gleichzeitig trifft.
-\emph{Beispiel:} Zwei unabhängige Radarpfade, davon einer mit alternativer Signalverarbeitung.
-
-\paragraph{Trennung/Partitionierung}
-Trennung verhindert Fehlerfortpflanzung: sicherheitskritische Anteile laufen räumlich und zeitlich isoliert von weniger kritischen Funktionen. Partitionierung (z.\,B.\ per Betriebssystem mit Zeit-/Speichertrennung) stellt sicher, dass ein Fehler in einer Partition keine andere beeinträchtigt.
-\emph{Beispiel:} Klassifikations-KI in einer strikt begrenzten Partition; Kerndetektion und HMI getrennt.
-
-\paragraph{Fail-Safe vs.\ Fail-Operational}
-\textbf{Fail-Safe} bedeutet, bei einem Fehler in einen definiert sicheren Zustand zu wechseln (z.\,B.\ Abschalten einer Funktion, klare Warnung, konservatives Verhalten).
-\textbf{Fail-Operational} bedeutet, trotz eines Fehlers die Funktion weiter bereitzustellen – ggf.\ in degradiertem Modus –, weil ein Abbruch riskanter wäre.
-\emph{Beispiel:} Bei Sensorausfall Umschalten auf redundanten Kanal (fail-operational); bei inkonsistenten Daten Anzeige eines geprüften Minimalbildes mit Warnhinweis (fail-safe).
-
-\paragraph{Deterministische Kommunikation}
-Kommunikation und Zeitverhalten müssen vorhersagbar sein: feste oder begrenzte Latenzen, kontrollierter Jitter, klare Prioritäten und synchronisierte Uhren. So lassen sich Worst-Case-Reaktionszeiten planen und nachweisen.
-\emph{Beispiel:} Zeitgesteuerte Übertragung sicherheitskritischer Radar-Updates mit garantierter maximaler Verzögerung.
-
-\subsection{Verifikation und Validierung (V\&V)}
-Ziel von V\&V ist es nachzuweisen, dass die Anforderungen korrekt, vollständig und erfüllt sind – und dass das System im vorgesehenen Einsatz \emph{das Richtige} tut.
-\textbf{Verifikation} fragt: „Haben wir das Produkt richtig gebaut?“
-\textbf{Validierung} fragt: „Haben wir das richtige Produkt gebaut?“
-
-Getestet wird auf verschiedenen Ebenen: von Einheiten über Integration bis hin zu System- und Abnahme-Tests. 
-Dieses Schichtenprinzip prüft Schnittstellen und stellt das Zusammenspiel zwischen Komponent und Gesammsystem sicher. 
-Unabhängige Reviews erhöhen zudem die Beweiskraft, klare Kriterien machen Ergebnisse bewertbar, und Traceability verknüpft Anforderungen, Tests und Resultate. \\
-Wichtig ist: Belege zählen! Ohne dokumentierte Ergebnisse gibt es keinen Nachweis.
-
-
-\subsection{Lebenszyklus}
-Safety muss über den gesamten Lebenszyklus gewährleistet sein.\\
-Es genügt nicht, wenn die verbauten Komponenten zu Beginn sicher sind. Z.B. müssen Umgebungsveränderungen berücksichtigt werden 
-und gegebenenfalls Sofwareupdates oder Reparaturen eingeplant werden.
-
-
-
-
-\section{Luftfahrt-spezifische Sicherheit}
-
-Der Rahmen bestimmt, \emph{welche} Safety-Ziele gelten, \emph{welche Evidenzen} akzeptiert werden und \emph{wer} sie freigibt. 
-So wird aus Technik ein zulassungsfähiges, im Betrieb überwachtes und dauerhaft sicheres System.
-Regularien die erfüllt werden müssen um die benötigten Zertifikate zu erhalten sind in Normen wie z.B. DO 178C festgehlten.
-
-
-
-
-
-
-
-
-
-
-
 \chapter{KI in der Luftfahrt}
 \section{Potential} 
 Die Luftfahrt ist eine sicherheitskritische Domäne mit sehr dynamischen und komplexen Bedingungen. 
@@ -763,7 +641,11 @@ Leistungs-/Unsicherheitsmetriken, Toolchain-/Daten-Governance, Monitoring/Degrad
 \chapter{Sicherheit in der Luftfahrt}\label{sec:safety-aviation}
 
 \section{Sicherheit – Grundlagen}\label{sec:safety-basics}
-\textbf{Begriffsrahmen.} Sicherheit (\emph{Safety}) ist die Freiheit von unvertretbaren Risiken. Risiko ergibt sich aus \emph{Eintrittswahrscheinlichkeit} und \emph{Schadensschwere}; Ziel ist ein \emph{tolerierbares Restrisiko} (ALARP).
+\textbf{Begriffsrahmen.} Sicherheit (\emph{Safety}) ist die Freiheit von unvertretbaren Risiken. 
+Risiko beschreibt die Kombination aus \emph{Schweregrad} einer möglichen Auswirkung und ihrer \emph{Eintrittswahrscheinlichkeit}. 
+Ziel ist, Risiken durch geeignete Maßnahmen so weit zu mindern, dass sie akzeptabel sind, um ein \emph{tolerierbares Restrisiko} festzulegen 
+(ALARP-Prinzip: as low as reasonably practicable).
+
 
 \subsection{Safety vs.\ Security}\label{sec:safety-vs-security}
 \emph{Safety} = Schutz vor unbeabsichtigten Fehlern/Versagen;\\
@@ -771,11 +653,35 @@ Leistungs-/Unsicherheitsmetriken, Toolchain-/Daten-Governance, Monitoring/Degrad
 Security-Vorfälle können Safety-Ziele gefährden und müssen daher bei Anforderungen, Design, etc. berücksichtigt werden.
 Da der Fokus auf Safety liegt, wird Security hier nur abgegrenzt und nicht genauer durchleutet.
 
-\subsection{Von Gefährdung zu Nachweis}\label{sec:risk-to-proof}
-\textbf{Schutzziele (Safety Goals).} Aus Gefährdungen werden zu verhindernde gefährliche Zustände/effektive Barrieren abgeleitet.  
-\textbf{Abgeleitete Anforderungen.} Schutzziele werden in mess- und prüfbare Anforderungen überführt (Reaktionszeiten, Verfügbarkeit, Fehlertoleranz).  
-\textbf{Risikominderung.} Präventiv (robuste Architektur/Redundanz), detektierend (Überwachung/Plausibilisierung), korrektiv (Fallback/sichere Abschaltung).  
-\textbf{Akzeptanz und Nachweis.} Kriterien definieren, wann Restrisiko tragbar ist; Nachweise durch Tests/Analysen/Inspektionen \(\rightarrow\) dokumentierte Traceability (Gefährdung \(\rightarrow\) Ziel \(\rightarrow\) Anforderung \(\rightarrow\) Evidenz).
+\subsection{Von der Gefährdung zum Nachweis}\label{sec:from-hazard-to-evidence}
+
+\paragraph{Schutzziele (Safety Goals).}
+Aus der Risiko\-bewertung werden \emph{klare Schutzziele} abgeleitet. Sie legen fest,
+\emph{welche gefährlichen Zustände zu verhindern sind} bzw.\ \emph{wie sie beherrscht werden müssen}
+(z.\,B.\ definierte Fallback-Zustände, zulässige Grenzen für Fehlalarme und Ausfälle).
+
+\paragraph{Abgeleitete Anforderungen.}
+Die Schutzziele werden in \emph{mess- und prüfbare Anforderungen} überführt
+(z.\,B.\ Reaktionszeiten, Verfügbarkeit, Fehlertoleranz, Datenintegrität).
+Jede Anforderung ist eindeutig formuliert, testbar und rückverfolgbar. 
+Damit bilden sie die Grundlage für die Verifikation und Validierung.
+
+\paragraph{Risikominderung.}
+Maßnahmen werden so gewählt, dass sie Gefahrenszenarien \emph{vermeiden}, \emph{früh erkennen}
+oder \emph{sicher beherrschen}:
+\begin{itemize}
+  \item \textbf{Präventiv} – Fehler vermeiden: robuste Architektur, Diversität/Redundanz, Partitionierung, Eingangsvalidierung.
+  \item \textbf{Detektierend} – Fehler erkennen: Laufzeitüberwachung, Plausibilitäts- und Kohärenzprüfungen, Selbsttests, Alarme.
+  \item \textbf{Korrektiv} – Fehler beherrschen: sichere Degradation/Fallback, geordnete Abschaltung, Wiederanlauf unter Kontrolle.
+\end{itemize}
+
+\paragraph{Akzeptanz und Nachweis.}
+\emph{Akzeptanzkriterien} definieren, wann das Restrisiko tragbar ist.
+Die Erfüllung wird durch \emph{Analysen}, \emph{Tests} und \emph{Inspektionen} nachgewiesen und
+entlang einer konsistenten Kette dokumentiert:
+\[
+\text{Gefährdung} \;\rightarrow\; \text{Schutzziel} \;\rightarrow\; \text{Anforderung} \;\rightarrow\; \text{Evidenz}.
+\]
 
 \subsection{Safety-Argumentation (Assurance Case)}\label{sec:assurance-case}
 Ein \emph{Assurance Case} begründet systematisch und nachvollziehbar, dass ein System unter definierten Einsatzbedingungen
@@ -805,7 +711,8 @@ Für KI-Komponenten umfasst die Evidenz u.\,a.\ (ohne Anspruch auf Vollständigk
 \paragraph{Dokumentation und Pflege.}
 Der Assurance Case ist ein \emph{lebendes Dokument}: Er wird über den gesamten Lebenszyklus gepflegt und bei Änderungen
 (Daten, Modelle, Software, ODD) aktualisiert. Traceability verknüpft \emph{Gefährdung} $\rightarrow$ \emph{Schutzziel}
-$\rightarrow$ \emph{Anforderung} $\rightarrow$ \emph{Nachweis}.
+$\rightarrow$ \emph{Anforderung} $\rightarrow$ \emph{Nachweis}. Die Argumentation ist der Kern der Dokumentation und dient 
+als Nachweis das etwas sicher genug ist.
 
 \subsection{Gefahrenanalyse und Risikoermittlung}\label{sec:hazard-risk}
 Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen frühzeitig zu erkennen, ihr Risiko grob einzuordnen
@@ -970,6 +877,7 @@ Auffälligkeiten werden erfasst, analysiert, behoben und regressionsgetestet:
 \paragraph{Schlussfolgerung.}
 V\&V liefert prüfbare Evidenz entlang des Lebenszyklus. Für KI ist zentrale Voraussetzung, dass Tests \emph{segmentiert},
 \emph{reproduzierbar} und \emph{evidenzorientiert} gestaltet sind und Änderungen kontrolliert freigegeben werden.
+Wichtig ist: Belege zählen! Ohne dokumentierte Ergebnisse gibt es keinen Nachweis.
 
 \subsection{Lebenszyklus}\label{sec:lifecycle}
 Safety ist kein einmaliger Zustand, sondern eine \emph{Eigenschaft über den gesamten Lebenszyklus}. 
