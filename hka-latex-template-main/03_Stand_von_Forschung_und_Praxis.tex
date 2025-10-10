@@ -7,7 +7,7 @@
 Dieses Kapitel skizziert, wie KI heute im Luftfahrtumfeld eingesetzt wird, welche Schwerpunkte der
 Forschungsdiskurs zu \emph{AI Safety} setzt und welche wiederkehrenden Praxisprobleme auftreten.
 Die Darstellung ist bewusst bewertungsfrei und dient als \emph{Context-Setting} zwischen den
-\emph{Grundlagen} und den \emph{Anforderungen und Szenarien} (Kap.~\ref{sec:anforderungen}).
+\emph{Grundlagen} und den \emph{Anforderungen und Szenarien}.
 
 
 \section{Grenzen klassischer Verfahren und Motivation}\label{sec:motivation-classic-limits}
@@ -45,18 +45,18 @@ die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutt
 
 
 % ----------------------------------------------------
-\section{Forschungsstand zu AI Safety (kompakt)}\label{sec:fs-safety}
+\section{Forschungsstand zu AI Safety}\label{sec:fs-safety}
 Der AI-Safety-Diskurs priorisiert \emph{Assurance} gegenüber reiner Benchmark-Optimierung. Wiederkehrende Motive: % TODO \cite{...}
 \begin{itemize}
-  \item \textbf{Daten-/Label-Governance:} Herkunft, Qualität, Annotation, Versionierung, Freigabeprozesse; auditable Artefakte (Datasheets/Model Cards).
-  \item \textbf{ODD und Annahmenmanagement:} explizite Gültigkeitsgrenzen, Szenariendefinitionen, messbare Annahmen; segmentiertes Reporting statt „Overall-Accuracy“.
-  \item \textbf{Robustheit und Verteilungssprünge:} Stress-/Sensitivitätstests (Clutter/Noise/RFI), OOD-Erkennung, konservative Meldestrategien (Abstain).
-  \item \textbf{Unsicherheit/Kalibrierung:} kalibrierte Konfidenzen (z.\,B.\ ECE/Brier), Fehlerbänder, Freigabekriterien je ODD-Segment.
-  \item \textbf{Erklärbarkeit/Auditierbarkeit:} zweckgebundene XAI zur Plausibilisierung (kein Ersatz für V\&V), reproduzierbare Auswertungen für Reviews.
-  \item \textbf{Toolchain-Assurance \& Reproduzierbarkeit:} kontrollierte Abhängigkeiten, deterministische Trainings-/Eval-Läufe, signierte Artefakte; ggf.\ Toolqualifizierung (DO-330-Gedanke).
-  \item \textbf{Lebenszyklus/Änderungen:} Monitoring im Betrieb, Drift-/OOD-Erkennung, Degradation/Fallback, kontrolliertes Re-Training mit erneuter Freigabe.
+  \item Daten-/Label-Governance
+  \item ODD und Annahmenmanagement
+  \item Robustheit und Verteilungssprünge 
+  \item Unsicherheit/Kalibrierung
+  \item Erklärbarkeit/Auditierbarkeit
+  \item Toolchain-Assurance \& Reproduzierbarkeit 
+  \item Lebenszyklus/Änderungen
 \end{itemize}
-\textit{Trend:} International verschiebt sich der Maßstab sichtbar von „Accuracy“ zu \emph{Assurance} (ODD-Schnitte, Kalibrierung, Reproduzierbarkeit, klare Freigabekriterien). % TODO \cite{...}
+\textit{Trend:} International verschiebt sich der Maßstab sichtbar von „Accuracy“ zu \emph{Assurance} (ODD-Schnitte, Reproduzierbarkeit, klare Freigabekriterien). % TODO \cite{...}
 
 % ----------------------------------------------------
 \section{KI in (Luftfahrt-)Radarsystemen}\label{sec:ki-radar-stand}
@@ -71,12 +71,11 @@ Veröffentlichungen und Praxisbeiträge zeigen unterschiedliche Reifegrade und I
 
 %----------------------------------------------------
 \section{Militärische Perspektive – Hauptunterschiede zur zivilen Luftfahrt}\label{sec:militaer-perspektive}
-KI findet in der militärischen Luftfahrt bereits vielfältig Anwendung (u.\,a.\ Lagebilder, Sensorik/Wahrnehmung, Mission Support).
- Mit Fokus dieser Arbeit wird z.B. bereits im Eurofighter 
-eine von Henshold entwickelte Objektklassifikations KI im Radar verwendet.
-Im Sinne von \emph{Dual-Use} ergeben sich Überschneidungen, von denen zivile und militärische Bereiche profitieren können.
-Öffentlich zugängliche Industrieangaben deuten auf KI-gestützte Radar-Funktionen im Eurofighter-Umfeld hin; belastbare technische
-Details sind jedoch nur eingeschränkt veröffentlicht.\parencite{ecrs-mk1-release}
+KI findet in der militärischen Luftfahrt bereits vielfältig Anwendung (u.\,a.\ Lagebilder, Sensorik/Wahrnehmung, Mission Support). 
+Mit Fokus dieser Arbeit wird z.B. bereits im Eurofighter eine von Hensholdt entwickelte Objektklassifikations KI im Radar verwendet 
+(\parencite{ecrs-mk1-release}). Im Sinne von \emph{Dual-Use} ergeben sich Überschneidungen, von denen zivile und 
+militärische Bereiche profitieren können.
+
 Militärische und zivile Verfahren unterscheiden sich grundlegend in Zielsetzung, Einsatzkontext, Regelwerk und Zertifizierung. 
 Zivile Luftfahrt priorisiert Passagiersicherheit, Transparenz und internationale Harmonisierung; militärische Luftfahrt fokussiert 
 Missionsfähigkeit, Resilienz und Geheimhaltung.
@@ -121,11 +120,11 @@ Technologieradar, nicht als Zertifizierungsreferenz.
 \section{Praxis-Trends}\label{sec:sop-trends}
 Aus Projekten und Veröffentlichungen zeichnen sich Querschnittstrends ab, die Anforderungen und Nachweise prägen:
 \begin{itemize}
-  \item \textbf{Shift: Accuracy $\rightarrow$ Assurance} (ODD, Kalibrierung, Reproduzierbarkeit, Freigabekriterien; vgl.~Kap.~\ref{sec:grundlagen-ki}).
-  \item \textbf{Szenarienbasiertes Reporting} (Segmentierung nach SNR/Entfernung/Wetter/Clutter, Aspekt; vgl.~Kap.~\ref{sec:radar-kpis}).
-  \item \textbf{Unknown/Abstain als Pflicht} (OOD-Erkennung, konservative Meldestrategien).
-  \item \textbf{Toolchain- \& Daten-Governance} (Versionierung, Audit-Trails, ggf.\ Toolqualifizierung; vgl.~Kap.~\ref{sec:sicherheitsprinzipien}).
-  \item \textbf{Inline vs.\ Frontloading} (strenge Echtzeit/HMI vs.\ Evidenz-/Repro-Fokus).
+  \item \textbf{Shift: Accuracy $\rightarrow$ Assurance}  vgl.~Kap.~\ref{sec:fs-safety}
+  \item \textbf{Szenarienbasiertes Reporting}  vgl.~Kap.~\ref{sec:radar-kpis}
+  \item \textbf{Unknown/Abstain als Pflicht} vgl.~Kap.~\ref{sec:sicherheitsprinzipien}
+  \item \textbf{Toolchain- \& Daten-Governance}  vgl.~Kap.~\ref{sec:sicherheitsprinzipien}
+  \item \textbf{Inline vs.\ Frontloading} vgl.~Kap.~\ref{sec:ki-radar-stand}
 \end{itemize}
 
 % ----------------------------------------------------
@@ -178,13 +177,13 @@ Entlastung von Personal & Automation-Bias / Fehlinterpretation von Konfidenzen \
 \end{table}
 
 % ----------------------------------------------------
-\section{Praxisbeobachtungen (abstrahiert)}\label{sec:praxis}
+\section{Praxisbeobachtungen}\label{sec:praxis}
 \begin{table}[h]
 \centering
-\caption{Beobachtete Problemklassen beim KI-Einsatz und abgeleitete Lessons Learned (abstrahiert)}
+\caption{Beobachtete Problemklassen beim KI-Einsatz und abgeleitete Lessons Learned}
 \begin{tabular}{p{0.33\textwidth}p{0.27\textwidth}p{0.32\textwidth}}
 \toprule
-\textbf{Fallbeispiel (abstrahiert)} & \textbf{Betroffene Felder} & \textbf{Lesson Learned} \\
+\textbf{Fallbeispiel} & \textbf{Betroffene Felder} & \textbf{Lesson Learned} \\
 \midrule
 Leistungseinbruch in Starkregen/See-Clutter & ODD/Abdeckung; Robustheit/Shift & Segmentiertes Testen/Reporting; konservative Schwellen/Abstain \\
 \midrule
@@ -203,18 +202,18 @@ Fehlinterpretation durch Bediener & Schnittstellen/HMI; XAI/Audit & Top-$k$, Kon
 
 % ----------------------------------------------------
 \section{Implikationen für Anforderungen und Nachweis}\label{sec:sop-implikationen}
-Aus dem Überblick ergeben sich für Kap.~\ref{sec:anforderungen} folgende Leitlinien:
+Auf Basis der Befunde in § \ref{sec:fs-safety}, § \ref{sec:ki-radar-stand} und § \ref{sec:sop-huerden} gelten:
 \begin{enumerate}
-  \item \textbf{ODD-/Szenarioabdeckung zuerst:} Anforderungen und Nachweise sind je ODD-Segment zu definieren und zu berichten.
-  \item \textbf{Konfidenz/Kalibrierung verpflichtend:} Freigabekriterien umfassen Unsicherheitsangaben, nicht nur Punktmetriken.
-  \item \textbf{Robustheits- und OOD-Tests:} Stress-/Störtests und Unknown/Abstain sind integraler Bestandteil.
-  \item \textbf{Toolchain-/Daten-Governance:} Reproduzierbarkeit, Signierung/Versionierung und Audit-Trails als verbindliche Anforderungen.
-  \item \textbf{Lifecycle-Sicht:} Monitoring, Drift-Erkennung und Change/Freigabeprozesse als Betriebsanforderungen definieren.
+  \item ODD-/Szenarioabdeckung zuerst
+  \item Konfidenz/Kalibrierung verpflichtend
+  \item Robustheits- und OOD-Tests
+  \item Toolchain-/Daten-Governance
+  \item Lifecycle-Sicht
 \end{enumerate}
 
 \medskip
 \noindent\textit{Übergang.}
-Im nächsten Kapitel (\ref{sec:anforderungen}) werden Szenarien konkretisiert, Anforderungsfelder präzisiert
+Im nächsten Kapitel werden Szenarien konkretisiert, Anforderungsfelder präzisiert
 und mit Erwartungen aus Standards/Leitlinien verknüpft, um sie anschließend (u.\,a.\ entlang ISO/PAS~8800)
 systematisch auf Abdeckung und Lücken zu prüfen.
 
@@ -237,7 +236,7 @@ Diese Beobachtungen leiten direkt zu den \emph{Anforderungen und Szenarien} übe
 
 \section{Ziel \& Scope}
 \textit{Zweck:} Rahmen für KI-Safety im Fahrzeug (Perzeption/Entscheidung, z.\,B.\ Radar-Objektklassifikation), ohne Security-Vertiefung. 
-\textit{Hinweis:} Cybersecurity (ISO 21434, UNECE R155/R156) wird nur als Betriebsrandbedingung erwähnt und ist \emph{nicht} Teil dieser Thesis.
+\textit{Hinweis:} Cybersecurity (ISO 21434, UNECE R155/R156) wird nur als Betriebsrandbedingung erwähnt und ist \emph{nicht} Teil dieser Arbeit.
 \textit{Gremien in einem Satz:} UNECE/WP.29 regelt Betrieb/Updates; ISO/SAE/IEEE standardisieren – Details hier nachrangig.
 
 \subsection{Begriffe \& Standards – Schnellvergleich}
@@ -255,27 +254,32 @@ KI-Guidance & EASA AI Level 1/2 (Guidance) & ISO/PAS 8800 \\
 \end{tabular}
 \end{center}
 
-\section{Normen-Panorama}
+\section{Normenüberblick (kompakt)}
 \begin{itemize}
-  \item \textbf{ISO 26262 (Functional Safety, ASIL A–D):} Lebenszyklus- und Nachweisrahmen für E/E-Systeme.
-  \item \textbf{ISO 21448 (SOTIF):} Umgang mit Funktions-/Wahrnehmungs­insuffizienzen und Szenario-Lücken.
-  \item \textbf{ISO 8800:} KI-spezifische Ergänzung zu 26262/SOTIF (Daten-/Modell-Governance, ODD/OOD, Kalibrierung, Betrieb/Updates).
-  \item \textbf{ISO TR 5469:} Domänenübergreifender Leitfaden \emph{Funktionale Sicherheit \& KI} – Eigenschaften, Risiken, Methoden/Prozesse.
-  \item \textbf{ISO 22989:} Domänenübergreifende Sammlung an KI Begriffen und Konzepten, die zur Vereinheitlichung dient.
+  \item ISO~26262 (Funktionale Sicherheit)
+  \item ISO~21448/SOTIF (beabsichtigte Funktion)
+  \item ISO/IEC~TR~5469 (KI+\!Safety-Brücke)
+  \item ISO/PAS~8800 (KI-Ergänzung zu 26262/SOTIF)
 \end{itemize}
+Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleichsfolie für Assurance-Bausteine.\parencite{iso-26262,iso-21448-sotif,iso-iec-tr-5469-2024,iso-pas-8800-2024}
+
+\section{ISO/PAS 8800 — Kernaussagen für diese Arbeit}
+\begin{itemize}
+  \item \textbf{ODD/Use-Case-Begrenzung} mit Unknown/Abstain \& Fallback als Pflicht.
+  \item \textbf{Daten-/Modell-Governance:} Lineage, Versionierung, Label-Qualität, Reproduzierbarkeit.
+  \item \textbf{Unsicherheit/Kalibrierung \& OOD:} segmentiertes Reporting, Freigabekriterien.
+  \item \textbf{Szenariobasierte V\&V} je ODD-Segment statt Mittelwert-KPIs.
+  \item \textbf{Betrieb/Updates:} Monitoring, Drift-Erkennung, kontrollierte Releases/Rollback.
+\end{itemize}
+\noindent
+Diese Punkte werden im Luftfahrtteil nicht 1:1 übernommen, sondern als \emph{Orientierung}
+für die bereits definierten Anforderungsfelder genutzt.
+\parencite{iso-pas-8800-2024}
+
 
 \section{Deep Dive: ISO/PAS 8800}
 \subsection{Positionierung \& Anwendungsbereich}
 \textit{Kernidee:} Ergänzt 26262/SOTIF; kein „Assurance-Rabatt“ für KI; relevant bei ML in sicherheitskritischen Funktionen.
-
-\subsection{Kernprinzipien (Stichworte)}
-\begin{itemize}
-  \item ODD/Use-Cases klar begrenzen; Unknown/Abstain + Fallback definieren.
-  \item Daten-/Modell-Governance (Lineage, Versionierung, Label-Qualität, Reproduzierbarkeit).
-  \item Unsicherheiten \& Kalibrierung; OOD-Erkennung als Pflichtbaustein.
-  \item Szenario-basierte V\&V pro ODD-Segment (statt Mittelwert-KPIs).
-  \item Betrieb/Monitoring \& kontrollierte Updates (inkl.\ Rollback).
-\end{itemize}
 
 \subsection{Artefakt-Checkliste für den Safety Case}
 \textit{Entwürfe:} ODD-Spezifikation; Data/Model-Lineage; Kalibrierungs- \& OOD-Nachweise; Szenariomatrix \& Abdeckung; Runtime-Monitoring-Konzept; Change-/Rollback-Prozess.

@@ -16,5 +16,585 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{towards-certifiable-ai-aviation-2024}{article}{}{}
+      \name{author}{9}{}{%
+        {{hash=e73eca99a53931b653a0c2384f2d9c6f}{%
+           family={Bello},
+           familyi={B\bibinitperiod},
+           given={Hymalai},
+           giveni={H\bibinitperiod}}}%
+        {{hash=8082ecbe9780c461c2db9037127a2357}{%
+           family={Geißler},
+           familyi={G\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=e4bcc874c139b776f17a644147aa5789}{%
+           family={Ray},
+           familyi={R\bibinitperiod},
+           given={Lala},
+           giveni={L\bibinitperiod}}}%
+        {{hash=8a83a15cee5e962150f98585f5f1c6eb}{%
+           family={Müller-Divéky},
+           familyi={M\bibinithyphendelim D\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=57f66066d804db9a6a0f631aa4beba38}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=869da81cc39af1b46e0cbf53579599f4}{%
+           family={Kittrell},
+           familyi={K\bibinitperiod},
+           given={Shannon},
+           giveni={S\bibinitperiod}}}%
+        {{hash=2e645c238508e587d2b3b624747956fb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Mengxi},
+           giveni={M\bibinitperiod}}}%
+        {{hash=78b85e16af77a1b542f32ece926f004b}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=80b8c701b8f52a5792cc2ff0f0e911e7}{%
+           family={Lukowicz},
+           familyi={L\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{abe6b7b62e8833b01cd98b64e2e68d0b}
+      \strng{fullhash}{a0b28fd2219263c2157bcbd11306ab1b}
+      \strng{fullhashraw}{a0b28fd2219263c2157bcbd11306ab1b}
+      \strng{bibnamehash}{abe6b7b62e8833b01cd98b64e2e68d0b}
+      \strng{authorbibnamehash}{abe6b7b62e8833b01cd98b64e2e68d0b}
+      \strng{authornamehash}{abe6b7b62e8833b01cd98b64e2e68d0b}
+      \strng{authorfullhash}{a0b28fd2219263c2157bcbd11306ab1b}
+      \strng{authorfullhashraw}{a0b28fd2219263c2157bcbd11306ab1b}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Towards certifiable AI in aviation: landscape, challenges, and opportunities}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.48550/arXiv.2409.08666
+      \endverb
+      \verb{eprint}
+      \verb 2409.08666
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2409.08666
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2409.08666
+      \endverb
+    \endentry
+    \entry{mil-ai-standards-2024}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=426844b8f9212d49150839207a6993b8}{%
+           family={Delgado-Aguilera\bibnamedelima Jurado},
+           familyi={D\bibinithyphendelim A\bibinitperiod\bibinitdelim J\bibinitperiod},
+           given={Raquel},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ec99b95393599bf501d0ff573c6aceff}{%
+           family={Ye},
+           familyi={Y\bibinitperiod},
+           given={Xiaojie},
+           giveni={X\bibinitperiod}}}%
+        {{hash=a748bbc938012c9f91a2ca4148b8af9e}{%
+           family={Ortolá\bibnamedelima Plaza},
+           familyi={O\bibinitperiod\bibinitdelim P\bibinitperiod},
+           given={Vicent},
+           giveni={V\bibinitperiod}}}%
+        {{hash=0d385ffb3b855e630c608e86a9c2fc29}{%
+           family={Zamarreño\bibnamedelima Suárez},
+           familyi={Z\bibinitperiod\bibinitdelim S\bibinitperiod},
+           given={María},
+           giveni={M\bibinitperiod}}}%
+        {{hash=503122ecc8bce5be2c47bd73ca6ea2b1}{%
+           family={Pérez\bibnamedelima Moreno},
+           familyi={P\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=80de8490f7de5bfb5885106744eb932a}{%
+           family={Arnaldo\bibnamedelima Valdés},
+           familyi={A\bibinitperiod\bibinitdelim V\bibinitperiod},
+           given={Rosa\bibnamedelima María},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f1696564761f46530cebd56685ae28e}
+      \strng{fullhash}{1b8f0b3b5d78e53b714e577923762292}
+      \strng{fullhashraw}{1b8f0b3b5d78e53b714e577923762292}
+      \strng{bibnamehash}{4f1696564761f46530cebd56685ae28e}
+      \strng{authorbibnamehash}{4f1696564761f46530cebd56685ae28e}
+      \strng{authornamehash}{4f1696564761f46530cebd56685ae28e}
+      \strng{authorfullhash}{1b8f0b3b5d78e53b714e577923762292}
+      \strng{authorfullhashraw}{1b8f0b3b5d78e53b714e577923762292}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Air Transport Management}
+      \field{title}{An introduction to the current state of standardization and certification on military AI applications}
+      \field{volume}{121}
+      \field{year}{2024}
+      \field{pages}{102685}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.jairtraman.2024.102685
+      \endverb
+    \endentry
+    \entry{do-178c}{report}{}{}
+      \list{institution}{1}{%
+        {RTCA, Inc.}%
+      }
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{DO-178C — Software Considerations in Airborne Systems and Equipment Certification}
+      \field{year}{2011}
+    \endentry
+    \entry{do-200b-ed-76}{report}{}{}
+      \list{institution}{1}{%
+        {RTCA, Inc.; EUROCAE}%
+      }
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{note}{RTCA DO-200B (Standards for Processing Aeronautical Data) / EUROCAE ED-76; häufig gemeinsam zitiert}
+      \field{title}{DO-200B / ED-76 — Standards for Processing Aeronautical Data}
+      \field{year}{2015}
+    \endentry
+    \entry{do-330}{report}{}{}
+      \list{institution}{1}{%
+        {RTCA, Inc.}%
+      }
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labeltitlesource}{title}
+      \field{title}{DO-330 — Software Tool Qualification Considerations}
+      \field{year}{2011}
+    \endentry
+    \entry{easa-ai-roadmap-2-2023}{report}{}{}
+      \list{institution}{1}{%
+        {European Union Aviation Safety Agency (EASA)}%
+      }
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labeltitlesource}{title}
+      \field{title}{EASA AI Roadmap 2.0}
+      \field{year}{2023}
+    \endentry
+    \entry{easa-ai-concept-issue2-2024}{report}{}{}
+      \list{institution}{1}{%
+        {European Union Aviation Safety Agency (EASA)}%
+      }
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labeltitlesource}{title}
+      \field{title}{EASA Artificial Intelligence Concept Paper, Issue 2}
+      \field{year}{2024}
+    \endentry
+    \entry{ecrs-mk1-release}{misc}{}{}
+      \name{author}{2}{}{%
+        {{hash=53af8867dbe0a82d9ae11510aee35976}{%
+           family={HENSOLDT},
+           familyi={H\bibinitperiod}}}%
+        {{hash=2b3275f929db5d542ce30e27a413242e}{%
+           family={Indra},
+           familyi={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{16d07355d3138dcb727d0025c4188b50}
+      \strng{fullhash}{16d07355d3138dcb727d0025c4188b50}
+      \strng{fullhashraw}{16d07355d3138dcb727d0025c4188b50}
+      \strng{bibnamehash}{16d07355d3138dcb727d0025c4188b50}
+      \strng{authorbibnamehash}{16d07355d3138dcb727d0025c4188b50}
+      \strng{authornamehash}{16d07355d3138dcb727d0025c4188b50}
+      \strng{authorfullhash}{16d07355d3138dcb727d0025c4188b50}
+      \strng{authorfullhashraw}{16d07355d3138dcb727d0025c4188b50}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Industry announcement; öffentliche Leistungsdaten begrenzt}
+      \field{title}{ECRS MK1 (Eurofighter Radar) — Programme overview/press release}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.hensoldt.net/de/products/ecrs-mk1-eurofighter-common-radar-system
+      \endverb
+      \verb{url}
+      \verb https://www.hensoldt.net/de/products/ecrs-mk1-eurofighter-common-radar-system
+      \endverb
+    \endentry
+    \entry{iso-21448-sotif}{standard}{}{}
+      \list{organization}{1}{%
+        {International Organization for Standardization}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{title}{ISO 21448 — Safety of the Intended Functionality (SOTIF)}
+      \field{year}{2022}
+    \endentry
+    \entry{iso-26262}{standard}{}{}
+      \list{organization}{1}{%
+        {International Organization for Standardization}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{note}{Teil 1 Begriffe; Teil 6 Softwareentwicklung}
+      \field{title}{ISO 26262 — Road vehicles — Functional safety (Parts 1–12)}
+      \field{year}{2018}
+    \endentry
+    \entry{iso-iec-22989}{standard}{}{}
+      \list{organization}{1}{%
+        {ISO/IEC JTC 1/SC 42}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{title}{ISO/IEC 22989 — Artificial Intelligence — Concepts and Terminology}
+      \field{year}{2022}
+    \endentry
+    \entry{iso-iec-tr-5469-2024}{report}{}{}
+      \list{institution}{1}{%
+        {ISO/IEC JTC 1/SC 42}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{title}{ISO/IEC TR 5469:2024 — Artificial Intelligence — Functional safety and AI: guidance}
+      \field{type}{Technical Report}
+      \field{year}{2024}
+    \endentry
+    \entry{iso-pas-8800-2024}{standard}{}{}
+      \list{organization}{1}{%
+        {International Organization for Standardization}%
+      }
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labeltitlesource}{title}
+      \field{note}{Automotive AI Safety framework; Ergänzung zu ISO 26262/SOTIF}
+      \field{title}{ISO/PAS 8800:2024 — Road vehicles — Safety of the intended functionality of AI in road vehicles}
+      \field{year}{2024}
+    \endentry
+    \entry{ml-meets-aerospace-2024}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=0eb08a0e4adbdf4de8f532dffd983fa4}{%
+           family={Luettig},
+           familyi={L\bibinitperiod},
+           given={Bastian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=329f4e0e4b2763750c2275d309a9a195}{%
+           family={Akhiat},
+           familyi={A\bibinitperiod},
+           given={Yassine},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b0ac00afafdc49cfde2ceef156aabb95}{%
+           family={Daw},
+           familyi={D\bibinitperiod},
+           given={Zamira},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{8194c47a799b82170638c362e01f9783}
+      \strng{fullhash}{8194c47a799b82170638c362e01f9783}
+      \strng{fullhashraw}{8194c47a799b82170638c362e01f9783}
+      \strng{bibnamehash}{8194c47a799b82170638c362e01f9783}
+      \strng{authorbibnamehash}{8194c47a799b82170638c362e01f9783}
+      \strng{authornamehash}{8194c47a799b82170638c362e01f9783}
+      \strng{authorfullhash}{8194c47a799b82170638c362e01f9783}
+      \strng{authorfullhashraw}{8194c47a799b82170638c362e01f9783}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Frontiers in Aerospace Engineering}
+      \field{title}{ML meets aerospace: challenges of certifying airborne AI}
+      \field{volume}{3}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.3389/fpace.2024.1475139
+      \endverb
+      \verb{urlraw}
+      \verb https://www.frontiersin.org/articles/10.3389/fpace.2024.1475139/full
+      \endverb
+      \verb{url}
+      \verb https://www.frontiersin.org/articles/10.3389/fpace.2024.1475139/full
+      \endverb
+    \endentry
+    \entry{easa-mleap-final-2024}{report}{}{}
+      \list{institution}{1}{%
+        {EASA}%
+      }
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labeltitlesource}{title}
+      \field{note}{Learning Assurance, ODD/Robustness}
+      \field{title}{MLEAP Final Report — Machine Learning Application Approval}
+      \field{year}{2024}
+    \endentry
+  \enddatalist
+\endrefsection
+
+\refsection{1}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{unsplash-9zsHNt5OpqE}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=634f6a4a4ab12686b5f3bc3e6145be37}{%
+           family={{Aaron Burden}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{fullhash}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{fullhashraw}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{bibnamehash}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{authorbibnamehash}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{authornamehash}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{authorfullhash}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \strng{authorfullhashraw}{634f6a4a4ab12686b5f3bc3e6145be37}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{Buchseite auf grauer Betonoberfläche}
+      \field{urlday}{4}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/bibelseite-auf-grauer-betonoberflache-9zsHNt5OpqE
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/bibelseite-auf-grauer-betonoberflache-9zsHNt5OpqE
+      \endverb
+    \endentry
+    \entry{unsplash-bNPHM2KWOxo}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=c36c3b032be2cceee206964b85c33dc6}{%
+           family={{awesomeph0tos}},
+           familyi={a\bibinitperiod}}}%
+      }
+      \strng{namehash}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{fullhash}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{fullhashraw}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{bibnamehash}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{authorbibnamehash}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{authornamehash}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{authorfullhash}{c36c3b032be2cceee206964b85c33dc6}
+      \strng{authorfullhashraw}{c36c3b032be2cceee206964b85c33dc6}
+      \field{sortinit}{a}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{Eine lange Regalreihe mit vielen Büchern}
+      \field{urlday}{4}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/eine-lange-regalreihe-mit-vielen-buchern-bNPHM2KWOxo
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/eine-lange-regalreihe-mit-vielen-buchern-bNPHM2KWOxo
+      \endverb
+    \endentry
+    \entry{cover-dezgo-2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=ff19c4f76062d58653991e50d291cc6f}{%
+           family={Erstellung},
+           familyi={E\bibinitperiod},
+           given={Eigene},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{fullhash}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{fullhashraw}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{bibnamehash}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{authorbibnamehash}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{authornamehash}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{authorfullhash}{ff19c4f76062d58653991e50d291cc6f}
+      \strng{authorfullhashraw}{ff19c4f76062d58653991e50d291cc6f}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Generiert mit dezgo.com am 2025-07-20}
+      \field{title}{Titelbild: KI-Sicherheit in Luftfahrtradarsystemen}
+      \true{nocite}
+    \endentry
+    \entry{unsplash-JtP_Dqtz6D8}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=825e8d49ce873784b575822f34f99e7e}{%
+           family={{Jamie Street}},
+           familyi={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{825e8d49ce873784b575822f34f99e7e}
+      \strng{fullhash}{825e8d49ce873784b575822f34f99e7e}
+      \strng{fullhashraw}{825e8d49ce873784b575822f34f99e7e}
+      \strng{bibnamehash}{825e8d49ce873784b575822f34f99e7e}
+      \strng{authorbibnamehash}{825e8d49ce873784b575822f34f99e7e}
+      \strng{authornamehash}{825e8d49ce873784b575822f34f99e7e}
+      \strng{authorfullhash}{825e8d49ce873784b575822f34f99e7e}
+      \strng{authorfullhashraw}{825e8d49ce873784b575822f34f99e7e}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{Mann steht neben weißem SUV in der Nähe einer Betonstraße unter blauem Himmel am Tag}
+      \field{urlday}{4}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/mann-steht-neben-weissem-suv-in-der-nahe-einer-betonstrasse-unter-blauem-himmel-am-tag-JtP_Dqtz6D8
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/mann-steht-neben-weissem-suv-in-der-nahe-einer-betonstrasse-unter-blauem-himmel-am-tag-JtP_Dqtz6D8
+      \endverb
+    \endentry
+    \entry{unsplash-Q1p7bh3SHj8}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=1f99771bc3e23e6097509a331544ab65}{%
+           family={NASA},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{1f99771bc3e23e6097509a331544ab65}
+      \strng{fullhash}{1f99771bc3e23e6097509a331544ab65}
+      \strng{fullhashraw}{1f99771bc3e23e6097509a331544ab65}
+      \strng{bibnamehash}{1f99771bc3e23e6097509a331544ab65}
+      \strng{authorbibnamehash}{1f99771bc3e23e6097509a331544ab65}
+      \strng{authornamehash}{1f99771bc3e23e6097509a331544ab65}
+      \strng{authorfullhash}{1f99771bc3e23e6097509a331544ab65}
+      \strng{authorfullhashraw}{1f99771bc3e23e6097509a331544ab65}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{Photo of outer space}
+      \field{urlday}{4}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/foto-aus-dem-weltraum-Q1p7bh3SHj8
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/foto-aus-dem-weltraum-Q1p7bh3SHj8
+      \endverb
+    \endentry
+    \entry{unsplash-g29arbbvPjo}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=322b5f89b27bbe626c7fb71f68d69abf}{%
+           family={{possessedphotography}},
+           familyi={p\bibinitperiod}}}%
+      }
+      \strng{namehash}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{fullhash}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{fullhashraw}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{bibnamehash}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{authorbibnamehash}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{authornamehash}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{authorfullhash}{322b5f89b27bbe626c7fb71f68d69abf}
+      \strng{authorfullhashraw}{322b5f89b27bbe626c7fb71f68d69abf}
+      \field{sortinit}{p}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{ASIMO robot doing hand sign}
+      \field{urlday}{4}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/asimo-robot-doing-handsign-g29arbbvPjo
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/asimo-robot-doing-handsign-g29arbbvPjo
+      \endverb
+    \endentry
+    \entry{unsplash-5fNmWej4tAA}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=49f355b2422e06491477be6d7826dc64}{%
+           family={{Scott Graham}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{49f355b2422e06491477be6d7826dc64}
+      \strng{fullhash}{49f355b2422e06491477be6d7826dc64}
+      \strng{fullhashraw}{49f355b2422e06491477be6d7826dc64}
+      \strng{bibnamehash}{49f355b2422e06491477be6d7826dc64}
+      \strng{authorbibnamehash}{49f355b2422e06491477be6d7826dc64}
+      \strng{authornamehash}{49f355b2422e06491477be6d7826dc64}
+      \strng{authorfullhash}{49f355b2422e06491477be6d7826dc64}
+      \strng{authorfullhashraw}{49f355b2422e06491477be6d7826dc64}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{Person mit Bleistift in der Nähe von Laptop}
+      \field{urlday}{4}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/person-mit-bleistift-in-der-nahe-von-laptop-5fNmWej4tAA
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/person-mit-bleistift-in-der-nahe-von-laptop-5fNmWej4tAA
+      \endverb
+    \endentry
+    \entry{unsplash-d4fGiVvfyPk}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=6ad6cbef1eb37fa9cccbb19ddc49fbe9}{%
+           family={{Vitaly Gariev}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{fullhash}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{fullhashraw}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{bibnamehash}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{authorbibnamehash}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{authornamehash}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{authorfullhash}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \strng{authorfullhashraw}{6ad6cbef1eb37fa9cccbb19ddc49fbe9}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Unsplash License}
+      \field{title}{Professor der komplexe Formeln an eine Tafel schreibt}
+      \field{urlday}{3}
+      \field{urlmonth}{10}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://unsplash.com/de/fotos/professor-der-komplexe-formeln-an-eine-tafel-schreibt-d4fGiVvfyPk
+      \endverb
+      \verb{url}
+      \verb https://unsplash.com/de/fotos/professor-der-komplexe-formeln-an-eine-tafel-schreibt-d4fGiVvfyPk
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 

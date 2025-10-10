@@ -5,11 +5,10 @@
 \chapter{Anforderungen und Szenarien für Radarsysteme}\label{chap:szenarien}
 
 \section{Ziel und Einordnung}\label{sec:szenarien-intro}
-Dieses Kapitel definiert einen \emph{Szenarienrahmen} für die spätere Bewertung und Nachweisführung. 
-Die Darstellung ist bewusst plattformneutral und dient dazu, Anforderungen und Leistungs-/Unsicherheitskriterien \emph{segmentiert} 
-zu berichten, anstatt über heterogene Bedingungen zu mitteln. 
-Die hier eingeführten Elemente (Szenario-Typen und ODD-Schnitte) bilden die Mess- und Berichtsachsen, 
-auf die sich die Anforderungsfelder in Kapitel~\ref{chap:anforderungen} und die Coverage-Analyse in Kapitel~\ref{chap:coverage} beziehen.
+Dieses Kapitel definiert einen \emph{Szenarienrahmen} für Bewertung und Nachweisführung.
+Die \emph{Szenario-Typen} und \emph{ODD-Schnitte} sind in Abschn.~\ref{sec:szenarien-rahmen}–\ref{sec:szenarien-odd} beschrieben.
+
+
 
 \section{Szenarienrahmen}\label{sec:szenarien-rahmen}
 Der Szenarienrahmen strukturiert typische Nutzungslagen und Nachweisfälle, ohne auf plattformspezifische Details einzugehen.
@@ -19,9 +18,9 @@ Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} berichtet
 \subsection{Szenario-Typen (Auswahl)}\label{sec:szenarien-typen}
 \begin{itemize}
   \item \textbf{Nominalbedingungen:} mittlere SNR, moderate Wetterlage, begrenzter Clutter, normale Verkehrsdichte.
-  \item \textbf{Clutter-intensiv:} ausgeprägter Boden-/Seeclutter, urbane Multipath-Situationen; lokal erhöhte $P_{fa}$-Tendenz.
-  \item \textbf{Adverse Weather:} starke Niederschläge/convective cells; Dämpfung, Spektralverbreiterung, Zielmaskierung.
-  \item \textbf{RFI/Koexistenz:} benachbarte Funkdienste, andere Radare, SSR/ADS-B-Überlagerung; Notch-/Filter-Betrieb.
+  \item \textbf{Clutter-intensiv:} ausgeprägter Boden-/See-Clutter, urbane Multipath-Situationen; lokal erhöhte $P_{fa}$-Tendenz.
+  \item \textbf{Adverse Weather:} starke Niederschläge; Dämpfung, Spektralverbreiterung, Zielmaskierung.
+  \item \textbf{RFI/Koexistenz:} benachbarte Funkdienste, andere Radarsysteme, SSR/ADS-B-Überlagerung; Notch-/Filter-Betrieb.
   \item \textbf{Dichte Verkehrslage:} viele Ziele, enge Winkelabstände, Datenassoziationsstress; Track-Kohärenz im Fokus.
   \item \textbf{Aspekt-/Kinematik-Randfälle:} ungünstige Zielaspekte, stark manövrierende Ziele, intermittierende RCS.
   \item \textbf{OOD/Unknown:} Szenarien/Klassen außerhalb der ODD; konservative Meldung (\emph{Abstain/Unknown}) verpflichtend.
@@ -57,15 +56,15 @@ und diskutiert die Ergebnisse.
 Dieses Kapitel fasst wiederkehrende Sicherheitsbedarfe als \emph{Anforderungsfelder} zusammen und ordnet ihnen
 \emph{typische Erwartungen} aus etablierten Leitlinien und Standards zu (konzeptionell; ohne Anspruch auf Vollständigkeit).
 Die Felder bilden die Zeilen der Coverage-Analyse in Kapitel~\ref{chap:coverage}. 
-Alle Leistungs-, Unsicherheits- und Freigabekriterien sind entlang der in Kapitel~\ref{chap:szenarien} eingeführten ODD-Segmente zu berichten.
+Berichtsdimensionen siehe Abschn.~\ref{sec:szenarien-rahmen}–\ref{sec:szenarien-odd}.
 
 \section{Anforderungsfelder}\label{sec:anforderungsfelder}
 \begin{enumerate}
   \item \textbf{Daten-/Label-Governance:} Herkunft, Qualität, Annotation und Freigabeprozesse sind zu definieren, zu versionieren und zu auditieren. 
   Datasheets/Model Cards und annotatorspezifische Qualitätsmetriken (Inter-Annotator Agreement) sind verbindlich zu führen.
 
-  \item \textbf{ODD- und Szenarioabdeckung:} ODD-Grenzen und Annahmen sind messbar zu formulieren; Leistung und Unsicherheit sind je ODD-Segment nachzuweisen.
-  Änderungen der ODD bedingen eine erneute Bewertung (inkl.\ Regressionstestplan).
+  \item \textbf{ODD- und Szenarioabdeckung:} Grenzen und Annahmen sind messbar zu formulieren; Leistung und Unsicherheit sind je ODD-Segment nachzuweisen.
+  Änderungen bedingen eine erneute Bewertung (inkl.\ Regressionstestplan).
 
   \item \textbf{Robustheit \& Verteilungssprünge:} Sensitivitäts-/Stresstests (z.\,B.\ Clutter/Noise/RFI) und Szenarien-Injektionen prüfen Stabilität.
   OOD-Erkennung mit konservativen Schwellen (\emph{Abstain}) ist verpflichtend.
@@ -88,208 +87,226 @@ Alle Leistungs-, Unsicherheits- und Freigabekriterien sind entlang der in Kapite
   \item \textbf{Änderungs-/Freigabeprozesse:} Re-Training/Updates erfolgen kontrolliert (Datenänderung, Hyperparameter, Code).
   Regressionstests und erneute Freigaben inkl.\ Safety-Case-Update sind verpflichtend.
 
-  \item \textbf{Schnittstellen/HMI (Inline):} Qualitätsflags, Konfidenz und \emph{Unknown/Abstain} sind maschinen- und menschlesbar zu übertragen.
+  \item \textbf{Schnittstellen/HMI (Inline):} Qualitätsflags, Konfidenz und \emph{Unknown/Abstain} sind maschinen- und menschenlesbar zu übertragen.
   HMI muss die Interpretation (Top-$k$, Konfidenz, OOD-Hinweise) unterstützen.
 
   \item \textbf{Frontloading-spezifisch:} Reproduzierbarkeit, Audit-Trails und die belastbare Überführung analytischer Ergebnisse in Evidenz (kein „Blindflug“ der Datenanalyse).
 \end{enumerate}
 
-\section{Referenzierung auf Standards und Leitlinien}\label{sec:ref-standards}
-\noindent
-\textbf{Einordnung.} ISO/PAS~8800 adressiert weitgehend dieselben \emph{Assurance-Bausteine},
-wie sie im \emph{EASA AI Concept Paper, Issue~2} gefordert werden — insbesondere ODD/Annahmen,
-Daten-/Label-Governance, Robustheit/OOD, Unsicherheit/Kalibrierung, Monitoring/Degradation
-sowie Toolchain-/Traceability-Aspekte.\parencite{iso-pas-8800-2024,easa-ai-concept-issue2-2024}
 
-\noindent
-\textbf{Einordnung ISO/IEC TR 5469.}
-Die TR~5469 dient als domänenneutrale Brücke für \emph{Assurance} von KI und liefert eine anschlussfähige
-Argumentationsstruktur (Claims, Annahmen, Evidenz) neben DO\mbox{-}178C. Zugleich ist sie bewusst sehr high-level,
-ohne domänenspezifische Vorgaben, und daher nicht \emph{direkt} anwendbar ohne Konkretisierung im Luftfahrtkontext.
-\parencite{iso-iec-tr-5469-2024}
+\section{Referenzrahmen: Wie die Quellen zusammenspielen}\label{sec:ref-standards}
 
+\noindent\textit{Lesehilfe.}
+Die Tabelle fasst wiederkehrende \emph{Anforderungsfelder} zusammen und nennt dazu typische
+\emph{Erwartungen/Evidenzen}. Sie dient als Orientierung, \emph{ohne Bewertung oder Rangfolge}.
 
-Etablierte Standards und Leitlinien definieren Erwartungen an Prozesse, Nachweise und Evidenz. 
-Zur Einordnung werden typische Erwartungen den Anforderungsfeldern zugeordnet; dies bildet die Brücke zur Coverage-Analyse
-(u.\,a.\ entlang ISO/PAS~8800).
-
-\begin{table}[h]
+\begin{table}[H]
 \centering
-\caption{Anforderungsfelder und beispielhafte Referenzquellen (nicht abschließend)}
+\caption{Anforderungsfelder und typische Erwartungen/Evidenzen (nicht abschließend)}
 \begin{tabular}{p{0.36\textwidth}p{0.56\textwidth}}
 \toprule
-\textbf{Anforderungsfeld} & \textbf{Beispielhafte Referenzen/Erwartungen} \\
+\textbf{Anforderungsfeld} & \textbf{Typische Erwartungen / Evidenzen} \\
 \midrule
-Daten-/Label-Governance & Lebenszyklus-Dokumentation; Datasheets/Model Cards; Freigabeprozesse \\
-ODD-/Szenarioabdeckung & Explizite ODD; szenarienbasiertes Testen/Reporting; Annahmenmanagement \\
-Robustheit/Shift & Stress-/Störtests; Sensitivität ggü.\ Clutter/RFI; OOD-Erkennung/Abstain \\
-Konfidenz/Unsicherheit & Kalibrierungsmetriken (ECE/Brier), Fehlerbänder, Freigabekriterien \\
-XAI/Auditierbarkeit & Zweckgebundene Erklärungen; Repro-Nachweise; Review-Artefakte \\
-Toolchain-Assurance & Reproduzierbarkeit; kontrollierte Abhängigkeiten; ggf.\ Toolqualifizierung \\
-Traceability/Versionierung & Ende-zu-Ende-Rückverfolgbarkeit; Konfigurationsmanagement \\
-Monitoring/Degradation & Laufzeitmetriken; Drift-/OOD-Alarme; Fallback-Logik \\
-Change/Freigabe & Prozesse für Re-Training; Regression; erneute Freigabe; Safety-Case-Update \\
-Schnittstellen/HMI & Qualitätsflags/Konfidenz/Unknown; Operator-Information \\
-Frontloading & Audit-Trails; Evidenzüberführung in den Safety Case \\
+Daten-/Label-Governance &
+Lebenszyklusdokumentation; Freigabe- und Prüfprozesse; Nachvollziehbarkeit von Änderungen. \\
+ODD-/Szenarioabdeckung &
+Explizite ODD-Beschreibung; szenariobasiertes Testen/Reporting; dokumentiertes Annahmenmanagement. \\
+Robustheit &
+Stress- und Sensitivitätstests (z.\,B.\ Clutter, Rauschen); OOD-Erkennung mit Abstain-Regeln. \\
+Konfidenz / Unsicherheit &
+Kalibrierungsmetriken; Freigabekriterien je ODD-Segment. \\
+Erklärbarkeit / Auditierbarkeit &
+Zweckgebundene XAI-Berichte; reproduzierbare Skripte/Notebooks; abgelegte Review-Artefakte. \\
+Toolchain-Assurance &
+Reproduzierbare Trainings-/Eval-Läufe; kontrollierte Abhängigkeiten; Artefakt-Signaturen; ggf.\ Toolqualifizierung. \\
+Traceability / Versionierung &
+End-to-End-Rückverfolgbarkeit (Anforderungen $\rightarrow$ Daten $\rightarrow$ Modell $\rightarrow$ Tests $\rightarrow$ Release). \\
+Monitoring / Degradation (Betrieb) &
+Laufzeitmetriken (Leistung, Kalibrierung); Drift-Detektion; Alarmierung; definierte Fallback-Logik. \\
+Änderungen / Freigabe &
+Trigger für Re-Training/Re-Kalibrierung; erneute Freigabe; Update des Safety Case. \\
+Schnittstellen / HMI (Inline) &
+Qualitätsflags, Konfidenzangaben, Unknown/Abstain; Operator-gerechte Darstellung (z.\,B. OOD-Hinweise). \\
+Frontloading (Analyse) &
+Audit-Trails; festgeschriebene Umgebungen; Überführung der Analyse in prüfbare Evidenzpakete. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\noindent
-Konkrete Quellen (z.\,B.\ behördliche Konzepte, ISO/PAS~8800, DO-178C/DO-330 als Kontext) werden im Rahmen der Coverage-Analyse pro Feld präzisiert.
-
-
 % ===== Literatur-/Standards-Factsheets =====
-\subsection*{Factsheets: Leitlinien, Standards und ihre Rolle}
-Die nachfolgende Übersicht ordnet zentrale Referenzen ein. Ziel ist keine Bewertung der Wirksamkeit,
-sondern eine klare Rollenbeschreibung mit Stärken/Grenzen und der Nutzungsweise in dieser Arbeit.
+\subsection{Factsheets: Leitlinien, Standards und ihre Rolle}
+Die folgende Übersicht konsolidiert zentrale Quellen (Rolle im Rahmen, Stärken/Grenzen, Nutzung in dieser Arbeit) in
+komprimierter Form. Sie dient als Nachschlage- und Verweisgrundlage, um Wiederholungen im Text zu vermeiden.
+\emph{Wichtig:} Die Tabelle stellt \textbf{keine Bewertung oder Rangfolge} dar, sondern eine neutrale Einordnung mit
+klarer Zweckbindung für diese Arbeit.
+% --- optionales Feintuning (kann in die Präambel) ---
+%\usepackage{longtable,booktabs,array,ragged2e,enumitem}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{4.5pt}
 
-% Voraussetzung in der Präambel:
-% \usepackage{longtable}
-% \usepackage{booktabs}
-% \usepackage{array}
-
-\renewcommand{\arraystretch}{1.13} % optional, etwas mehr Zeilenhöhe
-
-\begin{longtable}{p{0.17\textwidth} p{0.23\textwidth} p{0.22\textwidth} p{0.22\textwidth} p{0.12\textwidth}}
-\caption{Factsheets: Leitlinien/Standards – Rolle, Stärken, Grenzen, Nutzung}\label{tab:factsheets}\\
+% =======================
+% Factsheets als LONGTABLE
+% =======================
+\begin{longtable}{P{0.17\textwidth} P{0.25\textwidth} P{0.38\textwidth} P{0.16\textwidth}}
+\caption{Factsheets: Leitlinien/Standards – Rolle, Stärken/Grenzen, Nutzung}\label{tab:factsheets}\\
 \toprule
-\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken} & \textbf{Grenzen} & \textbf{Nutzung hier} \\
+\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Nutzung hier} \\
 \midrule
 \endfirsthead
 
 \toprule
-\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken} & \textbf{Grenzen} & \textbf{Nutzung hier} \\
+\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Nutzung hier} \\
 \midrule
 \endhead
 
+\addlinespace[4pt]
 \midrule
-\multicolumn{5}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
+\multicolumn{4}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
 \endfoot
 
+\addlinespace[4pt]
 \bottomrule
 \endlastfoot
 
-\textbf{ISO/IEC TR 5469}\parencite{iso-iec-tr-5469-2024} &
-Domänenneutrale Brücke für \emph{Assurance} von KI; Prozess-Rahmen neben DO-178C &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Domain-agnostisch, anschlussfähig an verschiedene Industrien
-  \item Klare Argumentationsstruktur für Assurance-Evidenz
-  \item Terminologie/„Usage Level“ anschlussfähig zu ISO/PAS~8800
-\end{itemize} &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Sehr high-level; keine domänenspezifischen Vorgaben
-  \item Nicht direkt anwendbar ohne Domänenkonkretisierung
-\end{itemize} &
-Rahmen \& Vokabular für Coverage \\
-\midrule
+\textbf{ISO/IEC TR 5469\parencite{iso-iec-tr-5469-2024}} &
+Domänenneutrale Brücke für \emph{Assurance} von KI; Prozess-Rahmen neben DO-178C. &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Anschlussfähige Argumentationsstruktur, domain-agnostisch
+  \item \textbf{–} Sehr high-level; ohne Domänenkonkretisierung nicht direkt anwendbar
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Vokabular \& Struktur für die Coverage-Argumentation. \\
 
-\textbf{ISO/PAS 8800}\parencite{iso-pas-8800-2024} &
-KI-bezogene Safety-Erwartungen (Automotive) als Orientierungsrahmen &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Konkrete Felder (ODD, Daten, Robustheit, Unsicherheit)
-  \item Gute Passung zu „Assurance statt Accuracy“
-\end{itemize} &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Automotive-Kontext; nicht luftfahrtspezifisch
-  \item Zulassungswege weichen vom Luftfahrtprozess ab
-\end{itemize} &
-Mapping auf Anforderungsfelder \\
-\midrule
+\textbf{ISO/PAS 8800\parencite{iso-pas-8800-2024}} &
+KI-bezogene Safety-Erwartungen (Automotive) als Orientierungsrahmen. &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Konkrete Felder (ODD, Daten, Robustheit, Unsicherheit, Betrieb)
+  \item \textbf{–} Automotive-Kontext; Zulassungswege abweichend von Luftfahrt
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Mapping auf Anforderungsfelder \& Coverage-Matrix. \\
 
-\textbf{EASA KI-Leitlinien/ Konzepte}\parencite{easa-ai-concept-issue2-2024} &
-Regulatorische Erwartungshaltung; konzeptionelle Leitplanken &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Behördliche Perspektive, Fokus auf Assurance
-  \item Klare Prinzipien (Transparenz, Nachweis, Monitoring)
-\end{itemize} &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item (Noch) keine normativen Detailanforderungen
-  \item Interpretationsspielräume bei Evidenzformen
-\end{itemize} &
-Regulatorischer Kontext \\
-\midrule
+\textbf{EASA AI Concept Paper (Issue 2, 2024)\parencite{easa-ai-concept-issue2-2024}} &
+Behördliche Erwartungshaltung für L1/L2; Ergänzung zum bestehenden Safety-Regelwerk. &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Klare Prinzipien (ODD, Learning Assurance, Monitoring, XAI)
+  \item \textbf{–} Keine normativen Detailanforderungen; Auslegungsspielräume
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Regulatorischer Kontext \& Leitplanken für Evidenzformen. \\
 
-\textbf{DO-178C / DO-330}\parencite{do-178c,do-330} &
-Software-Entwicklung/V\&V (DO-178C); Tool-Qualifizierung (DO-330) &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Etablierte Nachweiswege (DAL-abhängig)
-  \item Starke Prozess-/Traceability-Disziplin
-\end{itemize} &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Kein KI-spezifischer Fokus (Daten/Modelle/ODD fehlen)
-  \item Tool-Qualifizierung für ML-Stacks herausfordernd
-\end{itemize} &
-Querverweis Toolchain/Traceability \\
-\midrule
+\textbf{DO-178C / DO-330\parencite{do-178c,do-330}} &
+Software-Assurance (DO-178C, DAL-skaliert); Tool-Qualifizierung (DO-330). &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Etablierte Nachweiswege, starke Traceability/Unabhängigkeit
+  \item \textbf{–} Kein KI-Fokus (Daten/Modelle/ODD fehlen); ML-Toolchains herausfordernd
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Baseline für Airborne-Software; Querverweis Toolchain/Traceability. \\
 
-\textbf{ISO 21448 (SOTIF)}\parencite{iso-21448-sotif} &
-Sicherheit der beabsichtigten Funktion (insb.\ Wahrnehmung) &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Fokus auf unzureichende Wahrnehmung/ODD
-  \item Szenario-/Abdeckungslogik anschlussfähig
-\end{itemize} &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Automotive; Luftfahrt-Transfer nicht 1:1
-  \item Keine luftfahrtspezifischen DAL/Prozesse
-\end{itemize} &
-ODD \& Szenariologie \\
-\midrule
+\textbf{ISO 21448 (SOTIF)\parencite{iso-21448-sotif}} &
+Sicherheit der beabsichtigten Funktion; Fokus auf Wahrnehmungs-/Szenario-Lücken. &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Szenario-/Abdeckungslogik sehr anschlussfähig
+  \item \textbf{–} Automotive; keine luftfahrtspezifischen DAL/Prozesse
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+ODD-/Szenariologie als Referenz für Test \& Reporting. \\
 
-\textbf{DO-200B/ED-76}\parencite{do-200b-ed-76} &
-Datenqualität für Luftfahrt-Daten (Erzeugung/Verwaltung) &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Starker Fokus auf Daten-Assurance
-  \item Auditierbare Datenprozesse
-\end{itemize} &
-\begin{itemize}\setlength\itemsep{0.2em}
-  \item Nicht ML-spezifisch (Label-/Split-Themen fehlen)
-\end{itemize} &
-Daten-/Label-Governance \\
+\textbf{DO-200B/ED-76\parencite{do-200b-ed-76}} &
+Datenqualität in der Luftfahrt (Erzeugung/Verwaltung). &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Auditierbare Datenprozesse, starker Qualitätsfokus
+  \item \textbf{–} Nicht ML-spezifisch (Label/Splits fehlen)
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Baustein für Daten-/Label-Governance. \\
+
+\textbf{ISO 26262 (Functional Safety)\parencite{iso-26262}} &
+Road-vehicles-Standard für funktionale Sicherheit; Prozessdisziplin (V-Modell), Unabhängigkeit, ASIL-Skalierung. &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Klare Rollen/Unabhängigkeit; hazard-basierte Skalierung (ASIL)
+  \item \textbf{+} Durchgängige Traceability \& Lebenszyklusdisziplin
+  \item \textbf{–} Automotive-Kontext; keine DAL/DO-Bezüge, kein KI-spezifischer Fokus
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Vergleichsfolie für Traceability, Rollen \& Lifecycle; Einordnung Toolchain/Änderungen. \\
+
+\textbf{ISO/IEC 22989 (AI Begriffe)\parencite{iso-iec-22989}} &
+Domänenneutrale KI-Terminologie (Model, Dataset, Bias, Uncertainty etc.). &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Einheitliche Begriffsverwendung; dient als Nachschlagewerk
+  \item \textbf{–} Definitionsstandard; keine Anforderungen/Nachweiswege
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Begriffsreferenz (z.\,B. ODD, Unsicherheit, Kalibrierung). \\
+
+\textbf{EASA AI Roadmap 2.0 (2023)\parencite{easa-ai-roadmap-2-2023}} &
+Strategischer Rahmen (human-centric KI; Level-Pfad; Lebenszyklus-Blick). &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Stufenpfad \& Vertrauensbausteine (Learning Assurance, Oversight)
+  \item \textbf{–} High-level; keine normativen Detailanforderungen/DAL-Ableitung
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Verortung der Assurance-Bausteine (ODD, Monitoring, Learning Assurance). \\
+
+\textbf{EASA MLEAP Final Report (2024)\parencite{easa-mleap-final-2024}} &
+Behördennahes Forschungsprojekt zu \emph{Learning Assurance} (W-Shape, Use-Cases). &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Konkrete Methoden \& Pipeline; Evidenzen aus Luftfahrt-Use-Cases
+  \item \textbf{–} Guidance/Empfehlung (nicht bindend); Fokus auf Level-1/2
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Referenz für Evidenzformen (segmentiertes Reporting, Kalibrierung, ODD, Degradation). \\
 
 \end{longtable}
 
-\section{Normen und Behörden — Ergänzungen zur Factsheet-Tabelle}
+\noindent\textit{Hinweis.}
+ISO/PAS~8800 adressiert weitgehend dieselben Assurance-Bausteine (ODD/Annahmen, Daten-/Label-Governance,
+Robustheit/OOD, Kalibrierung, Monitoring/Degradation) wie das \emph{EASA AI Concept Paper, Issue~2};
+ISO/IEC~TR~5469 dient dabei als domänenneutrale Brücke für Terminologie und Argumentationsstruktur.
+\parencite{iso-pas-8800-2024,easa-ai-concept-issue2-2024,iso-iec-tr-5469-2024}
 
-\begin{itemize}
-  \item ISO 26262 — Road vehicles — Functional safety (Parts 1–12)\parencite{iso-26262}.\\
-  \ann{Prozessdisziplin der funktionalen Sicherheit (V-Modell, Unabhängigkeit in V\&V, ASIL-Einstufung).}
-      {Nützlich als Vergleichsfolie für Traceability, Rollen/Unabhängigkeit und Lebenszyklus — zur Einordnung von Toolchain- und Änderungsprozessen in dieser Arbeit.}
-      {Automotive-kontext; keine luftfahrtspezifischen DAL/DO-Bezüge und kein KI-spezifischer Fokus.}
 
-  \item ISO/IEC 22989 — Artificial Intelligence — Concepts and Terminology\parencite{iso-iec-22989}.\\
-  \ann{Einheitliche KI-Terminologie (Model, Dataset, Bias, Uncertainty etc.).}
-      {Sichert konsistente Begriffsverwendung über die Kapitel hinweg (z.\,B.\ ODD, Unsicherheit, Kalibrierung) und dient als Nachschlagewerk.}
-      {Reiner Definitionsstandard; keine Anforderungen/Nachweiswege.}
-
-  \item EASA AI Roadmap 2.0 (2023)\parencite{easa-ai-roadmap-2-2023}.\\
-  \ann{Strategische Einordnung: Stufenweiser Pfad zu vertrauenswürdiger KI (Level-1/2), Lebenszyklus-Blick, Forschungsbedarfe.}
-      {Rahmen, um die in dieser Arbeit verwendeten Assurance-Bausteine (ODD, Monitoring, Learning Assurance) regulatorisch zu verorten.}
-      {High-level; keine normativen Detailanforderungen oder DAL-Ableitung.}
-
-  \item EASA MLEAP Final Report (2024) — Machine Learning Application Approval\parencite{easa-mleap-final-2024}.\\
-  \ann{Konkrete Konzepte zu \emph{Learning Assurance}: Datenrepräsentativität, Generalisierung/Robustheit, OOD/Abstain — mit Luftfahrt-Use-Cases.}
-      {Behördennahe Referenz für Evidenzformen in dieser Arbeit (segmentiertes Reporting, Kalibrierung, ODD-Abdeckung, Degradationspfade).}
-      {Guidance/Empfehlung (nicht bindend); Fokus auf Level-1/2-Anwendungen.}
-\end{itemize}
 
 \section{Luftfahrt-Zertifizierung und Forschung — Ergänzungen}
 
-\begin{itemize}
-  \item \textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024)\parencite{ml-meets-aerospace-2024}.\\
-  \ann{Identifiziert Hürden: fehlende ODD-Disziplin, mangelnde OOD/Abstain-Strategien, Verifikationslücken.}
-      {Belegt die Verschiebung von „Accuracy“ zu \emph{Assurance} und stützt die Anforderungsfelder (ODD, Robustheit, Kalibrierung, Toolchain).}
-      {Übersichtsarbeit; keine radar-spezifischen Metriken oder Zulassungsfälle.}
+\begin{description}
+  \item[\textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024)\parencite{ml-meets-aerospace-2024}]
+  \textbf{Fokus:} Hürden bei der Zertifizierung luftfahrtnaher KI (ODD-Disziplin, OOD/Abstain, V\&V-Lücken).\\
+  \textbf{Beitrag:} Untermauert die Verschiebung von „Accuracy“ zu \emph{Assurance}; stützt Felder wie ODD, Robustheit, Kalibrierung, Toolchain.\\
+  \textbf{Grenzen:} Überblicksarbeit; keine radar-spezifischen KPIs/Zulassungsfälle.
 
-  \item \textit{Towards certifiable AI in aviation: landscape, challenges, and opportunities} (2024)\parencite{towards-certifiable-ai-aviation-2024}.\\
-  \ann{State-of-the-Art-Statement: Zertifizierungslandschaft, Evidenzbausteine, offene Punkte.}
-      {Praktische Checkliste/Strukturierungshilfe für Evidenzpakete und Coverage-Matrix in dieser Arbeit.}
-      {Vorwiegend konzeptionell; empirische Nachweise nur punktuell.}
-\end{itemize}
+  \item[\textit{Towards certifiable AI in aviation: landscape, challenges, and opportunities} (2024)\parencite{towards-certifiable-ai-aviation-2024}]
+  \textbf{Fokus:} Landscape/State of the Art zu Zertifizierungslandschaft, Evidenzbausteinen und offenen Punkten.\\
+  \textbf{Beitrag:} Praktische Strukturierungshilfe/Checkliste für Evidenzpakete und die Coverage-Matrix in dieser Arbeit.\\
+  \textbf{Grenzen:} Überwiegend konzeptionell; empirische Nachweise nur punktuell.
+\end{description}
 
 \noindent
-Die hier ergänzten Quellen werden in der Coverage-Analyse dort referenziert, wo sie den Nachweisrahmen (Roadmap/MLEAP)
-oder die Begriffsschärfung (ISO/IEC~22989) konkret stützen.
+Die beiden Quellen werden in der Coverage-Analyse dort referenziert, wo sie den Nachweisrahmen (z.\,B. Roadmap/MLEAP)
+oder die Begriffsschärfung (z.\,B. ISO/IEC~22989) konkret stützen.
 
 
 
@@ -383,10 +400,12 @@ KI-spezifische Guidance kommt \emph{zusätzlich} obenauf (z.\,B. Learning Assura
   \item \textbf{Tool-Qualifikation denken:} Trainings-/Konvertierungs-/Code-Gen-Tools können qualifikationspflichtig sein (DO-330), wenn ihre Fehler unentdeckt ins Produkt wirken könnten.
   \item \textbf{Traceability bleibt zentral:} Anforderungen \(\rightarrow\) Architektur/Code \(\rightarrow\) Tests/Analysen müssen lückenlos verknüpft sein; KI-spezifische Evidenz (z.\,B. Daten-/Modell-Governance, Kalibrierung, OOD/Abstain) wird \emph{zusätzlich} dokumentiert.
 \end{itemize}
-\paragraph{Wichtig:}
-Die DO 178C und 330 nehmen kein Bezug zu KI und ist für Software und Tools im Allgemeinen. Anzumerken ist, dass deterministischer code 
-oder MC/DC Coverage stark empfohlen wird und als best practise gilt. Diese Punkte sind bei KI nicht erfüllbar und werden nicht in dieser 
-Norm ausdrücklich gefordert. Das Fazit dazu ist, dass KI nach diesen Standards möglich ist, aber die Anforderungen an Nachweisen steigen.
+\paragraph{Wichtig.}
+DO-178C und DO-330 beziehen sich nicht spezifisch auf KI, sondern allgemein auf Software und Tools. Deterministischer Code 
+und MC/DC-Coverage sind stark empfohlen und gelten als Best Practice; bei KI-Komponenten sind diese Punkte teils nicht erfüllbar 
+und werden in den Normen nicht ausdrücklich gefordert. Fazit: KI ist unter diesen Standards grundsätzlich zulassungsfähig, jedoch 
+steigen die Anforderungen an die Nachweisführung.
+
 
 
 
@@ -473,7 +492,11 @@ Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern \emph{
 Als Anker dienen die in Kapitel~\ref{chap:anforderungen} definierten \emph{Anforderungsfelder}. 
 Für jedes Feld wird (i) der Bezug zu Forderungsquellen notiert, (ii) typische Evidenz/Artefakte skizziert, 
 (iii) ein Abdeckungsgrad bewertet und (iv) eine kurze Maßnahme abgeleitet. 
-Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} entlang der in Kapitel~\ref{chap:szenarien} eingeführten ODD-Segmente berichtet.
+Der Berichtsmaßstab folgt den ODD-Schnitten (Abschn.~\ref{sec:szenarien-odd}).
+
+% Pakete (falls noch nicht geladen)
+%\usepackage{longtable}
+%\usepackage{booktabs}
 
 \section{Anforderungs- und Coverage-Matrix}\label{sec:coverage}
 
@@ -512,40 +535,58 @@ Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} entlang d
 \newcommand{\F}{\textsuperscript{F}} % Frontloading-bezogen
 \newcommand{\I}{\textsuperscript{I}} % Inline-bezogen
 
-\begin{table}[h]
-\centering
-\caption{Coverage-Analyse (ISO/PAS~8800 \textrightarrow\ Anforderungsfelder)}
-\begin{tabular}{p{0.20\textwidth} p{0.22\textwidth} p{0.25\textwidth} p{0.07\textwidth} p{0.26\textwidth}}
+\begin{center} % optional fürs Zentrieren
+\begin{longtable}{p{0.20\textwidth} p{0.22\textwidth} p{0.25\textwidth} p{0.07\textwidth} p{0.26\textwidth}}
+\caption{Coverage-Analyse (ISO/PAS~8800 \textrightarrow\ Anforderungsfelder)}\label{tab:coverage}\\
+
 \toprule
 \textbf{Anforderungsfeld} & \textbf{ISO/PAS~8800 Bezug} & \textbf{Erwartete Artefakte / Nachweise} & \textbf{Abde- ckung} & \textbf{Kommentar / Lücke / Maßnahmen} \\
 \midrule
+\endfirsthead
+
+\multicolumn{5}{l}{\small Fortsetzung von \tablename~\thetable: Coverage-Analyse (ISO/PAS~8800 \textrightarrow\ Anforderungsfelder)}\\
+\toprule
+\textbf{Anforderungsfeld} & \textbf{ISO/PAS~8800 Bezug} & \textbf{Erwartete Artefakte / Nachweise} & \textbf{Abde- ckung} & \textbf{Kommentar / Lücke / Maßnahmen} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\small Fortsetzung auf der nächsten Seite}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% --------- TABELLENINHALT (unverändert) ---------
 \textbf{ODD-/Szenario- abdeckung} & ODD, Annahmen, szenarienbasiertes Testen & ODD-Dokument, Szenariokatalog, segmentiertes Leistungs-/Unsicherheits\-reporting, Re-Assessment bei ODD-Änderung & \score{2} & ODD-Schnitte definiert; Unsicherheitsreporting teils uneinheitlich. \textbf{Maßn.:} verbindliches ODD-Template; Pflichtmetriken (Pd/Pfa, ECE/Brier) je Segment; Unknown/Abstain-Kriterien; Regression bei ODD-Änderung. \\
 \midrule
 \textbf{Daten-/Label-Governance}\F & Daten-Management, Dokumentation, Freigabeprozesse & Datasheets/Model Cards, Label-Guidelines, Inter-Annotator-Agreement, versionierte Datenstände (Signaturen) & \score{2} & Prozesse vorhanden, IAA/Reviewstiefe variiert. \textbf{Maßn.:} IAA-Ziel, Freigabe-Checkliste, Pipeline-Hashing/Signierung, Datenänderungslog. \\
 \midrule
-\textbf{Robustheit \& Verteilungssprünge} & Robustheitsprinzipien, Stresstests & Stress-/Sensitivitätstests (z.\,B.\ RFI/Clutter/Noise), Domänen-Holdouts, Degradationskurven & \score{1} & Systematische Stresstests lückenhaft; RFI/Multipath selten. \textbf{Maßn.:} Testbatterie inkl.\ Worst-Case, Katalog pro Störart, Akzeptanzkriterien. \\
+\textbf{Robustheit \& Verteilungssprünge} & Robustheitsprinzi- pien, Stresstests & Stress-/Sensitivitätstests (z.\,B.\ RFI/Clutter/Noise), Domänen-Holdouts, Degradationskurven & \score{1} & Systematische Stresstests lückenhaft; RFI/Multipath selten. \textbf{Maßn.:} Testbatterie inkl.\ Worst-Case, Katalog pro Störart, Akzeptanzkriterien. \\
 \midrule
-\textbf{Konfidenzkali- brierung \& Unsicherheit} & Unsicherheitsbehandlung, Freigabekriterien & Kalibrationsberichte (ECE, Brier, NLL) je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; CI/Bootstrap-Reporting. \\
+\textbf{Konfidenzkali- brierung \& Unsicherheit} & Unsicherheitsbe- handlung, Freigabekriterien & Kalibrationsberichte (ECE, Brier, NLL) je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; CI/Bootstrap-Reporting. \\
 \midrule
 \textbf{Toolchain-Assurance \& Reproduzierbarkeit}\F & Tool-/Prozesskontrolle, ggf.\ Toolqualifizierung & deterministische Builds, Lockfiles, Artefakt-Signaturen, reproduzierbare Trainings-/Eval-Läufe, TQL-Bewertung & \score{2} & Repro besser, formale Toolqualifizierung teils offen. \textbf{Maßn.:} TQL-Entscheidungsmatrix, Build-Manifeste, CI/CD-Gates. \\
 \midrule
-\textbf{Monitoring/ Degradation (Betrieb)}\I & Betriebsüberwachung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Monitoring rudimentär; Degradationspfade wenig erprobt. \textbf{Maßn.:} Telemetrie-Set, OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
+\textbf{Monitoring/ Degradation (Betrieb)}\I & Betriebsüber wachung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Monitoring rudimentär; Degradationspfade wenig erprobt. \textbf{Maßn.:} Telemetrie-Set, OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
 \midrule
 \textbf{Traceability/ Versionierung}\F & Rückverfolgbarkeit, Konfigurationsmgmt. & End-to-end Links Anf.\,$\rightarrow$\,Daten\,$\rightarrow$\,Modell\,$\rightarrow$\, Tests\,$\rightarrow$\,Release; Änderungsprotokolle & \score{2} & Links vorhanden, Lücken bei Daten\,$\leftrightarrow$\,Modell. \textbf{Maßn.:} Traceability-Matrix, verbindliche Artefakt-IDs in CI. \\
 \midrule
 \textbf{XAI \& Auditierbarkeit}\F & nachvollziehbare Evidenz & zweckgebundene Erklärungen, reproduzierbare Notebooks/Skripte, Review-Artefakte & \score{2} & Heterogene XAI-Methoden, Repro schwankt. \textbf{Maßn.:} XAI-Playbook, Seed/Env-Fixierung, Audit-Pipeline. \\
 \midrule
-\textbf{Änderungen/Freigabe}\F & Änderungs- und Freigabekontrolle & Re-Training-Trigger, Regression-Testplan, Freigabeprotokoll, Safety-Case-Update & \score{2} & Trigger uneinheitlich, Regression ad hoc. \textbf{Maßn.:} feste Trigger (Daten-/Shift/Performance), definierter Regression-Scope. \\
+\textbf{Änderungen/ Freigabe}\F & Änderungs- und Freigabekontrolle & Re-Training-Trigger, Regression-Testplan, Freigabeprotokoll, Safety-Case-Update & \score{2} & Trigger uneinheitlich, Regression ad hoc. \textbf{Maßn.:} feste Trigger (Daten-/Shift/Performance), definierter Regression-Scope. \\
 \midrule
-\textbf{Schnittstellen/HMI (Inline)}\I & Informationsübergabe, Interpretierbarkeit & Qualitätsflags, Konfidenz, Unknown/Abstain, HMI-Richtlinien (Top-$k$, OOD-Hinweise) & \score{2} & Flags vorhanden, Darstellung uneinheitlich. \textbf{Maßn.:} HMI-Styleguide, Operator-Validierung. \\
+\textbf{Schnittstellen/ HMI (Inline)}\I & Informationsüber- gabe, Interpretierbarkeit & Qualitätsflags, Konfidenz, Unknown/Abstain, HMI-Richtlinien (Top-$k$, OOD-Hinweise) & \score{2} & Flags vorhanden, Darstellung uneinheitlich. \textbf{Maßn.:} HMI-Styleguide, Operator-Validierung. \\
 \midrule
 \textbf{Frontloading-spezifisch}\F & Evidenzgenerierung, Transfer in Safety Case & Audit-Trails (Notebooks/Seeds/Datenstände), Evidenzpakete, Review mit Safety-Team & \score{2} & Evidenztransfer inkonsistent. \textbf{Maßn.:} Evidenz-Template, Freigabe-Checklist, gemeinsame Reviews. \\
-\bottomrule
-\end{tabular}
+% --------- ENDE TABELLENINHALT ---------
+
+\end{longtable}
+\end{center}
 
 \vspace{0.5em}
 \ampelLegende\quad \F\,= Frontloading-bezogen,\; \I\,= Inline-bezogen.
-\end{table}
+
 
 \section{Diskussion der Abdeckung}\label{sec:abdeckung-diskussion}
 Die Coverage-Analyse zeigt ein differenziertes Bild über alle Anforderungsfelder hinweg. Insgesamt ist eine \textbf{weitgehende Abdeckung}
