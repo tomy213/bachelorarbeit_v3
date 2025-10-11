@@ -321,7 +321,7 @@ oder die Begriffsschärfung (z.\,B. ISO/IEC~22989) konkret stützen.
 \chapter{Luftfahrtrahmenbedingungen}
 
 % ==== Luftfahrt ====
-\subsection{Ziel, Motivation und Scope (Luftfahrt)}
+\section{Ziel, Motivation und Scope (Luftfahrt)}
 \paragraph{Ziel.}
 Einordnung, wie „sicher genug“ für KI-Funktionen in der Luftfahrt regulatorisch begründet und nachgewiesen wird: Rolle von EASA (AI Roadmap, Concept Paper Issue~2), MLEAP-Ergebnissen und etablierten Standards (z.B. DO-178C). Klarstellung: KI-Guidance ergänzt, ersetzt aber nicht die klassische Assurance; keine Erleichterung der Nachweisstrenge.
 
@@ -669,6 +669,30 @@ und \emph{Konfidenzkalibrierung \& Unsicherheit}.
   \item \textbf{Implikation:} Frontloading ist ein tragfähiges Vehikel zur \emph{Evidenzgenerierung}, sofern ODD-Schnitte,
   segmentierte Kalibrierung und Freigabekriterien verbindlich festgelegt und konsequent in Evidenzpakete überführt werden.
 \end{itemize}
+
+\paragraph{Warum der Schwerpunkt auf Frontloading.}
+In klassischen Radarsystemen werden Mustererkennung und Schwellwerte oft fest verdrahtet: Schwellen entstehen aus der
+Auswertung historischer Daten und werden anschließend deterministisch implementiert. Diese Musterfindung ist heute
+Gegenstand der Datenwissenschaft, deren leistungsfähigste Werkzeuge (u.\,a.) KI-Methoden sind. Wird KI \emph{vorlaufend}
+(offboard) zur Datenanalyse, Musterentdeckung und Hypothesenbildung eingesetzt – und das operative Verhalten anschließend
+\emph{klassisch} (deterministisch) umgesetzt und nach DO-178C-Systemlogik verifiziert –, bleibt die KI vom Flugzeugbetrieb
+entkoppelt und entspricht der EASA-Logik eines Level-1-Einsatzes (unterstützend, ohne eigenständige Autorität).
+Der assurance­relevante Vorteil: Die KI dient als Erkenntnisinstrument, während die produktive Funktion durch konventionelle,
+prüfbare Artefakte (z.\,B.\ feste Regeln, nachvollziehbare Schwellen) realisiert wird. Dadurch verlagern sich KI-spezifische
+Nachweise primär auf Reproduzierbarkeit der Analysen, Daten-/Label-Governance und die Traceability der Ableitung
+(Daten\,$\rightarrow$\,Muster\,$\rightarrow$\,Spezifikation), statt auf laufzeitkritische Nachweise im Bordbetrieb.
+
+\paragraph{Hardware-Perspektive: Frontloading vs.\ Inline.}
+Im \emph{Frontloading} liegen die Rechenlast und Speicherbedarfe offboard (Skalierung via CPU/GPU/Acceleratoren, kein Echtzeitzwang). 
+Das reduziert hardwarebedingte Zulassungsrisiken: deterministische Umgebungen (Container/VM, Seeds, Lockfiles) genügen für 
+Reproduzierbarkeit; Bordhardware bleibt unverändert, da die operative Logik \emph{deterministisch} implementiert wird. 
+Im \emph{Inline}-Betrieb treten zusätzliche Anforderungen auf: harte Latenz- und Verfügbarkeitsbudgets, deterministisches 
+Laufzeitverhalten unter Worst-Case-Last, begrenzte Ressourcen (Thermik, Energie, Speicher), potenzieller Bedarf an 
+beschleunigender Hardware (z.\,B.\ GPU/NPU) mit Integrations- und Lebenszyklusrisiken (Obsoleszenz), sowie Implikationen für 
+Nachweis und Qualifizierung der Hardware/Toolkette. Diese Zwänge erhöhen die Komplexität von Integration, Test und Zulassung 
+gegenüber einer reinen Frontloading-Nutzung.
+
+
 
 \section{Inline-Funktionen (Überblick)}\label{sec:uebertragbarkeit-inline}
 Für Inline-Funktionen (laufzeitwirksame Nutzung im Betrieb) treten betriebsnahe Forderungen in den Vordergrund:

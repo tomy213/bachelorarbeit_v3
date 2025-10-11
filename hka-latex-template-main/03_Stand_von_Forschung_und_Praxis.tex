@@ -2,10 +2,10 @@
 \chapterimage{Bilder_und_Co/autonomer_roboter.jpg} % Chapter heading image
 %----------------------------------------------------------------------------------------
 % --- KAPITEL: LITERATUR- UND PRAXISÜBERBLICK ---
-\chapter{Stand von Forschung und Praxis}\label{chap:state-of-practice}
+\chapter{Stand von Forschung \& Praxis}\label{chap:state-of-practice}
 
-Dieses Kapitel skizziert, wie KI heute im Luftfahrtumfeld eingesetzt wird, welche Schwerpunkte der
-Forschungsdiskurs zu \emph{AI Safety} setzt und welche wiederkehrenden Praxisprobleme auftreten.
+Dieses Kapitel skizziert den aktuellen Einsatz von KI – mit klarem Fokus auf die Luftfahrt, jedoch nicht exklusiv –,
+zeigt die Schwerpunkte des Forschungsdiskurses zu \emph{AI Safety} und wiederkehrende Praxisprobleme.
 Die Darstellung ist bewusst bewertungsfrei und dient als \emph{Context-Setting} zwischen den
 \emph{Grundlagen} und den \emph{Anforderungen und Szenarien}.
 
@@ -16,21 +16,25 @@ bilden den Grundstock, stoßen jedoch sichtbar an Grenzen:
 
 \begin{itemize}
   \item \textbf{Skalierung:} Mit wachsenden Sensor-Datenraten steigen Pflege- und Rechenaufwände überproportional; komplexe Regel-/Filterketten werden zur Engstelle.
-  \item \textbf{Nichtlineare Bedingungen:} Hart verdrahtete Heuristiken erfassen stark nichtlineare Zusammenhänge und Interaktionen (z.\,B.\ Geometrie $\times$ Wetter $\times$ Clutter) nur grob.
+  \item \textbf{Nichtlineare Bedingungen:} Fest verdrahtete Regeln bilden stark nichtlineare Zusammenhänge und Wechselwirkungen (z.\,B.\ Geometrie $\times$ Wetter $\times$ Clutter) nur unzureichend ab.
   \item \textbf{Hoher Anpassungsaufwand:} Neue Plattformen/Umgebungen erfordern wiederholtes Nachjustieren von Schwellen/Regeln; Nebenwirkungen sind schwer vorherzusagen.
 \end{itemize}
 
-\noindent
-\textbf{Motivation für KI.} KI lernt Muster in hochdimensionalen Daten und adressiert damit \emph{Nichtlinearität} und \emph{Adaptivität}
-(z.\,B.\ kontrolliertes Re-Training statt Regel-Neuentwurf). Im Radar-Kontext kann KI Muster \emph{im} Clutter erkennen, während klassische Verfahren
-Clutter primär unterdrücken und schwache Ziele ggf.\ später sichtbar werden. Voraussetzung für den Einsatz sind klar definierte Einsatzgrenzen (ODD),
-segmentierte Evidenzen und robuste Nachweise (Kalibrierung, Shift-/Stresstests).
+\paragraph{Motivation}
+KI ist heute allgegenwärtig – von generativen Assistenten wie ChatGPT bis zur KI-gestützten Suchlogik bei jeder Google-Suche; 
+hinzu kommen (teil-)autonome Fahrfunktionen und der Wettlauf um vollautonomes Fahren. Der aktuelle „KI-Hype“ schürt hohe 
+Erwartungen an Leistungsfähigkeit und Einführungs­tempo. In der Luftfahrt sind die Erwartungen traditionell besonders hoch: 
+Entscheidend sind neben Leistungsgewinnen vor allem belastbare Nachweise zur \emph{Sicherheit}. 
+KI lernt Muster in hochdimensionalen Daten und adressiert damit \emph{Nichtlinearität} und \emph{Adaptivität} 
+(z.\,B.\ Re-Training statt Neuentwurf). Im Radar-Kontext kann KI Muster \emph{im} Clutter erkennen, 
+während klassische Verfahren Clutter primär unterdrücken und schwache Ziele ggf.\ erst später sichtbar werden.
 
 
 % ----------------------------------------------------
-\section{Überblick: Einsatzfelder}\label{sec:sop-ueberblick}
-KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendung – von Sensorik und Bordfunktionen über den Flugbetrieb bis
-zum Luftraummanagement. Ein Literaturüberblick zeigt folgende Schwerpunkte (indikativ; nach \textcite{ml-meets-aerospace-2024}):
+\section{Einsatzfelder}\label{sec:sop-ueberblick}
+KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendungsmöglichkeiten – von Sensorik und Bordfunktionen 
+über den Flugbetrieb bis zum Luftraummanagement. Ein Literaturüberblick zeigt folgende Schwerpunkte 
+(indikativ; nach \textcite{ml-meets-aerospace-2024}):
 
 \begin{itemize}
   \item \textbf{Flugmanagement und -betrieb (39\,\%):} Routen-/Treibstoffoptimierung, Turnaround- und Dispositionsplanung, Pünktlichkeitsprognosen.
@@ -40,13 +44,16 @@ zum Luftraummanagement. Ein Literaturüberblick zeigt folgende Schwerpunkte (ind
 \end{itemize}
 
 \paragraph{Einordnung für Radar/Klassifikation.}
-Für diese Arbeit sind \emph{Sicherheit/Überwachung} sowie \emph{Sensorik \& Wahrnehmung} besonders relevant:
-die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutter-Trennung, Mikrodoppler) fällt genau hier hinein.
+Für diese Arbeit ist besonders die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutter-Trennung, 
+Mikrodoppler) relevant. Da luftfahrtspezifische, öffentlich zugängliche Fachquellen dazu derzeit sehr begrenzt sind,
+müssen externe Referenzen herangezogen und mit Blick auf die luftfahrttypischen Randbedingungen übertragen werden.
+
+
 
 
 % ----------------------------------------------------
 \section{Forschungsstand zu AI Safety}\label{sec:fs-safety}
-Der AI-Safety-Diskurs priorisiert \emph{Assurance} gegenüber reiner Benchmark-Optimierung. Wiederkehrende Motive: % TODO \cite{...}
+Der AI-Safety-Diskurs priorisiert \emph{Assurance} gegenüber reiner Benchmark-Optimierung. Wiederkehrende Motive sind: % TODO \cite{...}
 \begin{itemize}
   \item Daten-/Label-Governance
   \item ODD und Annahmenmanagement
@@ -60,14 +67,24 @@ Der AI-Safety-Diskurs priorisiert \emph{Assurance} gegenüber reiner Benchmark-O
 
 % ----------------------------------------------------
 \section{KI in (Luftfahrt-)Radarsystemen}\label{sec:ki-radar-stand}
-Veröffentlichungen und Praxisbeiträge zeigen unterschiedliche Reifegrade und Integrationspfade—vom \emph{Frontloading}
-(Entwicklung, Test, Evidenzerzeugung) bis hin zu \emph{Inline}-Funktionen mit unmittelbarer Wirkung. Relevante Beobachtungen: % TODO 5–8 Quellen \cite{...}
-\begin{itemize}
-  \item \textbf{Use-Cases:} Detektion/Klassifikation (inkl.\ Mikrodoppler), Clutter-Trennung, Sensorfusion, Qualitätsbewertung von Radarprodukten.
-  \item \textbf{Besonderheiten:} Datenknappheit seltener Ereignisse (Class Imbalance), distributionssensible Eingaben (Wetter/Clutter/RFI/Aspekt), Anforderungen an Latenz/Verfügbarkeit.
-  \item \textbf{Integrationsmuster:} Inline erfordert HMI-/Konfidenzkommunikation (Unknown/Abstain, Qualitätsflags) und Latenzgarantien; Frontloading fokussiert Reproduzierbarkeit, Audit-Trails und belastbare Evidenzüberführung.
-  \item \textbf{Reporting-Praxis:} Zunehmend segmentiertes Reporting nach ODD-Schnitten (SNR/Entfernung/Wetter/Clutter) statt nur Gesamtmetriken; Kalibrierungsangaben werden häufiger eingefordert.
-\end{itemize}
+In Radarsystemen erscheint KI derzeit in zwei grundsätzlichen Rollen: 
+(1) zur \emph{frontloading} Nutzung in Entwicklung, Test und Evidenzerzeugung (offline) sowie 
+(2) als \emph{inline} Funktion mit unmittelbarer Wirkung im Betrieb. 
+Zu betonen ist die Anwendung im \emph{Frontloading}.
+
+\paragraph{Typische Aufgabenfelder.}
+Detektion und Klassifikation (inkl.\ Mikrodoppler), Trennung von Ziel und Clutter, einfache Sensorfusion,
+Qualitätsbewertung von Radarprodukten, kuratierte Datenauswahl/-bereinigung sowie Ableitung von Tests und Szenarien.
+
+\paragraph{Besonderheiten.}
+Seltene Ereignisse (Klassenungleichgewicht), verteilungsabhängige Eingaben (Wetter, Clutter, RFI, Aspekt) und
+strikte Randbedingungen (z.\,B.\ Latenz/Verfügbarkeit bei Bordfunktionen) prägen Datenerhebung, Auswertung und Integration.
+
+\paragraph{Reporting-Praxis.}
+Statt nur Gesamtkennzahlen setzt sich eine segmentierte Darstellung nach ODD-Schnitten durch
+(z.\,B.\ nach SNR, Entfernung, Wetter, Clutter), um Leistung und Grenzen kontextsensitiv zu belegen.
+
+
 
 %----------------------------------------------------
 \section{Militärische Perspektive – Hauptunterschiede zur zivilen Luftfahrt}\label{sec:militaer-perspektive}
@@ -85,7 +102,7 @@ Kontext wie folgt zusammen:\parencite{mil-ai-standards-2024}
 
 \begin{table}[h]
 \centering
-\caption{Zivil vs.\ Militär – stark verkürzter Vergleich zentraler Aspekte}
+\caption{Zivil vs.\ Militär – verkürzter Vergleich zentraler Aspekte}
 \begin{tabular}{p{0.30\textwidth} p{0.30\textwidth} p{0.31\textwidth}}
 \toprule
 \textbf{Aspekt} & \textbf{Zivile Luftfahrt} & \textbf{Militärische Luftfahrt} \\
@@ -153,7 +170,12 @@ Das ist \emph{assurance-relevant}, weil Evidenz segmentiert (ODD-Schnitte) gefü
 \subsection{Hardware}\label{subsec:hardware}
 Je nach Ansatz sind die Anforderungen höher als bei klassischen Verfahren (mehrere CPU-Kerne, ggf.\ GPU/Accelerator).
 Solche Komponenten unterliegen Zulassungsanforderungen; verfügbare, qualifizierte Hardware kann den Integrationspfad (Frontloading vs.\ Inline)
-und die Latenzbudgets maßgeblich bestimmen.
+und die Latenzbudgets maßgeblich bestimmen. \\
+\emph{Praxisnotiz.} In hochkritischen Inline-Pfaden (DAL A/B) werden mehrere \emph{aktive} CPU-Kerne erst seit wenigen Jahren, durch 
+jüngerer Behörden-Guidance häufiger tatsächlich eingesetzt; zuvor wurden sie oft deaktiviert, um Nachweise zu vermeiden. 
+GPU-/Accelerator-Einsätze sind in solchen Pfaden weiterhin sehr selten. Sie finden sich daher überwiegend in weniger kritischen Partitionen 
+oder im Frontloading.
+
 
 
 \section{Chancen und Risiken (Radar/Objektklassifizierung)}\label{sec:ki-chancen-risiken}
@@ -166,7 +188,7 @@ KI kann Funktionen und Abläufe ergänzen oder verbessern; zugleich entstehen ne
 \toprule
 \textbf{Chancen} & \textbf{Risiken und Herausforderungen} \\
 \midrule
-Bessere Trennung Ziel/Clutter & Scheinsicherheit bei Regen-/See-Clutter (fehlkalibrierte Konfidenzen) \\[0.3em]
+Bessere Trennung Ziel/Clutter & Scheinsicherheit bei Regen-/See-Clutter \\[0.3em]
 Frühe Erkennung (z.\,B.\ UAS) & Verpasste Gefahrenklasse (erhöhte False-Negative-Rate) \\[0.3em]
 Robustere Sensorfusion & Fehlerfortpflanzung über Sensorkanäle (Kohärenz, Unsicherheitsbehandlung) \\[0.3em]
 Anpassbarkeit via Re-Training (ohne Pipeline-Neuentwurf) & Erneuter Freigabe-/Zulassungsbedarf, Daten-Drift im Betrieb \\[0.3em]
@@ -235,9 +257,10 @@ Diese Beobachtungen leiten direkt zu den \emph{Anforderungen und Szenarien} übe
 \chapter{Automobilbranche: KI \& Sicherheit}
 
 \section{Ziel \& Scope}
-\textit{Zweck:} Rahmen für KI-Safety im Fahrzeug (Perzeption/Entscheidung, z.\,B.\ Radar-Objektklassifikation), ohne Security-Vertiefung. 
-\textit{Hinweis:} Cybersecurity (ISO 21434, UNECE R155/R156) wird nur als Betriebsrandbedingung erwähnt und ist \emph{nicht} Teil dieser Arbeit.
-\textit{Gremien in einem Satz:} UNECE/WP.29 regelt Betrieb/Updates; ISO/SAE/IEEE standardisieren – Details hier nachrangig.
+Dieses Kapitel ordnet KI-Safety in der Automobilbranche ein und nutzt sie als \emph{Vergleichsfolie} für die Luftfahrt:
+Welche Bausteine (ODD, szenariobasierte V\&V, Kalibrierung/Unsicherheit, Daten-/Modell-Governance, Monitoring/Updates)
+sind etabliert und wie lassen sie sich strukturiert übertragen? Als Referenzrahmen dienen ISO~26262, ISO~21448 (SOTIF),
+ISO/PAS~8800 und ISO/IEC~TR~5469.
 
 \subsection{Begriffe \& Standards – Schnellvergleich}
 \begin{center}
@@ -292,7 +315,7 @@ für die bereits definierten Anforderungsfelder genutzt.
 \textit{Nutzen:} Ergänzt 8800/26262/SOTIF um Begriffe, Risikofaktoren und prozessuale Leitplanken – gut anschlussfähig an Luftfahrt-Argumentationsmuster.
 
 \section{Crosswalk: Luftfahrt \(\leftrightarrow\) Automotive}
-\subsection{Gemeinsamkeiten (kurz)}
+\subsection{Gemeinsamkeiten}
 \begin{itemize}
   \item Hazard-basierte Skalierung der Nachweisstrenge (DAL \(\leftrightarrow\) ASIL); kein „Assurance-Rabatt“ für KI.
   \item Safety Case/Assurance Case als roter Faden (Claims, Strategie, Evidenz, Annahmen).
@@ -300,7 +323,7 @@ für die bereits definierten Anforderungsfelder genutzt.
   \item Traceability, V\&V über Szenarien; Tool-Betrachtungen bei ML-Toolchains.
 \end{itemize}
 
-\subsection{Unterschiede (kurz)}
+\subsection{Unterschiede}
 \begin{itemize}
   \item Regulatorik: Luftfahrt (Zulassung vor Betrieb, starke Behördenbindung) vs.\ Automotive (EU Typgenehmigung/UNECE, USA Self-Certification) – kürzere OTA-Zyklen im Feld.
   \item HMI \& Betrieb: Crew/Operator vs.\ Fahrer/Handover; höhere Variantenvielfalt, dichter Update-Betrieb im Automotive.
