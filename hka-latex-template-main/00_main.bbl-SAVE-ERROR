@@ -96,6 +96,57 @@
       \verb https://arxiv.org/abs/2409.08666
       \endverb
     \endentry
+    \entry{conduit2017-superalloy-nn}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=9d74cb4c0791ed54f28eac9339681e6a}{%
+           family={Conduit},
+           familyi={C\bibinitperiod},
+           given={B.\bibnamedelimi D.},
+           giveni={B\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=ae3041a3a204b3f0f12cea9172af1721}{%
+           family={Jones},
+           familyi={J\bibinitperiod},
+           given={N.\bibnamedelimi G.},
+           giveni={N\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=f126a9f420cb436d20cbb5283afaca09}{%
+           family={Stone},
+           familyi={S\bibinitperiod},
+           given={H.\bibnamedelimi J.},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=1feeb04286535a2765ba2d651e306d52}{%
+           family={Conduit},
+           familyi={C\bibinitperiod},
+           given={G.\bibnamedelimi J.},
+           giveni={G\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{b4d8f8deca77a37f094a83069c8b09f9}
+      \strng{fullhash}{80ea73e2c50f0ce0079371f6f5612f6d}
+      \strng{fullhashraw}{80ea73e2c50f0ce0079371f6f5612f6d}
+      \strng{bibnamehash}{b4d8f8deca77a37f094a83069c8b09f9}
+      \strng{authorbibnamehash}{b4d8f8deca77a37f094a83069c8b09f9}
+      \strng{authornamehash}{b4d8f8deca77a37f094a83069c8b09f9}
+      \strng{authorfullhash}{80ea73e2c50f0ce0079371f6f5612f6d}
+      \strng{authorfullhashraw}{80ea73e2c50f0ce0079371f6f5612f6d}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Materials \& Design}
+      \field{title}{Design of a nickel-base superalloy using a neural network}
+      \field{volume}{131}
+      \field{year}{2017}
+      \field{pages}{358\bibrangedash 365}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/j.matdes.2017.06.007
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0264127517305907
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0264127517305907
+      \endverb
+    \endentry
     \entry{mil-ai-standards-2024}{article}{}{}
       \name{author}{6}{}{%
         {{hash=426844b8f9212d49150839207a6993b8}{%
@@ -202,6 +253,34 @@
       \field{title}{EASA Artificial Intelligence Concept Paper, Issue 2}
       \field{year}{2024}
     \endentry
+    \entry{handelsblatt-hannovermesse-2025}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=b9202574109cb954f95c3705d9f5400c}{%
+           family={Handelsblatt},
+           familyi={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9202574109cb954f95c3705d9f5400c}
+      \strng{fullhash}{b9202574109cb954f95c3705d9f5400c}
+      \strng{fullhashraw}{b9202574109cb954f95c3705d9f5400c}
+      \strng{bibnamehash}{b9202574109cb954f95c3705d9f5400c}
+      \strng{authorbibnamehash}{b9202574109cb954f95c3705d9f5400c}
+      \strng{authornamehash}{b9202574109cb954f95c3705d9f5400c}
+      \strng{authorfullhash}{b9202574109cb954f95c3705d9f5400c}
+      \strng{authorfullhashraw}{b9202574109cb954f95c3705d9f5400c}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Bericht zur Hannover Messe mit Industrie-Beispielen (Predictive Maintenance, vernetzte Triebwerke)}
+      \field{title}{Das Jahr der KI in der Industrie? Warum 2025 so entscheidend ist}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://www.handelsblatt.com/technik/ki/hannover-messe-das-jahr-der-ki-in-der-industrie-warum-2025-so-entscheidend-ist/100117773.html
+      \endverb
+      \verb{url}
+      \verb https://www.handelsblatt.com/technik/ki/hannover-messe-das-jahr-der-ki-in-der-industrie-warum-2025-so-entscheidend-ist/100117773.html
+      \endverb
+    \endentry
     \entry{ecrs-mk1-release}{misc}{}{}
       \name{author}{2}{}{%
         {{hash=53af8867dbe0a82d9ae11510aee35976}{%
@@ -286,6 +365,86 @@
       \field{title}{ISO/PAS 8800:2024 — Road vehicles — Safety of the intended functionality of AI in road vehicles}
       \field{year}{2024}
     \endentry
+    \entry{alphafold-nature-2021}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=10a7a824028a842a17d901b4ec09993d}{%
+           family={Jumper},
+           familyi={J\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=173072a12c87679d6e0aeed7dbfb2abc}{%
+           family={Evans},
+           familyi={E\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=38026ba4ee6b102b47bf3ffb41325c8f}{%
+           family={al.},
+           familyi={a\bibinitperiod},
+           prefix={et},
+           prefixi={e\bibinitperiod}}}%
+      }
+      \strng{namehash}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{fullhash}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{fullhashraw}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{bibnamehash}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{authorbibnamehash}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{authornamehash}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{authorfullhash}{94a303289eed4c6f60d56096c0561fbd}
+      \strng{authorfullhashraw}{94a303289eed4c6f60d56096c0561fbd}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{number}{7873}
+      \field{title}{Highly accurate protein structure prediction with AlphaFold}
+      \field{volume}{596}
+      \field{year}{2021}
+      \field{pages}{583\bibrangedash 589}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1038/s41586-021-03819-2
+      \endverb
+      \verb{urlraw}
+      \verb https://nature.com/articles/s41586-021-03819-2
+      \endverb
+      \verb{url}
+      \verb https://nature.com/articles/s41586-021-03819-2
+      \endverb
+    \endentry
+    \entry{Koopman:2025:EAI}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=0180518be5acba53c0936c475b7ebeb0}{%
+           family={Koopman},
+           familyi={K\bibinitperiod},
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \list{publisher}{1}{%
+        {o.\,V.}%
+      }
+      \strng{namehash}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{fullhash}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{fullhashraw}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{bibnamehash}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{authorbibnamehash}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{authornamehash}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{authorfullhash}{0180518be5acba53c0936c475b7ebeb0}
+      \strng{authorfullhashraw}{0180518be5acba53c0936c475b7ebeb0}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{isbn}{9798292384410}
+      \field{note}{Copyright by Philipp Koopman; Printed in Poland by Amazon Fulfillment}
+      \field{title}{Embodied AI Safety: Reimagining Safety Engineering for Artificial Intelligence in Physical Systems}
+      \field{version}{1.01}
+      \field{year}{2025}
+    \endentry
     \entry{ml-meets-aerospace-2024}{article}{}{}
       \name{author}{3}{}{%
         {{hash=0eb08a0e4adbdf4de8f532dffd983fa4}{%
@@ -340,6 +499,92 @@
       \field{note}{Learning Assurance, ODD/Robustness}
       \field{title}{MLEAP Final Report — Machine Learning Application Approval}
       \field{year}{2024}
+    \endentry
+    \entry{stat-watson-2018}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=9080f1afcfd81f40b0c5f11e9df8cc18}{%
+           family={Ross},
+           familyi={R\bibinitperiod},
+           given={Casey},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d28098b1f4dbea79ccb834743ade4eba}{%
+           family={Swetlitz},
+           familyi={S\bibinitperiod},
+           given={Ike},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{fullhash}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{fullhashraw}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{bibnamehash}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{authorbibnamehash}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{authornamehash}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{authorfullhash}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \strng{authorfullhashraw}{20fd4e98e779e8911b7a754fb99b2ff8}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{STAT}
+      \field{month}{07}
+      \field{title}{IBM pitched Watson as a revolution in cancer care. It’s nowhere close}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://www.statnews.com/2018/07/25/ibm-watson-recommended-unsafe-incorrect-treatments/
+      \endverb
+      \verb{url}
+      \verb https://www.statnews.com/2018/07/25/ibm-watson-recommended-unsafe-incorrect-treatments/
+      \endverb
+    \endentry
+    \entry{jipel-andersen-stabilityai-2024}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=6108a5926feaa25bd1b324a09f52570f}{%
+           family={Schor},
+           familyi={S\bibinitperiod},
+           given={Zach},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {NYU Journal of Intellectual Property \& Entertainment Law (JIPEL) Blog}%
+      }
+      \strng{namehash}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{fullhash}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{fullhashraw}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{bibnamehash}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{authorbibnamehash}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{authornamehash}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{authorfullhash}{6108a5926feaa25bd1b324a09f52570f}
+      \strng{authorfullhashraw}{6108a5926feaa25bd1b324a09f52570f}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{12}
+      \field{note}{Accessed online}
+      \field{title}{Andersen v. Stability AI: The Landmark Case — Unpacking the Copyright Risks of AI Image Generators}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://jipel.law.nyu.edu/andersen-v-stability-ai-the-landmark-case-unpacking-the-copyright-risks-of-ai-image-generators/
+      \endverb
+      \verb{url}
+      \verb https://jipel.law.nyu.edu/andersen-v-stability-ai-the-landmark-case-unpacking-the-copyright-risks-of-ai-image-generators/
+      \endverb
+    \endentry
+    \entry{shell-jpt-2022}{article}{}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Petroleum Technology (SPE)}
+      \field{month}{03}
+      \field{note}{Bericht zur Skalierung der KI-basierten Zustandsüberwachung bei Shell}
+      \field{title}{Shell Scales Predictive Maintenance to 10,000 Pieces}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://jpt.spe.org/shell-scales-predictive-maintenance-to-10-000-pieces
+      \endverb
+      \verb{url}
+      \verb https://jpt.spe.org/shell-scales-predictive-maintenance-to-10-000-pieces
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

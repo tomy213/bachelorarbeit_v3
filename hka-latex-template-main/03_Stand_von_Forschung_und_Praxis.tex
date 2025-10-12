@@ -32,68 +32,76 @@ während klassische Verfahren Clutter primär unterdrücken und schwache Ziele g
 
 
 % ----------------------------------------------------
-\section{Praxis – ausgewählte Beispiele}\label{sec:praxis}
+\section{KI in der Praxis}\label{sec:praxis}
+KI ist längst im industriellen Alltag angekommen – und 2025 zeichnet sich als Beschleunigerjahr ab.
+Auf Leitmessen wie der Hannover Messe zeigen Hersteller, wie KI in Serienprozesse wandert.
+Laut einer Bitkom-Befragung setzen bereits rund 42\,\% der deutschen Industrieunternehmen KI in der Produktion ein,
+weitere 35\,\% planen den baldigen Einsatz.\parencite{handelsblatt-hannovermesse-2025}
 
-\setlength{\tabcolsep}{4.5pt}
-\renewcommand{\arraystretch}{1.08}
+\subsection{KI Praxis in der Luftfahrt}
+\begin{itemize}
+  \item \textbf{Predictive Maintenance:\parencite{handelsblatt-hannovermesse-2025}}
+    Rolls-Royce plant „Two-Way-Comms“, um Telemetrie bis auf Komponentenebene aus Triebwerken zu erfassen.
+    KI (u.\,a. Microsoft Copilot) soll Anomalien frühzeitig erkennen; Ingenieur:innen können dann gezielt zusätzliche Sensordaten anfordern.
+    Der Marktstart wurde für das erste Halbjahr 2025 angekündigt; Recherchen deuten auf Einordnung in das \emph{Intelligent Engine}-Programm hin,
+    konkrete belastbare Hinweise auf den produktiven Einsatz dieser KI waren jedoch nicht auffindbar.
+  \item \textbf{Design of a nickel-base superalloy:\parencite{conduit2017-superalloy-nn}}
+    Kooperation von Rolls-Royce und der University of Cambridge: Ein Deep-Learning-Ansatz schlägt eine neue
+    Nickelbasis-Superlegierung für Triebwerkskomponenten vor. Experimente bestätigten die Vorhersagen; die Legierung erfüllte
+    alle Zielkriterien und übertraf insbesondere Oxidationsbeständigkeit und Streckgrenze etablierter Alternativen (z.\,B.\ RR1000).
+    Öffentliche Informationen zum realen Einsatz dieser Legierung sind derzeit nicht verfügbar.
+  \item \textbf{Eurofighter:\parencite{ecrs-mk1-release}}
+    Im Eurofighter wird eine von HENSOLDT entwickelte KI-Objektklassifikation im Radar genannt.
+    Aufgrund der militärischen Einordnung sind Umsetzungsdetails und Spezifikationen nicht öffentlich;
+    der Fall unterstreicht jedoch das Potenzial KI-basierter Objektklassifikation in Luftfahrt-Radarsystemen.
+\end{itemize}
 
-\begin{longtable}{p{0.35\textwidth} p{0.27\textwidth} p{0.32\textwidth}}
-\caption{Beispiele aus der Praxis und abgeleitete Schwerpunkte (indikativ, nicht abschließend)}
-\label{tab:praxis-beispiele}\\
-\toprule
-\textbf{Fallbeispiel} & \textbf{Relevante Felder} & \textbf{Kernaussage} \\
-\midrule
-\endfirsthead
+\subsection{Blick über den Tellerrand}
+Da KI in der Luftfahrt zwar vorhanden, aber im praktischen Einsatz oft schwer nachzuvollziehen ist, lohnt der Blick in andere Branchen, um belastbare Muster und Lessons Learned abzuleiten.
 
-\multicolumn{3}{l}{\small Fortsetzung von \tablename~\thetable: Beispiele aus der Praxis}\\
-\toprule
-\textbf{Fallbeispiel} & \textbf{Relevante Felder} & \textbf{Kernaussage} \\
-\midrule
-\endhead
+\begin{itemize}
+  \item \textbf{Shell – Predictive Maintenance in großem Maßstab:\parencite{shell-jpt-2022}}
+    ML-/KI-Modelle überwachen weltweit große Aggregatflotten (Ventile, Pumpen, Kompressoren) und unterstützen 
+    zustandsorientierte Wartung (weniger ungeplante Ausfälle, planbarere Einsätze).
+    Mit der Erfolgreichen Überwachung von über 10.000 Ausrüstungsteilen plant Shell die Ausweitung dieses Systems.
+  \item \textbf{AlphaFold/AlphaFold~3 – Struktur- \& Interaktionsvorhersage:\parencite{alphafold-nature-2021}}
+    Breit als Forschungs- und Design-Tool etabliert; hoher wissenschaftlicher Impact, in der Industrie als Enabler akzeptiert 
+    (Validierung bleibt erforderlich; keine „KI-entdeckten“ Medikamente allein durch KI zugelassen).
+    \emph{Relevanz:} Verdeutlicht die Rolle von KI als \emph{Entscheidungsunterstützung}; 
+    Unsicherheit/Vertrauensmaße und experimentelle Verifikation bleiben Pflicht.
+  \item \textbf{IBM Watson for Oncology – Grenzen klinischer Empfehlungssysteme:\parencite{stat-watson-2018}}
+    Berichte über unsichere/falsche Therapieempfehlungen führten zu Rücknahmen/Neujustierungen prominenter Partnerschaften.
+    \emph{Relevanz:} Warnhinweis zu Domain Shift, unzureichender Validierung und HMI: Ohne robuste Evidenz, klare Einsatzgrenzen 
+    (ODD) und Human-in-the-Loop riskiert man Scheinsicherheit.
+  \item \textbf{KI-gestützte Bildgenerierung – Urheberrecht \& Datenherkunft:\parencite{jipel-andersen-stabilityai-2024}}
+    Kontroverse um Trainingsdaten (urheberrechtlich geschützte Werke), laufende Verfahren und Debatten zur Lizenzierung.
+    \emph{Relevanz:} Unterstreicht die Bedeutung von Daten-/Label-Governance, Dokumentation der Herkunft und Nutzungsrechten.
+\end{itemize}
 
-\midrule
-\multicolumn{3}{r}{\small Fortsetzung auf der nächsten Seite}\\
-\endfoot
+\subsection{Sicherheits relevante Praxisvorfälle}\label{sec:praxis-vorfaelle}
+Die folgenden, öffentlich diskutierten Vorfälle rücken die Bedeutung von \emph{KI-Sicherheit} in den Vordergrund. 
+Insbesondere die Automobilbranche steht als treibender Sektor unter hoher öffentlicher Aufmerksamkeit – auch im Hinblick auf 
+\emph{eAI (Embodied Artificial Intelligence)} als operierendes Gesamtsystem.
 
-\bottomrule
-\endlastfoot
+\begin{itemize}
+  \item \textbf{Tesla Autopilot:}
+  Wiederholt kursieren Berichte und Videos zu unerwartetem Bremsen (sog.\ \emph{Phantom Braking}) oder Abkommen von der Straße
+  im Zusammenhang mit dem Tesla Autopiloten im Netz. Der \emph{Autopilot} ist ein Fahrerassistenzsystem und \emph{kein} 
+  wie der Name es vermuten lässt, autonomes Fahrzeug. 
+  Verantwortung und Überwachung verbleiben daher beim Fahrer. Erkenntnisse (\emph{Lessons Learned}) betreffen vor allem 
+  \emph{HMI} (Mensch–Maschine-Interaktion) und \emph{Automation Bias}/Übervertrauen. 
+  \item \textbf{Robotaxis (Cruise, San Francisco, 02.10.2023):}
+  Nach einer Kollision zwischen einer Fußgängerin und einem anderen Fahrzeug wurde die Fußgängerin unter ein Robotaxi geschleudert. 
+  Das Fahrzeug hielt zunächst an, setzte anschließend jedoch kurz an und schleifte die Person einige Meter mit, bevor es erneut stoppte. 
+  Dieser Vorfall war unteranderem eine Inspirationen für das Buch \emph{Embodied AI Safety} \parencite{Koopman:2025:EAI}, 
+  das \emph{Lessons Learned} und offene Fragen zur AI Safety aufarbeitet.
+\end{itemize}
 
-Robotaxi-Zwischenfall (Fußgängerin mitgeschleift) &
-ODD/Abdeckung; Betrieb/Monitoring; Schnittstellen/HMI &
-Einsatzgrenzen eng und explizit halten; betriebliche Evidenz (Telemetrie, Incident-Review) und konservative Fallbacks sind zentral. \\
-\midrule
-KI-gestützte Materialsuche (hochtemperaturfeste Legierungen für Triebwerke) &
-Daten-/Modell-Governance; Validierung/Transfer; Traceability &
-Ergebnisse benötigen nachvollziehbare Kriterien, Replikation und domänenseitige Verifikation vor sicherheitskritischem Transfer. \\
-\midrule
-Radar: Leistungseinbruch in Starkregen/See-Clutter &
-ODD/Abdeckung; Robustheit/Shift; Kalibrierung &
-Segmentiertes Testen/Reporting (SNR/Range/Wetter/Clutter) statt Gesamtmetriken; konservative Abstain-/Schwellenregeln. \\
-\midrule
-Radar: RFI-/Koexistenz-Ereignisse (benachbarte Funkdienste) &
-Robustheit/Shift; Monitoring/Degradation; Change/Freigabe &
-Geplante Notch-/Filter-Strategien und deren betriebliche Überwachung; klarer Regressions-Scope nach Parametrik-Änderungen. \\
-\midrule
-Predictive Maintenance: viele False Positives nach Daten-Shift &
-Daten-/Label-Governance; Konfidenz/Kalibrierung; Monitoring &
-Domänenspezifische Shift-Indikatoren und Re-Kalibrierung; saubere Szenario-Splits zur Bewertung der Generalisierung. \\
-\midrule
-Überoptimistische Genauigkeit durch Daten-Leckage im Training &
-Daten-/Label-Governance; Traceability; Toolchain-Assurance &
-Szenariobasierte Splits, Pipeline-Reviews und reproduzierbare Artefakte verhindern Scheinleistungen. \\
-\midrule
-Fehlkalibrierte Konfidenzen bei niedriger SNR &
-Konfidenz/Kalibrierung; ODD/Abdeckung &
-Kalibrierung je ODD-Segment (ECE/Brier/NLL) als Pflicht; dokumentierte Schwellen/Abstain-Regeln. \\
-\midrule
-Drift im Betrieb (Saison, Plattformwechsel) &
-Monitoring/Degradation; Change/Freigabe; Traceability &
-Laufzeitmetriken und OOD-Rate festlegen; kontrollierte Re-Trainings-/Re-Kalibrierungs-Trigger mit nachvollziehbarem Update-Pfad. \\
-\end{longtable}
-
+Diese sicherheitsrelevanten Praxisvorfälle werfen zusätzliche Fragen auf. Deutlich wird insbesondere die rechtliche Komplexität: 
+Es ist auch zu klären, wer wann die Verantwortung trägt (Fahrer, Betreiber, Hersteller).
 
 % ----------------------------------------------------
-\section{Einsatzfelder}\label{sec:sop-ueberblick}
+\section{Einsatzfelder in der Luftfahrt}\label{sec:sop-ueberblick}
 KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendungsmöglichkeiten – von Sensorik und Bordfunktionen 
 über den Flugbetrieb bis zum Luftraummanagement. Ein Literaturüberblick zeigt folgende Schwerpunkte 
 (indikativ; nach \textcite{ml-meets-aerospace-2024}):
@@ -182,8 +190,7 @@ oder im Frontloading.
 %----------------------------------------------------
 \section{Militärische Perspektive – Hauptunterschiede zur zivilen Luftfahrt}\label{sec:militaer-perspektive}
 KI findet in der militärischen Luftfahrt bereits vielfältig Anwendung (u.\,a.\ Lagebilder, Sensorik/Wahrnehmung, Mission Support). 
-Mit Fokus dieser Arbeit wird z.B. bereits im Eurofighter eine von Hensholdt entwickelte Objektklassifikations KI im Radar verwendet 
-(\parencite{ecrs-mk1-release}). Im Sinne von \emph{Dual-Use} ergeben sich Überschneidungen, von denen zivile und 
+Im Sinne von \emph{Dual-Use} ergeben sich Überschneidungen, von denen zivile und 
 militärische Bereiche profitieren können.
 
 Militärische und zivile Verfahren unterscheiden sich grundlegend in Zielsetzung, Einsatzkontext, Regelwerk und Zertifizierung. 
@@ -314,6 +321,67 @@ KI-Guidance & EASA AI Level 1/2 (Guidance) & ISO/PAS 8800 \\
 \end{itemize}
 Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleichsfolie für Assurance-Bausteine.\parencite{iso-26262,iso-21448-sotif,iso-iec-tr-5469-2024,iso-pas-8800-2024}
 
+\section{Crosswalk: Luftfahrt \(\leftrightarrow\) Automotive}
+\subsection{Gemeinsamkeiten}
+\begin{itemize}
+  \item Hazard-basierte Skalierung der Nachweisstrenge (DAL \(\leftrightarrow\) ASIL).
+  \item Kein „Assurance-Rabatt“ für KI.
+  \item Safety Case/Assurance Case als roter Faden (Claims, Strategie, Evidenz, Annahmen).
+  \item ODD/Einsatzgrenzen mit Bedeutung von OOD/Unknown und Fallback/Degradation.
+  \item Traceability und szenariobasierte V\&V; Toolchain-Betrachtungen bei ML (Daten/Training/Deployment).
+\end{itemize}
+
+\subsection{Unterschiede}
+\begin{itemize}
+  \item \textbf{Regulatorik:} Luftfahrt (Zulassung vor Betrieb, starke Behördenbindung) vs.\ Automotive (EU Typgenehmigung, USA Self-Certification).
+  \item \textbf{Änderungen/Updates:} Luftfahrt: erneute Freigabe erforderlich; Automotive: Rückrufaktionen und Feldbeobachtung möglich.
+  \item \textbf{HMI \& Betrieb:} Mehrköpfige Crew, Zeitplan vs.\ Privatfahrten.
+  \item \textbf{Umgebungen:} Luftfahrt vergleichsweise kontrollierte ODD; Automotive breit gestreute ODDs (urban/land/Autobahn, Wetter, Verkehrsdichte).
+  \item \textbf{Physikalische Größen:} Geschwindigkeit, Masse, Abmaße; Luftfahrt stark variierend, Automotive geringere Varianz.
+  \item \textbf{Skalen:} Flotten- und Betriebsstundenordnungen differieren (Mengen-/Zeitmaßstäbe), damit auch Evidenz- und Monitoring-Strategien.
+  \item \textbf{Einsatzunterscheidung von KI:} nach Autorität/Automatisierung (EASA KI-Level L1/L2 vs.\ SAE Automatisierungsgrad).
+\end{itemize}
+
+\subsection{Bemerkungen}
+\begin{itemize}
+  \item \textbf{DAL VS. ASIL:} DAL berücksichtigt ausschließlich den Schweregrad; ASIL berücksichtigt zusätzlich die 
+  Eintrittswahrscheinlichkeit und die Beherrschbarkeit.
+  \item \textbf{KI-Level VS. Automatisierungslevel:} KI-Level unterscheidet die Assuranceschicht, welche angelehnt an den 
+  Automatisierungsgrad ist; SAE Automatisierungslevel unterscheiden nach Funktionsschicht.
+  \item \textbf{Kostenfunktion (Beispiel Radar):} \[
+\min_{\tau}\; J(\tau)
+= \underbrace{c_{\mathrm{FA}}\;P_{\mathrm{FA}}(\tau)}_{\text{Kosten falscher Alarm}}
++ \underbrace{c_{\mathrm{FN}}\;P_{\mathrm{M}}(\tau)}_{\text{Kosten False Negative}}
++ \underbrace{c_{\mathrm{sys}}(\tau)}_{\text{Systemkosten}} 
+\]
+  Zivil priorisiert das Vermeiden von Personenschäden; Im militärischen Kontext muss mit Personenschäden gerechnet werden. 
+  Weiter kommt hier die Frage auf, ob man die Fehlerwahrscheilichkeit von Menschen im Vergleich  
+  zu einer Maschine berücksichtigen sollte.
+  \item \textbf{Fehlereintrittsraten – Größenordnungen (Beispielrechnung):} 
+  \begin{table}[h]
+\centering
+\caption{Beispielhafte Dimensionierung für Sensoren (vereinfachtes Rechenbeispiel)}
+  \begin{tabular}{p{0.40\textwidth} p{0.25\textwidth} p{0.25\textwidth}}
+\toprule
+\textbf{Kriterium} & \textbf{Automobilbranche} & \textbf{Luftfahrtbranche} \\
+\midrule
+  Betriebsstunden pro Fahrzeug (Lebensdauer) & 5.000  & 150.000 \\
+  Anzahl verbauter Sensoren (Flotte) & 100.000.000 & 10.000 \\
+  Gesamtbetriebsstunden (Flotte) & 5*$10^{11}$h & 15*$10^{8}$h  \\
+  Zielraten (Beispiel) & $<10^{-9}$/h &  $<10^{-9}$/h \\
+  Anzahl Ausfälle (Betriebsstunden * Zielrate) & < 500 &  < 1{,}5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+  \item \textbf{Hohe Sicherheitsanforderungen einzelner Bauteile:} Auch wenn die Motivation unterschiedlich ist, sind 
+    die Anforderungen bezüglich der Sicherheitsmetriken wie z.B. die Fehlereintrittsraten ähnlich. Die Automobilbranche 
+    versucht Kosten zu vermeiden durch Redundanz und Vermeidung von  Rückrufaktionen und erhöht daher die Sicherheitsanforderungen 
+    für die einzelnen Bauteile. Die Luftfahrt hat allgemein hohe Anforderungen an die Bauteile und erhöht die Sicherheit 
+    zusätzlich durch Redundanz. 
+\end{itemize}
+
+
+
 \section{ISO/PAS 8800 — Kernaussagen für diese Arbeit}
 \begin{itemize}
   \item \textbf{ODD/Use-Case-Begrenzung} mit Unknown/Abstain \& Fallback als Pflicht.
@@ -335,37 +403,6 @@ für die bereits definierten Anforderungsfelder genutzt.
 \subsection{Artefakt-Checkliste für den Safety Case}
 \textit{Entwürfe:} ODD-Spezifikation; Data/Model-Lineage; Kalibrierungs- \& OOD-Nachweise; Szenariomatrix \& Abdeckung; Runtime-Monitoring-Konzept; Change-/Rollback-Prozess.
 
-\subsection{Beispiel: Radar-Objektklassifizierung}
-\textit{Skizze:} Daten (RD/RDA, Mikro-Doppler, Tracks), Szenarien (Nacht/Regen/urban), Fehlklassifikationskosten, Abstain-Trigger, Drift-Signale, Integration in Brems-/Fusion-Kette, Fail-safe vs.\ Fail-operational.
-
 \section{ISO/IEC TR 5469 – Brücke \& Ergänzung}
 \textit{Rolle:} Referenzrahmen für KI+Funktionale Sicherheit; klärt Einsatzarten (KI \emph{in} Safety-Funktion, Safety \emph{für} KI, KI \emph{für} Entwicklung) und methodische Bausteine (z.\,B.\ Diversität/Unabhängigkeit von KI-Kanälen). 
 \textit{Nutzen:} Ergänzt 8800/26262/SOTIF um Begriffe, Risikofaktoren und prozessuale Leitplanken – gut anschlussfähig an Luftfahrt-Argumentationsmuster.
-
-\section{Crosswalk: Luftfahrt \(\leftrightarrow\) Automotive}
-\subsection{Gemeinsamkeiten}
-\begin{itemize}
-  \item Hazard-basierte Skalierung der Nachweisstrenge (DAL \(\leftrightarrow\) ASIL); kein „Assurance-Rabatt“ für KI.
-  \item Safety Case/Assurance Case als roter Faden (Claims, Strategie, Evidenz, Annahmen).
-  \item ODD/Operational Envelope als Einsatzgrenzen; Bedeutung von OOD/Unknown und Fallback/Degradation.
-  \item Traceability, V\&V über Szenarien; Tool-Betrachtungen bei ML-Toolchains.
-\end{itemize}
-
-\subsection{Unterschiede}
-\begin{itemize}
-  \item Regulatorik: Luftfahrt (Zulassung vor Betrieb, starke Behördenbindung) vs.\ Automotive (EU Typgenehmigung, USA Self-Certification).
-  \item HMI \& Betrieb: Crew/Operator vs.\ Fahrer/Handover; höhere Variantenvielfalt, dichter Update-Betrieb im Automotive.
-  \item Umgebungen: Luftfahrt eher kontrolliert/hochintegriert; Automotive breit gestreute ODDs (urban/land/\ldots).
-\end{itemize}
-
-
-
-\section{V\&V-Strategie (Automotive-konkret)}
-\textit{Leitplanken:} Szenario-basiertes Testen je ODD-Segment; Kalibrierung \& OOD-Rate als Pflichtmetriken; KPI-Berichte pro Klasse/Szene/SNR/Range; Latenz- \& Degradationsregeln dokumentieren.
-
-\section{Betrieb \& Lebenszyklus}
-\textit{Kerngedanke:} Monitoring/Drift/Telemetrie festlegen; kontrollierte Updates mit Freigabe/Rollback; Pflege der Evidenz über Modellstände (Lineage). 
-\textit{Hinweis:} Security/OTA-Regeln nur als Randbedingung, keine Vertiefung.
-
-\section{Offene Punkte (normnah)}
-\textit{To watch:} ML-Coverage/„genug getestet“, belastbare UQ-Nachweise, Transfer-Learning/COTS-Transparenz, Nichtdeterminismus, praktikable Prozesse für häufige Modell-Änderungen (kontinuierliche Re-Zertifizierung).
