@@ -396,13 +396,184 @@ für die bereits definierten Anforderungsfelder genutzt.
 \parencite{iso-pas-8800-2024}
 
 
-\section{Deep Dive: ISO/PAS 8800}
-\subsection{Positionierung \& Anwendungsbereich}
-\textit{Kernidee:} Ergänzt 26262/SOTIF; kein „Assurance-Rabatt“ für KI; relevant bei ML in sicherheitskritischen Funktionen.
+\chapter{Deep Dive: ISO/PAS 8800}
+\newcommand{\dotG}{{\color{green}\large$\bullet$}}
+\newcommand{\dotY}{{\color{blue}\large$\bullet$}}
+\newcommand{\dotR}{{\color{red}\large$\bullet$}}
 
-\subsection{Artefakt-Checkliste für den Safety Case}
-\textit{Entwürfe:} ODD-Spezifikation; Data/Model-Lineage; Kalibrierungs- \& OOD-Nachweise; Szenariomatrix \& Abdeckung; Runtime-Monitoring-Konzept; Change-/Rollback-Prozess.
+\section{Inhalte (nach Annex A) und Bemerkungen}
+\begin{itemize}
+  \item[\dotY] (0) \textbf{Einleitung}
+  \item[\dotR] (1) \textbf{Normreferenzen:} sind in anderen Kapiteln bereits aufgeführt und würde sich doppeln.
+  \item[\dotY] (2) \textbf{Scope}
+  \item[\dotR] (3) \textbf{Begriffe und Definitionen:} sind in anderen Kapiteln bereits aufgeführt und würde sich doppeln.
+  \item[\dotR] (4) \textbf{Abkürzungen:} sind in anderen Kapiteln bereits aufgeführt und würde sich doppeln.
+  \item[\dotR] (5) \textbf{Anforderungen für Konformität:}
+    Anforderungen an die ISO 26262-2 müssen erfüllbar sein oder zumindest begründete akzeptable Alternativen.
+  \item[\dotY] (6) \textbf{KI im Kontext der Systemsicherheitsentwicklung für Straßenfahrzeuge und Grundkonzepte:}
+    Wird berücksichtigt und im Blick auf Radarsysteme betrachtet.
+  \item[\dotR] (7) \textbf{KI-Sicherheitsmanagement:} bezieht sich auf Aktivitäten rund um den Sicherheitslebenszyklus, 
+    die notwendig sind, um Sicherheit zu gewährleisten und tragen nicht zum Verständnis der technischen Sicherheit an sich bei.
+    Man sollte anerkennen, dass dies wichtig ist, verlässt aber den Scope dieser Arbeit. Die Ziele sind: \\
+    (a) Lebenszyklus festlegen, um unvertretbare Risiken zu vermeiden auf Fahrzeugebene;\\
+    (b) geeignete organisatorische und projektspezifische Sicherheitsmanagementprozesse sicherstellen;\\
+    (c) KI-Sicherheitsaktivitäten planen, initiieren und durchführen.
+  \item[\dotY] (8) \textbf{Assurance-Argumente für KI-Systeme:} Die Ziele sind:\\ 
+    (a) Assurance-Argument entwickeln, das die Erfüllung der zugewiesenen Sicherheitsanforderungen belegt;\\
+    (b) prüfen, ob das Argument das tatsächliche Restrisiko eines Verstoßes gegen die Sicherheitsanforderungen korrekt abbildet.
+  \item[\dotG] (9) \textbf{Ableitung von KI-Sicherheitsanforderungen:} Die Ziele sind:\\
+    (a) vollständige, konsistente Sicherheitsanforderungen an das KI-System spezifizieren;\\
+    (b) Anforderungen auf Basis von Entwicklung/Verifikation/Validierung verfeinern;\\
+    (c) Einschränkungen des KI-Systems über seinen Eingaberaum definieren und an den übergeordneten Entwicklungsprozess eskalieren;\\
+    (d) erforderliche Off-board- und On-board-Maßnahmen gemäß Abschnitt 14 spezifizieren.
+  \item[\dotY] (10) \textbf{Auswahl von KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen:} Die Ziele sind:\\
+    (a) geeignete KI-Technologien auswählen und begründen;\\
+    (b) Architektur- und Entwicklungsmaßnahmen zur Erfüllung der Sicherheitsanforderungen vor dem Einsatz identifizieren;\\
+    (c) Architekturmaßnahmen zur Minderung nach dem Einsatz erkennbarer funktionaler Unzulänglichkeiten identifizieren;\\
+    (d) Maßnahmen definieren, die die Erfüllung der Sicherheitsanforderungen im Zielanwendungsbereich sicherstellen.
+  \item[\dotY] (11) \textbf{Datenbezogene Aspekte:} Die Ziele sind:\\
+    (a) Datensatz-Lebenszyklus (Erhebung, Erstellung, Analyse, Verifikation/Validierung, Verwaltung, Wartung) definieren;\\
+    (b) Datensatz-Unzulänglichkeiten mit Sicherheitsauswirkung identifizieren;\\
+    (c) datenbezogene Sicherheitseigenschaften mit Einfluss auf die Systemsicherheit identifizieren und zur Analyse heranziehen;\\
+    (d) Gegenmaßnahmen zur Vermeidung/Minderung von Datensatz-Unzulänglichkeiten über den Datensatz-Lebenszyklus hinweg festlegen;\\
+    (e) datenbezogene Arbeitsprodukte definieren, die den Sicherheitsnachweis unterstützen.
+  \item[\dotY] (12) \textbf{Verifikation und Validierung des KI-Systems:} Die Ziele sind:\\
+    (a) verifizieren, dass das KI-System seine Sicherheitsanforderungen erfüllt;\\
+    (b) validieren, dass die dem KI-System zugewiesenen Sicherheitsanforderungen bei der Integration ins übergeordnete System erreicht werden.
+  \item[\dotG] (13) \textbf{Sicherheitsanalyse von KI-Systemen:} Die Ziele sind:\\
+    (a) sicherheitsrelevante Faults und KI-Fehler identifizieren, die KI-Sicherheitsanforderungen verletzen können;\\
+    (b) potenzielle Ursachen identifizieren;\\
+    (c) Sicherheitsmaßnahmen zur Vermeidung oder Beherrschung sicherheitsrelevanter KI-Fehler definieren unterstützen;\\
+    (d) Verifikation der KI-Sicherheitsanforderungen unterstützen – durch Anpassung bzw. Neuableitung von Anforderungen zu Daten-, Entwurfs- und Test­spezifikationen.
+  \item[\dotR] (14) \textbf{Maßnahmen im Betrieb:} Maßnahmen im Betrieb außerhalb des Scopes dieser Arbeit.\\ 
+    (a) Prozessanforderungen für die kontinuierliche Sicherstellung der KI-Sicherheit nach dem Einsatz;\\
+    (b) Maßnahmen aus Abschnitt 8 und/oder zusätzliche Maßnahmen zur Risikofindung und zum Erhalt der KI-Sicherheit im Betrieb nutzen;\\
+    (c) geeignete Reaktionen auf unzulässige Risiken vorsehen und die erneute Freigabe des geänderten KI-Systems vor Auslieferung sicherstellen.
+  \item[\dotY] (15) \textbf{Vertrauen in die Nutzung von KI-Entwicklungsframeworks und -Softwaretools:} Die Ziele sind:
+   (a) Anforderungen und Leitlinien bereitstellen, um Fehlerquellen und unangemessene Verzerrungen in Offline-Prozessen, 
+   -Tools und -Prinzipien zu identifizieren, zu mindern und zu dokumentieren, die zur Entwicklung, Verifikation und 
+   Bereitstellung sicherheitsrelevanter KI-Modelle genutzt werden.
+  \item[\dotY] (A-H) \textbf{Anhänge (A–H):}\\
+    (A){\dotR} Überblick und Ablauf dieses Dokuments\\
+    (B){\dotR} Beispielstruktur eines Assurance-Arguments für ein KI-System\\
+    (C){\dotG} ISO 26262-Lückenanalyse für ML\\
+    (D){\dotG} Detaillierte Betrachtungen zu sicherheitsrelevanten Eigenschaften von KI-Systemen\\
+    (E){\dotR} STAMP/STPA-Beispiel\\
+    (F){\dotG} Identifikation von Softwareeinheiten in NN-basierten Systemen\\
+    (G){\dotG} Architektur- und Entwicklungsmaßnahmen für KI-Systeme\\
+    (H){\dotY} Typische Leistungskennzahlen für maschinelles Lernen\\
+\end{itemize}
 
-\section{ISO/IEC TR 5469 – Brücke \& Ergänzung}
-\textit{Rolle:} Referenzrahmen für KI+Funktionale Sicherheit; klärt Einsatzarten (KI \emph{in} Safety-Funktion, Safety \emph{für} KI, KI \emph{für} Entwicklung) und methodische Bausteine (z.\,B.\ Diversität/Unabhängigkeit von KI-Kanälen). 
-\textit{Nutzen:} Ergänzt 8800/26262/SOTIF um Begriffe, Risikofaktoren und prozessuale Leitplanken – gut anschlussfähig an Luftfahrt-Argumentationsmuster.
+\paragraph{Legende zur Einstufung der Relevanz bezüglich diser Arbeit}
+\begin{itemize}[leftmargin=2.5cm,labelsep=0.8em]
+  \item[\dotG] relevant
+  \item[\dotY] teilweise relevant
+  \item[\dotR] nicht besonders relevant
+\end{itemize}
+
+
+\section{Einleitung}
+Die ISO 8800 passt die ISO 26262 und ISO 21448 gezielt für KI an und ergänzt sie um ein 
+kausales Modell für KI-bedingte Unzulänglichkeiten, daraus abgeleitete Sicherheitsanforderungen sowie 
+Risikominderungs­maßnahmen. Weil Anwendungen und Stand der Technik stark variieren, werden weniger starre 
+Prozessvorgaben gemacht und stärker auf projekt­spezifische Assurance-Argumente mit iterativer Risikoreduktion 
+gesetzt. Das Dokument ist u. a. mit ISO/IEC 22989, TR 5469 abgestimmt und zeigt, wann seine Leitlinien gelten: immer 
+dann, wenn Sicherheitsanforderungen entweder einer KI-Funktion oder einer KI-Sicherheitsmaßnahme zugeordnet sind.
+
+\subsection{Schlüsselpunkte}
+\begin{itemize}
+ \item Zuschnitt/Erweiterung von ISO 26262 und ISO 21448 speziell für KI.
+ \item Kausales Modell für Quellen funktionaler Unzulänglichkeiten in KI; daraus abgeleitete KI-Sicherheitsanforderungen und Maßnahmen.
+ \item Fokus auf projektspezifisches Assurance-Argument statt detaillierter Prozessvorgaben; iterative Risikoreduktion.
+ \item Hazard/Risk-Analysen auf Fahrzeugebene sind nicht enthalten (bleiben ISO 26262/ISO 21448/ISO TS 5083 vorbehalten).
+ \item Enge Anbindung an ISO/IEC 22989, TR 5469; Klassen/Usage-Levels werden nicht explizit verwendet, dienen aber der Anforderungsermittlung.
+ \item Gültig für KI als Funktion oder als Sicherheitsmechanismus – auch außerhalb des unmittelbaren SOTIF-Scopes.
+\end{itemize}
+
+\section{Scope}
+Das Dokument gilt für sicherheitsrelevante Systeme in Serienfahrzeugen (ohne Mopeds), 
+die E/E-Systeme mit KI einsetzen. Es adressiert fahrzeugseitige Sicherheitsrisiken, die durch Ausgabemängel, 
+systematische Fehler und zufällige Hardwarefehler von KI-Elementen entstehen – 
+inklusive Wechselwirkungen mit KI-Elementen außerhalb des Fahrzeugs, sofern diese Sicherheit direkt (z. B. 
+externe Objekterkennung) oder indirekt (z. B. Felddaten-Monitoring) beeinflussen. Es beschreibt sicherheitsrelevante Eigenschaften 
+von KI-Systemen zur Untermauerung eines belastbaren Safety-Assurance-Claims, gibt aber keine spezifischen Leitlinien 
+für KI-basierte Softwaretools. Schwerpunktmäßig behandelt es ML-basierte Ansätze auf Prinzipienebene, ohne in methodische 
+Details zu gehen (z. B. konkrete DNN-Architekturen).
+
+\section{(6) KI im Kontext der Systemsicherheitsentwicklung angepasst auf Radarsysteme}
+\paragraph{KI in Radarsystemen nach ISO/PAS 8800 Kap.\,6}
+ISO/PAS~8800 ergänzt die ISO~26262 für Radarsysteme, sobald ML\slash KI als Bestandteil der sicherheitsrelevanten 
+Verarbeitung genutzt wird. Eine typische Architektur gliedert sich in \emph{Vorverarbeitung} , 
+\emph{ML-Modell} (Detektion/Klassifikation/Tracking) und \emph{Nachverarbeitung/Monitoring}. 
+Klassische Deploy\-ment-Schritte  werden durch ISO~26262 abgedeckt; daten- und 
+trainingsbezogene Schritte fallen in den Fokus der ISO/PAS~8800.
+
+\paragraph{Interaktion mit der Systemebene}
+Anforderungen und KPIs werden auf Systemebene zugewiesen und iterativ geschärft. Ist die Erfüllung 
+nicht belastbar nachweisbar (fehlende Daten, Evidenz), sind Systemmaßnahmen zu wählen: 
+ODD-Restriktion, Diversity (z.\,B.\ Radar+\-Kamera), Redundanz (parallelisierte Pfade). Integrationstests 
+und Felddaten können weitere Iterationen anstoßen.
+
+\paragraph{Fehlerfortpflanzung und Ursachen}
+Es werden Ketten beschrieben, die Fehler anhand von Ursache oder Auswirkung beschreiben
+und wie sie sich in das System eingliedern oder fortpflanzen. Beschrieben wird es nach:
+KI-Triggerbedingungen, Faults bzw.\ funktionalen Unzulänglichkeiten, 
+KI-Fehlern und unerwünschtem Verhalten. Radarbezogene Ursachen können sein (i) Spezifikationslücken im 
+ODD, (ii) Performance-Grenzen, (iii) systematische Trainings-/SW-Fehler 
+sowie (iv) zufällige Hardwarefehler.
+
+
+\section{(8)Assurance-Argumente für KI-Systeme}
+Ein Assurance-Argument ist eine strukturierte, nachvollziehbare Begründung, dass ein System ausreichend sicher ist. 
+Es verknüpft Sicherheits-Behauptungen (Claims) mit der Argumentationsstrategie und konkreter Evidenz 
+(Tests, Analysen, Reviews), inklusive der Annahmen und Geltungsbereich. Dadurch wird nachvollziehbar, 
+warum die Risiken als beherrscht gelten und welches Restrisiko bleibt. Für den Nachweis der Sicherheit 
+ist es zentral, weil es Prüfern und Behörden eine transparente, prüfbare Kette von Anforderungen → Maßnahmen → Nachweisen liefert.
+
+Die folgenden Punkte sind die in ISO/PAS~8800 geforderten Anforderungen um ein Assurance-Argument zu erstellen:
+
+\begin{itemize}
+  \item \textbf{(a) Definition des KI-Systems} (aus externen Quellen), einschließlich:
+    \begin{enumerate}[label=\arabic*)]
+      \item Spezifikation der dem KI-System zugewiesenen Sicherheitsanforderungen;
+      \item Definition des technischen Kontexts innerhalb des übergeordneten Systems (z.\,B.\ Schnittstellen, Bedingungen/Trigger, unter denen die KI-Funktion aktiviert wird, usw.);
+      \item Spezifikation des Eingaberaums.
+    \end{enumerate}
+  \item \textbf{(b) Anforderungen an das Assurance-Argument und die Arbeitsprodukte} für das KI-System (aus externen Quellen). Diese Anforderungen können aus dem Assurance-Argument des übergeordneten Systems sowie aus den Sicherheitsmanagement-Prozessen abgeleitet werden.
+  \item \textbf{(c) Die Arbeitsprodukte des KI-Lebenszyklus}
+\end{itemize}
+
+\section{(9) Ableitung von KI-Sicherheitsanforderungen}
+Es wird der Ablauf und Methoden beschrieben, wie Anforderungen abgeleitet werden können. 
+Da diese sich nicht auf Systeme, in der eine KI eingebettet wird beziehen oder wie diese 
+konkret auf KI Modelle angewendet werden können, ist diser Abschnitt sehr high-level. 
+Ein essentielles Beispiel, wie Anforderungen verändert werden müssen ist folgendes:
+
+\[
+\begin{array}{c}
+\text{Anforderung an}\\
+\text{Wahrscheinlichkeitn}\\
+\text{von Fehlern, die}\\
+\text{selten auftreten}
+\end{array}
+\;\underset{\text{verfeinert zu}}{\longrightarrow}\;
+\underbrace{\begin{array}{c}
+\text{Anforderung an}\\
+\text{relative Frequenzn}\\
+\text{von Fehlern, die}\\
+\text{selten auftreten}
+\end{array}}_{\substack{\text{Quantitative Anforderung}}}
+\;\land\;
+\underbrace{\begin{array}{c}
+\text{Anforderung an}\\
+\text{zusätzliche technische}\\
+\text{Maßnahmen zum}\\
+\text{kontrollieren oder}\\
+\text{reduzieren der}\\
+\text{Unsicherheit bei}\\
+\text{der Bewertung}\\
+\text{der quantitativen}\\
+\text{Anforderungen}\\
+\end{array}}_{\text{Qualitative Anforderung}}
+\]
+

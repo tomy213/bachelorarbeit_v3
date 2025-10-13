@@ -38,6 +38,17 @@ Für die Mess- und Berichtspflicht werden Szenarien entlang objektiver Schnitte 
 Alle Leistungs-, Unsicherheits- und Freigabekriterien sind \emph{pro ODD-Segment} zu berichten. 
 Damit bleibt die Bewertung kontextsensitiv und vermeidet irreführende Mittelwerte über heterogene Bedingungen.
 
+\subsection*{Radar-KPIs \& Abnahmekriterien (ODD-segmentiert)}
+\begin{itemize}
+  \item \textbf{Detektion/Klassifikation:} $P_d(\tau)$, $P_{fa}(\tau)$, ROC/PR \emph{je} Range-/SNR-Band; klassenweise F1/MCC.
+  \item \textbf{Kalibrierung/Unsicherheit:} ECE, Brier, NLL \emph{je Segment}; Bootstrap-Konfidenzbänder.
+  \item \textbf{OOD/Unknown:} OOD-TPR@1\%FPR, Abstain-Rate, Auswirkung auf $P_d/P_{fa}$.
+  \item \textbf{Laufzeit/Verfügbarkeit:} P95/P99-Latenz, Jitter, Verfügbarkeit pro Pfad.
+  \item \textbf{Ressourcen:} RAM/Flash/Compute-Budget (Inline) auf Zielhardware.
+\end{itemize}
+\noindent\emph{Abnahmeprinzip:} Bewertung \emph{pro ODD-Segment}; Gesamtmittelwerte nur ergänzend.
+
+
 \section{Brücke zu Anforderungsfeldern und Coverage}\label{sec:szenarien-bruecke}
 Die in Abschnitt~\ref{sec:szenarien-typen} definierten Szenario-Typen und die Reportingachsen aus Abschnitt~\ref{sec:szenarien-odd}
 bilden die Grundlage für die segmentierte Bewertung der Anforderungsfelder. 
@@ -45,6 +56,87 @@ Kapitel~\ref{chap:anforderungen} fasst diese Anforderungsfelder zusammen und ord
 Leitlinien und Standards zu. 
 Darauf aufbauend verknüpft Kapitel~\ref{chap:coverage} die \emph{geforderten Ansätze} mit dem beobachtbaren Abdeckungsgrad (Coverage-Analyse) 
 und diskutiert die Ergebnisse.
+
+
+
+
+
+
+% -------------------------
+% NEW CHAPTER: Ausgewählte KI-Modelle
+% -------------------------
+\chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
+
+\section{Ziel und Einordnung}\label{sec:modelle-intro}
+Dieses Kapitel liefert \emph{kurze, zweckgebundene} Steckbriefe ausgewählter Modellklassen. Es dient einer gemeinsamen
+Sprache für spätere Verweise (Kalibrierung, Unsicherheit, typische Fehlerbilder) und ersetzt keine technische Vertiefung.
+Die Rolle von Erklärbarkeit wird als \emph{auditierbares, aber nicht allein tragendes} Element im Assurance-Kontext beschrieben.
+
+\subsection*{Modellauswahl-Logik (0–3 Eignung, indikativ)}
+\begin{itemize}
+  \item \textbf{CNN (leicht, RD/RDA):} Leistung~3, Kalibrierung~2, OOD~2, Latenz~2–3, Repro/Audit~2.
+  \item \textbf{Deep Ensembles \textit{oder} MC-Dropout:} Leistung~3, Kalibrierung~3, OOD~3, Latenz~1–2, Repro/Audit~2.
+  \item \textbf{GBDT (Tracks/Tabular):} Leistung~2, Kalibrierung~2, OOD~1–2, Latenz~3, Repro/Audit~3.
+  \item \textbf{Autoencoder/One-Class (Anomalie):} Neuheit~2, Kalibrierung~1, OOD~2, Latenz~2–3, Repro/Audit~2.
+  \item \textbf{Temporal (TCN/Transformer):} Sequenznutzen~2–3, Latenz~1–2, Repro~2.
+\end{itemize}
+\noindent\emph{Regel:} Nur Modelle wählen, die \emph{pro Segment} KPI \& Latenz/Ressourcen erfüllen \emph{und} eine nachvollziehbare Kalibrierungs-/OOD-Strategie haben.
+
+
+\section{Modellsteckbriefe \& typische Fehlerbilder}\label{sec:steckbriefe}
+\begin{description}
+  \item[Entscheidungsbäume / Random Forests] \hfill\\
+  \textit{Charakter:} interpretierbar, robuste Basis für tabellarische Daten. 
+  \textit{Typische Fehler:} Overfitting bei vielen Features, inkonsistente Kalibrierung. 
+  \textit{Assurance-Hinweise:} Feature-Governance, Kalibrierung (Platt/Isotonic), Reproduzierbarkeit (Seeds).
+
+  \item[Gradient Boosting (XGBoost/LightGBM)] \hfill\\
+  \textit{Charakter:} starke Performance für strukturierte Daten. 
+  \textit{Typische Fehler:} Leakage-Risiko, Sensitivität auf Daten-Shift. 
+  \textit{Assurance-Hinweise:} strikte Train/Val/ Test-Trennung, SHAP nur als Audit-Hilfe, nicht als Safety-Nachweis; segmentierte Kalibrierung.
+
+  \item[CNN-Varianten] \hfill\\
+  \textit{Charakter:} Mustererkennung auf Bild-/Spektralrepräsentationen. 
+  \textit{Typische Fehler:} Black-Box-Charakter, OOD-Sensitivität, Spurious Correlations. 
+  \textit{Assurance-Hinweise:} OOD-/Shift-Tests, Kalibrierung je ODD-Segment, Replaybare Trainingspipelines.
+
+  \item[Autoencoder / One-Class-Methoden] \hfill\\
+  \textit{Charakter:} Anomalie-/Neuheitserkennung. 
+  \textit{Typische Fehler:} schwellengetrieben, empfindlich für Verteilungsänderungen (False Alarms). 
+  \textit{Assurance-Hinweise:} Schwellen-Audit, Kostenmetriken (FA/MD), dokumentierte Degradationspfade (Abstain/Review).
+\end{description}
+
+
+\subsection*{Empfehlungs-Schnittmenge (Go-Forward-Set)}
+\begin{itemize}
+  \item \textbf{Kernklassifikator:} leichtes CNN auf RD/RDA + \textit{Deep Ensemble} (N=3–5) \textit{oder} MC-Dropout.
+  \item \textbf{Kalibrierung:} Temperature Scaling \emph{je ODD-Segment}; ECE/Brier/NLL mit CI.
+  \item \textbf{OOD/Abstain:} Energie-Score \textit{oder} Mahalanobis im Feature-Space; segment-spezifische Schwellen; Hysterese \& Operator-Hinweis.
+  \item \textbf{Anomalie (optional, Frontloading/Monitoring):} Autoencoder/One-Class für Drift-/Neuheit, nicht als Primärpfad.
+  \item \textbf{Tabulare Baseline (Frontloading):} GBDT für Analysen, Plausibilisierung, Schwellenableitung.
+\end{itemize}
+
+
+\section{Erklärbarkeit \& Auditierbarkeit}\label{sec:xai}
+Erklärbarkeit (XAI) unterstützt die \emph{Plausibilisierung} für Reviews und Audits. Wirksamkeit ist \emph{zweckgebunden} und 
+liegt in der \emph{Prozessintegration} (Reproduzierbarkeit, Artefaktablage, Versionierung):
+\begin{itemize}
+  \item \textbf{Scope:} lokale Attributionen (z.\,B.\ Grad-CAM, Feature-Importance) für Fallanalysen; globale Charakterisierung für Modellverhalten.
+  \item \textbf{Grenzen:} post-hoc Methoden sind nicht beweiskräftig; sie \emph{ergänzen} Evidenzen (Metriken, Tests), ersetzen sie aber nicht.
+  \item \textbf{Audit-Praxis:} reproduzierbare Notebooks/Skripte, fixe Seeds/Umgebungen, Ablage der XAI-Reports im Safety Case.
+\end{itemize}
+
+\subsection*{Abnahmeplan}
+\begin{enumerate}
+  \item \textbf{Daten/ODD:} Szenario-Steckbriefe, Mindest-$n$ je Segment, getrennte Splits pro Segment.
+  \item \textbf{Leistung:} Pd/Pfa, ROC/PR je Segment; Bootstrap-CI; Worst-Case-Reports.
+  \item \textbf{Kalibrierung:} Reliability-Plots, ECE/Brier/NLL je Segment; dokumentierte Freigabeschwellen.
+  \item \textbf{OOD/Abstain:} OOD-TPR@1\%FPR; Einfluss von Abstain auf Pd/Pfa; Operator-Playbook.
+  \item \textbf{Robustheit:} Stress-/Shift-Tests (Clutter/RFI/Wetter/Aspekt); Degradationskurven; Akzeptanzkriterien.
+  \item \textbf{Laufzeit:} P95/P99-Latenz/Jitter auf Zielhardware; CI/CD-Regression-Gates.
+  \item \textbf{Repro/Toolchain:} Seeds, Lockfiles, Artefakt-IDs, Build-Manifeste; ggf. TQL-Entscheidung (DO-330).
+\end{enumerate}
+
 
 
 % -------------------------
@@ -422,61 +514,6 @@ steigen die Anforderungen an die Nachweisführung.
 Die in diesem Kapitel definierten Anforderungsfelder und ihre typischen Erwartungen werden in Kapitel~\ref{chap:coverage}
 zu einer \emph{Coverage-Analyse} verdichtet. Die Matrix verknüpft je Feld die \emph{geforderten Ansätze} mit dem
 beobachtbaren Abdeckungsgrad sowie geeigneten Evidenzf
-
-
-
-
-
-
-% -------------------------
-% NEW CHAPTER: Ausgewählte KI-Modelle
-% -------------------------
-\chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
-
-\section{Ziel und Einordnung}\label{sec:modelle-intro}
-Dieses Kapitel liefert \emph{kurze, zweckgebundene} Steckbriefe ausgewählter Modellklassen. Es dient einer gemeinsamen
-Sprache für spätere Verweise (Kalibrierung, Unsicherheit, typische Fehlerbilder) und ersetzt keine technische Vertiefung.
-Die Rolle von Erklärbarkeit wird als \emph{auditierbares, aber nicht allein tragendes} Element im Assurance-Kontext beschrieben.
-
-\section{Modellsteckbriefe \& typische Fehlerbilder}\label{sec:steckbriefe}
-\begin{description}
-  \item[Entscheidungsbäume / Random Forests] \hfill\\
-  \textit{Charakter:} interpretierbar, robuste Basis für tabellarische Daten. 
-  \textit{Typische Fehler:} Overfitting bei vielen Features, inkonsistente Kalibrierung. 
-  \textit{Assurance-Hinweise:} Feature-Governance, Kalibrierung (Platt/Isotonic), Reproduzierbarkeit (Seeds).
-
-  \item[Gradient Boosting (XGBoost/LightGBM)] \hfill\\
-  \textit{Charakter:} starke Performance für strukturierte Daten. 
-  \textit{Typische Fehler:} Leakage-Risiko, Sensitivität auf Daten-Shift. 
-  \textit{Assurance-Hinweise:} strikte Train/Val/ Test-Trennung, SHAP nur als Audit-Hilfe, nicht als Safety-Nachweis; segmentierte Kalibrierung.
-
-  \item[CNN-Varianten] \hfill\\
-  \textit{Charakter:} Mustererkennung auf Bild-/Spektralrepräsentationen. 
-  \textit{Typische Fehler:} Black-Box-Charakter, OOD-Sensitivität, Spurious Correlations. 
-  \textit{Assurance-Hinweise:} OOD-/Shift-Tests, Kalibrierung je ODD-Segment, Replaybare Trainingspipelines.
-
-  \item[Autoencoder / One-Class-Methoden] \hfill\\
-  \textit{Charakter:} Anomalie-/Neuheitserkennung. 
-  \textit{Typische Fehler:} schwellengetrieben, empfindlich für Verteilungsänderungen (False Alarms). 
-  \textit{Assurance-Hinweise:} Schwellen-Audit, Kostenmetriken (FA/MD), dokumentierte Degradationspfade (Abstain/Review).
-\end{description}
-
-\section{Erklärbarkeit \& Auditierbarkeit}\label{sec:xai}
-Erklärbarkeit (XAI) unterstützt die \emph{Plausibilisierung} für Reviews und Audits. Wirksamkeit ist \emph{zweckgebunden} und 
-liegt in der \emph{Prozessintegration} (Reproduzierbarkeit, Artefaktablage, Versionierung):
-\begin{itemize}
-  \item \textbf{Scope:} lokale Attributionen (z.\,B.\ Grad-CAM, Feature-Importance) für Fallanalysen; globale Charakterisierung für Modellverhalten.
-  \item \textbf{Grenzen:} post-hoc Methoden sind nicht beweiskräftig; sie \emph{ergänzen} Evidenzen (Metriken, Tests), ersetzen sie aber nicht.
-  \item \textbf{Audit-Praxis:} reproduzierbare Notebooks/Skripte, fixe Seeds/Umgebungen, Ablage der XAI-Reports im Safety Case.
-\end{itemize}
-
-\section{Brücke zur Coverage-Analyse}\label{sec:modelle-bruecke}
-Die Steckbriefe stützen die Einordnung in Kapitel~\ref{chap:coverage}: Kalibrierung, OOD-/Shift-Tests, Reproduzierbarkeit und
-Auditierbarkeit werden dort als \emph{geforderte Ansätze} den Anforderungsfeldern zugeordnet und hinsichtlich Abdeckung bewertet.
-
-
-
-
 
 
 
