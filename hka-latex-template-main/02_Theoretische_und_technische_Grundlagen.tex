@@ -495,9 +495,41 @@ für eine tragfähige Assurance.
 
 
 \section{Radar–Grundlagen für Objektklassifizierung}\label{sec:radar-objklass}
-Für die spätere Einordnung von KI-gestützter Objektklassifizierung im Radar-Kontext sind die verfügbaren
-Messgrößen, ihre Qualität und ihr Kontext entscheidend. Die folgende Zusammenstellung dient als Brücke
-zwischen Radarsensorik (RD/RDA-Domäne, Tracks) und nachgelagerten Klassifikationsfunktionen.
+Eine vereinfachte Darstellung klassischer Radar Klassifikation ist, es werden die empfangenen Rohdaten aufbereitet 
+und in eine verarbeitbare Form gebracht. Weiter wurde eine deterministische Heuristik einprogrammiert, 
+die anhand dieser aufbereiteten Daten und den dort definierten Mustern die Objekte unterscheidet. 
+Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kann das abweichen.
+
+\usetikzlibrary{arrows.meta,positioning}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+  >=Latex,
+  node distance=6mm,
+  box/.style={draw, rounded corners, align=center, inner sep=4pt, minimum height=7mm}
+]
+\node[box] (in)   {Daten rein\\\footnotesize (Radar-Rohdaten)};
+\node[box, right=of in]   (prep) {Aufbereiten\\\footnotesize (Filter, FFT)};
+\node[box, right=of prep] (pattern) {Muster erkennen\\\footnotesize (Regeln/Features)};
+\node[box, right=of pattern] (class) {Ziel klassifizieren\\\footnotesize (Label + Konfidenz)};
+\node[box, right=of class]   (out)   {Anzeigen\\\footnotesize (HMI/Operator)};
+
+% Einfluss durch Frontloading (separate Box darunter)
+\node[box, below=8mm of pattern] (front) {Frontloading\\\footnotesize (Schwellen/Regeln aus Entwicklung)};
+
+% Hauptfluss
+\draw[->] (in) -- (prep) -- (pattern) -- (class) -- (out);
+
+% Einfluss-Pfeil (gestrichelt)
+\draw[->, dashed] (front) -- (pattern);
+
+\end{tikzpicture}
+\caption{\emph{Input} → \emph{Aufbereiten} → \emph{Muster} → \emph{Klassifikation} → \emph{Output}.}
+\label{fig:radar-meta-simple}
+\end{figure}
+
+
 
 \subsection{Wichtige Datenpunkte für Objektklassifikation}\label{sec:radar-objklass-daten}
 \begin{table}[h]

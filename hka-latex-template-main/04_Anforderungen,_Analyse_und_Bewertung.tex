@@ -2,62 +2,199 @@
 \chapterimage{Bilder_und_Co/analyse.jpg} % Chapter heading image
 %----------------------------------------------------------------------------------------
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
-\chapter{Anforderungen und Szenarien für Radarsysteme}\label{chap:szenarien}
+\chapter{Radarsystem Auswahl}\label{chap:szenarien}
+Radarsysteme werden in der Luftfahrt an verschiedensten Orten und für verschiedenste Zwecke eingesetzt. 
+Und tragen dabei essentiell zur Flugsicherheit sowohl am Boden als auch an Board bei.
 
 \section{Ziel und Einordnung}\label{sec:szenarien-intro}
-Dieses Kapitel definiert einen \emph{Szenarienrahmen} für Bewertung und Nachweisführung.
-Die \emph{Szenario-Typen} und \emph{ODD-Schnitte} sind in Abschn.~\ref{sec:szenarien-rahmen}–\ref{sec:szenarien-odd} beschrieben.
+Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem augewählt und genauer betrachtet.
+Da sonst alles nur sehr waage Umschreibungen ohne konkretes Ziel wären. 
+Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
+
+\section{Auswahl des Radarsystems}
+Bereits in dem Grundlagenkapitel wurden verschiedene Radarsysteme und Einsatzgebiete erwähnt. 
+Da das System beispielhaft dienen soll, sind Einsatzzweck, Ort oder Art des Systems zweitrangig. 
+Die Objektklassifikation wird für diese Arbeit auf Grund dessen gewählt, dass sie verhältnismäßig verständlich 
+und nachvollziehbar ist. In dieser Arbeit wird beispielhaft eine Onboard Wetterphänomänsklassifikation als 
+Funktion ausgewählt. Wetterphänomäne zu identifizieren bietet hohes Potential, da auf Grund der Komplexität 
+klassische Methoden schnell an ihre Grenzen geraten. Und ein Pilot kann davon profitieren, wenn er 
+anstatt einer Klassifizierung zwischen Grün, Gelb und Rot zusätzlich wüsste ob es sich z.B. um 
+Regen oder Hagel handelt.
 
 
+\definecolor{riskHigh}{HTML}{D7263D}   % Rot
+\definecolor{riskMed}{HTML}{F29F05}    % Orange
+\definecolor{riskLow}{HTML}{2BA84A}    % Grün
+\newcommand{\risklabel}[2]{\textcolor{#1}{\textbf{#2}}}
+\newcommand{\riskbullet}[1]{\textcolor{#1}{\large\textbullet}\,}
 
-\section{Szenarienrahmen}\label{sec:szenarien-rahmen}
-Der Szenarienrahmen strukturiert typische Nutzungslagen und Nachweisfälle, ohne auf plattformspezifische Details einzugehen.
-Ziel ist eine eindeutig mess- und prüfbare Zuordnung von Anforderungen zur \emph{Operating Design Domain (ODD)}. 
-Leistung, Unsicherheit und Freigabekriterien werden \emph{segmentiert} berichtet – nicht als Gesamtdurchschnitt.
+\section{Szenarien bei Einsatz der Onboard-Klassifikation}
 
-\subsection{Szenario-Typen (Auswahl)}\label{sec:szenarien-typen}
 \begin{itemize}
-  \item \textbf{Nominalbedingungen:} mittlere SNR, moderate Wetterlage, begrenzter Clutter, normale Verkehrsdichte.
-  \item \textbf{Clutter-intensiv:} ausgeprägter Boden-/See-Clutter, urbane Multipath-Situationen; lokal erhöhte $P_{fa}$-Tendenz.
-  \item \textbf{Adverse Weather:} starke Niederschläge; Dämpfung, Spektralverbreiterung, Zielmaskierung.
-  \item \textbf{RFI/Koexistenz:} benachbarte Funkdienste, andere Radarsysteme, SSR/ADS-B-Überlagerung; Notch-/Filter-Betrieb.
-  \item \textbf{Dichte Verkehrslage:} viele Ziele, enge Winkelabstände, Datenassoziationsstress; Track-Kohärenz im Fokus.
-  \item \textbf{Aspekt-/Kinematik-Randfälle:} ungünstige Zielaspekte, stark manövrierende Ziele, intermittierende RCS.
-  \item \textbf{OOD/Unknown:} Szenarien/Klassen außerhalb der ODD; konservative Meldung (\emph{Abstain/Unknown}) verpflichtend.
+  \item \riskbullet{riskHigh}\textbf{False Negative (Gefahr übersehen)} — \risklabel{riskHigh}{Risiko: Hoch}\\
+        \textit{Auslöser:} Abschattung, schwaches SNR, Virga.\\
+        \textit{Auswirkung:} Verspätete Ausweich-/Höhenentscheidungen, potenzielles Sicherheitsrisiko.
+
+  \item \riskbullet{riskMed}\textbf{False Positive (z.\,B.\ Hagel gemeldet, keiner vorhanden)} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} AP/Clutter, Dämpfung, Radomnässe.\\
+        \textit{Auswirkung:} Unnötige Umwege/Profilwechsel, Effizienzverlust.
+
+  \item \riskbullet{riskMed}\textbf{Typverwechslung: Hagel vs.\ Starkregen/Graupel} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Ähnliche Signaturen, Mischphase.\\
+        \textit{Auswirkung:} Falsche Gefährdungseinschätzung (zu konservativ/zu liberal).
+
+  \item \riskbullet{riskMed}\textbf{Konvektion \(\leftrightarrow\) Stratiform (Bright Band)} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Bright-Band als scheinbarer Kern.\\
+        \textit{Auswirkung:} Über-/Unterschätzung konvektiver Gefahren entlang des Flugwegs.
+
+  \item \riskbullet{riskHigh}\textbf{Mikroburst/LLWS: Indizien vs.\ echte Ereignisse} — \risklabel{riskHigh}{Risiko: Hoch}\\
+        \textit{Auslöser:} Verwechslungsgefahr bei Shear-/Spektralmustern.\\
+        \textit{Auswirkung:} Fehlalarme oder verpasste Warnungen in kritischen Phasen.
+
+  \item \riskbullet{riskMed}\textbf{Range-/Velocity-Ambiguitäten} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} PRF-/Dealiasing-Grenzen.\\
+        \textit{Auswirkung:} Falsche Bewegungs-/Strukturklassifikation, inkonsistente Tracks.
+
+  \item \riskbullet{riskMed}\textbf{Geometriefehler (Abschattung/Side-Lobes)} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Pitch/Roll, Seitenkeulen.\\
+        \textit{Auswirkung:} Phantom-Echos oder „Löcher“ im Lagebild, lokale Fehleinschätzung.
+
+  \item \riskbullet{riskMed}\textbf{Radom-/Hardware-Zustand beeinflusst Klassen} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Nasser/vereister Radom, Gain-Drift.\\
+        \textit{Auswirkung:} Bias in Z/ZDR, systematische Fehlklassifikation/Confidence-Fehler.
+
+  \item \riskbullet{riskLow}\textbf{RFI/Interferenzen als „Wetter“} — \risklabel{riskLow}{Risiko: Niedrig}\\
+        \textit{Auslöser:} Externe Sender, Bordelektronik.\\
+        \textit{Auswirkung:} Streifen-/Fleckartefakte, temporäre Fehlinterpretationen.
+
+  \item \riskbullet{riskMed}\textbf{Domänen-Shift (neues Klimaregime/Jahreszeit)} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Abweichung vom Trainingsspektrum.\\
+        \textit{Auswirkung:} Systematische Klassifikationsfehler, reduzierte Verlässlichkeit.
+
+  \item \riskbullet{riskHigh}\textbf{Niedrige Datenqualität (hohe Dämpfung/geringes SNR)} — \risklabel{riskHigh}{Risiko: Hoch}\\
+        \textit{Auslöser:} Große Entfernung, Starkniederschlag, Radomnässe.\\
+        \textit{Auswirkung:} Hohe Varianz und instabile Klassen, sprunghafte Anzeigen.
+
+  \item \riskbullet{riskMed}\textbf{Latenz-/Update-Konflikte} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Rechenlast, langsame Scanzyklen.\\
+        \textit{Auswirkung:} Veraltete Klassen im Cockpit, eingeschränkte Taktiknutzen.
+
+  \item \riskbullet{riskMed}\textbf{UI/Interpretationsfehler trotz korrekter Klasse} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Unklare Symbolik, fehlende Confidence-Anzeige.\\
+        \textit{Auswirkung:} Fehlentscheidungen der Crew, Inkonsistenzen zwischen Crews.
+
+  \item \riskbullet{riskLow}\textbf{Track-Sprünge/Zell-Segmentierung} — \risklabel{riskLow}{Risiko: Niedrig}\\
+        \textit{Auslöser:} Splits/Merges, dünne Linienkonvektion.\\
+        \textit{Auswirkung:} Unruhige Trends/Konturen, geringere Planbarkeit.
+
+  \item \riskbullet{riskMed}\textbf{Unklassifizierbar (Out-of-Distribution)} — \risklabel{riskMed}{Risiko: Mittel}\\
+        \textit{Auslöser:} Seltene Phänomene, ungewöhnliche Texturen (z.\,B.\ Vulkanasche).\\
+        \textit{Auswirkung:} „Unklar“-Meldungen häufen sich, reduzierte Entscheidungsbasis.
 \end{itemize}
 
-\subsection{ODD-Schnitte (Reportingachsen)}\label{sec:szenarien-odd}
-Für die Mess- und Berichtspflicht werden Szenarien entlang objektiver Schnitte ausgewertet:
+
+\section{Anforderungen an die Objekt-/Wetterphänomen-Klassifikation}
+
 \begin{itemize}
-  \item \textit{Reichweite/SNR:} z.\,B.\ Entfernung in Bins, SNR-Bänder.
-  \item \textit{Wetter/Umwelt:} Niederschlagsklassen, Clutter-Typen (Boden/See/Wetter).
-  \item \textit{Geometrie:} Azimut-/Elevationssektoren, Aspektbereiche.
-  \item \textit{Dichte/Komplexität:} Zielanzahl pro Volumen/Zeiteinheit, Überschneidungsgrade.
-  \item \textit{RFI/Koexistenz:} Präsenz/Level, eingesetzte Notch-/Filter-Parameter.
+  \item \textbf{Allgemeine Ziele}
+    \begin{itemize}
+      \item Die Klassifikation \textbf{soll} für alle definierten Klassen (Hydrometeore, Konvektionstypen, Nicht-Meteo) Ergebnisse mit \emph{Confidence} liefern und Unsicherheit explizit ausweisen.
+      \item Eine \textbf{Unklar}-Klasse \textbf{muss} vorhanden sein, um Out-of-Distribution (OoD) und niedrige Datenqualität abzubilden.
+    \end{itemize}
+
+  \item \textbf{Leistungskennzahlen (pro Klasse, im Frontsektor $\pm 60^\circ$)}
+    \begin{itemize}
+      \item \textit{F1-Score:} Hydrometeore $\geq 0{,}85$; Konvektionstypen $\geq 0{,}80$.
+      \item \textit{Hagelindikatoren:} Detektionswahrscheinlichkeit $P_d \geq 0{,}90$, False-Alarm-Rate $\leq 0{,}10$.
+      \item \textit{Latenz (E2E):} Erfassung $\rightarrow$ Klassifikation $\rightarrow$ Anzeige $\leq 2\,\mathrm{s}$.
+      \item \textit{Stabilität:} Klassensprünge auf benachbarten Scans $\leq 1$ Klassenstufe bei unveränderter Szene (Median über 30\,s).
+    \end{itemize}
+
+  \item \textbf{False Negative minimieren (Gefahr übersehen)}
+    \begin{itemize}
+      \item \textbf{Muss} Qualitäts-/Geometrie-Flags (SNR, Attenuation, Blockage, Radom-Nässe) in die Entscheidungslogik integrieren.
+      \item \textbf{Muss} bei kritischen Indizien (z.\,B.\ starker Kern in Nähe Flugweg) eine konservative \emph{Warnbereitschaft} ausgeben, auch bei niedriger Confidence.
+    \end{itemize}
+
+  \item \textbf{False Positive begrenzen}
+    \begin{itemize}
+      \item \textbf{Soll} adaptive Confidence-Schwellen (abhängig von Datenqualität/Entfernung) verwenden.
+      \item \textbf{Soll} räumlich-zeitliche Konsistenztests (Persistenz, Mindestfläche) vor Klassenausgabe anwenden.
+    \end{itemize}
+
+  \item \textbf{Typverwechslungen (Hagel vs. Starkregen/Graupel)}
+    \begin{itemize}
+      \item \textbf{Soll} Merkmalsfusion aus Momenten (Z, V, W; optional ZDR, KDP, $\rho_{hv}$), Textur/Gradienten und Kontext (Temperatur/Höhe aus FMS) einsetzen.
+      \item \textbf{Soll} Mischphasen explizit als Zwischen-/Mehrklassen-Label mit geteilter Confidence ausgeben.
+    \end{itemize}
+
+  \item \textbf{Konvektion vs. Stratiform (Bright Band)}
+    \begin{itemize}
+      \item \textbf{Muss} Bright-Band-Detektor bereitstellen und dessen Output in die Konvektionstypisierung einbeziehen.
+      \item \textbf{Soll} vertikale Konsistenzprüfungen nutzen (mehrere Elevationen, falls verfügbar) oder Helligkeitsband-Heuristiken.
+    \end{itemize}
+
+  \item \textbf{Mikroburst/LLWS-Indizien}
+    \begin{itemize}
+      \item \textbf{Soll} mehrkriterielle Entscheidung (Doppler-Gradient, Divergenzindikatoren, Spektralbreite) mit Mindestpersistenz umsetzen.
+      \item \textbf{Soll} Ergebnisse klar als \emph{Indizien}-Level (nicht „bestätigtes Ereignis“) kennzeichnen.
+    \end{itemize}
+
+  \item \textbf{Range-/Velocity-Ambiguitäten}
+    \begin{itemize}
+      \item \textbf{Muss} Dealiasing-Qualitätskennzahlen liefern und bei Unsicherheit die Bewegungs-/Strukturklassifikation \emph{herabstufen} statt harte Entscheidungen zu erzwingen.
+      \item \textbf{Soll} PRF/Trip-Indikatoren in den Merkmalsraum einspeisen und betroffene Bins markieren.
+    \end{itemize}
+
+  \item \textbf{Geometrie/Abschattung/Side-Lobes}
+    \begin{itemize}
+      \item \textbf{Muss} Attitude-Kompensation (Pitch/Roll) berücksichtigen und Blockage-/Sektor-Masken anwenden.
+      \item \textbf{Soll} Seitenkeulen-Indikatoren erkennen und die Klassifikation dort de-priorisieren.
+    \end{itemize}
+
+  \item \textbf{Radom-/Hardware-Zustand}
+    \begin{itemize}
+      \item \textbf{Muss} Health-/Bias-Information (Kalibrierstatus, Gain-Drift, Radomnässe) als Eingangsmerkmale nutzen.
+      \item \textbf{Soll} druckreife Bias-Korrekturen (z.\,B.\ Regen-/Sun-Cal) auf die Klassenentscheidung propagieren.
+    \end{itemize}
+
+  \item \textbf{RFI/Interferenzen}
+    \begin{itemize}
+      \item \textbf{Muss} RFI-Detektion (spektrale/zeitliche Kohärenztests) durchführen und betroffene Bins/Regionen als \emph{nicht klassifizierbar} kennzeichnen.
+      \item \textbf{Soll} RFI-Muster von meteorologischen Flächen (z.\,B.\ band-/streifenförmig) trennen und Confidence absenken.
+    \end{itemize}
+
+  \item \textbf{Domänen-Shift/Regimewechsel}
+    \begin{itemize}
+      \item \textbf{Soll} Regime-Tags (tropisch, winterlich, gemäßigt) führen und regimeabhängige Parameter/Modelle wählen.
+      \item \textbf{Muss} Drift-/OoD-Indikatoren ausgeben (Anteil \emph{Unklar}, Feature-Statistiken vs.\ Training).
+    \end{itemize}
+
+  \item \textbf{Datenqualität und Attenuation}
+    \begin{itemize}
+      \item \textbf{Muss} SNR-/Attenuation-abhängige Confidence-Modelle einsetzen; Mindest-SNR-Gates dokumentieren.
+      \item \textbf{Soll} Glättung (räumlich/zeitlich) ohne relevante Details zu verwaschen; Parameter sind versioniert.
+    \end{itemize}
+
+  \item \textbf{Zeitverhalten \& Priorisierung}
+    \begin{itemize}
+      \item \textbf{Muss} Frontsektor priorisieren; bei Ressourcenknappheit frühzeitige, grobe Klasse mit Zeitstempel liefern (\emph{early exit}), gefolgt von verfeinerter Klasse.
+      \item \textbf{Soll} Klassifikationsalter anzeigen; harte Timeouts verhindern veraltete Ausgaben.
+    \end{itemize}
+
+  \item \textbf{Ausgaben \& HMI (klassifikationsnah)}
+    \begin{itemize}
+      \item \textbf{Muss} je Objekt: Klasse, Confidence (\%), Qualitätsflags (SNR/Attenuation/RFI/Dealiasing), Position/Entfernung, Zeitstempel ausgeben.
+      \item \textbf{Soll} aggregierte Layer (Zellenkontur, Trendpfeile) bereitstellen; bei niedriger Qualität reduzierte Darstellung statt Unterdrückung.
+      \item \textbf{Soll} klare Kennzeichnung von \emph{Indizien} vs.\ \emph{bestätigte} Klassifikationen.
+    \end{itemize}
+
+  \item \textbf{Validierung \& Test}
+    \begin{itemize}
+      \item \textbf{Muss} Testsätze pro Szenarioklasse (FN/FP, Bright-Band, Ambiguitäten, RFI, OoD) führen; Metriken (F1, $P_d$, FAR, Latenz) pro Regime berichten.
+      \item \textbf{Soll} Replays (I/Q) und Flugversuche mit Referenzdaten (Bodenradar/Satellit/Pluviometer, soweit verfügbar) zur Verifikation einsetzen.
+    \end{itemize}
 \end{itemize}
-Alle Leistungs-, Unsicherheits- und Freigabekriterien sind \emph{pro ODD-Segment} zu berichten. 
-Damit bleibt die Bewertung kontextsensitiv und vermeidet irreführende Mittelwerte über heterogene Bedingungen.
-
-\subsection*{Radar-KPIs \& Abnahmekriterien (ODD-segmentiert)}
-\begin{itemize}
-  \item \textbf{Detektion/Klassifikation:} $P_d(\tau)$, $P_{fa}(\tau)$, ROC/PR \emph{je} Range-/SNR-Band; klassenweise F1/MCC.
-  \item \textbf{Kalibrierung/Unsicherheit:} ECE, Brier, NLL \emph{je Segment}; Bootstrap-Konfidenzbänder.
-  \item \textbf{OOD/Unknown:} OOD-TPR@1\%FPR, Abstain-Rate, Auswirkung auf $P_d/P_{fa}$.
-  \item \textbf{Laufzeit/Verfügbarkeit:} P95/P99-Latenz, Jitter, Verfügbarkeit pro Pfad.
-  \item \textbf{Ressourcen:} RAM/Flash/Compute-Budget (Inline) auf Zielhardware.
-\end{itemize}
-\noindent\emph{Abnahmeprinzip:} Bewertung \emph{pro ODD-Segment}; Gesamtmittelwerte nur ergänzend.
-
-
-\section{Brücke zu Anforderungsfeldern und Coverage}\label{sec:szenarien-bruecke}
-Die in Abschnitt~\ref{sec:szenarien-typen} definierten Szenario-Typen und die Reportingachsen aus Abschnitt~\ref{sec:szenarien-odd}
-bilden die Grundlage für die segmentierte Bewertung der Anforderungsfelder. 
-Kapitel~\ref{chap:anforderungen} fasst diese Anforderungsfelder zusammen und ordnet ihnen typische Erwartungen aus etablierten 
-Leitlinien und Standards zu. 
-Darauf aufbauend verknüpft Kapitel~\ref{chap:coverage} die \emph{geforderten Ansätze} mit dem beobachtbaren Abdeckungsgrad (Coverage-Analyse) 
-und diskutiert die Ergebnisse.
-
-
 
 
 
@@ -68,76 +205,140 @@ und diskutiert die Ergebnisse.
 \chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
 
 \section{Ziel und Einordnung}\label{sec:modelle-intro}
-Dieses Kapitel liefert \emph{kurze, zweckgebundene} Steckbriefe ausgewählter Modellklassen. Es dient einer gemeinsamen
-Sprache für spätere Verweise (Kalibrierung, Unsicherheit, typische Fehlerbilder) und ersetzt keine technische Vertiefung.
-Die Rolle von Erklärbarkeit wird als \emph{auditierbares, aber nicht allein tragendes} Element im Assurance-Kontext beschrieben.
+Dieses Kapitel dient dazu einzelne relevante KI Modelle besser zu verstehen und eines davon 
+auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu untersuchen.
 
-\subsection*{Modellauswahl-Logik (0–3 Eignung, indikativ)}
+\section{Modell-Steckbriefe für Onboard-Radar (Wetterklassifikation)}
+
+\subsection*{CNN (Convolutional Neural Networks)}
 \begin{itemize}
-  \item \textbf{CNN (leicht, RD/RDA):} Leistung~3, Kalibrierung~2, OOD~2, Latenz~2–3, Repro/Audit~2.
-  \item \textbf{Deep Ensembles \textit{oder} MC-Dropout:} Leistung~3, Kalibrierung~3, OOD~3, Latenz~1–2, Repro/Audit~2.
-  \item \textbf{GBDT (Tracks/Tabular):} Leistung~2, Kalibrierung~2, OOD~1–2, Latenz~3, Repro/Audit~3.
-  \item \textbf{Autoencoder/One-Class (Anomalie):} Neuheit~2, Kalibrierung~1, OOD~2, Latenz~2–3, Repro/Audit~2.
-  \item \textbf{Temporal (TCN/Transformer):} Sequenznutzen~2–3, Latenz~1–2, Repro~2.
-\end{itemize}
-\noindent\emph{Regel:} Nur Modelle wählen, die \emph{pro Segment} KPI \& Latenz/Ressourcen erfüllen \emph{und} eine nachvollziehbare Kalibrierungs-/OOD-Strategie haben.
-
-
-\section{Modellsteckbriefe \& typische Fehlerbilder}\label{sec:steckbriefe}
-\begin{description}
-  \item[Entscheidungsbäume / Random Forests] \hfill\\
-  \textit{Charakter:} interpretierbar, robuste Basis für tabellarische Daten. 
-  \textit{Typische Fehler:} Overfitting bei vielen Features, inkonsistente Kalibrierung. 
-  \textit{Assurance-Hinweise:} Feature-Governance, Kalibrierung (Platt/Isotonic), Reproduzierbarkeit (Seeds).
-
-  \item[Gradient Boosting (XGBoost/LightGBM)] \hfill\\
-  \textit{Charakter:} starke Performance für strukturierte Daten. 
-  \textit{Typische Fehler:} Leakage-Risiko, Sensitivität auf Daten-Shift. 
-  \textit{Assurance-Hinweise:} strikte Train/Val/ Test-Trennung, SHAP nur als Audit-Hilfe, nicht als Safety-Nachweis; segmentierte Kalibrierung.
-
-  \item[CNN-Varianten] \hfill\\
-  \textit{Charakter:} Mustererkennung auf Bild-/Spektralrepräsentationen. 
-  \textit{Typische Fehler:} Black-Box-Charakter, OOD-Sensitivität, Spurious Correlations. 
-  \textit{Assurance-Hinweise:} OOD-/Shift-Tests, Kalibrierung je ODD-Segment, Replaybare Trainingspipelines.
-
-  \item[Autoencoder / One-Class-Methoden] \hfill\\
-  \textit{Charakter:} Anomalie-/Neuheitserkennung. 
-  \textit{Typische Fehler:} schwellengetrieben, empfindlich für Verteilungsänderungen (False Alarms). 
-  \textit{Assurance-Hinweise:} Schwellen-Audit, Kostenmetriken (FA/MD), dokumentierte Degradationspfade (Abstain/Review).
-\end{description}
-
-
-\subsection*{Empfehlungs-Schnittmenge (Go-Forward-Set)}
-\begin{itemize}
-  \item \textbf{Kernklassifikator:} leichtes CNN auf RD/RDA + \textit{Deep Ensemble} (N=3–5) \textit{oder} MC-Dropout.
-  \item \textbf{Kalibrierung:} Temperature Scaling \emph{je ODD-Segment}; ECE/Brier/NLL mit CI.
-  \item \textbf{OOD/Abstain:} Energie-Score \textit{oder} Mahalanobis im Feature-Space; segment-spezifische Schwellen; Hysterese \& Operator-Hinweis.
-  \item \textbf{Anomalie (optional, Frontloading/Monitoring):} Autoencoder/One-Class für Drift-/Neuheit, nicht als Primärpfad.
-  \item \textbf{Tabulare Baseline (Frontloading):} GBDT für Analysen, Plausibilisierung, Schwellenableitung.
+  \item \textbf{Zweck:} Pixel/Region-Segmentierung \& Detektion.
+  \item \textbf{Typische Variante:} YOLO
+  \item \textbf{Input/Features:} 2D/2.5D Radar-Schnitte, Textur/Gradienten, Sequenzen, Radarrohdaten möglich.
+  \item \textbf{Stärken:} Hohe Genauigkeit; lernt komplexe Muster; edge-tauglich mit leichten Backbones \& Quantisierung.
+  \item \textbf{Schwächen:} Daten-/Label-intensiv; geringere Erklärbarkeit.
+  \item \textbf{Latenz/Compute:} 10--100\,ms 
 \end{itemize}
 
-
-\section{Erklärbarkeit \& Auditierbarkeit}\label{sec:xai}
-Erklärbarkeit (XAI) unterstützt die \emph{Plausibilisierung} für Reviews und Audits. Wirksamkeit ist \emph{zweckgebunden} und 
-liegt in der \emph{Prozessintegration} (Reproduzierbarkeit, Artefaktablage, Versionierung):
+\subsection*{Baumbasierte Ensembles (GBDT)}
 \begin{itemize}
-  \item \textbf{Scope:} lokale Attributionen (z.\,B.\ Grad-CAM, Feature-Importance) für Fallanalysen; globale Charakterisierung für Modellverhalten.
-  \item \textbf{Grenzen:} post-hoc Methoden sind nicht beweiskräftig; sie \emph{ergänzen} Evidenzen (Metriken, Tests), ersetzen sie aber nicht.
-  \item \textbf{Audit-Praxis:} reproduzierbare Notebooks/Skripte, fixe Seeds/Umgebungen, Ablage der XAI-Reports im Safety Case.
+  \item \textbf{Zweck:} Tabellarische Klassifikation auf Feature-Vektoren.
+  \item \textbf{Typische Variante:} Random Forest
+  \item \textbf{Input/Features:} Texturen, Spektralbreite, SNR/Attenuation/Geometrie, Kontext (Temperatur/Höhe).
+  \item \textbf{Stärken:} Schnell, robust bei kleinen/mittelgroßen Datensätzen; gut erklärbar; sehr geringe Latenz.
+  \item \textbf{Schwächen:} Räumliche Nachbarschaft nur indirekt; ungeeignet für rohe Bilder/Sequenzen.
+  \item \textbf{Latenz/Compute:} $< 5$\,ms/Objekt; Echtzeit fähig
 \end{itemize}
 
-\subsection*{Abnahmeplan}
-\begin{enumerate}
-  \item \textbf{Daten/ODD:} Szenario-Steckbriefe, Mindest-$n$ je Segment, getrennte Splits pro Segment.
-  \item \textbf{Leistung:} Pd/Pfa, ROC/PR je Segment; Bootstrap-CI; Worst-Case-Reports.
-  \item \textbf{Kalibrierung:} Reliability-Plots, ECE/Brier/NLL je Segment; dokumentierte Freigabeschwellen.
-  \item \textbf{OOD/Abstain:} OOD-TPR@1\%FPR; Einfluss von Abstain auf Pd/Pfa; Operator-Playbook.
-  \item \textbf{Robustheit:} Stress-/Shift-Tests (Clutter/RFI/Wetter/Aspekt); Degradationskurven; Akzeptanzkriterien.
-  \item \textbf{Laufzeit:} P95/P99-Latenz/Jitter auf Zielhardware; CI/CD-Regression-Gates.
-  \item \textbf{Repro/Toolchain:} Seeds, Lockfiles, Artefakt-IDs, Build-Manifeste; ggf. TQL-Entscheidung (DO-330).
-\end{enumerate}
+\subsection*{Probabilistische \& OOD-Modelle}
+\begin{itemize}
+  \item \textbf{Zweck:} Verlässliche Unsicherheit, Out-of-Distribution \& Anomalie-Erkennung.
+  \item \textbf{Typische Variante:} Deep Ensembles
+  \item \textbf{Input/Features:} Ausgaben von CNN/GBDT + Qualitätsflags (z.B. SNR, RFI).
+  \item \textbf{Stärken:} Liefert \emph{Confidence} statt nur harte Klassen; erkennt ungewöhnliche Situationen.
+  \item \textbf{Schwächen:} Höherer Rechenbedarf bzw.\ tuning-sensitiv (OOD-Schwellen); komplexere Evaluation.
+  \item \textbf{Latenz/Compute:} Ensembles 2--5$\times$ Einzelmodell; nicht Echtzeit fähig
+\end{itemize}
 
+\subsection*{Clustering}
+\begin{itemize}
+  \item \textbf{Zweck:} Objektbildung, Vor-/Nachverarbeitung, Track-Seeding, Daten-Kuration (nicht primär finale Feinklassen).
+  \item \textbf{Typische Variante:} DBSCAN
+  \item \textbf{Input/Features:} (Reflektivität, Spektralbreite, Textur) + Koordinaten; für Zeitindex/Track-Kontext.
+  \item \textbf{Stärken:} Formflexibel, label-arm; stabilisiert Objekte/Tracks und verbessert nachgelagerte Klassifikationen.
+  \item \textbf{Schwächen:} Parameter-sensitiv ($\varepsilon$/minPts); keine semantischen Labels.
+  \item \textbf{Latenz:} optional Echtzeit fähig
+\end{itemize}
 
+\section{Modell Vergleich}
+
+\small
+\begin{longtable}{p{0.16\linewidth}p{0.21\linewidth}p{0.2\linewidth}p{0.21\linewidth}p{0.2\linewidth}}
+\caption{Vergleich der Modelle mit Anforderungen}\\
+\toprule
+\textbf{Kriterium} &
+\textbf{CNN} &
+\textbf{Baumbasiert} &
+\textbf{Probabilistisch/OOD} &
+\textbf{Clustering} \\
+\midrule
+\endfirsthead
+
+\toprule
+\textbf{Kriterium} &
+\textbf{CNN} &
+\textbf{Baumbasiert} &
+\textbf{Probabilistisch/OOD} &
+\textbf{Clustering} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
+\midrule
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+\textbf{Passung zu Szenarien} &
+\textbf{Hoch} lernt komplexe räumliche Muster \& Kerne &
+\textbf{Hoch} (mit guten Features) keine Rohdaten &
+\textbf{Ergänzend} liefert Unsicherheit/OOD, keine Semantik allein &
+\textbf{Niedrig als Primär} formt Objekte, aber keine Klassen \\
+
+\textbf{Leistung (F1, $P_d$/FAR)} &
+\textbf{Hoch} bei genügend Daten &
+\textbf{Hoch} (mit guten Features) niedrige FAR &
+\textbf{Steigert Verlässlichkeit} , keine eigene F1 &
+\textbf{Parameterabhängig} keine Klassenmetriken \\
+
+\textbf{Latenz} &
+\textbf{Erfüllbar}&
+\textbf{Sehr gut} ($<\,$ms/Objekt) &
+\textbf{2–5$\times$} Basislatenz (Ensembles) &
+\textbf{Gut} \\
+
+\textbf{Datenbedarf/ Labeling} &
+\textbf{Hoch}  &
+\textbf{Mittel} (Objekt-Feature-Labels) &
+\textbf{Zusatzdaten} &
+\textbf{Gering} \\
+
+\textbf{Erklärbarkeit} &
+\textbf{Mittel}  &
+\textbf{Gut}  &
+\textbf{Mittel}  &
+\textbf{Niedrig} (keine Labels) \\
+
+\textbf{Harware- anforderung} &
+\textbf{Mittel}  &
+\textbf{Niedrig} &
+\textbf{Mittel}  &
+\textbf{Niedrig} \\
+
+\textbf{Alleinstellungs-Tauglichkeit} &
+\textbf{Ja}  &
+\textbf{Ja} bei guten Features &
+\textbf{Nein} ergänzendes Modul &
+\textbf{Nein} Vor-/Nachverarbeitung \\
+\end{longtable}
+
+Als alleinstehendes Modell empfehlen sich Baummodelle (so fern man gute Features hat). 
+Diese sind alleinstellungsfähig, was für diese Arbeit wichtig ist, um zusätzliche Komplexität zu vermeiden. 
+Zudem sind sie Echtzeitfähig, gut erklärbar und haben eine relativ geringe Anforderung an die Leistung der Hardware. 
+Das hat den Vorteil, dass es nicht bereits an der Hardwarezulassung scheitert um dieses Modell theoretisch verwenden zu können.
+
+\section{Einbindungsmöglichkeiten}
+Als assistierendes System neben dem klassischen zur zusätzlichen Informationsgewinnung.\\
+Inline anstatt klassischer Schwellwertentscheider\\
+(inline bayes klassifikator? oder wie war das nochmal)\\
+\\
+mögliche szenarien beim assistieren oder im vergleich zum klassischen:\\
+- stimmen überein   gut\\
+- sind nah bei einander   kann leicht problematisch werden\\
+- eines fällt aus     kommt auf situation an\\
+- sie sind gegeteilig     interessant: was tun?\\
 
 % -------------------------
 % Anforderungsfelder & Referenzrahmen

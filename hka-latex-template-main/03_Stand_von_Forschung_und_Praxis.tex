@@ -397,6 +397,10 @@ für die bereits definierten Anforderungsfelder genutzt.
 
 
 \chapter{Deep Dive: ISO/PAS 8800}
+Die ISO 8800 ist sehr Dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
+sicher wird. Diese Norm beschreibt was zu tun ist und wie man begründet, dass eine KI sicher genug ist. 
+Detailprozesse und Risikobeurteilungen sind nicht enthalten. Stattdessen wie existierende Normen 
+angepasst oder erweitert werden müssen.
 \newcommand{\dotG}{{\color{green}\large$\bullet$}}
 \newcommand{\dotY}{{\color{blue}\large$\bullet$}}
 \newcommand{\dotR}{{\color{red}\large$\bullet$}}
@@ -431,16 +435,16 @@ für die bereits definierten Anforderungsfelder genutzt.
     (b) Architektur- und Entwicklungsmaßnahmen zur Erfüllung der Sicherheitsanforderungen vor dem Einsatz identifizieren;\\
     (c) Architekturmaßnahmen zur Minderung nach dem Einsatz erkennbarer funktionaler Unzulänglichkeiten identifizieren;\\
     (d) Maßnahmen definieren, die die Erfüllung der Sicherheitsanforderungen im Zielanwendungsbereich sicherstellen.
-  \item[\dotY] (11) \textbf{Datenbezogene Aspekte:} Die Ziele sind:\\
+  \item[\dotR] (11) \textbf{Datenbezogene Aspekte:} Die Ziele sind:\\
     (a) Datensatz-Lebenszyklus (Erhebung, Erstellung, Analyse, Verifikation/Validierung, Verwaltung, Wartung) definieren;\\
     (b) Datensatz-Unzulänglichkeiten mit Sicherheitsauswirkung identifizieren;\\
     (c) datenbezogene Sicherheitseigenschaften mit Einfluss auf die Systemsicherheit identifizieren und zur Analyse heranziehen;\\
     (d) Gegenmaßnahmen zur Vermeidung/Minderung von Datensatz-Unzulänglichkeiten über den Datensatz-Lebenszyklus hinweg festlegen;\\
     (e) datenbezogene Arbeitsprodukte definieren, die den Sicherheitsnachweis unterstützen.
-  \item[\dotY] (12) \textbf{Verifikation und Validierung des KI-Systems:} Die Ziele sind:\\
+  \item[\dotG] (12) \textbf{Verifikation und Validierung des KI-Systems:} Die Ziele sind:\\
     (a) verifizieren, dass das KI-System seine Sicherheitsanforderungen erfüllt;\\
     (b) validieren, dass die dem KI-System zugewiesenen Sicherheitsanforderungen bei der Integration ins übergeordnete System erreicht werden.
-  \item[\dotG] (13) \textbf{Sicherheitsanalyse von KI-Systemen:} Die Ziele sind:\\
+  \item[\dotY] (13) \textbf{Sicherheitsanalyse von KI-Systemen:} Die Ziele sind:\\
     (a) sicherheitsrelevante Faults und KI-Fehler identifizieren, die KI-Sicherheitsanforderungen verletzen können;\\
     (b) potenzielle Ursachen identifizieren;\\
     (c) Sicherheitsmaßnahmen zur Vermeidung oder Beherrschung sicherheitsrelevanter KI-Fehler definieren unterstützen;\\
@@ -459,9 +463,9 @@ für die bereits definierten Anforderungsfelder genutzt.
     (C){\dotG} ISO 26262-Lückenanalyse für ML\\
     (D){\dotG} Detaillierte Betrachtungen zu sicherheitsrelevanten Eigenschaften von KI-Systemen\\
     (E){\dotR} STAMP/STPA-Beispiel\\
-    (F){\dotG} Identifikation von Softwareeinheiten in NN-basierten Systemen\\
+    (F){\dotR} Identifikation von Softwareeinheiten in NN-basierten Systemen\\
     (G){\dotG} Architektur- und Entwicklungsmaßnahmen für KI-Systeme\\
-    (H){\dotY} Typische Leistungskennzahlen für maschinelles Lernen\\
+    (H){\dotR} Typische Leistungskennzahlen für maschinelles Lernen\\
 \end{itemize}
 
 \paragraph{Legende zur Einstufung der Relevanz bezüglich diser Arbeit}
@@ -502,7 +506,7 @@ Details zu gehen (z. B. konkrete DNN-Architekturen).
 
 \section{(6) KI im Kontext der Systemsicherheitsentwicklung angepasst auf Radarsysteme}
 \paragraph{KI in Radarsystemen nach ISO/PAS 8800 Kap.\,6}
-ISO/PAS~8800 ergänzt die ISO~26262 für Radarsysteme, sobald ML\slash KI als Bestandteil der sicherheitsrelevanten 
+ISO/PAS~8800 ergänzt die ISO~26262, sobald ML\slash KI als Bestandteil der sicherheitsrelevanten 
 Verarbeitung genutzt wird. Eine typische Architektur gliedert sich in \emph{Vorverarbeitung} , 
 \emph{ML-Modell} (Detektion/Klassifikation/Tracking) und \emph{Nachverarbeitung/Monitoring}. 
 Klassische Deploy\-ment-Schritte  werden durch ISO~26262 abgedeckt; daten- und 
@@ -577,3 +581,114 @@ Ein essentielles Beispiel, wie Anforderungen verändert werden müssen ist folge
 \end{array}}_{\text{Qualitative Anforderung}}
 \]
 
+
+\section{(10) Auswahl von KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen}
+Die Ziele dises Abschnittes sind bereits bei Inhalten beschrieben. Es wird beschrieben, dass Sicherheitsanforderungen 
+durch zwei Maßnahmen erfüllt werden können: Die Architektur und die Entwicklung. Weiter können beim Designprozess 
+nicht immer alle Anforderungen erfüllt werden, was dazuführt, dass diese angepasst werden müssen. Wichtig sind 
+die generellen Anfroderungen, nach denen die KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen entschieden werden:
+
+\begin{itemize}
+  \item Rechtfertigung, dass die Sicherheitsanforderungen erfült sind.
+  \item Sicherheitsanforderungen müssen den Komponenten zugewiesen sein.
+  \item Architektur- und Entwicklungsmaßnahmen helfen vom Design her Fehler von KI-Komponenten zu verhindern um Sicherheitsanforderungen zu erfüllen und das Risiko zu minimieren.
+  \item Die Effektivität gewählter Maßnahmen muss mittels Begründungen unterstützt werden.
+  \item Die Sicherheitsanalyse des KI-System-Output zeigt, ob Anforderungen erfüllt werden können.
+  \item Unterschiede zwischen Entwicklungsumgebung und Zielumgebung muss identifiziert werden.
+  \item Ki-Modelle müssen mittels validierungs Datensätzen trainiert und evaluiert werden.
+\end{itemize}
+
+Der letzte Punkt schließt indirekt RL Methoden aus, auch wenn diese, durch diese Norm allgemein nicht ausgeschlossen werden. 
+Das stellt einen kleinen Wiederspruch dar, was aufzeigt, dass auch Normen iterativ verbessert werden müssen. Anzumerken ist, dass 
+dies eine erst Version ist und daher noch keine iterativen Schritte seit der Erstveröffentlichung durchlaufen hat.
+
+\paragraph{Beispiel von Architektur- und Entwicklungsmaßnahmen}
+Weiter befinden sich in diesem Abschnitt Beispiele wie Architektur- und Entwicklungsmaßnahmen aussehen können. 
+Konkrete Maßnahmen bezüglich Robustheit, Zuverlässigkeit, etc. stützen auf bestpractise Methoden und 
+liefern daher keine zusätzlichen Erkenntnisse wann eine KI sicher ist.
+
+\section{(11) Datenbezogene Aspekte}
+Die hier beschriebenen Aspekte beziehen sich hauptsächlich auf: un-/ semi- und supervised learning. 
+Da diese sich ebenfalls auf bestpractise Methoden stützen, werden sie in dieser Arbeit nicht zusätzlich 
+aufgeführt, da diese nur wenig zur Erkenntnissgewinnung beitragen. Diese Methoden sind allgemein beim 
+Arbeiten mit großen Datenmengen und auch bei ML von essentieller Bedeutung. Sie sind weitverbreitete 
+Standarts verschiedener Industrien und haben auch Einfluss auf verschiedene Punkte dieser Arbeit.
+
+\section{(12) Verifikation und Validierung des KI-Systems}
+Diese Kapitel geht sehr highlevel auf Verifikation und Validierung ein. Unteranderem mit einigen Anforderungen 
+an benötigten Tests und des Workflows mit wichtigen Stichpunkte wie, dass SOTIF Trigger Bedingungen beschreibt. 
+Desweiteren wird auch eine Liste möglicher Testmethoden vorgeschlagen um Komponenten zu testen. Für diese 
+Arbeit sind folgende Punkte wichtig:
+
+\paragraph{KI spezifische Herausforderungen mit Eklärungen}
+\begin{itemize}
+  \item fehlen von präzisen Sicherheitsanforderungen
+  \item vielfältige Eingaben aus verschiedenen Quellen (z.B. kombination aus Radar und Kamera)
+  \item DNNs haben komplexe Architekturenheuristisches Trainieren (basierend auf Erfahrungswerten)
+  \item das Basieren auf großen Datensätzen
+  \item nicht vorhersagbares fehlerhaftes Verhalten
+  \item Einschränkung struktureller Abdeckung
+  \item kleine Änderungen (Umwelt) bringen große Auswirkungen mit sich (input VS output)
+  \item nicht ausreichende Datensätze führen zu ungewollten Verhalten
+\end{itemize}
+
+Weiter wird ein Beispiel zur Objekterkennung angeführt, dass sowohl ein Lidar als auch eine 
+Kamera ein Objekt nicht erkennen können durch einen Absorbtionseffekt eines Objektes. 
+Um zu zeigen, dass diese nicht stochastisch unabhängig sind.
+
+\section{(13) Sicherheitsanalyse von KI-Systemen}
+Es werden recht allgemein Sicherheitsanalysen und Workflows beschrieben mit berücksichtigung von KI. 
+Speziell angesprochene Punkte, sind: 
+\begin{itemize}
+  \item einige Datenspezifische Verweise
+  \item die Unterscheidung von KI-Komponenten in KI-Modelle und nicht KI-Modelle (Steuerlogik)
+  \item die am häufigsten auftretenden Fehlern bei KIs sind:
+    \begin{itemize}
+      \item Probleme bei Datenspezifikationen und dem sammeln von Daten
+      \item Probleme im Design und Implementierung
+      \item Probleme beim spezifizieren von Anforderungen
+    \end{itemize}
+  \item Herausforderungen und schwierige Eigenschaften bei Sicherheitsanalyse Techniken sind:
+    \begin{itemize}
+      \item Trainingsdaten statt Systemspezifikationen
+      \item unklare Systemarchitekturen
+      \item Unsicherheiten
+      \item Erklärbarkeit
+      \item nichtlineares Verhalten
+      \item sich verändernde Umgebung
+      \item komplexe Interaktionen und schwer verständliche Zusammenhänge
+    \end{itemize}
+\end{itemize}
+
+
+\section{(15) Vertrauen in die Nutzung von KI-Entwicklungsframeworks und -Softwaretools}
+Hier beschriebn sind bestpractise Methoden und ein Fokus auf PFMEA (Potential Failure Modes and Affects Analysis)
+mit einer Beispieltabelle.
+
+\section{Annex}
+Im Anhang befinden sich wichtige Beispiele und Zusatzinformationen. Folgend sind die 
+für diese Arbeit wichtigsten Punkte:
+\paragraph{Annex - C; ISO 26262 Lückenanalyse für ML}
+Für den Einsatz von ML wird Hardware von einem oder mehreren CPUs empfohlen und 
+für Neuronale Netze GPUs. \\
+Vorallem bei der Verifikation, Analyse, etc. wird auf Simulationen und Heuristische 
+bzw. Experten Aswertung verwiesen.\\
+Die Anforderung an die Richtigkeit der Ausführung des Codes und Datenfluss muss entfernt 
+werden, was auf den Probabilistischen output einer KI zurückzuführen ist. Das bedeutet, 
+dass der Code nicht mehr deterministisch sein kann und eine MC/DC Coverage (Modified Condition/Decision Coverage) 
+nicht mehr möglich ist. (MC/DC ist eine Anforderung an die Eindeutigkeit des Codes; Jeder Ja/Nein Input oder 
+Bedingung hat einen Eindeutigen output.)
+\paragraph{Annex - D; Detaillierte Betrachtungen zu sicherheitsrelevanten Eigenschaften von KI-Systemen}
+Hier werden Sicherheits bezogene Eigenschafte beschrieben und zugeordnet, diese hier wiederzugeben 
+wäre exessiv und trägt nicht unmittelbar dem Verständnis bei.
+\paragraph{Annex - G; Architektur- und Entwicklungsmaßnahmen für KI-Systeme}
+Hier werden Detailbeschreibungen angeführt zu folgenden Themen, welche jeweils untergliedert sind:
+\begin{itemize}
+  \item Beispiele für Architektur und Entwicklungsmaßnahmen für KI
+  \item Qualitative und qantitative Analyse von KI Architekturen
+  \item Datenverteilungen und ihr Einfluss auf KI Modelle
+  \item Trainingssicherheitsmaßnahmen
+  \item Überwachung und KI System Modifikationen
+  \item Ausrichtung der Absichten
+  \item Berücksichtigungen im Zusammenhang mit der Zielausführungsumgebung
+\end{itemize}
