@@ -340,6 +340,7 @@ Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleic
   \item \textbf{Physikalische Größen:} Geschwindigkeit, Masse, Abmaße; Luftfahrt stark variierend, Automotive geringere Varianz.
   \item \textbf{Skalen:} Flotten- und Betriebsstundenordnungen differieren (Mengen-/Zeitmaßstäbe), damit auch Evidenz- und Monitoring-Strategien.
   \item \textbf{Einsatzunterscheidung von KI:} nach Autorität/Automatisierung (EASA KI-Level L1/L2 vs.\ SAE Automatisierungsgrad).
+  \item \textbf{Hardware Zulassung:} Z.B. Verwendung von Redundanz.
 \end{itemize}
 
 \subsection{Bemerkungen}
@@ -378,6 +379,10 @@ Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleic
     versucht Kosten zu vermeiden durch Redundanz und Vermeidung von  Rückrufaktionen und erhöht daher die Sicherheitsanforderungen 
     für die einzelnen Bauteile. Die Luftfahrt hat allgemein hohe Anforderungen an die Bauteile und erhöht die Sicherheit 
     zusätzlich durch Redundanz. 
+  \item \textbf{Hardware Zulassung:} Im Automotive werden z.B. GPUs auf Grund ihrer Unsicherheit redundant verbaut um Sicherheit zu gewährleisten.
+    In der Luftfahrt, wo ein System ohnehin redundant verbaut wird, würde man diese ``stapeln''. Ein Beispiel, warum das problematisch sein kann:
+    wenn man für eine Entscheidung 11 unabhängige Klassifizierer verbaut, welche jeweils 9 unabhängige GPUs haben, würde man eine 30 aus 99 Entscheidung treffen.
+    (6 aus 11 notwendige Klassifizierer für eine Entscheidung, mit jeweils 5 aus 9 GPUs) (Ein ``Gott Modell'' Ansatz, wie Tesla ihn verfolgt ist in der Luftfahrt undenkbar.)
 \end{itemize}
 
 

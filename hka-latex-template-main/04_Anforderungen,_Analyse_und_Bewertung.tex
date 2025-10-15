@@ -208,16 +208,17 @@ Regen oder Hagel handelt.
 Dieses Kapitel dient dazu einzelne relevante KI Modelle besser zu verstehen und eines davon 
 auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu untersuchen.
 
-\section{Modell-Steckbriefe für Onboard-Radar (Wetterklassifikation)}
+\section{Modell-Steckbriefe}
 
 \subsection*{CNN (Convolutional Neural Networks)}
 \begin{itemize}
   \item \textbf{Zweck:} Pixel/Region-Segmentierung \& Detektion.
   \item \textbf{Typische Variante:} YOLO
-  \item \textbf{Input/Features:} 2D/2.5D Radar-Schnitte, Textur/Gradienten, Sequenzen, Radarrohdaten möglich.
-  \item \textbf{Stärken:} Hohe Genauigkeit; lernt komplexe Muster; edge-tauglich mit leichten Backbones \& Quantisierung.
+  \item \textbf{Input/Features:} 2D Radardaten (z.B. Winkel, Distanz), Radarrohdaten möglich.
+  \item \textbf{Stärken:} Hohe Genauigkeit; lernt komplexe Muster; edge-tauglich mit  Quantisierung.
   \item \textbf{Schwächen:} Daten-/Label-intensiv; geringere Erklärbarkeit.
-  \item \textbf{Latenz/Compute:} 10--100\,ms 
+  \item \textbf{Latenz/Compute:} 10--100\,ms
+  \item \textbf{Modellgröße:} ca. 2.000.000 Parameter.
 \end{itemize}
 
 \subsection*{Baumbasierte Ensembles (GBDT)}
@@ -228,26 +229,31 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
   \item \textbf{Stärken:} Schnell, robust bei kleinen/mittelgroßen Datensätzen; gut erklärbar; sehr geringe Latenz.
   \item \textbf{Schwächen:} Räumliche Nachbarschaft nur indirekt; ungeeignet für rohe Bilder/Sequenzen.
   \item \textbf{Latenz/Compute:} $< 5$\,ms/Objekt; Echtzeit fähig
+  \item \textbf{Modellgröße:} ca. 13.000 Knoten/Blätter.
 \end{itemize}
 
-\subsection*{Probabilistische \& OOD-Modelle}
+\subsection*{Vision Transformer }
+
 \begin{itemize}
-  \item \textbf{Zweck:} Verlässliche Unsicherheit, Out-of-Distribution \& Anomalie-Erkennung.
-  \item \textbf{Typische Variante:} Deep Ensembles
-  \item \textbf{Input/Features:} Ausgaben von CNN/GBDT + Qualitätsflags (z.B. SNR, RFI).
-  \item \textbf{Stärken:} Liefert \emph{Confidence} statt nur harte Klassen; erkennt ungewöhnliche Situationen.
-  \item \textbf{Schwächen:} Höherer Rechenbedarf bzw.\ tuning-sensitiv (OOD-Schwellen); komplexere Evaluation.
-  \item \textbf{Latenz/Compute:} Ensembles 2--5$\times$ Einzelmodell; nicht Echtzeit fähig
+  \item \textbf{Zweck:} Patch-/Bildbasierte Klassifikation, Segmentierung und Detektion auf Radar-„Bildern“;.
+  \item \textbf{Typische Variante:} \emph{DeiT-Small} bei mehr Daten/Compute.
+  \item \textbf{Input/Feature:} Mehrkanal-Radar-Slices (z.\,B.\ Reflektivität, Spektralbreite, \text{SNR}).
+  \item \textbf{Stärken:} Globaler Kontext durch Self-Attention; flexible Tokenisierung (auflösungsrobust).
+  \item \textbf{Schwächen:} Hoher Daten- und Compute-Bedarf; Sensitivität gegenüber Patch-/Token-Design.
+  \item \textbf{Latenz/Compute:}  $\sim$10--40\,ms pro 512$\times$512 (auf einer GPU).
+  \item \textbf{Modellgröße:} ca. 22.000.000 Parameter.
 \end{itemize}
+
 
 \subsection*{Clustering}
 \begin{itemize}
-  \item \textbf{Zweck:} Objektbildung, Vor-/Nachverarbeitung, Track-Seeding, Daten-Kuration (nicht primär finale Feinklassen).
+  \item \textbf{Zweck:} Objektbildung, Vor-/Nachverarbeitung, Tracking.
   \item \textbf{Typische Variante:} DBSCAN
   \item \textbf{Input/Features:} (Reflektivität, Spektralbreite, Textur) + Koordinaten; für Zeitindex/Track-Kontext.
   \item \textbf{Stärken:} Formflexibel, label-arm; stabilisiert Objekte/Tracks und verbessert nachgelagerte Klassifikationen.
   \item \textbf{Schwächen:} Parameter-sensitiv ($\varepsilon$/minPts); keine semantischen Labels.
   \item \textbf{Latenz:} optional Echtzeit fähig
+  \item \textbf{Modellgröße:} Feature anhängig.
 \end{itemize}
 
 \section{Modell Vergleich}
@@ -284,61 +290,176 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \textbf{Passung zu Szenarien} &
 \textbf{Hoch} lernt komplexe räumliche Muster \& Kerne &
 \textbf{Hoch} (mit guten Features) keine Rohdaten &
-\textbf{Ergänzend} liefert Unsicherheit/OOD, keine Semantik allein &
+\textbf{Hoch} auf bei großräumigen Mustern &
 \textbf{Niedrig als Primär} formt Objekte, aber keine Klassen \\
 
 \textbf{Leistung (F1, $P_d$/FAR)} &
 \textbf{Hoch} bei genügend Daten &
 \textbf{Hoch} (mit guten Features) niedrige FAR &
-\textbf{Steigert Verlässlichkeit} , keine eigene F1 &
+\textbf{Hoch} bei genügend Daten &
 \textbf{Parameterabhängig} keine Klassenmetriken \\
 
 \textbf{Latenz} &
 \textbf{Erfüllbar}&
 \textbf{Sehr gut} ($<\,$ms/Objekt) &
-\textbf{2–5$\times$} Basislatenz (Ensembles) &
+\textbf{mittel} (GPU notwendig) &
 \textbf{Gut} \\
 
 \textbf{Datenbedarf/ Labeling} &
 \textbf{Hoch}  &
 \textbf{Mittel} (Objekt-Feature-Labels) &
-\textbf{Zusatzdaten} &
+\textbf{Hoch} &
 \textbf{Gering} \\
 
 \textbf{Erklärbarkeit} &
 \textbf{Mittel}  &
 \textbf{Gut}  &
-\textbf{Mittel}  &
+\textbf{Schlecht}  &
 \textbf{Niedrig} (keine Labels) \\
 
 \textbf{Harware- anforderung} &
 \textbf{Mittel}  &
 \textbf{Niedrig} &
-\textbf{Mittel}  &
+\textbf{Hoch}  &
 \textbf{Niedrig} \\
 
 \textbf{Alleinstellungs-Tauglichkeit} &
 \textbf{Ja}  &
 \textbf{Ja} bei guten Features &
-\textbf{Nein} ergänzendes Modul &
+\textbf{Ja}  &
 \textbf{Nein} Vor-/Nachverarbeitung \\
 \end{longtable}
 
-Als alleinstehendes Modell empfehlen sich Baummodelle (so fern man gute Features hat). 
+Als alleinstehendes Modell empfehlen sich Baummodelle (so fern man gute Features hat), als typisches Modell wird Random Forrest verwendet. 
 Diese sind alleinstellungsfähig, was für diese Arbeit wichtig ist, um zusätzliche Komplexität zu vermeiden. 
 Zudem sind sie Echtzeitfähig, gut erklärbar und haben eine relativ geringe Anforderung an die Leistung der Hardware. 
-Das hat den Vorteil, dass es nicht bereits an der Hardwarezulassung scheitert um dieses Modell theoretisch verwenden zu können.
+Das hat den Vorteil, dass es nicht bereits an der Hardwarezulassung scheitert.
+
+\section{Erklärung eines Random Forrest}
+Ein Random Forest ist ein Ensemble vieler Entscheidungsbäume. Jeder Baum wird aus einer zufälligen Stichprobe 
+der Trainingsdaten aufgebaut und betrachtet an jedem Knoten nur eine zufällige Auswahl der Merkmale. Der Baum 
+stellt einfache Schwellenfragen, teilt die Daten Schritt für Schritt und gibt am Blatt eine Klassenentscheidung 
+(oder einen Zahlenwert) aus. Für neue Daten werden die Ergebnisse aller Bäume zusammengeführt: Bei Klassifikation 
+zählt die Mehrheit, bei Regression der Mittelwert. Durch die zufällige Daten- und Merkmalswahl werden die Bäume 
+voneinander unabhängiger, die Streuung sinkt, und die Gesamtvorhersage wird robuster.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  level 1/.style={sibling distance=46mm, level distance=14mm},
+  level 2/.style={sibling distance=28mm, level distance=14mm},
+  edge from parent/.style={draw,-Stealth},
+  every node/.style={font=\small},
+  decision/.style={rectangle,draw,rounded corners,align=center,inner sep=2pt,minimum width=22mm},
+  leaf/.style={ellipse,draw,fill=gray!10,align=center,inner sep=2pt,minimum width=16mm}
+]
+\node[decision]{\textbf{Frage 1}\\$f_1 \le \theta_1$?}
+  child { node[decision]{\textbf{Frage 2}\\$f_2 \le \theta_2$?}
+    child { node[leaf]{\textbf{Blatt}\\Klasse A} edge from parent node[left]{Ja} }
+    child { node[leaf]{\textbf{Blatt}\\Klasse B} edge from parent node[right]{Nein} }
+    edge from parent node[left]{Ja}
+  }
+  child { node[decision]{\textbf{Frage 3}\\$f_3 \le \theta_3$?}
+    child { node[leaf]{\textbf{Blatt}\\Klasse B} edge from parent node[left]{Ja} }
+    child { node[leaf]{\textbf{Blatt}\\Klasse C} edge from parent node[right]{Nein} }
+    edge from parent node[right]{Nein}
+  };
+\end{tikzpicture}
+\caption{Einfache Skizze eines Entscheidungsbaums: An jedem Knoten wird eine Schwellenfrage gestellt; am Blatt steht die Klassenentscheidung.}
+\end{figure}
+
+\subsection{Wichtige Punkte}
+
+\paragraph{Eigenschaften}
+\begin{itemize}
+  \item Ensemble aus vielen Entscheidungsbäumen mit Zufall in Daten- und Merkmalsauswahl (\emph{robust, stabil}).
+  \item Trifft Entscheidungen über einfache Schwellenfragen; am Blatt Mehrheitsklasse bzw.\ Mittelwert.
+  \item Funktioniert ohne starke Annahmen über Datenverteilungen; unempfindlich gegenüber Ausreißern und Skalierung.
+  \item Liefert Klassenwahrscheinlichkeiten (als Häufigkeiten im Blatt) und Feature-Wichtigkeiten.
+\end{itemize}
+
+\paragraph{Zentrale Hyperparameter (Klassifikation)}
+\begin{itemize}
+  \item \texttt{n\_estimators}: Anzahl Bäume (typ.\ 50--300).
+  \item \texttt{max\_depth}, \texttt{min\_samples\_leaf}: Baumkomplexität/Glättung (z.\,B.\ Tiefe 6--12; Leaf $\geq$ 5--50).
+  \item \texttt{max\_features}: Anzahl Merkmale pro Split (z.\,B.\ $\sqrt{d}$).
+  \item \texttt{class\_weight}: Ausgleich unausgewogener Klassen (\texttt{balanced}).
+  \item \texttt{criterion}: Gütemaß für Splits (Gini/Entropie).
+\end{itemize}
+
+\paragraph{Vorteile}
+\begin{itemize}
+  \item Geringes Overfitting-Risiko im Vergleich zu einzelnen tiefen Bäumen; solide Basisleistung mit wenig Tuning.
+  \item Sehr schnelle Inferenz auf Objekt-/Patch-Features (ms-Bereich); gut für Edge/Onboard.
+  \item Erklärbar über Feature-Wichtigkeiten.
+\end{itemize}
+
+\paragraph{Nachteile}
+\begin{itemize}
+  \item Nutzt räumliche Nachbarschaft nur indirekt; für reine Pixel-Segmentierung weniger geeignet.
+  \item Empfindlich bei vielen irrelevanten Features: Zu tiefe Bäume können Rauschen „aufsammeln“.
+  \item Klassengewichte/Imbalance: Ohne passende class-weight/Sampling-Strategien werden Minderheitsklassen leicht benachteiligt.
+\end{itemize}
+
 
 \section{Einbindungsmöglichkeiten}
-Als assistierendes System neben dem klassischen zur zusätzlichen Informationsgewinnung.\\
-Inline anstatt klassischer Schwellwertentscheider\\
-(inline bayes klassifikator? oder wie war das nochmal)\\
-\\
-mögliche szenarien beim assistieren oder im vergleich zum klassischen:\\
-- stimmen überein   gut\\
-- sind nah bei einander   kann leicht problematisch werden\\
-- eines fällt aus     kommt auf situation an\\
-- sie sind gegeteilig     interessant: was tun?\\
+Ein Random Forrest kann an verschiedenen Stellen eingesetzt werden, mögliche Einsatzfelder sind:
+
+\begin{itemize}
+  \item \textbf{Musteridentifikation \& Datendarstellung in der Entwicklung}\\
+  Wiederkehrende Strukturen in Radardaten können mit einem Random Forrest systematisch erkannt und als 
+  verständliche Merkmalsbilder aufbereitet werden. Hierzu werden geeignete Features (z.\,B.\ Intensitäts-, Textur- und Kontextgrößen) definiert, 
+  Daten explorativ visualisiert und ein konsistenter „Musterkatalog“ erstellt, der später als Grundlage für die Klassifikation dient.
+
+  \item \textbf{Assistierendes System neben dem klassischen Radar}\\
+  Das Modell läuft parallel und liefert zusätzliche, verdichtete Informationen zur Wetterlage 
+  (z.\,B.\ Klassenhinweise, Trendindizien, Qualitätsmerkmale). Die Ausgabe ergänzt die bestehende 
+  Anzeige, ohne deren Logik zu ersetzen, und unterstützt die Crew mit klaren, kompakten Hinweisen 
+  für die taktische Entscheidungsfindung.
+
+  \item \textbf{Ersatz/Ergänzung klassischer Schwellen-Entscheidungsbäume}\\
+  Anstelle fest verdrahteter Schwellwerte werden datengetriebene Entscheidungsgrenzen verwendet, 
+  die sich aus gelabelten Beispielen ableiten lassen. Das reduziert Hand-Tuning, erhöht die Konsistenz 
+  über verschiedene Wetterregime und ermöglicht feinere Trennungen zwischen ähnlichen Phänomenen.
+
+  \item \textbf{Zusammen mit Kalman-Filter}\\
+  Das Modell ersetzt die Zustands­schätzung klassischer Filter nicht, sondern \emph{füttert} sie: 
+  Es liefert stabilisierte Beobachtungen und Klassifikationsergebnisse (inkl.\ Qualitätsmerkmalen), 
+  die anschließend von einem Schätzer weiterverarbeitet werden. So bleibt die Bahn-/Zellverfolgung im 
+  Filter, während die inhaltliche Deutung der Echos und ihre zeitliche Glättung modellbasiert verbessert werden.
+  Der Kalmanfilter (ähnlich eines hidden Markow Modells) wurde als Ansatz ausgesucht, da dessen Output ebenfalls 
+  probabilistisch ist und daher durch die Ergänzung eines ebenfalls probabilistischen Algorithmus nicht 
+  zwangsläufig schwerwiegend beeinflusst wird.
+\end{itemize}
+
+Die Musteridentifikation \& Datendarstellung in der Entwicklung weißt das größte Potential auf, weil:
+diese Anwendung in die Level 1 Kategorie nach EASA fällt und daher zeitnah Anwendung finden kann; 
+und wer einmal mit großen Datensätzen gearbeitet hat weiß die Verwendung von ML methoden zu schätzen, 
+zudem setzt sich diesbezüglich eine ganze Wissenschaft auseinander mit dem Namen Datascience.
+
+\section{Mögliche Szenarien beim Einsatz}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{p{0.21\linewidth}p{0.37\linewidth}p{0.38\linewidth}}
+\toprule
+\textbf{Szenario} & \textbf{Beschreibung} & \textbf{Erklärung (Bezug zu klassischen Methoden / bekanntem Wissen)} \\
+\midrule
+Übereinstimmung mit klassischer Methode & Random Forest und klassische Auswertung kommen zur gleichen Aussage. & Es werden etablierte Verfahren bzw.\ Vorwissen bestätigt; keine besonderer Erkenntnisgewinn. \\
+\addlinespace
+Nahe beieinander / knapp verschieden & Random Forest und klassische Methode liefern ähnliche, aber nicht identische Ergebnisse. & Grenzbereich: Daten/Features geben keine klare Trennung her oder Kontexteffekte fehlen; Entscheidungen können schwanken und sollten markiert bzw.\ weiter untersucht werden. Hinweis, dass Daten nicht vollständig oder repräsentativ waren, dass das Modell angepasst werden muss oder vielleicht bekanntes Wissen detaillierter werden kann.\\
+\addlinespace
+Eines „fällt aus“ (Lücke auf einer Seite) & Entweder die klassische Methode deckt einen Fall nicht ab, den der Random Forest sinnvoll bewertet – \emph{oder} der Random Forest versagt, wo die klassische Methode stabil ist. & Hinweis auf Abdeckungsunterschiede: z.\,B.\ klassische Schwellen nicht definiert für neuen Kontext, oder das Modell außerhalb seiner Trainingsdomäne; klare Dokumentation, wann welches Verfahren gilt. \\
+\addlinespace
+Gegenteilige Aussagen & Random Forest und klassische Methode widersprechen sich deutlich. & Konfliktfall: mögliche Label-/Feature-Probleme, Hyperparameter Wahl, etc.; erfordert gezielte Fallanalyse. \\
+\addlinespace
+Neues Muster entdeckt & Random Forest macht auf wiederkehrende Strukturen aufmerksam, die im bisherigen Wissen/Katalog nicht vorkommen. & Kandidat zur Erweiterung des Musterkatalogs: Fälle sammeln, prüfen, definieren und (falls valide) als neue Klasse/Regel aufnehmen. Hier gilt ``kein Assurance Rabatt'', es muss mit etablierten Methoden nachgewießen werden. \\
+\bottomrule
+\end{tabular}
+\caption{Szenarien bei der Musteridentifikation \& Datendarstellung mit Random Forest im Vergleich zu klassischen Methoden bzw.\ bekanntem Wissen.}
+\end{table}
+
 
 % -------------------------
 % Anforderungsfelder & Referenzrahmen
