@@ -28,7 +28,10 @@ Erwartungen an Leistungsfähigkeit und Einführungs­tempo. In der Luftfahrt sin
 Entscheidend sind neben Leistungsgewinnen vor allem belastbare Nachweise zur \emph{Sicherheit}. 
 KI lernt Muster in hochdimensionalen Daten und adressiert damit \emph{Nichtlinearität} und \emph{Adaptivität} 
 (z.\,B.\ Re-Training statt Neuentwurf). Im Radar-Kontext kann KI Muster \emph{im} Clutter erkennen, 
-während klassische Verfahren Clutter primär unterdrücken und schwache Ziele ggf.\ erst später sichtbar werden.
+während klassische Verfahren Clutter primär unterdrücken und schwache Ziele ggf.\ erst später sichtbar werden. 
+Jüngste Ereignisse vom 02.10.25 am Münchner Flughafen, der wegen Drohnensichtungen den Betrieb einstellen musste, 
+verdeutlichen, dass die Luftfahrt von verbesserter Mustererkennung und damit einhergehender frühzeitiger 
+Erkennung profitieren kann.
 
 
 % ----------------------------------------------------
@@ -509,7 +512,8 @@ von KI-Systemen zur Untermauerung eines belastbaren Safety-Assurance-Claims, gib
 für KI-basierte Softwaretools. Schwerpunktmäßig behandelt es ML-basierte Ansätze auf Prinzipienebene, ohne in methodische 
 Details zu gehen (z. B. konkrete DNN-Architekturen).
 
-\section{(6) KI im Kontext der Systemsicherheitsentwicklung angepasst auf Radarsysteme}
+\section{Kapitel Deep Dive}
+\subsection{(6) KI im Kontext der Systemsicherheitsentwicklung angepasst auf Radarsysteme}
 \paragraph{KI in Radarsystemen nach ISO/PAS 8800 Kap.\,6}
 ISO/PAS~8800 ergänzt die ISO~26262, sobald ML\slash KI als Bestandteil der sicherheitsrelevanten 
 Verarbeitung genutzt wird. Eine typische Architektur gliedert sich in \emph{Vorverarbeitung} , 
@@ -532,7 +536,7 @@ ODD, (ii) Performance-Grenzen, (iii) systematische Trainings-/SW-Fehler
 sowie (iv) zufällige Hardwarefehler.
 
 
-\section{(8)Assurance-Argumente für KI-Systeme}
+\subsection{(8)Assurance-Argumente für KI-Systeme}
 Ein Assurance-Argument ist eine strukturierte, nachvollziehbare Begründung, dass ein System ausreichend sicher ist. 
 Es verknüpft Sicherheits-Behauptungen (Claims) mit der Argumentationsstrategie und konkreter Evidenz 
 (Tests, Analysen, Reviews), inklusive der Annahmen und Geltungsbereich. Dadurch wird nachvollziehbar, 
@@ -552,7 +556,7 @@ Die folgenden Punkte sind die in ISO/PAS~8800 geforderten Anforderungen um ein A
   \item \textbf{(c) Die Arbeitsprodukte des KI-Lebenszyklus}
 \end{itemize}
 
-\section{(9) Ableitung von KI-Sicherheitsanforderungen}
+\subsection{(9) Ableitung von KI-Sicherheitsanforderungen}
 Es wird der Ablauf und Methoden beschrieben, wie Anforderungen abgeleitet werden können. 
 Da diese sich nicht auf Systeme, in der eine KI eingebettet wird beziehen oder wie diese 
 konkret auf KI Modelle angewendet werden können, ist diser Abschnitt sehr high-level. 
@@ -587,7 +591,7 @@ Ein essentielles Beispiel, wie Anforderungen verändert werden müssen ist folge
 \]
 
 
-\section{(10) Auswahl von KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen}
+\subsection{(10) Auswahl von KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen}
 Die Ziele dises Abschnittes sind bereits bei Inhalten beschrieben. Es wird beschrieben, dass Sicherheitsanforderungen 
 durch zwei Maßnahmen erfüllt werden können: Die Architektur und die Entwicklung. Weiter können beim Designprozess 
 nicht immer alle Anforderungen erfüllt werden, was dazuführt, dass diese angepasst werden müssen. Wichtig sind 
@@ -612,14 +616,14 @@ Weiter befinden sich in diesem Abschnitt Beispiele wie Architektur- und Entwickl
 Konkrete Maßnahmen bezüglich Robustheit, Zuverlässigkeit, etc. stützen auf bestpractise Methoden und 
 liefern daher keine zusätzlichen Erkenntnisse wann eine KI sicher ist.
 
-\section{(11) Datenbezogene Aspekte}
+\subsection{(11) Datenbezogene Aspekte}
 Die hier beschriebenen Aspekte beziehen sich hauptsächlich auf: un-/ semi- und supervised learning. 
 Da diese sich ebenfalls auf bestpractise Methoden stützen, werden sie in dieser Arbeit nicht zusätzlich 
 aufgeführt, da diese nur wenig zur Erkenntnissgewinnung beitragen. Diese Methoden sind allgemein beim 
 Arbeiten mit großen Datenmengen und auch bei ML von essentieller Bedeutung. Sie sind weitverbreitete 
 Standarts verschiedener Industrien und haben auch Einfluss auf verschiedene Punkte dieser Arbeit.
 
-\section{(12) Verifikation und Validierung des KI-Systems}
+\subsection{(12) Verifikation und Validierung des KI-Systems}
 Diese Kapitel geht sehr highlevel auf Verifikation und Validierung ein. Unteranderem mit einigen Anforderungen 
 an benötigten Tests und des Workflows mit wichtigen Stichpunkte wie, dass SOTIF Trigger Bedingungen beschreibt. 
 Desweiteren wird auch eine Liste möglicher Testmethoden vorgeschlagen um Komponenten zu testen. Für diese 
@@ -641,7 +645,7 @@ Weiter wird ein Beispiel zur Objekterkennung angeführt, dass sowohl ein Lidar a
 Kamera ein Objekt nicht erkennen können durch einen Absorbtionseffekt eines Objektes. 
 Um zu zeigen, dass diese nicht stochastisch unabhängig sind.
 
-\section{(13) Sicherheitsanalyse von KI-Systemen}
+\subsection{(13) Sicherheitsanalyse von KI-Systemen}
 Es werden recht allgemein Sicherheitsanalysen und Workflows beschrieben mit berücksichtigung von KI. 
 Speziell angesprochene Punkte, sind: 
 \begin{itemize}
@@ -666,7 +670,7 @@ Speziell angesprochene Punkte, sind:
 \end{itemize}
 
 
-\section{(15) Vertrauen in die Nutzung von KI-Entwicklungsframeworks und -Softwaretools}
+\subsection{(15) Vertrauen in die Nutzung von KI-Entwicklungsframeworks und -Softwaretools}
 Hier beschriebn sind bestpractise Methoden und ein Fokus auf PFMEA (Potential Failure Modes and Affects Analysis)
 mit einer Beispieltabelle.
 

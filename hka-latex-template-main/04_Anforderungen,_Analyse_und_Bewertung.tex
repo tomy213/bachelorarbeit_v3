@@ -22,178 +22,148 @@ anstatt einer Klassifizierung zwischen Grün, Gelb und Rot zusätzlich wüsste o
 Regen oder Hagel handelt.
 
 
-\definecolor{riskHigh}{HTML}{D7263D}   % Rot
-\definecolor{riskMed}{HTML}{F29F05}    % Orange
-\definecolor{riskLow}{HTML}{2BA84A}    % Grün
-\newcommand{\risklabel}[2]{\textcolor{#1}{\textbf{#2}}}
-\newcommand{\riskbullet}[1]{\textcolor{#1}{\large\textbullet}\,}
+\section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomene}
 
-\section{Szenarien bei Einsatz der Onboard-Klassifikation}
 
-\begin{itemize}
-  \item \riskbullet{riskHigh}\textbf{False Negative (Gefahr übersehen)} — \risklabel{riskHigh}{Risiko: Hoch}\\
-        \textit{Auslöser:} Abschattung, schwaches SNR, Virga.\\
-        \textit{Auswirkung:} Verspätete Ausweich-/Höhenentscheidungen, potenzielles Sicherheitsrisiko.
+% --- Risikobadges ---
+\newcommand{\riskbadge}[2]{\colorbox{#1!15}{\textcolor{#1!70!black}{\scriptsize\textbf{#2}}}}
+\newcommand{\risklow}{\riskbadge{green}{NIEDRIG}}
+\newcommand{\riskmed}{\riskbadge{orange}{MITTEL}}
+\newcommand{\riskhigh}{\riskbadge{red}{HOCH}}
+% --- Scope-Badges (zusätzlich zu den Risk-Badges) ---
+\newcommand{\scopeon}{\colorbox{cyan!15}{\textcolor{cyan!60!black}{\scriptsize\textbf{ONBOARD}}}}
+\newcommand{\scopeapt}{\colorbox{violet!15}{\textcolor{violet!60!black}{\scriptsize\textbf{FLUGHAFEN}}}}
+\newcommand{\scopeboth}{\colorbox{gray!20}{\textcolor{black!70}{\scriptsize\textbf{BEIDES}}}}
 
-  \item \riskbullet{riskMed}\textbf{False Positive (z.\,B.\ Hagel gemeldet, keiner vorhanden)} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} AP/Clutter, Dämpfung, Radomnässe.\\
-        \textit{Auswirkung:} Unnötige Umwege/Profilwechsel, Effizienzverlust.
+\subsection*{Legende}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.2em]
+  \item \risklow\ \,geringes Fehlklassifikations-/Folgerisiko
+  \item \riskmed\ \,moderates Risiko
+  \item \riskhigh\ \,hohes Risiko (operativ kritisch)
+  \item \scopeon\ \,relevant primär für Onboard-Wetterradar / Cockpit
+  \item \scopeapt\ \,relevant primär für Flughafen-/Bodenradar
+  \item \scopeboth\ \,für beide Betriebsarten relevant
+\end{itemize}
 
-  \item \riskbullet{riskMed}\textbf{Typverwechslung: Hagel vs.\ Starkregen/Graupel} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Ähnliche Signaturen, Mischphase.\\
-        \textit{Auswirkung:} Falsche Gefährdungseinschätzung (zu konservativ/zu liberal).
+\subsection*{Meteorologische Szenarien}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
+  \item \riskhigh\ \scopeboth\ Konvektive Gewitterzellen / TS-Kerne (Thunderstorm cores) (Starkregen, Graupel, Hagel; starken Auf-/Abwinde).
+  \item \riskhigh\ \scopeboth\ Eingelagerte Konvektion in Stratiformbereichen (kleinere Geweitterzellen versteckt in großflächigen harmlosen Wolken).
+  \item \riskhigh\ \scopeboth\ Vereisungsrelevante Phasen: Schnee/Schneeregen (Vereisungsgefahr).
+  \item \riskmed\ \scopeboth\ Graupelschauer / Wintergewitter (gemischte Wasser- und Eisteilchen, schnelle Klassendynamik).
+  \item \riskmed\ \scopeboth\ Anvil-Blowoff, Virga, (Eispartikel, die von einer Gewitterwolke weggeweht wurden; Verdunstung bevor der Boden berührt wurde) (Echo ohne Bodenniederschlag; starker lokaler Abwind (Downburst) durch Verdunstungskühlung).
+  \item \riskhigh\ \scopeon\ Pfadabschattung hinter Starkzellen (\emph{black hole/gap illusion}): starke Dämpfung erzeugt scheinbar „freie“ Korridore hinter einer Zelle → hohes Risiko für Fehlrouting durch vermeintliche Lücken.
+\end{itemize}
 
-  \item \riskbullet{riskMed}\textbf{Konvektion \(\leftrightarrow\) Stratiform (Bright Band)} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Bright-Band als scheinbarer Kern.\\
-        \textit{Auswirkung:} Über-/Unterschätzung konvektiver Gefahren entlang des Flugwegs.
+\subsection*{Mess- und Auswerteartefakte}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
+  \item \riskhigh\ \scopeboth\ Abschwächung / Dämpfung (v.\,a.\ Schatten hinter Starkzellen).
+  \item \riskmed\ \scopeboth\ Strahlenaufweitung / Beam Overshooting (bodennahe Schichten/Schmelzschicht verfehlt durch Erdkrümmung; Fernbereich bzw.\ falscher Tilt).
+  \item \riskmed\ \scopeboth\ Partielle Volumenfüllung (großes Strahlvolumen und kleine Zellen $\rightarrow$ wird gemittelt).
+  \item \riskhigh\ \scopeapt\ Kalibration / Drift (z.\,B.\ Offset $\rightarrow$ systematische Fehler).
+\end{itemize}
 
-  \item \riskbullet{riskHigh}\textbf{Mikroburst/LLWS: Indizien vs.\ echte Ereignisse} — \risklabel{riskHigh}{Risiko: Hoch}\\
-        \textit{Auslöser:} Verwechslungsgefahr bei Shear-/Spektralmustern.\\
-        \textit{Auswirkung:} Fehlalarme oder verpasste Warnungen in kritischen Phasen.
-
-  \item \riskbullet{riskMed}\textbf{Range-/Velocity-Ambiguitäten} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} PRF-/Dealiasing-Grenzen.\\
-        \textit{Auswirkung:} Falsche Bewegungs-/Strukturklassifikation, inkonsistente Tracks.
-
-  \item \riskbullet{riskMed}\textbf{Geometriefehler (Abschattung/Side-Lobes)} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Pitch/Roll, Seitenkeulen.\\
-        \textit{Auswirkung:} Phantom-Echos oder „Löcher“ im Lagebild, lokale Fehleinschätzung.
-
-  \item \riskbullet{riskMed}\textbf{Radom-/Hardware-Zustand beeinflusst Klassen} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Nasser/vereister Radom, Gain-Drift.\\
-        \textit{Auswirkung:} Bias in Z/ZDR, systematische Fehlklassifikation/Confidence-Fehler.
-
-  \item \riskbullet{riskLow}\textbf{RFI/Interferenzen als „Wetter“} — \risklabel{riskLow}{Risiko: Niedrig}\\
-        \textit{Auslöser:} Externe Sender, Bordelektronik.\\
-        \textit{Auswirkung:} Streifen-/Fleckartefakte, temporäre Fehlinterpretationen.
-
-  \item \riskbullet{riskMed}\textbf{Domänen-Shift (neues Klimaregime/Jahreszeit)} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Abweichung vom Trainingsspektrum.\\
-        \textit{Auswirkung:} Systematische Klassifikationsfehler, reduzierte Verlässlichkeit.
-
-  \item \riskbullet{riskHigh}\textbf{Niedrige Datenqualität (hohe Dämpfung/geringes SNR)} — \risklabel{riskHigh}{Risiko: Hoch}\\
-        \textit{Auslöser:} Große Entfernung, Starkniederschlag, Radomnässe.\\
-        \textit{Auswirkung:} Hohe Varianz und instabile Klassen, sprunghafte Anzeigen.
-
-  \item \riskbullet{riskMed}\textbf{Latenz-/Update-Konflikte} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Rechenlast, langsame Scanzyklen.\\
-        \textit{Auswirkung:} Veraltete Klassen im Cockpit, eingeschränkte Taktiknutzen.
-
-  \item \riskbullet{riskMed}\textbf{UI/Interpretationsfehler trotz korrekter Klasse} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Unklare Symbolik, fehlende Confidence-Anzeige.\\
-        \textit{Auswirkung:} Fehlentscheidungen der Crew, Inkonsistenzen zwischen Crews.
-
-  \item \riskbullet{riskLow}\textbf{Track-Sprünge/Zell-Segmentierung} — \risklabel{riskLow}{Risiko: Niedrig}\\
-        \textit{Auslöser:} Splits/Merges, dünne Linienkonvektion.\\
-        \textit{Auswirkung:} Unruhige Trends/Konturen, geringere Planbarkeit.
-
-  \item \riskbullet{riskMed}\textbf{Unklassifizierbar (Out-of-Distribution)} — \risklabel{riskMed}{Risiko: Mittel}\\
-        \textit{Auslöser:} Seltene Phänomene, ungewöhnliche Texturen (z.\,B.\ Vulkanasche).\\
-        \textit{Auswirkung:} „Unklar“-Meldungen häufen sich, reduzierte Entscheidungsbasis.
+\subsection*{Operative Anwendungsszenarien}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
+  \item \riskhigh\ \scopeboth\ TS-Avoidance (Klassifikation von Hagel/Starkregen; Routen-/Holding-Entscheidungen).
+  \item \riskhigh\ \scopeboth\ Vereisungsmanagement (Erkennen von z.B. SLD (supercooled large droplets); kann zu schneller Leistungsdegradation führen).
+  \item \riskhigh\ \scopeboth\ Mikroburst Erkennung (Kurzlebige, starke Abwinde) (start-/landekritisch).
 \end{itemize}
 
 
-\section{Anforderungen an die Objekt-/Wetterphänomen-Klassifikation}
 
-\begin{itemize}
-  \item \textbf{Allgemeine Ziele}
-    \begin{itemize}
-      \item Die Klassifikation \textbf{soll} für alle definierten Klassen (Hydrometeore, Konvektionstypen, Nicht-Meteo) Ergebnisse mit \emph{Confidence} liefern und Unsicherheit explizit ausweisen.
-      \item Eine \textbf{Unklar}-Klasse \textbf{muss} vorhanden sein, um Out-of-Distribution (OoD) und niedrige Datenqualität abzubilden.
-    \end{itemize}
+\section{Abgeleitete Anforderungen für Onboard-/Aviation-Radar}
 
-  \item \textbf{Leistungskennzahlen (pro Klasse, im Frontsektor $\pm 60^\circ$)}
-    \begin{itemize}
-      \item \textit{F1-Score:} Hydrometeore $\geq 0{,}85$; Konvektionstypen $\geq 0{,}80$.
-      \item \textit{Hagelindikatoren:} Detektionswahrscheinlichkeit $P_d \geq 0{,}90$, False-Alarm-Rate $\leq 0{,}10$.
-      \item \textit{Latenz (E2E):} Erfassung $\rightarrow$ Klassifikation $\rightarrow$ Anzeige $\leq 2\,\mathrm{s}$.
-      \item \textit{Stabilität:} Klassensprünge auf benachbarten Scans $\leq 1$ Klassenstufe bei unveränderter Szene (Median über 30\,s).
-    \end{itemize}
+\subsection*{1. Gewitterkerne und Linien erkennen (\riskhigh \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Das System hebt starke Zellen und Gewitterlinien gut sichtbar hervor.
+  \item [L] Anzeige aktualisiert sich schnell (ca. alle 5–10 s) und deckt mindestens 160 NM ab.
+  \item [H] Klare Markierungen/Umrisse und Entfernungsangaben helfen bei Ausweichentscheidungen.
+  \item [V] In Tests werden typische Gewitterszenarien zuverlässig als „zu meiden“ markiert.
+\end{itemize}
 
-  \item \textbf{False Negative minimieren (Gefahr übersehen)}
-    \begin{itemize}
-      \item \textbf{Muss} Qualitäts-/Geometrie-Flags (SNR, Attenuation, Blockage, Radom-Nässe) in die Entscheidungslogik integrieren.
-      \item \textbf{Muss} bei kritischen Indizien (z.\,B.\ starker Kern in Nähe Flugweg) eine konservative \emph{Warnbereitschaft} ausgeben, auch bei niedriger Confidence.
-    \end{itemize}
+\subsection*{2. Eingelagerte Zellen in großflächigem Regen (\riskhigh \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Kleine, „versteckte“ Kerne im flächigen Regen werden als eigene Gefahrbereiche angezeigt.
+  \item [L] Auch bei nur wenig Helligkeitsunterschied zum Umfeld sollen diese Kerne erkannt werden.
+  \item [H] Ein einfacher Hinweis („Eingelagert“) kann zugeschaltet werden.
+  \item [V] Nachweis mit aufgezeichneten Fällen und Vergleichsdaten (z.\,B. Blitzmeldungen).
+\end{itemize}
 
-  \item \textbf{False Positive begrenzen}
-    \begin{itemize}
-      \item \textbf{Soll} adaptive Confidence-Schwellen (abhängig von Datenqualität/Entfernung) verwenden.
-      \item \textbf{Soll} räumlich-zeitliche Konsistenztests (Persistenz, Mindestfläche) vor Klassenausgabe anwenden.
-    \end{itemize}
+\subsection*{3. Vereisung erkennen und managen (\riskhigh \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Das System gibt Hinweise auf Vereisungsbereiche (inkl. feiner Niesel unter 0~\textdegree C).
+  \item [L] Die ungefähre Höhe der „Null-Grad-Schicht“ wird angezeigt mit brauchbarer Genauigkeit.
+  \item [H] Ein einfaches Profil entlang der Flugstrecke zeigt, wo Vereisung wahrscheinlich ist.
+  \item [V] Abgleich mit Pilotenberichten und Vorhersagen zeigt eine gute Übereinstimmung.
+\end{itemize}
 
-  \item \textbf{Typverwechslungen (Hagel vs. Starkregen/Graupel)}
-    \begin{itemize}
-      \item \textbf{Soll} Merkmalsfusion aus Momenten (Z, V, W; optional ZDR, KDP, $\rho_{hv}$), Textur/Gradienten und Kontext (Temperatur/Höhe aus FMS) einsetzen.
-      \item \textbf{Soll} Mischphasen explizit als Zwischen-/Mehrklassen-Label mit geteilter Confidence ausgeben.
-    \end{itemize}
+\subsection*{4. Schauer/Graupel und schnelle Änderungen (\riskmed \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Kurze, kräftige Schauer werden erkennbar klassifiziert.
+  \item [L] Starke Änderungen sollen innerhalb weniger Sekunden sichtbar werden.
+  \item [H] Hinweis „schnelle Entwicklung“ zur Aufmerksamkeitserhöhung.
+\end{itemize}
 
-  \item \textbf{Konvektion vs. Stratiform (Bright Band)}
-    \begin{itemize}
-      \item \textbf{Muss} Bright-Band-Detektor bereitstellen und dessen Output in die Konvektionstypisierung einbeziehen.
-      \item \textbf{Soll} vertikale Konsistenzprüfungen nutzen (mehrere Elevationen, falls verfügbar) oder Helligkeitsband-Heuristiken.
-    \end{itemize}
+\subsection*{5. Amboss-Auswehung, Fallstreifen, böiger Ausfluss (\riskmed \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Bereiche mit Niederschlag in der Höhe ohne Bodentreffer sowie Böenfronten werden gekennzeichnet.
+  \item [L] Die Lage solcher Grenzen wird ausreichend genau dargestellt (für taktische Meidung).
+  \item [H] Kopplung mit Windscherungs-/Böenwarnungen, wenn solche Daten vorliegen.
+\end{itemize}
 
-  \item \textbf{Mikroburst/LLWS-Indizien}
-    \begin{itemize}
-      \item \textbf{Soll} mehrkriterielle Entscheidung (Doppler-Gradient, Divergenzindikatoren, Spektralbreite) mit Mindestpersistenz umsetzen.
-      \item \textbf{Soll} Ergebnisse klar als \emph{Indizien}-Level (nicht „bestätigtes Ereignis“) kennzeichnen.
-    \end{itemize}
+\subsection*{6. Dämpfung und scheinbare „Lücken“ (\riskhigh \scopeon)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Das System erkennt und kennzeichnet abgeschattete Bereiche hinter starken Zellen.
+  \item [L] Falsch zu schwach angezeigte Echos hinter einer Zelle sollen deutlich markiert werden.
+  \item [H] Deutlicher Hinweis „Sicht eingeschränkt – Messung unsicher“ und Vorschlag, seitlich auszuweichen.
+  \item [V] Nachweis in Flugtests, dass irreführende „Gaps“ seltener zu Fehlentscheidungen führen.
+\end{itemize}
 
-  \item \textbf{Range-/Velocity-Ambiguitäten}
-    \begin{itemize}
-      \item \textbf{Muss} Dealiasing-Qualitätskennzahlen liefern und bei Unsicherheit die Bewegungs-/Strukturklassifikation \emph{herabstufen} statt harte Entscheidungen zu erzwingen.
-      \item \textbf{Soll} PRF/Trip-Indikatoren in den Merkmalsraum einspeisen und betroffene Bins markieren.
-    \end{itemize}
+\subsection*{7. Strahlführung und „Overshooting“ (\riskmed \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Eine Automatik hilft beim richtigen Neigungswinkel; warnt, wenn tiefe Schichten übersehen werden könnten.
+  \item [L] Tiefe Schichten im Nahbereich und mittlere Höhen in der Ferne sollen abgedeckt sein.
+  \item [H] Einfache Empfehlung „bester Neigungswinkel“ und ein leicht bedienbarer Automatikmodus.
+\end{itemize}
 
-  \item \textbf{Geometrie/Abschattung/Side-Lobes}
-    \begin{itemize}
-      \item \textbf{Muss} Attitude-Kompensation (Pitch/Roll) berücksichtigen und Blockage-/Sektor-Masken anwenden.
-      \item \textbf{Soll} Seitenkeulen-Indikatoren erkennen und die Klassifikation dort de-priorisieren.
-    \end{itemize}
+\subsection*{8. Ausweichen und Routenhilfe (\riskhigh \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Der geplante Flugweg wird auf Konflikte mit Zellen geprüft (einige Minuten im Voraus).
+  \item [L] Vorschläge für seitlichen Abstand werden ausreichend genau berechnet.
+  \item [H] Klare, einfache Empfehlungen (z.\,B. „rechts 20 NM umfliegen“) ohne Informationsüberflutung.
+  \item [V] Erprobung mit Crew-Feedback und Verfahrensvorgaben.
+\end{itemize}
 
-  \item \textbf{Radom-/Hardware-Zustand}
-    \begin{itemize}
-      \item \textbf{Muss} Health-/Bias-Information (Kalibrierstatus, Gain-Drift, Radomnässe) als Eingangsmerkmale nutzen.
-      \item \textbf{Soll} druckreife Bias-Korrekturen (z.\,B.\ Regen-/Sun-Cal) auf die Klassenentscheidung propagieren.
-    \end{itemize}
+\subsection*{9. Vereisung im laufenden Betrieb (\riskhigh \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Automatische Hinweise: „Feine Vereisung möglich“, „Eisbereich in X Minuten“.
+  \item [L] Zeit- und Entfernungsangaben sind grob, aber verlässlich genug für die Planung.
+  \item [H] Anbindung an Checklisten-Hinweise im Cockpit (nur als Unterstützung).
+\end{itemize}
 
-  \item \textbf{RFI/Interferenzen}
-    \begin{itemize}
-      \item \textbf{Muss} RFI-Detektion (spektrale/zeitliche Kohärenztests) durchführen und betroffene Bins/Regionen als \emph{nicht klassifizierbar} kennzeichnen.
-      \item \textbf{Soll} RFI-Muster von meteorologischen Flächen (z.\,B.\ band-/streifenförmig) trennen und Confidence absenken.
-    \end{itemize}
+\subsection*{10. Windscherung und Fallböen (\riskhigh \scopeboth)}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [F] Hinweise auf starke Böengrenzen und plötzlich wechselnde Winde werden angezeigt; externe Meldungen können eingeblendet werden.
+  \item [L] Warnungen erscheinen schnell genug, um darauf reagieren zu können.
+  \item [H] Einheitliche, gut verständliche Warnstufen und klare Cockpit-Hinweise.
+\end{itemize}
 
-  \item \textbf{Domänen-Shift/Regimewechsel}
-    \begin{itemize}
-      \item \textbf{Soll} Regime-Tags (tropisch, winterlich, gemäßigt) führen und regimeabhängige Parameter/Modelle wählen.
-      \item \textbf{Muss} Drift-/OoD-Indikatoren ausgeben (Anteil \emph{Unklar}, Feature-Statistiken vs.\ Training).
-    \end{itemize}
+\subsection*{11. Allgemeines}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.25em]
+  \item [L] Verfügbarkeit und Fehlermeldungen sind klar erkennbar (z.\,B. „Dämpfungskorrektur nicht aktiv“).
+  \item [F] Kurze Aufzeichnung zur Nachbetrachtung (z.\,B. letzte 30 Minuten) ist möglich.
+  \item [V] Entwicklung und Tests folgen den üblichen Luftfahrt-Standards; wichtige Szenarien sind durch Tests abgedeckt.
+\end{itemize}
 
-  \item \textbf{Datenqualität und Attenuation}
-    \begin{itemize}
-      \item \textbf{Muss} SNR-/Attenuation-abhängige Confidence-Modelle einsetzen; Mindest-SNR-Gates dokumentieren.
-      \item \textbf{Soll} Glättung (räumlich/zeitlich) ohne relevante Details zu verwaschen; Parameter sind versioniert.
-    \end{itemize}
 
-  \item \textbf{Zeitverhalten \& Priorisierung}
-    \begin{itemize}
-      \item \textbf{Muss} Frontsektor priorisieren; bei Ressourcenknappheit frühzeitige, grobe Klasse mit Zeitstempel liefern (\emph{early exit}), gefolgt von verfeinerter Klasse.
-      \item \textbf{Soll} Klassifikationsalter anzeigen; harte Timeouts verhindern veraltete Ausgaben.
-    \end{itemize}
-
-  \item \textbf{Ausgaben \& HMI (klassifikationsnah)}
-    \begin{itemize}
-      \item \textbf{Muss} je Objekt: Klasse, Confidence (\%), Qualitätsflags (SNR/Attenuation/RFI/Dealiasing), Position/Entfernung, Zeitstempel ausgeben.
-      \item \textbf{Soll} aggregierte Layer (Zellenkontur, Trendpfeile) bereitstellen; bei niedriger Qualität reduzierte Darstellung statt Unterdrückung.
-      \item \textbf{Soll} klare Kennzeichnung von \emph{Indizien} vs.\ \emph{bestätigte} Klassifikationen.
-    \end{itemize}
-
-  \item \textbf{Validierung \& Test}
-    \begin{itemize}
-      \item \textbf{Muss} Testsätze pro Szenarioklasse (FN/FP, Bright-Band, Ambiguitäten, RFI, OoD) führen; Metriken (F1, $P_d$, FAR, Latenz) pro Regime berichten.
-      \item \textbf{Soll} Replays (I/Q) und Flugversuche mit Referenzdaten (Bodenradar/Satellit/Pluviometer, soweit verfügbar) zur Verifikation einsetzen.
-    \end{itemize}
+\subsection*{Legende}
+\paragraph{Anforderungstypen}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.2em]
+  \item \textbf{F = Funktionalität} \quad Was das System tun \emph{muss}.
+  \item \textbf{L = Leistung/Qualität} \quad Messbare Kennzahlen/Schwellen.
+  \item \textbf{H = HMI/Bedienung} \quad Anzeige, Interaktion, Workload-Reduktion.
+  \item \textbf{V = Validierung/Safety} \quad Nachweis, Tests, Konformität.
 \end{itemize}
 
 
@@ -256,7 +226,7 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
   \item \textbf{Modellgröße:} Feature anhängig.
 \end{itemize}
 
-\section{Modell Vergleich}
+\section{Modell Vergleich und Auswahl}
 
 \small
 \begin{longtable}{p{0.16\linewidth}p{0.21\linewidth}p{0.2\linewidth}p{0.21\linewidth}p{0.2\linewidth}}
@@ -432,10 +402,10 @@ Ein Random Forrest kann an verschiedenen Stellen eingesetzt werden, mögliche Ei
   zwangsläufig schwerwiegend beeinflusst wird.
 \end{itemize}
 
-Die Musteridentifikation \& Datendarstellung in der Entwicklung weißt das größte Potential auf, weil:
-diese Anwendung in die Level 1 Kategorie nach EASA fällt und daher zeitnah Anwendung finden kann; 
-und wer einmal mit großen Datensätzen gearbeitet hat weiß die Verwendung von ML methoden zu schätzen, 
-zudem setzt sich diesbezüglich eine ganze Wissenschaft auseinander mit dem Namen Datascience.
+Die Musteridentifikation und Datendarstellung in der Entwicklung bietet das größte Potenzial, weil sie der 
+EASA-Level-1-Kategorie zugeordnet und damit zeitnah eingesetzt werden kann. Zudem ist durch die Arbeit mit 
+großen Datensätzen zu erkennen, wie wertvoll ML-Verfahren sind. Das zeigt, dass die Entwicklung von der Disziplin Data Science 
+sehr profitieren kann.
 
 \section{Mögliche Szenarien beim Einsatz}
 
@@ -446,11 +416,11 @@ zudem setzt sich diesbezüglich eine ganze Wissenschaft auseinander mit dem Name
 \toprule
 \textbf{Szenario} & \textbf{Beschreibung} & \textbf{Erklärung (Bezug zu klassischen Methoden / bekanntem Wissen)} \\
 \midrule
-Übereinstimmung mit klassischer Methode & Random Forest und klassische Auswertung kommen zur gleichen Aussage. & Es werden etablierte Verfahren bzw.\ Vorwissen bestätigt; keine besonderer Erkenntnisgewinn. \\
+Übereinstimmung mit klassischer Methode & Random Forest und klassische Auswertung kommen zur gleichen Aussage. & Es werden etablierte Verfahren bzw.\ Vorwissen bestätigt; kein besonderer Erkenntnisgewinn. \\
 \addlinespace
 Nahe beieinander / knapp verschieden & Random Forest und klassische Methode liefern ähnliche, aber nicht identische Ergebnisse. & Grenzbereich: Daten/Features geben keine klare Trennung her oder Kontexteffekte fehlen; Entscheidungen können schwanken und sollten markiert bzw.\ weiter untersucht werden. Hinweis, dass Daten nicht vollständig oder repräsentativ waren, dass das Modell angepasst werden muss oder vielleicht bekanntes Wissen detaillierter werden kann.\\
 \addlinespace
-Eines „fällt aus“ (Lücke auf einer Seite) & Entweder die klassische Methode deckt einen Fall nicht ab, den der Random Forest sinnvoll bewertet – \emph{oder} der Random Forest versagt, wo die klassische Methode stabil ist. & Hinweis auf Abdeckungsunterschiede: z.\,B.\ klassische Schwellen nicht definiert für neuen Kontext, oder das Modell außerhalb seiner Trainingsdomäne; klare Dokumentation, wann welches Verfahren gilt. \\
+Einseitige Lücke & Entweder die klassische Methode deckt einen Fall nicht ab, den der Random Forest sinnvoll bewertet – \emph{oder} der Random Forest versagt, wo die klassische Methode stabil ist. & Hinweis auf Abdeckungsunterschiede: z.\,B.\ klassische Schwellen nicht definiert für neuen Kontext, oder das Modell außerhalb seiner Trainingsdomäne; klare Dokumentation, wann welches Verfahren gilt. \\
 \addlinespace
 Gegenteilige Aussagen & Random Forest und klassische Methode widersprechen sich deutlich. & Konfliktfall: mögliche Label-/Feature-Probleme, Hyperparameter Wahl, etc.; erfordert gezielte Fallanalyse. \\
 \addlinespace
@@ -468,84 +438,65 @@ Neues Muster entdeckt & Random Forest macht auf wiederkehrende Strukturen aufmer
 
 \section{Ziel des Kapitels}\label{sec:anforderungen-intro}
 Dieses Kapitel fasst wiederkehrende Sicherheitsbedarfe als \emph{Anforderungsfelder} zusammen und ordnet ihnen
-\emph{typische Erwartungen} aus etablierten Leitlinien und Standards zu (konzeptionell; ohne Anspruch auf Vollständigkeit).
-Die Felder bilden die Zeilen der Coverage-Analyse in Kapitel~\ref{chap:coverage}. 
-Berichtsdimensionen siehe Abschn.~\ref{sec:szenarien-rahmen}–\ref{sec:szenarien-odd}.
+\emph{typische Erwartungen} aus etablierten Leitlinien und Standards zu.
+%die Felder bilden die Zeilen der Coverage-Analyse in Kapitel~\ref{chap:coverage}. 
 
 \section{Anforderungsfelder}\label{sec:anforderungsfelder}
-\begin{enumerate}
-  \item \textbf{Daten-/Label-Governance:} Herkunft, Qualität, Annotation und Freigabeprozesse sind zu definieren, zu versionieren und zu auditieren. 
-  Datasheets/Model Cards und annotatorspezifische Qualitätsmetriken (Inter-Annotator Agreement) sind verbindlich zu führen.
 
-  \item \textbf{ODD- und Szenarioabdeckung:} Grenzen und Annahmen sind messbar zu formulieren; Leistung und Unsicherheit sind je ODD-Segment nachzuweisen.
-  Änderungen bedingen eine erneute Bewertung (inkl.\ Regressionstestplan).
+\subsection*{1. Klassentaxonomie \& Entscheidungslogik}
+\begin{itemize}[leftmargin=2.2em,itemsep=0.2em]
+  \item Eindeutige, domänenspezifische Klassen mit Kurzdefinition und Abgrenzung (z.\,B. TS-Kern vs. starker Regen; Graupel vs. Hagel).
+  \item Qualitative Entscheidungsmerkmale je Klasse (z.\,B. Intensität, Gradienten, Persistenz) und typische Verwechslungen.
+  \item \emph{Granularität/Hierarchie:} Aggregatklassen für grobe Analysen vs. Feinklassen für Detailstudien.
+\end{itemize}
 
-  \item \textbf{Robustheit \& Verteilungssprünge:} Sensitivitäts-/Stresstests (z.\,B.\ Clutter/Noise/RFI) und Szenarien-Injektionen prüfen Stabilität.
-  OOD-Erkennung mit konservativen Schwellen (\emph{Abstain}) ist verpflichtend.
+\subsection*{2. Semantik, Kontext \& Label-Policy}
+\begin{itemize}
+  \item Raum-/Zeit-Kontext: Gültigkeitsbereich der Klassendefinition (Größe, Dauer, Umgebung).
+  \item Quellenbezug: Onboard-Only vs. Fusion (Bodenradar/Blitz/NWP) — was darf zur Entscheidung beitragen?
+  \item Regeln für Mischpixel/Mischzellen (Primärklasse, Mehrfachlabel, „Gemischt“) und Konfliktlösung (Tie-Break, „unentschieden“).
+  \item Dokumentierte Edge-Cases (z.\,B. Virga über trockener Schicht, Attenuationslücke).
+\end{itemize}
 
-  \item \textbf{Konfidenzkalibrierung \& Unsicherheit:} Wahrscheinlichkeiten müssen kalibriert sein (z.\,B.\ ECE/Brier); Freigabekriterien umfassen Konfidenz-/Fehlerbänder je Segment.
-  Epistemische vs.\ aleatorische Unsicherheit sind, soweit praktikabel, zu trennen.
+\subsection*{3. Unsicherheit, OOD}
+\begin{itemize}
+  \item Gültige Ausgänge: \emph{Klasse A}, \emph{Klasse B}, \emph{Unbekannt/prüfen}; kein Zwang zur Entscheidung.
+  \item Definition von OOD (außerhalb Trainingsspektrum; z.\,B. Chaff, seltene Lagen) und Umgang: \emph{Unbekannt} + Hinweis.
+  \item Pflege eines Katalogs seltener Phänomene (Wissensbasis) zur späteren ODD-Erweiterung.
+\end{itemize}
 
-  \item \textbf{Erklärbarkeit \& Auditierbarkeit:} XAI dient der Plausibilisierung für Reviews – zweckgebunden, reproduzierbar und mit dokumentierten Grenzen.
-  Ergebnisse sind als auditable Artefakte in den Safety Case zu übernehmen.
+\subsection*{4. Reproduzierbarkeit}
+\begin{itemize}
+  \item Fixierte Datenstände, Seeds, Preprocessing-Versionen (gleicher Input \textrightarrow{} gleicher Output).
+  \item Wiederholbare Experimente (Skripte/Notebooks, protokollierte Konfigurationen).
+  \item Versionierung von Daten, Features, Modellen und Label-Guidelines; optional Re-Training/Updates dokumentieren.
+\end{itemize}
 
-  \item \textbf{Toolchain-Assurance \& Reproduzierbarkeit:} Trainings-/Eval-Läufe müssen reproduzierbar sein (Seeds, Umgebungen), Artefakte signiert und Abhängigkeiten kontrolliert.
-  Wo erforderlich, ist eine formale Toolqualifizierung vorzusehen.
+\subsection*{5. Validierungslogik}
+\begin{itemize}
+  \item Strikte Trennung von Trainings- und Prüfdatensätzen (nach Ereignis/Zeitraum/Region).
+  \item Klassenbezogene, qualitative Erfolgskriterien (z.\,B. „Kernbereiche werden klar isoliert“).
+  \item Bedeutungsstabile Ergebnisse über Distanzen/Tilts/Quellen (sofern genutzt).
+\end{itemize}
 
-  \item \textbf{Traceability/Versionierung:} Ende-zu-Ende-Rückverfolgbarkeit von Anforderungen $\rightarrow$ Daten $\rightarrow$ Modelle $\rightarrow$ Tests $\rightarrow$ Releases.
-  Konfigurations- und Änderungsstände sind prüfbar zu dokumentieren.
+\subsection*{6. ODD, Datenraum \& Szenarioabdeckung}
+\begin{itemize}
+  \item ODD klar beschreiben (Regionen, Jahreszeiten, Entfernungen/Tilts, verfügbare Kanäle, Flugphasen).
+  \item Szenariokatalog führen (typisch \& Edge Cases), Coverage dokumentieren, Lücken benennen.
+  \item Grenzen \& Annahmen explizit (z.\,B. „keine Polarimetrie“, „Küstenclutter“); pro ODD-Segment Leistung \emph{und} Unsicherheit berichten.
+  \item Änderungen am ODD/Daten/Pipeline \textrightarrow{} erneute Bewertung inkl. Regressionstestplan; kurze Kriterien, wann ein neues ODD-Segment als „abgedeckt“ gilt.
+\end{itemize}
 
-  \item \textbf{Monitoring/Degradation (Betrieb):} Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate) und Drift-Erkennung sind zu etablieren.
-  Degradations-/Fallback-Logiken (inkl.\ Alarmierung) sind zu definieren und nachzuweisen.
+\subsection*{7. Erklärbarkeit (Explainability)}
+\begin{itemize}
+  \item Global: Welche Merkmale sind \emph{typisch} entscheidend je Klasse (Feature-Rangfolgen, Regelbeispiele)?
+  \item Lokal: Kurze Fall-Erklärung „Warum wurde hier Klasse X gewählt?“ (Top-Merkmale, Nachbarschaft).
+  \item Konsistenz: Erklärungen müssen zur Klassen-Definition passen (kein „Widerspruch zur Semantik“).
+\end{itemize}
 
-  \item \textbf{Änderungs-/Freigabeprozesse:} Re-Training/Updates erfolgen kontrolliert (Datenänderung, Hyperparameter, Code).
-  Regressionstests und erneute Freigaben inkl.\ Safety-Case-Update sind verpflichtend.
-
-  \item \textbf{Schnittstellen/HMI (Inline):} Qualitätsflags, Konfidenz und \emph{Unknown/Abstain} sind maschinen- und menschenlesbar zu übertragen.
-  HMI muss die Interpretation (Top-$k$, Konfidenz, OOD-Hinweise) unterstützen.
-
-  \item \textbf{Frontloading-spezifisch:} Reproduzierbarkeit, Audit-Trails und die belastbare Überführung analytischer Ergebnisse in Evidenz (kein „Blindflug“ der Datenanalyse).
-\end{enumerate}
 
 
 \section{Referenzrahmen: Wie die Quellen zusammenspielen}\label{sec:ref-standards}
-
-\noindent\textit{Lesehilfe.}
-Die Tabelle fasst wiederkehrende \emph{Anforderungsfelder} zusammen und nennt dazu typische
-\emph{Erwartungen/Evidenzen}. Sie dient als Orientierung, \emph{ohne Bewertung oder Rangfolge}.
-
-\begin{table}[H]
-\centering
-\caption{Anforderungsfelder und typische Erwartungen/Evidenzen (nicht abschließend)}
-\begin{tabular}{p{0.36\textwidth}p{0.56\textwidth}}
-\toprule
-\textbf{Anforderungsfeld} & \textbf{Typische Erwartungen / Evidenzen} \\
-\midrule
-Daten-/Label-Governance &
-Lebenszyklusdokumentation; Freigabe- und Prüfprozesse; Nachvollziehbarkeit von Änderungen. \\
-ODD-/Szenarioabdeckung &
-Explizite ODD-Beschreibung; szenariobasiertes Testen/Reporting; dokumentiertes Annahmenmanagement. \\
-Robustheit &
-Stress- und Sensitivitätstests (z.\,B.\ Clutter, Rauschen); OOD-Erkennung mit Abstain-Regeln. \\
-Konfidenz / Unsicherheit &
-Kalibrierungsmetriken; Freigabekriterien je ODD-Segment. \\
-Erklärbarkeit / Auditierbarkeit &
-Zweckgebundene XAI-Berichte; reproduzierbare Skripte/Notebooks; abgelegte Review-Artefakte. \\
-Toolchain-Assurance &
-Reproduzierbare Trainings-/Eval-Läufe; kontrollierte Abhängigkeiten; Artefakt-Signaturen; ggf.\ Toolqualifizierung. \\
-Traceability / Versionierung &
-End-to-End-Rückverfolgbarkeit (Anforderungen $\rightarrow$ Daten $\rightarrow$ Modell $\rightarrow$ Tests $\rightarrow$ Release). \\
-Monitoring / Degradation (Betrieb) &
-Laufzeitmetriken (Leistung, Kalibrierung); Drift-Detektion; Alarmierung; definierte Fallback-Logik. \\
-Änderungen / Freigabe &
-Trigger für Re-Training/Re-Kalibrierung; erneute Freigabe; Update des Safety Case. \\
-Schnittstellen / HMI (Inline) &
-Qualitätsflags, Konfidenzangaben, Unknown/Abstain; Operator-gerechte Darstellung (z.\,B. OOD-Hinweise). \\
-Frontloading (Analyse) &
-Audit-Trails; festgeschriebene Umgebungen; Überführung der Analyse in prüfbare Evidenzpakete. \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 % ===== Literatur-/Standards-Factsheets =====
 \subsection{Factsheets: Leitlinien, Standards und ihre Rolle}
@@ -638,17 +589,6 @@ Sicherheit der beabsichtigten Funktion; Fokus auf Wahrnehmungs-/Szenario-Lücken
 &
 ODD-/Szenariologie als Referenz für Test \& Reporting. \\
 
-\textbf{DO-200B/ED-76\parencite{do-200b-ed-76}} &
-Datenqualität in der Luftfahrt (Erzeugung/Verwaltung). &
-\begin{minipage}[t]{\linewidth}\vspace{2pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Auditierbare Datenprozesse, starker Qualitätsfokus
-  \item \textbf{–} Nicht ML-spezifisch (Label/Splits fehlen)
-\end{itemize}
-\vspace{-4pt}\end{minipage}
-&
-Baustein für Daten-/Label-Governance. \\
-
 \textbf{ISO 26262 (Functional Safety)\parencite{iso-26262}} &
 Road-vehicles-Standard für funktionale Sicherheit; Prozessdisziplin (V-Modell), Unabhängigkeit, ASIL-Skalierung. &
 \begin{minipage}[t]{\linewidth}\vspace{2pt}
@@ -706,21 +646,15 @@ ISO/IEC~TR~5469 dient dabei als domänenneutrale Brücke für Terminologie und A
 
 \section{Luftfahrt-Zertifizierung und Forschung — Ergänzungen}
 
-\begin{description}
-  \item[\textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024)\parencite{ml-meets-aerospace-2024}]
+\subsection*{\textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024)\parencite{ml-meets-aerospace-2024}}
   \textbf{Fokus:} Hürden bei der Zertifizierung luftfahrtnaher KI (ODD-Disziplin, OOD/Abstain, V\&V-Lücken).\\
   \textbf{Beitrag:} Untermauert die Verschiebung von „Accuracy“ zu \emph{Assurance}; stützt Felder wie ODD, Robustheit, Kalibrierung, Toolchain.\\
   \textbf{Grenzen:} Überblicksarbeit; keine radar-spezifischen KPIs/Zulassungsfälle.
 
-  \item[\textit{Towards certifiable AI in aviation: landscape, challenges, and opportunities} (2024)\parencite{towards-certifiable-ai-aviation-2024}]
+\subsection*{\textit{Towards certifiable AI in aviation: landscape, challenges, and opportunities} (2024)\parencite{towards-certifiable-ai-aviation-2024}}
   \textbf{Fokus:} Landscape/State of the Art zu Zertifizierungslandschaft, Evidenzbausteinen und offenen Punkten.\\
   \textbf{Beitrag:} Praktische Strukturierungshilfe/Checkliste für Evidenzpakete und die Coverage-Matrix in dieser Arbeit.\\
   \textbf{Grenzen:} Überwiegend konzeptionell; empirische Nachweise nur punktuell.
-\end{description}
-
-\noindent
-Die beiden Quellen werden in der Coverage-Analyse dort referenziert, wo sie den Nachweisrahmen (z.\,B. Roadmap/MLEAP)
-oder die Begriffsschärfung (z.\,B. ISO/IEC~22989) konkret stützen.
 
 
 
@@ -737,7 +671,7 @@ oder die Begriffsschärfung (z.\,B. ISO/IEC~22989) konkret stützen.
 % ==== Luftfahrt ====
 \section{Ziel, Motivation und Scope (Luftfahrt)}
 \paragraph{Ziel.}
-Einordnung, wie „sicher genug“ für KI-Funktionen in der Luftfahrt regulatorisch begründet und nachgewiesen wird: Rolle von EASA (AI Roadmap, Concept Paper Issue~2), MLEAP-Ergebnissen und etablierten Standards (z.B. DO-178C). Klarstellung: KI-Guidance ergänzt, ersetzt aber nicht die klassische Assurance; keine Erleichterung der Nachweisstrenge.
+Einordnung, wie „sicher genug“ für KI-Funktionen in der Luftfahrt regulatorisch begründet und nachgewiesen wird: Rolle von EASA (AI Roadmap, Concept Paper Issue~2), MLEAP-Ergebnissen und etablierten Standards (z.B. DO-178C).
 
 \paragraph{Motivation.}
 KI hält in sicherheitsrelevanten Avionikfunktionen Einzug (z.\,B.\ Radar-Objektklassifizierung). Für den Einsatz im Flugbetrieb braucht es eine belastbare Begründung „sicher genug“ – auf Basis der etablierten Luftfahrt-Standards, ergänzt um KI-spezifische Evidenzen. Gleichzeitig bleiben zentrale Fragen offen (Generalisierung und Drift, Daten-/Modell-Governance, Updates im Betrieb, OOD/Abstain). Ein kurzer Seitenblick auf militärische Anwendungen ist hilfreich, weil dort Degradation, Resilienz gegen Störungen (Jamming/Täuschung) und konsequente Human-in-the-Loop-Konzepte geschärft sind; diese Aspekte liefern Anregungen, stehen hier aber nicht im Mittelpunkt der zivilen Zulassung.
@@ -851,11 +785,6 @@ Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern \emph{
 Als Anker dienen die in Kapitel~\ref{chap:anforderungen} definierten \emph{Anforderungsfelder}. 
 Für jedes Feld wird (i) der Bezug zu Forderungsquellen notiert, (ii) typische Evidenz/Artefakte skizziert, 
 (iii) ein Abdeckungsgrad bewertet und (iv) eine kurze Maßnahme abgeleitet. 
-Der Berichtsmaßstab folgt den ODD-Schnitten (Abschn.~\ref{sec:szenarien-odd}).
-
-% Pakete (falls noch nicht geladen)
-%\usepackage{longtable}
-%\usepackage{booktabs}
 
 \section{Anforderungs- und Coverage-Matrix}\label{sec:coverage}
 
@@ -895,7 +824,7 @@ Der Berichtsmaßstab folgt den ODD-Schnitten (Abschn.~\ref{sec:szenarien-odd}).
 \newcommand{\I}{\textsuperscript{I}} % Inline-bezogen
 
 \begin{center} % optional fürs Zentrieren
-\begin{longtable}{p{0.20\textwidth} p{0.22\textwidth} p{0.25\textwidth} p{0.07\textwidth} p{0.26\textwidth}}
+\begin{longtable}{p{0.20\textwidth} p{0.21\textwidth} p{0.25\textwidth} p{0.07\textwidth} p{0.27\textwidth}}
 \caption{Coverage-Analyse (ISO/PAS~8800 \textrightarrow\ Anforderungsfelder)}\label{tab:coverage}\\
 
 \toprule
@@ -917,28 +846,27 @@ Der Berichtsmaßstab folgt den ODD-Schnitten (Abschn.~\ref{sec:szenarien-odd}).
 \endlastfoot
 
 % --------- TABELLENINHALT (unverändert) ---------
-\textbf{ODD-/Szenario- abdeckung} & ODD, Annahmen, szenarienbasiertes Testen & ODD-Dokument, Szenariokatalog, segmentiertes Leistungs-/Unsicherheits\-reporting, Re-Assessment bei ODD-Änderung & \score{2} & ODD-Schnitte definiert; Unsicherheitsreporting teils uneinheitlich. \textbf{Maßn.:} verbindliches ODD-Template; Pflichtmetriken (Pd/Pfa, ECE/Brier) je Segment; Unknown/Abstain-Kriterien; Regression bei ODD-Änderung. \\
+\textbf{ODD-/Szenario- abdeckung} & ODD, Annahmen, szenarienbasiertes Testen & ODD-Dokument, Szenariokatalog, segmentiertes Leistungs-/Unsicherheits\-reporting, Re-Assessment bei ODD-Änderung & \score{2} & ODD-Schnitte definiert. \textbf{Maßn.:} verbindliches ODD-Template; Pflichtmetriken (z.B. Pd/Pfa) je Segment; Unknown/Abstain-Kriterien; Regression bei ODD-Änderung. \\
 \midrule
-\textbf{Daten-/Label-Governance}\F & Daten-Management, Dokumentation, Freigabeprozesse & Datasheets/Model Cards, Label-Guidelines, Inter-Annotator-Agreement, versionierte Datenstände (Signaturen) & \score{2} & Prozesse vorhanden, IAA/Reviewstiefe variiert. \textbf{Maßn.:} IAA-Ziel, Freigabe-Checkliste, Pipeline-Hashing/Signierung, Datenänderungslog. \\
+\textbf{Daten-/Label-Governance}\F & Daten-Management, Dokumentation, Freigabeprozesse & Datasheets/Model Cards, Label-Guidelines, versionierte Datenstände (Signaturen) & \score{2} & Prozesse vorhanden. \textbf{Maßn.:} Freigabe-Checkliste, Pipeline-Hashing/Signierung, Datenänderungslog. \\
 \midrule
-\textbf{Robustheit \& Verteilungssprünge} & Robustheitsprinzi- pien, Stresstests & Stress-/Sensitivitätstests (z.\,B.\ RFI/Clutter/Noise), Domänen-Holdouts, Degradationskurven & \score{1} & Systematische Stresstests lückenhaft; RFI/Multipath selten. \textbf{Maßn.:} Testbatterie inkl.\ Worst-Case, Katalog pro Störart, Akzeptanzkriterien. \\
+\textbf{Robustheit \& Verteilungssprünge} & Robustheitsprinzi- pien, Stresstests & Stress-/Sensitivitätstests (z.\,B.\ RFI/Clutter/Noise), Degradationskurven & \score{1} & Systematische Stresstests lückenhaft; RFI/Multipath selten. \textbf{Maßn.:} Testbatterie inkl.\ Worst-Case, Katalog pro Störart, Akzeptanzkriterien. \\
 \midrule
-\textbf{Konfidenzkali- brierung \& Unsicherheit} & Unsicherheitsbe- handlung, Freigabekriterien & Kalibrationsberichte (ECE, Brier, NLL) je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; CI/Bootstrap-Reporting. \\
+\textbf{Konfidenzkali- brierung \& Unsicherheit} & Unsicherheitsbe- handlung, Freigabekriterien & Kalibrationsberichte je ODD-Segment, dokumentierte Thresholds/Abstain-Regeln & \score{2} & Konfidenzmetriken vorhanden, Kalibrierung nicht konsistent je Segment. \textbf{Maßn.:} Kalibrierung verpflichtend pro Segment; Bootstrap-Reporting. \\
 \midrule
-\textbf{Toolchain-Assurance \& Reproduzierbarkeit}\F & Tool-/Prozesskontrolle, ggf.\ Toolqualifizierung & deterministische Builds, Lockfiles, Artefakt-Signaturen, reproduzierbare Trainings-/Eval-Läufe, TQL-Bewertung & \score{2} & Repro besser, formale Toolqualifizierung teils offen. \textbf{Maßn.:} TQL-Entscheidungsmatrix, Build-Manifeste, CI/CD-Gates. \\
+\textbf{Toolchain-Assurance \& Reproduzierbarkeit}\F & Tool-/Prozesskontrolle, ggf.\ Toolqualifizierung & deterministische Builds, Lockfiles, Artefakt-Signaturen, reproduzierbare Trainings-/Eval-Läufe, TQL-Bewertung & \score{2} & Repro besser, formale Toolqualifizierung teils offen. \textbf{Maßn.:} TQL-Entscheidungsmatrix, Build-Manifeste. \\
 \midrule
-\textbf{Monitoring/ Degradation (Betrieb)}\I & Betriebsüber wachung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Monitoring rudimentär; Degradationspfade wenig erprobt. \textbf{Maßn.:} Telemetrie-Set, OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
+\textbf{Monitoring/ Degradation (Betrieb)}\I & Betriebsüberwa- chung, sichere Degradation & Laufzeitmetriken (Leistung/Kalibrierung/OOD-Rate), Drift-Detektion, Alarm-/Fallback-Policy & \score{1} & Degradationspfade wenig erprobt. \textbf{Maßn.:} OOD-/Drift-Tracker, Degradation-Playbook mit Tests. \\
 \midrule
-\textbf{Traceability/ Versionierung}\F & Rückverfolgbarkeit, Konfigurationsmgmt. & End-to-end Links Anf.\,$\rightarrow$\,Daten\,$\rightarrow$\,Modell\,$\rightarrow$\, Tests\,$\rightarrow$\,Release; Änderungsprotokolle & \score{2} & Links vorhanden, Lücken bei Daten\,$\leftrightarrow$\,Modell. \textbf{Maßn.:} Traceability-Matrix, verbindliche Artefakt-IDs in CI. \\
+\textbf{Traceability/ Versionierung}\F & Rückverfolgbarkeit, Konfigurationsmgmt. & End-to-end Links Anf.\,$\rightarrow$\,Daten\,$\rightarrow$\,Modell\,$\rightarrow$\, Tests\,$\rightarrow$\,Release; Änderungsprotokolle & \score{2} & Links vorhanden, Lücken bei Daten\,$\leftrightarrow$\,Modell. \textbf{Maßn.:} Traceability-Matrix, verbindliche Artefakt-IDs. \\
 \midrule
 \textbf{XAI \& Auditierbarkeit}\F & nachvollziehbare Evidenz & zweckgebundene Erklärungen, reproduzierbare Notebooks/Skripte, Review-Artefakte & \score{2} & Heterogene XAI-Methoden, Repro schwankt. \textbf{Maßn.:} XAI-Playbook, Seed/Env-Fixierung, Audit-Pipeline. \\
 \midrule
-\textbf{Änderungen/ Freigabe}\F & Änderungs- und Freigabekontrolle & Re-Training-Trigger, Regression-Testplan, Freigabeprotokoll, Safety-Case-Update & \score{2} & Trigger uneinheitlich, Regression ad hoc. \textbf{Maßn.:} feste Trigger (Daten-/Shift/Performance), definierter Regression-Scope. \\
+\textbf{Änderungen/ Freigabe}\F & Änderungs- und Freigabekontrolle & Re-Training-Trigger, Regression-Testplan, Freigabeprotokoll, Safety-Case-Update & \score{2} & Trigger uneinheitlich. \textbf{Maßn.:} feste Trigger (Daten-/Shift/Performance), definierter Regression-Scope. \\
 \midrule
-\textbf{Schnittstellen/ HMI (Inline)}\I & Informationsüber- gabe, Interpretierbarkeit & Qualitätsflags, Konfidenz, Unknown/Abstain, HMI-Richtlinien (Top-$k$, OOD-Hinweise) & \score{2} & Flags vorhanden, Darstellung uneinheitlich. \textbf{Maßn.:} HMI-Styleguide, Operator-Validierung. \\
+\textbf{Schnittstellen/ HMI (Inline)}\I & Informationsüber- gabe, Interpretierbarkeit & Qualitätsflags, Konfidenz, Unknown/Abstain, HMI-Richtlinien (OOD-Hinweise) & \score{2} & Flags vorhanden, Darstellung uneinheitlich. \textbf{Maßn.:} HMI-Styleguide, Operator-Validierung. \\
 \midrule
-\textbf{Frontloading-spezifisch}\F & Evidenzgenerierung, Transfer in Safety Case & Audit-Trails (Notebooks/Seeds/Datenstände), Evidenzpakete, Review mit Safety-Team & \score{2} & Evidenztransfer inkonsistent. \textbf{Maßn.:} Evidenz-Template, Freigabe-Checklist, gemeinsame Reviews. \\
-% --------- ENDE TABELLENINHALT ---------
+\textbf{Frontloading-spezifisch}\F & Evidenzgenerierung, Transfer in Safety Case & Audit-Trails (Notebooks/Datenstände), Evidenzpakete, Review mit Safety-Team & \score{2} & Evidenztransfer inkonsistent. \textbf{Maßn.:} Evidenz-Template, Freigabe-Checklist, gemeinsame Reviews. \\
 
 \end{longtable}
 \end{center}
@@ -949,19 +877,19 @@ Der Berichtsmaßstab folgt den ODD-Schnitten (Abschn.~\ref{sec:szenarien-odd}).
 
 \section{Diskussion der Abdeckung}\label{sec:abdeckung-diskussion}
 Die Coverage-Analyse zeigt ein differenziertes Bild über alle Anforderungsfelder hinweg. Insgesamt ist eine \textbf{weitgehende Abdeckung}
-in prozessualen und evidenzbezogenen Feldern erkennbar (z.\,B.\ Daten-/Label-Governance, Toolchain-Assurance, Traceability), während
-\textbf{leistungs- und betriebskritische Felder} (Robustheit \& Verteilungssprünge, Monitoring/Degradation) noch \textbf{substantielle Lücken}
+in prozessualen und evidenzbezogenen Feldern erkennbar (z.\,B.\ Daten-/Label-Governance, Toolchain-Assurance), während
+\textbf{leistungs- und betriebskritische Felder} (Robustheit \& Verteilungssprünge, Monitoring/Degradation) noch \textbf{Lücken}
 aufweisen. Die wichtigsten Beobachtungen sind:
 
 \paragraph{(1) ODD-/Szenarioabdeckung: weitgehend vorhanden, Unsicherheits-Reporting inkonsistent.}
 Die Definition der ODD und die szenarienbasierte Leistungsbewertung sind konzeptionell verankert. \textit{Schwachpunkte} liegen in der
 \textit{einheitlichen Berichterstattung von Unsicherheit} pro Segment (Kalibrierung, Konfidenzbänder) sowie in \textit{klaren Kriterien für Unknown/Abstain}.
-Eine verbindliche ODD-Vorlage und Pflichtmetriken (z.\,B.\ Pd/Pfa, ECE/Brier je Segment) würden die Nachvollziehbarkeit erhöhen und
+Eine verbindliche ODD-Vorlage und Pflichtmetriken (z.\,B.\ Pd/Pfa je Segment) würden die Nachvollziehbarkeit erhöhen und
 Re-Assessments bei ODD-Änderungen operationalisieren.
 
 \paragraph{(2) Daten-/Label-Governance: organisatorisch gut adressierbar, in der Tiefe heterogen.}
 Prozesse zu Herkunft, Qualität, Freigabe und Dokumentation sind \textbf{umsetzbar und auditierbar}. In der Praxis variieren jedoch
-\textbf{Label-Qualität (IAA)}, Versionierungstiefe und Freigabe-Checklisten. \textbf{Standardisierte Datasheets/Model Cards} und \textbf{signierte Datenstände}
+\textbf{Label-Qualität}, Versionierungstiefe und Freigabe-Checklisten. Nicht ausreichend \textbf{Standardisierte Datasheets/Model Cards} und \textbf{signierte Datenstände}
 reduzieren Reproduzierbarkeits- und Integritätsrisiken insbesondere im Frontloading.
 
 \paragraph{(3) Robustheit \& Shift: größter Handlungsbedarf.}
@@ -971,11 +899,11 @@ bleibt die Bewertung „sicher genug“ \textbf{konditional}.
 
 \paragraph{(4) Konfidenzkalibrierung \& Unsicherheit: verfügbar, aber nicht durchgängig segmentiert.}
 Konfidenzmetriken liegen vor; \textbf{Kalibrierung je ODD-Segment} und \textbf{Threshold-/Abstain-Regeln} sind jedoch nicht konsistent dokumentiert.
-Eine verpflichtende \textbf{segmentierte Kalibrierung} (inkl.\ CI/Bootstrap) stärkt die Freigabekriterien und erleichtert die Auditierung.
+Eine verpflichtende \textbf{segmentierte Kalibrierung} stärkt die Freigabekriterien und erleichtert die Auditierung.
 
 \paragraph{(5) Toolchain-Assurance \& Traceability: solide Basis, Formalisierung ausbaufähig.}
 Reproduzierbare Builds, Lockfiles, Artefakt-Signaturen und End-to-End-Traceability sind vielfach vorhanden, jedoch \textbf{nicht lückenlos}.
-\textbf{TQL-Entscheidungsmatrizen} (wo relevant), verbindliche \textbf{Artefakt-IDs in CI/CD} und \textbf{Pflicht-Change-Logs} schließen typische Nachweislücken.
+\textbf{TQL-Entscheidungsmatrizen} (wo relevant), verbindliche \textbf{Artefakt-IDs} und \textbf{Pflicht-Change-Logs} schließen typische Nachweislücken.
 
 \paragraph{(6) Monitoring/Degradation im Betrieb: reif für Leitplanken, noch nicht Standard.}
 Laufzeitmetriken und Drift-/OOD-Detektoren werden \textbf{rudimentär} genutzt; \textbf{klare Degradationspfade} (Alarmierung, Fallback) fehlen oft.
@@ -1013,6 +941,8 @@ Kapitel~\ref{chap:coverage} verdichtete Coverage-Analyse \emph{plausibel} unter 
 Radarsystemen adressiert werden können. Die Einordnung bleibt produktneutral und folgt dem Meta-Ansatz:
 Im Fokus steht nicht die Wirksamkeit einzelner Techniken, sondern ob die \emph{geforderten Ansätze} mit
 heutigen Praktiken belastbar abgedeckt werden.
+
+\section{Abdeckung der Anforderungen des Beispiel Modells}
 
 \section{Frontloading-Use-Cases (exemplarisch)}\label{sec:uebertragbarkeit-frontloading}
 Frontloading-Anwendungen (außerhalb der Inline-Funktion; z.\,B.\ Datenaufbereitung, Musteranalyse, Validierung
