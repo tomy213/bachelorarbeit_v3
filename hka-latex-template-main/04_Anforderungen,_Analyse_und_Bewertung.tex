@@ -11,8 +11,138 @@ Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem augewählt u
 Da sonst alles nur sehr waage Umschreibungen ohne konkretes Ziel wären. 
 Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
 
+\section{Verschiedene Radarsysteme}
+In Flugzeugen sind meist mehrere Radare für verschieden Verwendungszwecke verbaut. Im folgenden werden 
+beispielhaft verschiedene Flugzeuge betrachtet. Zu untersuchen sind die dort verwendeten Radarsysteme, 
+deren Profile bzw. was man versucht zu erkennen und die entsprechenden Anforderungen. Um die Dimensionen 
+zu verstehen je eine kleine Listen der Spezifikationen.
+
+\subsection{MiG-25}
+Ein Mig-25 besitzt ein Bordradar zur Luftzielsuche und Verfolgung und ein Seitensichtradar zur Aufklärung 
+bzw. Bodenkartierung.
+Als Bordradar wurde z.B. ein Smerch-A1 verbaut, die Spezifikationen sind: \parencite{MiGAlley_Smerch}
+
+\paragraph{Überblick}
+\begin{itemize}
+  \item \textbf{Bezeichnungen:} RP-SA / RP-25 / \emph{Smerch-A} / \emph{Izdeliye 720} (MiG-25-Reihe); Ursprung aus dem verbesserten Tu-128A-Smerch.
+  \item \textbf{Plattformen:} MiG-25P (später A2/A3 in Serienmaschinen); frühe Prototypen mit \emph{Smerch-A1}.
+  \item \textbf{Radar-Gewicht (RP-25):} ca.\ 500~kg.
+  \item \textbf{Grundwellenlänge:} \(\sim\)3\,cm; \emph{Smerch-A1} zusätzlich geheime 2\,cm-Betriebsart.
+  \item \textbf{Reichweiten (A1):} Bomber-Detektion \(\approx 100\)~km; Tracking-Reichweite \(\approx 50\)~km.
+  \item \textbf{ECM/Clutter:} fortlaufende Verbesserungen in Störfestigkeit und Tiefflug-Cluttertoleranz ab Serienstand.
+\end{itemize} %600kw nach  wikipedia
+
+
+
+\subsection{F-14}
+Als Bordradar wurde unteranderem ein AWG-9 verwendet, die Spezifikationen sind: \parencite{Forecast1999_AWG9_APG71}
+\paragraph{Abmessungen \& Masse}
+\begin{itemize}
+  \item \textbf{Antenne:} Slotted plane array; % Angabe übernommen wie geliefert
+        \textit{14.2 cm} \,/\, \textit{36 in}\footnote{Die Antennenangabe ist in der gelieferten Quelle inkonsistent (14{,}2\,cm entsprechen nicht 36\,in). Wert wörtlich übernommen.}
+  \item \textbf{Gewicht (System):} 590~kg \,/\, 1{,}300~lb
+  \item \textbf{Volumen (System):} 0{,}78~m\textsuperscript{3} \,/\, 28~ft\textsuperscript{3}
+\end{itemize}
+
+\paragraph{Frequenz \& Leistung (AWG-9)}
+\begin{itemize}
+  \item \textbf{Frequenzband:} 8--12~GHz (X-Band)
+  \item \textbf{Spitzenleistung (Peak Power):} 10~kW
+  \item \textbf{Mittlere Leistung (Average Power):}
+    \begin{itemize}
+      \item 7~kW (Pulse-Doppler-Modus)
+      \item 500~W (Pulsmodus)
+    \end{itemize}
+  \item \textbf{Pulsbreite:}
+    \begin{itemize}
+      \item Pulsmodus: 0{,}4~\(\mu\)s, 50~\(\mu\)s
+      \item Pulse-Doppler: 0{,}4~\(\mu\)s, 1{,}3~\(\mu\)s, 2{,}0~\(\mu\)s, 2{,}7~\(\mu\)s
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Leistungsdaten}
+\begin{itemize}
+  \item \textbf{Max.\ Reichweite (Suche):} 213~km \,/\, 115~NM
+  \item \textbf{Scanrate:} 80\(^\circ\)/s (horizontal); 2 Scans/s (vertikal)
+  \item \textbf{Nachführkapazität (TWS):} bis zu 24 Ziele gleichzeitig; Raketenstarts in rascher Folge gegen bis zu 6 dieser Ziele
+  \item \textbf{Zielverfolgbarer Höhenbereich:} 50~ft bis 80{,}000~ft; Zielgeschwindigkeit von niedriger Unterschall bis \(> \)~Mach~3
+\end{itemize}
+
+
+
+\subsection{A-320}
+In einem A-320 sind drei verschiedene Radarsysteme verbaut: ein Wetterradar, ein Radar-Höhenmesser und 
+ein Bodenradar (ATC). 
+Als Wetterradar wird z.B. ein RDR-4000 verwendet, die Spezifikationen sind: \parencite{Honeywell_RDR4000_Specs}
+\paragraph{Radar Processor}
+\begin{itemize}
+  \item \textbf{Weight:} 10.5~lbs (4.76~kg) max
+  \item \textbf{Input Power:} 115~VAC (96--134~VAC), 360--800~Hz
+  \item \textbf{Power Dissipated:} 150~VA nominal\\
+        \hspace*{1.8em}\footnotesize(Inklusive Leistung für Transmitter/Receiver, Antennatrieb und Bedienpanel)
+  \item \textbf{Environmental:} DO-160E (\(-55^\circ\)C bis \(+70^\circ\)C)
+  \item \textbf{Software:} RTCA DO-178B Level~C
+\end{itemize}
+
+\paragraph{Transmitter/Receiver}
+\begin{itemize}
+  \item \textbf{Transmitter Method:} Pulse Compression
+  \item \textbf{Weight:} 5.1~lbs (2.31~kg) max
+  \item \textbf{Transmitter Frequency:} 9.375~GHz
+  \item \textbf{Noise Figure:} 1.9~dB
+  \item \textbf{Environmental:} DO-160E (\(-55^\circ\)C bis \(+70^\circ\)C)
+  \item \textbf{Minimum Discernable Signal:} \(-124\)~dBm
+\end{itemize}
+
+\paragraph{Antenna System}
+\begin{itemize}
+  \item \textbf{Flat-Plate-Optionen (Gain / Beamwidth / Weight):}
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{lccc}
+\hline
+\textbf{Apertur (Durchmesser)} & \textbf{Gain (dBi, nom.)} & \textbf{3-dB-Beamwidth} & \textbf{Gewicht} \\
+\hline
+30\,"\  & 34.8 & 3.0\(^\circ\) & 6~lbs \\
+24\,"\  & 33.0 & 4.2\(^\circ\) & 4~lbs \\
+18\,"\  & 31.0 & 5.6\(^\circ\) & 3.0~lbs \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+  \item \textbf{Scan Rate:} bis zu 90\(^\circ\)/s
+  \item \textbf{Weight:} 16~lbs (Single), 29.5~lbs (Dual)
+  \item \textbf{Environmental:} DO-160E (\(-55^\circ\)C bis \(+70^\circ\)C)
+\end{itemize}
+
+\paragraph{System Specifications}
+\begin{itemize}
+  \item \textbf{Max Detection Ranges:}
+  \begin{itemize}
+    \item 320~NM -- Weather und Ground~Map
+    \item 60~NM -- Turbulence
+    \item 5~NM -- Windshear
+  \end{itemize}
+  \item \textbf{Azimuth Coverage:}
+  \begin{itemize}
+    \item \(\pm 80^\circ\) -- Weather und Ground~Map
+    \item \(\pm 40^\circ\) -- Windshear
+  \end{itemize}
+\end{itemize}
+
+\subsection{Referenz (Automotive)}
+Als vergleich werden Spezifikationen eines Bosch Frontradars angeschaut: \parencite{Bosch_FrontRadar_2025}
+\begin{itemize}
+  \item \textbf{Frequenzbereich:} 76 bis 77 GHz und 77 bis 81 GH
+  \item \textbf{Reichweite:} bis zu 530 m
+  \item \textbf{(H x B x T) Maße:} 56 mm x 76 mm x 20 mm
+  \item \textbf{Verbrauch:} < 3.5 W
+\end{itemize}
+
+
 \section{Auswahl des Radarsystems}
-Bereits in dem Grundlagenkapitel wurden verschiedene Radarsysteme und Einsatzgebiete erwähnt. 
 Da das System beispielhaft dienen soll, sind Einsatzzweck, Ort oder Art des Systems zweitrangig. 
 Die Objektklassifikation wird für diese Arbeit auf Grund dessen gewählt, dass sie verhältnismäßig verständlich 
 und nachvollziehbar ist. In dieser Arbeit wird beispielhaft eine Onboard Wetterphänomänsklassifikation als 
@@ -178,6 +308,7 @@ Regen oder Hagel handelt.
 Dieses Kapitel dient dazu einzelne relevante KI Modelle besser zu verstehen und eines davon 
 auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu untersuchen.
 
+
 \section{Modell-Steckbriefe}
 
 \subsection*{CNN (Convolutional Neural Networks)}
@@ -337,6 +468,17 @@ voneinander unabhängiger, die Streuung sinkt, und die Gesamtvorhersage wird rob
 \end{tikzpicture}
 \caption{Einfache Skizze eines Entscheidungsbaums: An jedem Knoten wird eine Schwellenfrage gestellt; am Blatt steht die Klassenentscheidung.}
 \end{figure}
+
+\subsection{Sicherheitseinordnung}
+Erfahrungsgemäß kann man bei einer eindeutigen Klassifikation ``out of the bag'' sprich ohne Aufwand 
+von einer bis zu 80 \% Genauigkeit ausgehen. Mit geringen Feature Egineering bereits 90 bis 97 \%. 
+Ab hier beginnt die eigentliche Arbeit. Auf Datensätzen von wenigen hundert bis mehreren Tausend Daten 
+sind Genauigkeiten bis zu 99,9 \% möglich. Mit größeren Datenmengen, guten Features und eng gefasster 
+ODD wäre somit eine Genauigkeit im Bereich $\le 1\times10^{-4}$ bzw. >99,99 \% auf homogenen Testdaten realistisch. 
+Da Daten in der Realität nicht homogen sondern heterogen verteilt sind, wäre eine Fehlerquote von $\ 1\times10^{-6}$ 
+pro Mission theoretisch möglich. Dadurch könnten unter idealen Vorraussetzungen und besonderer Begründung 
+Bereiche wie DAL B oder ASIL C möglich sein. Wenn man keine eindeutige Klassifikation sondern 
+prozentuale Ausgaben berücksichtigt kann man zudem unterstützende Einsatzmöglichkeiten erörtern.
 
 \subsection{Wichtige Punkte}
 
@@ -516,12 +658,12 @@ klarer Zweckbindung für diese Arbeit.
 \begin{longtable}{P{0.17\textwidth} P{0.25\textwidth} P{0.38\textwidth} P{0.16\textwidth}}
 \caption{Factsheets: Leitlinien/Standards – Rolle, Stärken/Grenzen, Nutzung}\label{tab:factsheets}\\
 \toprule
-\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Nutzung hier} \\
+\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Bemerkung} \\
 \midrule
 \endfirsthead
 
 \toprule
-\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Nutzung hier} \\
+\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Bemerkung} \\
 \midrule
 \endhead
 

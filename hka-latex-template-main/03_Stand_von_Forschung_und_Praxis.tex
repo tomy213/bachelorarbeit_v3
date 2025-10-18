@@ -103,6 +103,46 @@ Insbesondere die Automobilbranche steht als treibender Sektor unter hoher öffen
 Diese sicherheitsrelevanten Praxisvorfälle werfen zusätzliche Fragen auf. Deutlich wird insbesondere die rechtliche Komplexität: 
 Es ist auch zu klären, wer wann die Verantwortung trägt (Fahrer, Betreiber, Hersteller).
 
+
+\section{Wie sicher sind KIs heute?}
+Um zu verstehen wie sicher etwas ist versucht man es auch in Zahlen auszudrücken, um es vergleichen zu können. 
+Solche Zahlen fließen auch in die Anforderungen wie z.B. die Anzahl an Fehlern pro Stunde. Konkrete Zahlen gehen 
+aus der Einstufung hervor: 
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.18}
+\begin{tabular}{ll|ll}
+\hline
+\multicolumn{2}{c|}{\textbf{Luftfahrt}} & \multicolumn{2}{c}{\textbf{Automotive}} \\
+\textbf{DAL} & \textbf{Typ. Wert pro mission (20h)} & \textbf{ASIL} & \textbf{Typ. Wert pro h} \\
+\hline
+DAL A (catastrophic)& $\le 1\times10^{-9}$/mission & ASIL D (sehr hoch)& $\le 1\times10^{-8}$/h \\
+DAL B (hazardous)& $\le 1\times10^{-7}$/mission & ASIL C (hoch)& $\le 1\times10^{-7}$/h \\
+DAL C (major)& $\le 1\times10^{-5}$/mission & ASIL B (mittel)& $\le 1\times10^{-7}$/h \\
+DAL D (minor)& $\le 1\times10^{-5}$/mission & ASIL A (niedrig)& $\le 1\times10^{-6}$/h  \\
+\hline
+\end{tabular}
+\caption{Gegenüberstellung der Kategorien: Luftfahrt (DAL) und Automotive (ASIL) mit typischen Zielgrößen pro Betriebsstunde oder Mission.}
+\end{table}
+
+Bei einem voll autonomen Fahrzeug werden alle Funktionen pauschal als ASIL D eingestuft, da man keine Kontrolle 
+über das Fahrzeug hat, dementsprechend die Beherschbarkeit gleich Null ist und zudem davon auszugehen ist, dass 
+bei einer Fehlfunktion das Fahrzeug von der Straße abkommen kann und daher zu schweren Personenschäden kommen kann.
+Leider werden von Unternehmen keine Konkreten Zahlen, die diese Werte stützen können bezüglich der verwendeten 
+KIs veröffentlicht. Ein Anhaltspunkt können folgende Zahlen liefern: \parencite{herger2024disengagements}\\
+Im Zeitraum Dezember 2022 bis November 2023 wurden in Kalifornien autonome Fahrzeuge eingesetzt, die 
+insgesamt \textbf{9.282.681 km} mit Sicherheitsfahrer zurückgelegt haben; die Firmen meldeten dabei 
+\textbf{6.570 Eingriffe}. Laut Auswertung wurden rund 84 \% der Disengagements vom Safety Driver initiiert, 
+der Rest vom AV-System bzw. beiden. Das macht ca. \textbf{1.412 km pro Eingriff}, wenn man eine 
+Durchschnittsgeschwindigkeit von 50km/h annimmt, macht das ca. 1 Eingriff alle 28 Stunden. 
+Somit kann man grob von 99,96 \% Richtigkeit pro Stunde ausgehen, was im Bereich von $ 1\times10^{-4}$/h liegt und somit 
+lediglich mit besonderer Begründung in Bereichen von \textbf{DAL D oder ASIL A} einzuordnen ist. 
+Anzumerken ist, dass hier das Gesammtsystem betrachtet wurde. Das heißt Einzelkomponenten 
+sind höher einzuordnen. Wenn man bei mehreren Duzend im Gesammtsystem beteiligten Komponenten ausgeht 
+und man zudem den Fehlern eine Unabhängigkeit vorraussetzt, kann man für diese Komponenten je eine 
+Fehlerquote von $ 1\times10^{-6}$/h annehmen. Einzelkomponenten können somit im Bereich \textbf{DAL C bzw. ASIL B} 
+oder höher einzuordnen sein. (In der Literatur werden solche KI gesteuerten Gesammtsysteme als eAI bezeichnet.)
+
 % ----------------------------------------------------
 \section{Einsatzfelder in der Luftfahrt}\label{sec:sop-ueberblick}
 KI findet in der Luftfahrt entlang der gesamten Wertschöpfungskette Anwendungsmöglichkeiten – von Sensorik und Bordfunktionen 
@@ -389,21 +429,6 @@ Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleic
 \end{itemize}
 
 
-
-\section{ISO/PAS 8800 — Kernaussagen für diese Arbeit}
-\begin{itemize}
-  \item \textbf{ODD/Use-Case-Begrenzung} mit Unknown/Abstain \& Fallback als Pflicht.
-  \item \textbf{Daten-/Modell-Governance:} Lineage, Versionierung, Label-Qualität, Reproduzierbarkeit.
-  \item \textbf{Unsicherheit/Kalibrierung \& OOD:} segmentiertes Reporting, Freigabekriterien.
-  \item \textbf{Szenariobasierte V\&V} je ODD-Segment statt Mittelwert-KPIs.
-  \item \textbf{Betrieb/Updates:} Monitoring, Drift-Erkennung, kontrollierte Releases/Rollback.
-\end{itemize}
-\noindent
-Diese Punkte werden im Luftfahrtteil nicht 1:1 übernommen, sondern als \emph{Orientierung}
-für die bereits definierten Anforderungsfelder genutzt.
-\parencite{iso-pas-8800-2024}
-
-
 \chapter{Deep Dive: ISO/PAS 8800}
 Die ISO 8800 ist sehr Dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
 sicher wird. Diese Norm beschreibt was zu tun ist und wie man begründet, dass eine KI sicher genug ist. 
@@ -484,7 +509,7 @@ angepasst oder erweitert werden müssen.
 \end{itemize}
 
 
-\section{Einleitung}
+\section{(0) Einleitung}
 Die ISO 8800 passt die ISO 26262 und ISO 21448 gezielt für KI an und ergänzt sie um ein 
 kausales Modell für KI-bedingte Unzulänglichkeiten, daraus abgeleitete Sicherheitsanforderungen sowie 
 Risikominderungs­maßnahmen. Weil Anwendungen und Stand der Technik stark variieren, werden weniger starre 
@@ -502,7 +527,7 @@ dann, wenn Sicherheitsanforderungen entweder einer KI-Funktion oder einer KI-Sic
  \item Gültig für KI als Funktion oder als Sicherheitsmechanismus – auch außerhalb des unmittelbaren SOTIF-Scopes.
 \end{itemize}
 
-\section{Scope}
+\section{(2) Scope}
 Das Dokument gilt für sicherheitsrelevante Systeme in Serienfahrzeugen (ohne Mopeds), 
 die E/E-Systeme mit KI einsetzen. Es adressiert fahrzeugseitige Sicherheitsrisiken, die durch Ausgabemängel, 
 systematische Fehler und zufällige Hardwarefehler von KI-Elementen entstehen – 
