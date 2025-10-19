@@ -1078,6 +1078,23 @@ In Summe sind \emph{alle} Random-Forrest-Anforderungen den Luftfahrt-Forderungen
 „Nicht-Zuordnung“ ergibt sich nicht.
 
 
+
+
+
+
+
+% -------------------------
+% CHAPTER 7: Bewertung der Übertragbarkeit
+% -------------------------
+\chapter{Bewertung der Übertragbarkeit}\label{chap:uebertragbarkeit}
+In diesem Kapitel geht es darum die Übertragbarkeit des gewählten Beispiels auf existierende Normen zu 
+übertragen. Das in dieser Arbeit gewählte Beispiel war ein Random Forest KI Modell zu nutzen, um 
+Muster und Datensätze zu erkennen und darzustellen in der Entwicklung, für die Klassifikation von  
+Wetterphänomänen mittels eines Onboard Radarsystems in einem Flugzeug.
+
+
+
+
 \section{Abgeleitete ISO~8800-Abdeckung (aus R-KI \texorpdfstring{$\rightarrow$}{→} F-Avi)}
 
 \subsection*{Methode}
@@ -1138,85 +1155,44 @@ um den prinzipienbasierten Rahmen der Norm in konkrete Nachweise zu überführen
 
 
 
+\section{Fokussierte Bewertung für das Beispiel \emph{Random Forest} (Wetterphänomenerkennung mit Bordradar)}
 
+\subsection{Bewertungsrahmen (knapp)}
+\textbf{Scope:} Assistierende/L1–L2-ähnliche Funktion zur Klassifikation von Wetterphänomenen (Warn-/Hinweischarakter).\\
+\textbf{Annahmen:} ODD sauber definiert (Wetterregime, Sensor-/Modusgrenzen), offline trainiertes \& eingefrorenes Modell,
+zeit-/raumgetrennte Splits, ausreichende ODD-repräsentative Daten, deterministische Laufzeit im Budget, konservative Degradationsregeln.
 
+\subsection{Kurzurteil}
+Unter den obigen Annahmen ist die Absicherung des Random-Forest-Beispiels \textbf{gut erreichbar} und
+\textbf{anschlussfähig zu ISO/PAS~8800}: ODD-Disziplin, Datenlebenszyklus, V\&V und Betriebsmaßnahmen sind inhaltlich abbildbar.
+Blockierende Lücken ergeben sich nicht; verbleibende Punkte sind projektspezifisch präzisierbar.
 
+\subsection{Begründung in 5 Punkten}
+\begin{enumerate}
+  \item \textbf{ODD \& konservatives Verhalten:} Für Radar-ODD (z.\,B.\ Reichweite/Scan-Modus/Wetterzellen) ist ein klarer
+  Abstain/Degrade-Pfad definierbar; das passt direkt zu den Luftfahrt-Forderungen und ISO-Kap.~9/12/14.
+  \item \textbf{Daten \& Repräsentativität:} Ein RF profitiert von explizit ODD-abgeleiteten Datenschnitten
+  (Region×Saison×Tageszeit×Modus); der ISO-Dataset-Lifecycle (Kap.~11) trägt die Nachweise.
+  \item \textbf{V\&V \& Generalisierung:} Imbalance-taugliche Metriken (z.\,B.\ PR-AUC, Recall@Precision) und
+  zeit-/raumgetrennte Splits sind für RF praktikabel und normkonform (Kap.~9/12).
+  \item \textbf{Robustheit/Edge-Cases:} RF erlaubt explizite Policies für Shadow/Attenuation/Clutter (als \emph{Unknown}/Warnung).
+  Testszenarien lassen sich aus einem projektspezifischen Edge-Case-Katalog ableiten (ISO fordert Behandlung, Ausgestaltung projektseitig).
+  \item \textbf{Betrieb \& Monitoring:} Logging/Drift-Indikatoren (z.\,B.\ Score-Verteilungen, Fehlerschwerpunkte) sind
+  mit RF leicht implementierbar; Re-Bewertung/Re-Freigabe folgt ISO-Kap.~14.
+\end{enumerate}
 
-% -------------------------
-% CHAPTER 7: Bewertung der Übertragbarkeit
-% -------------------------
-\chapter{Bewertung der Übertragbarkeit}\label{chap:uebertragbarkeit}
-
-Dieses Kapitel bewertet, inwieweit die in Kapitel~\ref{chap:anforderungen} definierten Anforderungsfelder und die in
-Kapitel~\ref{chap:coverage} verdichtete Coverage-Analyse \emph{plausibel} unter den Rahmenbedingungen von
-Radarsystemen adressiert werden können. Die Einordnung bleibt produktneutral und folgt dem Meta-Ansatz:
-Im Fokus steht nicht die Wirksamkeit einzelner Techniken, sondern ob die \emph{geforderten Ansätze} mit
-heutigen Praktiken belastbar abgedeckt werden.
-
-\section{Abdeckung der Anforderungen des Beispiel Modells}
-
-\section{Frontloading-Use-Cases (exemplarisch)}\label{sec:uebertragbarkeit-frontloading}
-Frontloading-Anwendungen (außerhalb der Inline-Funktion; z.\,B.\ Datenaufbereitung, Musteranalyse, Validierung
-und Evidenzerstellung) zeigen eine hohe Anschlussfähigkeit an die geforderten Ansätze in den Feldern
-\emph{Daten-/Label-Governance}, \emph{Toolchain-Assurance \& Reproduzierbarkeit}, \emph{Traceability/Versionierung}
-und \emph{Konfidenzkalibrierung \& Unsicherheit}.
+\subsection{Gezielte Restarbeiten (knapp, projektspezifisch)}
 \begin{itemize}
-  \item \textbf{Stärken:} Reproduzierbare Pipelines (Seeds/Umgebungen), versionierte und signierte Artefakte,
-  auditierbare Notebooks/Skripte und definierte Review-Prozesse ermöglichen belastbare Evidenzpakete
-  für den Safety Case.
-  \item \textbf{Schwachpunkte:} Die \emph{Tiefe der Robustheitsevidenz} gegenüber Verteilungssprüngen ist oft uneinheitlich;
-  Stress-/Shift-Testkataloge und Degradationskurven sind nicht immer standardisiert.
-  \item \textbf{Implikation:} Frontloading ist ein tragfähiges Vehikel zur \emph{Evidenzgenerierung}, sofern ODD-Schnitte,
-  segmentierte Kalibrierung und Freigabekriterien verbindlich festgelegt und konsequent in Evidenzpakete überführt werden.
+  \item \textbf{Operative Erklärbarkeit:} RF-Feature-Beiträge (Permutation/SHAP) in HMI-Hinweise übersetzen
+  (Konfidenz, Grund der Warnung, empfohlene Reaktion).
+  \item \textbf{Runtime-Indikatoren:} Zwei, drei messbare Monitorsignale festlegen (z.\,B.\ OOD-Score, Kalibrations-Drift, Shadow-Flag-Rate)
+  und konservative Trigger definieren.
+  \item \textbf{Edge-Case-Policy:} Radar-spezifische Taxonomie (Shadow, Bodenclutter, Eiskristalle …) festhalten;
+  Umgang (\emph{Unknown}/Warnung/Degradation) verbindlich regeln.
 \end{itemize}
 
-\paragraph{Warum der Schwerpunkt auf Frontloading.}
-In klassischen Radarsystemen werden Mustererkennung und Schwellwerte oft fest verdrahtet: Schwellen entstehen aus der
-Auswertung historischer Daten und werden anschließend deterministisch implementiert. Diese Musterfindung ist heute
-Gegenstand der Datenwissenschaft, deren leistungsfähigste Werkzeuge (u.\,a.) KI-Methoden sind. Wird KI \emph{vorlaufend}
-(offboard) zur Datenanalyse, Musterentdeckung und Hypothesenbildung eingesetzt – und das operative Verhalten anschließend
-\emph{klassisch} (deterministisch) umgesetzt und nach DO-178C-Systemlogik verifiziert –, bleibt die KI vom Flugzeugbetrieb
-entkoppelt und entspricht der EASA-Logik eines Level-1-Einsatzes (unterstützend, ohne eigenständige Autorität).
-Der assurance­relevante Vorteil: Die KI dient als Erkenntnisinstrument, während die produktive Funktion durch konventionelle,
-prüfbare Artefakte (z.\,B.\ feste Regeln, nachvollziehbare Schwellen) realisiert wird. Dadurch verlagern sich KI-spezifische
-Nachweise primär auf Reproduzierbarkeit der Analysen, Daten-/Label-Governance und die Traceability der Ableitung
-(Daten\,$\rightarrow$\,Muster\,$\rightarrow$\,Spezifikation), statt auf laufzeitkritische Nachweise im Bordbetrieb.
-
-\paragraph{Hardware-Perspektive: Frontloading vs.\ Inline.}
-Im \emph{Frontloading} liegen die Rechenlast und Speicherbedarfe offboard (Skalierung via CPU/GPU/Acceleratoren, kein Echtzeitzwang). 
-Das reduziert hardwarebedingte Zulassungsrisiken: deterministische Umgebungen (Container/VM, Seeds, Lockfiles) genügen für 
-Reproduzierbarkeit; Bordhardware bleibt unverändert, da die operative Logik \emph{deterministisch} implementiert wird. 
-Im \emph{Inline}-Betrieb treten zusätzliche Anforderungen auf: harte Latenz- und Verfügbarkeitsbudgets, deterministisches 
-Laufzeitverhalten unter Worst-Case-Last, begrenzte Ressourcen (Thermik, Energie, Speicher), potenzieller Bedarf an 
-beschleunigender Hardware (z.\,B.\ GPU/NPU) mit Integrations- und Lebenszyklusrisiken (Obsoleszenz), sowie Implikationen für 
-Nachweis und Qualifizierung der Hardware/Toolkette. Diese Zwänge erhöhen die Komplexität von Integration, Test und Zulassung 
-gegenüber einer reinen Frontloading-Nutzung.
-
-
-
-\section{Inline-Funktionen (Überblick)}\label{sec:uebertragbarkeit-inline}
-Für Inline-Funktionen (laufzeitwirksame Nutzung im Betrieb) treten betriebsnahe Forderungen in den Vordergrund:
-\emph{Monitoring/Degradation}, robuste Performance unter Störung sowie \emph{schnittstellen- und HMI-seitige}
-Informationsqualität (Qualitätsflags, Konfidenz, Unknown/Abstain).
-\begin{itemize}
-  \item \textbf{Stärken:} Segmentierte Metriken und ODD-Begrenzung sind konzeptionell vorhanden; erste OOD-Indikatoren und
-  Konfidenzberichte werden genutzt.
-  \item \textbf{Schwachpunkte:} Es fehlen häufig integrierte \emph{Betriebsstrategien} mit eindeutigem Telemetrie-Set,
-  Alarmierungslogik und getesteten Degradationspfaden; systematische RFI/Clutter-Stresstests sind lückenhaft.
-  \item \textbf{Implikation:} Die Übertragbarkeit ist \emph{konditional}: klare ODD-Grenzen, definierte Abbruch-/Fallback-Regeln
-  und evidenzgestützte Kalibrierung im Zielbetrieb sind Voraussetzung.
-\end{itemize}
-
-\section{Zusammenführende Bewertung}\label{sec:uebertragbarkeit-zusammen}
-In Summe ist die Übertragbarkeit der \emph{geforderten Ansätze} für Frontloading-Szenarien heute \emph{plausibel} und mit
-überschaubaren Ergänzungen (z.\,B.\ Standardisierung von Evidenzformaten, konsistente Kalibrierung je ODD-Segment)
-erreichbar. Für Inline-Funktionen bestehen weiterhin \emph{kritische Evidenzbedarfe} bei \emph{Robustheit \& Shift}
-sowie \emph{Monitoring/Degradation}. Die leitende Frage „\emph{ist KI sicher genug?}“ lässt sich daher nicht binär,
-sondern \emph{konditional} beantworten: Dort, wo ODD eindeutig begrenzt, segmentierte Evidenz vorliegt und
-Degradationspfade geprüft sind, ist Vertrauen begründbar; darüber hinaus bleibt gezielte Weiterentwicklung erforderlich.
-
-\section{Brücke zu Empfehlungen}\label{sec:uebertragbarkeit-bruecke}
-Die nachfolgenden Empfehlungen (Kapitel~\ref{chap:empfehlungen}) priorisieren Maßnahmen, die die in Kapitel~\ref{chap:coverage}
-sichtbar gewordenen Lücken (insbesondere Robustheit/Shift und Betriebsevidenz) adressieren und die Operationalisierung
-der geforderten Ansätze in Richtung auditierbarer Evidenzketten beschleunigen.
-
+\subsection{Schlussfolgerung}
+Für die gewählte, assistierende Wetterklassifikation mit Random Forest ist die \emph{normkonforme, auditierbare}
+Absicherung \textbf{mit heutigem Stand} plausibel: Die Kernanforderungen der Luftfahrt sind in der ISO/PAS~8800 ausreichend
+hinterlegt; der verbleibende Aufwand liegt in der \emph{projektspezifischen} Präzisierung von HMI/Erklärbarkeit,
+Runtime-Monitoren und der Edge-Case-Taxonomie.
