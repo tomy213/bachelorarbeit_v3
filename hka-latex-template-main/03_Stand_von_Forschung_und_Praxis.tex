@@ -41,6 +41,36 @@ Auf Leitmessen wie der Hannover Messe zeigen Hersteller, wie KI in Serienprozess
 Laut einer Bitkom-Befragung setzen bereits rund 42\,\% der deutschen Industrieunternehmen KI in der Produktion ein,
 weitere 35\,\% planen den baldigen Einsatz.\parencite{handelsblatt-hannovermesse-2025}
 
+\subsection{Erfahrungsbeispiel: Titanik-Datensatz}
+Dieses Beispiel wurde gewählt, weil es verständlich und nachvollziehbar ist und die Reproduzierbarkeit unterstreicht.
+Zudem zeigt es, wie wertvoll maschinelles Lernen für die Arbeit mit großen Datensätzen ist.
+
+Der Titanik-Datensatz ist ein bekanntes Beispiel, um etwa in Vorlesungen einen Einstieg in das
+maschinelle Lernen zu ermöglichen. Der Datensatz und entsprechende Modelle sind auf Plattformen wie
+Kaggle und Hugging Face öffentlich zugänglich.
+
+In diesem Beispiel werden die verfügbaren Passagierdaten der Titanik mithilfe von ML-Methoden
+verarbeitet und Zusammenhänge visualisiert. Hierzu werden tabellarische Daten aufbereitet,
+Spalten in geeignete Merkmale/Labels überführt und verschiedene Modelle trainiert, unter anderem
+klassischerweise auch ein Random Forest. Dabei werden typische Datensatzprobleme sichtbar, etwa
+dass die deutsche und die amerikanische Zahlenschreibweise Punkt und Komma vertauschen, oder wie
+sich sinnvolle von nicht sinnvollen Labels unterscheiden lassen. Beim Random Forest werden
+beispielsweise Baumtiefe und die Anzahl der Merkmale variiert, um zu verstehen, wie sich diese
+Hyperparameter auf die \emph{Accuracy} auswirken. Als Ausgabe wird klassisch die Wahrscheinlichkeit,
+dass eine Person überlebt hat, gewählt; die Ergebnisse werden anschließend grafisch dargestellt.
+
+Der Datensatz umfasst meist knapp 900 Passagiere, zu denen u.\,a.\ Alter und Geschlecht bekannt sind.
+Ein alternativer Datensatz mit weniger Attributen enthält über 2{,}200 Personen. Insgesamt stehen in
+diesem Beispiel somit mehrere Tausend Datenpunkte zur Verfügung. Mit wenigen Schritten können
+automatisch Grafiken zu Datenzusammenhängen erzeugt werden.
+
+Eine frühe Erkenntnis aus diesem Beispiel ist oft, wie man nicht sinnvolle Labels identifiziert.
+Nach einem ersten Durchlauf zeigt sich beispielsweise, dass der scheinbar ausschlaggebende Prädiktor
+für das Überleben die Kabinennummer ist und nicht — wie zu erwarten — Alter oder Geschlecht.
+Schnell wird erkennbar, dass in den Daten häufig nur bei den Überlebenden die Kabinennummer erfasst
+ist, bei den Verstorbenen jedoch nicht (\emph{Label Leakage}/Erfassungsbias).
+
+
 \subsection{KI Praxis in der Luftfahrt}
 \begin{itemize}
   \item \textbf{Predictive Maintenance:\parencite{handelsblatt-hannovermesse-2025}}

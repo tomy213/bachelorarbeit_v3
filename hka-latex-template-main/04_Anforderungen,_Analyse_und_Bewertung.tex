@@ -133,6 +133,8 @@ Als Wetterradar wird z.B. ein RDR-4000 verwendet, die Spezifikationen sind: \par
 \end{itemize}
 
 \subsection{Referenz (Automotive)}
+Frontradar zur abstand Messung. Toterwinkel Assistent (optional hinter quer mit dabei). Toterwinkel Quererkennung (unterschiedliche, gleicher Typ).
+Toterwinkel Module müssen breite Winkelabdeckung haben. Vollausstattung somit 5 Radare.\\
 Als vergleich werden Spezifikationen eines Bosch Frontradars angeschaut: \parencite{Bosch_FrontRadar_2025}
 \begin{itemize}
   \item \textbf{Frequenzbereich:} 76 bis 77 GHz und 77 bis 81 GH
@@ -467,41 +469,46 @@ prozentuale Ausgaben berücksichtigt kann man zudem unterstützende Einsatzmögl
   \item Klassengewichte/Imbalance: Ohne passende class-weight/Sampling-Strategien werden Minderheitsklassen leicht benachteiligt.
 \end{itemize}
 
-
 \section{Einbindungsmöglichkeiten}
-Ein Random Forrest kann an verschiedenen Stellen eingesetzt werden, mögliche Einsatzfelder sind:
+Ein \emph{Random Forest} kann an verschiedenen Stellen eingesetzt werden. Mögliche Einsatzfelder sind:
 
 \begin{itemize}
   \item \textbf{Musteridentifikation \& Datendarstellung in der Entwicklung}\\
-  Wiederkehrende Strukturen in Radardaten können mit einem Random Forrest systematisch erkannt und als 
-  verständliche Merkmalsbilder aufbereitet werden. Hierzu werden geeignete Features (z.\,B.\ Intensitäts-, Textur- und Kontextgrößen) definiert, 
-  Daten explorativ visualisiert und ein konsistenter „Musterkatalog“ erstellt, der später als Grundlage für die Klassifikation dient.
+  Wiederkehrende Strukturen in Radardaten können mit einem Random Forest systematisch erkannt und als
+  verständliche Merkmalsbilder aufbereitet werden. Hierzu werden geeignete Features (z.\,B.\ Intensitäts-, Textur-
+  und Kontextgrößen) definiert, Daten explorativ visualisiert und ein konsistenter „Musterkatalog“ erstellt,
+  der später als Grundlage für die Klassifikation dient.
 
   \item \textbf{Assistierendes System neben dem klassischen Radar}\\
-  Das Modell läuft parallel und liefert zusätzliche, verdichtete Informationen zur Wetterlage 
-  (z.\,B.\ Klassenhinweise, Trendindizien, Qualitätsmerkmale). Die Ausgabe ergänzt die bestehende 
-  Anzeige, ohne deren Logik zu ersetzen, und unterstützt die Crew mit klaren, kompakten Hinweisen 
-  für die taktische Entscheidungsfindung.
+  Das Modell läuft parallel und liefert zusätzliche, verdichtete Informationen zur Wetterlage
+  (z.\,B.\ Klassenhinweise, Trends, Qualitätsmerkmale). Die Ausgabe ergänzt die bestehende Anzeige,
+  ohne deren Logik zu ersetzen, und unterstützt die Crew mit klaren, kompakten Hinweisen für die
+  taktische Entscheidungsfindung.
 
   \item \textbf{Ersatz/Ergänzung klassischer Schwellen-Entscheidungsbäume}\\
-  Anstelle fest verdrahteter Schwellwerte werden datengetriebene Entscheidungsgrenzen verwendet, 
-  die sich aus gelabelten Beispielen ableiten lassen. Das reduziert Hand-Tuning, erhöht die Konsistenz 
-  über verschiedene Wetterregime und ermöglicht feinere Trennungen zwischen ähnlichen Phänomenen.
+  Anstelle fest verdrahteter Schwellwerte werden datengetriebene Entscheidungsgrenzen verwendet,
+  die sich aus gelabelten Beispielen ableiten lassen. Das reduziert manuelles Tuning, erhöht die
+  Konsistenz über verschiedene Wetterregime und ermöglicht feinere Trennungen zwischen ähnlichen Phänomenen.
 
-  \item \textbf{Zusammen mit Kalman-Filter}\\
-  Das Modell ersetzt die Zustands­schätzung klassischer Filter nicht, sondern \emph{füttert} sie: 
-  Es liefert stabilisierte Beobachtungen und Klassifikationsergebnisse (inkl.\ Qualitätsmerkmalen), 
-  die anschließend von einem Schätzer weiterverarbeitet werden. So bleibt die Bahn-/Zellverfolgung im 
+  \item \textbf{Kombination mit Kalman-Filter}\\
+  Das Modell ersetzt die Zustandsschätzung klassischer Filter nicht, sondern \emph{füttert} sie:
+  Es liefert stabilisierte Beobachtungen und Klassifikationsergebnisse (inkl.\ Qualitätsmerkmalen),
+  die anschließend von einem Schätzer weiterverarbeitet werden. So verbleibt die Bahn-/Zellverfolgung im
   Filter, während die inhaltliche Deutung der Echos und ihre zeitliche Glättung modellbasiert verbessert werden.
-  Der Kalmanfilter (ähnlich eines hidden Markow Modells) wurde als Ansatz ausgesucht, da dessen Output ebenfalls 
-  probabilistisch ist und daher durch die Ergänzung eines ebenfalls probabilistischen Algorithmus nicht 
-  zwangsläufig schwerwiegend beeinflusst wird.
+  Der Kalman-Filter (ähnlich in der Zielsetzung zu Hidden-Markov-Modellen) wurde gewählt, da dessen Output
+  probabilistisch ist und durch die Ergänzung eines ebenfalls probabilistischen Algorithmus nicht
+  zwangsläufig in seiner Stabilität beeinträchtigt wird.
 \end{itemize}
 
-Die Musteridentifikation und Datendarstellung in der Entwicklung bietet das größte Potenzial, weil sie der 
-EASA-Level-1-Kategorie zugeordnet und damit zeitnah eingesetzt werden kann. Zudem ist durch die Arbeit mit 
-großen Datensätzen zu erkennen, wie wertvoll ML-Verfahren sind. Das zeigt, dass die Entwicklung von der Disziplin Data Science 
-sehr profitieren kann.
+Das hieraus gewählte Beispiel ist grundsätzlich der \emph{Toolqualifikation} zuzuordnen (Entwicklungsunterstützung),
+wird in dieser Arbeit jedoch primär unter den Gesichtspunkten eines möglichen \emph{Onboard}-Einsatzes betrachtet,
+um Rückschlüsse für einen späteren direkten Einsatz ziehen zu können. Eine enge Kopplung oder gar ein Ersatz
+etablierter Software würde zusätzliche Komplexität einführen und Fragen nach Sinnhaftigkeit und Mehrwert aufwerfen,
+die hier nicht im Fokus stehen. Die \emph{Musteridentifikation \& Datendarstellung in der Entwicklung} bietet
+das größte Potenzial, weil sie der EASA-Level-1-Kategorie (Assistenz) zugeordnet werden kann und somit kurzfristig
+einsatzfähig ist. Zugleich zeigt die Arbeit mit großen Datensätzen den Mehrwert von ML-Verfahren und unterstreicht,
+dass die Entwicklung spürbar von \emph{Data-Science}-Praktiken profitiert.
+
 
 \section{Mögliche Szenarien beim Einsatz}
 
@@ -677,16 +684,32 @@ Behördliche Erwartungshaltung für L1/L2; Ergänzung zum bestehenden Safety-Reg
 &
 Regulatorischer Kontext \& Leitplanken für Evidenzformen. \\
 
-\textbf{DO-178C / DO-330\parencite{do-178c,do-330}} &
-Software-Assurance (DO-178C, DAL-skaliert); Tool-Qualifizierung (DO-330). &
+\textbf{DO-178C (Software Assurance)\parencite{do-178c}} &
+Zentraler Nachweisrahmen für \emph{airborne} Software; definiert DAL-skalierte Objectives über den gesamten SW-Lebenszyklus. &
 \begin{minipage}[t]{\linewidth}\vspace{2pt}
 \begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Etablierte Nachweiswege, starke Traceability/Unabhängigkeit
-  \item \textbf{–} Kein KI-Fokus (Daten/Modelle/ODD fehlen); ML-Toolchains herausfordernd
+  \item \textbf{+} Etablierter Zertifizierungsmaßstab (DAL A–E)
+  \item \textbf{+} Klare Verifikationsanforderungen
+  \item \textbf{–} Kein KI-/Daten-/ODD-Fokus; ML-Modelle und Datensätze werden nicht explizit adressiert
+  \item \textbf{–} Erfordert Ergänzung durch KI-/Daten-Governance für ML-Anteile
 \end{itemize}
 \vspace{-4pt}\end{minipage}
 &
-Baseline für Airborne-Software; Querverweis Toolchain/Traceability. \\
+Baseline für Onboard-Software. In dieser Arbeit als Software Referenz statt DO-330 für das Beispiel.\\
+
+
+\textbf{DO-330 (Tool Qualification)\parencite{do-330}} &
+Qualifizierung von Entwicklungs-/Verifikationswerkzeugen. &
+\begin{minipage}[t]{\linewidth}\vspace{2pt}
+\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
+  \item \textbf{+} Proportionaler Ansatz via \emph{TQL 1–5}
+  \item \textbf{+} Klare Artefakte: TOR, TQP, TOP, Tests/Analysen, TAS
+  \item \textbf{–} Kein KI-/Datenfokus; Scope auf Tool \& beabsichtigten Einsatz beschränkt
+\end{itemize}
+\vspace{-4pt}\end{minipage}
+&
+Um das Bsp. verwenden zu können müssen tool-spezifische Artefakte nachgewiesen werden.\\
+
 
 \textbf{ISO 21448 (SOTIF)\parencite{iso-21448-sotif}} &
 Sicherheit der beabsichtigten Funktion; Fokus auf Wahrnehmungs-/Szenario-Lücken. &
@@ -1153,46 +1176,60 @@ Die Norm erfordert bei diesen Punkten oft projektspezifische Präzisierungen
 (z.\,B.\ operative Erklärbarkeit, radarspezifische Edge-Case-Policies), 
 um den prinzipienbasierten Rahmen der Norm in konkrete Nachweise zu überführen.
 
-
-
-\section{Fokussierte Bewertung für das Beispiel \emph{Random Forest} (Wetterphänomenerkennung mit Bordradar)}
-
-\subsection{Bewertungsrahmen (knapp)}
-\textbf{Scope:} Assistierende/L1–L2-ähnliche Funktion zur Klassifikation von Wetterphänomenen (Warn-/Hinweischarakter).\\
-\textbf{Annahmen:} ODD sauber definiert (Wetterregime, Sensor-/Modusgrenzen), offline trainiertes \& eingefrorenes Modell,
-zeit-/raumgetrennte Splits, ausreichende ODD-repräsentative Daten, deterministische Laufzeit im Budget, konservative Degradationsregeln.
-
-\subsection{Kurzurteil}
-Unter den obigen Annahmen ist die Absicherung des Random-Forest-Beispiels \textbf{gut erreichbar} und
-\textbf{anschlussfähig zu ISO/PAS~8800}: ODD-Disziplin, Datenlebenszyklus, V\&V und Betriebsmaßnahmen sind inhaltlich abbildbar.
-Blockierende Lücken ergeben sich nicht; verbleibende Punkte sind projektspezifisch präzisierbar.
-
-\subsection{Begründung in 5 Punkten}
-\begin{enumerate}
-  \item \textbf{ODD \& konservatives Verhalten:} Für Radar-ODD (z.\,B.\ Reichweite/Scan-Modus/Wetterzellen) ist ein klarer
-  Abstain/Degrade-Pfad definierbar; das passt direkt zu den Luftfahrt-Forderungen und ISO-Kap.~9/12/14.
-  \item \textbf{Daten \& Repräsentativität:} Ein RF profitiert von explizit ODD-abgeleiteten Datenschnitten
-  (Region×Saison×Tageszeit×Modus); der ISO-Dataset-Lifecycle (Kap.~11) trägt die Nachweise.
-  \item \textbf{V\&V \& Generalisierung:} Imbalance-taugliche Metriken (z.\,B.\ PR-AUC, Recall@Precision) und
-  zeit-/raumgetrennte Splits sind für RF praktikabel und normkonform (Kap.~9/12).
-  \item \textbf{Robustheit/Edge-Cases:} RF erlaubt explizite Policies für Shadow/Attenuation/Clutter (als \emph{Unknown}/Warnung).
-  Testszenarien lassen sich aus einem projektspezifischen Edge-Case-Katalog ableiten (ISO fordert Behandlung, Ausgestaltung projektseitig).
-  \item \textbf{Betrieb \& Monitoring:} Logging/Drift-Indikatoren (z.\,B.\ Score-Verteilungen, Fehlerschwerpunkte) sind
-  mit RF leicht implementierbar; Re-Bewertung/Re-Freigabe folgt ISO-Kap.~14.
-\end{enumerate}
-
-\subsection{Gezielte Restarbeiten (knapp, projektspezifisch)}
+\section{Kritische Punkte}
+Aus der Luftfahrt werden folgenden Punkte gefordert um es überhaupt in betracht ziehen zu können zugelassen zu werden:
 \begin{itemize}
-  \item \textbf{Operative Erklärbarkeit:} RF-Feature-Beiträge (Permutation/SHAP) in HMI-Hinweise übersetzen
-  (Konfidenz, Grund der Warnung, empfohlene Reaktion).
-  \item \textbf{Runtime-Indikatoren:} Zwei, drei messbare Monitorsignale festlegen (z.\,B.\ OOD-Score, Kalibrations-Drift, Shadow-Flag-Rate)
-  und konservative Trigger definieren.
-  \item \textbf{Edge-Case-Policy:} Radar-spezifische Taxonomie (Shadow, Bodenclutter, Eiskristalle …) festhalten;
-  Umgang (\emph{Unknown}/Warnung/Degradation) verbindlich regeln.
+  \item AI Level 1 oder 2: Ja; da es unterstüzend in der Entwicklung eingesetzt werden soll, daher Lv1
+  \item Kein Reinforcement Learning: Ja
+  \item Kein Online Lernen: Ja; da es in der Entwicklung verwendet werden soll und daher keinen direkten Einfluss auf im Betrieb hat
+  \item Maximal DAL C: Ja; eine Wetterklassifikation würde zwar in den Bereich DAL B fallen, aber eine unterstützende Wirkung ohne direkten Einfluss auf den Betrieb kann in den Bereich DAL D betrachtet werden. Da höchstens der Aufwand zum Nachweiß der gefundenen Muster steigen kann.
+  \item Mindestens 10e(-5) Fehlerquote: Ja; liegt erfahrungs gemäß in einem realistischen Rahmen
+  \item Kein Assurance Rabatt: Ja; wenn man jede gefundene Erkenntnis bzw. Muster nachweisen und mit klassischen Methoden beweisen muss. Somit geht jede jede Erkenntnis den gesammten bereits existierenden Nachweißweg.
 \end{itemize}
 
-\subsection{Schlussfolgerung}
-Für die gewählte, assistierende Wetterklassifikation mit Random Forest ist die \emph{normkonforme, auditierbare}
-Absicherung \textbf{mit heutigem Stand} plausibel: Die Kernanforderungen der Luftfahrt sind in der ISO/PAS~8800 ausreichend
-hinterlegt; der verbleibende Aufwand liegt in der \emph{projektspezifischen} Präzisierung von HMI/Erklärbarkeit,
-Runtime-Monitoren und der Edge-Case-Taxonomie.
+\section{Untersuchung der Punkte}
+Im folgenden werden die nicht vollständig abgedeckten Punkte untersucht und gegebenfalls mit 
+den klassischen Beispiel des Titanikdatensatzes erfahrungsgemäß begründet. 
+
+
+\subsection{Teilweise abgedeckte Punkte}
+\begin{itemize}
+  \item R-KI-02: möglich; *
+  \item R-KI-03: möglich; *
+  \item R-KI-04: wenig problematisch; wurde anhand des Titanikdatensatz Beispiel verdeutlicht.
+  \item R-KI-05: wenig problematisch; ist möglich und hat wenig mit dem Modell selbst zu tun, sondern mehr mit der Arbeitsweise.
+  \item R-KI-06: möglich; *; wird z.B. über separate Labels ermöglicht.
+  \item R-KI-07: wenig problematisch; kalibrieren kann man z.B. mittels Hyperparametern. Unsichere Bereiche markieren kann mittels 
+    Label gemacht werden *. Primär fällt diese Anforderung nicht in diesen Bereich der Entwicklung. 
+    (Die endgültige Entscheidungslogik ist von diesem Einsatzzweck getrennt.)
+  \item R-KI-08: möglich; *; wird z.B. über separate Labels ermöglicht.
+  \item R-KI-09: möglich; *; wird z.B. über separate Labels ermöglicht.
+  \item R-KI-10: wenig problematisch; wurde anhand des Titanikdatensatz Beispiel verdeutlicht. Mittels Graphiken können die 
+    für den Output relevantesten Labels angezeigt werde.
+  \item R-KI-11: wenig problematisch; ist möglich und hat wenig mit dem Modell selbst zu tun. Für die konkreten Umsetzung 
+    gilt eine analoge Erklärung zu *.
+  \item R-KI-12: voll erfüllbar; Die in der Entwicklung gewonnen Erkenntnisse werden in eine klassische Sofware übernommen, 
+    die diese Anforderung erfüllt.
+  \item R-KI-13: wenig problematisch; wenn allgemeingültige Erkenntnisse gewonnen und nachgewießen wurden stellt 
+    dieser Punkt kein Problem dar. Wenn es sich um neue Erkenntnisse handelt, die Drift unterliegen können, müssen Updates 
+    und weiteres eingeplant werden. Wenn man die Erkenntnisse klassisch nachgewießen wurden, können hierfür klassische 
+    Anforderungen verwendet werden.
+\end{itemize}
+
+(*): Über die Daten und Labelabhängigkeit und wie es möglich ist das für dieses Beispiel 
+umzusetzen, wird in dieser Arbeit keine konkrete Meinung geäußert, da dies den Umfang dieser Arbeit überschreitet. 
+Anzumerken ist, dass es Methoden dafür gibt aber stehts Projektabhängig ist. Daher sind diese Punkte in der Norm 
+beschrieben aber nicht genauer festgehalten und müssen geprüft werden. Das es möglich ist wurde unteranderem 
+in dem Kapitel Forschung und Praxis verdeutlicht.
+
+\section{Fazit}
+Wie in der Abdeckung zu erkennen sind alle definierten Anforderungen mindestens teilweise abgedeckt. 
+Auch die teilweise abgedeckten Punkte sind nach genauerer Betrachtung erfahrungsgemäß für dieses 
+Beispiel meist wenig problematisch zu erfüllen. Die übrigen Punkte, die als teilweise abgedeckt 
+und möglich markiert sind, sind für dieses Beispiel spezifisch nachzuweisen. Diese Nachweiße 
+überschreiten den Umfang dieser Arbeit. Best Practise Methoden z.B. für den Umgang mit Daten 
+und Labels oder den Umgang mit Hyperparametern sind in der ISO 8800 vorhanden. Da Random 
+Forest eine für längere Zeit etablierte Methode ist und daher viel Literatur, Wissen und 
+Erfahrung vorhanden sind. Sind diese Punkte als realistisch erfüllbar einzustufen. 
+Weiter sind die kritischen Punkte der Luftfahrt erfüllt und somit eine Zulassung für 
+dieses Beispiel durchaus möglich.
