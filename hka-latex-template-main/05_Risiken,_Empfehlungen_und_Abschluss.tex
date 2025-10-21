@@ -6,235 +6,103 @@
 % -------------------------
 \chapter{Sicherheitslücken und Risiken}\label{chap:risiken}
 
-Dieses Kapitel konsolidiert die in der Coverage-Analyse (Kap.~\ref{chap:coverage}) identifizierten Lücken
-und leitet daraus priorisierte Risiken ab. Die Einordnung folgt dem Meta-Ansatz dieser Arbeit:
-Bewertet wird nicht die Wirksamkeit einzelner Techniken, sondern ob die \emph{geforderten Ansätze}
-(Anforderungsfelder in Kap.~\ref{chap:anforderungen}) ausreichend abgedeckt sind, um Vertrauen zu stiften.
-
-
-
-
-
-
-%--------------------------------------------------------------------
-%komplett unsauber
-%--------------------------------------------------------------------
-
+Dieses Kapitel bündelt \emph{allgemeine} Limitierungen, Risiken und potenzielle Lücken beim 
+Einsatz von KI in sicherheitskritischen Kontexten. Die Darstellung beruht auf der in dieser 
+Arbeit ausgewerteten Fachliteratur und behördlichen Guidance-Dokumenten, die überwiegend aus 
+dem Luftfahrtumfeld stammen, deren Aussagen hier jedoch bewusst \emph{modell- und domänenneutral} 
+verdichtet werden. Ziel ist es, wiederkehrende Risikothemen und typische Schwachstellen zu 
+identifizieren und daraus übertragbare Schlussfolgerungen für verbleibende Restrisiken abzuleiten. 
+Security-Aspekte, wirtschaftliche Erwägungen sowie die detaillierte Ausgestaltung regulatorischer 
+Zulassungsverfahren sind nicht Gegenstand dieses Abschnitts; es werden keine neuen Anforderungen 
+eingeführt, sondern bestehende Themenfelder systematisch strukturiert. Eine Zuordnung zum später 
+verwendeten Beispiel erfolgt erst im Anschluss.
 
 
 \section{Lückenanalyse: Zertifizierungsfähigkeit von KI in der Luftfahrt}
-Die Übersicht \textit{ML meets aerospace: challenges of certifying airborne AI} \parencite{ml-meets-aerospace-2024}
-hat zentrale Problemfelder für die Zertifizierbarkeit von ML herausgearbeitet. Im Folgenden werden die Punkte
-als Überlegungen und Limitationen strukturiert; die jeweils betroffenen Befunde \textbf{B1–B8}
-(Abschn.~\ref{sec:risiken-befunde}) sind zur Vermeidung von Doppelungen verlinkt.
+Die nachfolgenden Punkte stammen überwiegend aus \emph{ML meets aerospace: challenges of certifying airborne AI} \parencite{ml-meets-aerospace-2024} und bündeln die aus Sicht dieser Arbeit wichtigsten, komprimierten Herausforderungen/Limitierungen für die Zertifizierbarkeit.
 
-\subsection{Überlegungen:}
-\paragraph{(1) Geltung heutiger Prozesse für KI (Anwendbarkeit)}
-\textbf{Befund:} KI ist formal „nur“ eine Implementierungswahl, verhält sich aber probabilistisch und datenverteiltungsabhängig.  
-\textbf{Gap:} Klassische Nachweise decken „eingefrorene“ Leistungswerte ab, nicht jedoch das Verhalten auf \emph{unbekannten} Daten und unter \emph{Drift}. Der ODD-Begriff allein reicht nicht, wenn die reale Datenverteilung wandert.
-
-\paragraph{(2) Safety-Aspekte}
-\textbf{Befund:} Anforderungen können Zielwerte (z.\,B. Treffer-/Fehlerraten) vorgeben; Verifikation gelingt auf Validationsdaten.  
-\textbf{Gaps:} 
+\subsection{Überlegungen}
 \begin{itemize}
-  \item Übertragbarkeit auf \emph{unbekannte} Daten bleibt unsicher (Generalisierung/Drift).
-  \item Zwei Wege werden diskutiert: (1) wie bisher über Requirements \& Design Assurance \emph{ohne} probabilistische Systemintegration; (2) \emph{mit} expliziter Integration von Zuverlässigkeitswerten in Safety-Analysen – dafür fehlen heute belastbare Verfahren (\textbf{vgl.~B1–B4}).
-  \item „DALgebra“ (Redundanz/Monitoring \(\rightarrow\) höherer DAL) ist für ML nur eingeschränkt übertragbar: Unabhängigkeit und verlässliche Erkennung „nicht-leistender“ Kanäle sind ungeklärt.
+  \item \textbf{AI-Level \& Übersteuerbarkeit (L1/L2).}
+        Übersteuerbarkeit durch die Crew ist als Prinzip gefordert; \emph{wie} dies konkret erfolgt, ist projektspezifisch festzulegen und nachzuweisen (klare HMI-Mittel, sichtbar/greifbar; Priorisierung bei konkurrierenden Eingriffen).
+  \item \textbf{Geltung heutiger Prozesse (Anwendbarkeit).}
+        Klassische Nachweise decken „eingefrorene“ Leistung ab, nicht Verhalten auf \emph{unbekannten} Daten/bei \emph{Drift}; ODD allein genügt nicht bei wandernden Verteilungen.
+  \item \textbf{Safety-Aspekte.}
+        Unsichere Übertragbarkeit auf unbekannte Daten; unklare Einbindung probabilistischer Zuverlässigkeitsgrößen in Safety-Analysen; Redundanz/Monitoring $\rightarrow$ höherer DAL („DALgebra“) nur begrenzt übertragbar.
+  \item \textbf{System-Aspekte.}
+        Unklar, was \emph{hinreichend dissimilar} bei ML bedeutet (Daten/Architektur/Hyperparameter); \emph{Runtime Assurance} verlangt zuverlässige Fehlererkennung, Konfidenzen und OOD-Detektion.
+  \item \textbf{Software-Aspekte (DO-178C-Logik).}
+        \emph{Zwischen-Spezifikation} via Daten/Metriken unscharf; Lücken in Traceability bis zu Datenanforderungen; Testtiefe/ML-Coverage unklar.
+  \item \textbf{Probabilistische Systeme (Analogie).}
+        Fehlende, anerkannte Verfahren für „genug“ Testen und probabilistische Leistungsargumente (inkl.\ OOD/Drift).
+  \item \textbf{Zertifizierungsprozess.}
+        „Henne–Ei“ Praxis $\leftrightarrow$ Zulassung; Standardisierungszyklen vs.\ ML-Tempo; fehlende Leitplanken für \emph{kontinuierliche Re-Zertifizierung}.
+  \item \textbf{Tool-Qualifikation (DO-330).}
+        ML-Toolchains passen schlecht in die klassische Tool-Taxonomie; „Output prüfen statt Tool qualifizieren“ skaliert bei Massendaten schlecht (ggf.\ qualifizierte Checker-Tools).
 \end{itemize}
 
-\paragraph{(3) System-Aspekte}
-\textbf{Befund:} Luftfahrtsysteme nutzen Redundanz und Dissimilarität zur Verringerung gemeinsamer Fehlerursachen.  
-\textbf{Gaps:}
+\subsection{Limitierungen}
 \begin{itemize}
-  \item \textit{Dissimilarität bei ML}: Was bedeutet „hinreichend verschieden“ bei Daten, Architektur, Hyperparametern, Initialisierung?
-  \item \textit{Runtime Assurance}: Umschalten auf einfachere Pfade ist richtig, aber \emph{Erkennung} von Fehlfunktionen, verlässliche Konfidenzen und OOD-Detektion sind weiterhin Forschungsfelder (\textbf{vgl.~B1, B2, B3}).
+  \item \textbf{Spezifikation.}
+        ML-Verhalten nur indirekt (Daten/Metriken) beschreibbar; ODD unvollständig bei Rand-/Übergangsfällen.
+  \item \textbf{Datenabhängigkeit \& Nachvollziehbarkeit.}
+        Leistung folgt den Daten (Bias/Lücken/Rauschen); komplexe Pipelines erschweren Reproduzierbarkeit/Traceability.
+  \item \textbf{Verifikation.}
+        Kein Konsens zu „ausreichendem“ Testen; formale Verfahren skalieren schlecht; XAI hilft, ersetzt aber keine Robustheits-/Generalisierungsnachweise; OOD bleibt offen.
+  \item \textbf{Safety-getriebenes Lernen.}
+        Optimierung oft auf Performance statt Sicherheit/Robustheit; unsichere Konfidenzen auf OOD; einfache, verifizierbare Fallbacks in komplexen Systemen schwer.
+  \item \textbf{Nichtdeterminismus.}
+        Variabilität durch Eingangsrauschen, Parallelhardware, Stochastik; Rest-Nichtdeterminismus ist zu begrenzen und nachzuweisen.
+  \item \textbf{Transfer Learning.}
+        Risiken (negativer Transfer, Privatsphäre, Interpretierbarkeit); fehlende Benchmarks für V\&V-Vergleichbarkeit.
+  \item \textbf{Kontinuierliche Entwicklung (MLOps).}
+        Bedarf an Regeln für Retraining-Trigger und V\&V-Tiefe vor/nach Deployment (\emph{kontinuierliche Re-Zertifizierung}).
 \end{itemize}
 
-\paragraph{(4) Software-Aspekte (DO-178C-Logik)}
-\textbf{Befund:} Klassische Ebenen (System-, High-, Low-Level-Requirements), Traceability, Coverage und DAL-skalierte Evidenz.  
-\textbf{Gaps:}
+\paragraph{Abschluss.}
+Die vorstehend gebündelten Herausforderungen ziehen sich über den gesamten ML‐Lebenszyklus. 
+Die ISO/PAS~8800 adressiert \emph{alle} genannten Themenbereiche; für eine zulassungsfähige 
+Argumentation bleibt jedoch die projektspezifische Ausgestaltung entscheidend.
+
+\section{Beispielbezogene Herausforderungen, Limitierungen und Risiken (RF \& Radar/Wetter)}
+
 \begin{itemize}
-  \item \textit{Spezifikation}: ML-Verhalten wird \emph{indirekt} über Daten/Metriken beschrieben – wie wird diese „Zwischen-Spezifikation“ standardkonform geführt?
-  \item \textit{Traceability}: Vom High-Level-Requirement bis hinunter zu \emph{Datenanforderungen}, Datensätzen und Metriken – Lücke zwischen Spezifikation und tatsächlichem Modellverhalten.
-  \item \textit{Verifikation}: Nominal/off-nominal Testdateneigenschaften, Robustheit/Generalisierung – \emph{ausreichende Testtiefe} und \emph{Coverage-Maße} für ML sind offen (\textbf{vgl.~B5–B7}).
+  \item \textbf{ODD \& Datenraum}
+    \begin{itemize}
+      \item Abdeckung relevanter ODD-Kombinationen (Region $\times$ Jahreszeit $\times$ Flughöhe/Phase $\times$ Antennen-/Scan-Modus).
+      \item Nichtstationarität/Drift (Klimatologien, Sensor-Alterung, Software-Updates) vs.\ Trainingsverteilung.
+    \end{itemize}
+
+  \item \textbf{Labeling \& Ground Truth}
+    \begin{itemize}
+      \item Unsichere/indirekte Labels (z.\,B.\ „Hazardous Weather“ aus Proxy-Quellen); begrenzte Verfügbarkeit verifizierter Wahrheiten.
+      \item Klassenungleichgewicht (starke Imbalance seltener Phänomene) und inkonsistente Label-Regeln über Datensätze.
+    \end{itemize}
+
+  \item \textbf{Feature-Engineering \& Vorverarbeitung}
+    \begin{itemize}
+      \item Wahl robuster, physikalisch plausibler Features (Intensität, Textur, Neighbourhood/3D-Kontext).
+      \item Sensitivität gegenüber Filterung, Normalisierung, Mosaikierung und Qualitätskontrollen (QC).
+    \end{itemize}
+
+  \item \textbf{Betrieb \& Monitoring}
+    \begin{itemize}
+      \item Laufzeit-Indikatoren für Drift/OOD und Regeln für konservatives Verhalten (\emph{Abstain/Degrade}).
+      \item Logging/Recording für Vorfallanalyse und kontrollierte Modell-Updates (kein Online-Lernen).
+    \item \end{itemize}
+
+  \item \textbf{Human Factors (bei Onboard-Anzeige)}
+    \begin{itemize}
+      \item Nutzeradäquate Darstellung (Konfidenz/Qualität), Vermeidung von Over-/Under-Trust.
+      \item Klare Übersteuerbarkeit und Priorisierung bei konkurrierenden Hinweisen/Warnungen.
+    \end{itemize}
+
+  \item \textbf{Toolkette (als Entwicklungswerkzeug)}
+    \begin{itemize}
+      \item Umgang mit Massendaten, Versionierung von Daten/Features/Labels; ggf.\ Toolqualifikation (DO-330) statt DAL.
+      \item Verwendete Werkzeuge zum Trainieren oder Testen müssen auch qualifiziert sein.
+    \end{itemize}
 \end{itemize}
-
-\paragraph{(5) Probabilistische Systeme (Analogie)}
-\textbf{Befund:} GPS/ILS zeigen, wie probabilistische Leistungsanforderungen regulativ handhabbar sind (Schwellen, Tests, Konfidenzen).  
-\textbf{Gap:} Vergleichbare, anerkannte Verfahren fehlen für ML: Wann ist Testen „genug“, und wie wird probabilistische Leistung sicher argumentiert (inkl. OOD/Drift) (\textbf{vgl.~B1–B4})?
-
-\paragraph{(6) Zertifizierungsprozess}
-\textbf{Befund:} Behörden geben Regeln vor; akzeptierte \emph{Means of Compliance} kommen aus Konsensstandards.  
-\textbf{Gaps:}
-\begin{itemize}
-  \item „Henne-Ei“: Reife Praxis entsteht erst im Betrieb, Flugbetrieb setzt aber Zulassung voraus.
-  \item Standardisierungszyklen vs.\ ML-Innovationsgeschwindigkeit: Risiko der Obsoleszenz.
-  \item Kontinuierliche Updates sind für ML essenziell, triggern aber (heute) Änderung/Zertifizierung – Guidance für \emph{kontinuierliche Re-Zertifizierung} fehlt (\textbf{vgl.~B8}).
-\end{itemize}
-
-\paragraph{(7) Tool-Qualifikation (DO-330)}
-\textbf{Befund:} TQL 1–5 je nach Toolkriterium und Ziel-DAL; Qualifikation nötig, wenn Prozesse ersetzt/reduziert werden.  
-\textbf{Gaps:}
-\begin{itemize}
-  \item ML-Toolchains (Datenmanagement, Training, Konvertierung, Deployment, OOD-Checks) sprengen die klassische Tool-Taxonomie.
-  \item „Output verifizieren statt Tool qualifizieren“ wird bei \emph{Massendaten} praktisch schwierig; führt ggf. zu Bedarf an \emph{Checker-Tools} (die selbst qualifiziert werden müssten) (\textbf{vgl.~B6}).
-\end{itemize}
-
-\paragraph{Kurzfazit.}
-Aktuelle Luftfahrtstandards tragen die Grundidee von Assurance, stoßen bei ML aber an Grenzen: fehlende, anerkannte Verfahren für Generalisierung/Drift, Dissimilarität, ML-Coverage, probabilistische Leistungsnachweise, fortlaufende Updates und Tool-Einordnung (\textbf{vgl.~B1–B8}).
-
-\subsection{Limitierungen:}
-Neben regulatorischen Lücken bestehen technologische Grenzen, die derzeit verhindern, System-Safety vollumfänglich zu garantieren. Die wichtigsten Punkte:
-
-\paragraph{(1) Spezifikation.}
-ML-Verhalten wird nur indirekt über Daten, Metriken und Lernverfahren beschrieben. ODD-Definitionen stoßen an Grenzen (Vollständigkeit, Terminologie, Annahmen, Edge-Cases); Off-Nominal-Bedingungen sind schwer abzudecken. Operativ Daten können Spezifikationen nachschärfen, lösen aber selten Randfall-Probleme.
-
-\paragraph{(2) Datenabhängigkeit \& Nachvollziehbarkeit.}
-Leistung spiegelt Trainingsdaten (Bias, Lücken, Rauschen). Repräsentativität ist schwer sicherzustellen. Komplexe Pipelines (Preprocessing, Training, Konvertierung, Deployment) erschweren Traceability und Reproduzierbarkeit.
-
-\paragraph{(3) Verifikation.}
-Es fehlt ein allgemein akzeptiertes Maß für „ausreichendes Testen“. Formale Verfahren sind architektur-/aktivierungsabhängig und skaliert schwer. Struktur-Analogien (z.\,B. Neuron-Coverage) taugen nicht als SW-Coverage-Ersatz. XAI (lokal/global) hilft beim Verstehen/Debuggen, ersetzt aber keine belastbaren Test- und Robustheitsnachweise; Generalisierung und OoD bleiben offene Baustellen.
-
-\paragraph{(4) Safety-getriebenes Lernen.}
-Training optimiert meist Performance statt Sicherheit/Robustheit. Konfidenzwerte sind auf OOD-Daten unzuverlässig. Runtime-Assurance erfordert messbare Sicherheitskriterien und einfache, verifizierbare Fallback-Funktionen – bei komplexen Systemen schwer umzusetzen.
-
-\paragraph{(5) Nichtdeterminismus.}
-Variabilität entsteht durch Eingangsrauschen (Inference), parallelisierte Hardware (GPU/Multicore) und Trainingsstochasticität (Seeds, Shuffling). Erforderlich sind Monitoring/Logging, Sensitivitäts- und Robustheitsanalysen sowie Nachweise, dass Rest-Nichtdeterminismus vorhersehbar und akzeptabel begrenzt ist.
-
-\paragraph{(6) Transfer Learning \& COTS.}
-Transfer Learning reduziert Datenbedarf/Trainingszeit, birgt aber Risiken (negativer Transfer, Privatsphäre, Interpretierbarkeit). Fehlende Benchmarks behindern Vergleichbarkeit von Verifikationsmethoden. Für COTS-Modelle ist der bidirektionale Informationsfluss (Trainingsannahmen \(\leftrightarrow\) ODD) ungeklärt; unklar ist auch, wie nah der Prozess an klassischer Software-Integration liegt.
-
-\paragraph{(7) Kontinuierliche Entwicklung (MLOps).}
-ML benötigt laufendes Monitoring, Drift-Erkennung und kontrollierte Updates. Punktuelle Zertifizierungen passen schlecht zu häufigen Modelländerungen. Es fehlen klare Regeln, \emph{wann} retrainiert werden muss und \emph{welche} V\&V-Tiefe vor/nach Deployment erforderlich ist (Stichwort: kontinuierliche Re-Zertifizierung).
-
-\paragraph{Kurzfazit.}
-Ohne belastbare Verfahren für Spezifikation, Generalisierung/OOD, ML-Coverage, UQ, Runtime-Assurance, Traceability über die gesamte Pipeline und praktikable Re-Zertifizierungsprozesse bleibt „sicher genug“ für KI in der Luftfahrt eine offene Forschungs- und Standardisierungsaufgabe.
-
-
-
-
-
-
-%-----------------------------------------------------------------------
-%------------------------------------------------------------------------
-%----------------------------------------------------------------------
-
-
-
-
-\begin{comment}
-
-
-\section{Konsolidierte Befunde}\label{sec:risiken-befunde}
-Die wichtigsten, kapitelübergreifend konsistenten Befunde lassen sich entlang der Anforderungsfelder bündeln:
-
-\begin{enumerate}[label=\textbf{B\arabic*}]
-  \item \textbf{Robustheit \& Verteilungssprünge (kritisch).}%
-    \label{befund:robustheit}
-    Systematische Stress-/Shift-Tests (RFI/Clutter/Noise, Domänen-Holdouts) sind häufig unvollständig; akzeptierte
-    Degradationskurven und Worst-Case-Kriterien fehlen (vgl.\ Matrix: \emph{Robustheit \& Verteilungssprünge}, \score{1}).
-
-  \item \textbf{Monitoring \& Degradation im Betrieb (kritisch).}%
-    \label{befund:monitoring}
-    Laufzeitmetriken, Drift-/OOD-Erkennung sowie definierte Fallback-/Degradationspfade sind nur rudimentär etabliert
-    (vgl.\ \emph{Monitoring/Degradation}, \score{1}). Dies betrifft insbesondere Inline-Funktionen.
-
-  \item \textbf{Segmentierte Kalibrierung \& Unsicherheitsreporting (hoch).}%
-    \label{befund:kalibrierung}
-    Konfidenzmetriken bestehen, jedoch nicht konsistent \emph{je ODD-Segment} mit dokumentierten Schwellen/Abstain-Regeln
-    (vgl.\ \emph{Konfidenzkalibrierung \& Unsicherheit}, \score{2}).
-
-  \item \textbf{ODD-/Szenarioabdeckung (hoch).}%
-    \label{befund:odd}
-    ODD-Schnitte sind definiert, aber das \emph{einheitliche} Unsicherheits-Reporting pro Segment und die Handhabung von
-    Unknown/Abstain sind uneinheitlich (vgl.\ \emph{ODD-/Szenarioabdeckung}, \score{2}).
-
-  \item \textbf{Daten-/Label-Governance \& Traceability (mittel).}%
-    \label{befund:governance}
-    Prozesse sind vorhanden, variieren aber in Tiefe/Strenge (IAA, versionierte/signierte Datenstände, lückenlose Links
-    Daten$\leftrightarrow$Modell) (vgl.\ \emph{Daten-/Label-Governance}, \score{2}; \emph{Traceability}, \score{2}).
-
-  \item \textbf{Toolchain-Assurance \& Qualifizierung (mittel).}%
-    \label{befund:toolchain}
-    Reproduzierbarkeit/Lockfiles/Signaturen sind zunehmend Standard, formale Toolqualifizierungen (wo relevant) sind
-    nicht durchgängig bewertet (vgl.\ \emph{Toolchain-Assurance}, \score{2}).
-
-  \item \textbf{XAI \& Auditierbarkeit (mittel).}%
-    \label{befund:xai}
-    XAI wird heterogen eingesetzt; Reproduzierbarkeit und auditierbare Ablage sind nicht konsistent geregelt
-    (vgl.\ \emph{XAI \& Auditierbarkeit}, \score{2}).
-
-  \item \textbf{Änderungs-/Freigabeprozesse (mittel).}%
-    \label{befund:change}
-    Trigger für Re-Training, Regression-Scope und Safety-Case-Updates sind nicht überall verbindlich definiert
-    (vgl.\ \emph{Änderungen/Freigabe}, \score{2}).
-\end{enumerate}
-
-\paragraph*{Frontloading vs.\ Inline.}
-Die Befunde \ref{befund:governance}–\ref{befund:toolchain} sind im Frontloading tendenziell besser adressierbar
-(Repro, Auditierbarkeit, Evidenzketten). Kritische Lücken liegen vorrangig in \ref{befund:robustheit} und \ref{befund:monitoring}
-(betriebsnah, Inline-bezogen).
-\section{Priorisierung}\label{sec:risiken-prio}
-Für die Priorisierung wird ein einfacher, transparent nachvollziehbarer Rubrik-Score verwendet:
-\[
-\text{Priorität} = \text{Auswirkung} \times \text{Eintrittswahrscheinlichkeit},
-\]
-wobei beide Faktoren auf einer 1–3-Skala bewertet werden (\emph{1=niedrig, 2=mittel, 3=hoch}).
-Die resultierende Priorität wird zusätzlich als Ampel visualisiert (\score{1}–\score{3}).
-
-\begin{table}[h]
-\centering
-\caption{Risikopriorisierung (Auswirkung $\times$ Eintrittswahrscheinlichkeit) und empfohlene Maßnahmen}
-\begin{tabular}{p{0.28\textwidth} p{0.07\textwidth} p{0.14\textwidth} p{0.10\textwidth} p{0.33\textwidth}}
-\toprule
-\textbf{Risiko (Kurzbezug)} & \textbf{Ref.} & \textbf{Auswirkung} & \textbf{Priorität} & \textbf{Empfohlene Maßnahmen (Verweis)} \\
-\midrule
-Robustheit: unzureichende Shift-/Stresstests (inkl.\ RFI/Clutter) & B1 & 3 & \score{3} &
-Testbatterie standardisieren (Worst-Case, Störarten-Katalog, Degradationskurven); Akzeptanzkriterien festlegen. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-Betrieb: fehlende Telemetrie/Degradationspfade (Inline) & B2 & 3 & \score{3} &
-Monitoring-Playbook (Metrik-Set, OOD/Drift-Tracker), Alarmierungslogik, getestete Fallbacks/HMI-Richtlinien. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-Kalibrierung: nicht segmentiertes Unsicherheitsreporting & B3 & 2 & \score{2} &
-Segmentierte Kalibrierung (ECE/Brier/NLL je ODD), CI/Bootstrap, dokumentierte Thresholds/Abstain-Regeln. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-ODD: uneinheitliche Unknown/Abstain-Kriterien & B4 & 2 & \score{2} &
-Verbindliches ODD-Template; Pflichtmetriken je Segment; Unknown/Abstain-Policy. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-Governance/Traceability: IAA/Versionierung/Links lückenhaft & B5 & 2 & \score{2} &
-Datasheets/Model Cards; IAA-Ziele; signierte Datenstände; Traceability-Matrix \& Artefakt-IDs in CI. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-Toolchain: fehlende TQL-Bewertungen (wo relevant) & B6 & 2 & \score{2} &
-TQL-Entscheidungsmatrix; deterministische Builds; Lockfiles/Signaturen; CI/CD-Gates. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-XAI/Auditierbarkeit: heterogene Praxis \& Repro-Defizite & B7 & 1--2 & \score{2} &
-XAI-Playbook; Seed/Env-Fixierung; Audit-Pipeline; Ablage im Safety Case. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\midrule
-Change/Freigabe: uneinheitliche Trigger/Regression & B8 & 1--2 & \score{2} &
-Fixe Trigger (Daten-/Shift-/Performance-Delta); definierter Regression-Scope; Safety-Case-Update. $\rightarrow$ Kap.~\ref{chap:empfehlungen} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph*{Hinweise zur Anwendung.}
-\begin{itemize}
-  \item \emph{Auswirkung} bezieht sich auf potenzielle Sicherheitsrelevanz (z.\,B.\ Fehlklassifikationen ohne sichere Degradation).
-  \item \emph{Eintrittswahrscheinlichkeit} ist als heutige Praxisnähe/Bekanntheit der Lücke zu lesen (keine statistische Häufigkeit).
-  \item Die Prioritäten bilden die Grundlage für Kap.~\ref{chap:empfehlungen} und die Reihenfolge der Maßnahmen (kurz/mittel/langfristig).
-\end{itemize}
-\end{comment}
-
-
-\section{Brücke zu Empfehlungen}\label{sec:risiken-bruecke}
-Die priorisierten Risiken \ref{befund:robustheit}–\ref{befund:change} werden in Kapitel~\ref{chap:empfehlungen}
-durch Maßnahmenpakete adressiert (kurz-/mittel-/langfristig). Schwerpunkte: (i) Robustheits-/Shift-Evidenzen standardisieren,
-(ii) Betriebsleitplanken für Monitoring/Degradation, (iii) konsistente Evidenzformate (Kalibrierung, Governance, Traceability).
-
-
-
-
-
-
 
 
 
@@ -243,43 +111,6 @@ durch Maßnahmenpakete adressiert (kurz-/mittel-/langfristig). Schwerpunkte: (i)
 % -------------------------
 \chapter{Empfehlungen zur Anwendung}\label{chap:empfehlungen}
 
-Die folgenden Empfehlungen leiten sich aus der Coverage-Analyse (Kap.~\ref{chap:coverage}) und der Priorisierung der
-Sicherheitslücken (Kap.~\ref{chap:risiken}) ab. Sie priorisieren Maßnahmen nach Umsetzbarkeit und Wirkung, ohne eine
-Zulassungsbewertung vorwegzunehmen.
-
-\section{Kurzfristige Maßnahmen (prozess- und evidenznah)}\label{sec:empfehlungen-kurzfristig}
-\begin{itemize}
-  \item \textbf{Verbindliche ODD-Templates} (\textit{B4}): ODD-Grenzen, Annahmen und segmentierte Reportingachsen
-  (z.\,B.\ SNR/Entfernung/Wetter/Clutter) standardisieren; Unknown/Abstain-Policy festlegen; Pflichtmetriken pro Segment (Pd/Pfa, ECE/Brier, NLL).
-  \item \textbf{Segmentierte Kalibrierung} (\textit{B3}): Kalibrierungsberichte je ODD-Segment inkl.\ Konfidenzintervallen (CI/Bootstrap);
-  dokumentierte Schwellen und Freigaberegeln.
-  \item \textbf{Daten-/Label-Governance stärken} (\textit{B5}): Datasheets/Model Cards, Label-Guidelines mit IAA-Zielen;
-  versionierte und signierte Datenstände; Freigabe-Checklisten.
-  \item \textbf{Toolchain-Assurance in CI/CD} (\textit{B6}): deterministische Builds, Lockfiles, Artefakt-Signaturen;
-  TQL-Entscheidungsmatrix für kritische Tools; verbindliche Artefakt-IDs.
-  \item \textbf{Traceability durchgängig machen} (\textit{B5}): End-to-end-Verknüpfungen Anforderung$\rightarrow$Daten$\rightarrow$Modell$\rightarrow$Tests$\rightarrow$Release;
-  Pflicht-Change-Logs und Review-Gates.
-  \item \textbf{XAI-Audit-Praxis standardisieren} (\textit{B7}): XAI-Playbook (zweckgebundene Methoden); Seeds/Umgebungen fixieren;
-  reproduzierbare Notebooks/Skripte im Safety Case ablegen.
-\end{itemize}
-
-\section{Mittelfristige Entwicklungspfade (Robustheit \& Betrieb)}\label{sec:empfehlungen-mittelfristig}
-\begin{itemize}
-  \item \textbf{Testbatterie Robustheit/Shift} (\textit{B1}): katalogisierte Stress-/Shift-Tests (inkl.\ RFI/Clutter/Noise),
-  Worst-Case-Definitionen, Degradationskurven, akzeptierte Akzeptanzkriterien; Reporting-Vorlage.
-  \item \textbf{Monitoring/Degradation-Playbook} (\textit{B2}): Telemetrie-Set (Leistung, Kalibrierung, OOD-Rate),
-  Drift-Detektoren, Alarmierungslogik, geprüfte Fallback-Pfade; HMI-Styleguide (Qualitätsflags/Konfidenz/Unknown).
-  \item \textbf{Standardisierte Evidenzpakete} (\textit{B3,B5,B7}): Formatvorlagen für Evidenz (Kalibrierung, Daten-/Toolchain-Governance,
-  XAI-Berichte) inkl.\ reproduzierbarer Notebooks, Seeds/Umgebungen und Artefakt-IDs.
-\end{itemize}
-
-\section{Langfristige Standardisierung (Harmonisierung \& Skalierung)}\label{sec:empfehlungen-langfristig}
-\begin{itemize}
-  \item \textbf{Harmonisierung von Leitlinien:} Weiterentwicklung konzeptioneller Vorgaben in Richtung konsentierter Evidenzanforderungen
-  für KI-Komponenten (z.\,B.\ akzeptierte Shift-/Robustheitsnachweise, Kalibrierungsreporting).
-  \item \textbf{Domänenübergreifende Transferformate:} kompatible Daten-/Evidenzformate zur Wiederverwendbarkeit von Frontloading-Nachweisen
-  und zur Skalierung auditierbarer Evidenzketten.
-\end{itemize}
 
 \section{Implikation}\label{sec:empfehlungen-implikation}
 Die Empfehlungen operationalisieren die \emph{geforderten Ansätze} in den Feldern ODD, Kalibrierung, Daten-/Toolchain-Governance sowie

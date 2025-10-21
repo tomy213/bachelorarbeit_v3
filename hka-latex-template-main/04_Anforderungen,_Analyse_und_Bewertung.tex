@@ -133,7 +133,8 @@ Als Wetterradar wird z.B. ein RDR-4000 verwendet, die Spezifikationen sind: \par
 \end{itemize}
 
 \subsection{Referenz (Automotive)}
-Frontradar zur abstand Messung. Toterwinkel Assistent (optional hinter quer mit dabei). Toterwinkel Quererkennung (unterschiedliche, gleicher Typ).
+Frontradar zur abstand Messung. Toterwinkel Assistent (optional hinten quer mit dabei). 
+Toterwinkel Quererkennung (unterschiedliche, gleicher Typ).
 Toterwinkel Module müssen breite Winkelabdeckung haben. Vollausstattung somit 5 Radare.\\
 Als vergleich werden Spezifikationen eines Bosch Frontradars angeschaut: \parencite{Bosch_FrontRadar_2025}
 \begin{itemize}
@@ -154,7 +155,7 @@ anstatt einer Klassifizierung zwischen Grün, Gelb und Rot zusätzlich wüsste o
 Regen oder Hagel handelt.
 
 
-\section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomene}
+\section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomäne}
 
 
 % --- Risikobadges ---
@@ -924,6 +925,71 @@ steigen die Anforderungen an die Nachweisführung.
 
 
 
+
+\section{DO-178C vs.\ DO-330: Absicht und Kernunterschiede}
+\textbf{Absicht.} \emph{DO-178C} \parencite{do-178c} definiert die
+DAL-skalierte Assurance für \emph{airborne Software} über den gesamten Lebenszyklus (Anforderungen→Design→Code→V\&V→Änderungen),
+um die sichere Funktion im Betrieb nachzuweisen. \emph{DO-330} \parencite{do-330} ergänzt dies für \emph{Werkzeuge}:
+Immer dann, wenn für Tool-Ergebnisse \emph{Credit} beansprucht wird (d.\,h.\ man verlässt sich darauf, ohne vollständige Gegenprüfung),
+fordert DO-330 eine \emph{Toolqualifikation} mit risikoproportionalem Nachweis (\emph{TQL}). Kurz: DO-178C prüft \emph{was} die
+Bordsoftware sicher leisten muss, DO-330 prüft \emph{wie} vertrauenswürdig die Werkzeuge sind, mit denen diese Nachweise entstehen.
+
+\begin{longtable}{p{0.21\linewidth}p{0.36\linewidth}p{0.38\linewidth}}
+\caption{Vergleich DO-178C vs.\ DO-330 }\label{tab:do178c-do330}\\
+\toprule
+\textbf{Aspekt} & \textbf{DO-178C (Software Assurance)} & \textbf{DO-330 (Tool Qualification)} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Aspekt} & \textbf{DO-178C (Software Assurance)} & \textbf{DO-330 (Tool Qualification)} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+
+Geltungsbereich &
+Airborne-Software (Teil des freizugebenden Systems); vollständiger SW-Lifecycle. &
+Entwicklungs-/Verifikationswerkzeuge im Engineering-Prozess; nur für den beanspruchten Einsatz. \\[4pt]
+
+Auslöser / Pflicht &
+Immer für Bordsoftware (DAL A–E, hazardbasiert). &
+Nur wenn Tool-Ergebnisse als \emph{Credit} genutzt werden; sonst kein TQL nötig (Ergebnis anderweitig verifizieren). \\[4pt]
+
+Skalierung &
+\textbf{DAL A–E}: bestimmt Strenge von V\&V, Unabhängigkeit, Coverage etc. &
+\textbf{TQL 1–5}: bestimmt Tiefe der Toolqualifikation (abhängig von Tool-Art, Credit, Ziel-DAL der SW). \\[4pt]
+
+Nachweisziel &
+Sichere, korrekte Funktion der \emph{Software im Betrieb}. &
+Korrektes, reproduzierbares \emph{Werkzeugverhalten} im spezifizierten Einsatz (keine unentdeckten Fehler). \\[4pt]
+
+Kernartefakte (typisch) &
+High-/Low-Level Requirements, Design, Code-Standards, Reviews/Tests, Coverage, Problem Reporting. &
+TOR (Tool Operational Requirements), TQP (Tool Qualification Plan), TOP (Tool Operational Procedures),
+TQ-Tests/Analysen, TAS (Tool Accomplishment Summary). \\[4pt]
+
+Unabhängigkeit &
+Vorgegeben je DAL (Reviews/Tests unabhängig). &
+Erforderlich, wenn Toolfehler Nachweise verfälschen könnten; proportional zum TQL/Credit. \\[4pt]
+
+Konzept „Credit“ &
+Nicht anwendbar (es ist das zu zertifizierende Produkt). &
+Zentral: Je mehr Nachweis-Credit, desto höher der TQL und der Qualifikationsaufwand. \\[4pt]
+
+Umgang ohne Qualifikation &
+— &
+Kein Credit beanspruchen und Tool-Outputs vollständig gegentesten/reviewen („Confidence in Use“ dokumentieren). \\[4pt]
+
+Beispiele &
+Bord-Radar-Software, Anzeigenlogik, Safety-Monitore. &
+Code-Generator, Testframework, Datenlabeling-/Auswertetool mit Nachweis-Credit. \\[4pt]
+
+\end{longtable}
+
+\noindent\textit{Implikation für diese Arbeit.} Läuft der Random Forest \emph{onboard} als Funktion, gilt DO-178C (inkl.\ DAL-Skalierung).
+Wird er \emph{als Entwicklungs-/Verifikationswerkzeug} genutzt und seine Ergebnisse fließen \emph{ohne vollständige Gegenprüfung} in Nachweise ein,
+ist DO-330 (TQL-basiert) anzuwenden. Ohne Credit genügt eine dokumentierte \emph{Confidence in Use} (Versionierung, Reproduzierbarkeit, Limits).
+
 %----------------------------------------------------
 %----------------------------------------------------
 
@@ -1176,60 +1242,106 @@ Die Norm erfordert bei diesen Punkten oft projektspezifische Präzisierungen
 (z.\,B.\ operative Erklärbarkeit, radarspezifische Edge-Case-Policies), 
 um den prinzipienbasierten Rahmen der Norm in konkrete Nachweise zu überführen.
 
-\section{Kritische Punkte}
-Aus der Luftfahrt werden folgenden Punkte gefordert um es überhaupt in betracht ziehen zu können zugelassen zu werden:
+
+\section{Kritische Punkte (harte „Gatekeeper“)}
+Die folgenden Punkte sind \emph{Mindestvoraussetzungen}, damit die Funktion grundsätzlich für eine Zulassung
+als Bordfunktion in Betracht kommt. Sie adressieren den Onboard-Einsatz; ein reiner Entwicklungsbetrieb
+(ohne Bordfunktion) fällt nicht darunter.
+
 \begin{itemize}
-  \item AI Level 1 oder 2: Ja; da es unterstüzend in der Entwicklung eingesetzt werden soll, daher Lv1
-  \item Kein Reinforcement Learning: Ja
-  \item Kein Online Lernen: Ja; da es in der Entwicklung verwendet werden soll und daher keinen direkten Einfluss auf im Betrieb hat
-  \item Maximal DAL C: Ja; eine Wetterklassifikation würde zwar in den Bereich DAL B fallen, aber eine unterstützende Wirkung ohne direkten Einfluss auf den Betrieb kann in den Bereich DAL D betrachtet werden. Da höchstens der Aufwand zum Nachweiß der gefundenen Muster steigen kann.
-  \item Mindestens 10e(-5) Fehlerquote: Ja; liegt erfahrungs gemäß in einem realistischen Rahmen
-  \item Kein Assurance Rabatt: Ja; wenn man jede gefundene Erkenntnis bzw. Muster nachweisen und mit klassischen Methoden beweisen muss. Somit geht jede jede Erkenntnis den gesammten bereits existierenden Nachweißweg.
+  \item \textbf{AI-Level \& Autorität (EASA L1/L2).}
+        \emph{L1 – Assistenz:} Wenn das Modell optional für zusätzliche Hinweise/Warnungen eingesetzt wird
+         und somimt jederzeit übersteuerbar bleibt.
+
+  \item \textbf{System-Safety-Zuordnung \& DAL (DO-178C).}
+        \emph{Pilot-Assistenz:} Entscheidung verbleibt beim Menschen
+        $\rightarrow$ typischerweise \textbf{DAL C–D}.
+        Die daraus abgeleiteten Zielgrößen/Fehlerraten sind erfahrungsgemäß \emph{realistisch} erreichbar,
+        müssen jedoch use-case-spezifisch festgelegt und nachgewiesen werden.
+
+  \item \textbf{Kein Online-Lernen im Betrieb.}
+        \emph{Eingefrorenes Modell:} Das Modell wird offline trainiert und zur Freigabe „gefroren“;
+        Laufzeitanpassungen sind ausgeschlossen. Für einen Random Forest ist dies unproblematisch umsetzbar.
+
+  \item \textbf{Kein Assurance-Rabatt.}
+        ML-Erkenntnisse ersetzen keine klassischen Nachweise: Jede abgeleitete Regel/Muster wird
+        mit etablierten Verfahren verifiziert und in den Safety Case integriert (vollständige Nachweiskette).
 \end{itemize}
+
+\noindent\emph{Vergleich:} Wird die Funktion ausschließlich als \emph{Entwicklungswerkzeug} eingesetzt (kein Bordprodukt),
+gilt statt der DAL-Logik die \emph{Toolqualifikation} nach DO-330 (TQL, Credit-basiert).
+
+
 
 \section{Untersuchung der Punkte}
-Im folgenden werden die nicht vollständig abgedeckten Punkte untersucht und gegebenfalls mit 
-den klassischen Beispiel des Titanikdatensatzes erfahrungsgemäß begründet. 
+Im Folgenden werden die nicht vollständig abgedeckten Punkte knapp bewertet (Erfüllbarkeit + kurze Begründung).
 
-
-\subsection{Teilweise abgedeckte Punkte}
+\subsection{Teilweise abgedeckte Punkte — Erfüllbarkeit}
 \begin{itemize}
-  \item R-KI-02: möglich; *
-  \item R-KI-03: möglich; *
-  \item R-KI-04: wenig problematisch; wurde anhand des Titanikdatensatz Beispiel verdeutlicht.
-  \item R-KI-05: wenig problematisch; ist möglich und hat wenig mit dem Modell selbst zu tun, sondern mehr mit der Arbeitsweise.
-  \item R-KI-06: möglich; *; wird z.B. über separate Labels ermöglicht.
-  \item R-KI-07: wenig problematisch; kalibrieren kann man z.B. mittels Hyperparametern. Unsichere Bereiche markieren kann mittels 
-    Label gemacht werden *. Primär fällt diese Anforderung nicht in diesen Bereich der Entwicklung. 
-    (Die endgültige Entscheidungslogik ist von diesem Einsatzzweck getrennt.)
-  \item R-KI-08: möglich; *; wird z.B. über separate Labels ermöglicht.
-  \item R-KI-09: möglich; *; wird z.B. über separate Labels ermöglicht.
-  \item R-KI-10: wenig problematisch; wurde anhand des Titanikdatensatz Beispiel verdeutlicht. Mittels Graphiken können die 
-    für den Output relevantesten Labels angezeigt werde.
-  \item R-KI-11: wenig problematisch; ist möglich und hat wenig mit dem Modell selbst zu tun. Für die konkreten Umsetzung 
-    gilt eine analoge Erklärung zu *.
-  \item R-KI-12: voll erfüllbar; Die in der Entwicklung gewonnen Erkenntnisse werden in eine klassische Sofware übernommen, 
-    die diese Anforderung erfüllt.
-  \item R-KI-13: wenig problematisch; wenn allgemeingültige Erkenntnisse gewonnen und nachgewießen wurden stellt 
-    dieser Punkt kein Problem dar. Wenn es sich um neue Erkenntnisse handelt, die Drift unterliegen können, müssen Updates 
-    und weiteres eingeplant werden. Wenn man die Erkenntnisse klassisch nachgewießen wurden, können hierfür klassische 
-    Anforderungen verwendet werden.
+  \item \textbf{R-KI-02 (Datenrepräsentativität):} \emph{Erfüllbarkeit: hoch.}
+      Für die L1-Assistenz genügt eine ODD-geleitete, einsatzangemessene Abdeckung; fehlende Kombinationen 
+      werden ausdrücklich als \emph{Unknown} gekennzeichnet und konservativ behandelt. 
+
+  \item \textbf{R-KI-03 (Edge-Cases sicht-/markierbar):} \emph{Erfüllbarkeit: hoch.}
+        Typische Radar-Edge-Cases (Shadow, Clutter etc.) sind fachlich bekannt und können konsistent markiert werden.
+
+  \item \textbf{R-KI-04 (Build-Reproduzierbarkeit):} \emph{Erfüllbarkeit: hoch.}
+        Random-Forest-Pipelines liefern stabil replizierbare Ergebnisse und identische Builds sind erfahrungsgemäß zuverlässig erreichbar.
+
+  \item \textbf{R-KI-05 (End-to-End-Traceability):} \emph{Erfüllbarkeit: hoch.}
+        Anforderungen, Daten/Labels, Trainingsläufe, Modelle und Testergebnisse lassen sich mit Standard-Werkzeugen 
+        durchgängig verknüpfen.
+
+  \item \textbf{R-KI-06 (Primärmetrik/Operating Point):} \emph{Erfüllbarkeit: hoch.}
+        Imbalance-taugliche Kennzahlen (z.\,B.\ Recall oder Precision) sind etabliert; 
+        der Schwellenwert kann einsatzbezogen (Crew-Workload/False-Alarm-Rate) begründet werden.
+
+  \item \textbf{R-KI-07 (Kalibrierung/Unsicherheit):} \emph{Erfüllbarkeit: mittel–hoch.}
+        Kalibrierung ist technisch gut machbar; die \emph{operative} Nutzung (z.\,B.\ Anzeige/Regeln) ist kontextabhängig.
+
+  \item \textbf{R-KI-08 (OOD-Erkennung/Reaktion):} \emph{Erfüllbarkeit: mittel–hoch.}
+        OOD-Indikatoren sind verfügbar; die konservative Reaktion ist definierbar, bleibt aber projektspezifisch.
+
+  \item \textbf{R-KI-09 (Attenuation \(\neq\) „Safe“):} \emph{Erfüllbarkeit: hoch.}
+        Schattenzonen hinter starken Echos können als \emph{Unknown} markiert werden; 
+        die konservative Behandlung ist unabhängig von der Modellgüte zulassungskonform.
+
+  \item \textbf{R-KI-10 (Feature-Evidenz):} \emph{Erfüllbarkeit: hoch.}
+        Globale/lokale Beitragsanalysen sind für RF etabliert und review-fähig.
+
+  \item \textbf{R-KI-11 (Zeit-/Raum-getrennte Tests):} \emph{Erfüllbarkeit: hoch.}
+        Zeit-/Regions-Splits sind organisatorisch gut umsetzbar und fachlich angemessen.
+
+  \item \textbf{R-KI-12 (Echtzeit/Determinismus):} \emph{Erfüllbarkeit: hoch.}
+        Die Auswertung mit Random Forest ist rechnerisch leicht; mit fest definierten Verarbeitungsschritten 
+        und Puffergrößen lassen sich die vorgesehenen Reaktionszeiten verlässlich einhalten.
+
+  \item \textbf{R-KI-13 (Monitoring/Drift):} \emph{Erfüllbarkeit: mittel–hoch.}
+        Drift-Indikatoren sind verfügbar; Schwellen und Reaktionswege sind projektbezogen festzulegen, aber realistisch.
 \end{itemize}
 
-(*): Über die Daten und Labelabhängigkeit und wie es möglich ist das für dieses Beispiel 
-umzusetzen, wird in dieser Arbeit keine konkrete Meinung geäußert, da dies den Umfang dieser Arbeit überschreitet. 
-Anzumerken ist, dass es Methoden dafür gibt aber stehts Projektabhängig ist. Daher sind diese Punkte in der Norm 
-beschrieben aber nicht genauer festgehalten und müssen geprüft werden. Das es möglich ist wurde unteranderem 
-in dem Kapitel Forschung und Praxis verdeutlicht.
+\subsection{Zwischen Fazit}
+Die nur teilweise abgedeckten Punkte gelten überwiegend als \emph{gut erfüllbar}; verbleibende Unschärfen betreffen
+vor allem projektspezifisches, nicht die grundsätzliche Machbarkeit.
 
 \section{Fazit}
-Wie in der Abdeckung zu erkennen sind alle definierten Anforderungen mindestens teilweise abgedeckt. 
-Auch die teilweise abgedeckten Punkte sind nach genauerer Betrachtung erfahrungsgemäß für dieses 
-Beispiel meist wenig problematisch zu erfüllen. Die übrigen Punkte, die als teilweise abgedeckt 
-und möglich markiert sind, sind für dieses Beispiel spezifisch nachzuweisen. Diese Nachweiße 
-überschreiten den Umfang dieser Arbeit. Best Practise Methoden z.B. für den Umgang mit Daten 
-und Labels oder den Umgang mit Hyperparametern sind in der ISO 8800 vorhanden. Da Random 
-Forest eine für längere Zeit etablierte Methode ist und daher viel Literatur, Wissen und 
-Erfahrung vorhanden sind. Sind diese Punkte als realistisch erfüllbar einzustufen. 
-Weiter sind die kritischen Punkte der Luftfahrt erfüllt und somit eine Zulassung für 
-dieses Beispiel durchaus möglich.
+Die Zuordnung zeigt: Die für den hier betrachteten Entwicklungs-Use-Case relevanten Anforderungen werden durch
+ISO/PAS~8800 \emph{mindestens teilweise} und in der Praxis \emph{gut erfüllbar} abgedeckt. Mit Blick auf eine
+spätere Bordfunktion sind die harten Gatekeeper (AI-Level/Autorität, hazardbasierte DAL-Zuordnung, ODD mit
+konservativem Verhalten, kein Online-Lernen sowie vollständige Nachweiskette) adressierbar und für eine
+\emph{L1-Assistenz} realistisch nachweisbar.
+
+Ein \emph{Random Forest} erweist sich hierfür als geeignetes Verfahren: rechnerisch leicht, deterministisch,
+erklärbar und mit etablierten Evidenzformen (Kalibrierung, OOD-Indikatoren, Feature-Evidenz). Die noch
+\emph{teilabgedeckten} Punkte (z.\,B.\ ODD\(\rightarrow\)Daten-Ableitung, Edge-Case-Policy, Operating-Point,
+Betriebs-Monitoring) sind projektspezifisch zu präzisieren, stellen jedoch keine prinzipiellen Hürden dar.
+
+\textbf{Einordnung Tool vs.\ Bordfunktion.} Wird das Modell ausschließlich als Entwicklungswerkzeug genutzt,
+genügt eine Credit-basierte Toolqualifikation (DO-330/TQL) bzw.\ eine dokumentierte \emph{Confidence in Use};
+für eine Bordfunktion greift die DO-178C-Logik mit hazardbasiertem DAL (typisch DAL~C–D bei Pilot-Assistenz)
+und denselben Evidenzbausteinen. In beiden Pfaden gilt: \emph{kein Assurance-Rabatt} — ML-Erkenntnisse sind
+klassisch zu verifizieren und in den Safety Case einzubetten.
+
+\emph{Bottom line:} Unter den definierten Einsatzgrenzen (L1, ODD, kein Online-Lernen) und mit den skizzierten
+Evidenzen ist die Übertragbarkeit \emph{ausreichend} für eine zulassungsfähige Assistenzfunktion; offene Punkte
+betreffen die projektspezifische Ausgestaltung, nicht die grundsätzliche Machbarkeit.
