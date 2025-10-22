@@ -82,7 +82,7 @@ Aus dem gewählten Modell hervorgehende Herausforderungen (die größten Schwier
 \begin{itemize}
   \item \textbf{Daten \& Labeling:} Repräsentativität über das ODD, Klassenungleichgewichte und hochdimensionale Feature-Sets erhöhen den Aufwand für sinnvolle Features/Labels.
   \item \textbf{Modellgröße:} Je nach Anzahl der Bäume, Tiefe und Feature-Anzahl typischerweise \emph{mehrere~MB bis wenige~GB}.
-  \item \textbf{Rechenbedarf:} Relativ höher als bei Kalman-Filtern oder FFT.
+  \item \textbf{Rechenbedarf:} Für Onbord relativ hoch; höher als bei Kalman-Filtern oder FFT.
 \end{itemize}
 
 \subsection{Wetterphänomen-Klassifikation}
@@ -104,35 +104,59 @@ Für einen Bord-Einsatz sind zusätzlich ODD-Grenzen, Degradationsregeln (\emph{
 % CHAPTER 13: Empfehlungen zur Anwendung
 % -------------------------
 \chapter{Empfehlungen zur Anwendung}\label{chap:empfehlungen}
+
+Die folgenden Empfehlungen verdichten die in dieser Arbeit gewonnenen Befunde aus EASA-Leitlinien,
+ISO/PAS~8800 und der beispielbezogenen Analyse zu einem \emph{pragmatischen Handlungsrahmen}.
+Ziel ist kein neues Regelwerk, sondern eine kompakte Orientierung, wie KI-Funktionen (hier: RF-gestützte
+Wetterphänomen-Klassifikation) \emph{schrittweise, nachvollziehbar und zulassungskonform} in der Praxis
+aufgesetzt werden können. Die Punkte sind bewusst \emph{tool- und domänenneutral} formuliert, knüpfen
+aber an luftfahrtspezifische Anforderungen (ODD, Human-in-the-Loop, Assurance) an. Sie richten sich
+an Projekte, die mit einem klar abgegrenzten Scope starten, Datenqualität früh adressieren, Evidenz
+systematisch aufbauen und Dokumentation als integralen Produktbestandteil verstehen. Der Katalog ist
+als \emph{Checkliste mit Prioritäten} zu lesen: erst Einsatzgrenzen und Datenbasis klären, dann
+Assurance und HMI konkretisieren, Nutzen messen und Reife schrittweise erhöhen.
+
+
+\section{Empfehlungskatalog}
+
 \begin{itemize}
-  \item das ein pilot eine einfache sprachsteuerung aller hey siri wie ist das wetter; und einer antwort 
-    mit ``in 200km besteht mit einer 80\% wk ein graupel schauer, zu 15\% starker regen und mit 5\% hagel''
-    zu bekommen wäre eine mögliche vorstellung. wenn die wetter lampe auf rot steht kann der pilot dann 
-    entscheiden wie groß der bogen um die wolken herum sein muss.
-  \item in anderen branchen wie zb automotive wurde sich ebenfalls intensiv mit der problematik auseinander 
-    gesetzt und vorgehen oder der umgang mit den adressierten herausforderungen, bedenken etc. wurden bereits definiert.
-    daran kann man sich orientieren und für die luftfahrt angepasst übertragen.
-  \item vorallem mit den daten sollte man sich jetzt schon auseinander setzen, dass wenn es soweit ist 
-    und ki in der luftfahrt einsetzen kann/darf diese auch trainieren kann (daumenregel aus der data science: 
-    80\% des aufwand sind die daten)
-  \item einzelne kleine klardefinierte schritte führen zum erfolg. ki ist sicher genug für die luftfahrt ist 
-    eine zu große aussage. aber einzelne modelle für enge einsatzzwecke sind wie man anhand dieser arbeit sehen kann 
-    nah genug dran, dass es sich lohnt diese auszuarbeiten und sie zeitnah ausreichend sicher genug nachweisen zu können.
-  \item obsoleszenz ist ein problem was man berücksichtigen muss, daher sollte man sich auf die grundlagen konzentrieren
-  \item für genaue umsetzungen kann man sich im sinne des dual use orientieren wie das in der luftfahrt aussehen kann 
-    um so konkrete und projektspezifische umsetzungen ableiten zu können
-  \item aus der analyse der iso 8800, den anforderungen, vorraussetzungen und bedenken in der luftfahrt und dass alle adressiert 
-    werden sowie konkrete umsetzungen formuliert wurden kann man sagen, dass die allgemeienen probleme so gut wie ausgeräumt sind.
-    konkrete praktische und projektspezifische umsetzungen können auch abgeleitet werden. all diese punkte zusammen genommen 
-    kann man sagen, dass für ausgewählte modelle und einsatzzwecke man ki in diesen einzelfällen als sicher genug betrachten kann 
-    und es jetzt nur noch um die umsetzung geht.
+  \item \textbf{ODD-Disziplin zuerst.}
+        Einsatzbereich eindeutig definieren (inkl.\ Übergangsregeln \emph{Abstain/Degrade}) und alle Evidenzen darauf beziehen.
+
+  \item \textbf{Frühe Data-Readiness.}
+        Repräsentativität, Label-Qualität und Imbalance aktiv managen; Datenartefakte (Bias, Lücken) dokumentieren und adressieren.
+
+  \item \textbf{Assurance-Argumentation sauber führen.}
+        Je komplexer das Thema, desto wichtiger sind nachvollziehbare, konsistente Nachweise und eine klare Begründungslinie.
+
+  \item \textbf{Human-in-the-Loop pragmatisch halten.}
+        Rollen und Eingriffsrechte eindeutig festlegen; HMI so gestalten, dass Hinweise knapp, erklärbar und übersteuerbar sind.
+        Falls projektseitig gewünscht: konkretisieren, z.\,B.\ Anforderung, dass KI-Hinweise eine Wahrscheinlichkeitsangabe (in~\%) enthalten.
+
+  \item \textbf{Scope klein halten, Nutzen klar messen.}
+        Enge, beobachtbare Use-Cases wählen; KPIs vorab definieren (z.\,B.\ Fehlalarmrate) und im Betrieb überprüfen.
+
+  \item \textbf{Wiederverwendung mit Augenmaß.}
+        Methoden/Artefakte aus anderen Domänen (z.B. Automotive und militärische Luftfahrt) übernehmen, ODD- und HMI-Spezifika der zivilen Luftfahrt jedoch explizit nachziehen.
+
+  \item \textbf{Schrittweise Reife statt „Big Bang“.}
+        Mit L1-Assistenz starten, Evidenz aufbauen, erst dann Autorität ausweiten; jede Stufe mit klaren Gate-Kriterien abschließen.
+
+  \item \textbf{Dokumentation als Produktbestandteil.}
+        Neue Themenfelder (hier: KI) haben geringe Betriebserfahrung und erfordern entsprechend ausführliche, auditfähige Dokumentation.
+
+  \item \textbf{An den Grundlagen orientieren (``take it slow'').}
+      Kernprinzipien und stabile Basistechniken (klare Anforderungen, einfache Architekturen, überprüfbare Regeln, deterministische Pfade) priorisieren; das senkt Pflegeaufwand und reduziert Obsoleszenzrisiken bei wechselnden Tools und Bibliotheken.
+
 \end{itemize}
 
-\section{Implikation}\label{sec:empfehlungen-implikation}
-Die Empfehlungen operationalisieren die \emph{geforderten Ansätze} in den Feldern ODD, Kalibrierung, Daten-/Toolchain-Governance sowie
-Robustheit \& Betrieb. Sie verringern die Lücke zwischen konzeptionellen Erwartungen und praktisch auditierbarer Evidenz und stärken die
-Grundlage für eine belastbare Einordnung der Leitfrage, ob der Einsatz von KI im luftfahrtspezifischen Kontext als \emph{hinreichend sicher}
-angesehen werden kann.
+\paragraph{Abschluss und Überleitung.}
+Der Empfehlungskatalog zielt nicht auf Geschwindigkeit, sondern auf \emph{Nachvollziehbarkeit} und \emph{Schrittfolgen}, die
+sich in der Praxis bewähren: Zuerst Einsatzgrenzen (ODD) und Datenlage stabilisieren, dann Evidenz und HMI konkretisieren,
+anschließend Autorität maßvoll erhöhen. Zwei erprobte Grundsätze aus der Data Science bleiben leitend: (i) \emph{80\,\% der Arbeit
+sind Datenarbeit} (Sammeln, Bereinigen, Labeln, Versionieren) – wer hier investiert, reduziert spätere Risiken; (ii) \emph{start
+simple, baseline first} – einfache, überprüfbare Lösungen schaffen robuste Ausgangspunkte und verhindern Fehloptimierungen.
+Mit diesen Prinzipien wird KI nicht „per Dekret“ sicher, aber \emph{systematisch} absicherbar.
 
 
 
@@ -142,6 +166,93 @@ angesehen werden kann.
 
 
 
+% -------------------------
+% CHAPTER 18: Fazit und Ausblick
+% -------------------------
+\chapter{Fazit und Ausblick}\label{chap:fazit-ausblick}
+
+\section{Fazit}
+Die Arbeit hat die in Luftfahrt-Leitlinien und -Standards geforderten Absicherungsansätze systematisch 
+den erkennbaren Abdeckungen im Radar-/KI-Kontext gegenübergestellt und daraus eine konsolidierte Matrix 
+sowie handlungsorientierte Empfehlungen abgeleitet. Kernbeiträge sind (i) die strukturierte Zuordnung von 
+Forderungen und Abdeckungen, (ii) die verdichtete Übersicht typischer Lücken/Risiken und (iii) ein 
+praxisnaher Empfehlungskatalog für eine schrittweise Anwendung \emph{mit} nachvollziehbarer Evidenzführung. 
+Damit liegt eine belastbare Grundlage vor, um KI-Funktionen im Umfeld luftfahrtnaher Radaranwendungen 
+zielgerichtet einzuordnen und abzusichern.
+\medskip
+
+Die Coverage-Analyse zeigt: Die ISO/PAS~8800 adressiert wesentliche Assurance-Bausteine 
+(u.\,a.\ ODD, Daten-/Label-Governance, Robustheit, Monitoring), deckt sie im luftfahrtspezifischen 
+Sinn jedoch oftmals nur \emph{teilweise} ab; projekt- und domänenspezifische Präzisierungen bleiben nötig.
+\footnote{Vgl.\ Diskussion und Zwischenfazit zur Abdeckung.} Gleichwohl ergibt sich unter realistischen 
+Annahmen eine tragfähige Brücke: Die in der Luftfahrt geforderten Ansätze lassen sich überwiegend zuordnen, 
+Lücken sind identifiziert und explizit adressierbar.
+\medskip
+
+Für das gewählte Beispiel (Random-Forest-gestützte Wetterphänomen-Klassifikation) gilt: Unter den definierten Einsatzgrenzen 
+(Assistenzfunktion \textit{Level~1}, klarer ODD, kein Online-Lernen) und mit den skizzierten Evidenzen 
+(u.\,a.\ OOD-Indikatoren, Kalibrierung, Feature-Evidenz, deterministische Auswertung) erscheint eine 
+zulassungsfähige \emph{L1-Assistenz} erreichbar. Offene Punkte betreffen primär die 
+\emph{projektspezifische Ausgestaltung} (z.\,B.\ Edge-Case-Policy, Operating Point, Betriebs-Monitoring), 
+nicht die grundsätzliche Machbarkeit.
+\medskip
+
+Regelwerksseitig bleibt die Unterscheidung zentral: Läuft das Modell als \emph{Bordfunktion}, greift DO-178C mit 
+hazardbasierter DAL-Skalierung und der geforderten Unabhängigkeit/Strenge; wird es als \emph{Entwicklungs-/Verifikationswerkzeug} 
+genutzt, sind Credit-Ansprüche und TQL nach DO-330 maßgeblich (alternativ: dokumentierte \emph{Confidence in Use} ohne Credit). 
+In beiden Pfaden gilt: kein \emph{Assurance-Rabatt}—ML-Erkenntnisse sind klassisch zu verifizieren und in den Safety Case einzubetten.
+
+
+\section{Einordnung der Risiken}
+Die Analyse der allgemeinen Risiken und der beispielbezogenen Limitierungen unterstreicht, dass verbleibende 
+Unsicherheiten (Generalisierung/OOD, Testabdeckung auf Szenarioebene, Lebenszyklus- und Änderungsmanagement) 
+weniger Grundsatzprobleme als vielmehr Umsetzungs- und Nachweisfragen sind. Für die Wetterdomäne verstärken 
+\emph{Ground-Truth-Knappheit}, \emph{Imbalance} und \emph{Sensorartefakte} den Bedarf an klaren Policies 
+(Unknown/Abstain), konservativer Betriebslogik und kontinuierlichem Monitoring. 
+
+
+\section{Ausblick}
+Kurz- bis mittelfristig empfiehlt sich ein \emph{schrittweises} Vorgehen: mit enger Funktion, klarer ODD-Disziplin, 
+expliziter Human-in-the-Loop-Rolle und messbaren KPIs starten; Evidenzketten stabilisieren, Betriebsdaten strukturiert 
+rückspiegeln und die Autorität erst nach belastbaren Erfahrungen erweitern. Der vorgelegte Empfehlungskatalog bietet 
+hierfür eine praxistaugliche Leitplanke.
+\medskip
+
+Forschung und Standardisierung sollten vorrangig adressieren: szenario-/inputbasierte Abdeckungsmaße für 
+V\&V, anerkannte Verfahren zur Generalisierung unter Drift, operationalisierbare Regeln für Re-Training/Re-Approval 
+sowie robuste OOD-/Qualitätsindikatoren für den Betrieb. Dadurch ließe sich die heute noch projektspezifische 
+Präzisierung weiter \emph{verallgemeinern} und die Nachweislast zielgenauer skalieren. 
+Forschung und Standardisierung sollten hier nur knapp bekräftigt werden: \emph{projektspezifisch} steht 
+zunächst die Datenarbeit im Vordergrund—für das hier genutzte Beispiel u.a. insbesondere 
+Data-Readiness und Label-Qualität. Standardisierungsseitig sind \emph{schlanke Minimalprofile} und 
+klar benannte Artefakte hilfreich (ODD, KPIs, Abstain/Degrade-Regeln), flankiert von praxisreifen 
+\emph{Tools} (Daten-/Label-Governance, Abdeckungsreporting) und berechenbaren Pfaden zur 
+\emph{Plattform-/Hardware-Zulassung} (Determinismus, Portierung/Optimierung). \emph{Langfristig}—nur 
+der Vollständigkeit halber—sind Grundlagen für höhere Automatisierungsgrade (z.\,B.\ L3) zu klären, 
+etwa Autoritätsgrenzen, Updates und Oversight.
+
+
+
+\paragraph{Pragmatische Leitlinie.}
+Zwei Grundsätze aus der Data Science bleiben leitend: (1) \emph{Datenarbeit dominiert den Aufwand}— typisch entfallen 
+\(\approx 80\,\%\) auf Beschaffung, Bereinigung, Labeling und Governance. (2) \emph{Kleine, gut gefasste Schritte 
+schlagen große Sprünge}—enge Scopes mit klaren Metriken liefern verlässlichere Evidenz als breit angelegte Funktionen. 
+Beides spricht für frühe Data-Readiness, konservative Betriebsregeln (\emph{Abstain/Degrade}) und konsequentes 
+Lifecycle-Management.
+
+\paragraph{Schlussbild.}
+Unter realistischen Rahmenbedingungen und mit disziplinierter Evidenzführung ist KI im Radarumfeld als L1-Assistenz 
+\emph{hinreichend sicher machbar}. Im Vordergrund steht nicht „mehr Methode“, sondern 
+\emph{konsequente Operationalisierung}: ODD klären, Daten/Tools führen, Betrieb überwachen, Änderungen kontrollieren.
+
+
+
+
+
+
+
+
+\begin{comment}
 
 
 % -------------------------
@@ -169,6 +280,16 @@ Robustheit gegen relevante Störungen plausibel nachgewiesen ist und geprüfte D
 \emph{begründbar}. Außerhalb dieser Bedingungen besteht \emph{weiterer Evidenzbedarf}, insbesondere hinsichtlich systematischer
 Shift-/Stresstests und betriebskritischer Monitoring-/Fallback-Mechanismen.
 
+\section{Schlussfolgerung}
+Die Analyse zeigt: Die adressierten Felder (ODD, Daten-/Label-Governance, V\&V/Metriken, Robustheit/OOD,
+Kalibrierung, Betrieb/Monitoring) werden durch ISO/PAS~8800 und die luftfahrtspezifischen Leitlinien
+konsistent aufgegriffen. \emph{Für ausgewählte Modelle und eng definierte Einsatzzwecke} erscheint ein
+„hinreichend sicher“ erreichbar -- vorausgesetzt, Rollen/Autorität sind klar festgelegt, ODD und
+Nicht-ODD-Verhalten priorisiert konservativ umgesetzt und die Evidenzführung projektkonkret ausgestaltet.
+Die verbleibende Aufgabe ist damit \emph{primär eine saubere Umsetzung und Dokumentation im Einzelfall},
+nicht das Fehlen grundlegender Prinzipien.
+
+
 \section{Ausblick}\label{sec:fazit-ausblick}
 Für die Weiterentwicklung zeichnen sich drei Pfade ab:
 \begin{enumerate}
@@ -183,3 +304,4 @@ Damit liefert die Arbeit einen strukturierten Beitrag zur Einordnung der Frage �
 konkrete Ansatzpunkte, an denen Evidenz und Praxis weiter zusammengeführt werden können.
 
 
+\end{comment}
