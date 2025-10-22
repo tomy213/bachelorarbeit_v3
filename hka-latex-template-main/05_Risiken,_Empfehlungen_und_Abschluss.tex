@@ -64,53 +64,69 @@ Die vorstehend gebündelten Herausforderungen ziehen sich über den gesamten ML�
 Die ISO/PAS~8800 adressiert \emph{alle} genannten Themenbereiche; für eine zulassungsfähige 
 Argumentation bleibt jedoch die projektspezifische Ausgestaltung entscheidend.
 
-\section{Beispielbezogene Herausforderungen, Limitierungen und Risiken (RF \& Radar/Wetter)}
 
+
+
+\section{Beispielbezogene Herausforderungen}
+
+\subsection{Allgemein}
+Die allgemeinen Herausforderungen wurden bereits behandelt; nachfolgend ein paar beispielhafte Punkte:
 \begin{itemize}
-  \item \textbf{ODD \& Datenraum}
-    \begin{itemize}
-      \item Abdeckung relevanter ODD-Kombinationen (Region $\times$ Jahreszeit $\times$ Flughöhe/Phase $\times$ Antennen-/Scan-Modus).
-      \item Nichtstationarität/Drift (Klimatologien, Sensor-Alterung, Software-Updates) vs.\ Trainingsverteilung.
-    \end{itemize}
-
-  \item \textbf{Labeling \& Ground Truth}
-    \begin{itemize}
-      \item Unsichere/indirekte Labels (z.\,B.\ „Hazardous Weather“ aus Proxy-Quellen); begrenzte Verfügbarkeit verifizierter Wahrheiten.
-      \item Klassenungleichgewicht (starke Imbalance seltener Phänomene) und inkonsistente Label-Regeln über Datensätze.
-    \end{itemize}
-
-  \item \textbf{Feature-Engineering \& Vorverarbeitung}
-    \begin{itemize}
-      \item Wahl robuster, physikalisch plausibler Features (Intensität, Textur, Neighbourhood/3D-Kontext).
-      \item Sensitivität gegenüber Filterung, Normalisierung, Mosaikierung und Qualitätskontrollen (QC).
-    \end{itemize}
-
-  \item \textbf{Betrieb \& Monitoring}
-    \begin{itemize}
-      \item Laufzeit-Indikatoren für Drift/OOD und Regeln für konservatives Verhalten (\emph{Abstain/Degrade}).
-      \item Logging/Recording für Vorfallanalyse und kontrollierte Modell-Updates (kein Online-Lernen).
-    \item \end{itemize}
-
-  \item \textbf{Human Factors (bei Onboard-Anzeige)}
-    \begin{itemize}
-      \item Nutzeradäquate Darstellung (Konfidenz/Qualität), Vermeidung von Over-/Under-Trust.
-      \item Klare Übersteuerbarkeit und Priorisierung bei konkurrierenden Hinweisen/Warnungen.
-    \end{itemize}
-
-  \item \textbf{Toolkette (als Entwicklungswerkzeug)}
-    \begin{itemize}
-      \item Umgang mit Massendaten, Versionierung von Daten/Features/Labels; ggf.\ Toolqualifikation (DO-330) statt DAL.
-      \item Verwendete Werkzeuge zum Trainieren oder Testen müssen auch qualifiziert sein.
-    \end{itemize}
+  \item \textbf{Nachweislogik \& Probabilistik:} Fragen zu klassischen Software-Nachweisen (z.\,B.\ MC/DC) sowie zum Umgang mit probabilistischem Modellverhalten müssen geklärt werden.
+  \item \textbf{Werkzeuge/Toolchain:} Trainings- und Datentools müssen ebenfalls qualifiziert werden.
+  \item \textbf{Projektbezug:} Diese Arbeit betrachtet kein konkretes Bordprodukt; projektspezifische Ausprägungen (z.\,B.\ HMI, Eingriffslogik) sind sicher auszulegen und nachzuweisen.
 \end{itemize}
 
+\subsection{Random-Forest-bezogen}
+Aus dem gewählten Modell hervorgehende Herausforderungen (die größten Schwierigkeiten betreffen Daten und Labels):
+\begin{itemize}
+  \item \textbf{Daten \& Labeling:} Repräsentativität über das ODD, Klassenungleichgewichte und hochdimensionale Feature-Sets erhöhen den Aufwand für sinnvolle Features/Labels.
+  \item \textbf{Modellgröße:} Je nach Anzahl der Bäume, Tiefe und Feature-Anzahl typischerweise \emph{mehrere~MB bis wenige~GB}.
+  \item \textbf{Rechenbedarf:} Relativ höher als bei Kalman-Filtern oder FFT.
+\end{itemize}
+
+\subsection{Wetterphänomen-Klassifikation}
+Aus der Anwendung hervorgehende Herausforderungen (mit Blick auf das Modell):
+\begin{itemize}
+  \item \textbf{Begrenzter ``Ground Truth'':} Wenige \emph{perfekte} Labels; häufig Expertenannotation.
+  \item \textbf{Regime-Drift:} Regionale/saisonale Unterschiede führen zu Verteilungswechseln; Modelle können außerhalb ihres Trainingsregimes degradieren.
+  \item \textbf{Imbalance:} Seltene Phänomene (z.\,B.\ Hagel, Superzellen) sind unterrepräsentiert und verschärfen Fehlklassifikationsrisiken.
+  \item \textbf{Sensorartefakte:} Abschattung/Attenuation (z.\,B.\ hinter Starkniederschlag), Boden-/See-Clutter, Bright-Band, Mixed-Phase erschweren die Merkmalsbildung.
+  \item \textbf{Uneindeutige Klassengrenzen:} Überlappende/mehrdeutige Klassen (z.\,B.\ Starkregen vs.\ Hagel) erschweren eine saubere Unterscheidung und das Labeling.
+\end{itemize}
+
+
+\paragraph{Hinweis.}
+Für einen Bord-Einsatz sind zusätzlich ODD-Grenzen, Degradationsregeln (\emph{Abstain/Unknown}) und operative Kalibrierungs-/Qualitätsanzeigen zu definieren; im reinen Entwicklungssetting verschiebt sich der Fokus auf Daten-/Modell-Governance und reproduzierbare Trainingspipelines.
 
 
 % -------------------------
 % CHAPTER 13: Empfehlungen zur Anwendung
 % -------------------------
 \chapter{Empfehlungen zur Anwendung}\label{chap:empfehlungen}
-
+\begin{itemize}
+  \item das ein pilot eine einfache sprachsteuerung aller hey siri wie ist das wetter; und einer antwort 
+    mit ``in 200km besteht mit einer 80\% wk ein graupel schauer, zu 15\% starker regen und mit 5\% hagel''
+    zu bekommen wäre eine mögliche vorstellung. wenn die wetter lampe auf rot steht kann der pilot dann 
+    entscheiden wie groß der bogen um die wolken herum sein muss.
+  \item in anderen branchen wie zb automotive wurde sich ebenfalls intensiv mit der problematik auseinander 
+    gesetzt und vorgehen oder der umgang mit den adressierten herausforderungen, bedenken etc. wurden bereits definiert.
+    daran kann man sich orientieren und für die luftfahrt angepasst übertragen.
+  \item vorallem mit den daten sollte man sich jetzt schon auseinander setzen, dass wenn es soweit ist 
+    und ki in der luftfahrt einsetzen kann/darf diese auch trainieren kann (daumenregel aus der data science: 
+    80\% des aufwand sind die daten)
+  \item einzelne kleine klardefinierte schritte führen zum erfolg. ki ist sicher genug für die luftfahrt ist 
+    eine zu große aussage. aber einzelne modelle für enge einsatzzwecke sind wie man anhand dieser arbeit sehen kann 
+    nah genug dran, dass es sich lohnt diese auszuarbeiten und sie zeitnah ausreichend sicher genug nachweisen zu können.
+  \item obsoleszenz ist ein problem was man berücksichtigen muss, daher sollte man sich auf die grundlagen konzentrieren
+  \item für genaue umsetzungen kann man sich im sinne des dual use orientieren wie das in der luftfahrt aussehen kann 
+    um so konkrete und projektspezifische umsetzungen ableiten zu können
+  \item aus der analyse der iso 8800, den anforderungen, vorraussetzungen und bedenken in der luftfahrt und dass alle adressiert 
+    werden sowie konkrete umsetzungen formuliert wurden kann man sagen, dass die allgemeienen probleme so gut wie ausgeräumt sind.
+    konkrete praktische und projektspezifische umsetzungen können auch abgeleitet werden. all diese punkte zusammen genommen 
+    kann man sagen, dass für ausgewählte modelle und einsatzzwecke man ki in diesen einzelfällen als sicher genug betrachten kann 
+    und es jetzt nur noch um die umsetzung geht.
+\end{itemize}
 
 \section{Implikation}\label{sec:empfehlungen-implikation}
 Die Empfehlungen operationalisieren die \emph{geforderten Ansätze} in den Feldern ODD, Kalibrierung, Daten-/Toolchain-Governance sowie
