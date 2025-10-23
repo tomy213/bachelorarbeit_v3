@@ -71,7 +71,7 @@ Schnell wird erkennbar, dass in den Daten häufig nur bei den Überlebenden die 
 ist, bei den Verstorbenen jedoch nicht (\emph{Label Leakage}/Erfassungsbias).
 
 
-\subsection{KI Praxis in der Luftfahrt}
+\subsection{KI-Praxis in der Luftfahrt}
 \begin{itemize}
   \item \textbf{Predictive Maintenance:\parencite{handelsblatt-hannovermesse-2025}}
     Rolls-Royce plant „Two-Way-Comms“, um Telemetrie bis auf Komponentenebene aus Triebwerken zu erfassen.
@@ -96,7 +96,7 @@ Da KI in der Luftfahrt zwar vorhanden, aber im praktischen Einsatz oft schwer na
   \item \textbf{Shell – Predictive Maintenance in großem Maßstab:\parencite{shell-jpt-2022}}
     ML-/KI-Modelle überwachen weltweit große Aggregatflotten (Ventile, Pumpen, Kompressoren) und unterstützen 
     zustandsorientierte Wartung (weniger ungeplante Ausfälle, planbarere Einsätze).
-    Mit der Erfolgreichen Überwachung von über 10.000 Ausrüstungsteilen plant Shell die Ausweitung dieses Systems.
+    Mit der erfolgreichen Überwachung von über 10.000 Ausrüstungsteilen plant Shell die Ausweitung dieses Systems.
   \item \textbf{AlphaFold/AlphaFold~3 – Struktur- \& Interaktionsvorhersage:\parencite{alphafold-nature-2021}}
     Breit als Forschungs- und Design-Tool etabliert; hoher wissenschaftlicher Impact, in der Industrie als Enabler akzeptiert 
     (Validierung bleibt erforderlich; keine „KI-entdeckten“ Medikamente allein durch KI zugelassen).
@@ -104,14 +104,14 @@ Da KI in der Luftfahrt zwar vorhanden, aber im praktischen Einsatz oft schwer na
     Unsicherheit/Vertrauensmaße und experimentelle Verifikation bleiben Pflicht.
   \item \textbf{IBM Watson for Oncology – Grenzen klinischer Empfehlungssysteme:\parencite{stat-watson-2018}}
     Berichte über unsichere/falsche Therapieempfehlungen führten zu Rücknahmen/Neujustierungen prominenter Partnerschaften.
-    \emph{Relevanz:} Warnhinweis zu Domain Shift, unzureichender Validierung und HMI: Ohne robuste Evidenz, klare Einsatzgrenzen 
-    (ODD) und Human-in-the-Loop riskiert man Scheinsicherheit.
+    \emph{Relevanz:} Warnhinweis zu Domain Shift, unzureichender Validierung und HMI (Human-Machine-Interface): Ohne robuste Evidenz, klare Einsatzgrenzen 
+    (ODD (Operational Design Domain)) und Human-in-the-Loop riskiert man Scheinsicherheit.
   \item \textbf{KI-gestützte Bildgenerierung – Urheberrecht \& Datenherkunft:\parencite{jipel-andersen-stabilityai-2024}}
     Kontroverse um Trainingsdaten (urheberrechtlich geschützte Werke), laufende Verfahren und Debatten zur Lizenzierung.
     \emph{Relevanz:} Unterstreicht die Bedeutung von Daten-/Label-Governance, Dokumentation der Herkunft und Nutzungsrechten.
 \end{itemize}
 
-\subsection{Sicherheits relevante Praxisvorfälle}\label{sec:praxis-vorfaelle}
+\subsection{Sicherheitsrelevante Praxisvorfälle}\label{sec:praxis-vorfaelle}
 Die folgenden, öffentlich diskutierten Vorfälle rücken die Bedeutung von \emph{KI-Sicherheit} in den Vordergrund. 
 Insbesondere die Automobilbranche steht als treibender Sektor unter hoher öffentlicher Aufmerksamkeit – auch im Hinblick auf 
 \emph{eAI (Embodied Artificial Intelligence)} als operierendes Gesamtsystem.
@@ -137,26 +137,26 @@ Es ist auch zu klären, wer wann die Verantwortung trägt (Fahrer, Betreiber, He
 \section{Wie sicher sind KIs heute?}
 Um zu verstehen wie sicher etwas ist versucht man es auch in Zahlen auszudrücken, um es vergleichen zu können. 
 Solche Zahlen fließen auch in die Anforderungen wie z.B. die Anzahl an Fehlern pro Stunde. Konkrete Zahlen gehen 
-aus der Einstufung hervor: 
+aus der Einstufung hervor (folgend sind typische Beispiele): 
 \begin{table}[h]
 \centering
 \renewcommand{\arraystretch}{1.18}
 \begin{tabular}{ll|ll}
 \hline
 \multicolumn{2}{c|}{\textbf{Luftfahrt}} & \multicolumn{2}{c}{\textbf{Automotive}} \\
-\textbf{DAL} & \textbf{Typ. Wert pro mission (20h)} & \textbf{ASIL} & \textbf{Typ. Wert pro h} \\
+\textbf{DAL} & \textbf{Typ. Wert pro Mission (20h)} & \textbf{ASIL} & \textbf{Typ. Wert pro h} \\
 \hline
-DAL A (catastrophic)& $\le 1\times10^{-9}$/mission & ASIL D (sehr hoch)& $\le 1\times10^{-8}$/h \\
-DAL B (hazardous)& $\le 1\times10^{-7}$/mission & ASIL C (hoch)& $\le 1\times10^{-7}$/h \\
-DAL C (major)& $\le 1\times10^{-5}$/mission & ASIL B (mittel)& $\le 1\times10^{-7}$/h \\
-DAL D (minor)& $\le 1\times10^{-5}$/mission & ASIL A (niedrig)& $\le 1\times10^{-6}$/h  \\
+DAL A (catastrophic)& $\le 1\times10^{-9}$/Mission & ASIL D (sehr hoch)& $\le 1\times10^{-8}$/h \\
+DAL B (hazardous)& $\le 1\times10^{-7}$/Mission & ASIL C (hoch)& $\le 1\times10^{-7}$/h \\
+DAL C (major)& $\le 1\times10^{-5}$/Mission & ASIL B (mittel)& $\le 1\times10^{-7}$/h \\
+DAL D (minor)& $\le 1\times10^{-5}$/Mission & ASIL A (niedrig)& $\le 1\times10^{-6}$/h  \\
 \hline
 \end{tabular}
 \caption{Gegenüberstellung der Kategorien: Luftfahrt (DAL) und Automotive (ASIL) mit typischen Zielgrößen pro Betriebsstunde oder Mission.}
 \end{table}
 
 Bei einem voll autonomen Fahrzeug werden alle Funktionen pauschal als ASIL D eingestuft, da man keine Kontrolle 
-über das Fahrzeug hat, dementsprechend die Beherschbarkeit gleich Null ist und zudem davon auszugehen ist, dass 
+über das Fahrzeug hat, dementsprechend die Beherrschbarkeit gleich Null ist und zudem davon auszugehen ist, dass 
 bei einer Fehlfunktion das Fahrzeug von der Straße abkommen kann und daher zu schweren Personenschäden kommen kann.
 Leider werden von Unternehmen keine Konkreten Zahlen, die diese Werte stützen können bezüglich der verwendeten 
 KIs veröffentlicht. Ein Anhaltspunkt können folgende Zahlen liefern: \parencite{herger2024disengagements}\\
@@ -167,11 +167,12 @@ der Rest vom AV-System bzw. beiden. Das macht ca. \textbf{1.412 km pro Eingriff}
 Durchschnittsgeschwindigkeit von 50km/h annimmt, macht das ca. 1 Eingriff alle 28 Stunden. 
 Somit kann man grob von 99,96 \% Richtigkeit pro Stunde ausgehen, was im Bereich von $ 1\times10^{-4}$/h liegt und somit 
 lediglich mit besonderer Begründung in Bereichen von \textbf{DAL D oder ASIL A} einzuordnen ist. 
-Anzumerken ist, dass hier das Gesammtsystem betrachtet wurde. Das heißt Einzelkomponenten 
-sind höher einzuordnen. Wenn man bei mehreren Duzend im Gesammtsystem beteiligten Komponenten ausgeht 
-und man zudem den Fehlern eine Unabhängigkeit vorraussetzt, kann man für diese Komponenten je eine 
+Anzumerken ist, dass hier das Gesamtsystem betrachtet wurde und diese Eingriffe nicht zwangsläufig auf einen 
+Ausfall sicherheitskritischer Funktionen zurück zu führen ist. Das heißt Einzelkomponenten 
+sind höher einzuordnen. Wenn man bei mehreren Dutzend im Gesamtsystem beteiligten Komponenten ausgeht 
+und man zudem den Fehlern eine Unabhängigkeit voraussetzt, kann man für diese Komponenten je eine 
 Fehlerquote von $ 1\times10^{-6}$/h annehmen. Einzelkomponenten können somit im Bereich \textbf{DAL C bzw. ASIL B} 
-oder höher einzuordnen sein. (In der Literatur werden solche KI gesteuerten Gesammtsysteme als eAI bezeichnet.)
+oder höher einzuordnen sein. (In der Literatur werden solche KI gesteuerten Gesamtsysteme als eAI bezeichnet.)
 
 % ----------------------------------------------------
 \section{Einsatzfelder in der Luftfahrt}\label{sec:sop-ueberblick}
@@ -360,9 +361,8 @@ Diese Beobachtungen leiten direkt zu den \emph{Anforderungen und Szenarien} übe
 
 
 %--------------------------------------------------------------------------
-%komplett unsauber
 %------------------------------------------------------------------------------
-\chapter{Automobilbranche: KI \& Sicherheit}
+\chapter{Automobilbranche: KI \& Sicherheit}\label{chap:automotiv}
 
 \section{Ziel \& Scope}
 Dieses Kapitel ordnet KI-Safety in der Automobilbranche ein und nutzt sie als \emph{Vergleichsfolie} für die Luftfahrt:
@@ -413,7 +413,7 @@ Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleic
   \item \textbf{Physikalische Größen:} Geschwindigkeit, Masse, Abmaße; Luftfahrt stark variierend, Automotive geringere Varianz.
   \item \textbf{Skalen:} Flotten- und Betriebsstundenordnungen differieren (Mengen-/Zeitmaßstäbe), damit auch Evidenz- und Monitoring-Strategien.
   \item \textbf{Einsatzunterscheidung von KI:} nach Autorität/Automatisierung (EASA KI-Level L1/L2 vs.\ SAE Automatisierungsgrad).
-  \item \textbf{Hardware Zulassung:} Z.B. Verwendung von Redundanz.
+  \item \textbf{Hardware-Zulassung:} Z.B. Verwendung von Redundanz.
 \end{itemize}
 
 \subsection{Bemerkungen}
@@ -429,7 +429,7 @@ Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleic
 + \underbrace{c_{\mathrm{sys}}(\tau)}_{\text{Systemkosten}} 
 \]
   Zivil priorisiert das Vermeiden von Personenschäden; Im militärischen Kontext muss mit Personenschäden gerechnet werden. 
-  Weiter kommt hier die Frage auf, ob man die Fehlerwahrscheilichkeit von Menschen im Vergleich  
+  Weiter kommt hier die Frage auf, ob man die Fehlerwahrscheinlichkeit von Menschen im Vergleich  
   zu einer Maschine berücksichtigen sollte.
   \item \textbf{Fehlereintrittsraten – Größenordnungen (Beispielrechnung):} 
   \begin{table}[h]
@@ -459,7 +459,7 @@ Sie ersetzen keine luftfahrtspezifischen Prozesse, dienen hier aber als Vergleic
 \end{itemize}
 
 
-\chapter{Deep Dive: ISO/PAS 8800}
+\chapter{Deep-Dive: ISO/PAS 8800}\label{chap:iso-8800}
 Die ISO 8800 ist sehr Dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
 sicher wird. Diese Norm beschreibt was zu tun ist und wie man begründet, dass eine KI sicher genug ist. 
 Detailprozesse und Risikobeurteilungen sind nicht enthalten. Stattdessen wie existierende Normen 
@@ -531,7 +531,7 @@ angepasst oder erweitert werden müssen.
     (H){\dotR} Typische Leistungskennzahlen für maschinelles Lernen\\
 \end{itemize}
 
-\paragraph{Legende zur Einstufung der Relevanz bezüglich diser Arbeit}
+\paragraph{Legende zur Einstufung der Relevanz bezüglich dieser Arbeit}
 \begin{itemize}[leftmargin=2.5cm,labelsep=0.8em]
   \item[\dotG] relevant
   \item[\dotY] teilweise relevant
@@ -567,7 +567,7 @@ von KI-Systemen zur Untermauerung eines belastbaren Safety-Assurance-Claims, gib
 für KI-basierte Softwaretools. Schwerpunktmäßig behandelt es ML-basierte Ansätze auf Prinzipienebene, ohne in methodische 
 Details zu gehen (z. B. konkrete DNN-Architekturen).
 
-\section{Kapitel Deep Dive}
+\section{Kapitel Deep-Dive}
 \subsection{(6) KI im Kontext der Systemsicherheitsentwicklung angepasst auf Radarsysteme}
 \paragraph{KI in Radarsystemen nach ISO/PAS 8800 Kap.\,6}
 ISO/PAS~8800 ergänzt die ISO~26262, sobald ML\slash KI als Bestandteil der sicherheitsrelevanten 
@@ -650,20 +650,20 @@ Ein essentielles Beispiel, wie Anforderungen verändert werden müssen ist folge
 Die Ziele dises Abschnittes sind bereits bei Inhalten beschrieben. Es wird beschrieben, dass Sicherheitsanforderungen 
 durch zwei Maßnahmen erfüllt werden können: Die Architektur und die Entwicklung. Weiter können beim Designprozess 
 nicht immer alle Anforderungen erfüllt werden, was dazuführt, dass diese angepasst werden müssen. Wichtig sind 
-die generellen Anfroderungen, nach denen die KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen entschieden werden:
+die generellen Anforderungen, nach denen die KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen entschieden werden:
 
 \begin{itemize}
-  \item Rechtfertigung, dass die Sicherheitsanforderungen erfült sind.
+  \item Rechtfertigung, dass die Sicherheitsanforderungen erfüllt sind.
   \item Sicherheitsanforderungen müssen den Komponenten zugewiesen sein.
   \item Architektur- und Entwicklungsmaßnahmen helfen vom Design her Fehler von KI-Komponenten zu verhindern um Sicherheitsanforderungen zu erfüllen und das Risiko zu minimieren.
   \item Die Effektivität gewählter Maßnahmen muss mittels Begründungen unterstützt werden.
   \item Die Sicherheitsanalyse des KI-System-Output zeigt, ob Anforderungen erfüllt werden können.
   \item Unterschiede zwischen Entwicklungsumgebung und Zielumgebung muss identifiziert werden.
-  \item Ki-Modelle müssen mittels validierungs Datensätzen trainiert und evaluiert werden.
+  \item KI-Modelle müssen mittels validierungs Datensätzen trainiert und evaluiert werden.
 \end{itemize}
 
 Der letzte Punkt schließt indirekt RL Methoden aus, auch wenn diese, durch diese Norm allgemein nicht ausgeschlossen werden. 
-Das stellt einen kleinen Wiederspruch dar, was aufzeigt, dass auch Normen iterativ verbessert werden müssen. Anzumerken ist, dass 
+Das stellt einen kleinen Widerspruch dar, was aufzeigt, dass auch Normen iterativ verbessert werden müssen. Anzumerken ist, dass 
 dies eine erst Version ist und daher noch keine iterativen Schritte seit der Erstveröffentlichung durchlaufen hat.
 
 \paragraph{Beispiel von Architektur- und Entwicklungsmaßnahmen}
@@ -676,18 +676,18 @@ Die hier beschriebenen Aspekte beziehen sich hauptsächlich auf: un-/ semi- und 
 Da diese sich ebenfalls auf bestpractise Methoden stützen, werden sie in dieser Arbeit nicht zusätzlich 
 aufgeführt, da diese nur wenig zur Erkenntnissgewinnung beitragen. Diese Methoden sind allgemein beim 
 Arbeiten mit großen Datenmengen und auch bei ML von essentieller Bedeutung. Sie sind weitverbreitete 
-Standarts verschiedener Industrien und haben auch Einfluss auf verschiedene Punkte dieser Arbeit.
+Standards verschiedener Industrien und haben auch Einfluss auf verschiedene Punkte dieser Arbeit.
 
 \subsection{(12) Verifikation und Validierung des KI-Systems}
-Diese Kapitel geht sehr highlevel auf Verifikation und Validierung ein. Unteranderem mit einigen Anforderungen 
+Diese Kapitel geht sehr highlevel auf Verifikation und Validierung ein. Unter anderem mit einigen Anforderungen 
 an benötigten Tests und des Workflows mit wichtigen Stichpunkte wie, dass SOTIF Trigger Bedingungen beschreibt. 
 Desweiteren wird auch eine Liste möglicher Testmethoden vorgeschlagen um Komponenten zu testen. Für diese 
 Arbeit sind folgende Punkte wichtig:
 
-\paragraph{KI spezifische Herausforderungen mit Eklärungen}
+\paragraph{KI spezifische Herausforderungen mit Erklärungen}
 \begin{itemize}
   \item fehlen von präzisen Sicherheitsanforderungen
-  \item vielfältige Eingaben aus verschiedenen Quellen (z.B. kombination aus Radar und Kamera)
+  \item vielfältige Eingaben aus verschiedenen Quellen (z.B. Kombination aus Radar und Kamera)
   \item DNNs haben komplexe Architekturenheuristisches Trainieren (basierend auf Erfahrungswerten)
   \item das Basieren auf großen Datensätzen
   \item nicht vorhersagbares fehlerhaftes Verhalten
@@ -697,7 +697,7 @@ Arbeit sind folgende Punkte wichtig:
 \end{itemize}
 
 Weiter wird ein Beispiel zur Objekterkennung angeführt, dass sowohl ein Lidar als auch eine 
-Kamera ein Objekt nicht erkennen können durch einen Absorbtionseffekt eines Objektes. 
+Kamera ein Objekt nicht erkennen können durch einen Absorptionseffekt eines Objektes. 
 Um zu zeigen, dass diese nicht stochastisch unabhängig sind.
 
 \subsection{(13) Sicherheitsanalyse von KI-Systemen}

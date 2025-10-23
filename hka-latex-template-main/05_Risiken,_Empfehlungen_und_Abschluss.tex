@@ -39,6 +39,8 @@ Die nachfolgenden Punkte stammen überwiegend aus \emph{ML meets aerospace: chal
         „Henne–Ei“ Praxis $\leftrightarrow$ Zulassung; Standardisierungszyklen vs.\ ML-Tempo; fehlende Leitplanken für \emph{kontinuierliche Re-Zertifizierung}.
   \item \textbf{Tool-Qualifikation (DO-330).}
         ML-Toolchains passen schlecht in die klassische Tool-Taxonomie; „Output prüfen statt Tool qualifizieren“ skaliert bei Massendaten schlecht (ggf.\ qualifizierte Checker-Tools).
+  \item \textbf{Sicherheit verlangt Vorhersagbarkeit.}
+        Safety Cases setzen vorhersagbares Verhalten voraus; KI/ML liefert jedoch primär \emph{probabilistische} Aussagen, die an Datenverteilungen gebunden sind. Vorhersagbarkeit muss daher \emph{operationalisiert} werden: klarer ODD (außerhalb \emph{Abstain/Degrade}), kalibrierte Unsicherheit (reliability), Runtime-Assurance (OOD-Detektion) sowie eng begrenzte Inferenzpfade auf der Zielplattform (feste Pipelines, Worst-Case-Timing).
 \end{itemize}
 
 \subsection{Limitierungen}
@@ -57,12 +59,15 @@ Die nachfolgenden Punkte stammen überwiegend aus \emph{ML meets aerospace: chal
         Risiken (negativer Transfer, Privatsphäre, Interpretierbarkeit); fehlende Benchmarks für V\&V-Vergleichbarkeit.
   \item \textbf{Kontinuierliche Entwicklung (MLOps).}
         Bedarf an Regeln für Retraining-Trigger und V\&V-Tiefe vor/nach Deployment (\emph{kontinuierliche Re-Zertifizierung}).
+  \item \textbf{Hardware-Constraints \& Skalierung.} 
+        Größere/komplexere Modelle (mehr Parameter, höhere Eingangsauflösung) benötigen deutlich mehr Rechenleistung, Speicher/Bandbreite und Energie. Auf avionischen Zielplattformen kann dies Latenz- und Determinismusrisiken, Kühl- und Integrationsaufwand erhöhen.
+
 \end{itemize}
 
 \paragraph{Abschluss.}
 Die vorstehend gebündelten Herausforderungen ziehen sich über den gesamten ML‐Lebenszyklus. 
-Die ISO/PAS~8800 adressiert \emph{alle} genannten Themenbereiche; für eine zulassungsfähige 
-Argumentation bleibt jedoch die projektspezifische Ausgestaltung entscheidend.
+Die ISO/PAS~8800 adressiert die Themenfelder prinzipienbasiert, häufig nur teilweise konkret; 
+für eine zulassungsfähige Argumentation bleibt jedoch die projektspezifische Ausgestaltung entscheidend.
 
 
 
@@ -73,7 +78,7 @@ Argumentation bleibt jedoch die projektspezifische Ausgestaltung entscheidend.
 Die allgemeinen Herausforderungen wurden bereits behandelt; nachfolgend ein paar beispielhafte Punkte:
 \begin{itemize}
   \item \textbf{Nachweislogik \& Probabilistik:} Fragen zu klassischen Software-Nachweisen (z.\,B.\ MC/DC) sowie zum Umgang mit probabilistischem Modellverhalten müssen geklärt werden.
-  \item \textbf{Werkzeuge/Toolchain:} Trainings- und Datentools müssen ebenfalls qualifiziert werden.
+  \item \textbf{Werkzeuge/Toolchain:} Trainings- und Datentools müssen bei beanspruchtem Credit ebenfalls qualifiziert werden; sonst „Confidence in Use“/Gegenprüfung.
   \item \textbf{Projektbezug:} Diese Arbeit betrachtet kein konkretes Bordprodukt; projektspezifische Ausprägungen (z.\,B.\ HMI, Eingriffslogik) sind sicher auszulegen und nachzuweisen.
 \end{itemize}
 
@@ -81,8 +86,8 @@ Die allgemeinen Herausforderungen wurden bereits behandelt; nachfolgend ein paar
 Aus dem gewählten Modell hervorgehende Herausforderungen (die größten Schwierigkeiten betreffen Daten und Labels):
 \begin{itemize}
   \item \textbf{Daten \& Labeling:} Repräsentativität über das ODD, Klassenungleichgewichte und hochdimensionale Feature-Sets erhöhen den Aufwand für sinnvolle Features/Labels.
-  \item \textbf{Modellgröße:} Je nach Anzahl der Bäume, Tiefe und Feature-Anzahl typischerweise \emph{mehrere~MB bis wenige~GB}.
-  \item \textbf{Rechenbedarf:} Für Onbord relativ hoch; höher als bei Kalman-Filtern oder FFT.
+  \item \textbf{Modellgröße:} Je nach Anzahl der Bäume, Tiefe und Feature-Anzahl typischerweise \emph{mehrere~MB bis mehrere hundert~MB}.
+  \item \textbf{Rechenbedarf:} Für Onbord abhängig von der Baumtiefe und Feature-Anzahl relativ hoch (kann höher als bei Kalman-Filtern oder FFT sein)
 \end{itemize}
 
 \subsection{Wetterphänomen-Klassifikation}
@@ -218,20 +223,13 @@ rückspiegeln und die Autorität erst nach belastbaren Erfahrungen erweitern. De
 hierfür eine praxistaugliche Leitplanke.
 \medskip
 
-Forschung und Standardisierung sollten vorrangig adressieren: szenario-/inputbasierte Abdeckungsmaße für 
-V\&V, anerkannte Verfahren zur Generalisierung unter Drift, operationalisierbare Regeln für Re-Training/Re-Approval 
-sowie robuste OOD-/Qualitätsindikatoren für den Betrieb. Dadurch ließe sich die heute noch projektspezifische 
-Präzisierung weiter \emph{verallgemeinern} und die Nachweislast zielgenauer skalieren. 
-Forschung und Standardisierung sollten hier nur knapp bekräftigt werden: \emph{projektspezifisch} steht 
-zunächst die Datenarbeit im Vordergrund—für das hier genutzte Beispiel u.a. insbesondere 
-Data-Readiness und Label-Qualität. Standardisierungsseitig sind \emph{schlanke Minimalprofile} und 
-klar benannte Artefakte hilfreich (ODD, KPIs, Abstain/Degrade-Regeln), flankiert von praxisreifen 
-\emph{Tools} (Daten-/Label-Governance, Abdeckungsreporting) und berechenbaren Pfaden zur 
-\emph{Plattform-/Hardware-Zulassung} (Determinismus, Portierung/Optimierung). \emph{Langfristig}—nur 
-der Vollständigkeit halber—sind Grundlagen für höhere Automatisierungsgrade (z.\,B.\ L3) zu klären, 
-etwa Autoritätsgrenzen, Updates und Oversight.
-
-
+Forschung und Standardisierung sollten \emph{etablierte Best-Practice-Verfahren} gezielt
+\emph{nachweisfähig} machen und zugleich verbleibende generische Lücken schließen. Dazu zählen
+insbesondere (i) \textbf{Hardware-} und \textbf{Tool-Zulassungen}, (ii) ein geregelter Umgang mit 
+\textbf{Re-Training} bereits freigegebener oder im Einsatz befindlicher Modelle sowie (iii) robuste
+\textbf{Betriebsindikatoren} für OOD/Qualität. \emph{Langfristig} sind darüber hinaus die
+Grundlagen höherer Automatisierungsgrade (z.\,B.\ L3: Autoritätsgrenzen, Updates, Oversight)
+methodisch und regulativ zu präzisieren. 
 
 \paragraph{Pragmatische Leitlinie.}
 Zwei Grundsätze aus der Data Science bleiben leitend: (1) \emph{Datenarbeit dominiert den Aufwand}— typisch entfallen 
@@ -240,68 +238,16 @@ schlagen große Sprünge}—enge Scopes mit klaren Metriken liefern verlässlich
 Beides spricht für frühe Data-Readiness, konservative Betriebsregeln (\emph{Abstain/Degrade}) und konsequentes 
 Lifecycle-Management.
 
-\paragraph{Schlussbild.}
-Unter realistischen Rahmenbedingungen und mit disziplinierter Evidenzführung ist KI im Radarumfeld als L1-Assistenz 
-\emph{hinreichend sicher machbar}. Im Vordergrund steht nicht „mehr Methode“, sondern 
-\emph{konsequente Operationalisierung}: ODD klären, Daten/Tools führen, Betrieb überwachen, Änderungen kontrollieren.
+\section{Schlussbild und Antwort auf die Leitfrage}
+Unter realistischen Rahmenbedingungen und mit disziplinierter Evidenzführung ist KI im Radarumfeld als
+\emph{Level-1-Assistenz} \emph{hinreichend sicher machbar}. Die Leitfrage „Ist KI sicher genug für ein Flugzeug?“
+beantworte ich daher \emph{konkret} wie folgt: \textbf{Ja—für klar eingegrenzte, assistierende Funktionen} mit
+\textbf{stabilem ODD}, \textbf{kein Online-Lernen im Betrieb}, \textbf{konservativem Verhalten (Abstain/Degrade)},
+\textbf{menschlicher Entscheidungsverantwortung} und einer \textbf{durchgängigen Evidenzkette}. 
+In diesem Rahmen sind die typischen Nachweisziele (DAL-proportional) realistisch erreichbar, etwa für die hier
+betrachtete Random-Forest-gestützte Wetterphänomen-Assistenz.
 
-
-
-
-
-
-
-
-\begin{comment}
-
-
-% -------------------------
-% CHAPTER 14: Fazit und Ausblick
-% -------------------------
-\chapter{Fazit und Ausblick}\label{chap:fazit}
-
-\section{Zusammenfassung der Ergebnisse}\label{sec:fazit-zusammenfassung}
-Diese Arbeit hat den Einsatz von KI im Kontext von Luftfahrtradarsystemen aus einer Meta-Perspektive betrachtet.
-Im Mittelpunkt stand nicht die Detailbewertung einzelner Verfahren, sondern die Frage, \emph{welche Ansätze zur Absicherung
-gefordert werden} und \emph{inwieweit diese abgedeckt} sind. Auf Basis eines plattformneutralen \emph{Szenarienrahmens}
-sowie \emph{ODD-Schnitten} (Kap.~\ref{chap:szenarien}) wurden \emph{Anforderungsfelder} definiert und typischen Erwartungen
-aus etablierten Leitlinien und Standards zugeordnet (Kap.~\ref{chap:anforderungen}). Die anschließende Coverage-Analyse entlang
-ISO/PAS~8800 (Kap.~\ref{chap:coverage}) hat gezeigt, dass prozessuale und evidenzbezogene Felder (z.\,B.\ Daten-/Label-Governance,
-Toolchain-Assurance, Traceability) \emph{weitgehend adressierbar} sind, während leistungs- und betriebskritische Felder
-(Robustheit \& Verteilungssprünge, Monitoring/Degradation) \emph{substantielle Lücken} aufweisen. Die Bewertung der Übertragbarkeit
-(Kap.~\ref{chap:uebertragbarkeit}) legt nahe, dass \emph{Frontloading}-Anwendungen heute plausibel evidenzfähig sind, während
-Inline-Funktionen konditionale Voraussetzungen (klare ODD-Grenzen, segmentierte Evidenz, geprüfte Degradationspfade) benötigen.
-
-\section{Antwort auf die Leitfrage}\label{sec:fazit-antwort}
-Die leitende Frage, ob der Einsatz von KI in Luftfahrtradarsystemen unter den aktuell verfügbaren Konzepten und Rahmenbedingungen
-als \emph{hinreichend sicher} zu betrachten ist, lässt sich \emph{nicht binär} beantworten. 
-\textbf{Konditional gilt:} Dort, wo die ODD eindeutig begrenzt ist, segmentierte Evidenzen für Leistung \emph{und} Kalibrierung vorliegen,
-Robustheit gegen relevante Störungen plausibel nachgewiesen ist und geprüfte Degradationspfade existieren, ist Vertrauen
-\emph{begründbar}. Außerhalb dieser Bedingungen besteht \emph{weiterer Evidenzbedarf}, insbesondere hinsichtlich systematischer
-Shift-/Stresstests und betriebskritischer Monitoring-/Fallback-Mechanismen.
-
-\section{Schlussfolgerung}
-Die Analyse zeigt: Die adressierten Felder (ODD, Daten-/Label-Governance, V\&V/Metriken, Robustheit/OOD,
-Kalibrierung, Betrieb/Monitoring) werden durch ISO/PAS~8800 und die luftfahrtspezifischen Leitlinien
-konsistent aufgegriffen. \emph{Für ausgewählte Modelle und eng definierte Einsatzzwecke} erscheint ein
-„hinreichend sicher“ erreichbar -- vorausgesetzt, Rollen/Autorität sind klar festgelegt, ODD und
-Nicht-ODD-Verhalten priorisiert konservativ umgesetzt und die Evidenzführung projektkonkret ausgestaltet.
-Die verbleibende Aufgabe ist damit \emph{primär eine saubere Umsetzung und Dokumentation im Einzelfall},
-nicht das Fehlen grundlegender Prinzipien.
-
-
-\section{Ausblick}\label{sec:fazit-ausblick}
-Für die Weiterentwicklung zeichnen sich drei Pfade ab:
-\begin{enumerate}
-  \item \textbf{Methodische Evidenzpakete:} Standardisierte Formate für Kalibrierung, Shift-/Robustheitsnachweise und Traceability
-  erleichtern die Auditierung und erhöhen die Wiederverwendbarkeit von Frontloading-Ergebnissen.
-  \item \textbf{Betriebsleitplanken:} Ein konsentiertes Monitoring-/Degradation-Playbook (Telemetrie-Set, OOD-/Drift-Detektoren,
-  Alarm-/Fallback-Regeln, HMI-Richtlinien) schafft die Grundlage für belastbare Inline-Evidenz.
-  \item \textbf{Harmonisierung von Leitlinien:} Die schrittweise Konkretisierung konzeptioneller Vorgaben (z.\,B.\ akzeptierte
-  Evidenzanforderungen für KI-Komponenten) stärkt die Anschlussfähigkeit an etablierte Safety-Prozesse.
-\end{enumerate}
-Damit liefert die Arbeit einen strukturierten Beitrag zur Einordnung der Frage „\emph{ist KI sicher genug?}“ und markiert
-konkrete Ansatzpunkte, an denen Evidenz und Praxis weiter zusammengeführt werden können.
-
-
-\end{comment}
+Im Vordergrund steht dabei nicht „mehr Methode“, sondern die \emph{konsequente Operationalisierung}:
+ODD präzisieren und einhalten, Daten- und Tool-Governance führen, Kalibrierung/OOD überwachen und Änderungen
+kontrolliert freigeben. \emph{Außerhalb} dieser Leitplanken (höhere Autorität, offene ODDs, adaptives Online-Lernen)
+ist die Aussage \emph{nicht} pauschal übertragbar und bleibt Gegenstand weiterer Forschung und Regelwerksentwicklung.

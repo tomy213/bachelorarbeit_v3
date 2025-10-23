@@ -4,11 +4,11 @@
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
 \chapter{Radarsystem Auswahl}\label{chap:szenarien}
 Radarsysteme werden in der Luftfahrt an verschiedensten Orten und für verschiedenste Zwecke eingesetzt. 
-Und tragen dabei essentiell zur Flugsicherheit sowohl am Boden als auch an Board bei.
+Und tragen dabei essentiell zur Flugsicherheit sowohl am Boden als auch an Bord bei.
 
 \section{Ziel und Einordnung}\label{sec:szenarien-intro}
-Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem augewählt und genauer betrachtet.
-Da sonst alles nur sehr waage Umschreibungen ohne konkretes Ziel wären. 
+Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem ausgewählt und genauer betrachtet.
+Da sonst alles nur sehr vage Umschreibungen ohne konkretes Ziel wären. 
 Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
 
 \section{Verschiedene Radarsysteme}
@@ -35,7 +35,7 @@ Als Bordradar wurde z.B. ein Smerch-A1 verbaut, die Spezifikationen sind: \paren
 
 
 \subsection{F-14}
-Als Bordradar wurde unteranderem ein AWG-9 verwendet, die Spezifikationen sind: \parencite{Forecast1999_AWG9_APG71}
+Als Bordradar wurde unter anderem ein AWG-9 verwendet, die Spezifikationen sind: \parencite{Forecast1999_AWG9_APG71}
 \paragraph{Abmessungen \& Masse}
 \begin{itemize}
   \item \textbf{Antenne:} Slotted plane array; % Angabe übernommen wie geliefert
@@ -133,7 +133,7 @@ Als Wetterradar wird z.B. ein RDR-4000 verwendet, die Spezifikationen sind: \par
 \end{itemize}
 
 \subsection{Referenz (Automotive)}
-Frontradar zur abstand Messung. Toterwinkel Assistent (optional hinten quer mit dabei). 
+Frontradar zur Abstandmessung. Toterwinkel Assistent (optional hinten quer mit dabei). 
 Toterwinkel Quererkennung (unterschiedliche, gleicher Typ).
 Toterwinkel Module müssen breite Winkelabdeckung haben. Vollausstattung somit 5 Radare.\\
 Als vergleich werden Spezifikationen eines Bosch Frontradars angeschaut: \parencite{Bosch_FrontRadar_2025}
@@ -148,14 +148,14 @@ Als vergleich werden Spezifikationen eines Bosch Frontradars angeschaut: \parenc
 \section{Auswahl des Radarsystems}
 Da das System beispielhaft dienen soll, sind Einsatzzweck, Ort oder Art des Systems zweitrangig. 
 Die Objektklassifikation wird für diese Arbeit auf Grund dessen gewählt, dass sie verhältnismäßig verständlich 
-und nachvollziehbar ist. In dieser Arbeit wird beispielhaft eine Onboard Wetterphänomänsklassifikation als 
-Funktion ausgewählt. Wetterphänomäne zu identifizieren bietet hohes Potential, da auf Grund der Komplexität 
+und nachvollziehbar ist. In dieser Arbeit wird beispielhaft eine Onboard-Wetterphänomensklassifikation als 
+Funktion ausgewählt. Wetterphänomene zu identifizieren bietet hohes Potential, da auf Grund der Komplexität 
 klassische Methoden schnell an ihre Grenzen geraten. Und ein Pilot kann davon profitieren, wenn er 
 anstatt einer Klassifizierung zwischen Grün, Gelb und Rot zusätzlich wüsste ob es sich z.B. um 
 Regen oder Hagel handelt.
 
 
-\section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomäne}
+\section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomene}
 
 
 % --- Risikobadges ---
@@ -181,10 +181,10 @@ Regen oder Hagel handelt.
 \subsection*{Meteorologische Szenarien}
 \begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
   \item \riskhigh\ \scopeboth\ Konvektive Gewitterzellen / TS-Kerne (Thunderstorm cores) (Starkregen, Graupel, Hagel; starken Auf-/Abwinde).
-  \item \riskhigh\ \scopeboth\ Eingelagerte Konvektion in Stratiformbereichen (kleinere Geweitterzellen versteckt in großflächigen harmlosen Wolken).
+  \item \riskhigh\ \scopeboth\ Eingelagerte Konvektion in Stratiformbereichen (kleinere Gewitterzellen versteckt in großflächigen harmlosen Wolken).
   \item \riskhigh\ \scopeboth\ Vereisungsrelevante Phasen: Schnee/Schneeregen (Vereisungsgefahr).
   \item \riskmed\ \scopeboth\ Graupelschauer / Wintergewitter (gemischte Wasser- und Eisteilchen, schnelle Klassendynamik).
-  \item \riskmed\ \scopeboth\ Anvil-Blowoff, Virga, (Eispartikel, die von einer Gewitterwolke weggeweht wurden; Verdunstung bevor der Boden berührt wurde) (Echo ohne Bodenniederschlag; starker lokaler Abwind (Downburst) durch Verdunstungskühlung).
+  \item \riskmed\ \scopeboth\ Anvil-Blowoff, Virga, (Eispartikel, die von einer Gewitterwolke weggeweht wurden; Verdunstung bevor der Boden berührt wurde); (Echo ohne Bodenniederschlag; starker lokaler Abwind (Downburst) durch Verdunstungskühlung).
   \item \riskhigh\ \scopeon\ Pfadabschattung hinter Starkzellen (\emph{black hole/gap illusion}): starke Dämpfung erzeugt scheinbar „freie“ Korridore hinter einer Zelle → hohes Risiko für Fehlrouting durch vermeintliche Lücken.
 \end{itemize}
 
@@ -290,12 +290,12 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
   \item \textbf{Modellgröße:} ca. 13.000 Knoten/Blätter.
 \end{itemize}
 
-\subsection*{Vision Transformer }
+\subsection*{Vision Transformer}
 
 \begin{itemize}
   \item \textbf{Zweck:} Patch-/Bildbasierte Klassifikation, Segmentierung und Detektion auf Radar-„Bildern“;.
   \item \textbf{Typische Variante:} \emph{DeiT-Small} bei mehr Daten/Compute.
-  \item \textbf{Input/Feature:} Mehrkanal-Radar-Slices (z.\,B.\ Reflektivität, Spektralbreite, \text{SNR}).
+  \item \textbf{Input/Features:} Mehrkanal-Radar-Slices (z.\,B.\ Reflektivität, Spektralbreite, \text{SNR}).
   \item \textbf{Stärken:} Globaler Kontext durch Self-Attention; flexible Tokenisierung (auflösungsrobust).
   \item \textbf{Schwächen:} Hoher Daten- und Compute-Bedarf; Sensitivität gegenüber Patch-/Token-Design.
   \item \textbf{Latenz/Compute:}  $\sim$10--40\,ms pro 512$\times$512 (auf einer GPU).
@@ -314,7 +314,7 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
   \item \textbf{Modellgröße:} Feature anhängig.
 \end{itemize}
 
-\section{Modell Vergleich und Auswahl}
+\section{Modellvergleich und Auswahl}
 
 \small
 \begin{longtable}{p{0.16\linewidth}p{0.21\linewidth}p{0.2\linewidth}p{0.21\linewidth}p{0.2\linewidth}}
@@ -388,12 +388,12 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \textbf{Nein} Vor-/Nachverarbeitung \\
 \end{longtable}
 
-Als alleinstehendes Modell empfehlen sich Baummodelle (so fern man gute Features hat), als typisches Modell wird Random Forrest verwendet. 
+Als alleinstehendes Modell empfehlen sich Baummodelle (so fern man gute Features hat), als typisches Modell wird Random Forest verwendet. 
 Diese sind alleinstellungsfähig, was für diese Arbeit wichtig ist, um zusätzliche Komplexität zu vermeiden. 
 Zudem sind sie Echtzeitfähig, gut erklärbar und haben eine relativ geringe Anforderung an die Leistung der Hardware. 
 Das hat den Vorteil, dass es nicht bereits an der Hardwarezulassung scheitert.
 
-\section{Erklärung eines Random Forrest}
+\section{Erklärung eines Random Forest}
 Ein Random Forest ist ein Ensemble vieler Entscheidungsbäume. Jeder Baum wird aus einer zufälligen Stichprobe 
 der Trainingsdaten aufgebaut und betrachtet an jedem Knoten nur eine zufällige Auswahl der Merkmale. Der Baum 
 stellt einfache Schwellenfragen, teilt die Daten Schritt für Schritt und gibt am Blatt eine Klassenentscheidung 
@@ -427,13 +427,13 @@ voneinander unabhängiger, die Streuung sinkt, und die Gesamtvorhersage wird rob
 \end{figure}
 
 \subsection{Sicherheitseinordnung}
-Erfahrungsgemäß kann man bei einer eindeutigen Klassifikation ``out of the bag'' sprich ohne Aufwand 
-von einer Accuracy bis zu 80 \%  ausgehen. Mit geringen Feature Egineering bereits 90 bis 97 \%. 
+Beispielhafte Erfahrungswerte sind bei einer eindeutigen Klassifikation ``out-of-bag'' sprich ohne Aufwand 
+eine Accuracy bis zu 80 \%  . Mit geringen Feature Engineering bereits 90 bis 97 \%. 
 Ab hier beginnt die eigentliche Arbeit. Auf Datensätzen von wenigen Tausend Daten 
 sind Genauigkeiten bis zu 99,9 \% möglich. Mit größeren Datenmengen, guten Features und eng gefasster 
 ODD wäre somit eine Genauigkeit im Bereich $\le 1\times10^{-4}$ bzw. >99,99 \% auf homogenen Testdaten realistisch. 
 Da Daten in der Realität nicht homogen sondern heterogen verteilt sind, wäre eine Fehlerquote von $\ 1\times10^{-6}$ 
-pro Mission theoretisch möglich. Dadurch könnten unter idealen Vorraussetzungen und besonderer Begründung 
+pro Mission theoretisch möglich. Dadurch könnten unter idealen Voraussetzungen und besonderer Begründung 
 Bereiche wie DAL B oder ASIL C möglich sein. Wenn man keine eindeutige Klassifikation sondern 
 prozentuale Ausgaben berücksichtigt kann man zudem unterstützende Einsatzmöglichkeiten erörtern.
 
@@ -593,7 +593,7 @@ und mit IDs versehen, um sie später mit der Abdeckung der ISO 8800 abzugleichen
 
 \subsection{Erklärbarkeit und Validierung}
 \begin{description}
-  \item[\textbf{R-KI-10 (Feature-Evidenz).}] Globale und lokale Beitragsanalysen (z.\,B.\ Permutation/SHAP) \emph{müssen} für Reviews verfügbar sein.\\
+  \item[\textbf{R-KI-10 (Feature-Evidenz).}] Globale und lokale Beitragsanalysen (z.\,B.\ Permutation oder Leaf-Pfad-Inspection (Regeln pro Blatt)) \emph{müssen} für Reviews verfügbar sein.\\
   \emph{Nachweis:} Feature-Ranking, Fall-Erklärungen (Top-Treiber pro Event).
 
   \item[\textbf{R-KI-11 (Zeit-/Raum-getrennte Tests).}] Validierung \emph{muss} zeitlich und räumlich getrennt erfolgen; tatsächlich getestete ODD-Zellen sind zu protokollieren.\\
@@ -800,7 +800,7 @@ ISO/IEC~TR~5469 dient dabei als domänenneutrale Brücke für Terminologie und A
 %Luftfahrt
 %---------------------------------------------
 
-\chapter{Luftfahrtrahmenbedingungen}
+\chapter{Luftfahrtrahmenbedingungen}\label{chap:anf-avi}
 
 % ==== Luftfahrt ====
 \section{Ziel, Motivation und Scope (Luftfahrt)}
@@ -1089,7 +1089,7 @@ explizite Runtime-Indikatoren und organisatorische Governance-Elemente nur teilw
 \begin{itemize}
   \item \textbf{F-Avi-01 Human-centric, Level \& ConOps/HAT} (\S 6, 7): Rollen, Interaktion und Management sind nur implizit vorhanden. Der Mensch als Zentrale Rolle und konkrete Aufgabenverteilungen sind nicht explizit vorgegeben. Diese sind in den Anforderungen oder Domänenabgrenzungen zu betrachten.
   \item \textbf{F-Avi-04 AI Assurance (Learning \& Explainability)} (\S 8, 12, 15): Assurance-Argumente sind vollständig dargestellt. Erklärbarkeit wird ausdrücklich gefordert, bleibt aber offen und ist projektspezifisch zu betrachten.
-  \item \textbf{F-Avi-06 OOD \& Unvorhersagbarkeit} (\S 9, 12, 14): OOD/Unsicherheiten werden definiert und im Test/Betrieb behandelt. Spezifische Runtime-Monitore/Trigger sind gefordert zu dokumentieren aber als Aufgabe der SOTIF und mit Hinweisen zum ``living safety-case'' vermerkt. In der Luftfahrt werden z.B. in den Anforderungen explizite Update Zeitpunkte festgehalten, im Automotive werden diese unteranderem gesondert betrachtet.
+  \item \textbf{F-Avi-06 OOD \& Unvorhersagbarkeit} (\S 9, 12, 14): OOD/Unsicherheiten werden definiert und im Test/Betrieb behandelt. Spezifische Runtime-Monitore/Trigger sind gefordert zu dokumentieren aber als Aufgabe der SOTIF und mit Hinweisen zum ``living safety-case'' vermerkt. In der Luftfahrt werden z.B. in den Anforderungen explizite Update Zeitpunkte festgehalten, im Automotive werden diese unter anderem gesondert betrachtet.
   \item \textbf{F-Avi-08 Lebenszyklus \& W-Shape} (\S 7, 8, 14): Ein vollständiger AI-Safety-Lebenszyklus ist vorhanden; das EASA-spezifische W-Shape (Gates/Artefakte) als formale Struktur ist nicht Teil der ISO. Statdessen wird die klassische V-Shape als Struktur verwendet.
   \item \textbf{F-Avi-09 Kein Online-Lernen im Betrieb} (\S 14, 10): ISO fordert Re-Training/Re-Validation/Re-Approval bei Änderungen, verbietet Online-Lernen jedoch nicht explizit.
   \item \textbf{F-Avi-11 Rare-Events-Management} (\S 11, 12, 9): Edge-Case-Handling ist vorgesehen; ein verpflichtender Taxonomie-/Katalog-Mechanismus ist nicht vorgegeben. Edge-cases sind fest zu halten, zu definieren, wie damit umzugehen ist, etc. sie sind aber projektspezifisch, daher wird ein allgemeiner Katalog nicht gefordert und ist für jedes Projekt einzeln anzufertigen.
@@ -1161,7 +1161,7 @@ R-KI-13 & Monitoring \& Drift (Betrieb, Wartungstrigger) & F-Avi-05, F-Avi-06, F
 
 \end{longtable}
 
-In Summe sind \emph{alle} Random-Forrest-Anforderungen den Luftfahrt-Forderungen (F-Avi-01…12) zuordenbar; eine echte
+In Summe sind \emph{alle} Random-Forest-Anforderungen den Luftfahrt-Forderungen (F-Avi-01…12) zuordenbar; eine echte
 „Nicht-Zuordnung“ ergibt sich nicht.
 
 
@@ -1177,7 +1177,7 @@ In Summe sind \emph{alle} Random-Forrest-Anforderungen den Luftfahrt-Forderungen
 In diesem Kapitel geht es darum die Übertragbarkeit des gewählten Beispiels auf existierende Normen zu 
 übertragen. Das in dieser Arbeit gewählte Beispiel war ein Random Forest KI Modell zu nutzen, um 
 Muster und Datensätze zu erkennen und darzustellen in der Entwicklung, für die Klassifikation von  
-Wetterphänomänen mittels eines Onboard Radarsystems in einem Flugzeug.
+Wetterphänomenen mittels eines Onboard Radarsystems in einem Flugzeug.
 
 
 

@@ -51,7 +51,7 @@ Die Beispiele in den Kästen sind \emph{illustrativ} (nicht abschließend).
     \coordinate (topC) at ([yshift=-1cm]B.north);
     \node[draw, fill=green!10, minimum width=12cm, minimum height=5cm, anchor=north] (C) at (topC) {};
     \node[anchor=north, align=center] at (C.north) [yshift=-5pt] { \textbf{Deep Learning (DL)} \\[7.5em]
-      – Convolutional Nurnal Network (CNN) \\ – Transformer };
+      – Convolutional Neural Network (CNN) \\ – Transformer };
     % Foundation Models
     \coordinate (topD) at ([yshift=-1cm]C.north);
     \node[draw, fill=yellow!10, minimum width=11cm, minimum height=2.5cm, anchor=north] (D) at (topD) {};
@@ -93,7 +93,7 @@ dass Vorhersagen möglichst gut mit den Labels übereinstimmen.
 
 \paragraph{Bewertung.}
 Häufig verwendete Methoden zur Bewertung bei Klassifikation sind: Konfusionsmatrix, Accuracy, Precision, Recall, F\(_1\)-Score, ROC-Kurve. 
-Und bei Regresssion meist der MSE (Mean Squared Error).
+Und bei Regression meist der MSE (Mean Squared Error).
 
 
 \subsection{Neuronale Netze }\label{sec:nn-einfach}
@@ -350,7 +350,7 @@ die \emph{qualifizierte Herleitung}, die \emph{Messmethodik} und die \emph{Audit
   \item \textbf{Geschwindigkeitsauflösung:} kleinste unterscheidbare Radialgeschwindigkeit; abhängig von Beobachtungszeit (CPI-Länge) und Anzahl der Pulse (Doppler-FFT).
   \item \textbf{Winkelauflösung:} Trennung im Azimut/Elevation; abhängig von Antennenapertur, SNR und Winkelschätzverfahren (z.\,B.\ Monopulse/DBF).
   \item \textbf{Reichweitenmessfehler:} zufällige Abweichungen der Distanzschätzung; beeinflusst durch SNR, Pulskompression und Synchronisation.
-  \item \textbf{Geschwindigkeitsmessfehler:} Unsicherheit der Doppler­schätzung; abhängig von SNR, Beobachtungsdauer, PRF-Stabilität (Pulse-Repetition-Frequncey).
+  \item \textbf{Geschwindigkeitsmessfehler:} Unsicherheit der Doppler­schätzung; abhängig von SNR, Beobachtungsdauer, PRF-Stabilität (Pulse-Repetition-Frequency).
   \item \textbf{Winkelmessfehler:} Abweichung zwischen geschätztem und tatsächlichem Winkel; Funktion von SNR, Apertur, Array-Kalibrierung und Verfahren.
 \end{itemize}
 
@@ -419,7 +419,7 @@ und erzeugen \emph{Randfälle}, die in ODD/Tests explizit abzudecken sind.
 Viele der genannten Einflüsse wirken \emph{vor} der Detektion (SNR, Spektralform), propagieren durch
 \emph{CFAR/Maskierung} und prägen die Qualität von \emph{Clustering/Tracking}. Für KI-Funktionen
 (Objektklassifizierung) heißt das: Eingaben (RD/RDA (Range-Doppler/-Angle), Merkmalsvektoren) variieren distributionsseitig,
-Konfidenzen können fehlkalibriert sein, und OOD-Fälle treten gehäuft in Randbedingungen auf.
+Konfidenzen können falsch kalibriert sein, und OOD-Fälle treten gehäuft in Randbedingungen auf.
 
 \begin{table}[h]
 \centering
@@ -495,7 +495,7 @@ für eine tragfähige Assurance.
 
 
 \section{Radar–Grundlagen für Objektklassifizierung}\label{sec:radar-objklass}
-Eine vereinfachte Darstellung klassischer Radar Klassifikation ist, es werden die empfangenen Rohdaten aufbereitet 
+Eine vereinfachte Darstellung klassischer Radar-Klassifikation ist, es werden die empfangenen Rohdaten aufbereitet 
 und in eine verarbeitbare Form gebracht. Weiter wurde eine deterministische Heuristik einprogrammiert, 
 die anhand dieser aufbereiteten Daten und den dort definierten Mustern die Objekte unterscheidet. 
 Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kann das abweichen.
@@ -996,7 +996,7 @@ Die Vertrauenswürdigkeit der ML-Lieferkette ist Teil der Safety-Argumentation. 
   \item \textbf{Traceability:} Ende-zu-Ende-Links von Anforderungen über Daten/Modelle und Auswertungen bis zum Release.
 \end{itemize}
 \textit{Hinweis.} Allgemeine Evidenzlogik siehe Assurance Case (\ref{sec:sicherheitsprinzipien}); KI-spezifische Erwartung an Toolchain/Traceability wird u.\,a.\ in ISO/PAS~8800 strukturiert.\\
-\textit{Takeaway.} Nicht nur die ki sondern auch die verwendeten tools z.B. zum Trainieren müssen sicher sein.
+\textit{Takeaway.} Nicht nur die KI sondern auch die verwendeten tools z.B. zum Trainieren müssen sicher sein.
 
 
 \subsection{Traceability und Reproduzierbarkeit.}
@@ -1006,13 +1006,13 @@ und \emph{Wiederholbarkeit} (vergleichbare Ergebnisse über Zeit/Plattformen) er
 
 
 \subsection{Betrieb, Monitoring und Änderungen (Lifecycle)}\label{sec:betrieb-drift}
-Assurance endet nicht mit der Inbetriebnahme. Eine heute freigegebene KI kann durch z.B. Umgebungsveränderungen(ODD-Verschiebungen
+Assurance endet nicht mit der Inbetriebnahme. Eine heute freigegebene KI kann durch z.B. Umgebungsveränderungen (ODD-Verschiebungen
 oder neue Szenarien) morgen unsicher sein. Nach der Freigabe sichern folgende Punkte die Wirksamkeit:
 \begin{itemize}
   \item \textbf{Monitoring:} Laufzeitmetriken pro ODD-Segment (Leistung, Kalibrierung, OOD-/Drift-Rate) und Alarmkonzepte.
   \item \textbf{Degradation/Fallback:} definierte Betriebsmodi und Eskalationspfade (inkl.\ HMI-Hinweisen), verifiziert durch Szenarien-/Stresstests.
-  \item \textbf{Change \& Release:} Trigger für Re-Training/Updates (z.\,B.\ Daten-Shift, Performance-Drop)und erneute Freigabe.
-  \item \textbf{Living safety case} Alle Änderungen Dokumentieren und Reflektieren (Was haben wir dazu gelern?).
+  \item \textbf{Change \& Release:} Trigger für Re-Training/Updates (z.\,B.\ Daten-Shift, Performance-Drop) und erneute Freigabe.
+  \item \textbf{Living safety case} Alle Änderungen Dokumentieren und Reflektieren (Was haben wir dazu gelernt?).
 \end{itemize}
 
 

@@ -63,7 +63,7 @@ bewährten Bezugsrahmen.
 Ungeklärt bleibt jedoch, in welchem Ausmaß vorhandene Konzepte, Vorgehensmodelle 
 und Rahmenbedingungen geeignet erscheinen, Vertrauen in KI-basierte Funktionen zu 
 stiften, wenn diese in luftfahrtrelevanten Anwendungen eingesetzt werden. 
-Am Beispiel des Anwendungsfelds Radar lässt sich diese Frage exemplarisch einordnen, 
+Am Beispiel des Anwendungsfeldes Radar lässt sich diese Frage exemplarisch einordnen, 
 ohne eine Detailbewertung einzelner Verfahren vorzunehmen: Im Vordergrund steht die 
 übergeordnete Einschätzung, welche Ansätze gefordert sind und inwieweit deren 
 Abdeckung gegeben ist.
@@ -104,8 +104,8 @@ der ISO 8800 strukturiert analysiert, deren Übertragbarkeit auf den Radar-Konte
 bewertet sowie potenzielle Sicherheitslücken und Risiken identifiziert. Aus den Ergebnissen 
 werden anwendungsbezogene Empfehlungen abgeleitet. 
 Auf Basis eines ausgewählten Beispielmodells wurden mögliche Risiken identifiziert. Diese wurden verglichen 
-mit einer ergänzenden Analyse zu heutigen Standards; Ergebnis: Die gefundenen Risiken sind 
-durch die dort adressierten und abgedeckten Risiken enthalten.
+mit einer ergänzenden Analyse zu heutigen Standards; 
+Ergebnis: Die identifizierten Risiken sind dort bereits adressiert und abgedeckt.
 
 
 \section{Forschungsfragen}
@@ -118,7 +118,7 @@ als hinreichend sicher zu betrachten?
 \paragraph{Rahmenbedingungen:}
 Welche Anforderungen und Leitlinien werden derzeit von luftfahrtspezifischen 
 Institutionen (z. B. EASA) und internationalen Standards (z. B. ISO 8800) an die 
-Sicherheit von KI Systemen gestellt?
+Sicherheit von KI-Systemen gestellt?
 \paragraph{Potenziale und Risiken:}
 Welche Einsatzmöglichkeiten von KI in Radarsystemen existieren, und welche spezifischen 
 Chancen, Risiken und Unsicherheiten ergeben sich daraus?
@@ -159,20 +159,62 @@ Vorgehensweisen im Radar-Kontext. Daraus resultieren:
 \section{Vorgehensweise}
 Die Untersuchung kombiniert systematische Sichtung und strukturierende Analyse:
 \begin{enumerate}
-\item \textbf{Literaturrecherche} zu AI Safety, Luftfahrtsicherheit und Radar; Sammlung ausgewählter Praxisberichte zu Problemen beim KI-Einsatz.
+\item \textbf{Literaturrecherche} zu AI-Safety, Luftfahrtsicherheit und Radar; Sammlung ausgewählter Praxisberichte zu Problemen beim KI-Einsatz.
 \item \textbf{Grundlagen} zu KI, Radar und Sicherheit; kompakte \textbf{Steckbriefe} ausgewählter KI-Modelle mit Blick auf Erklärbarkeit und typische Fehlerbilder.
-\item \textbf{Anforderungen und Szenarien} für Radarsysteme ableiten; \textbf{Abgleich} geforderter Ansätze (u.,a. entlang ISO~8800) mit der \textbf{heutigen Abdeckung}; \textbf{Bewertung der Übertragbarkeit}.
+\item \textbf{Anforderungen und Szenarien} für Radarsysteme ableiten; \textbf{Abgleich} geforderter Ansätze (u.a. entlang ISO~8800) mit der \textbf{heutigen Abdeckung}; \textbf{Bewertung der Übertragbarkeit}.
 \item \textbf{Identifikation} von Sicherheitslücken und Risiken; \textbf{Ableitung} von Empfehlungen.
 \end{enumerate}
 
+\newpage
 \section{Aufbau der Arbeit}
-Kapitel~\textbf{1} führt in Motivation, Problemstellung, Zielsetzung und Forschungsfragen ein und definiert Umfang und Abgrenzung.
-Kapitel~\textbf{2} stellt die \textbf{Grundlagen} zu KI, Radar und Sicherheit bereit.
-Kapitel~\textbf{3} bietet einen \textbf{Literatur- und Praxisüberblick} (inkl.\ kuratierter Berichte zu Problemen beim KI-Einsatz).
-Kapitel~\textbf{4} formuliert \textbf{typische Anforderungen und Szenarien} für Radarsysteme.
-Kapitel~\textbf{5} erläutert \textbf{ausgewählte KI-Modelle} knapp im Hinblick auf Erklärbarkeit und Fehlerbilder.
-Kapitel~\textbf{6} \textbf{analysiert} bestehende \textbf{AI-Safety-Ansätze entlang der ISO~8800} und prüft deren \textbf{Abdeckung}.
-Kapitel~\textbf{7} \textbf{bewertet die Übertragbarkeit} auf den Radar-Kontext.
-Kapitel~\textbf{8} \textbf{identifiziert Sicherheitslücken und Risiken}.
-Kapitel~\textbf{9} \textbf{leitet Empfehlungen} für die Anwendung ab.
-Kapitel~\textbf{10} schließt mit \textbf{Fazit und Ausblick}.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}[
+  node distance=18mm and 18mm,
+  box/.style={draw, rounded corners, align=center, text width=32mm, minimum height=8mm, fill=gray!5},
+  arrow/.style={-{Latex}, thick}
+]
+
+% --- Obere Reihe --- [..., xshift=-14mm, yshift=-14mm]
+\node[box] (auto) {\nameref{chap:automotiv}};
+\node[box, right=of auto, xshift=-12mm] (ref) {\nameref{chap:anforderungen}\\(Referenzrahmen)};
+\node[box, right=of ref, xshift=-12mm] (radar) {\nameref{chap:szenarien}};
+\node[box, right=of radar, xshift=-12mm] (models) {\nameref{chap:modelle}};
+
+
+% --- Zweite Reihe ---
+\node[box, below=of auto, yshift=5mm] (iso) {\nameref{chap:iso-8800}};
+\node[box, below=of ref, yshift=5mm] (avi) {\nameref{chap:anf-avi}};
+\node[box, below=of radar, yshift=-10mm] (anfref) {\nameref{chap:anforderungen}\\(Anforderungen)};
+
+% --- Dritte Reihe  ---
+\node[box, below=of avi] (cov) {\nameref{chap:coverage}};
+
+% --- vierte reihe ---
+\node[box, below=of cov, xshift=10mm] (ueber) {\nameref{chap:uebertragbarkeit}};
+\node[box, right=of ueber, xshift=-10mm] (risk) {\nameref{chap:risiken}};
+
+% --- fünfte reihe ---
+\node[box, below=of ueber, yshift=6mm] (empf) {\nameref{chap:empfehlungen}};
+
+% --- sechste reihe ---
+\node[box, below=of empf, yshift=6mm] (faz) {\nameref{chap:fazit-ausblick}};
+
+% --- Pfeile ---
+\draw[arrow] (auto) -- (iso);                         % Automotive -> ISO 8800
+\draw[arrow] (ref) -- (avi);                          % Referenzrahmen -> Anforderungen Luftfahrt
+\draw[arrow] (radar) -- (anfref);                     % Radar -> Anf&Ref
+\draw[arrow] (models) -- (anfref);                    % Modelle -> Anf&Ref
+\draw[arrow] (iso) -- (cov);                          % ISO 8800 -> Coverage
+\draw[arrow] (avi) -- (cov);                          % Anforderungen Luftfahrt -> Coverage
+\draw[arrow] (anfref) -- (ueber);                     % Anf&Ref -> Bewertung
+\draw[arrow] (cov) -- (ueber);                        % Coverage -> Bewertung
+\draw[arrow] (ueber) -- (empf);                       % bewertung -> risiken
+\draw[arrow] (risk) -- (empf);                        % risiken -> empfehlung
+\draw[arrow] (empf) -- (faz);                         % empfehlung -> fazit
+
+
+\end{tikzpicture}
+\caption{Illustration des Aufbaus der Arbeit: Kapitelbezüge und Datenfluss.}
+\end{figure}
