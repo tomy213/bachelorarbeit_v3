@@ -10,7 +10,7 @@ Repräsentationsaspekte, die für radarnahe Anwendungen relevant sind. Sicherhei
 Sicherheitskapiteln behandelt.
 
 \section{Begriffe und Konzepte}\label{sec:begriffe-konzepte}
-Unter \emph{Künstlicher Intelligenz (KI)} werden Verfahren verstanden, die aus Daten Muster ableiten
+Unter \emph{KI} werden Verfahren verstanden, die aus Daten Muster ableiten
 und darauf basierend Entscheidungen, Klassifikationen oder Vorhersagen treffen. Technisch prägend sind
 \emph{Machine Learning (ML)} und dessen Teilbereich \emph{Deep Learning (DL)} mit tiefen, meist
 neuronalen Architekturen. Für diese Arbeit stehen Modellklassen, Datenrepräsentationen und der
@@ -27,8 +27,9 @@ spielen für technische Radaranwendungen keine Rolle.
 \emph{Limited Memory} Systeme nutzen gelernte Modelle und historische Daten (typisch für moderne ML/DL).
 
 \paragraph{Begriffsverschachtelung}
-Die Abbildung dient zum visuellen Verständnis, wie wichtige Begriffe einzuordnen sind in einer Teilmengen-Beziehung:
-\emph{Künstliche Intelligenz (KI)} umfasst \emph{Maschinelles Lernen (ML)} als Untermenge;
+Die Abbildung dient zum visuellen Verständnis, wie häufig verwendete Begriffe einzuordnen sind. 
+Dargestellt in einer Teilmengen-Beziehung:
+\emph{KI} umfasst \emph{Maschinelles Lernen (ML)} als Untermenge;
 \emph{Deep Learning (DL)} ist wiederum eine Teilmenge von ML; und \emph{Foundation Models (FM)}
 bilden eine spezielle Klasse innerhalb des DL-Bereichs (z.B. ChatGPT (LLM)).
 Die Beispiele in den Kästen sind \emph{illustrativ} (nicht abschließend).
@@ -46,7 +47,7 @@ Die Beispiele in den Kästen sind \emph{illustrativ} (nicht abschließend).
     \coordinate (topB) at ([yshift=-1cm]A.north);
     \node[draw, fill=blue!10, minimum width=13cm, minimum height=9cm, anchor=north] (B) at (topB) {};
     \node[anchor=north, align=center] at (B.north) [yshift=-5pt] { \textbf{Maschinelles Lernen (ML)} \\[14em]
-      – Lineare Regression \\ – Entscheidungsbäume/Random Forests \\ – Support Vector Machines \\ – Clustering  \\ - Neuronale Netze (NN)};
+      – Lineare Regression \\ – Entscheidungsbäume/Random Forests \\ – Support Vector Machines \\ – Clustering  \\ – Neuronale Netze (NN)};
     % DL
     \coordinate (topC) at ([yshift=-1cm]B.north);
     \node[draw, fill=green!10, minimum width=12cm, minimum height=5cm, anchor=north] (C) at (topC) {};
@@ -62,7 +63,8 @@ Die Beispiele in den Kästen sind \emph{illustrativ} (nicht abschließend).
 \end{figure}
 \noindent\emph{Praxisbezug:} In radarnahen Aufgaben werden klassische ML-Verfahren (z.\,B. Random Forests)
 und DL-Verfahren (z.\,B. CNNs/Transformer) eingesetzt; Foundation Models spielen hier v.\,a. als
-vortrainierte Repräsentationen oder multimodale Bausteine eine Rolle.
+vortrainierte Repräsentationen oder multimodale Bausteine eine Rolle. LLMs wie ChatGPT sind zum Beispiel 
+Anwendungen von Transformer-Modellen.
 
 
 \section{Lernparadigmen}\label{sec:lernparadigmen}
@@ -71,113 +73,21 @@ vortrainierte Repräsentationen oder multimodale Bausteine eine Rolle.
 \textbf{Reinforcement Learning (RL)} : Lernen durch Interaktion und Belohnungen.
 \smallskip
 
-Für diese Arbeit sind SL und UL am wichtigsten. Weiter wird RL in den EASA-Papieren ausdrücklich ausgeschlossen.
+Für diese Arbeit sind SL und UL am wichtigsten. Weiter wird RL nach den EASA-Papieren nicht empfohlen.
+\section{Beispiel: Training eines ML-Modells mit neuronalen Netzen (kompakt)}\label{sec:nn-train-kompakt}
+Beim \textbf{überwachten Lernen} liegen zu jedem Eingabebeispiel passende \emph{Labels} vor; das Netz lernt die Abbildung
+\(\text{Eingabe}\!\rightarrow\!\text{Label}\) durch Minimierung einer \textbf{Verlustfunktion (Loss)}. Ein neuronales Netz besteht aus
+Schichten mit \textbf{Gewichten} und \textbf{Aktivierungsfunktionen} (z.\,B.\ ReLU), die Eingaben schrittweise in
+aussagekräftige \emph{Repräsentationen} überführen.
 
-\subsection{Überwachtes Lernen (kurz erklärt)}\label{sec:supervised-simple}
-Beim \emph{überwachten Lernen} liegen zu jedem Eingabebeispiel passende \emph{Labels} (Zielwerte) vor.
-Das Modell lernt eine Zuordnung \(\text{Eingabe} \rightarrow \text{Label}\), indem es seine Parameter so anpasst,
-dass Vorhersagen möglichst gut mit den Labels übereinstimmen.
+\textbf{Trainingsablauf (Kernidee):} Daten in \emph{Mini-Batches} durch das Netz schicken (\emph{Forward Pass}) \(\rightarrow\) Loss mit den
+Labels berechnen \(\rightarrow\) \emph{Backpropagation} bestimmt Gradienten \(\rightarrow\) ein \textbf{Optimierer} aktualisiert
+die Gewichte. Viele Wiederholungen über alle Trainingsdaten heißen \textbf{Epochen}. Daten werden in \textbf{Train/Valid/Test} aufgeteilt:
+Training passt Gewichte an, \emph{Validierung} steuert Hyperparameter/Frühes Stoppen, \emph{Test} schätzt die finale Leistung.
 
-\paragraph{Typische Aufgaben.}
-\begin{itemize}
-  \item \textbf{Klassifikation:} eindeutige Klasse vorhersagen (z.\,B.\ A/B/C).
-  \item \textbf{Regression:} einen numerischen Wert schätzen (z.\,B.\ Temperatur).
-\end{itemize}
-
-\paragraph{Wie lernt das Modell?}
-\begin{itemize}
-  \item \textbf{Verlustfunktion (Loss):} misst den Fehler der Vorhersage
-  \item \textbf{Optimierung:} schrittweise Gewichts­anpassung 
-  \item \textbf{Batches \& Epochen:} Daten in Häppchen; mehrfache Durchläufe über den Datensatz.
-\end{itemize}
-
-\paragraph{Bewertung.}
-Häufig verwendete Methoden zur Bewertung bei Klassifikation sind: Konfusionsmatrix, Accuracy, Precision, Recall, F\(_1\)-Score, ROC-Kurve. 
-Und bei Regression meist der MSE (Mean Squared Error).
-
-
-\subsection{Neuronale Netze }\label{sec:nn-einfach}
-Neuronale Netze sind Rechenmodelle, die versuchen, aus Beispielen \emph{Regeln} zu lernen.
-Man kann sie sich wie viele hintereinander geschaltete „Mini‐Entscheider“ vorstellen, die jeweils
-ein bisschen an der Gesamtentscheidung mitwirken. Beim Lernen werden die „Stellschrauben“
-(\emph{Gewichte}) so lange feinjustiert, bis die Vorhersagen gut genug sind.
-
-\paragraph{Grundidee }
-Ein Eingabedatenpunkt (z.\,B.\ ein Bildausschnitt oder ein Zahlenvektor) wird Schicht für Schicht
-weitergereicht und Schritt für Schritt in etwas \emph{Aussagekräftigeres} verwandelt.
-Am Ende steht eine Vorhersage (z.\,B.\ „Klasse A“ vs.\ „Klasse B“).
-Stimmt die Vorhersage nicht, wird das Netz minimal „korrigiert“, damit es beim nächsten Mal
-weniger danebengreift.
-
-\paragraph{Wie lernt das Netz? (Mini‐Ablauf)}
-\begin{enumerate}
-  \item \textbf{Start:} Zufällige Anfangseinstellungen der Stellschrauben (Gewichte).
-  \item \textbf{Vorhersagen:} Daten durch das Netz schicken \(\rightarrow\) Ausgabe entsteht.
-  \item \textbf{Fehler messen:} Vergleich mit der richtigen Antwort (\emph{Verlust} = Fehlermaß).
-  \item \textbf{Nachjustieren:} Kleine Korrekturen an den Gewichten (Schrittweise, viele Wiederholungen).
-\end{enumerate}
-
-\paragraph{Wann lohnt sich ein neuronales Netz?}
-\begin{itemize}
-  \item \textbf{Viele Daten, komplexe Muster:} Bilder, Spektrogramme, Zeitreihen mit versteckten Strukturen.
-  \item \textbf{Wenig Handarbeit an Merkmalen:} Das Netz „lernt“ nützliche Merkmale selbst.
-  \item \textbf{Vorwissen nutzbar:} Vortrainierte Modelle können \emph{weiterverwendet} und angepasst werden (Transfer Learning).
-\end{itemize}
-
-\paragraph{Begriffe, die man kurz gehört haben sollte.}
-\begin{itemize}
-  \item \textbf{Aktivierungsfunktion:} kleine Nichtlinearität in jeder Schicht (z.\,B.\ ReLU), damit das Netz \emph{komplexe} Regeln lernen kann.
-  \item \textbf{Optimierer:} Verfahren, das die Gewichte schrittweise anpasst (z.\,B.\ \emph{Adam}, \emph{SGD}).
-  \item \textbf{Epochen/Batch:} Wie oft das Netz alle Trainingsdaten sieht / in wie großen Häppchen sie gefüttert werden.
-  \item \textbf{Überanpassung (Overfitting):} Netz merkt sich Trainingsdaten „auswendig“ und verallgemeinert schlecht.
-  \item \textbf{Regularisierung:} Gegenmittel gegen Überanpassung (z.\,B.\ \emph{Dropout}, frühes Stoppen, mehr/abwechslungsreiche Daten).
-\end{itemize}
-
-
-\section{Daten- und Lebenszyklusbegriffe}\label{sec:daten-lifecycle}
-Wesentliche Artefakte sind \emph{Datensätze} (mit/ohne Labels), \emph{Splits} (Train/Valid/Test)
-und \emph{Features/Repräsentationen}. Der generische Lebenszyklus umfasst Datenerhebung/Kuratierung,
-Modellentwurf, Training, Evaluation, Bereitstellung (Inferenz) und Pflege (z.\,B. Retraining).
-Der Einsatzbereich wird fachlich beschrieben (z.\,B. typische Szenarien, Sensor-/Modus-Metadaten);
-sicherheitsspezifische ODD-Anforderungen werden an anderer Stelle vertieft.
-
-\section{Verteilungen, Bias und Datenqualität}\label{sec:bias-qualität}
-\emph{Distribution Shift} (Abweichungen zwischen Trainings- und Einsatzdaten) ist eine häufige
-Ursache für Leistungseinbußen. \emph{Bias} kann aus Messung, Auswahl oder Labeling entstehen.
-Datenqualität umfasst Vollständigkeit, Relevanz, Rauschverhalten, Konsistenz und reproduzierbare
-Aufbereitung (z.\,B. Normalisierung, Synchronisation).
-
-\section{Modellklassen für radarnahe Aufgaben}\label{sec:modelle-radar}
-\textbf{Klassische ML:} lineare/logistische Modelle, SVM, Random Forests (auf Handcrafted-Features
-wie RCS-Statistiken, spektralen Kennwerten, Track-Merkmalen).\\
-\textbf{Deep Learning:}
-\begin{itemize}
-  \item \emph{CNNs} auf 2D-Inputs (z.\,B. Range–Doppler- oder Range–Doppler–Angle-Maps).
-  \item \emph{1D/2D-CNN + RNN/Transformer} für Sequenzen (Temporaldynamik, Mikrodoppler).
-  \item \emph{Graph- und Set-Modelle} (z.\,B. auf Detektions-Clustern/Tracks).
-  \item \emph{Multimodal} (Fusion Radar + weitere Sensorik auf Feature-/Entscheidungsebene).
-\end{itemize}
-
-\section{Repräsentationen \& Featurebildung}\label{sec:repräsentationen}
-Praktische Formen sind u.\,a. I/Q-Samples (selten direkt), Zeit–Frequenz-Darstellungen (STFT, RD/RDA),
-Aggregationen über Tracks (Trajektorienmerkmale) sowie Metadaten (SNR, PRF, Modus).
-Vorverarbeitung (Filterung, Normalisierung, Masken) prägt, welche Muster Modelle überhaupt
-lernen können.
-
-\section{Training und Evaluation (technisch, nicht-safety)}\label{sec:train-eval}
-\textbf{Regularisierung:} Weight Decay, Dropout, frühes Stoppen, Datenaugmentation.\\
-\textbf{Imbalance-Handling:} gewichtete Verluste, Focal Loss, gezieltes Sampling.\\
-\textbf{Validierungsstrategie:} zeit-/szenariobasierte Splits, k-fache CV, Standort-/Wetter-Holdouts.\\
-\textbf{Metriken (task-spezifisch):} Accuracy, Precision/Recall/F1, ROC/PR-AUC, Top-k.
-Sicherheitsspezifische Metriken (z.\,B. Kalibrierung) werden separat behandelt.
-
-\section{Bereitstellung und Performanzaspekte}\label{sec:deployment}
-\textbf{Inferenzgraph:} Pre-/Postprocessing, Modell, Batching.\\
-\textbf{Optimierung:} Quantisierung, Pruning, Kernel-/Tensor-RT, ONNX-Pfad.\\
-\textbf{Ressourcen:} Latenz/Throughput, Speicher-/Bandbreitenbedarf, Portierung (CPU/GPU/DSP).
-Diese Punkte sind für Radar-Pipelines relevant, unabhängig von Sicherheitsargumenten.
-
-
+\textbf{Überanpassung (Overfitting)} wird mit \textbf{Regularisierung} reduziert: \emph{Dropout}, \emph{Weight Decay} und \emph{Early Stopping}.
+\textbf{Metriken} hängen von der Aufgabe ab: bei \emph{Klassifikation} u.\,a.\ Accuracy, Precision/Recall/F\(_1\), ROC; bei
+\emph{Regression} typischerweise MSE. Optional kann \textbf{Transfer Learning} genutzt werden, um vortrainierte Netze an neue Daten anzupassen.
 
 
 
@@ -195,19 +105,6 @@ Typische Aufgaben umfassen:
   \item \textbf{Kartierung und Navigationsunterstützung:} Boden-/Geländedarstellung (Mapping) als Ergänzung zu weiteren Navigationsquellen.
   \item \textbf{Luftraum- und Bodenüberwachung:} Unterstützung von Verkehrsfluss, Staffelung und Situational Awareness am Boden und in der Luft.
 \end{itemize}
-
-\paragraph{Luftfahrtkontext (Beispiele).}
-\begin{itemize}
-  \item \textbf{Bodenradar:} \emph{Primärradar} (nicht-kooperative Detektion); \emph{Sekundärradar} (kooperative Abfrage/Antwort) – Koexistenz kann zu Überlagerungen führen.
-  \item \textbf{Bordradar:} v.\,a.\ \emph{Wetterradar} zur Gewitter-/Niederschlagserkennung; Umfeldinformationen für kollisionsvermeidende Funktionen.
-  \item \textbf{Radarhöhenmesser:} meist \emph{FMCW}-basiert, liefert Höhe über Grund für Anflug/Landung und logikführende Systeme.
-\end{itemize}
-
-\noindent
-Je nach Plattform (airborne vs.\ ground) und Missionsprofil unterscheiden sich Reichweite, Aktualisierungsrate, Auflösung und Integrationsgrad.
-Aus Safety-Sicht sind besonders relevant: (i) stabile Leistung unter variablen Umgebungsbedingungen,
-(ii) zuverlässige Trennung relevanter Ziele von Clutter/Störungen und (iii) qualifizierte, auditierbare Informationen
-für nachgelagerte Funktionen und Crews.
 
 \section{Funktionsprinzipien und Signalpfad}\label{sec:signalpfad}
 Radare senden elektromagnetische Energie aus und werten Echos aus, um \emph{Entfernung}, \emph{Relativgeschwindigkeit}
@@ -308,6 +205,18 @@ prägt Messcharakteristika, Integrationsaufwand und Evidenzanforderungen in der 
 \end{itemize}
 
 \subsection{Beispiele im Luftfahrtkontext}
+
+\begin{itemize}
+  \item \textbf{Bodenradar:} \emph{Primärradar} (nicht-kooperative Detektion); \emph{Sekundärradar} (kooperative Abfrage/Antwort) – Koexistenz kann zu Überlagerungen führen.
+  \item \textbf{Bordradar:} v.\,a.\ \emph{Wetterradar} zur Gewitter-/Niederschlagserkennung; Umfeldinformationen für kollisionsvermeidende Funktionen.
+  \item \textbf{Radarhöhenmesser:} meist \emph{FMCW}-basiert, liefert Höhe über Grund für Anflug/Landung und logikführende Systeme.
+\end{itemize}
+
+\noindent
+Je nach Plattform (airborne vs.\ ground) und Missionsprofil unterscheiden sich Reichweite, Aktualisierungsrate, Auflösung und Integrationsgrad.
+Aus Safety-Sicht sind besonders relevant: (i) stabile Leistung unter variablen Umgebungsbedingungen,
+(ii) zuverlässige Trennung relevanter Ziele von Clutter/Störungen und (iii) qualifizierte, auditierbare Informationen
+für nachgelagerte Funktionen und Crews.
 \begin{itemize}
   \item \textbf{Boden-Primärradar} (gepulst/Puls-Doppler, meist mechanisch oder hybrid): nicht-kooperative Luftraumüberwachung.
   \item \textbf{Sekundärradar} (kooperativ): Abfrage/Antwort-Verfahren; Koexistenz mit Primärradar beachten.
@@ -388,13 +297,13 @@ dokumentieren:
   \item \textbf{ODD-Schnitt:} Berichte getrennt nach relevanten ODD-Segmenten (z.\,B.\ Reichweitenbänder, SNR-Bins, Wetterklassen) statt nur „Overall“-Mittelwerten.
   \item \textbf{Konfidenzen/Kalibrierung:} Neben Punktwerten Unsicherheiten/Intervalle angeben; Kalibrierung der Detektions-/Klassifikationskonfidenzen dokumentieren.
   \item \textbf{Traceability:} Datenstände, Preprocessing, Modell-/SW-Versionen und Testskripte versioniert festhalten.
+  \item \textit{Takeaway:}
+    Metriken wie $P_d$ und $P_{fa}$ sind nur im Kontext von ODD-Schnitten, Messbedingungen und Trade-offs aussagekräftig.
+    Für Safety zählen \emph{belastbare Messprotokolle}, \emph{kalibrierte Unsicherheiten} und \emph{nachvollziehbare
+    Freigabekriterien} mindestens so viel wie die numerischen Werte selbst.
 \end{itemize}
 
-\vspace{0.25em}
-\noindent\textit{Takeaway.}
-Metriken wie $P_d$ und $P_{fa}$ sind nur im Kontext von ODD-Schnitten, Messbedingungen und Trade-offs aussagekräftig.
-Für Safety zählen \emph{belastbare Messprotokolle}, \emph{kalibrierte Unsicherheiten} und \emph{nachvollziehbare
-Freigabekriterien} mindestens so viel wie die numerischen Werte selbst.
+
 
 \section{Betriebsbedingungen und Herausforderungen}\label{sec:radar-conditions}
 Radarsysteme operieren in wechselhaften Umgebungen. Neben fundamentalen Rauschgrenzen wirken
@@ -580,18 +489,14 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 
 \subsection{Merksätze zur Objektklassifizierung}\label{sec:klass-merksätze}
 \begin{itemize}
-  \item \textbf{Stabilität vor KI:} Gute Klassifikation braucht saubere Detektion, stabile RD/RDA-Daten und verlässliche Tracks.
-  \item \textbf{Zeit schlägt Einzelbild:} Sequenzen/Trajektorien offenbaren Muster robuster als Einzelscans.
-  \item \textbf{Mikrodoppler als Fingerabdruck:} Rotorrate/Flügelschlag trennen Drohnen, Helikopter, Vögel — SNR- und Aspect-abhängig.
-  \item \textbf{Quality-in-the-loop:} SNR, CFAR-Masken, Clutter-/RFI-Flags als Features erhöhen Robustheit.
-  \item \textbf{Offene Welt akzeptieren:} \emph{Unknown}-Klasse und OOD-Detektion sind Pflicht; lieber abstain als falsch sicher.
+  \item \textbf{Zeit schlägt Einzelbild: \parencite{skolnik2001-intro-radar}} Sequenzen/Trajektorien offenbaren Muster robuster als Einzelscans.
+  \item \textbf{Mikrodoppler als Fingerabdruck: \parencite{Chen2011MicroDoppler}} Rotorrate/Flügelschlag trennen Drohnen, Helikopter, Vögel — SNR- und Aspect-abhängig.
+  \item \textbf{Offene Welt akzeptieren: \parencite{Koopman:2025:EAI}} \emph{Unknown}-Klasse und OOD-Detektion sind Pflicht; lieber abstain als falsch sicher.
   \item \textbf{Konfidenz muss stimmen:} Kalibrierte Wahrscheinlichkeiten und klare Abstain-Schwellen > Top-1-Quote.
-  \item \textbf{Physik hilft:} Kinematik-/Spektral-Checks stabilisieren datengetriebene Modelle.
-  \item \textbf{Szenariodeckung statt „Overall-Accuracy“:} Leistung nach SNR/Entfernung/Aspekt/Wetter berichten.
-  \item \textbf{Splits ohne Leckage:} Szenarien (Standort/Aspekt/Wetter) strikt zwischen Train/Test trennen.
-  \item \textbf{Robust denken:} Clutter, RFI, Aussetzer einplanen; Fallbacks gehören zum Design.
+  \item \textbf{Physik hilft: \parencite{feigl-phd-deadreckoning}} Kinematik-/Spektral-Checks stabilisieren datengetriebene Modelle.
+  \item \textbf{Robust denken: \parencite{radartutorial-cfar}} Clutter, RFI, Aussetzer einplanen; Fallbacks gehören zum Design.
   \item \textbf{HMI klärt Erwartungen:} Top-k, Konfidenz und OOD-/Qualitätsflags reduzieren Fehlinterpretationen.
-  \item \textbf{Vorverarbeitung prägt Merkmale:} Wahl von CFAR, Filterung und Normalisierung bestimmt, was das Modell überhaupt „sehen“ kann.
+  \item \textbf{Vorverarbeitung prägt Merkmale: \parencite{skolnik2001-intro-radar}} Wahl von CFAR, Filterung und Normalisierung bestimmt, was das Modell überhaupt „sehen“ kann.
 \end{itemize}
 
 \vspace{0.25em}
@@ -625,27 +530,27 @@ Safety, Security und Reliability sind komplementär: Security schützt die Integ
 
 \subsection{Nachweislogik und Assurance Case}\label{sec:assurance-logic}
 
-\paragraph{Schutzziele (Safety Goals).}
+\paragraph{Schutzziele (Safety Goals)}
 Aus der Risikobewertung werden \emph{klare Schutzziele} abgeleitet. Sie legen fest,
 \emph{welche gefährlichen Zustände zu verhindern sind} bzw.\ \emph{wie sie beherrscht werden müssen}
 (z.\,B.\ definierte Fallback-Zustände, zulässige Grenzen für Fehlalarme und Ausfälle).
 
-\paragraph{Abgeleitete Anforderungen.}
+\paragraph{Abgeleitete Anforderungen}
 Die Schutzziele werden in \emph{mess- und prüfbare Anforderungen} überführt
 (z.\,B.\ Reaktionszeiten, Verfügbarkeit, Fehlertoleranz, Datenintegrität).
 Jede Anforderung ist eindeutig formuliert, testbar und rückverfolgbar. 
 Damit bilden sie die Grundlage für Verifikation und Validierung.
 
-\paragraph{Risikominderung.}
+\paragraph{Risikominderung}
 Maßnahmen werden so gewählt, dass sie Gefahrenszenarien \emph{vermeiden}, \emph{früh erkennen}
 oder \emph{sicher beherrschen}:
 \begin{itemize}
-  \item \textbf{Präventiv} – robuste Architektur, Diversität/Redundanz, Partitionierung, Eingangsvalidierung.
-  \item \textbf{Detektierend} – Laufzeitüberwachung, Plausibilitäts-/Kohärenzprüfungen, Selbsttests, Alarme.
-  \item \textbf{Korrektiv} – Degradation/Fallback, geordnete Abschaltung, Wiederanlauf unter Kontrolle.
+  \item \textbf{Präventiv:} robuste Architektur, Diversität/Redundanz, Partitionierung.
+  \item \textbf{Detektierend:} Laufzeitüberwachung, Plausibilitätsprüfungen, Selbsttests, Alarme.
+  \item \textbf{Korrektiv:} Degradation/Fallback, kontrollierte Abschaltung/Wiederanlauf.
 \end{itemize}
 
-\paragraph{Akzeptanz und Nachweis.}
+\paragraph{Akzeptanz und Nachweis}
 \emph{Akzeptanzkriterien} definieren, wann das Restrisiko tragbar ist.
 Die Erfüllung wird durch \emph{Analysen}, \emph{Tests} und \emph{Inspektionen} nachgewiesen und
 entlang einer konsistenten Kette dokumentiert:
@@ -653,7 +558,7 @@ entlang einer konsistenten Kette dokumentiert:
 \text{Gefährdung} \;\rightarrow\; \text{Schutzziel} \;\rightarrow\; \text{Anforderung} \;\rightarrow\; \text{Evidenz}.
 \]
 
-\paragraph{Assurance Case (Kernprinzip).}
+\paragraph{Assurance Case (Kernprinzip)}
 Ein \emph{Assurance Case} begründet systematisch, dass ein System unter definierten Einsatzbedingungen
 \emph{sicher genug} ist. Er beantwortet vier Fragen:
 \begin{itemize}
@@ -663,53 +568,43 @@ Ein \emph{Assurance Case} begründet systematisch, dass ein System unter definie
   \item \emph{Wodurch} wird es gestützt? \hfill(\textbf{Evidenz})
 \end{itemize}
 
-\paragraph{Evidenzbausteine im KI-Kontext.}
+\paragraph{Evidenzbausteine im KI-Kontext}
 Für KI-Komponenten u.\,a.: \textbf{ODD/Annahmen} (Segmentierung), \textbf{Daten-/Label-Governance}
 (Herkunft, Qualität, Versionierung, Freigaben), \textbf{Leistung \& Unsicherheit}
 (segmentierte Metriken, Kalibrierung, Abstain/Unknown-Regeln), \textbf{Robustheit/Shift}
 (Stresstests, Worst-Case-Kriterien), \textbf{Toolchain/Traceability} (reproduzierbare Pipelines,
 Artefakt-IDs, Signaturen) und \textbf{Betrieb} (Monitoring, Drift-/OOD-Erkennung, Degradationspfade).
 
-\paragraph{Lebendes Dokument.}
+\paragraph{Lebendes Dokument (living safety case)}
 Der Assurance Case wird über den Lebenszyklus gepflegt und bei Änderungen (Daten, Modelle, Software, ODD)
 aktualisiert. Traceability verknüpft \emph{Gefährdung} $\rightarrow$ \emph{Schutzziel} $\rightarrow$
 \emph{Anforderung} $\rightarrow$ \emph{Nachweis}.
 
-
-
-\section{Sicherheitsprinzipien und Nachweisführung}\label{sec:sicherheitsprinzipien}
-\textbf{Sicherheit verstehen bedeutet, Risiken zu verstehen.}\\
-\textbf{Grundidee.} \emph{Safety} adressiert die Vermeidung unvertretbarer Risiken, die aus unbeabsichtigten Fehlern,
-Fehlfunktionen oder unzureichend beherrschten Unsicherheiten entstehen. Für KI bedeutet das: Nicht nur
-Leistungszahlen zählen, sondern eine belastbare \emph{Assurance}, die Annahmen, Evidenz und Grenzen transparent macht.
-
-\subsection{Gefahrenanalyse und Risikoermittlung}\label{sec:hazard-risk}
+\section{Gefahrenanalyse und Risikoermittlung}\label{sec:hazard-risk}
 Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen frühzeitig zu erkennen, ihr Risiko grob einzuordnen
 und wirksame Gegenmaßnahmen abzuleiten. Das Ergebnis ist eine priorisierte Liste von Risiken mit klaren
 Safety-Zielen, abgeleiteten Anforderungen und einem Plan für deren Nachweis.
 
-\paragraph{Ablauf in Kurzform.}
+\paragraph{Ablauf in Kurzform}
 \begin{enumerate}
-  \item \textbf{Sammeln:} Mögliche Gefährdungen identifizieren (Technik, Mensch, Umfeld, Betrieb).
-  \item \textbf{Einordnen:} Schweregrad und Eintrittswahrscheinlichkeit bewerten (z.\,B.\ Risikomatrix).
+  \item \textbf{Sammeln:} Mögliche Gefährdungen identifizieren.
+  \item \textbf{Einordnen:} Schweregrad und Eintrittswahrscheinlichkeit bewerten.
   \item \textbf{Maßnahmen ableiten:} präventiv, detektierend, korrektiv.
   \item \textbf{Anforderungen festlegen:} messbar, überprüfbar, rückverfolgbar.
-  \item \textbf{Pflegen:} regelmäßig aktualisieren (Änderungen, Betriebserfahrungen, Updates).
+  \item \textbf{Pflegen:} regelmäßig aktualisieren.
 \end{enumerate}
 
-\paragraph{Methoden (Auswahl).}
+\paragraph{Methoden (Auswahl)}
 \begin{itemize}
   \item \textbf{Hazard Identification (HAZID):} strukturierte Sammlung von Gefährdungen per Workshops, Checklisten
         und Erfahrungswissen. Ergebnis: Hazard-Liste mit Ursachen, Wirkungen und Annahmen.
   \item \textbf{FMEA/FMECA:} \emph{Bottom-up} auf Komponenten- oder Funktionsebene: Welche Ausfallarten gibt es,
         was passiert dann, wie wird es entdeckt? FMECA ergänzt eine Kritikalitätsbewertung zur Priorisierung.
-  \item \textbf{Fault Tree Analysis (FTA):} \emph{Top-down} vom unerwünschten Ereignis (z.\,B.\ Verlust der Warnfunktion)
-        zu seinen Ursachen; geeignet, Ketten und Wechselwirkungen sichtbar zu machen.
   \item \textbf{STPA:} systemtheoretischer Ansatz: Welche unsicheren Steueraktionen und Rahmenbedingungen führen
         zu Gefährdungen – einschließlich Software, HMI und Prozeduren (nicht nur Hardware).
 \end{itemize}
 
-\paragraph{Leitprinzipien.}
+\paragraph{Leitprinzipien}
 \begin{itemize}
   \item \textbf{Kontextsensitiv:} Bewertung immer im vorgesehenen Einsatzkontext; Annahmen explizit dokumentieren.
   \item \textbf{Evidenzorientiert:} Ergebnisse müssen in überprüfbare Anforderungen und Nachweise übersetzt werden.
@@ -717,7 +612,7 @@ Safety-Zielen, abgeleiteten Anforderungen und einem Plan für deren Nachweis.
 \end{itemize}
 
 
-\subsection{Architekturprinzipien der funktionalen Sicherheit}\label{sec:arch-fusa}
+\section{Architekturprinzipien der funktionalen Sicherheit}\label{sec:arch-fusa}
 Ziel dieser Prinzipien ist es, Risiken durch die Systemarchitektur zu senken: Fehler sollen gar nicht erst wirken,
 früh erkannt oder sicher beherrscht werden. Im Fokus stehen klare Strukturen, vorhersehbares Verhalten und
 kontrollierte Degradation statt Überraschungen.
@@ -726,53 +621,31 @@ kontrollierte Degradation statt Überraschungen.
 \textbf{Redundanz} bedeutet, kritische Funktionen mehrfach vorzuhalten, sodass beim Ausfall einer Instanz eine andere übernimmt.
 \textbf{Diversität/Dissimilarität} ergänzt dies durch bewusst unterschiedliche Ausprägungen (z.\,B.\ verschiedene Hardware/Software
 oder unterschiedliche Algorithmen), damit ein gemeinsamer Fehler nicht alle Kanäle gleichzeitig trifft.\\
-\emph{Beispiel:} Zwei unabhängige Signalverarbeitungspfade; einer nutzt ein klassisches Verfahren, der andere ein ML-basiertes Verfahren.
 
 \paragraph{Trennung/Partitionierung}
 Trennung verhindert Fehlerfortpflanzung: sicherheitskritische Anteile laufen räumlich und zeitlich isoliert von weniger kritischen Funktionen.
 Partitionierung (z.\,B.\ per Betriebssystem mit Zeit-/Speichertrennung) stellt sicher, dass ein Fehler in einer Partition keine andere beeinträchtigt.\\
-\emph{Beispiel:} Klassifikations-KI in einer strikt begrenzten Partition; Kerndetektion, HMI und Logging in getrennten Partitionen.
 
 \paragraph{Fail-Safe vs.\ Fail-Operational}
 \textbf{Fail-Safe} bedeutet, bei einem Fehler in einen definiert sicheren Zustand zu wechseln (z.\,B.\ Abschalten einer Funktion,
 klare Warnung, konservatives Verhalten). \textbf{Fail-Operational} bedeutet, trotz eines Fehlers die Funktion weiter bereitzustellen – ggf.\ in
 degradiertem Modus –, weil ein Abbruch riskanter wäre.\\
-\emph{Beispiel:} Bei Sensorausfall Umschalten auf redundanten Kanal (fail-operational); bei inkonsistenten Daten Anzeige eines geprüften Minimalbildes mit Warnhinweis (fail-safe).
 
 \paragraph{Deterministisches Zeitverhalten und Kommunikation}
 Kommunikation und Zeitverhalten müssen vorhersagbar sein: feste oder begrenzte Latenzen, kontrollierter Jitter, klare Prioritäten
 und synchronisierte Uhren. So lassen sich Worst-Case-Reaktionszeiten planen und nachweisen.\\
-\emph{Beispiel:} Zeitgesteuerte Übertragung sicherheitskritischer Updates mit garantierter maximaler Verzögerung; priorisierte Bus-Slots.
-
-\paragraph{Fehlererkennung und Plausibilisierung}
-Frühe Erkennung reduziert Folgeschäden: kontinuierliche Plausibilitätsprüfungen, Bereichs-/Kohärenzchecks und Quervergleiche
-zwischen Kanälen detektieren inkonsistentes Verhalten.\\
-\emph{Beispiel:} Cross-Checks zwischen Track-Qualität, Konfidenzmeldungen und OOD-Indikatoren; Alarm bei widersprüchlichen Signalen.
 
 \paragraph{Degradation und Fallback-Strategien}
 Degradationspfade werden \emph{vorab} definiert, getestet und dokumentiert: Welche Teilfunktion wird in welchem Fehlerfall
 weitergeführt, welche wird abgeschaltet, welche Warnung wird ausgegeben?\\
-\emph{Beispiel:} Bei erhöhter Unsicherheit Umschalten auf konservative Schwellen und „Unknown/Abstain“ statt erzwungener Klassifikation.
 
 \paragraph{Health Monitoring und Watchdogs}
 Laufzeitüberwachung (Alive-/Timing-Monitoring, Ressourcenüberwachung) erkennt hängende oder aus dem Ruder laufende Komponenten frühzeitig.
 Watchdogs erzwingen definierte Wiederanläufe oder Degradationspfade, wenn Zustände verletzt werden.\\
-\emph{Beispiel:} Watchdog-Reset des Klassifikationsprozesses bei Zeitüberschreitung; Eskalation auf Fallback-Darstellung.
 
 \paragraph{Schnittstellenklarheit und Datenqualität}
 Schnittstellen müssen eindeutig spezifiziert sein (Formate, Einheiten, Latenzbudgets, Qualitätsflags).
 Eingehende Daten werden validiert; Qualitätskennzahlen (z.\,B.\ Konfidenz, Kalibrierungsstatus, OOD-Flags) werden mitgeführt und ausgewertet.\\
-\emph{Beispiel:} Weitergabe von Top-$k$-Hypothesen mit Konfidenz und „Unknown“-Kennzeichen statt nur einer Klasse.
-
-\paragraph{Sensorfusion und Kanalkohärenz}
-Fusion mehrerer Informationsquellen erhöht Robustheit – vorausgesetzt, die Fusion behandelt Unsicherheiten explizit
-und toleriert widersprüchliche Eingänge.\\
-\emph{Beispiel:} Fusion von Detektions- und Klassifikationspfad mit Unsicherheitsgewichten; Absenken des Einflusses unkalibrierter Quellen.
-
-\paragraph{Konfigurations- und Änderungsdisziplin}
-Architekturprinzipien wirken nur, wenn Konfigurationen kontrolliert sind und Änderungen nachvollziehbar freigegeben werden.
-Versionen, Abhängigkeiten und Artefakte müssen eindeutig identifizierbar sein.\\
-\emph{Beispiel:} Signierte Modelle und Datenstände; fixe Build-Umgebungen; dokumentierte Regressionstests vor Freigabe.
 
 \medskip
 \noindent
@@ -781,39 +654,16 @@ und im Fehlerfall kontrolliert zu degradieren. Sie unterstützen somit die Ablei
 belastbarer Nachweise entlang des gesamten Lebenszyklus.
 
 
-\subsection{Verifikation und Validierung (V\&V)}\label{sec:vv}
+\section{Verifikation und Validierung (V\&V)}\label{sec:vv}
 Ziel von V\&V ist der Nachweis, dass spezifizierte Anforderungen korrekt umgesetzt sind (\emph{Verifikation})
 und dass das System im vorgesehenen Einsatz \emph{das Richtige} tut (\emph{Validierung}).
 
-\paragraph{Grundprinzip (kurz).}
-\textbf{Verifikation:} „Haben wir das Produkt richtig gebaut?“ \quad
-\textbf{Validierung:} „Haben wir das richtige Produkt gebaut?“
+\paragraph{Grundprinzip}
+\textbf{Verifikation:} „Haben wir das Produkt richtig gebaut?“ \\
+\textbf{Validierung:} „Haben wir das richtige Produkt gebaut?“\\
 Beide Perspektiven sind geplant, mit Akzeptanzkriterien hinterlegt, unabhängig überprüft und nachvollziehbar belegt.
 
-\paragraph{Ebenen und Artefakte.}
-\begin{itemize}
-  \item \textbf{Unit-/Modultests:} Schnittstellen, Grenzwerte, Fehlermodi einzelner Komponenten.
-  \item \textbf{Integrationstests:} Zusammenspiel, Protokolle, Zeitverhalten.
-  \item \textbf{Systemtests:} End-to-End-Funktion, Performance, Ressourcen, Robustheit.
-  \item \textbf{Abnahmetests:} formale Nachweise gegen freigegebene Anforderungen.
-\end{itemize}
-Ergebnisse sind prüfbar abzulegen (Protokolle, Logs, Messdaten, Testfälle, Konfigurationen).
-
-\paragraph{Testentwurf und Abdeckung.}
-\begin{itemize}
-  \item \textbf{Ableitung:} Jeder Testfall referenziert die zugehörige Anforderung und erwartete Ergebnisse.
-  \item \textbf{Abdeckung:} funktional (Anforderungsabdeckung), strukturell (wo sinnvoll), szenariobasiert (inkl.\ Rand-/Störfällen).
-  \item \textbf{Kriterien:} vorab definierte Pass/Fail-Regeln, Toleranzen, Unsicherheitsbänder.
-\end{itemize}
-
-\paragraph{Unabhängigkeit \& Reproduzierbarkeit.}
-\begin{itemize}
-  \item \textbf{Rollen-Trennung:} Entwicklung vs.\ unabhängige Verifikation/Review.
-  \item \textbf{Reproduzierbarkeit:} feste Seeds/Versionen, deterministische Builds, dokumentierte Laufzeitumgebung.
-  \item \textbf{Artefakt-Integrität:} signierte Modelle/Datenstände, unveränderliche Test-Logs.
-\end{itemize}
-
-\paragraph{KI-spezifische V\&V-Aspekte (ohne Lifecycle-Dopplungen).}
+\paragraph{KI-spezifische V\&V-Aspekte}
 \begin{itemize}
   \item \textbf{ODD-Segmentierung:} Leistung und Fehlerraten je Segment (z.\,B.\ SNR, Entfernung, Wetter, Clutter) statt nur Mittelwerten.
   \item \textbf{Kalibrierung:} Konfidenzmetriken (z.\,B.\ ECE, Brier, NLL) und dokumentierte Abstain/Unknown-Schwellen.
@@ -822,23 +672,7 @@ Ergebnisse sind prüfbar abzulegen (Protokolle, Logs, Messdaten, Testfälle, Kon
   \item \textbf{XAI als Audit-Hilfe:} reproduzierbare, zweckgebundene Reports (kein Ersatz für Tests/Analysen).
 \end{itemize}
 
-\paragraph{Daten- und Testdisziplin (knapp).}
-\textit{Governance-Details siehe Abschn.~\ref{sec:lifecycle}.} Für V\&V genügen die Kernpflichten:
-\begin{itemize}
-  \item \textbf{Split-Hygiene:} strikte Trennung Train/Valid/Test, keine Leaks; dokumentierte Sampling-Strategie.
-  \item \textbf{Referenzsets:} eingefrorene „Golden Sets“ für Regressionstests.
-\end{itemize}
-
-\paragraph{Schluss.}
-V\&V muss \emph{segmentiert}, \emph{reproduzierbar} und \emph{evidenzorientiert} sein. Entscheidend: Ohne dokumentierte Ergebnisse kein Nachweis.
-
-
-\subsection{Lebenszyklus}\label{sec:lifecycle}
-Safety ist kein einmaliger Zustand, sondern eine \emph{Eigenschaft über den gesamten Lebenszyklus}. 
-Änderungen an Anforderungen, Daten, Software/Modellen, Hardware oder Betriebskontext wirken direkt auf die Sicherheit 
-und müssen kontrolliert behandelt werden.
-
-\paragraph{Phasenüberblick.}
+\section{Phasenüberblick}
 \begin{itemize}
   \item \textbf{Konzept \& Requirements:} Zweck, ODD, Schutzziele, Annahmen, Schnittstellen, erste Hazard-/Risikobetrachtung.
   \item \textbf{Architektur \& Design:} Sicherheitsprinzipien (Redundanz, Trennung, Degradation), Daten-/Toolchain-Governance.
@@ -847,46 +681,6 @@ und müssen kontrolliert behandelt werden.
   \item \textbf{Betrieb \& Instandhaltung:} Monitoring, Ereignis-/Fehlermanagement, Wartung, Telemetrieauswertung.
   \item \textbf{Änderungen \& Stilllegung:} kontrollierte Updates, Obsoleszenzmanagement, sichere Außerbetriebnahme.
 \end{itemize}
-
-\paragraph{Änderungs- und Konfigurationsmanagement.}
-\begin{itemize}
-  \item \textbf{Versionierung:} eindeutige Identitäten für Anforderungen, Datenstände, Modelle, Binärartefakte und Konfigurationen.
-  \item \textbf{Kontrollpunkte:} formale Änderungsanträge, Risiko-/Auswirkungsanalyse, definierter Regressionstest-Scope.
-  \item \textbf{Freigabe:} dokumentierte Entscheidung, aktualisierte Evidenz (inkl.\ Safety-Argumentation), rollierende Rückverfolgbarkeit.
-\end{itemize}
-
-\paragraph{Betriebliches Monitoring und Ereignismanagement.}
-\begin{itemize}
-  \item \textbf{Telemetrie-Set:} Laufzeitmetriken zu Leistung, Kalibrierung, OOD-/Drift-Rate, Ressourcen, Latenzen.
-  \item \textbf{Erkennung:} Detektoren für Daten-/Kontext-Shift, Konsistenz- und Plausibilitätsverletzungen, Watchdogs.
-  \item \textbf{Eskalation/Degradation:} definierte Alarme, Fallback-/Degradationspfade, HMI-Hinweise, sichere Recovery.
-  \item \textbf{Incident-Handling:} Erfassung, Analyse, Korrekturmaßnahme, Nachverifikation, Lessons Learned.
-\end{itemize}
-
-\paragraph{Daten- und Modellpflege (KI-spezifisch).}
-\begin{itemize}
-  \item \textbf{Daten-Governance:} Herkunft, Freigaben, Versionierung, Label-Qualität (z.\,B.\ Inter-Annotator-Agreement), Audit-Trails.
-  \item \textbf{Drift-Response:} klare Trigger für Neu-Training/Neu-Kalibrierung; reproduzierbare Pipelines, Golden Sets für Regression.
-  \item \textbf{Einsatzgrenzen:} Unknown/Abstain-Regeln, konservative Schwellen, ODD-Anpassung mit Re-Assessment.
-\end{itemize}
-
-\paragraph{Lieferkette und Obsoleszenz.}
-\begin{itemize}
-  \item \textbf{Supply Chain Integrity:} qualifizierte Tools/Komponenten, signierte Artefakte, Abhängigkeitskontrolle.
-  \item \textbf{Obsoleszenzmanagement:} Ersatzstrategien, Migrationspfade, Kompatibilitäts- und Rückwirkungsanalysen.
-\end{itemize}
-
-\paragraph{Dokumentation und Schulung.}
-\begin{itemize}
-  \item \textbf{Dokumentation:} konsistente Artefakte (Anforderungen, Architektur, Tests, Evidenzen, Betriebserfahrungen) als lebender Satz.
-  \item \textbf{Schulung/Training:} Rollen- und HMI-spezifische Trainings; Umgang mit Konfidenz, Unknown/Abstain und Alarmen.
-\end{itemize}
-
-\paragraph{Schlussfolgerung.}
-Ein wirksames Lebenszyklus-Management stellt sicher, dass \emph{Veränderungen} nicht zu verdeckten Sicherheitslücken führen.
-Kernbausteine sind kontrollierte Änderungen, reproduzierbare Evidenzketten, laufzeitnahes Monitoring und eine dokumentierte,
-geübte Degradations- und Incident-Response.
-
 
 \section{Luftfahrt-spezifische Sicherheit}\label{sec:aviation-specific}
 Der luftfahrtspezifische Rahmen definiert, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenzen akzeptiert werden
@@ -924,171 +718,36 @@ Einstufung niedriger ausfallen; bei automatischer Wirkung oder geringer Fehlerto
 
 
 \subsection{Brücke zu KI/ML}\label{sec:bridge-ml}
-KI zeigt probabilistisches Verhalten und verlangt zusätzliche Evidenz (ODD/Annahmen, Daten-/Label-Governance, Unsicherheit/Kalibrierung, Toolchain-Assurance, Monitoring/Drift/Änderungsmanagement). In der Luftfahrt existiert derzeit kein direktes KI-Normenpendant; Erwartungen werden über Anforderungen/Prozesse adressiert. Externe Orientierung (z.\,B.\ ISO/PAS 8800) kann helfen, ersetzt aber keine luftfahrtspezifische Bewertung.
+KI zeigt probabilistisches Verhalten und verlangt zusätzliche Evidenz. 
+In der Luftfahrt existiert derzeit kein direktes KI-Normenpendant; 
+Erwartungen werden über Anforderungen/Prozesse adressiert. Externe 
+Orientierung (z.\,B.\ ISO/PAS 8800) kann helfen, ersetzt aber keine luftfahrtspezifische Bewertung.
 
-\section{Kernelemente der KI-Sicherheit}\label{sec:ai-safety-kern}
-Dieses Kapitel legt die begriffliche und methodische Basis für die spätere Einordnung der Sicherheit von 
-KI im Radar-Kontext. Zunächst werden zentrale KI-Konzepte skizziert, anschließend Prinzipien der Sicherheitsargumentation 
-(Assurance/Nachweisführung) erläutert und gegenüber \emph{Security} sowie \emph{Zuverlässigkeit/Robustheit} abgegrenzt. 
-Die folgenden Elemente fassen wiederkehrende Anforderungen an die Absicherung von KI zusammen.
-Sie bilden später die Zeilen der Anforderungs- und Coverage-Matrix und dienen als Referenzrahmen
-für die Einordnung im Radar-Kontext.
+\section{Kernelemente der KI\,-Sicherheit}\label{sec:ai-safety-kern}
+Folgend begriffliche und methodische Grundlagen für die spätere Bewertung
+der Sicherheit von KI im Radar-Kontext etabliert. Die nachfolgenden Kernelemente bündeln wiederkehrende
+Anforderungen an die Absicherung von KI-Systemen.
 
-\subsection{ODD (Operational Design Domain) und Annahmen}\label{sec:odd}
-Zentral ist die präzise Definition der \emph{Operating Design Domain (ODD)}: Einsatzbereich, Bedingungen
-und Einschränkungen, für die Anforderungen, Daten und Annahmen gelten. Innerhalb dieser Grenzen muss
-die KI die spezifizierten Sicherheits- und Leistungsziele erfüllen. Annahmen sind explizit zu machen,
-messbar zu formulieren und durch Evidenz abzusichern; andernfalls ist eine Aussage \emph{sicher genug}
-nicht belastbar.
-
-\subsection{Assurance statt „viel hilft viel“}\label{sec:assurance}
-Mehr Parameter und mehr Daten verbessern häufig die Metriken einer KI, ersetzen aber keine \emph{Assurance}.
-Im Vordergrund stehen testbare Anforderungen, nachvollziehbare Evidenzketten, kalibrierte
-Unsicherheiten und ausreichende Erklärbarkeit — nicht die Maximierung einzelner Benchmark-Kennzahlen.
-Datenpflege ist dabei essenziell (\emph{„trash in, trash out“}). Neben Durchschnittswerten sind die
-\emph{ODD-Abdeckung}, \emph{Edge-Cases} und \emph{Out-of-Distribution (OOD)}-Tests zu priorisieren,
-um Grenzfallverhalten zu verstehen und abzusichern. Ein reiner „mehr Daten = sicherer“-Ansatz (wie
-teils bei allgemeinen Sprachmodellen) ist für sicherheitskritische Anwendungen nicht ausreichend.
-
-\subsection{Erklärbarkeit und Auditierbarkeit}\label{sec:xai-audit}
-Erklärbarkeit (XAI) dient der fachlichen Plausibilisierung, unterstützt Reviews/Audits und hilft,
-Grenzen sichtbar zu machen. Sie ersetzt keine Verifikation/Validierung, sondern ergänzt sie.
-Wesentlich ist die prozessuale Verankerung: klare Verwendungszwecke, dokumentierte Einschränkungen
-und konsistente Einbindung in Freigabeentscheidungen.
-
-\subsection{Leistungs- und Unsicherheitsmetriken}\label{sec:metrics}
-Domänengerechte Metriken (z.\,B.\ Detektions-/Fehlerraten unter Randbedingungen, Kalibrierungsmaße)
-sind mit Konfidenzangaben und Freigabekriterien zu kombinieren. Konservative Schätzungen, belastbare
-Messprotokolle und definierte Mindestleistungen pro ODD-Segment schaffen Nachvollziehbarkeit und
-Vergleichbarkeit der Evidenz.
-
-\vspace{0.5em}
-\noindent\textbf{Takeaway.}
-KI-Sicherheit basiert auf klaren Domänengrenzen (ODD), testbaren Anforderungen und Evidenzketten,
-vertrauenswürdigen Toolchains sowie lebenszyklusorientiertem Monitoring und Änderungsmanagement.
-Erklärbarkeit und kalibrierte Unsicherheit vervollständigen die Nachweisführung — Benchmark-Höchstwerte
-allein genügen nicht.
-
-
-\paragraph{Unsicherheit, Kalibrierung und Leistungsmaßstab.}
-Es ist hilfreich, \emph{aleatorische} (stochastische, irreduzible) und \emph{epistemische} (wissensbedingte, prinzipiell reduzierbare) Unsicherheit zu unterscheiden. Für sicherheitskritische Kontexte sind \emph{kalibrierte Konfidenzen}, \emph{Plausibilisierung} und \emph{Nachvollziehbarkeit} der Entscheidungsgrundlagen wesentlich. Maßstab ist nicht maximale Benchmark-Genauigkeit, sondern \emph{sicher genug} innerhalb der ODD – belegt durch nachvollziehbare Evidenz und belastbare Grenzen.
-
-\begin{table}[h]
-  \centering
-  \caption{Unsicherheitsbegriffe (Kurzüberblick)}
-  \begin{tabular}{p{0.28\textwidth}p{0.65\textwidth}}
-    \toprule
-    \textbf{Aleatorische Unsicherheit} & Variabilität des Phänomens/der Messung; durch mehr Daten nicht eliminierbar, nur zu modellieren (z.\,B.\ Rauschen, Wettervariabilität).\\
-    \midrule
-    \textbf{Epistemische Unsicherheit} & Wissenslücken im Modell/System; durch zusätzliche Evidenz, Daten oder Modellanpassung reduzierbar (z.\,B.\ neue Szenarien, bessere ODD-Abdeckung).\\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-
-
-\subsection{Toolchain-Assurance, Reproduzierbarkeit und Traceability}\label{sec:toolchain}
-Die Vertrauenswürdigkeit der ML-Lieferkette ist Teil der Safety-Argumentation. Gefordert sind:
 \begin{itemize}
-  \item \textbf{Reproduzierbarkeit:} von Training und Evaluation sowie kontrollierte Umgebungen.
-  \item \textbf{Integrität:} Versionierung und Signaturen für Datenstände, Modelle, etc.
-  \item \textbf{Tool-Assurance:} \emph{Qualify or verify} nach DO-330—kritische Tools werden qualifiziert oder ihre Ergebnisse vollständig anderweitig verifiziert.
-  \item \textbf{Traceability:} Ende-zu-Ende-Links von Anforderungen über Daten/Modelle und Auswertungen bis zum Release.
-\end{itemize}
-\textit{Hinweis.} Allgemeine Evidenzlogik siehe Assurance Case (\ref{sec:sicherheitsprinzipien}); KI-spezifische Erwartung an Toolchain/Traceability wird u.\,a.\ in ISO/PAS~8800 strukturiert.\\
-\textit{Takeaway.} Nicht nur die KI sondern auch die verwendeten tools z.B. zum Trainieren müssen sicher sein.
-
-
-\subsection{Traceability und Reproduzierbarkeit.}
-Rückverfolgbarkeit verbindet Anforderungen, Gefährdungen/Schutzziele, Datenstände, Modell-/Konfigurationsversionen,
-Trainingsläufe, Auswertungen und Releases. \emph{Reproduzierbarkeit} (identische Ergebnisse bei kontrolliertem Neuaufbau)
-und \emph{Wiederholbarkeit} (vergleichbare Ergebnisse über Zeit/Plattformen) erhöhen die Beweiskraft der Evidenz.
-
-
-\subsection{Betrieb, Monitoring und Änderungen (Lifecycle)}\label{sec:betrieb-drift}
-Assurance endet nicht mit der Inbetriebnahme. Eine heute freigegebene KI kann durch z.B. Umgebungsveränderungen (ODD-Verschiebungen
-oder neue Szenarien) morgen unsicher sein. Nach der Freigabe sichern folgende Punkte die Wirksamkeit:
-\begin{itemize}
-  \item \textbf{Monitoring:} Laufzeitmetriken pro ODD-Segment (Leistung, Kalibrierung, OOD-/Drift-Rate) und Alarmkonzepte.
-  \item \textbf{Degradation/Fallback:} definierte Betriebsmodi und Eskalationspfade (inkl.\ HMI-Hinweisen), verifiziert durch Szenarien-/Stresstests.
-  \item \textbf{Change \& Release:} Trigger für Re-Training/Updates (z.\,B.\ Daten-Shift, Performance-Drop) und erneute Freigabe.
-  \item \textbf{Living safety case} Alle Änderungen Dokumentieren und Reflektieren (Was haben wir dazu gelernt?).
+  \item \textbf{ODD und Annahmen:} Präzise Festlegung des Einsatzbereichs, der Bedingungen und der
+        Einschränkungen, für die Anforderungen, Daten und Annahmen gelten.
+  \item \textbf{Assurance statt „viel hilft viel“:} Eine Erhöhung von Parameterzahl oder Datenmenge
+        kann Metriken verbessern, ersetzt jedoch nicht \emph{Assurance} bzw.\ belastbare Nachweise
+        zur Sicherheit.
+  \item \textbf{Erklärbarkeit und Auditierbarkeit:} Erklärbarkeit (XAI) unterstützt fachliche
+        Plausibilisierung, Reviews und Audits und macht Grenzen sichtbar.
+  \item \textbf{Leistungs- und Unsicherheitsmetriken:} Domänengerechte Metriken (z.\,B.\ Detektions-
+        und Fehlerraten unter Randbedingungen) sind mit Konfidenzangaben und Freigabekriterien zu
+        kombinieren; konservative Schätzungen, belastbare Messprotokolle und definierte Mindestleistungen
+        je ODD-Segment stellen Nachvollziehbarkeit und Vergleichbarkeit sicher.
+  \item \textbf{Toolchain-Assurance:} Entwicklungs-, Daten- und Trainingswerkzeuge sind so auszuwählen
+        und zu betreiben, dass sie \emph{nachweislich} keine zusätzliche Fehlerquelle darstellen.
+  \item \textbf{Traceability und Reproduzierbarkeit:} Rückverfolgbarkeit verknüpft Anforderungen,
+        Gefährdungen/Schutzziele, Datenstände, Modell-/Konfigurationsversionen, Trainingsläufe,
+        Auswertungen und Releases; Reproduzierbarkeit (identische Ergebnisse bei kontrolliertem Neuaufbau)
+        erhöht die Beweiskraft der Evidenz.
+  \item \textbf{Betrieb, Monitoring und Änderungen (Lifecycle):} Assurance endet nicht mit der
+        Inbetriebnahme; Umgebungsveränderungen können eine heute freigegebene KI morgen unsicher
+        werden lassen und erfordern Monitoring sowie geregelte Änderungen (z.\,B.\ Retraining).
 \end{itemize}
 
-
-
-\paragraph{Kurzhinweis zu Rahmenwerken.}
-Spezifische Luftfahrt-Normen für KI existieren derzeit nicht; zuständige Behörden adressieren KI vornehmlich konzeptionell.
-Als externe Bezugsfolie kann u.\,a.\ \emph{ISO/PAS 8800} (Automotive, KI-bezogene Safety) dienen—ohne Übertragungsanspruch—,
-während dieses Werk später als Referenz für die Coverage-Analyse herangezogen wird.
-
-
-
-
-\paragraph{SOTIF-Gedanke (ISO 21448).}
-ISO~21448 fokussiert Risiken aus der \emph{beabsichtigten Funktion} – also unsichere oder unzureichende Leistung
-\emph{ohne} vorliegenden Defekt/Fehler der Komponenten. Typische Ursachen sind unvollständige ODD-Abdeckung,
-mehrdeutige Umgebungen oder nicht antizipierte Szenarien. Für KI/Wahrnehmung bedeutet das: Sicherheit verlangt
-Evidenz über \emph{Leistungsgrenzen} und \emph{Kontexte}, nicht nur über Fehlerfreiheit der Teile.
-\parencite{iso-21448-sotif}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%------------------------------------------------
-%Zusammenfassung
-%-------------------------------------------------
-
-
-\chapter{Zusammenfassung der Grundlagen}\label{chap:grundlagen-summary}
-Dieses Kapitel fasst die zentralen Ergebnisse der Grundlagen zusammen und markiert den Übergang zur
-Analyse spezifischer Anforderungen, Szenarien und Bewertungsmethoden.
-
-\paragraph{KI und AI Safety (Kap.~\ref{sec:grundlagen-ki}).}
-Wir haben geklärt, dass die Bewertung von KI in sicherheitskritischen Anwendungen nicht über
-Benchmark-Metriken erfolgt, sondern über \emph{Assurance}: klar definierte ODD-Grenzen und Annahmen,
-testbare Anforderungen, belastbare Evidenzketten, kalibrierte Unsicherheiten, eine vertrauenswürdige
-Toolchain und ein lebenszyklusorientiertes Monitoring (inkl.\ Drift/OOD-Erkennung und kontrollierter
-Änderungen). Security wurde abgegrenzt, aber nicht vertieft.
-
-\paragraph{Radarsysteme in der Luftfahrt (Kap.~\ref{sec:grundlagen-radar}).}
-Radar liefert essenzielle Informationen für Lagebild, Wettervermeidung und Navigation. Wir haben
-Funktionsprinzipien (Entfernung–Doppler–Winkel), typische Architekturen und Modi, die
-Signalverarbeitungskette (RD/CFAR/Tracking), Leistungskennzahlen ($P_d$, $P_{fa}$, ROC, Auflösung,
-Latenz, Verfügbarkeit) sowie Betriebsbedingungen (Clutter, RFI, Multipath, Atmosphärik) umrissen.
-Für die spätere Klassifikation sind die relevanten Merkmale (z.\,B.\ Mikrodoppler, RCS, Tracks) und
-deren Qualitätskontext herausgestellt.
-
-\paragraph{Sicherheit in der Luftfahrt (Kap.~\ref{sec:safety-aviation}).}
-Safety wurde als Freiheit von unvertretbaren Risiken eingeordnet (ALARP). Wir haben die Kette
-\emph{Gefährdung} $\rightarrow$ \emph{Schutzziel} $\rightarrow$ \emph{Anforderung} $\rightarrow$ \emph{Nachweis}
-sowie den \emph{Assurance Case} (Claim/Begründung/Kontext/Evidenz) skizziert, grundlegende
-Analyse- und Architekturmuster (HAZID, FMEA/FMECA, FTA, STPA; Redundanz, Diversität, Partitionierung,
-Fail-Safe/Fail-Operational) aufgeführt und den regulatorischen Rahmen mit DAL-Logik umrissen. 
-Konkrete KI-Normen existieren in der Luftfahrt derzeit nicht; externe Bezugsfolien (z.\,B.\ ISO/PAS~8800)
-werden später als Vergleich herangezogen, ohne Übertragungsanspruch.
-
-\medskip
-\noindent\textbf{Takeaway.}  
-Die Grundlagen definieren drei feste Ankerpunkte für die weitere Arbeit:
-(i) \textit{KI-Assurance} als Maßstab „sicher genug“,  
-(ii) \textit{Radar-Spezifika} als anwendungsnaher Daten- und Leistungskontext,  
-(iii) \textit{Luftfahrt-Safety} als Prozess- und Nachweisrahmen.  
-Darauf aufbauend werden im nächsten Teil domänenspezifische \emph{Anforderungen und Szenarien}
-hergeleitet und anschließend entlang eines Referenzrahmens (u.\,a.\ ISO/PAS~8800) die \emph{Abdeckung}
-und \emph{Lücken} systematisch bewertet.
