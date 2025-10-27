@@ -41,9 +41,10 @@ Auf Leitmessen wie der Hannover Messe zeigen Hersteller, wie KI in Serienprozess
 Laut einer Bitkom-Befragung setzen bereits rund 42\,\% der deutschen Industrieunternehmen KI in der Produktion ein,
 weitere 35\,\% planen den baldigen Einsatz.\parencite{handelsblatt-hannovermesse-2025}
 
-\paragraph{Erfahrungsbeispiel: Titanik-Datensatz}
+\paragraph{Erfahrungsbeispiel: Titanik-Datensatz \parencite{KaggleTitanic}}
 Dieses Beispiel unterstreicht die Verständlichkeit, Nachvollziehbarkeit und Reproduzierbarkeit von ML-Modellen wie 
-z.B. Random Forest. Zudem zeigt es, wie wertvoll maschinelles Lernen für die Arbeit mit großen Datensätzen ist.
+z.B. Random Forest. Zudem zeigt es, wie wertvoll maschinelles Lernen für die Arbeit mit großen Datensätzen ist. 
+Details zu diesem Beispiel sind z.B. auf Seiten wie Kaggle zu finden.
 
 
 \subsection{KI-Praxis in der Luftfahrt}
@@ -129,7 +130,7 @@ Ausfall sicherheitskritischer Funktionen zurück zu führen ist. Das heißt Einz
 sind höher einzuordnen. Wenn man bei mehreren Dutzend im Gesamtsystem beteiligten Komponenten ausgeht 
 und man zudem den Fehlern eine Unabhängigkeit voraussetzt, kann man für diese Komponenten je eine 
 Fehlerquote von $ 1\times10^{-6}$/h annehmen. Einzelkomponenten können somit im Bereich \textbf{DAL C bzw. ASIL B} 
-oder höher einzuordnen sein. (In der Literatur werden solche KI gesteuerten Gesamtsysteme als eAI bezeichnet.)
+einzuordnen sein. (In der Literatur werden solche KI gesteuerten Gesamtsysteme als eAI bezeichnet.)
 
 % ----------------------------------------------------
 \section{Einsatzfelder in der Luftfahrt}\label{sec:sop-ueberblick}
@@ -218,7 +219,7 @@ Kontext wie folgt zusammen:\parencite{mil-ai-standards-2024}
 \begin{table}[h]
 \centering
 \caption{Zivil vs.\ Militär – verkürzter Vergleich zentraler Aspekte}
-\begin{tabular}{p{0.30\textwidth} p{0.30\textwidth} p{0.31\textwidth}}
+\begin{tabular}{p{0.28\textwidth} p{0.31\textwidth} p{0.32\textwidth}}
 \toprule
 \textbf{Aspekt} & \textbf{Zivile Luftfahrt} & \textbf{Militärische Luftfahrt} \\
 \midrule
@@ -226,7 +227,7 @@ Ziele \& Kontext & Sicherheit, Zuverlässigkeit, Interoperabilität im reguliert
 Regulatorik \& Standards & EASA/FAA/ICAO; DO-178C, DO-254, DO-160; KI-Guidance ergänzt bestehende Safety-Regeln & EDA/NATO/nationale Ministerien; EMARs, MIL-STD-882E; missions-/fähigkeitsbezogene Ergänzungen \\
 Standardisierung & Breite Stakeholder-Beteiligung, öffentlich, iterativ & Begrenzte Stakeholder (Behörden, Auftragnehmer), teils klassifiziert \\
 Zertifizierung & Pflicht vor Einsatz; internationale Anerkennung; umfangreiche V\&V in kontrollierten Szenarien & EMAR-basiert und missionsbezogen; V\&V auch in Übungen/realitätsnahen Stresstests \\
-Transparenz \& Ethik & Hohe Transparenz, Nachvollziehbarkeit, öffentliche Rechenschaft & Abwägung mit Geheimhaltung; zusätzliche ethische Leitplanken (z.\,B.\ zu Autonomiegraden) \\
+Transparenz \& Ethik & Hohe Transparenz, Nachvollziehbarkeit, öffentliche Rechenschaft & Abwägung mit Geheimhaltung; zusätzliche ethische Leitplanken \\
 Betrieb \& Resilienz & „Fail-safe“/„fail-operational“ nach Hazard; klarer Regelbetrieb & Starke Resilienzanforderungen (Jamming/Täuschung), \emph{graceful degradation} unter Störung \\
 \bottomrule
 \end{tabular}
