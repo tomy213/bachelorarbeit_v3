@@ -75,19 +75,19 @@ Anwendungen von Transformer-Modellen.
 
 Für diese Arbeit sind SL und UL am wichtigsten. Weiter wird RL nach den EASA-Papieren nicht empfohlen.
 \section{Beispiel: Training eines ML-Modells mit neuronalen Netzen (kompakt)}\label{sec:nn-train-kompakt}
-Beim \textbf{überwachten Lernen} liegen zu jedem Eingabebeispiel passende \emph{Labels} vor; das Netz lernt die Abbildung
-\(\text{Eingabe}\!\rightarrow\!\text{Label}\) durch Minimierung einer \textbf{Verlustfunktion (Loss)}. Ein neuronales Netz besteht aus
-Schichten mit \textbf{Gewichten} und \textbf{Aktivierungsfunktionen} (z.\,B.\ ReLU), die Eingaben schrittweise in
+Beim überwachten Lernen liegen zu jedem Eingabebeispiel passende \emph{Labels} vor; das Netz lernt die Abbildung
+\(\text{Eingabe}\!\rightarrow\!\text{Label}\) durch Minimierung einer Verlustfunktion (Loss). Ein neuronales Netz besteht aus
+Schichten mit Gewichten und Aktivierungsfunktionen (z.\,B.\ ReLU), die Eingaben schrittweise in
 aussagekräftige \emph{Repräsentationen} überführen.
 
-\textbf{Trainingsablauf (Kernidee):} Daten in \emph{Mini-Batches} durch das Netz schicken (\emph{Forward Pass}) \(\rightarrow\) Loss mit den
-Labels berechnen \(\rightarrow\) \emph{Backpropagation} bestimmt Gradienten \(\rightarrow\) ein \textbf{Optimierer} aktualisiert
-die Gewichte. Viele Wiederholungen über alle Trainingsdaten heißen \textbf{Epochen}. Daten werden in \textbf{Train/Valid/Test} aufgeteilt:
+Trainingsablauf (Kernidee): Daten in \emph{Mini-Batches} durch das Netz schicken (\emph{Forward Pass}) \(\rightarrow\) Loss mit den
+Labels berechnen \(\rightarrow\) \emph{Backpropagation} bestimmt Gradienten \(\rightarrow\) ein Optimierer aktualisiert
+die Gewichte. Viele Wiederholungen über alle Trainingsdaten heißen Epochen. Daten werden in Train/Valid/Test aufgeteilt:
 Training passt Gewichte an, \emph{Validierung} steuert Hyperparameter/Frühes Stoppen, \emph{Test} schätzt die finale Leistung.
 
-\textbf{Überanpassung (Overfitting)} wird mit \textbf{Regularisierung} reduziert: \emph{Dropout}, \emph{Weight Decay} und \emph{Early Stopping}.
-\textbf{Metriken} hängen von der Aufgabe ab: bei \emph{Klassifikation} u.\,a.\ Accuracy, Precision/Recall/F\(_1\), ROC; bei
-\emph{Regression} typischerweise MSE. Optional kann \textbf{Transfer Learning} genutzt werden, um vortrainierte Netze an neue Daten anzupassen.
+Überanpassung (Overfitting) wird mit Regularisierung reduziert: \emph{Dropout}, \emph{Weight Decay} und \emph{Early Stopping}.
+Metriken hängen von der Aufgabe ab: bei \emph{Klassifikation} u.\,a.\ Accuracy, Precision/Recall/F\(_1\), ROC; bei
+\emph{Regression} typischerweise MSE. Optional kann Transfer Learning genutzt werden, um vortrainierte Netze an neue Daten anzupassen.
 
 
 
@@ -95,6 +95,8 @@ Training passt Gewichte an, \emph{Validierung} steuert Hyperparameter/Frühes St
 
 % --- KAPITEL: GRUNDLAGEN / RADAR ---
 \chapter{Radarsysteme in der Luftfahrt}\label{sec:grundlagen-radar}
+
+
 
 \section{Aufgaben und Einsatzspektrum}\label{sec:radar-aufgaben}
 Radarsysteme liefern wetter- und umgebungsbezogene Informationen und unterstützen taktische wie operationelle Entscheidungen.
@@ -106,19 +108,53 @@ Typische Aufgaben umfassen:
   \item \textbf{Luftraum- und Bodenüberwachung:} Unterstützung von Verkehrsfluss, Staffelung und Situational Awareness am Boden und in der Luft.
 \end{itemize}
 
-\section{Funktionsprinzipien und Signalpfad}\label{sec:signalpfad}
-Radare senden elektromagnetische Energie aus und werten Echos aus, um \emph{Entfernung}, \emph{Relativgeschwindigkeit}
-und \emph{Richtung} von Objekten zu bestimmen. Drei Grundbeziehungen strukturieren die Messung:
-\begin{itemize}
-  \item \textbf{Laufzeit $\rightarrow$ Entfernung:} Aus der Zeit zwischen Aussendung und Empfang folgt die Distanz.
-  \item \textbf{Doppler $\rightarrow$ Relativgeschwindigkeit:} Frequenzverschiebung durch Relativbewegung entlang der Sichtlinie.
-  \item \textbf{Antenne/Beam $\rightarrow$ Winkel:} Richtwirkung bzw.\ Phasen-/Amplitudenunterschiede erlauben die Winkelschätzung.
-\end{itemize}
-Diese Größen werden über eine Verarbeitungskette erschlossen, die – abhängig von Architektur und Modus –
-variieren kann, in der Luftfahrt aber typischerweise die folgenden Schritte umfasst.
 
-\subsection{Signalverarbeitungskette (High-Level)}\label{sec:signal-kette}
-% HINWEIS: Für die Grafik werden tikz + arrows.meta + positioning benötigt.
+\section{Systemarchitekturen und Betriebsmodi}\label{sec:radar-architektur}
+Radarsysteme unterscheiden sich hinsichtlich Geometrie, Wellenform und Abtaststrategie. Die Wahl der Architektur
+prägt Messcharakteristika, Integrationsaufwand und Evidenzanforderungen in der Safety-Argumentation.
+
+\subsection{Systemklassen: Mono-, Bi- und Multistatik}
+\begin{itemize}
+  \item \textbf{Monostatisch} (in der Luftfahrt dominierend): Sende- und Empfangsantenne am selben Ort.
+        Vorteile: kompakte Integration, eindeutige Geometrie; einfacher Nachweis. 
+  \item \textbf{Bistatisch}: Sende- und Empfangsposition getrennt. 
+        Vorteile: spezielle Geometrien/Signaturvorteile; Nachteile: komplexere Auswertung/ODD, Synchronisation.
+  \item \textbf{Multistatisch}: mehrere, verteilte Empfänger/Sender. 
+        Vorteile: Redundanz, Winkel-/Positionsgenauigkeit; Nachteile: hoher Daten-/Zeitabgleich.
+\end{itemize}
+
+\subsection{Wellenformen}
+\begin{itemize}
+  \item \textbf{Gepulst / Puls-Doppler}: Zeitdiskrete Aussendung; Reichweite aus Laufzeit, Geschwindigkeit aus Doppler über Pulsfolgen.
+        \emph{Standard} für Entfernungsbestimmung (z.\,B.\ Primärradar, viele Bordradare).
+  \item \textbf{CW (Continuous Wave)}: kontinuierliche Aussendung; misst primär Geschwindigkeit (Doppler).
+        Ohne Modulation keine Entfernungsschätzung.
+  \item \textbf{FMCW (Frequency-Modulated CW)}: Frequenzrampe zur gleichzeitigen Reichweiten- und Geschwindigkeitsbestimmung.
+        \emph{Weit verbreitet} bei Radarhöhenmessern oder im Automotive (Chirp-Sequence); zunehmend in Kurz-/Mittelreichweite (z.\,B.\ UAS).
+\end{itemize}
+\subsection{Scanprinzipien}
+\begin{itemize}
+  \item \textbf{Mechanisches Schwenken}: Physisches Drehen/Kippen der Antenne; robust und günstig, aber begrenzte Scanrate und höhere Latenz.
+  \item \textbf{Elektronisches Schwenken}: Strahlrichtung via Phasen-/Amplitudensteuerung; \emph{passiv} 
+  dominiert Automotive (Winkel aus Phasendifferenzen), für große Reichweiten/Leistung in der Luftfahrt meist \emph{aktiv}.
+\end{itemize}
+
+
+\subsection{Beispiele im Luftfahrtkontext}
+
+\begin{itemize}
+  \item \textbf{Bodenradar}: \emph{Primärradar} für nicht-kooperative Luftraumüberwachung; \emph{Sekundärradar} als kooperatives Abfrage/Antwort-Verfahren (Koexistenz beachten).
+  \item \textbf{Bordradar}: vor allem \emph{Wetterradar} (gepulst/Puls-Doppler, teils elektronisch geschwenkt) zur Gewitter-, Niederschlags- und Turbulenzerkennung.
+  \item \textbf{Radarhöhenmesser}: meist \emph{FMCW}, liefert Höhe über Grund für Anflug/Landung und Systemlogik.
+\end{itemize}
+
+\noindent
+Reichweite, Aktualisierungsrate und Auflösung variieren nach Plattform und Mission. 
+
+
+
+
+\section{Signalpfad}\label{sec:signalpfad}
 
  \usetikzlibrary{arrows.meta,positioning}
 % Optional: \usepackage{booktabs} (anderswo bereits genutzt)
@@ -171,103 +207,17 @@ ein Kompromiss: zu niedrig $\rightarrow$ mehr Treffer, aber hohe Falschalarmrate
 weniger Fehlalarme, aber Verlust schwacher Ziele. \emph{CFAR} hält die
 Falschalarmrate durch lokale Störschätzung adaptiv konstant und ist daher ein zentraler Baustein für
 stabile Detektion – insbesondere in Umgebungen mit variierendem Clutter (z.\,B.\ Wetter, See, Boden).
+An dieser stelle werden oft KIs eingesetzt, um bei einer gesentkten Schwelle innerhalb des Rauschens 
+Muster zu erkennen. Hierbei gilt, wenn die KI auch nichts sieht ist es okay, erkennt die KI aber etwas 
+hat man einen Mehrwert.
 
-\section{Systemarchitekturen und Betriebsmodi}\label{sec:radar-architektur}
-Radarsysteme unterscheiden sich hinsichtlich Geometrie, Wellenform und Abtaststrategie. Die Wahl der Architektur
-prägt Messcharakteristika, Integrationsaufwand und Evidenzanforderungen in der Safety-Argumentation.
 
-\subsection{Systemklassen: Mono-, Bi- und Multistatik}
-\begin{itemize}
-  \item \textbf{Monostatisch} (in der Luftfahrt dominierend): Sende- und Empfangsantenne am selben Ort.
-        Vorteile: kompakte Integration, eindeutige Geometrie; einfacher Nachweis. 
-  \item \textbf{Bistatisch}: Sende- und Empfangsposition getrennt. 
-        Vorteile: spezielle Geometrien/Signaturvorteile; Nachteile: komplexere Auswertung/ODD, Synchronisation.
-  \item \textbf{Multistatisch}: mehrere, verteilte Empfänger/Sender. 
-        Vorteile: Redundanz, Winkel-/Positionsgenauigkeit; Nachteile: hoher Daten-/Zeitabgleich, komplexe Evidenzführung.
-\end{itemize}
 
-\subsection{Wellenformen}
-\begin{itemize}
-  \item \textbf{Gepulst / Puls-Doppler}: Zeitdiskrete Aussendung; Reichweite aus Laufzeit, Geschwindigkeit aus Doppler über Pulsfolgen.
-        \emph{Standard} für Entfernungsbestimmung (z.\,B.\ Primärradar, viele Bordradare).
-  \item \textbf{CW (Continuous Wave)}: kontinuierliche Aussendung; misst primär Geschwindigkeit (Doppler).
-        Ohne Modulation keine Entfernungsschätzung.
-  \item \textbf{FMCW (Frequency-Modulated CW)}: Frequenzrampe zur gleichzeitigen Reichweiten- und Geschwindigkeitsbestimmung.
-        \emph{Weit verbreitet} bei Radarhöhenmessern; zunehmend in Kurz-/Mittelreichweite (z.\,B.\ UAS).
-\end{itemize}
-
-\subsection{Scanprinzipien}
-\begin{itemize}
-  \item \textbf{Mechanisches Schwenken}: physisches Drehen/Kippen der Antenne; bewährt, kosteneffizient,
-        aber begrenzte Abdeckungsrate und höhere Latenzen.
-  \item \textbf{Elektronisches Schwenken (Phased Array/AESA)}: Richtungsänderung durch Phasen-/Amplitudensteuerung.
-        Vorteile: schnelle Strahllenkung, vielseitige Modi, Mehrkanal-Auswertung; höhere Komplexität und Datenraten.
-\end{itemize}
-
-\subsection{Beispiele im Luftfahrtkontext}
-
-\begin{itemize}
-  \item \textbf{Bodenradar:} \emph{Primärradar} (nicht-kooperative Detektion); \emph{Sekundärradar} (kooperative Abfrage/Antwort) – Koexistenz kann zu Überlagerungen führen.
-  \item \textbf{Bordradar:} v.\,a.\ \emph{Wetterradar} zur Gewitter-/Niederschlagserkennung; Umfeldinformationen für kollisionsvermeidende Funktionen.
-  \item \textbf{Radarhöhenmesser:} meist \emph{FMCW}-basiert, liefert Höhe über Grund für Anflug/Landung und logikführende Systeme.
-\end{itemize}
-
-\noindent
-Je nach Plattform (airborne vs.\ ground) und Missionsprofil unterscheiden sich Reichweite, Aktualisierungsrate, Auflösung und Integrationsgrad.
-Aus Safety-Sicht sind besonders relevant: (i) stabile Leistung unter variablen Umgebungsbedingungen,
-(ii) zuverlässige Trennung relevanter Ziele von Clutter/Störungen und (iii) qualifizierte, auditierbare Informationen
-für nachgelagerte Funktionen und Crews.
-\begin{itemize}
-  \item \textbf{Boden-Primärradar} (gepulst/Puls-Doppler, meist mechanisch oder hybrid): nicht-kooperative Luftraumüberwachung.
-  \item \textbf{Sekundärradar} (kooperativ): Abfrage/Antwort-Verfahren; Koexistenz mit Primärradar beachten.
-  \item \textbf{Bord-Wetterradar} (gepulst/Puls-Doppler, zunehmend elektronisch geschwenkt): Gewitter-/Niederschlagserkennung, Turbulenzhinweise.
-  \item \textbf{Radarhöhenmesser} (FMCW): Höhe über Grund für Anflug/Landung und Systemlogik.
-\end{itemize}
-
-\paragraph{Hinweis zur Safety-Einordnung.}
-Architektur- und Moduswahl beeinflussen Evidenzanforderungen z.B. Datenraten oder Latenz, schlagen auf Nachweise wie für die Robustheit 
-oder Traceability durch. Diese Aspekte werden in den Leistungskennzahlen und Betriebsbedingungen weiter konkretisiert.
-
-\section{Leistungskennzahlen und Qualitätsmaße}\label{sec:radar-kpis}
-Leistungskennzahlen (KPIs) dienen als Schnittstelle zwischen Technik und Nachweisführung: Sie
-quantifizieren, ob das Radarsystem in seinen Einsatzbedingungen die geforderten Funktionen
-verlässlich erbringt. Für sicherheitskritische Kontexte ist neben dem Zahlenwert insbesondere
-die \emph{qualifizierte Herleitung}, die \emph{Messmethodik} und die \emph{Auditierbarkeit} relevant.
-
-\subsection{Kernmetriken für Detektion und Betrieb}\label{sec:kernmetriken}
+\section{Typische Trade-offs}\label{sec:tradeoffs}
 \begin{table}[h]
 \centering
-\caption{Typische Metriken für Radarleistung (Auswahl)}
-\begin{tabular}{p{0.28\textwidth}p{0.62\textwidth}}
-\toprule
-\textbf{Entdeckungswahrschein- lichkeit ($P_d$)} & Wahrscheinlichkeit, dass ein tatsächlich vorhandenes Ziel detektiert wird; abhängig u.\,a.\ von SNR, Entfernung, Aspekt und Clutter. \\
-\midrule
-\textbf{Falschalarmwahrschein- lichkeit ($P_{fa}$)} & Wahrscheinlichkeit, dass ein Ziel gemeldet wird, obwohl keines existiert (Rauschen/Clutter/Interferenzen). CFAR hält $P_{fa}$ adaptiv konstant. \\
-\midrule
-\textbf{ROC-Kurve} & Zusammenhang zwischen $P_d$ und $P_{fa}$ über variierende Schwellen; zeigt den Trade-off und erlaubt Betriebs­punkt­wahl nach Einsatzprioritäten. \\
-\midrule
-\textbf{Update-Rate / Latenz} & Zeitliche Aktualisierung und Verzögerung der Messungen; bestimmt Reaktionsfähigkeit und Track-Stabilität. \\
-\midrule
-\textbf{Verfügbarkeit / Zuverlässigkeit} & Anteil der Zeit, in der spezifizierte Leistung erreicht wird (inkl.\ MTBF/MTTR-Aspekten); relevant für Dauerbetrieb und Safety-Argumentation. \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Auflösungen und Messfehler}\label{sec:aufl-messfehler}
-\begin{itemize}
-  \item \textbf{Entfernungsauflösung:} minimal trennbare Reichweiten­differenz; geprägt durch Puls-/Signalbandbreite (Pulskompression/Range-FFT).
-  \item \textbf{Geschwindigkeitsauflösung:} kleinste unterscheidbare Radialgeschwindigkeit; abhängig von Beobachtungszeit (CPI-Länge) und Anzahl der Pulse (Doppler-FFT).
-  \item \textbf{Winkelauflösung:} Trennung im Azimut/Elevation; abhängig von Antennenapertur, SNR und Winkelschätzverfahren (z.\,B.\ Monopulse/DBF).
-  \item \textbf{Reichweitenmessfehler:} zufällige Abweichungen der Distanzschätzung; beeinflusst durch SNR, Pulskompression und Synchronisation.
-  \item \textbf{Geschwindigkeitsmessfehler:} Unsicherheit der Doppler­schätzung; abhängig von SNR, Beobachtungsdauer, PRF-Stabilität (Pulse-Repetition-Frequency).
-  \item \textbf{Winkelmessfehler:} Abweichung zwischen geschätztem und tatsächlichem Winkel; Funktion von SNR, Apertur, Array-Kalibrierung und Verfahren.
-\end{itemize}
-
-\subsection{Typische Trade-offs}\label{sec:tradeoffs}
-\begin{table}[h]
-\centering
-\caption{Wesentliche Trade-offs in Radarsystemen}
-\begin{tabular}{p{0.35\textwidth}p{0.55\textwidth}}
+\caption{Trade-offs in Radarsystemen}
+\begin{tabular}{p{0.33\textwidth}p{0.57\textwidth}}
 \toprule
 \textbf{Reichweite vs.\ Auflösung} & Mehr Bandbreite verbessert Entfernungsauflösung, erhöht aber Rauschbandbreite, Datenrate und Systemkomplexität. \\
 \midrule
@@ -277,7 +227,7 @@ die \emph{qualifizierte Herleitung}, die \emph{Messmethodik} und die \emph{Audit
 \midrule
 \textbf{Detektionsschwelle vs.\ $P_{fa}$} & Niedrige Schwellen steigern $P_d$, aber auch $P_{fa}$; hohe Schwellen senken Fehlalarme, verpassen schwache Ziele. CFAR balanciert adaptiv. \\
 \midrule
-\textbf{Clutter-Unterdrückung vs.\ Zielerhalt} & Aggressive Filter (z.\,B.\ MTI, Wettermasken) reduzieren Störungen, riskieren aber langsame/schwache Ziele zu dämpfen. \\
+\textbf{Clutter-Unterdrückung vs.\ Zielerhalt} & Aggressive Filter reduzieren Störungen, riskieren aber langsame/schwache Ziele zu dämpfen. \\
 \midrule
 \textbf{Datenrate/Kompression vs.\ Informationsgehalt} & Feine Raster, viele Kanäle und hohe Abtastraten erhöhen Aussagekraft, treiben jedoch Schnittstellen, Speicher und Rechenlast. \\
 \midrule
@@ -288,119 +238,19 @@ die \emph{qualifizierte Herleitung}, die \emph{Messmethodik} und die \emph{Audit
 \end{tabular}
 \end{table}
 
-\subsection{Mess- und Reportinghinweise}\label{sec:reporting}
-Für die Vergleichbarkeit und Auditierbarkeit sind Messbedingungen und Auswerteprotokolle explizit zu
-dokumentieren:
-\begin{itemize}
-  \item \textbf{Szenariokonditionen:} SNR/Entfernung/Aspekt, Clutter- und Wetterlage, Interferenzsituation.
-  \item \textbf{Betriebsmodus/Parameter:} Wellenform (PRF/Bandbreite), Scanmodus, Integrationszeiten, CFAR-Variante und Parameter.
-  \item \textbf{ODD-Schnitt:} Berichte getrennt nach relevanten ODD-Segmenten (z.\,B.\ Reichweitenbänder, SNR-Bins, Wetterklassen) statt nur „Overall“-Mittelwerten.
-  \item \textbf{Konfidenzen/Kalibrierung:} Neben Punktwerten Unsicherheiten/Intervalle angeben; Kalibrierung der Detektions-/Klassifikationskonfidenzen dokumentieren.
-  \item \textbf{Traceability:} Datenstände, Preprocessing, Modell-/SW-Versionen und Testskripte versioniert festhalten.
-  \item \textit{Takeaway:}
-    Metriken wie $P_d$ und $P_{fa}$ sind nur im Kontext von ODD-Schnitten, Messbedingungen und Trade-offs aussagekräftig.
-    Für Safety zählen \emph{belastbare Messprotokolle}, \emph{kalibrierte Unsicherheiten} und \emph{nachvollziehbare
-    Freigabekriterien} mindestens so viel wie die numerischen Werte selbst.
-\end{itemize}
 
-
-
-\section{Betriebsbedingungen und Herausforderungen}\label{sec:radar-conditions}
-Radarsysteme operieren in wechselhaften Umgebungen. Neben fundamentalen Rauschgrenzen wirken
-Störeinflüsse und Szenariovariabilität direkt auf SNR, Detektionsleistung und Messfehler ein.
-Für die spätere KI-Einordnung ist wesentlich: Viele Effekte verschieben die \emph{Datenverteilung}
-und erzeugen \emph{Randfälle}, die in ODD/Tests explizit abzudecken sind.
-
-\subsection{Störquellen und Szenarien (Überblick)}\label{sec:stoerquellen}
+\section{Störquellen und Szenarien}\label{sec:stoerquellen}
 \begin{itemize}
   \item \textbf{Thermisches Rauschen:} Fundamentale Hintergrundbegrenzung der Empfangselektronik; bestimmt die minimal detektierbare Signalstärke (SNR-Schwelle).
   \item \textbf{RFI (Radio Frequency Interference):} Einflüsse benachbarter Funkdienste oder anderer Radare; kann SNR reduzieren und Falschalarmrate erhöhen.
   \item \textbf{Mehrwegeausbreitung (Multipath):} Reflexionen an Boden/Strukturen erzeugen geisterhafte Ziele oder Phasenfehler; verschlechtern Winkel-/Reichweitenkonsistenz.
   \item \textbf{Clutter (Boden, See, Wetter):} Starke, oft strukturierte Rückstreuung; erschwert die Trennung schwacher/langsamer Ziele und erhöht $P_{fa}$.
   \item \textbf{Regen / Dämpfung:} Besonders in höheren Frequenzen relevant; dämpft Nutzsignal und produziert Wetterclutter (Spektralverbreiterung).
-  \item \textbf{Jamming / Deception:} Absichtliche Störung (Rauscheinträge) bzw.\ Täuschung (falsche Ziele, z.\,B.\ mittels DRFM); erschwert verlässliche Detektion/Tracking.
+  \item \textbf{Jamming / Deception:} Absichtliche Störung (Rauscheinträge) bzw.\ Täuschung; erschwert verlässliche Detektion/Tracking.
   \item \textbf{Zielschwankungen (RCS):} Rückstreuquerschnitt variiert mit Geometrie, Material und Aspekt; führt zu SNR-Fluktuationen und intermittierenden Detektionen.
   \item \textbf{Interferenzen kooperativer Systeme:} Überlagerungen durch Sekundärradar/ADS-B in räumlich/frequenznahen Szenarien; Artefakte und Überdeckung möglich.
   \item \textbf{Atmosphärische Effekte:} Refraktion, Duktung, Turbulenz verändern die Ausbreitung; scheinbare Positionsverschiebungen und Reichweitenanomalien sind möglich.
 \end{itemize}
-
-\subsection{Auswirkungen auf Messkette und Nachweis}\label{sec:auswirkungen}
-Viele der genannten Einflüsse wirken \emph{vor} der Detektion (SNR, Spektralform), propagieren durch
-\emph{CFAR/Maskierung} und prägen die Qualität von \emph{Clustering/Tracking}. Für KI-Funktionen
-(Objektklassifizierung) heißt das: Eingaben (RD/RDA (Range-Doppler/-Angle), Merkmalsvektoren) variieren distributionsseitig,
-Konfidenzen können falsch kalibriert sein, und OOD-Fälle treten gehäuft in Randbedingungen auf.
-
-\begin{table}[h]
-\centering
-\caption{Störeinflüsse: Auswirkung auf Messung/Verarbeitung und typische Gegenmaßnahmen (Auswahl)}
-\begin{tabular}{p{0.23\textwidth}p{0.38\textwidth}p{0.30\textwidth}}
-\toprule
-\textbf{Einfluss} & \textbf{Auswirkung} & \textbf{Gegenmaßnahmen} \\
-\midrule
-Therm. Rauschen & SNR-Limit, höhere $P_{fa}$ bei niedrigen Schwellen & Integrationszeit, Bandbreitenwahl, Kühlung \\
-\midrule
-RFI & Erhöhte Grundlinie, Spektralartefakte & Frequenzkoordination, Notch-Filter\\
-\midrule
-Multipath & Geisterziele, Winkel-/Range-Bias & Elevations-/Geometriewahl, Track-Plausibilisierung \\
-\midrule
-Clutter & Zielmaskierung, lokale $P_{fa}$-Spitzen & Adaptives CFAR, Wettermasken, dynamische Schwellen \\
-\midrule
-Regen/Dämpfung & Nutzsignal-Dämpfung, Spektralverbreiterung & Frequenz-Anpassung, Kalibrierung \\
-\midrule
-Jamming/Deception & Falsche Ziele, SNR-Kollaps & Anti-Jam-Wellenformen, Konsistenz-/Track-Checks, Alarmierung \\
-\midrule
-Zielschwankung & Intermittierende Detektion, SNR-Fluktuation & Track-Integrität, Feature-Normalisierung \\
-\midrule
-Überlagerung & Artefakte, Messlücken & Kanal-/Zeitentkopplung, Filterung, Koexistenzmanagement \\
-\midrule
-Atmosphärik & Reichweiten-/Höhenanomalien & Umweltmodelle, Plausibilisierung, konservative Schwellen \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\vspace{0.25em}
-\noindent\textit{Hinweis für die KI-Einordnung.}
-Die oben skizzierten Effekte definieren \emph{ODD-Schnitte}, die für die Leistung, Konfidenz und Fehlerraten 
-getrennt zu berichten und zu kalibrieren sind. Für die Assurance von Klassifikationsfunktionen sind 
-außerdem OOD-Erkennung, konservative Schwellen und Fallback-Strategien (Abstain) zentrale Bausteine.
-
-\section{Sicherheitsrelevanz und Rolle im Gesamtsystem}\label{sec:radar-safetyrolle}
-Radar liefert Primärinformationen für situatives Lagebild, Wettervermeidung und kollisionsrelevante
-Entscheidungen. Entsprechend wirken Qualität, Aktualität und Plausibilisierung der Radardaten direkt auf
-das Gesamtrisiko. Für sicherheitskritische Anwendungen ergeben sich daraus drei Schwerpunkte:
-
-\paragraph{Informationsqualität und Plausibilisierung.}
-Detektion, Messfehler und Clutter-Situation bestimmen, wie belastbar Reichweite, Geschwindigkeit und
-Winkel sind. Plausibilisierungen (z.\,B.\ Konsistenz über Zeit/Aspekt, Track-Integrität, kinematische
-Grenzprüfungen) sind notwendig, um Geisterziele, Ausreißer und degradierte Bedingungen zu erkennen und
-angemessen zu behandeln (Degradation/Fallback).
-
-\paragraph{Integration und Schnittstellen.}
-Radar steht selten isoliert: Daten fließen in weitere Avionikfunktionen (z.\,B.\ Navigation, Warn-/Assistenz-
-Systeme) und HMI. Anforderungen an \emph{Latenz}, \emph{Update-Rate}, \emph{Synchronisation} und
-\emph{Determinismus} der Kommunikation sind daher explizit zu spezifizieren und nachzuweisen. 
-Traceability über Schnittstellen (Formate, Qualitätsflags, Konfidenzen) ist Voraussetzung für Auditierbarkeit.
-
-\paragraph{Rolle im Safety Case.}
-Aus Systemperspektive werden Radar-bezogene \emph{Schutzziele} abgeleitet (z.\,B.\ Mindestleistungen pro
-ODD-Segment oder Erkennung und Grenzen von Degradationen) und in überprüfbare \emph{Anforderungen} überführt
-(Metriken, Testmethodik, Freigabekriterien). Evidenz umfasst Mess-/Testprotokolle, Kalibrierung,
-Konfigurations-/Versionsstände sowie Ergebnisse aus Integration und Betrieb (Monitoring/Health).
-
-\medskip
-\noindent\textit{Implikationen für KI-Funktionen.}
-Wird KI inline (z.\,B.\ zur Objektklassifizierung) genutzt, sind Konfidenz-Kalibrierung, OOD-Erkennung,
-Abstain-/Fallback-Strategien und die konsistente Weitergabe von Qualitätsindikatoren an nachgelagerte
-Funktionen wesentlich. Bei KI im Frontloading (z.\,B.\ Musteranalyse für Entwicklung/Verifikation) liegt der
-Fokus auf Tool-/Prozessassurance, Reproduzierbarkeit und der Überführbarkeit der Ergebnisse in belastbare
-Evidenz für den Safety Case.
-
-\medskip
-\noindent\textit{Hinweis zur Kritikalität.}
-Die sicherheitstechnische Einordnung einzelner Radar- und KI-Funktionen (z.\,B.\ Klassifikation) ist
-systemspezifisch und hängt von Architektur, Barrieren und automatischer Wirkung ab. Unabhängig davon
-bleiben ODD-Definition, Mess-/Reportingdisziplin und lebenszyklusorientiertes Monitoring zentrale Bausteine
-für eine tragfähige Assurance.
 
 
 \section{Radar–Grundlagen für Objektklassifizierung}\label{sec:radar-objklass}
@@ -440,7 +290,7 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 
 
 
-\subsection{Wichtige Datenpunkte für Objektklassifikation}\label{sec:radar-objklass-daten}
+\subsection{Wichtige Datenpunkte und Merksätze für Objektklassifikation}\label{sec:radar-objklass-daten}
 \begin{table}[h]
 \centering
 \caption{Radar-Merkmale und Kontextinformationen für Objektklassifikation (Auswahl)}
@@ -471,39 +321,16 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 \end{tabular}
 \end{table}
 
-\subsection{Merksätze zu Radar-Grundlagen}\label{sec:radar-merksätze}
-\begin{itemize}
-  \item \textbf{Physik zuerst:} Das Signal-Rausch-Verhältnis setzt die Grenzen; alles Weitere baut darauf auf.
-  \item \textbf{Qualität wandert nach unten:} Stabilität von Range–Doppler–Angle prägt alle Folgeschritte.
-  \item \textbf{PRF ist ein Hebel:} Pulsfolge steuert den Kompromiss Reichweite vs.\ Geschwindigkeit.
-  \item \textbf{Bandbreite kostet:} Bessere Auflösung \(\rightarrow\) höhere Datenrate/Rechenlast/Hardwareanforderungen.
-  \item \textbf{Antenne = Winkel:} Größere Apertur/elektronisches Schwenken verbessert Winkeltrennung, erhöht Komplexität.
-  \item \textbf{Zeit vs.\ Latenz:} Längere Integration schärft Doppler, erhöht Latenz/Bewegungsunschärfe.
-  \item \textbf{CFAR steuert $P_{fa}$:} Zu niedrige Schwellen \(\uparrow P_{fa}\), zu hohe verpassen schwache Ziele.
-  \item \textbf{Clutter ist der Hauptgegner:} Filter aggressiv genug wählen, ohne langsame/schwache Ziele zu verlieren.
-  \item \textbf{Mehrwege/Atmosphäre erzeugen Geister:} Tracking und Konsistenzprüfungen enttarnen Scheinziele.
-  \item \textbf{Koexistenz beachten:} SSR/ADS-B, Funk- und Navigationsdienste können überlagern.
-  \item \textbf{Kalibrierung hält ehrlich:} Regelmäßige Checks/Health-Monitoring verhindern Drift.
-  \item \textbf{Metadaten sind Gold:} PRF-/Modus-/Antenne-Infos gehören ins Dataset für Interpretierbarkeit.
-\end{itemize}
-
-\subsection{Merksätze zur Objektklassifizierung}\label{sec:klass-merksätze}
 \begin{itemize}
   \item \textbf{Zeit schlägt Einzelbild: \parencite{skolnik2001-intro-radar}} Sequenzen/Trajektorien offenbaren Muster robuster als Einzelscans.
   \item \textbf{Mikrodoppler als Fingerabdruck: \parencite{Chen2011MicroDoppler}} Rotorrate/Flügelschlag trennen Drohnen, Helikopter, Vögel — SNR- und Aspect-abhängig.
   \item \textbf{Offene Welt akzeptieren: \parencite{Koopman:2025:EAI}} \emph{Unknown}-Klasse und OOD-Detektion sind Pflicht; lieber abstain als falsch sicher.
-  \item \textbf{Konfidenz muss stimmen:} Kalibrierte Wahrscheinlichkeiten und klare Abstain-Schwellen > Top-1-Quote.
-  \item \textbf{Physik hilft: \parencite{feigl-phd-deadreckoning}} Kinematik-/Spektral-Checks stabilisieren datengetriebene Modelle.
+  \item \textbf{Physik hilft: \parencite{feigl-phd-deadreckoning}} Kinematik-Checks stabilisieren datengetriebene Modelle.
   \item \textbf{Robust denken: \parencite{radartutorial-cfar}} Clutter, RFI, Aussetzer einplanen; Fallbacks gehören zum Design.
-  \item \textbf{HMI klärt Erwartungen:} Top-k, Konfidenz und OOD-/Qualitätsflags reduzieren Fehlinterpretationen.
+  \item \textbf{HMI klärt Erwartungen:} Z.B. OOD-/Qualitätsflags reduzieren Fehlinterpretationen.
   \item \textbf{Vorverarbeitung prägt Merkmale: \parencite{skolnik2001-intro-radar}} Wahl von CFAR, Filterung und Normalisierung bestimmt, was das Modell überhaupt „sehen“ kann.
 \end{itemize}
 
-\vspace{0.25em}
-\noindent\textit{Hinweis.}
-Die hier zusammengefassten Datenpunkte und Merksätze liefern im nächsten Kapitel den direkten Anknüpfungspunkt
-für die \emph{KI-gestützte Objektklassifizierung} und die Herleitung der \emph{Anforderungsfelder} (ODD-Schnitte,
-Leistungs-/Unsicherheitsmetriken, Toolchain-/Daten-Governance, Monitoring/Degradation).
 
 
 
@@ -516,7 +343,7 @@ Leistungs-/Unsicherheitsmetriken, Toolchain-/Daten-Governance, Monitoring/Degrad
 \chapter{Sicherheit}\label{sec:safety-aviation}
 
 \section{Sicherheit – Grundlagen}\label{sec:safety-basics}
-\textbf{Begriffsrahmen.} Sicherheit (\emph{Safety}) ist die Freiheit von unvertretbaren Risiken. 
+\textbf{Begriffsrahmen} – Sicherheit (\emph{Safety}) ist die Freiheit von unvertretbaren Risiken. 
 Risiko beschreibt die Kombination aus \emph{Schweregrad} einer möglichen Auswirkung und ihrer \emph{Eintrittswahrscheinlichkeit}. 
 Ziel ist, Risiken durch geeignete Maßnahmen so weit zu mindern, dass sie akzeptabel sind, um ein \emph{tolerierbares Restrisiko} festzulegen 
 (ALARP-Prinzip: as low as reasonably practicable).
@@ -636,7 +463,7 @@ Kommunikation und Zeitverhalten müssen vorhersagbar sein: feste oder begrenzte 
 und synchronisierte Uhren. So lassen sich Worst-Case-Reaktionszeiten planen und nachweisen.\\
 
 \paragraph{Degradation und Fallback-Strategien}
-Degradationspfade werden \emph{vorab} definiert, getestet und dokumentiert: Welche Teilfunktion wird in welchem Fehlerfall
+Degradationspfade werden vorab definiert, getestet und dokumentiert: Welche Teilfunktion wird in welchem Fehlerfall
 weitergeführt, welche wird abgeschaltet, welche Warnung wird ausgegeben?\\
 
 \paragraph{Health Monitoring und Watchdogs}
@@ -682,6 +509,7 @@ Beide Perspektiven sind geplant, mit Akzeptanzkriterien hinterlegt, unabhängig 
   \item \textbf{Änderungen \& Stilllegung:} kontrollierte Updates, Obsoleszenzmanagement, sichere Außerbetriebnahme.
 \end{itemize}
 
+\begin{comment}
 \section{Luftfahrt-spezifische Sicherheit}\label{sec:aviation-specific}
 Der luftfahrtspezifische Rahmen definiert, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenzen akzeptiert werden
 und \emph{wer} Entscheidungen trifft. Ziel ist ein zulassungsfähiges System, das im Betrieb überwacht und über
@@ -722,6 +550,7 @@ KI zeigt probabilistisches Verhalten und verlangt zusätzliche Evidenz.
 In der Luftfahrt existiert derzeit kein direktes KI-Normenpendant; 
 Erwartungen werden über Anforderungen/Prozesse adressiert. Externe 
 Orientierung (z.\,B.\ ISO/PAS 8800) kann helfen, ersetzt aber keine luftfahrtspezifische Bewertung.
+\end{comment}
 
 \section{Kernelemente der KI\,-Sicherheit}\label{sec:ai-safety-kern}
 Folgend begriffliche und methodische Grundlagen für die spätere Bewertung
