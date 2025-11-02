@@ -75,54 +75,38 @@ Rahmenbedingungen ausreichen, um Vertrauen in KI-basierte Funktionen in sicherhe
 Anwendungen der Luftfahrt zu begründen.
 
 
-\section{Forschungsfrage}
+\section{Hauptforschungsfrage}
 Ist der Einsatz von KI in Luftfahrtradarsystemen 
 unter den aktuell verfügbaren Sicherheitskonzepten und regulatorischen Rahmenbedingungen 
 als hinreichend sicher zu betrachten?
 
-\subsection*{Weitere Fragen}
-\paragraph{Rahmenbedingungen:}
-Welche Anforderungen und Leitlinien werden derzeit von luftfahrtspezifischen 
-Institutionen (z. B. EASA) und internationalen Standards (z. B. ISO 8800) an die 
-Sicherheit von KI-Systemen gestellt?
-\paragraph{Potenziale und Risiken:}
-Welche Einsatzmöglichkeiten von KI in Radarsystemen existieren und welche spezifischen 
-Chancen, Risiken und Unsicherheiten ergeben sich daraus?
-\paragraph{Abdeckung durch bestehende Ansätze:}
-In welchem Umfang adressieren aktuelle AI-Safety-Methoden und -Konzepte die für 
-Luftfahrtsysteme typischen Sicherheitsanforderungen?
-\paragraph{Offene Fragen:}
-Welche Aspekte der KI-Sicherheit erscheinen im luftfahrtspezifischen Kontext derzeit 
-noch kritisch und wo ist weiterer Forschungs- und Entwicklungsbedarf erkennbar?
-
-
 \section{Ziel und Beitrag der Arbeit}
-Ziel dieser Arbeit ist es, die Leitfrage zu beantworten, ob der Einsatz von KI 
-im Kontext von Luftfahrtradarsystemen als hinreichend sicher betrachtet 
-werden kann. Hierzu wird geprüft, welche Ansätze zur Absicherung gefordert werden und 
-in welchem Umfang diese bereits abgedeckt sind, unter Berücksichtigung der hohen 
-Anforderungen der Luftfahrt. Regulatorische Leitlinien einschlägiger Institutionen wie etwa EASA,
-sowie etablierte Sicherheitsstandards (u.a. ISO 8800) dienen als Bezugsrahmen. 
+Ziel dieser Arbeit ist es, die Hauptforschungsfrage zu beantworten.
+Darüber hinaus gilt es zu durchleuchten, welche Anforderungen und Leitlinien derzeit von 
+luftfahrtspezifischen Institutionen (z.B. EASA) und internationalen Standards (z.B. ISO 8800) 
+an die Sicherheit von KI-Systemen gestellt werden. 
+Hier gilt es anhand der hohen Anforderungen der Luftfahrt zu prüfen, in welchem Umfang 
+diese durch aktuelle Standards adressiert werden.
 Das Ergebnis soll eine Einordnung liefern, in welchen Bereichen die vorhandenen Konzepte und 
 Rahmenbedingungen bereits Vertrauen in KI-basierte Funktionen ermöglichen und wo weiterer 
 Forschungs- und Entwicklungsbedarf besteht.
+
 \medskip
-Die Arbeit leistet eine \emph{strukturierte Zuordnung} zwischen (I) den in 
-etablierten Sicherheitsstandards sowie behördlichen Leitlinien \emph{geforderten} 
-Absicherungsansätzen und (II) der \emph{erkennbaren Abdeckung} durch heutige 
+Die Arbeit leistet eine strukturierte Zuordnung zwischen (I) den in 
+etablierten Sicherheitsstandards sowie behördlichen Leitlinien geforderten 
+Absicherungsansätzen und (II) der erkennbaren Abdeckung durch heutige 
 Vorgehensweisen im Radar-Kontext. Daraus resultieren:
+
+\medskip
 \begin{itemize}
-\item eine konsolidierte Anforderungs- und Coverage-Matrix (Forderung~$\leftrightarrow$ Abdeckung~$\leftrightarrow$ Begründung),
-\item eine verdichtete Übersicht typischer Lücken und Risiken,
-\item empfehlungsorientierte Schlussfolgerungen für Anwendung und Weiterentwicklung.
+\item eine konsolidierte Anforderungs- und Coverage-Matrix (Forderung~$\leftrightarrow$ Abdeckung~$\leftrightarrow$ Begründung)
+\item eine verdichtete Übersicht typischer Lücken und Risiken
+\item empfehlungsorientierte Schlussfolgerungen für Anwendung und Weiterentwicklung
 \end{itemize}
 
 
-
-\section{Umfang und Abgrenzung}
-Im Mittelpunkt dieser Arbeit steht die \emph{Einordnung geforderter Ansätze zur Absicherung} 
-von KI im Kontext von Luftfahrtradarsystemen und die Frage, inwieweit eine Abdeckung 
-durch heutige Praktiken erkennbar ist. Nicht Gegenstand ist die Detailbewertung oder 
+\subsection*{Abgrenzung}
+Nicht Gegenstand dieser Arbeit ist die Detailbewertung oder 
 Zertifizierung einzelner Algorithmen oder Produkte.
 Radarsysteme dienen als Anwendungsrahmen; weitere Einsatzmöglichkeiten von KI in 
 der Luftfahrt werden berücksichtigt, jedoch nicht vertieft. Zur Veranschaulichung 
@@ -134,13 +118,20 @@ Inline-Integration abzuleiten. Die Arbeit setzt auf publizierte Quellen und
 
 
 \section{Vorgehensweise}
-Die Untersuchung kombiniert systematische Sichtung und strukturierende Analyse:
-\begin{enumerate}
-\item Literaturrecherche zu AI-Safety, Luftfahrtsicherheit und Radar; Sammlung ausgewählter Praxisberichte zu Problemen beim KI-Einsatz.
-\item Grundlagen zu KI, Radar und Sicherheit; kompakte Steckbriefe ausgewählter KI-Modelle mit Blick auf Erklärbarkeit und typische Fehlerbilder.
-\item Anforderungen und Szenarien für Radarsysteme ableiten; Abgleich geforderter Ansätze (u.a. entlang ISO~8800) mit der heutigen Abdeckung; Bewertung der Übertragbarkeit.
-\item Identifikation von Sicherheitslücken und Risiken; Ableitung von Empfehlungen.
-\end{enumerate}
+Im Verlauf dieser Arbeit wird folgendermaßen vorgegangen:
+
+\medskip
+Es wurden Literaturrecherchen zu AI-Safety, Luftfahrtsicherheit und Radar gemacht, 
+die mittels Grundlagen gestützt werden. 
+
+Hinzu kommt eine Sammlung ausgewählter Praxisberichte von KI im Einsatz. Weiter werden 
+möglicher Sicherheitslücken und Risiken identifiziert und Erkenntnisse aus der Praxis betrachtet.
+
+Es wird ein Abgleich geforderter Ansätze mit der heutigen Abdeckung untersucht. 
+Zudem wird zur besseren Darzustellung dies anhand eines Beispieles verdeutlicht wofür
+Anforderungen und Szenarien für ein Radarsystem definiert und die Übertragbarkeit bewertet wird.
+
+Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlungen abgeleitet.
 
 \newpage
 \section{Aufbau der Arbeit}
@@ -199,10 +190,10 @@ Die Untersuchung kombiniert systematische Sichtung und strukturierende Analyse:
 
 Zunächst werden die notwendigen Grundlagen zu KI, Radarsystemen und Sicherheit
 skizziert.
-Darauf aufbauend folgen eine Einordnung des heutigen KI-Einsatzes und ein Blick auf die
+Darauf aufbauend folgt eine Einordnung des heutigen KI-Einsatzes und ein Blick auf die
 Automobilbranche \textbf{1} mit ihren jüngst eingeführten Standards \textbf{5} sowie luftfahrtspezifische
 Referenzrahmen \textbf{2}, \textbf{6}.
-Für eine konkrete Beispielbetrachtung werden anschließend ein Radarsystem \textbf{3} samt
+Für eine konkrete Beispielbetrachtung wird anschließend ein Radarsystem \textbf{3} samt
 Einsatzzweck sowie ein passendes KI-Modell \textbf{4} gewählt; hierfür werden spezifische
 Anforderungen \textbf{7} definiert und mit luftfahrtspezifischen Referenzrahmen 
 abgeglichen. 
@@ -210,6 +201,6 @@ Die so identifizierten allgemeinen Luftfahrtanforderungen werden den
 Automobilstandards gegenübergestellt, um Übereinstimmungen und Lücken mittels einer \nameref{chap:coverage} \textbf{8} aufzuzeigen.
 Die Abdeckung der Beispielanforderungen wird daraus abgeleitet \textbf{9}.
 Anschließend werden Herausforderungen und Risiken für KI in der Luftfahrt
-\textbf{10} herausgearbeitet und Empfehlungen \textbf{11} formuliert; den Abschluss bildet ein
+\textbf{10} ausgearbeitet und Empfehlungen \textbf{11} formuliert. Den Abschluss bildet ein
 Fazit \textbf{12} mit den zentralen Erkenntnissen.
 

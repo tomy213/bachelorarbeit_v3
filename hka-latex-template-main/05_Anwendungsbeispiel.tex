@@ -1,4 +1,4 @@
-\part{Anforderungen, Analyse und Bewertung}
+\part{Beispiel}
 \chapterimage{Bilder_und_Co/analyse.jpg} % Chapter heading image
 %----------------------------------------------------------------------------------------
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
@@ -6,7 +6,6 @@
 Radarsysteme werden in der Luftfahrt an verschiedensten Orten und für verschiedenste Zwecke eingesetzt. 
 Diese tragen dabei essentiell zur Flugsicherheit sowohl am Boden als auch an Bord bei.
 
-\section{Ziel und Einordnung}\label{sec:szenarien-intro}
 Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem ausgewählt und genauer betrachtet.
 Da sonst alles nur sehr vage Umschreibungen ohne konkretes Ziel wären. 
 Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
@@ -29,11 +28,11 @@ zu verstehen je eine kleine Listen der Spezifikationen.
 \textbf{Parameter} & \textbf{Wert} \\
 \hline
 Rolle/Typ & Bordradar Luftzielsuche/-verfolgung; Seitensichtradar Aufklärung/Bodenkartierung \\
-Bezeichnungen & RP-SA / RP-25 / \emph{Smerch-A} / \emph{Izdeliye 720}; Ursprung aus dem verbesserten Tu-128A-Smerch \\
-Plattformen & MiG-25P; frühe Prototypen mit \emph{Smerch-A1} \\
-Frequenz/ Band/ Wellenlänge & Grundwellenlänge \(\sim\)3\,cm; \emph{Smerch-A1} zusätzlich 2\,cm-Betriebsart \\
-Tx-Leistung (Peak) & \textbf{(N)} 600 kW \\
-Tx-Leistung (Avg) & \textbf{(N)} 1-6 kW \\
+Bezeichnungen & Smerch-A \\
+Plattformen & MiG-25P; frühe Prototypen mit Smerch-A1 \\
+Frequenz/ Band/ Wellenlänge & Grundwellenlänge \(\sim\)3\,cm; Smerch-A1 zusätzlich 2\,cm-Betriebsart \\
+Sendeleistung (Spitze) & \textbf{(N)} 600 kW \\
+Sendeleistung (Durchschnitt) & \textbf{(N)} 1-6 kW \\
 Wellenform/Puls & \textbf{(N)} pulse-only radar with no look-down/shoot-down capability; \textbf{(N)} 25 Nano Sekunden \\
 Reichweite/Detektion & Bomber-Detektion \(\approx 100\) km; Tracking \(\approx 50\) km (A1) \\
 Scan/Abdeckung & fortlaufende Verbesserungen in Störfestigkeit und Tiefflug-Cluttertoleranz ab Serienstand \\
@@ -59,12 +58,12 @@ Rolle/Typ & Bordradar; Mehrzielfähigkeit (TWS) \\
 Bezeichnungen & AWG-9 \\
 Plattformen & F-14 \\
 Frequenz/ Band/ Wellenlänge & 8--12\,GHz (X-Band) \\
-Tx-Leistung (Peak) & 10\,kW \\
-Tx-Leistung (Avg) & ca.\ 7\,kW (Pulse-Doppler), 500\,W (Pulsmodus) \\
+Sendeleistung (Spitze) & 10\,kW \\
+Sendeleistung (Durchschnitt) & ca.\ 7\,kW (Pulse-Doppler), 500\,W (Pulsmodus) \\
 Wellenform/Puls & Pulsbreite: Puls 0.4/50\,\(\mu\)s; Pulse-Doppler 0.4/1.3/2.0/2.7\,\(\mu\)s \\
 Reichweite/Detektion & Max.\ Suche 213\,km (115\,NM) \\
 Scan/Abdeckung & 80\(^\circ\)/s (horizontal); 2 Scans/s (vertikal) \\
-Antenne (Typ/Größe/Gain) & Slotted planar array; 14.2\,cm / 36\,in \emph{(Angabe inkonsistent)} \\
+Antenne (Typ/Größe/Gain) & Slotted planar array; 14.2\,cm / 36\,in (Angabe inkonsistent) \\
 Gewicht (System) & 590\,kg (1{,}300\,lb) \\
 Abmessungen (H\(\times\)B\(\times\)T)/ Volumen & 0.78\,m\(^3\) (28\,ft\(^3\)) \\
 Hinweise & TWS bis 24 Ziele; Raketenstarts gegen bis zu 6 Ziele; Zielverfolgbarer Höhenbereich 50\,ft bis 80{,}000\,ft; Zielgeschwindigkeit von niedriger Unterschall bis \(>\) Mach 3 \\
@@ -86,8 +85,8 @@ Rolle/Typ & Wetterradar (Flugzeug zusätzlich: Radar-Höhenmesser) \\
 Bezeichnungen & Honeywell RDR-4000 \\
 Plattformen & A-320 \\
 Frequenz/ Band/ Wellenlänge & Transmitter Frequency 9.375\,GHz \\
-Tx-Leistung (Peak) & \textbf{(N)} 900 W, 12 mükro Sekunden \\
-Tx-Leistung (Avg) & \textbf{(N)} 40 W, 275 mükro Sekunden \\
+Sendeleistung (Spitze) & \textbf{(N)} 900 W, 12 mükro Sekunden \\
+Sendeleistung (Durchschnitt) & \textbf{(N)} 40 W, 275 mükro Sekunden \\
 Wellenform/Puls & Pulse Compression \\
 Reichweite/Detektion & 320\,NM (Weather \& Ground Map); 60\,NM (Turbulence); 5\,NM (Windshear) \\
 Scan/Abdeckung & Azimuth \(\pm 80^\circ\) (Weather/Ground Map), \(\pm 40^\circ\) (Windshear); Scanrate bis 90\(^\circ\)/s \\
@@ -101,6 +100,7 @@ Hinweise & 115\,VAC (96--134\,VAC), 360--800\,Hz; Power Dissipated 150\,VA (nom.
 \end{table}
 
 % ===================== Referenz (Automotive) =====================
+% ===================== Referenz (Automotive) =====================
 \subsection{Referenz (Automotive) \parencite{Bosch_FrontRadar_2025}}
 \begin{table}[h]
 \centering
@@ -109,36 +109,36 @@ Hinweise & 115\,VAC (96--134\,VAC), 360--800\,Hz; Power Dissipated 150\,VA (nom.
 \hline
 \textbf{Parameter} & \textbf{Wert} \\
 \hline
-Rolle/Typ & Abstandsmessung; Toterwinkel-Assistent (Vollausstattung optional 5 Stk.) \\
+Rolle/Typ & Abstandsmessung; Toterwinkel-Assistent \\
 Bezeichnungen & Frontradar \\
 Plattformen & Automotive \\
 Frequenz/ Band/ Wellenlänge & 76--77\,GHz und 77--81\,GHz \\
-Tx-Leistung (Peak) & --- \\
-Tx-Leistung (Avg) & typ. Sendeleistung im Bereich von 0.1--1\,W; Verbrauch < 3.5\,W \\
+Sendeleistung (Spitze) & $\leq$\,55\,dBm EIRP (regulatorischer Grenzwert, 77--81\,GHz, ETSI EN 302\,264) \footnote{\citetitle{ETSI_EN_302_264_V2_1_1} \parencite{ETSI_EN_302_264_V2_1_1}.} \\
+Sendeleistung (Durchschnitt) & \textbf{(T)} 0.1--1\,W \\
 Wellenform/Puls & \textbf{(T)} FMCW \\
 Reichweite/Detektion & bis zu 530\,m \\
 Scan/Abdeckung & --- \\
 Antenne (Typ/Größe/Gain) & --- \\
 Gewicht (System) & --- \\
 Abmessungen (H\(\times\)B\(\times\)T)/ Volumen & 56\,mm \(\times\) 76\,mm \(\times\) 20\,mm \\
-Hinweise & Chirp Sequenze ca. 10 mükro Sekunden pro Rampe \\
+Hinweise & Chirp-Sequenz ca.\ 10\, \textmu s pro Rampe; Vollausstattung optional 5 Sensoren im Fahrzeug; Gesamtverbrauch < 3.5\,W \\
 \hline
 \end{tabular}
 \caption{Automotive-Referenz (Frontradar)}
 \end{table}
 
-\emph{Anmerkung:} \textbf{(N)} Sind Daten aus nicht belastbaren Quellen wie Wikipedia oder Fachforenbeiträge. 
+
+\textbf{Anmerkung:} \textbf{(N)} Sind Daten aus nicht belastbaren Quellen wie Wikipedia oder Fachforenbeiträge. 
 \textbf{(T)} Sind typische/übliche oder abgelitete Werte vergleichbarer Systeme.
 
 
 \section{Auswahl des Radarsystems}
-Da das System beispielhaft dienen soll, sind Einsatzzweck, Ort oder Art des Systems zweitrangig. 
+Da das System beispielhaft dienen soll, sind Einsatzzweck oder Art des Systems zweitrangig. 
 Die Objektklassifikation wird für diese Arbeit aufgrund dessen gewählt, dass sie verhältnismäßig verständlich 
 und nachvollziehbar ist. In dieser Arbeit wird beispielhaft eine Onboard-Wetterphänomensklassifikation als 
 Funktion ausgewählt. Wetterphänomene zu identifizieren bietet hohes Potential, da aufgrund der Komplexität 
-klassische Methoden schnell an ihre Grenzen geraten. Und ein Pilot kann davon profitieren, wenn er 
-anstatt einer Klassifizierung zwischen Grün, Gelb und Rot zusätzlich wüsste ob es sich z.B. um 
-Regen oder Hagel handelt.
+klassische Methoden schnell an ihre Grenzen geraten. Und zusätzliche Informationen über das Wetter 
+die Crew bei Entscheidungen wie der Routenplanung unterstützen kann.
 
 
 \section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomene}
@@ -171,7 +171,7 @@ Regen oder Hagel handelt.
   \item \riskhigh\ \scopeboth\ Vereisungsrelevante Phasen: Schnee/Schneeregen (Vereisungsgefahr).
   \item \riskmed\ \scopeboth\ Graupelschauer / Wintergewitter (gemischte Wasser- und Eisteilchen, schnelle Klassendynamik).
   \item \riskmed\ \scopeboth\ Anvil-Blowoff, Virga, (Eispartikel, die von einer Gewitterwolke weggeweht wurden; Verdunstung bevor der Boden berührt wurde); (Echo ohne Bodenniederschlag; starker lokaler Abwind (Downburst) durch Verdunstungskühlung).
-  \item \riskhigh\ \scopeon\ Pfadabschattung hinter Starkzellen (\emph{black hole/gap illusion}): starke Dämpfung erzeugt scheinbar „freie“ Korridore hinter einer Zelle → hohes Risiko für Fehlrouting durch vermeintliche Lücken.
+  \item \riskhigh\ \scopeon\ Pfadabschattung hinter Starkzellen (black hole/gap illusion): starke Dämpfung erzeugt scheinbar „freie“ Korridore hinter einer Zelle → hohes Risiko für Fehlrouting durch vermeintliche Lücken.
 \end{itemize}
 
 \subsection*{Mess- und Auswerteartefakte}
@@ -200,11 +200,11 @@ Das Bordwetterradar soll konvektive Wetterlagen frühzeitig erkennen, nach Gefä
 
 \subsection{Funktionale Anforderungen}
 \begin{itemize}
-  \item \textbf{Reflexionsbasierte Detektion und Intensitätsdarstellung}: Farbkodierte Anzeige nach Reflektivität (rot = hoch, grün = niedrig); Interpretation muss Tropfengröße/Phase berücksichtigen. \emph{Reflektivität ist nicht direkt proportional zum Risiko}.
+  \item \textbf{Reflexionsbasierte Detektion und Intensitätsdarstellung}: Farbkodierte Anzeige nach Reflektivität (rot = hoch, grün = niedrig); Interpretation muss Tropfengröße/Phase berücksichtigen. Reflektivität ist nicht direkt proportional zum Risiko.
   \item \textbf{Phänomen-Erfassbarkeit}: 
   \begin{itemize}
-    \item \emph{Erkennbar}: Regen, nasser Hagel, nasse Turbulenz, (prädiktiv) Windscherung je nach System. 
-    \item \emph{Nicht direkt erkennbar}: Eis\-kristalle, trockener Hagel, Schnee, Clear-Air-Turbulenz, Sandstürme; Blitz nicht direkt, nur Vorhersagefunktionen.
+    \item Erkennbar: Regen, nasser Hagel, nasse Turbulenz, (prädiktiv) Windscherung je nach System. 
+    \item Nicht direkt erkennbar: Eis\-kristalle, trockener Hagel, Schnee, Clear-Air-Turbulenz, Sandstürme; Blitz nicht direkt, nur Vorhersagefunktionen.
   \end{itemize}
   \item \textbf{Turbulenzanzeige (Doppler/TURB)}: Anzeige nasser Turbulenz (typisch bis 40\,NM, je nach Standard bis 60\,NM).
   \item \textbf{Bedrohungs-/Gefahrenklassifikation}: Automatische Auswertung/Tracking von Zellen mit Hagel- und Blitz-Prädiktion, Predictive Overflight, erweiterte Turbulenzstufen; REACT zur Dämpfungskompensation.
@@ -244,7 +244,6 @@ Das Bordwetterradar soll konvektive Wetterlagen frühzeitig erkennen, nach Gefä
 % -------------------------
 \chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
 
-\section{Ziel und Einordnung}\label{sec:modelle-intro}
 Dieses Kapitel dient dazu einzelne relevante KI Modelle besser zu verstehen und eines davon 
 auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu untersuchen.
 
@@ -270,19 +269,19 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
   \item \textbf{Stärken:} Schnell, robust bei kleinen/mittelgroßen Datensätzen; gut erklärbar; sehr geringe Latenz.
   \item \textbf{Schwächen:} Räumliche Nachbarschaft nur indirekt; ungeeignet für rohe Bilder/Sequenzen.
   \item \textbf{Latenz/Compute:} $< 5$\,ms/Objekt; Echtzeitfähig
-  \item \textbf{Modellgröße:} ca. 13.000 Knoten/Blätter.
+  \item \textbf{Modellgröße:} ca. 10.000 Knoten/Blätter.
 \end{itemize}
 
 \subsection*{Vision Transformer}
 
 \begin{itemize}
   \item \textbf{Zweck:} Patch-/Bildbasierte Klassifikation, Segmentierung und Detektion auf Radar-„Bildern“;.
-  \item \textbf{Typische Variante:} \emph{DeiT-Small} bei mehr Daten/Compute.
+  \item \textbf{Typische Variante:} DeiT-Small bei mehr Daten/Compute.
   \item \textbf{Input/Features:} Mehrkanal-Radar-Slices (z.\,B.\ Reflektivität, Spektralbreite, \text{SNR}).
   \item \textbf{Stärken:} Globaler Kontext durch Self-Attention; flexible Tokenisierung (auflösungsrobust).
   \item \textbf{Schwächen:} Hoher Daten- und Compute-Bedarf; Sensitivität gegenüber Patch-/Token-Design.
   \item \textbf{Latenz/Compute:}  $\sim$10--40\,ms pro 512$\times$512 (auf einer GPU).
-  \item \textbf{Modellgröße:} ca. 22.000.000 Parameter.
+  \item \textbf{Modellgröße:} ca. 20.000.000 Parameter.
 \end{itemize}
 
 
@@ -321,7 +320,7 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \endhead
 
 \midrule
-\multicolumn{5}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
+\multicolumn{5}{r}{Fortsetzung auf der nächsten Seite}\\
 \midrule
 \endfoot
 
@@ -336,9 +335,9 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 
 \textbf{Leistung (F1, $P_d$/FAR)} &
 \textbf{Hoch} bei genügend Daten &
-\textbf{Hoch} (mit guten Features) niedrige FAR &
+\textbf{Hoch} (mit guten Features) &
 \textbf{Hoch} bei genügend Daten &
-\textbf{Parameterabhängig} keine Klassenmetriken \\
+\textbf{Parameterabhängig} \\
 
 \textbf{Latenz} &
 \textbf{Erfüllbar}&
@@ -356,7 +355,7 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \textbf{Mittel}  &
 \textbf{Gut}  &
 \textbf{Schlecht}  &
-\textbf{Niedrig} (keine Labels) \\
+\textbf{Schlecht} (keine Labels) \\
 
 \textbf{Harware- anforderung} &
 \textbf{Mittel}  &
@@ -411,10 +410,10 @@ voneinander unabhängiger, die Streuung sinkt, und die Gesamtvorhersage wird rob
 
 \subsection{Sicherheitsbezug}
 Random Forest ist für sicherheitsrelevante Kontexte geeignet, da das Bagging-Ensemble 
-aus vielen Entscheidbäumen die Modellvarianz senkt und dadurch \emph{robust gegen Overfitting} 
-ist. Die baumstrukturierten Regeln ermöglichen eine \emph{hohe Erklärbarkeit}: Entscheidungen lassen 
+aus vielen Entscheidbäumen die Modellvarianz senkt und dadurch robust gegen Overfitting 
+ist. Die baumstrukturierten Regeln ermöglichen eine hohe Erklärbarkeit: Entscheidungen lassen 
 sich auf konkrete Feature-Schwellen und Pfade zurückführen. Zugleich ist die 
-\emph{Nachverfolgbarkeit sicherheitskritischer Unterscheidungen} gegeben, da Edge-Cases und knappe 
+Nachverfolgbarkeit sicherheitskritischer Unterscheidungen gegeben, da Edge-Cases und knappe 
 Entscheidungsmargen über Blattverteilungen, Knoten bzw. Schwellen und fallbezogene Pfade identifiziert 
 und auditiert werden können; damit sind kritische Fälle transparent analysierbar.
 
@@ -438,7 +437,7 @@ und auditiert werden können; damit sind kritische Fälle transparent analysierb
 \end{itemize}
 
 \section{Einbindungsmöglichkeiten}
-Ein \emph{Random Forest} kann an verschiedenen Stellen eingesetzt werden. Mögliche Einsatzfelder sind:
+Ein Random Forest kann an verschiedenen Stellen eingesetzt werden. Mögliche Einsatzfelder sind:
 
 \begin{itemize}
   \item \textbf{Musteridentifikation \& Datendarstellung in der Entwicklung}\\
@@ -459,7 +458,7 @@ Ein \emph{Random Forest} kann an verschiedenen Stellen eingesetzt werden. Mögli
   Konsistenz über verschiedene Wetterregime und ermöglicht feinere Trennungen zwischen ähnlichen Phänomenen.
 
   \item \textbf{Kombination mit Kalman-Filter}\\
-  Das Modell ersetzt die Zustandsschätzung klassischer Filter nicht, sondern \emph{füttert} sie:
+  Das Modell ersetzt die Zustandsschätzung klassischer Filter nicht, sondern füttert sie:
   Es liefert stabilisierte Beobachtungen und Klassifikationsergebnisse (inkl.\ Qualitätsmerkmalen),
   die anschließend von einem Schätzer weiterverarbeitet werden. So verbleibt die Bahn-/Zellverfolgung im
   Filter, während die inhaltliche Deutung der Echos und ihre zeitliche Glättung modellbasiert verbessert werden.
@@ -468,47 +467,72 @@ Ein \emph{Random Forest} kann an verschiedenen Stellen eingesetzt werden. Mögli
   zwangsläufig in seiner Stabilität beeinträchtigt wird.
 \end{itemize}
 
-Das hieraus gewählte Beispiel ist grundsätzlich der Toolqualifikation zuzuordnen (Entwicklungsunterstützung),
-wird in dieser Arbeit jedoch primär unter den Gesichtspunkten eines möglichen Onboard-Einsatzes betrachtet,
-um Rückschlüsse für einen späteren direkten Einsatz ziehen zu können. Eine enge Kopplung oder gar ein Ersatz
-etablierter Software würde zusätzliche Komplexität einführen und Fragen nach Sinnhaftigkeit und Mehrwert aufwerfen,
-die hier nicht im Fokus stehen. Die Musteridentifikation \& Datendarstellung in der Entwicklung bietet
-das größte Potenzial, weil sie der EASA-Level-1-Kategorie (Assistenz) zugeordnet werden kann und somit kurzfristig
-einsatzfähig ist. Zugleich zeigt die Arbeit mit großen Datensätzen den Mehrwert von ML-Verfahren und unterstreicht,
-dass die Entwicklung spürbar von Data-Science-Praktiken profitiert.
+Auch wenn eine Anwendung in der Entwicklung zum verarbeiten großer Datenmengen große Vorteile bringen kann, 
+wird in dieser Arbeit der Onbord Einsatz untersucht. Eine enge Kopplung oder gar ein Ersatz
+etablierter Software würde zusätzliche Komplexität einführen und potentielle Fragen nach Sinnhaftigkeit und Mehrwert aufwerfen,
+die hier nicht im Fokus stehen. Daher wird der Einsatz als separate Onbordassistenz betrachtet.
 
 
 \section{Mögliche Szenarien beim Einsatz}
+Wenn man das klassische System und die KI parallel laufen lässt, kann es passieren, dass entweder das klassische 
+System oder die KI etwas erkennen kann. Dabei gilt es auch zu betrachten, ob diese übereinstimmen mit dem was sie 
+erkennen bzw. welcher Gefahrenlage das erkannte zuzuordnen ist.
 
-\begin{table}[h!]
-\centering
-\small
-\begin{tabular}{p{0.18\linewidth}p{0.35\linewidth}p{0.43\linewidth}}
-\toprule
-\textbf{Szenario} & \textbf{Beschreibung} & \textbf{Erklärung (Bezug zu klassischen Methoden / bekanntem Wissen)} \\
-\midrule
-Übereinstimmung mit klassischer Methode & Random Forest und klassische Auswertung kommen zur gleichen Aussage. & Es werden etablierte Verfahren bzw.\ Vorwissen bestätigt; kein besonderer Erkenntnisgewinn. \\
-\addlinespace
-Nahe beieinander / knapp verschieden & Random Forest und klassische Methode liefern ähnliche, aber nicht identische Ergebnisse. & Grenzbereich: Daten/Features geben keine klare Trennung her oder Kontexteffekte fehlen; Entscheidungen können schwanken und sollten markiert bzw.\ weiter untersucht werden. Hinweis, dass Daten nicht vollständig oder repräsentativ waren, dass das Modell angepasst werden muss oder vielleicht bekanntes Wissen detaillierter werden kann.\\
-\addlinespace
-Einseitige Lücke & Entweder die klassische Methode deckt einen Fall nicht ab, den der Random Forest sinnvoll bewertet – \emph{oder} der Random Forest versagt, wo die klassische Methode stabil ist. & Hinweis auf Abdeckungsunterschiede: z.\,B.\ klassische Schwellen nicht definiert für neuen Kontext, oder das Modell außerhalb seiner Trainingsdomäne; klare Dokumentation, wann welches Verfahren gilt. \\
-\addlinespace
-Gegenteilige Aussagen & Random Forest und klassische Methode widersprechen sich deutlich. & Konfliktfall: mögliche Label-/Feature-Probleme, Hyperparameter Wahl, etc.; erfordert gezielte Fallanalyse. \\
-\addlinespace
-Neues Muster entdeckt & Random Forest macht auf wiederkehrende Strukturen aufmerksam, die im bisherigen Wissen/Katalog nicht vorkommen. & Kandidat zur Erweiterung des Musterkatalogs: Fälle sammeln, prüfen, definieren und (falls valide) als neue Klasse/Regel aufnehmen. Hier gilt ``kein Assurance Rabatt'', es muss mit etablierten Methoden nachgewießen werden. \\
-\bottomrule
-\end{tabular}
-\caption{Szenarien bei der Musteridentifikation \& Datendarstellung mit Random Forest im Vergleich zu klassischen Methoden bzw.\ bekanntem Wissen.}
-\end{table}
+\medskip
+\begin{itemize}
+  \item Die KI sieht etwas und das klassische System nicht. Hier muss von Fall zu Fall unterschieden werden was sinnvoller ist. 
+  \item Das klassische System sieht etwas aber die KI nicht, hier wäre eine konsevative Entscheidung sinnvoll.
+  \item beide sehen nichts, hier kann man davon ausgehen, dass auch nichts da ist.
+  \item beide sehen etwas und schätzen es gleich ein, hier wären zusätzliche Informationen, die die KI möglicherweise liefern kann von Mehrwert, aber nicht unbeding essentiell.
+  \item beide sehen etwas und wiedersprechen sich, hier muss auch wieder unterschieden werden ob eine konsevative Entscheidung sinnvoll ist 
+    und man entsprechend der höheren Gefahrenlage handelt oder man das klassische System als Fallback strategie betrachtet. 
+\end{itemize}
+
 
 
 % -------------------------
 % Anforderungsfelder & Referenzrahmen
 % -------------------------
-\chapter{Anforderungsfelder \& Referenzrahmen}\label{chap:anforderungen}
+\chapter{Anforderungen \& Zuordnung}\label{chap:anforderungen}
 
-Dieses Kapitel fasst wiederkehrende Sicherheitsbedarfe als \emph{Anforderungsfelder} zusammen und ordnet ihnen
-\emph{typische Erwartungen} aus etablierten Leitlinien und Standards zu.
+
+
+
+\section{Beispielbezogene Herausforderungen}
+
+\subsection{Allgemein}
+Die allgemeinen Herausforderungen wurden bereits behandelt; nachfolgend ein paar beispielhafte Punkte:
+\begin{itemize}
+  \item \textbf{Nachweislogik \& Probabilistik:} Fragen zu klassischen Software-Nachweisen (z.\,B.\ MC/DC) sowie zum Umgang mit probabilistischem Modellverhalten müssen geklärt werden.
+  \item \textbf{Werkzeuge/Toolchain:} Trainings- und Datentools müssen bei beanspruchtem Credit ebenfalls qualifiziert werden; sonst „Confidence in Use“/Gegenprüfung.
+  \item \textbf{Projektbezug:} Diese Arbeit betrachtet kein konkretes Bordprodukt; projektspezifische Ausprägungen (z.\,B.\ HMI, Eingriffslogik) sind sicher auszulegen und nachzuweisen.
+\end{itemize}
+
+\subsection{Random-Forest-bezogen}
+Aus dem gewählten Modell hervorgehende Herausforderungen (die größten Schwierigkeiten betreffen Daten und Labels):
+\begin{itemize}
+  \item \textbf{Daten \& Labeling:} Repräsentativität über das ODD, Klassenungleichgewichte und hochdimensionale Feature-Sets erhöhen den Aufwand für sinnvolle Features/Labels.
+  \item \textbf{Modellgröße:} Je nach Anzahl der Bäume, Tiefe und Feature-Anzahl typischerweise mehrere~MB bis mehrere hundert~MB.
+  \item \textbf{Rechenbedarf:} Für Onbord abhängig von der Baumtiefe und Feature-Anzahl relativ hoch (kann höher als bei Kalman-Filtern oder FFT sein)
+\end{itemize}
+
+\subsection{Wetterphänomen-Klassifikation}
+Aus der Anwendung hervorgehende Herausforderungen (mit Blick auf das Modell):
+\begin{itemize}
+  \item \textbf{Begrenzter ``Ground Truth'':} Wenige perfekte Labels; häufig Expertenannotation.
+  \item \textbf{Regime-Drift:} Regionale/saisonale Unterschiede führen zu Verteilungswechseln; Modelle können außerhalb ihres Trainingsregimes degradieren.
+  \item \textbf{Imbalance:} Seltene Phänomene (z.\,B.\ Hagel, Superzellen) sind unterrepräsentiert und verschärfen Fehlklassifikationsrisiken.
+  \item \textbf{Sensorartefakte:} Abschattung/Attenuation (z.\,B.\ hinter Starkniederschlag), Boden-/See-Clutter, Bright-Band, Mixed-Phase erschweren die Merkmalsbildung.
+  \item \textbf{Uneindeutige Klassengrenzen:} Überlappende/mehrdeutige Klassen (z.\,B.\ Starkregen vs.\ Hagel) erschweren eine saubere Unterscheidung und das Labeling.
+\end{itemize}
+
+
+\paragraph{Hinweis.}
+Für einen Bord-Einsatz sind zusätzlich ODD-Grenzen, Degradationsregeln (Abstain/Unknown) und operative Kalibrierungs-/Qualitätsanzeigen zu definieren; im reinen Entwicklungssetting verschiebt sich der Fokus auf Daten-/Modell-Governance und reproduzierbare Trainingspipelines.
+
+
+Dieses Kapitel fasst wiederkehrende Sicherheitsbedarfe als Anforderungsfelder zusammen und ordnet ihnen
+typische Erwartungen aus etablierten Leitlinien und Standards zu.
 
 \section{Radar\,\texorpdfstring{$\times$}{x}\,KI: Anforderungen für Klassifikation}
 \label{sec:req-radar-ki}
@@ -563,478 +587,10 @@ und mit IDs versehen, um sie später mit der Abdeckung der ISO 8800 abzugleichen
 
 
 
-
-
-
-\section{Referenzrahmen: Wie die Quellen zusammenspielen}\label{sec:ref-standards}
-
-% ===== Literatur-/Standards-Factsheets =====
-\subsection{Factsheets: Leitlinien, Standards und ihre Rolle}
-Die folgende Übersicht konsolidiert zentrale Quellen (Rolle im Rahmen, Stärken/Grenzen, Nutzung in dieser Arbeit) in
-komprimierter Form. Sie dient als Nachschlage- und Verweisgrundlage, um Wiederholungen im Text zu vermeiden.
-\emph{Wichtig:} Die Tabelle stellt \textbf{keine Bewertung oder Rangfolge} dar, sondern eine neutrale Einordnung mit
-klarer Zweckbindung für diese Arbeit.
-% --- optionales Feintuning (kann in die Präambel) ---
-%\usepackage{longtable,booktabs,array,ragged2e,enumitem}
-\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
-\renewcommand{\arraystretch}{1.08}
-\setlength{\tabcolsep}{4.5pt}
-
-% =======================
-% Factsheets als LONGTABLE
-% =======================
-\begin{longtable}{P{0.17\textwidth} P{0.25\textwidth} P{0.38\textwidth} P{0.16\textwidth}}
-\caption{Factsheets: Leitlinien/Standards – Rolle, Stärken/Grenzen, Nutzung}\label{tab:factsheets}\\
-\toprule
-\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Bemerkung} \\
-\midrule
-\endfirsthead
-
-\toprule
-\textbf{Quelle} & \textbf{Rolle im Rahmen} & \textbf{Stärken / Grenzen} & \textbf{Bemerkung} \\
-\midrule
-\endhead
-
-\addlinespace[4pt]
-\midrule
-\multicolumn{4}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
-\endfoot
-
-\addlinespace[4pt]
-\bottomrule
-\endlastfoot
-
-\textbf{ISO/IEC TR 5469\parencite{iso-iec-tr-5469-2024}} &
-Domänenneutrale Brücke für \emph{Assurance} von KI. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Anschlussfähige Argumentationsstruktur, domain-agnostisch
-  \item \textbf{–} Sehr high-level; ohne Domänenkonkretisierung nicht direkt anwendbar
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Vokabular \& Struktur für die Coverage-Argumentation. \\
-
-
-\textbf{ISO/IEC 22989 (AI Begriffe)\parencite{iso-iec-22989}} &
-Domänenneutrale KI-Terminologie (Model, Dataset, Bias, Uncertainty etc.). &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Einheitliche Begriffsverwendung; dient als Nachschlagewerk
-  \item \textbf{–} Definitionsstandard; keine Anforderungen/Nachweiswege
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Begriffsreferenz (z.\,B. ODD, Unsicherheit). \\
-
-
-\textbf{ISO 21448 (SOTIF)\parencite{iso-21448-sotif}} &
-Sicherheit der beabsichtigten Funktion; Fokus auf Wahrnehmungs-/Szenario-Lücken. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Szenario-/Abdeckungslogik sehr anschlussfähig
-  \item \textbf{–} Automotive; nicht direkt KI anwendbar
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-ODD-/Szenariologie als Referenz für Test \& Reporting. \\
-
-\textbf{ISO 26262 (Functional Safety)\parencite{iso-26262}} &
-Road-vehicles-Standard für funktionale Sicherheit; Prozessdisziplin (V-Modell), Unabhängigkeit, ASIL-Skalierung. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Klare Rollen/Unabhängigkeit; hazard-basierte Skalierung (ASIL)
-  \item \textbf{+} Durchgängige Traceability \& Lebenszyklusdisziplin
-  \item \textbf{–} Automotive;  nicht direkt KI anwendbar
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Vergleichsfolie für Traceability, Rollen \& Lifecycle. \\
-
-
-\textbf{ISO/PAS 8800\parencite{iso-pas-8800-2024}} &
-KI-bezogene Safety-Erwartungen (Automotive) als Orientierungsrahmen. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Konkrete Felder (ODD, Daten, Robustheit, Unsicherheit, Betrieb)
-  \item \textbf{–} Automotive; Zulassungswege abweichend von Luftfahrt
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Versteht sich als Konkretisierung der ISO 26262 für KI. \\
-
-\textbf{EASA AI Concept Paper (Issue 2, 2024)\parencite{easa-ai-concept-issue2-2024}} &
-Behördliche Erwartungshaltung für L1/L2; Ergänzung zum bestehenden Safety-Regelwerk. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Klare Prinzipien (ODD, Learning Assurance, Monitoring, XAI)
-  \item \textbf{–} Keine normativen Detailanforderungen; Auslegungsspielräume
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Regulatorischer Kontext \& Leitplanken für Evidenzformen. \\
-
-\textbf{DO-178C (Software Assurance)\parencite{do-178c}} &
-Zentraler Nachweisrahmen für \emph{airborne} Software; definiert DAL-skalierte Objectives über den gesamten SW-Lebenszyklus. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=0pt,topsep=0pt]
-  \item \textbf{+} Etablierter Zertifizierungsmaßstab (DAL A–E)
-  \item \textbf{+} Klare Verifikationsanforderungen
-  \item \textbf{–} nicht direkt KI anwendbar
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Baseline für Onboard-Software.\\
-
-
-\textbf{DO-330 (Tool Qualification)\parencite{do-330}} &
-Qualifizierung von Entwicklungs-/Verifikationswerkzeugen. &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Proportionaler Ansatz via \emph{TQL 1–5}
-  \item \textbf{+} Klare Artefakte: TOR, TQP, TOP, Tests/Analysen, TAS
-  \item \textbf{–} nicht direkt KI anwendbar
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Um das Bsp. verwenden zu können müssen tool-spezifische Artefakte nachgewiesen werden.\\
-
-
-\textbf{EASA AI Roadmap 2.0 (2023)\parencite{easa-ai-roadmap-2-2023}} &
-Strategischer Rahmen (human-centric KI; Level-Pfad; Lebenszyklus-Blick). &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=1pt,topsep=0pt]
-  \item \textbf{+} Stufenpfad \& Vertrauensbausteine (Learning Assurance, Oversight)
-  \item \textbf{–} High-level; keine normativen Detailanforderungen/DAL-Ableitung
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Verortung der Assurance-Bausteine (ODD, Monitoring, Learning Assurance). \\
-
-\textbf{EASA MLEAP Final Report (2024)\parencite{easa-mleap-final-2024}} &
-Behördennahes Forschungsprojekt zu \emph{Learning Assurance} (W-Shape, Use-Cases). &
-\begin{minipage}[t]{\linewidth}\vspace{0pt}
-\begin{itemize}[leftmargin=*,itemsep=-1pt,topsep=-1pt]
-  \item \textbf{+} Konkrete Methoden \& Pipeline; Evidenzen aus Luftfahrt-Use-Cases
-  \item \textbf{–} Guidance/Empfehlung (nicht bindend); Fokus auf Level-1/2
-\end{itemize}
-\vspace{0pt}\end{minipage}
-&
-Referenz für Evidenzformen (segmentiertes Reporting, Kalibrierung, ODD, Degradation). \\
-
-\end{longtable}
-
-
-\section{Luftfahrt-Zertifizierung und Forschung — Ergänzungen}
-
-\subsection*{\textit{ML meets aerospace: challenges of certifying airborne AI} (Frontiers, 2024)\parencite{ml-meets-aerospace-2024}}
-  \textbf{Fokus:} Hürden bei der Zertifizierung luftfahrtnaher KI (ODD-Disziplin, OOD/Abstain, V\&V-Lücken).\\
-  \textbf{Beitrag:} Untermauert die Verschiebung von „Accuracy“ zu \emph{Assurance}; stützt Felder wie ODD, Robustheit, Kalibrierung, Toolchain.\\
-  \textbf{Grenzen:} Überblicksarbeit; keine radar-spezifischen KPIs/Zulassungsfälle.
-
-\subsection*{\textit{Towards certifiable AI in aviation: landscape, challenges, and opportunities} (2024)\parencite{towards-certifiable-ai-aviation-2024}}
-  \textbf{Fokus:} Landscape/State of the Art zu Zertifizierungslandschaft, Evidenzbausteinen und offenen Punkten.\\
-  \textbf{Beitrag:} Praktische Strukturierungshilfe/Checkliste für Evidenzpakete und die Coverage-Matrix in dieser Arbeit.\\
-  \textbf{Grenzen:} Überwiegend konzeptionell; empirische Nachweise nur punktuell.
-
-
-
-
-
-
-
-%---------------------------------------------
-%Luftfahrt
-%---------------------------------------------
-
-\chapter{Luftfahrtrahmenbedingungen}\label{chap:anf-avi}
-
-Folgend werden systematisch EASA Dokumente auf Forderungen an die Assurance für KI untersucht und 
-anschließend zusätzlich etablierte Normen betrachtet und das Beispiel eingeordnet. 
-
-\section{EASA AI-Roadmap \parencite{easa-ai-roadmap-2-2023}}
-Die EASA positioniert KI als „human-centric“ und staffelt Anwendungen nach Autorität: \textbf{Level 1} (Assistenz), 
-\textbf{Level 2} (Human-AI-Teaming) und später \textbf{Level 3} (fortgeschrittene Automatisierung). 
-Roadmap 2.0 definiert Vertrauenswürdigkeits-Bausteine (u.\,a. Learning Assurance, Erklärbarkeit, Human Oversight) 
-und skizziert einen gestuften Zulassungspfad. \emph{Kernbotschaft:} KI ergänzt, aber ersetzt das bestehende Safety-Regelwerk nicht.
-\paragraph{Was das praktisch bedeutet}
-\begin{itemize}
-  \item \textbf{Stufenweise Zulassung:} Erst Level-1, später Level-2 – jeweils mit klar definiertem Einsatzbereich und menschlicher Aufsicht. \emph{Kein „Assurance-Rabatt“:} Die Strenge der Nachweise richtet sich weiterhin nach Hazard/DAL.
-  \item \textbf{Zusatz statt Ersatz:} KI-spezifische Evidenzen (z.\,B. Daten-/Modell-Governance, Kalibrierung, OOD/Abstain, Monitoring) kommen \emph{on top} zur etablierten Software-/System-Assurance.
-  \item \textbf{Lebenszyklus im Blick:} Betriebliches Monitoring, kontrollierte Updates und nachvollziehbare Änderungen sind Teil des Sicherheitsarguments („living“ Safety Case).
-\end{itemize}
-
-
-
-\section{EASA AI-Guidance 2024 (Concept Paper Issue 2) – Level 1 \& 2 \parencite{easa-ai-concept-issue2-2024}}
-Das \emph{Concept Paper Issue 2} (03/2024) beschreibt die schrittweise Einführung von KI in sicherheitsrelevanten Anwendungen: 
-zuerst \textbf{Level 1} (Assistenzfunktionen), anschließend ausgewählte \textbf{Level 2}-Anwendungen (\emph{Human–AI Teaming}). 
-Die Guidance ergänzt das bestehende Safety-Regelwerk (z.\,B.\ DO-178C) um KI-spezifische Bausteine wie \emph{Learning Assurance}, 
-Erklärbarkeit, präzise Einsatzgrenzen (ODD) und betriebliches Monitoring – ohne die klassischen Nachweise zu ersetzen.
-
-\paragraph{Kernpunkte:}
-\begin{itemize}
-  \item \textbf{Level-Feinbild \& „statisches“ AI-Level:} Unterscheidung L1A/L1B sowie L2A (cooperation, directed) und L2B (collaboration, supervised); das \emph{höchste} erreichte Fähigkeitsniveau legt ein \emph{statisches} Level fest und steuert die Proportionalität der Nachweise.
-  \item \textbf{ConOps \& Aufgabenallokation (HAT):} Endnutzerzentrierte ConOps mit klaren \emph{Task Allocation Patterns} (Rollen, Autorität, Übersteuerbarkeit) als verbindliche Grundlage für Design, V\&V und Betrieb.
-  \item \textbf{OD vs.\ ODD (Einsatzgrenzen):} Zweistufige Scope-Führung: \emph{Operational Domain} auf Systemebene und verfeinertes \emph{ODD} für AI/ML-Constituents; außerhalb davon gilt \emph{abstain/degradation}.
-  \item \textbf{Methodenumfang \& Trainingsmodus:} Fokus auf \emph{überwachtes} (und initial \emph{unüberwachtes}) Lernen; \emph{kein} Reinforcement Learning in L1/L2; Modelle werden \emph{offline} trainiert und zur Freigabe \emph{eingefroren} (kein Online-Lernen im Betrieb).
-  \item \textbf{Kritikalitätsgrenzen \& Assurance:} In der Anfangsphase \emph{kein} Einsatz von AI/ML-Constituents in höchsten Kritikalitäten (z.\,B.\ IDAL~A/B, SWAL~1/2); \emph{keine} Reduktion klassischer Assurance-Anforderungen innerhalb der AI/ML-Teile.
-  \item \textbf{Funktionsanalyse bis zum AI/ML-Item:} Systematische Zerlegung bis zur Trennlinie AI/ML-Item vs.\ traditionelle Komponenten, Anforderungen und V\&V zielgenau führen zu können.
-\end{itemize}
-
-
-
-
-\section{MLEAP Final Report (2024) \parencite{easa-mleap-final-2024}}
-Der \emph{Final Report} des EASA-Forschungsprojekts \textbf{MLEAP} (Machine Learning Application Approval) bündelt Methoden- und Werkzeugempfehlungen zur \emph{Learning Assurance} und zeigt, wie der EASA-\emph{W-Shape} (lernprozessspezifische Ergänzung zum V-Modell) praktisch umgesetzt werden kann. Schwerpunkte sind \textbf{Datenrepräsentativität}, \textbf{Generalisierung} und \textbf{Robustheit/Stabilität} von ML-Modellen; ergänzt wird dies durch eine generische Entwicklungs-Pipeline im Sinne des W-Shape. Die Ergebnisse fließen in das \emph{EASA AI Concept Paper Issue 2} ein.
-
-\paragraph{Kerninhalte:}
-\begin{itemize}
-  \item \textbf{W-Shape als Lernprozess-Rahmen:} Ergänzt das V-Modell um ML-spezifische Ziele/Verifikationen (Daten, Lernen, Modell, Integration) entlang des gesamten Zyklus.
-  \item \textbf{ODD-gebundene Datenqualität:} Repräsentativität wird explizit aus dem AI/ML-ODD abgeleitet; Balance \emph{Completeness} vs.\ \emph{Diversity} wird methodisch geführt (Selection Grid).
-  \item \textbf{„Right-Sizing“ \& Generalisierung:} Modellkomplexität wird zweckadäquat gewählt; Generalisation Guarantees werden prozessual abgesichert (Splits, Bounds, Unsicherheiten).
-  \item \textbf{Stabilität vs.\ Robustheit:} Klare Trennung der Ziele und Prüfmethoden (statistisch, empirisch, formal) mit Perspektive auf Runtime-Überwachung.
-  \item \textbf{Systematik seltener Fälle:} Gemeinsame Taxonomie (Edge/Corner/Outlier) und mehrlagiges Schema (Pixel→Domain→Object→Scene→Scenario) für Tests und Datenerzeugung.
-  \item \textbf{Use-Case-getriebene Bewertbarkeit:} Konkrete Luftfahrt-Use-Cases dienen als Trägerartefakte für Methodenwahl, Bewertung und operativen Transfer.
-\end{itemize}
-
-
-\section{Forderungen aus der Luftfahrt}
-Im Folgenden sind die Forderungen zur Zulassung einer KI aus der Roadmap, dem Concept Paper und dem MLEAP Report 
-zusammengetragen und mit IDs zum späteren Vergleich markiert.
-
-\paragraph {F-Avi-01 Human-centric, Level \& ConOps/HAT (Human-AI-Teaming)}
-  {KI wird human-zentriert ausgelegt; \emph{statisches} AI-Level (L1A/B, L2A/B) richtet die Prüftiefe aus. Eine endnutzerzentrierte \emph{ConOps} mit klaren \emph{Task Allocation Patterns} (Rollen, Autorität, Übersteuerbarkeit) ist verbindlich. \textit{Roadmap, Concept}}
-
-\paragraph {F-Avi-02 OD/ODD \& Abstain/Degradation}
-  {Einsatzgrenzen sind zweistufig zu führen: \emph{OD} (System) und verfeinertes \emph{ODD} (AI/ML-Constituent). Außerhalb des ODD verhält sich die KI konservativ (Abstain/Degradation). \textit{Roadmap, Concept}}
-
-\paragraph {F-Avi-03 Knowledge \& Data Governance (ODD→Daten)}
-  {Daten- und Wissensbasen werden vor dem Training qualifiziert (Provenienz, Repräsentativität) und \emph{explizit} aus dem ODD abgeleitet; Methodenwahl wird dokumentiert (z.\,B.\ Selection Grid). \textit{Roadmap, Concept, MLEAP}}
-
-\paragraph {F-Avi-04 AI Assurance (Learning \& Explainability)}
-  {Der Übergang von Programmieren zu Lernen wird abgesichert; Erklärbarkeit ist technisch (Dev/Review) \emph{und} operativ (nutzerverständlich, rechtzeitig) vorzusehen. \textit{Roadmap, Concept}}
-
-\paragraph {F-Avi-05 Betriebs-Recording}
-  {Bord-/Betriebsaufzeichnungen unterstützen kontinuierliches Sicherheitsmonitoring und Vorfallanalysen; sie sind Bestandteil des Safety Case. \textit{Roadmap}}
-
-\paragraph {F-Avi-06 OOD \& Unvorhersagbarkeit}
-  {Verteilungswechsel werden erkannt; Unsicherheit wird gemanagt und löst konservatives Verhalten aus. \emph{Runtime}-Indikatoren/Monitore sind vorzusehen. \textit{Roadmap, MLEAP}}
-
-\paragraph {F-Avi-07 Generalisierung, Robustheit \& Stabilität}
-  {Generalisierung ist nachzuweisen (zeit-/raumgetrennte Splits); \emph{Stabilität} (kleine Perturbationen) und \emph{Robustheit} (adverse Bedingungen) werden mit getrennten Test-Suiten geprüft; ein \emph{Komplexitätsbudget} verhindert Under-/Overfit. \textit{Roadmap, MLEAP}}
-
-\paragraph {F-Avi-08 Lebenszyklus \& W-Shape}
-  {Der Safety Case umfasst Aktivitäten \emph{vor} dem Training und \emph{nach} der Zulassung (Monitoring, kontrollierte Änderungen). Der EASA-\emph{W-Shape} dient als Governance-Rahmen mit klaren Gates/Artefakten. \textit{Roadmap, MLEAP}}
-
-\paragraph {F-Avi-09 Kein Online-Lernen im Betrieb}
-  {Modelle sind \emph{offline} trainiert und zur Freigabe \emph{eingefroren}; Online-/Continual-Learning in der Operation ist ausgeschlossen. \textit{Roadmap, Concept}}
-
-\paragraph {F-Avi-10 Einbettung in Safety-Systeme/Plattform}
-  {Die Semantik des Modells bleibt bei Portierung/Optimierung erhalten; Plattform-/Hardware-Aspekte (inkl. Beschleuniger) sind qualifikationsfähig auszulegen. \textit{Roadmap}}
-
-\paragraph {F-Avi-11 Rare-Events-Management}
-  {Seltene/novel Situationen werden systematisch erfasst (Taxonomie, Katalog) und für Tests sowie Datenpflege genutzt. \textit{MLEAP}}
-
-\paragraph {F-Avi-12 Use-Case-Verankerung}
-  {Methoden- und Metrikentscheidungen sind an Use-Case-Anforderungen gebunden; operative Übergabeartefakte (KPIs, Monitoring-Hooks, Logging) sind vor Einsatz definiert. \textit{MLEAP}}
-
-
-
-
-\section{DO-178C – Rolle im KI-Kontext}
-\textbf{DO-178C} bleibt die \emph{Baseline} für Software-Assurance in der Avionik: Ziele und Evidenzen skalieren mit 
-\textbf{DAL A–E}. EASA verweist explizit auf die DO-178C-Daten/Liefergegenstände (inkl. Tool-Qualifikation) als Nachweisgrundlage; 
-KI-spezifische Guidance kommt \emph{zusätzlich} obenauf (z.\,B. Learning Assurance), ändert aber die Software-Pflichten nicht. 
-\emph{Praxis:} Daten-/Modell-Pipelines berühren Tool-Qualifikation (DO-330).
-
-\paragraph{Bezug zu KI Anwendungen und EASA}
-\begin{itemize}
-  \item \textbf{Airborne Software bleibt DO-178C-pflichtig:} Inferenz-Software, Laufzeit/Framework, Treiber und Integrationscode (inkl.\ Vor-/Nachverarbeitung) werden wie gewohnt gemäß DO-178C nachgewiesen; die KI-Guidance kommt \emph{on top} (kein „DAL-Rabatt“).
-  \item \textbf{Modelle sind konfigurationsgeführte Artefakte:} Gewichte/Graph/Quantisierung gelten als freigegebener Software-Stand („gefroren“ zur Zulassung) und werden wie Software-Daten behandelt; Updates sind kontrollierte Änderungen, kein Online-Lernen.
-  \item \textbf{Tool-Qualifikation denken:} Trainings-/Konvertierungs-/Code-Gen-Tools können qualifikationspflichtig sein (DO-330), wenn ihre Fehler unentdeckt ins Produkt wirken könnten.
-  \item \textbf{Traceability bleibt zentral:} Anforderungen \(\rightarrow\) Architektur/Code \(\rightarrow\) Tests/Analysen müssen lückenlos verknüpft sein; KI-spezifische Evidenz (z.\,B. Daten-/Modell-Governance, Kalibrierung, OOD/Abstain) wird \emph{zusätzlich} dokumentiert.
-\end{itemize}
-\paragraph{Wichtig.}
-DO-178C und DO-330 beziehen sich nicht spezifisch auf KI, sondern allgemein auf Software und Tools. Deterministischer Code 
-und MC/DC-Coverage sind stark empfohlen und gelten als Best Practice; bei KI-Komponenten sind diese Punkte teils nicht erfüllbar 
-und werden in den Normen nicht ausdrücklich gefordert. Fazit: KI ist unter diesen Standards grundsätzlich zulassungsfähig, jedoch 
-steigen die Anforderungen an die Nachweisführung.
-
-
-
-
-\section{DO-178C vs.\ DO-330: Absicht und Kernunterschiede}
-\textbf{Absicht.} \emph{DO-178C} \parencite{do-178c} definiert die
-DAL-skalierte Assurance für \emph{airborne Software} über den gesamten Lebenszyklus (Anforderungen→Design→Code→V\&V→Änderungen),
-um die sichere Funktion im Betrieb nachzuweisen. \emph{DO-330} \parencite{do-330} ergänzt dies für \emph{Werkzeuge}:
-Immer dann, wenn für Tool-Ergebnisse \emph{Credit} beansprucht wird (d.\,h.\ man verlässt sich darauf, ohne vollständige Gegenprüfung),
-fordert DO-330 eine \emph{Toolqualifikation} mit risikoproportionalem Nachweis (\emph{TQL}). Kurz: DO-178C prüft \emph{was} die
-Bordsoftware sicher leisten muss, DO-330 prüft \emph{wie} vertrauenswürdig die Werkzeuge sind, mit denen diese Nachweise entstehen.
-
-\begin{longtable}{p{0.21\linewidth}p{0.36\linewidth}p{0.38\linewidth}}
-\caption{Vergleich DO-178C vs.\ DO-330 }\label{tab:do178c-do330}\\
-\toprule
-\textbf{Aspekt} & \textbf{DO-178C (Software Assurance)} & \textbf{DO-330 (Tool Qualification)} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Aspekt} & \textbf{DO-178C (Software Assurance)} & \textbf{DO-330 (Tool Qualification)} \\
-\midrule
-\endhead
-\bottomrule
-\endlastfoot
-
-Geltungsbereich &
-Airborne-Software (Teil des freizugebenden Systems); vollständiger SW-Lifecycle. &
-Entwicklungs-/Verifikationswerkzeuge im Engineering-Prozess; nur für den beanspruchten Einsatz. \\[4pt]
-
-Auslöser / Pflicht &
-Immer für Bordsoftware (DAL A–E, hazardbasiert). &
-Nur wenn Tool-Ergebnisse als \emph{Credit} genutzt werden; sonst kein TQL nötig (Ergebnis anderweitig verifizieren). \\[4pt]
-
-Skalierung &
-\textbf{DAL A–E}: bestimmt Strenge von V\&V, Unabhängigkeit, Coverage etc. &
-\textbf{TQL 1–5}: bestimmt Tiefe der Toolqualifikation (abhängig von Tool-Art, Credit, Ziel-DAL der SW). \\[4pt]
-
-Nachweisziel &
-Sichere, korrekte Funktion der \emph{Software im Betrieb}. &
-Korrektes, reproduzierbares \emph{Werkzeugverhalten} im spezifizierten Einsatz (keine unentdeckten Fehler). \\[4pt]
-
-Kernartefakte (typisch) &
-High-/Low-Level Requirements, Design, Code-Standards, Reviews/Tests, Coverage, Problem Reporting. &
-TOR (Tool Operational Requirements), TQP (Tool Qualification Plan), TOP (Tool Operational Procedures),
-TQ-Tests/Analysen, TAS (Tool Accomplishment Summary). \\[4pt]
-
-Unabhängigkeit &
-Vorgegeben je DAL (Reviews/Tests unabhängig). &
-Erforderlich, wenn Toolfehler Nachweise verfälschen könnten; proportional zum TQL/Credit. \\[4pt]
-
-Konzept „Credit“ &
-Nicht anwendbar (es ist das zu zertifizierende Produkt). &
-Zentral: Je mehr Nachweis-Credit, desto höher der TQL und der Qualifikationsaufwand. \\[4pt]
-
-Umgang ohne Qualifikation &
-— &
-Kein Credit beanspruchen und Tool-Outputs vollständig gegentesten/reviewen („Confidence in Use“ dokumentieren). \\[4pt]
-
-\end{longtable}
-
-\noindent\textit{Implikation für diese Arbeit.} Läuft der Random Forest \emph{onboard} als Funktion, gilt DO-178C (inkl.\ DAL-Skalierung).
-Wird er \emph{als Entwicklungs-/Verifikationswerkzeug} genutzt und seine Ergebnisse fließen \emph{ohne vollständige Gegenprüfung} in Nachweise ein,
-ist DO-330 (TQL-basiert) anzuwenden. Ohne Credit genügt eine dokumentierte \emph{Confidence in Use} (Versionierung, Reproduzierbarkeit, Limits).
-
-
-
 % -------------------------
 % CHAPTER 6: Coverage-Analyse entlang ISO/PAS 8800
 % -------------------------
-\chapter{Coverage-Analyse}\label{chap:coverage}
 
-\section{Vorgehen der Analyse}\label{sec:analyse-vorgehen}
-Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern \emph{welche Ansätze zur Absicherung gefordert werden}
-(u.\,a.\ aus ISO/PAS~8800 sowie konzeptionellen Leitlinien) und \emph{in welchem Umfang Abdeckung erkennbar ist}.
-Als Anker dienen die in Kapitel~\ref{chap:anforderungen} definierten \emph{Anforderungsfelder}. 
-
-
-
-
-\newcommand{\covV}{\textcolor{green!40!black}{\textbf{V}}} % voll
-\newcommand{\covT}{\textcolor{orange!80!black}{\textbf{T}}} % teilweise
-\newcommand{\covK}{\textcolor{red!70!black}{\textbf{K}}}    % keine
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-
-\section{Vergleich: Luftfahrt-Forderungen vs.\ ISO 8800 (Coverage-Matrix)}
-\setlength{\LTpost}{0pt}
-
-\begin{longtable}{L{0.12\linewidth}L{0.4\linewidth}L{0.18\linewidth}L{0.12\linewidth}}
-\caption{Gegenüberstellung der Forderungen (F-Avi-01…12) mit ISO/PAS 8800:2024 \textbf{Kapiteln}. Abdeckung: \covV{}=voll, \covT{}=teilweise, \covK{}=keine.}\\
-\toprule
-\textbf{ID} & \textbf{Kurzbezeichnung} & \textbf{ISO 8800 (Kapitel)} & \textbf{Abdeckung} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{ID} & \textbf{Kurzbezeichnung} & \textbf{ISO 8800 (Kapitel)} & \textbf{Abdeckung} \\
-\midrule
-\endhead
-\midrule
-\multicolumn{4}{r}{\emph{Fortsetzung auf nächster Seite}}\\
-\midrule
-\endfoot
-\bottomrule
-\endlastfoot
-
-F-Avi-01 & Human-centric, Level \& ConOps/HAT & 6, 7 & \covT \\[2pt]
-
-F-Avi-02 & OD/ODD \& Abstain/Degradation & 9, 12, 14 & \covV \\[2pt]
-
-F-Avi-03 & Knowledge \& Data Governance (ODD→Daten) & 11, 9, 8 & \covV \\[2pt]
-
-F-Avi-04 & AI Assurance (Learning \& Explainability) & 8, 12, 15 & \covT \\[2pt]
-
-F-Avi-05 & Betriebs-Recording & 14 & \covV \\[2pt]
-
-F-Avi-06 & OOD \& Unvorhersagbarkeit& 9, 12, 14 & \covT \\[2pt]
-
-F-Avi-07 & Generalisierung, Robustheit \& Stabilität & 9, 12 & \covV \\[2pt]
-
-F-Avi-08 & Lebenszyklus \& W-Shape (Gates/Artefakte) & 7, 8, 14 & \covT \\[2pt]
-
-F-Avi-09 & Kein Online-Lernen im Betrieb & 14, 10 & \covT \\[2pt]
-
-F-Avi-10 & Einbettung in Safety-Systeme/Plattform & 10, 6 & \covV \\[2pt]
-
-F-Avi-11 & Rare-Events-Management (Taxonomie/Katalog) & 11, 12, 9 & \covT \\[2pt]
-
-F-Avi-12 & Use-Case-Verankerung (KPIs/Übergabe in Betrieb) & 6, 8, 12, 14 & \covT \\
-
-\end{longtable}
-
-
-
-
-\section{Diskussion der Abdeckung (EASA \& ISO 8800)}
-
-\subsection{Überblick}
-Die Gegenüberstellung zeigt eine solide Abdeckung zentraler Lebenszyklus- und Technikthemen durch die ISO/PAS~8800. 
-Insbesondere Datenführung, V\&V sowie Betriebsmaßnahmen sind deutlich adressiert. 
-Demgegenüber bleiben Aspekte mit starkem Human-Fokus (HAT/ConOps), genaue Ausprägungen von Erklärbarkeit, 
-explizite Runtime-Indikatoren und organisatorische Governance-Elemente nur teilweise oder rahmenhaft geregelt.
-
-\subsection{Stärken (voll abgedeckt, \covV)}
-\begin{itemize}
-  \item \textbf{F-Avi-02 OD/ODD \& Abstain/Degradation} (9, 12, 14): ISO verknüpft ODD/Unsicherheit mit Ableitung von Anforderungen, Test/Validierung und Maßnahmen im Betrieb.
-  \item \textbf{F-Avi-03 Knowledge \& Data Governance} (11, 9, 8): Vollständiger Dataset-Lebenszyklus mit Safety-Analyse, Validierung, Pflege und Rückführung in den Assurance-Nachweis.
-  \item \textbf{F-Avi-05 Betriebs-Recording} (14): Feld-Datenerhebung, Nutzung für Monitoring, Re-Bewertung/Änderungen sind fest verankert.
-  \item \textbf{F-Avi-07 Generalisierung, Robustheit \& Stabilität} (9, 12): Prüfziele, Methoden und Bewertungslogik für Performance/Robustheit sind vorhanden (inkl.\ Testebenen und Integrationssicht).
-  \item \textbf{F-Avi-10 Einbettung in Safety-Systeme/Plattform} (10, 6): Architektur- und Entwicklungsmaßnahmen, sowie Systemkontext und Einbettung werden adressiert.
-\end{itemize}
-
-\subsection{Teilabdeckungen (Lücken, \covT)}
-\begin{itemize}
-  \item \textbf{F-Avi-01 Human-centric, Level \& ConOps/HAT} (6, 7): Rollen, Interaktion und Management sind nur implizit vorhanden. Der Mensch als Zentrale Rolle und konkrete Aufgabenverteilungen sind nicht explizit vorgegeben. Diese sind in den Anforderungen oder Domänenabgrenzungen zu betrachten.
-  \item \textbf{F-Avi-04 AI Assurance (Learning \& Explainability)} (8, 12, 15): Assurance-Argumente sind vollständig dargestellt. Erklärbarkeit wird ausdrücklich gefordert, bleibt aber offen und ist projektspezifisch zu betrachten.
-  \item \textbf{F-Avi-06 OOD \& Unvorhersagbarkeit} (9, 12, 14): OOD/Unsicherheiten werden definiert und im Test/Betrieb behandelt. Spezifische Runtime-Monitore/Trigger sind gefordert zu dokumentieren aber als Aufgabe der SOTIF und mit Hinweisen zum ``living safety-case'' vermerkt. In der Luftfahrt werden z.B. in den Anforderungen explizite Update Zeitpunkte festgehalten, im Automotive werden diese unter anderem gesondert betrachtet.
-  \item \textbf{F-Avi-08 Lebenszyklus \& W-Shape} (7, 8, 14): Ein vollständiger AI-Safety-Lebenszyklus ist vorhanden; das EASA-spezifische W-Shape (Gates/Artefakte) als formale Struktur ist nicht Teil der ISO. Statdessen wird die klassische V-Shape als Struktur verwendet.
-  \item \textbf{F-Avi-09 Kein Online-Lernen im Betrieb} (14, 10): ISO fordert Re-Training/Re-Validation/Re-Approval bei Änderungen, verbietet Online-Lernen jedoch nicht explizit.
-  \item \textbf{F-Avi-11 Rare-Events-Management} (11, 12, 9): Edge-Case-Handling ist vorgesehen; ein verpflichtender Taxonomie-/Katalog-Mechanismus ist nicht vorgegeben. Edge-cases sind fest zu halten, zu definieren, wie damit umzugehen ist, etc.. Sie sind aber projektspezifisch, daher wird ein allgemeiner Katalog nicht gefordert und ist für jedes Projekt einzeln anzufertigen.
-  \item \textbf{F-Avi-12 Use-Case-Verankerung} (6, 8, 12, 14): Kontext, KPIs, Validierung und Betriebsübergang sind vorhanden; projektinterne Use-Case-Artefakte/KPIs müssen konkretisiert werden. Diese sind hier zwar gefordert, es wird aber darauf hingewiesen, dass diese Projektabhängig sind.
-\end{itemize}
-
-\subsection{Interpretationsrahmen}
-Die ISO/PAS~8800 setzt auf prinzipienbasierte Anforderungen: Sie definiert Ziele, Workflows und Work Products, lässt aber 
-Gestaltungsspielraum für projektspezifische Ausprägungen (z.\,B.\ HAT/HMI, Monitore, interne Gates). 
-Die ausgewiesenen Teilabdeckungen (\covT) sind daher Erwartungsräume, die im Projektkontext präzisiert werden sollten, 
-ohne der ISO zu widersprechen.
-
-\subsection{Zwischenfazit}
-Der Abgleich der EASA-Dokumente mit der ISO/PAS~8800 zeigt, dass die in dieser Arbeit behandelten Aspekte von der Norm
-entweder vollständig oder zumindest teilweise abgedeckt werden. Die ISO/PAS~8800 ist bewusst
-prinzipienbasiert angelegt und lässt projektspezifischen Interpretations- und Gestaltungsspielraum. Zugleich treten
-Branchenunterschiede zutage: Die Luftfahrt verankert unter anderem Anforderungen und Einsatzgrenzen (OD/ODD) stark im
-Prozess und verfolgt eine deutlich human-zentrierte Auslegung, während die Automobilbranche viele Fragestellungen auch
-aus der SOTIF-Perspektive adressiert und den Menschen zwar berücksichtigt, ihn jedoch nicht in gleicher Weise ins Zentrum
-stellt.
 
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -1052,7 +608,7 @@ stellt.
 \midrule
 \endhead
 \midrule
-\multicolumn{3}{r}{\emph{Fortsetzung auf nächster Seite}}\\
+\multicolumn{3}{r}{Fortsetzung auf nächster Seite}\\
 \midrule
 \endfoot
 \bottomrule
@@ -1126,7 +682,7 @@ Falls alle zugeordneten F-Avi-Punkte „voll“ sind \(\Rightarrow\) \covV; ande
 \midrule
 \endhead
 \midrule
-\multicolumn{5}{r}{\emph{Fortsetzung auf nächster Seite}}\\
+\multicolumn{5}{r}{Fortsetzung auf nächster Seite}\\
 \midrule
 \endfoot
 \bottomrule
@@ -1175,17 +731,17 @@ als Bordfunktion in Betracht kommt. Sie adressieren den Onboard-Einsatz, ein rei
 
 \begin{itemize}
   \item \textbf{AI-Level \& Autorität (EASA L1/L2).}
-        \emph{L1 – Assistenz:} Wenn das Modell optional für zusätzliche Hinweise/Warnungen eingesetzt wird
+        L1 – Assistenz: Wenn das Modell optional für zusätzliche Hinweise/Warnungen eingesetzt wird
          und somit jederzeit übersteuerbar bleibt.
 
   \item \textbf{System-Safety-Zuordnung \& DAL (DO-178C).}
-        \emph{Pilot-Assistenz:} Entscheidung verbleibt beim Menschen
+        Pilot-Assistenz: Entscheidung verbleibt beim Menschen
         $\rightarrow$ typischerweise \textbf{DAL C–D}.
         Die daraus abgeleiteten Zielgrößen/Fehlerraten sind erfahrungsgemäß realistisch erreichbar,
         müssen jedoch use-case-spezifisch festgelegt und nachgewiesen werden.
 
   \item \textbf{Kein Online-Lernen im Betrieb.}
-        \emph{Eingefrorenes Modell:} Das Modell wird offline trainiert und zur Freigabe „gefroren“;
+        Eingefrorenes Modell: Das Modell wird offline trainiert und zur Freigabe „gefroren“;
         Laufzeitanpassungen sind ausgeschlossen. Für einen Random Forest ist dies unproblematisch umsetzbar.
 
   \item \textbf{Kein Assurance-Rabatt.}
@@ -1193,7 +749,7 @@ als Bordfunktion in Betracht kommt. Sie adressieren den Onboard-Einsatz, ein rei
         mit etablierten Verfahren verifiziert und in den Safety Case integriert (vollständige Nachweiskette).
 \end{itemize}
 
-\noindent\emph{Vergleich:} Wird die Funktion ausschließlich als Entwicklungswerkzeug eingesetzt (kein Bordprodukt),
+\noindent \textbf{Vergleich:} Wird die Funktion ausschließlich als Entwicklungswerkzeug eingesetzt (kein Bordprodukt),
 gilt statt der DAL-Logik die Toolqualifikation nach DO-330 (TQL, Credit-basiert).
 
 
@@ -1204,7 +760,7 @@ Im Folgenden werden die nicht vollständig abgedeckten Punkte knapp bewertet (Er
 \begin{itemize}
   \item \textbf{R-KI-02 (Datenrepräsentativität):} \emph{Erfüllbarkeit: Hoch.}
       Für die L1-Assistenz genügt eine ODD-geleitete, einsatzangemessene Abdeckung; fehlende Kombinationen 
-      werden ausdrücklich als \emph{Unknown} gekennzeichnet und konservativ behandelt. 
+      werden ausdrücklich als ``Unknown'' gekennzeichnet und konservativ behandelt. 
 
   \item \textbf{R-KI-03 (Edge-Cases sicht-/markierbar):} \emph{Erfüllbarkeit: Hoch.}
         Typische Radar-Edge-Cases (Shadow, Clutter etc.) sind fachlich bekannt und können konsistent markiert werden.
@@ -1266,6 +822,11 @@ für eine Bordfunktion greift die DO-178C-Logik mit hazardbasiertem DAL (typisch
 und denselben Evidenzbausteinen. In beiden Pfaden gilt: Kein ``Assurance-Rabatt'' — ML-Erkenntnisse sind
 klassisch zu verifizieren und in den Safety Case einzubetten.
 
-\emph{Bottom line:} Unter den definierten Einsatzgrenzen (L1, ODD, kein Online-Lernen) und mit den skizzierten
+\textbf{Bottom line:} Unter den definierten Einsatzgrenzen (L1, ODD, kein Online-Lernen) und mit den skizzierten
 Evidenzen ist die Übertragbarkeit ausreichend für eine zulassungsfähige Assistenzfunktion; offene Punkte
 betreffen die projektspezifische Ausgestaltung, nicht die grundsätzliche Machbarkeit.
+
+
+\textbf{Wichtig:} Den Dokumenten von Honeywell bezüglich des Wetterradar eines A320, fällt es 
+nach der DO 178B (Vorgänger der DO 178C) in den Bereich von DAL Level C und kann nach EASA 
+Empfehlungen eine Anwendung finden.

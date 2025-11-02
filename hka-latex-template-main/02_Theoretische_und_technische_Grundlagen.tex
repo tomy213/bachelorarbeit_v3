@@ -3,38 +3,33 @@
 %----------------------------------------------------------------------------------------
 
 \chapter{Künstliche Intelligenz}\label{sec:grundlagen-ki}
-Dieses Kapitel legt die begriffliche und methodische Basis für den späteren Einsatz von KI im Radar-Kontext.
-Im Fokus stehen zentrale Begriffe, Lernparadigmen, gebräuchliche Modellklassen sowie Daten- und
-Repräsentationsaspekte, die für radarnahe Anwendungen relevant sind. Sicherheitsspezifische Aspekte
-(Assurance, Nachweisführung, Kalibrierung, ODD-Anforderungen) werden in den entsprechenden
-Sicherheitskapiteln behandelt.
+In diesem Kapitel wird auf Begrifflichkeiten und Konzepte eingegangen, die im Gesamt-KI-Kontext 
+eingeordnet werden. Anschließend werden die wichtigsten Lernparadigmen zusammen mit einem 
+Beispieltrainingsablauf erklärt.
 
 \section{Begriffe und Konzepte}\label{sec:begriffe-konzepte}
-Unter \emph{KI} werden Verfahren verstanden, die aus Daten Muster ableiten
+Unter KI werden Verfahren verstanden, die aus Daten Muster ableiten
 und darauf basierend Entscheidungen, Klassifikationen oder Vorhersagen treffen. Technisch prägend sind
 \emph{Machine Learning (ML)} und dessen Teilbereich \emph{Deep Learning (DL)} mit tiefen, meist
-neuronalen Architekturen. Für diese Arbeit stehen Modellklassen, Datenrepräsentationen und der
-Trainingsprozess im Vordergrund.
+neuronalen Architekturen. 
 
 \section{Einordnung}\label{sec:ki-einordnung}
-KI wird in drei Kategorien entsprechend ihrer Fähigkeiten eingeteilt, davon ist aber nur eine relevant.
-\textbf{Narrow AI} (schwache KI) erledigt klar abgegrenzte Aufgaben.
+KI wird in drei Kategorien entsprechend ihrer Fähigkeiten eingeteilt. Eine 
+\textbf{Narrow AI} (schwache KI) erledigt klar abgegrenzte Aufgaben. 
 \textbf{AGI} (starke KI) und \textbf{ASI} (übermenschliche KI) sind nur theoretische Kategorien und
-spielen für technische Radaranwendungen keine Rolle.
-
-\paragraph{Narrow-AI: Reactive Machine vs.\ Limited Memory.}
-\emph{Reactive Machine} Systeme entscheiden nur aus dem aktuellen Zustand (klassische Regel- oder Suchverfahren).
-\emph{Limited Memory} Systeme nutzen gelernte Modelle und historische Daten (typisch für moderne ML/DL).
+spielen für heutige Awendungen keine Rolle. Daher ist nur Narrow AI relevant, welche in zwei Kategorien unterteilt wird. 
+In der ersten sind Systeme, die Entscheiden aus dem aktuellen Zustand treffen, dazu gehören zum Beispiel klassische Regelverfahren.
+Die zweiten sind Systeme, die gelernte Modelle und historische Daten nutzen. Die zweite Kategorie ist typisch für moderne ML-Modelle.
 
 \paragraph{Begriffsverschachtelung}
 Die Abbildung dient zum visuellen Verständnis, wie häufig verwendete Begriffe einzuordnen sind. 
 Dargestellt in einer Teilmengen-Beziehung:
-\emph{KI} umfasst \emph{Maschinelles Lernen (ML)} als Untermenge;
-\emph{Deep Learning (DL)} ist wiederum eine Teilmenge von ML; und \emph{Foundation Models (FM)}
-bilden eine spezielle Klasse innerhalb des DL-Bereichs (z.B. ChatGPT (LLM)).
-Die Beispiele in den Kästen sind \emph{illustrativ} (nicht abschließend).
+Beispielsweise ist ChatGPT ein LLM, welches auch als Anwendung von Foundation-Models (FM) zuzuordnen ist. 
+Foundation-Models bilden eine spezielle Unterklasse von Deep-Learning (DL), welches wiederum 
+eine Unterklasse von Machine-Learning (ML) ist. Machine-Learning als solches ist ein Teil von KI.
+Die Beispiele in den Kästen sind illustrativ, nicht abschließend.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \vspace{0.5cm}
 \begin{tikzpicture}
@@ -61,33 +56,36 @@ Die Beispiele in den Kästen sind \emph{illustrativ} (nicht abschließend).
 \end{tikzpicture}
 \caption{Verschachtelte Begriffe (AI $\supset$ ML $\supset$ DL)}
 \end{figure}
-\noindent\emph{Praxisbezug:} In radarnahen Aufgaben werden klassische ML-Verfahren (z.\,B. Random Forests)
-und DL-Verfahren (z.\,B. CNNs/Transformer) eingesetzt; Foundation Models spielen hier v.\,a. als
-vortrainierte Repräsentationen oder multimodale Bausteine eine Rolle. LLMs wie ChatGPT sind zum Beispiel 
+\noindent\textbf{Praxisbezug:} In radarbezogenen Aufgaben werden klassische ML-Verfahren (z.\,B. Random Forests)
+und DL-Verfahren (z.\,B. CNNs/Transformer) eingesetzt. Foundation Models spielen hier vor allem als
+vortrainierte Modelle mit spezifischer Anwendung eine Rolle. LLMs wie ChatGPT sind zum Beispiel 
 Anwendungen von Transformer-Modellen.
 
 
 \section{Lernparadigmen}\label{sec:lernparadigmen}
-\textbf{Supervised Lernen (SL)} : Eingabe–Ausgabe-Paare (z.\,B. Klassifikation, Regression).\\
-\textbf{Unsupervised Lernen (UL)} : Strukturentdeckung ohne Labels (z.\,B. Clustering).\\
+\textbf{Supervised Learning (SL)} : Eingabe–Ausgabe-Paare (z.\,B. Klassifikation, Regression).\\
+\textbf{Unsupervised Learning (UL)} : Strukturentdeckung ohne Labels (z.\,B. Clustering).\\
 \textbf{Reinforcement Learning (RL)} : Lernen durch Interaktion und Belohnungen.
 \smallskip
 
-Für diese Arbeit sind SL und UL am wichtigsten. Weiter wird RL nach den EASA-Papieren nicht empfohlen.
-\section{Beispiel: Training eines ML-Modells mit neuronalen Netzen (kompakt)}\label{sec:nn-train-kompakt}
-Beim überwachten Lernen liegen zu jedem Eingabebeispiel passende \emph{Labels} vor; das Netz lernt die Abbildung
-\(\text{Eingabe}\!\rightarrow\!\text{Label}\) durch Minimierung einer Verlustfunktion (Loss). Ein neuronales Netz besteht aus
+Diese drei Lernparadigmen bilden die Hauptansätze für modernes maschinelles Lernen. 
+Für diese Arbeit sind SL und UL am wichtigsten, da RL nach EASA-Empfehlungen \footnote{\citetitle{easa-ai-concept-issue2-2024} \parencite{easa-ai-concept-issue2-2024}} 
+aufgrund der erschwerten Nachweisbarkeit und unvorhersehbaren Risiken beim online-learning als nicht geeignet eingestuft wird.
+
+\section{Beispiel: Training eines ML-Modells mit neuronalen Netzen}\label{sec:nn-train-kompakt}
+Beim überwachten Lernen liegen zu jedem Eingabebeispiel passende Labels vor. Das Netz lernt die Abbildung 
+(\(\text{Eingabe}\!\rightarrow\!\text{Label}\)) durch Minimierung einer Verlustfunktion (Loss). Ein neuronales Netz besteht aus
 Schichten mit Gewichten und Aktivierungsfunktionen (z.\,B.\ ReLU), die Eingaben schrittweise in
-aussagekräftige \emph{Repräsentationen} überführen.
+aussagekräftige Repräsentationen überführen.
 
-Trainingsablauf (Kernidee): Daten in \emph{Mini-Batches} durch das Netz schicken (\emph{Forward Pass}) \(\rightarrow\) Loss mit den
-Labels berechnen \(\rightarrow\) \emph{Backpropagation} bestimmt Gradienten \(\rightarrow\) ein Optimierer aktualisiert
+Trainingsablauf (Kernidee): Daten in Mini-Batches durch das Netz schicken (Forward Pass) \(\rightarrow\) Loss mit den
+Labels berechnen \(\rightarrow\) Backpropagation bestimmt Gradienten \(\rightarrow\) ein Optimierer aktualisiert
 die Gewichte. Viele Wiederholungen über alle Trainingsdaten heißen Epochen. Daten werden in Train/Valid/Test aufgeteilt:
-Training passt Gewichte an, \emph{Validierung} steuert Hyperparameter/Frühes Stoppen, \emph{Test} schätzt die finale Leistung.
+Training passt Gewichte an, Validierung steuert Hyperparameter/Frühes Stoppen, Test schätzt die finale Leistung.
 
-Überanpassung (Overfitting) wird mit Regularisierung reduziert: \emph{Dropout}, \emph{Weight Decay} und \emph{Early Stopping}.
-Metriken hängen von der Aufgabe ab: bei \emph{Klassifikation} u.\,a.\ Accuracy, Precision/Recall/F\(_1\), ROC; bei
-\emph{Regression} typischerweise MSE. Optional kann Transfer Learning genutzt werden, um vortrainierte Netze an neue Daten anzupassen.
+Überanpassung (Overfitting) wird mit Regularisierung reduziert: Dropout, Weight Decay und Early Stopping.
+Metriken hängen von der Aufgabe ab: bei Klassifikation u.\,a.\ Accuracy, Precision/Recall/F\(_1\), ROC; bei
+Regression typischerweise MSE. Optional kann Transfer Learning genutzt werden, um vortrainierte Netze an neue Daten anzupassen.
 
 
 
@@ -95,12 +93,15 @@ Metriken hängen von der Aufgabe ab: bei \emph{Klassifikation} u.\,a.\ Accuracy,
 
 % --- KAPITEL: GRUNDLAGEN / RADAR ---
 \chapter{Radarsysteme in der Luftfahrt}\label{sec:grundlagen-radar}
-
+In diesem Kapitel werden die architektonischen und technischen Eigenschaften von Radarsystemen in der Luftfahrt aufgelistet. 
+Diese Grundlagen stellen die Basis für das im späteren Verlauf dieser Arbeit verwendete Beispiel. 
 
 
 \section{Aufgaben und Einsatzspektrum}\label{sec:radar-aufgaben}
-Radarsysteme liefern wetter- und umgebungsbezogene Informationen und unterstützen taktische wie operationelle Entscheidungen.
+Radarsysteme liefern zum Beispiel wetter- und umgebungsbezogene Informationen und unterstützen taktische sowie operationelle Entscheidungen.
 Typische Aufgaben umfassen:
+
+\medskip
 \begin{itemize}
   \item \textbf{Detektion und Verfolgung von Objekten:} Erkennung, Lokalisierung und Bahn-/Geschwindigkeitsschätzung (z.\,B.\ Luftfahrzeuge, Hindernisse, UAS).
   \item \textbf{Wettererfassung und -darstellung:} Identifikation von Niederschlagszonen, Turbulenzindikatoren und Gewitterzellen zur Routen-/Höhenplanung.
@@ -110,10 +111,10 @@ Typische Aufgaben umfassen:
 
 
 \section{Systemarchitekturen und Betriebsmodi}\label{sec:radar-architektur}
-Radarsysteme unterscheiden sich hinsichtlich Geometrie, Wellenform und Abtaststrategie. Die Wahl der Architektur
+Radarsysteme unterscheiden sich hinsichtlich der Systemklassen, Wellenform und Scanprinzipien. Die Wahl der Architektur
 prägt Messcharakteristika, Integrationsaufwand und Evidenzanforderungen in der Safety-Argumentation.
 
-\subsection{Systemklassen: Mono-, Bi- und Multistatik}
+\subsection{Systemklassen}
 \begin{itemize}
   \item \textbf{Monostatisch} (in der Luftfahrt dominierend): Sende- und Empfangsantenne am selben Ort.
         Vorteile: kompakte Integration, eindeutige Geometrie; einfacher Nachweis. 
@@ -126,32 +127,31 @@ prägt Messcharakteristika, Integrationsaufwand und Evidenzanforderungen in der 
 \subsection{Wellenformen}
 \begin{itemize}
   \item \textbf{Gepulst / Puls-Doppler}: Zeitdiskrete Aussendung; Reichweite aus Laufzeit, Geschwindigkeit aus Doppler über Pulsfolgen.
-        \emph{Standard} für Entfernungsbestimmung (z.\,B.\ Primärradar, viele Bordradare).
+        Standard für Entfernungsbestimmung (z.\,B.\ Primärradar, viele Bordradare).
   \item \textbf{CW (Continuous Wave)}: kontinuierliche Aussendung; misst primär Geschwindigkeit (Doppler).
         Ohne Modulation keine Entfernungsschätzung.
   \item \textbf{FMCW (Frequency-Modulated CW)}: Frequenzrampe zur gleichzeitigen Reichweiten- und Geschwindigkeitsbestimmung.
-        \emph{Weit verbreitet} bei Radarhöhenmessern oder im Automotive (Chirp-Sequence); zunehmend in Kurz-/Mittelreichweite (z.\,B.\ UAS).
+        Weit verbreitet bei Radarhöhenmessern oder im Automotive (Chirp-Sequence); zunehmend in Kurz-/Mittelreichweite (z.\,B.\ UAS).
 \end{itemize}
 \subsection{Scanprinzipien}
 \begin{itemize}
   \item \textbf{Mechanisches Schwenken}: Physisches Drehen/Kippen der Antenne; robust und günstig, aber begrenzte Scanrate und höhere Latenz.
-  \item \textbf{Elektronisches Schwenken}: Strahlrichtung via Phasen-/Amplitudensteuerung; \emph{passiv} 
-  dominiert Automotive (Winkel aus Phasendifferenzen), für große Reichweiten/Leistung in der Luftfahrt meist \emph{aktiv}.
+  \item \textbf{Elektronisches Schwenken}: Strahlrichtung via Phasen-/Amplitudensteuerung; passiv 
+  dominiert Automotive (Winkel aus Phasendifferenzen), für große Reichweiten/Leistung in der Luftfahrt meist aktiv.
 \end{itemize}
 
 
 \subsection{Beispiele im Luftfahrtkontext}
 
 \begin{itemize}
-  \item \textbf{Bodenradar}: \emph{Primärradar} für nicht-kooperative Luftraumüberwachung; \emph{Sekundärradar} als kooperatives Abfrage/Antwort-Verfahren (Koexistenz beachten).
-  \item \textbf{Bordradar}: vor allem \emph{Wetterradar} (gepulst/Puls-Doppler, teils elektronisch geschwenkt) zur Gewitter-, Niederschlags- und Turbulenzerkennung.
-  \item \textbf{Radarhöhenmesser}: meist \emph{FMCW}, liefert Höhe über Grund für Anflug/Landung und Systemlogik.
+  \item \textbf{Bodenradar}: Primärradar für nicht-kooperative Luftraumüberwachung; Sekundärradar als kooperatives Abfrage/Antwort-Verfahren (Koexistenz beachten).
+  \item \textbf{Bordradar}: vor allem Wetterradar (gepulst/Puls-Doppler, teils elektronisch geschwenkt) zur Gewitter-, Niederschlags- und Turbulenzerkennung.
+  \item \textbf{Radarhöhenmesser}: meist FMCW, liefert Höhe über Grund für Anflug/Landung und Systemlogik.
 \end{itemize}
 
-\noindent
-Reichweite, Aktualisierungsrate und Auflösung variieren nach Plattform und Mission. 
-
-
+\medskip
+Das später verwendete Beispiel bezieht sich auf den Onbord Einsatz. Die somit einhergehende Architektur bestimmt 
+die Form der in den Signalpfad einfließenden Daten.
 
 
 \section{Signalpfad}\label{sec:signalpfad}
@@ -200,46 +200,13 @@ Reichweite, Aktualisierungsrate und Auflösung variieren nach Plattform und Miss
   \draw[arrow] (track) -- (hmi);
 \end{tikzpicture}
 
-\subsection{Detektion und CFAR (Constant False Alarm Rate)}\label{sec:cfar}
-Neben echten Zielen enthalten Radardaten Rauschen, Clutter und Störanteile.
-Die Detektion entscheidet, ob ein Echo zielbedingt ist oder nicht. Die Wahl der Schwellen ist dabei
-ein Kompromiss: zu niedrig $\rightarrow$ mehr Treffer, aber hohe Falschalarmrate; zu hoch $\rightarrow$
-weniger Fehlalarme, aber Verlust schwacher Ziele. \emph{CFAR} hält die
-Falschalarmrate durch lokale Störschätzung adaptiv konstant und ist daher ein zentraler Baustein für
-stabile Detektion – insbesondere in Umgebungen mit variierendem Clutter (z.\,B.\ Wetter, See, Boden).
-An dieser stelle werden oft KIs eingesetzt, um bei einer gesentkten Schwelle innerhalb des Rauschens 
-Muster zu erkennen. Hierbei gilt, wenn die KI auch nichts sieht ist es okay, erkennt die KI aber etwas 
-hat man einen Mehrwert.
-
-
-
-\section{Typische Trade-offs}\label{sec:tradeoffs}
-\begin{table}[h]
-\centering
-\caption{Trade-offs in Radarsystemen}
-\begin{tabular}{p{0.33\textwidth}p{0.57\textwidth}}
-\toprule
-\textbf{Reichweite vs.\ Auflösung} & Mehr Bandbreite verbessert Entfernungsauflösung, erhöht aber Rauschbandbreite, Datenrate und Systemkomplexität. \\
-\midrule
-\textbf{CPI-Länge (Beobachtungszeit)} & Längere Integration schärft Dopplerauflösung/SNR, erhöht aber Latenz und erzeugt Unschärfe bei manövrierenden Zielen. \\
-\midrule
-\textbf{Zeit–Frequenz–Unschärfe} & (Heisenbergsche Unschärferelation) Kurze Signale lokalisieren gut in Reichweite, verlieren Frequenzpräzision (Geschwindigkeit) – und umgekehrt. \\
-\midrule
-\textbf{Detektionsschwelle vs.\ $P_{fa}$} & Niedrige Schwellen steigern $P_d$, aber auch $P_{fa}$; hohe Schwellen senken Fehlalarme, verpassen schwache Ziele. CFAR balanciert adaptiv. \\
-\midrule
-\textbf{Clutter-Unterdrückung vs.\ Zielerhalt} & Aggressive Filter reduzieren Störungen, riskieren aber langsame/schwache Ziele zu dämpfen. \\
-\midrule
-\textbf{Datenrate/Kompression vs.\ Informationsgehalt} & Feine Raster, viele Kanäle und hohe Abtastraten erhöhen Aussagekraft, treiben jedoch Schnittstellen, Speicher und Rechenlast. \\
-\midrule
-\textbf{Wellenform-Komplexität vs.\ Robustheit} & Komplexe Modulationen bieten bessere Auflösung/Anti-Jam, erhöhen aber Implementierungsaufwand und Modellempfindlichkeiten. \\
-\midrule
-\textbf{Abdeckungsrate vs.\ Verweilzeit} & Schnelles Scannen erhöht Volumenabdeckung/Aktualität, reduziert Verweilzeit und SNR; längere Verweilzeiten umgekehrt. \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 
 \section{Störquellen und Szenarien}\label{sec:stoerquellen}
+Aus Störquellen und Szenarien können mögliche Anforderungen, die für die Gewährleistung eines sicheren 
+Betriebs essenziell sind abgeleitet werden. 
+
+\medskip
 \begin{itemize}
   \item \textbf{Thermisches Rauschen:} Fundamentale Hintergrundbegrenzung der Empfangselektronik; bestimmt die minimal detektierbare Signalstärke (SNR-Schwelle).
   \item \textbf{RFI (Radio Frequency Interference):} Einflüsse benachbarter Funkdienste oder anderer Radare; kann SNR reduzieren und Falschalarmrate erhöhen.
@@ -253,11 +220,11 @@ hat man einen Mehrwert.
 \end{itemize}
 
 
-\section{Radar–Grundlagen für Objektklassifizierung}\label{sec:radar-objklass}
-Eine vereinfachte Darstellung klassischer Radar-Klassifikation ist, es werden die empfangenen Rohdaten aufbereitet 
-und in eine verarbeitbare Form gebracht. Weiter wurde eine deterministische Heuristik einprogrammiert, 
+\section{Radar–Grundlagen für Objektklassifikation}\label{sec:radar-objklass}
+Eine vereinfachte Darstellung klassischer Radar-Klassifikation ist, die empfangenen Rohdaten aufzubereiteten 
+und in eine verarbeitbare Form zu bringen. Weiter wird eine deterministische Heuristik einprogrammiert, 
 die anhand dieser aufbereiteten Daten und den dort definierten Mustern die Objekte unterscheidet. 
-Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kann das abweichen.
+Diese werden anschließend dem Operator angezeigt.
 
 \usetikzlibrary{arrows.meta,positioning}
 
@@ -265,7 +232,7 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 \centering
 \begin{tikzpicture}[
   >=Latex,
-  node distance=6mm,
+  node distance=5mm,
   box/.style={draw, rounded corners, align=center, inner sep=4pt, minimum height=7mm}
 ]
 \node[box] (in)   {Daten rein\\\footnotesize (Radar-Rohdaten)};
@@ -275,7 +242,7 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 \node[box, right=of class]   (out)   {Anzeigen\\\footnotesize (HMI/Operator)};
 
 % Einfluss durch Frontloading (separate Box darunter)
-\node[box, below=8mm of pattern] (front) {Frontloading\\\footnotesize (Schwellen/Regeln aus Entwicklung)};
+\node[box, below=8mm of pattern] (front) {Entwicklung\\\footnotesize (Schwellen/Regeln)};
 
 % Hauptfluss
 \draw[->] (in) -- (prep) -- (pattern) -- (class) -- (out);
@@ -284,52 +251,23 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 \draw[->, dashed] (front) -- (pattern);
 
 \end{tikzpicture}
-\caption{\emph{Input} → \emph{Aufbereiten} → \emph{Muster} → \emph{Klassifikation} → \emph{Output}.}
+\caption{Input → Aufbereiten → Muster → Klassifikation → Output.}
 \label{fig:radar-meta-simple}
 \end{figure}
 
 
+Ein Radar erkennt Objekte, indem es mehrere Merkmale gemeinsam bewertet. 
+Zum Beispiel spielt die Echo-Stärke beziehungsweise der Radarquerschnitt eine Rolle, 
+echte Ziele heben sich mit stabiler Signalreserve vom Hintergrund ab. Aus dem Doppler 
+ergibt sich zusammen mit einem Bewegungsmodell eine plausible Bahn, die sich 
+deutlich von Umgebungsrefexionen unterscheidet. 
+Signale, die sich deutlich von der Umgebung abheben, werden meist als punktförmige Ziele behandelt.
+Alternativ zum rein punktförmigen Zielen, kann man anhand wiederkehrende Muster wie zum 
+Beispiel Mikro-Doppler Ziele erkennen.
+Entscheidend ist schließlich die zeitliche Konsistenz, was über viele Messungen wiederkehrt und sich sauber tracken lässt, 
+wird erkannt. Dabei sorgen meist CFAR und Clutter-Filter dafür, dass Rauschen und Umgebung möglichst wenig stören.
 
-\subsection{Wichtige Datenpunkte und Merksätze für Objektklassifikation}\label{sec:radar-objklass-daten}
-\begin{table}[h]
-\centering
-\caption{Radar-Merkmale und Kontextinformationen für Objektklassifikation (Auswahl)}
-\begin{tabular}{p{0.32\textwidth}p{0.58\textwidth}}
-\toprule
-\textbf{Reichweite (Entfernung)} & Position relativ zum Radar; Basis für Lagebestimmung und Tracking. \\
-\midrule
-\textbf{Relativgeschwindigkeit (Doppler)} & Trennung bewegter von statischen Objekten; Hinweis auf Verhaltensklassen. \\
-\midrule
-\textbf{Winkel (Azimut/Elevation)} & Räumliche Lokalisierung; Voraussetzung für Zieltrennung in dichten Szenen. \\
-\midrule
-\textbf{Radar Cross Section (RCS)} & Rückstreustärke (Größe/Material/Geometrie); Typ- und Größenindizien. \\
-\midrule
-\textbf{Doppler-/Mikrodoppler-Signatur} & Feinstrukturen durch bewegte Teile (Rotor, Flügelschlag); starke Trennmerkmale. \\
-\midrule
-\textbf{Zeitliche Historie / Tracks} & Trajektorien, Persistenz und Manöver; robustere Merkmalsbildung als Einzelscans. \\
-\midrule
-\textbf{Spektrale Eigenschaften} & Verteilung der Rückstreuung (Frequenz/Polarisation); Material-/Strukturhinweise. \\
-\midrule
-\textbf{Clutter-Kontext} & Umwelt (Boden/See/Wetter) beeinflusst Unsicherheit und Fehlklassifikationen. \\
-\midrule
-\textbf{SNR und Qualitätsmetriken} & SNR, CFAR-Masken, lokale Störschätzer; Gewichtung unsicherer Messungen. \\
-\midrule
-\textbf{Sensor-/Modus-Metadaten} & Wellenform, PRF, Antennen-Aspect, Scanmodus; Einordnung und Normalisierung. \\
-\midrule
-\textbf{Konsistenz über Zeit} & Track-Confidence, Aussetzer, Plausibilitätschecks (kinematische Grenzen). \\
-\bottomrule
-\end{tabular}
-\end{table}
 
-\begin{itemize}
-  \item \textbf{Zeit schlägt Einzelbild: \parencite{skolnik2001-intro-radar}} Sequenzen/Trajektorien offenbaren Muster robuster als Einzelscans.
-  \item \textbf{Mikrodoppler als Fingerabdruck: \parencite{Chen2011MicroDoppler}} Rotorrate/Flügelschlag trennen Drohnen, Helikopter, Vögel — SNR- und Aspect-abhängig.
-  \item \textbf{Offene Welt akzeptieren: \parencite{Koopman:2025:EAI}} \emph{Unknown}-Klasse und OOD-Detektion sind Pflicht; lieber abstain als falsch sicher.
-  \item \textbf{Physik hilft: \parencite{feigl-phd-deadreckoning}} Kinematik-Checks stabilisieren datengetriebene Modelle.
-  \item \textbf{Robust denken: \parencite{radartutorial-cfar}} Clutter, RFI, Aussetzer einplanen; Fallbacks gehören zum Design.
-  \item \textbf{HMI klärt Erwartungen:} Z.B. OOD-/Qualitätsflags reduzieren Fehlinterpretationen.
-  \item \textbf{Vorverarbeitung prägt Merkmale: \parencite{skolnik2001-intro-radar}} Wahl von CFAR, Filterung und Normalisierung bestimmt, was das Modell überhaupt „sehen“ kann.
-\end{itemize}
 
 
 
@@ -341,78 +279,65 @@ Diese werden anschließend dem Operator angezeigt. Bei modernen ML Methoden, kan
 %--------------------------------------------------------
 
 \chapter{Sicherheit}\label{sec:safety-aviation}
+Im vorliegenden Kapitel werden Begrifflichkeiten wie Safety und Reliability definiert. 
+Sowie Vorgehen zum Nachweis der Sicherheit beziehungsweise das Vorgehen bei Assurance Cases beschrieben. 
 
-\section{Sicherheit – Grundlagen}\label{sec:safety-basics}
-\textbf{Begriffsrahmen} – Sicherheit (\emph{Safety}) ist die Freiheit von unvertretbaren Risiken. 
-Risiko beschreibt die Kombination aus \emph{Schweregrad} einer möglichen Auswirkung und ihrer \emph{Eintrittswahrscheinlichkeit}. 
-Ziel ist, Risiken durch geeignete Maßnahmen so weit zu mindern, dass sie akzeptabel sind, um ein \emph{tolerierbares Restrisiko} festzulegen 
-(ALARP-Prinzip: as low as reasonably practicable).
 
-\subsection{Safety vs.\ Security}\label{sec:safety-vs-security}
-\emph{Safety} = Schutz vor unbeabsichtigten Fehlern/Versagen; 
-\emph{Security} = Schutz vor absichtlichen Angriffen/Manipulationen. 
+
+\section{Definition und Gegenüberstellung}\label{sec:safety-basics}
+Sicherheit bedeutet die Freiheit von unvertretbaren Risiken und ist somit der Schutz vor unbeabsichtigten Fehlern/Versagen. 
+Risiken werden anhand der Kombination aus Schweregrad einer möglichen Auswirkung und ihrer Eintrittswahrscheinlichkeit beschrieben. 
+Ziel ist es, diese Risiken durch geeignete Maßnahmen so weit zu mindern, dass sie akzeptabel sind, um ein tolerierbares Restrisiko festzulegen. 
+Dabei gilt meist das ALARP-Prinzip (as low as reasonably practicable), das bedeutet, dass weitere Risikominderungsmaßnahmen 
+nur dann ergriffen werden, wenn die Kosten und der Aufwand im Verhältnis zum erwarteten Nutzen vertretbar sind.
+
+\medskip
+Security ist der Schutz vor absichtlichen Angriffen/Manipulationen. 
 Security-Vorfälle können Safety-Ziele gefährden und müssen daher bei Anforderungen, Architektur und Nachweisen berücksichtigt werden. 
-\emph{Reliability} (Zuverlässigkeit) beschreibt die Fähigkeit, spezifizierte Funktionen über Zeit unter definierten Bedingungen zu erfüllen. 
-Safety, Security und Reliability sind komplementär: Security schützt die Integrität, Reliability adressiert Ausfälle/Alterung, Safety begründet die zulässige Risikoposition und Evidenz.
 
-\subsection{Nachweislogik und Assurance Case}\label{sec:assurance-logic}
+\medskip
+Reliability (Zuverlässigkeit) beschreibt die Fähigkeit, spezifizierte Funktionen über Zeit unter definierten Bedingungen zu erfüllen. 
+Safety, Security und Reliability sind komplementär. Security schützt die Integrität, Reliability adressiert Ausfälle/Alterung und Safety begründet die zulässige Risikoposition und Evidenz.
 
-\paragraph{Schutzziele (Safety Goals)}
-Aus der Risikobewertung werden \emph{klare Schutzziele} abgeleitet. Sie legen fest,
-\emph{welche gefährlichen Zustände zu verhindern sind} bzw.\ \emph{wie sie beherrscht werden müssen}
+\section{Sicherheitsnachweis}\label{sec:assurance-logic}
+
+\paragraph{Schutzziele}
+Aus der Risikobewertung werden klare Schutzziele abgeleitet. Sie legen fest,
+welche gefährlichen Zustände zu verhindern sind bzw.\ wie sie beherrscht werden müssen
 (z.\,B.\ definierte Fallback-Zustände, zulässige Grenzen für Fehlalarme und Ausfälle).
 
 \paragraph{Abgeleitete Anforderungen}
-Die Schutzziele werden in \emph{mess- und prüfbare Anforderungen} überführt
+Die Schutzziele werden in mess- und prüfbare Anforderungen überführt
 (z.\,B.\ Reaktionszeiten, Verfügbarkeit, Fehlertoleranz, Datenintegrität).
 Jede Anforderung ist eindeutig formuliert, testbar und rückverfolgbar. 
 Damit bilden sie die Grundlage für Verifikation und Validierung.
 
 \paragraph{Risikominderung}
-Maßnahmen werden so gewählt, dass sie Gefahrenszenarien \emph{vermeiden}, \emph{früh erkennen}
-oder \emph{sicher beherrschen}:
+Maßnahmen werden so gewählt, dass sie Gefahrenszenarien vermeiden, früh erkennen
+oder sicher beherrschen:
 \begin{itemize}
   \item \textbf{Präventiv:} robuste Architektur, Diversität/Redundanz, Partitionierung.
   \item \textbf{Detektierend:} Laufzeitüberwachung, Plausibilitätsprüfungen, Selbsttests, Alarme.
   \item \textbf{Korrektiv:} Degradation/Fallback, kontrollierte Abschaltung/Wiederanlauf.
 \end{itemize}
 
-\paragraph{Akzeptanz und Nachweis}
-\emph{Akzeptanzkriterien} definieren, wann das Restrisiko tragbar ist.
-Die Erfüllung wird durch \emph{Analysen}, \emph{Tests} und \emph{Inspektionen} nachgewiesen und
-entlang einer konsistenten Kette dokumentiert:
-\[
-\text{Gefährdung} \;\rightarrow\; \text{Schutzziel} \;\rightarrow\; \text{Anforderung} \;\rightarrow\; \text{Evidenz}.
-\]
-
-\paragraph{Assurance Case (Kernprinzip)}
-Ein \emph{Assurance Case} begründet systematisch, dass ein System unter definierten Einsatzbedingungen
-\emph{sicher genug} ist. Er beantwortet vier Fragen:
+\paragraph{Sicherheitsnachweis}
+Ein Assurance Case begründet systematisch, dass ein System unter definierten Einsatzbedingungen
+sicher genug ist. Es beantwortet vier Fragen:
 \begin{itemize}
-  \item \emph{Was} wird behauptet? \hfill(\textbf{Claim/Goal})
-  \item \emph{Warum} ist das plausibel? \hfill(\textbf{Strategie/Begründung})
-  \item \emph{Unter welchen Bedingungen} gilt es? \hfill(\textbf{Kontext/Annahmen})
-  \item \emph{Wodurch} wird es gestützt? \hfill(\textbf{Evidenz})
+  \item Was wird behauptet? \hfill(\textbf{Claim/Goal})
+  \item Warum ist das plausibel? \hfill(\textbf{Strategie/Begründung})
+  \item Unter welchen Bedingungen gilt es? \hfill(\textbf{Kontext/Annahmen})
+  \item Wodurch wird es gestützt? \hfill(\textbf{Evidenz})
 \end{itemize}
 
-\paragraph{Evidenzbausteine im KI-Kontext}
-Für KI-Komponenten u.\,a.: \textbf{ODD/Annahmen} (Segmentierung), \textbf{Daten-/Label-Governance}
-(Herkunft, Qualität, Versionierung, Freigaben), \textbf{Leistung \& Unsicherheit}
-(segmentierte Metriken, Kalibrierung, Abstain/Unknown-Regeln), \textbf{Robustheit/Shift}
-(Stresstests, Worst-Case-Kriterien), \textbf{Toolchain/Traceability} (reproduzierbare Pipelines,
-Artefakt-IDs, Signaturen) und \textbf{Betrieb} (Monitoring, Drift-/OOD-Erkennung, Degradationspfade).
-
-\paragraph{Lebendes Dokument (living safety case)}
-Der Assurance Case wird über den Lebenszyklus gepflegt und bei Änderungen (Daten, Modelle, Software, ODD)
-aktualisiert. Traceability verknüpft \emph{Gefährdung} $\rightarrow$ \emph{Schutzziel} $\rightarrow$
-\emph{Anforderung} $\rightarrow$ \emph{Nachweis}.
 
 \section{Gefahrenanalyse und Risikoermittlung}\label{sec:hazard-risk}
 Ziel der Gefahrenanalyse ist es, mögliche Gefährdungen frühzeitig zu erkennen, ihr Risiko grob einzuordnen
 und wirksame Gegenmaßnahmen abzuleiten. Das Ergebnis ist eine priorisierte Liste von Risiken mit klaren
 Safety-Zielen, abgeleiteten Anforderungen und einem Plan für deren Nachweis.
 
-\paragraph{Ablauf in Kurzform}
+\paragraph{Ablauf}
 \begin{enumerate}
   \item \textbf{Sammeln:} Mögliche Gefährdungen identifizieren.
   \item \textbf{Einordnen:} Schweregrad und Eintrittswahrscheinlichkeit bewerten.
@@ -421,156 +346,62 @@ Safety-Zielen, abgeleiteten Anforderungen und einem Plan für deren Nachweis.
   \item \textbf{Pflegen:} regelmäßig aktualisieren.
 \end{enumerate}
 
-\paragraph{Methoden (Auswahl)}
+\paragraph{Methoden}
 \begin{itemize}
-  \item \textbf{Hazard Identification (HAZID):} strukturierte Sammlung von Gefährdungen per Workshops, Checklisten
-        und Erfahrungswissen. Ergebnis: Hazard-Liste mit Ursachen, Wirkungen und Annahmen.
-  \item \textbf{FMEA/FMECA:} \emph{Bottom-up} auf Komponenten- oder Funktionsebene: Welche Ausfallarten gibt es,
+  \item \textbf{Hazard Identification (HAZID)} beschreibt die strukturierte Sammlung von Gefährdungen per Workshops, Checklisten
+        und Erfahrungswissen. Daraus resultiert eine Hazard-Liste mit Ursachen, Wirkungen und Annahmen.
+  \item \textbf{FMEA/FMECA} beschreibt eine Bottom-up Analyse, welche folgende Fragen beantwortet: Welche Ausfallarten gibt es,
         was passiert dann, wie wird es entdeckt? FMECA ergänzt eine Kritikalitätsbewertung zur Priorisierung.
-  \item \textbf{STPA:} systemtheoretischer Ansatz: Welche unsicheren Steueraktionen und Rahmenbedingungen führen
-        zu Gefährdungen – einschließlich Software, HMI und Prozeduren (nicht nur Hardware).
+  \item \textbf{STPA} ist der systemtheoretischer Ansatz zur Untersuchung unsicheren Steueraktionen und Rahmenbedingungen, die 
+        zu Gefährdungen führen. Es beinhält neben Hardware auch Software und HMI.
 \end{itemize}
-
-\paragraph{Leitprinzipien}
-\begin{itemize}
-  \item \textbf{Kontextsensitiv:} Bewertung immer im vorgesehenen Einsatzkontext; Annahmen explizit dokumentieren.
-  \item \textbf{Evidenzorientiert:} Ergebnisse müssen in überprüfbare Anforderungen und Nachweise übersetzt werden.
-  \item \textbf{Lebendes Artefakt:} Gefahrenliste, Ziele und Maßnahmen werden über den Lebenszyklus fortgeschrieben.
-\end{itemize}
-
 
 \section{Architekturprinzipien der funktionalen Sicherheit}\label{sec:arch-fusa}
-Ziel dieser Prinzipien ist es, Risiken durch die Systemarchitektur zu senken: Fehler sollen gar nicht erst wirken,
+Ziel dieser Prinzipien ist es, Risiken durch die Systemarchitektur zu senken. Fehler sollen gar nicht erst wirken,
 früh erkannt oder sicher beherrscht werden. Im Fokus stehen klare Strukturen, vorhersehbares Verhalten und
 kontrollierte Degradation statt Überraschungen.
 
-\paragraph{Redundanz und Diversität/Dissimilarität}
-\textbf{Redundanz} bedeutet, kritische Funktionen mehrfach vorzuhalten, sodass beim Ausfall einer Instanz eine andere übernimmt.
-\textbf{Diversität/Dissimilarität} ergänzt dies durch bewusst unterschiedliche Ausprägungen (z.\,B.\ verschiedene Hardware/Software
-oder unterschiedliche Algorithmen), damit ein gemeinsamer Fehler nicht alle Kanäle gleichzeitig trifft.\\
+\begin{table}[h]
+\centering
+\caption{Architekturprinzipien}
+\begin{tabular}{p{0.22\textwidth}p{0.4\textwidth}p{0.3\textwidth}}
+\toprule
+\textbf{Prinzip} & \textbf{Zweck / Kernaussage} & \textbf{Typische Maßnahmen / Beispiele} \\
+\midrule
+Redundanz \& Diversität & Ausfälle abfangen; gemeinsame Fehlerursachen vermeiden. &
+Mehrkanal-Design; unterschiedliche HW/SW/Algorithmen. \\
+\midrule
+Trennung / Partitionierung & Fehlerfortpflanzung verhindern; kritische Anteile isolieren. &
+Zeit-/Speicherpartitionen, separate Prozesse. \\
+\midrule
+Fail-Safe vs.\ Fail-Operational & Entweder sicher abschalten oder Funktion trotz Fehler weiterführen (ggf. degradiert). &
+Sicherer Zustand, Warnungen; degradierte Modi mit Mindestfunktion. \\
+\midrule
+Degradation \& Fallback & Vorab definierte, getestete Pfade für den Fehlerfall. &
+Degradationsmatrix, Abschaltkriterien, Nutzerhinweise/Alerts. \\
+\midrule
+Health Monitoring \& Watchdogs & Früherkennung und Erzwingen definierter Wiederanläufe/Degradationen. &
+Alive-Checks, Ressourcenmonitoring, HW/SW-Watchdogs. \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\paragraph{Trennung/Partitionierung}
-Trennung verhindert Fehlerfortpflanzung: sicherheitskritische Anteile laufen räumlich und zeitlich isoliert von weniger kritischen Funktionen.
-Partitionierung (z.\,B.\ per Betriebssystem mit Zeit-/Speichertrennung) stellt sicher, dass ein Fehler in einer Partition keine andere beeinträchtigt.\\
-
-\paragraph{Fail-Safe vs.\ Fail-Operational}
-\textbf{Fail-Safe} bedeutet, bei einem Fehler in einen definiert sicheren Zustand zu wechseln (z.\,B.\ Abschalten einer Funktion,
-klare Warnung, konservatives Verhalten). \textbf{Fail-Operational} bedeutet, trotz eines Fehlers die Funktion weiter bereitzustellen – ggf.\ in
-degradiertem Modus –, weil ein Abbruch riskanter wäre.\\
-
-\paragraph{Deterministisches Zeitverhalten und Kommunikation}
-Kommunikation und Zeitverhalten müssen vorhersagbar sein: feste oder begrenzte Latenzen, kontrollierter Jitter, klare Prioritäten
-und synchronisierte Uhren. So lassen sich Worst-Case-Reaktionszeiten planen und nachweisen.\\
-
-\paragraph{Degradation und Fallback-Strategien}
-Degradationspfade werden vorab definiert, getestet und dokumentiert: Welche Teilfunktion wird in welchem Fehlerfall
-weitergeführt, welche wird abgeschaltet, welche Warnung wird ausgegeben?\\
-
-\paragraph{Health Monitoring und Watchdogs}
-Laufzeitüberwachung (Alive-/Timing-Monitoring, Ressourcenüberwachung) erkennt hängende oder aus dem Ruder laufende Komponenten frühzeitig.
-Watchdogs erzwingen definierte Wiederanläufe oder Degradationspfade, wenn Zustände verletzt werden.\\
-
-\paragraph{Schnittstellenklarheit und Datenqualität}
-Schnittstellen müssen eindeutig spezifiziert sein (Formate, Einheiten, Latenzbudgets, Qualitätsflags).
-Eingehende Daten werden validiert; Qualitätskennzahlen (z.\,B.\ Konfidenz, Kalibrierungsstatus, OOD-Flags) werden mitgeführt und ausgewertet.\\
-
-\medskip
-\noindent
-Diese Architekturprinzipien schaffen die Grundlage, Fehlerwirkungen zu begrenzen, Laufzeitverhalten vorhersehbar zu halten
-und im Fehlerfall kontrolliert zu degradieren. Sie unterstützen somit die Ableitung prüfbarer Anforderungen und die Erstellung
-belastbarer Nachweise entlang des gesamten Lebenszyklus.
-
-
-\section{Verifikation und Validierung (V\&V)}\label{sec:vv}
-Ziel von V\&V ist der Nachweis, dass spezifizierte Anforderungen korrekt umgesetzt sind (\emph{Verifikation})
-und dass das System im vorgesehenen Einsatz \emph{das Richtige} tut (\emph{Validierung}).
-
-\paragraph{Grundprinzip}
-\textbf{Verifikation:} „Haben wir das Produkt richtig gebaut?“ \\
-\textbf{Validierung:} „Haben wir das richtige Produkt gebaut?“\\
-Beide Perspektiven sind geplant, mit Akzeptanzkriterien hinterlegt, unabhängig überprüft und nachvollziehbar belegt.
-
-\paragraph{KI-spezifische V\&V-Aspekte}
-\begin{itemize}
-  \item \textbf{ODD-Segmentierung:} Leistung und Fehlerraten je Segment (z.\,B.\ SNR, Entfernung, Wetter, Clutter) statt nur Mittelwerten.
-  \item \textbf{Kalibrierung:} Konfidenzmetriken (z.\,B.\ ECE, Brier, NLL) und dokumentierte Abstain/Unknown-Schwellen.
-  \item \textbf{Robustheit/Shift:} Stress-/Holdout-Tests (RFI/Clutter/Noise, Domänenwechsel), Degradationskurven, Worst-Case-Kriterien.
-  \item \textbf{OOD/Unknown:} Nachweise zur Erkennung und konservativen Behandlung unbekannter Klassen/Situationen.
-  \item \textbf{XAI als Audit-Hilfe:} reproduzierbare, zweckgebundene Reports (kein Ersatz für Tests/Analysen).
-\end{itemize}
-
-\section{Phasenüberblick}
-\begin{itemize}
-  \item \textbf{Konzept \& Requirements:} Zweck, ODD, Schutzziele, Annahmen, Schnittstellen, erste Hazard-/Risikobetrachtung.
-  \item \textbf{Architektur \& Design:} Sicherheitsprinzipien (Redundanz, Trennung, Degradation), Daten-/Toolchain-Governance.
-  \item \textbf{Implementierung:} Coding-/Model-Standards, reproduzierbare Pipelines, deterministische Builds.
-  \item \textbf{V\&V \& Zulassung:} szenariobasierte Tests, Evidenzpakete, unabhängige Reviews, formale Freigaben.
-  \item \textbf{Betrieb \& Instandhaltung:} Monitoring, Ereignis-/Fehlermanagement, Wartung, Telemetrieauswertung.
-  \item \textbf{Änderungen \& Stilllegung:} kontrollierte Updates, Obsoleszenzmanagement, sichere Außerbetriebnahme.
-\end{itemize}
-
-\begin{comment}
-\section{Luftfahrt-spezifische Sicherheit}\label{sec:aviation-specific}
-Der luftfahrtspezifische Rahmen definiert, \emph{welche} Safety-Ziele gelten, \emph{welche} Evidenzen akzeptiert werden
-und \emph{wer} Entscheidungen trifft. Ziel ist ein zulassungsfähiges System, das im Betrieb überwacht und über
-den Lebenszyklus sicher gehalten werden kann.
-
-\subsection{Regulatorischer Rahmen und Rollen}\label{sec:reg-frame}
-\textbf{Behörden} (z.\,B.\ EASA/FAA) setzen Regeln, definieren die Zertifizierungsbasis und erteilen Zulassungen.
-\textbf{Applicant/Hersteller} ist verantwortlich für Safety-Nachweise und vollständige, konsistente Dokumentation.
-Zentrale Elemente sind u.\,a.:
-\begin{itemize}
-  \item \textbf{Zertifizierungsbasis:} anwendbare Vorschriften, besondere Bedingungen, Auslegungsrichtlinien.
-  \item \textbf{Nachweisstrategie:} Kombination aus Analysen, Tests, Inspektionen am Produkt.
-  \item \textbf{Konformitätsnachweis:} geprüfte Artefakte und Prüfberichte, die die Anforderungen abdecken.
-\end{itemize}
-
-\subsection{Standards/Prozesse (Überblick)}\label{sec:standards}
-\textbf{DO-178C} (Software; Evidenztiefe nach DAL), \textbf{DO-330} (Tool-Qualifizierung als Supplement), sowie DO-331…DO-333 (modellbasiert, objektorientiert, formal).  
-\textbf{Hinweis:} KI-spezifische Luftfahrt-Normen existieren aktuell nicht; externe Bezugsfolie u.\,a.\ \emph{ISO/PAS 8800} (Automotive, KI-bezogene Safety) – ohne Geltungsanspruch für Luftfahrt.
-Diese Standards definieren akzeptierte Nachweiswege und die nötige Strenge – ohne sie gibt es keine Zulassungsfähigkeit und keinen verlässlichen Betrieb.
-
-\subsection{Development Assurance Levels (DAL)}\label{sec:dal}
-Die Schwere möglicher Fehlfunktionen bestimmt die geforderte Strenge von Entwicklung, Verifikation und Unabhängigkeit:
-\begin{itemize}
-  \item \textbf{DAL A} — katastrophal (z.\,B.\ Verlust des Flugzeugs/Leben)
-  \item \textbf{DAL B} — hazardous/severe-major
-  \item \textbf{DAL C} — major
-  \item \textbf{DAL D} — minor
-  \item \textbf{DAL E} — kein Safety-Einfluss
-\end{itemize}
-\textit{Einordnung:} Die konkrete DAL-Zuweisung ist systemspezifisch und erfolgt über die Hazard-/Risikobetrachtung.
-Wenn eine Funktion keinen unmittelbaren automatischen Einfluss ausübt und weitere Barrieren vorhanden sind, kann die
-Einstufung niedriger ausfallen; bei automatischer Wirkung oder geringer Fehlertoleranz sind strengere Stufen zu prüfen.
-\textit{Hinweis zur Klassifikation:} Ohne unmittelbare automatische Wirkung und mit vorgelagerten/parallel wirkenden Barrieren kann Objektklassifizierung \emph{typischerweise} im Bereich \textbf{DAL C} liegen; bei automatischer Wirkung ist mindestens \textbf{DAL B} zu prüfen. Konkrete Einordnung ist systemspezifisch.
-
-
-\subsection{Brücke zu KI/ML}\label{sec:bridge-ml}
-KI zeigt probabilistisches Verhalten und verlangt zusätzliche Evidenz. 
-In der Luftfahrt existiert derzeit kein direktes KI-Normenpendant; 
-Erwartungen werden über Anforderungen/Prozesse adressiert. Externe 
-Orientierung (z.\,B.\ ISO/PAS 8800) kann helfen, ersetzt aber keine luftfahrtspezifische Bewertung.
-\end{comment}
 
 \section{Kernelemente der KI\,-Sicherheit}\label{sec:ai-safety-kern}
-Folgend begriffliche und methodische Grundlagen für die spätere Bewertung
+Folgend werden begriffliche und methodische Grundlagen für die spätere Bewertung
 der Sicherheit von KI im Radar-Kontext etabliert. Die nachfolgenden Kernelemente bündeln wiederkehrende
 Anforderungen an die Absicherung von KI-Systemen.
 
 \begin{itemize}
   \item \textbf{ODD und Annahmen:} Präzise Festlegung des Einsatzbereichs, der Bedingungen und der
-        Einschränkungen, für die Anforderungen, Daten und Annahmen gelten.
-  \item \textbf{Assurance statt „viel hilft viel“:} Eine Erhöhung von Parameterzahl oder Datenmenge
-        kann Metriken verbessern, ersetzt jedoch nicht \emph{Assurance} bzw.\ belastbare Nachweise
+        Einschränkungen, die für Anforderungen, Daten und Annahmen gelten.
+  \item \textbf{Nachweis statt „viel hilft viel“:} Eine Erhöhung von Parameterzahl oder Datenmenge
+        kann Metriken verbessern, ersetzt jedoch nicht Assurance bzw.\ belastbare Nachweise
         zur Sicherheit.
   \item \textbf{Erklärbarkeit und Auditierbarkeit:} Erklärbarkeit (XAI) unterstützt fachliche
-        Plausibilisierung, Reviews und Audits und macht Grenzen sichtbar.
-  \item \textbf{Leistungs- und Unsicherheitsmetriken:} Domänengerechte Metriken (z.\,B.\ Detektions-
-        und Fehlerraten unter Randbedingungen) sind mit Konfidenzangaben und Freigabekriterien zu
-        kombinieren; konservative Schätzungen, belastbare Messprotokolle und definierte Mindestleistungen
-        je ODD-Segment stellen Nachvollziehbarkeit und Vergleichbarkeit sicher.
+        Plausibilisierung, Reviews sowie Audits und macht Grenzen sichtbar.
   \item \textbf{Toolchain-Assurance:} Entwicklungs-, Daten- und Trainingswerkzeuge sind so auszuwählen
-        und zu betreiben, dass sie \emph{nachweislich} keine zusätzliche Fehlerquelle darstellen.
+        und zu betreiben, dass sie nachweislich keine zusätzliche Fehlerquelle darstellen.
   \item \textbf{Traceability und Reproduzierbarkeit:} Rückverfolgbarkeit verknüpft Anforderungen,
         Gefährdungen/Schutzziele, Datenstände, Modell-/Konfigurationsversionen, Trainingsläufe,
         Auswertungen und Releases; Reproduzierbarkeit (identische Ergebnisse bei kontrolliertem Neuaufbau)

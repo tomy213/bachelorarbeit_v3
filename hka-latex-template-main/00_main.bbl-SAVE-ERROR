@@ -118,35 +118,93 @@
       \verb https://arxiv.org/abs/2409.08666
       \endverb
     \endentry
-    \entry{Chen2011MicroDoppler}{book}{}{}
+    \entry{NTSB_HWY18FH011}{online}{}{}
       \name{author}{1}{}{%
-        {{hash=7d226da67ebf9f0f6bb7439d48d67c5a}{%
-           family={Chen},
-           familyi={C\bibinitperiod},
-           given={Victor\bibnamedelima C.},
-           giveni={V\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=0b89b0da9f63a1ab5847e94a7a763c5d}{%
+           family={Board},
+           familyi={B\bibinitperiod},
+           given={National\bibnamedelimb Transportation\bibnamedelima Safety},
+           giveni={N\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
       }
-      \list{location}{1}{%
-        {Norwood, MA}%
+      \strng{namehash}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{fullhash}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{fullhashraw}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{bibnamehash}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{authorbibnamehash}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{authornamehash}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{authorfullhash}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \strng{authorfullhashraw}{0b89b0da9f63a1ab5847e94a7a763c5d}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Ereignisdatum: 2018-03-23; Mountain View, CA. Verweist u.\,a. auf Report HAR-20-01.}
+      \field{subtitle}{Investigation ID: HWY18FH011}
+      \field{title}{Collision Between a Sport Utility Vehicle Operating With Partial Driving Automation and a Crash Attenuator}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.ntsb.gov/investigations/Pages/HWY18FH011.aspx
+      \endverb
+      \verb{url}
+      \verb https://www.ntsb.gov/investigations/Pages/HWY18FH011.aspx
+      \endverb
+    \endentry
+    \entry{Coluccia2020Sensors4172}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=d21a458a3558053db580cfd8ec135a78}{%
+           family={Coluccia},
+           familyi={C\bibinitperiod},
+           given={Angelo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0ed026162ef682bb6432092dbe39c815}{%
+           family={Parisi},
+           familyi={P\bibinitperiod},
+           given={Gianluca},
+           giveni={G\bibinitperiod}}}%
+        {{hash=003ca76341a0523eb13d96558686cf73}{%
+           family={Fascista},
+           familyi={F\bibinitperiod},
+           given={Alessio},
+           giveni={A\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
-        {Artech House}%
+        {MDPI}%
       }
-      \strng{namehash}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{fullhash}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{fullhashraw}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{bibnamehash}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{authorbibnamehash}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{authornamehash}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{authorfullhash}{7d226da67ebf9f0f6bb7439d48d67c5a}
-      \strng{authorfullhashraw}{7d226da67ebf9f0f6bb7439d48d67c5a}
+      \strng{namehash}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{fullhash}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{fullhashraw}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{bibnamehash}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{authorbibnamehash}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{authornamehash}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{authorfullhash}{f33b0ed3fb529ba58867e018eae77c81}
+      \strng{authorfullhashraw}{f33b0ed3fb529ba58867e018eae77c81}
       \field{sortinit}{C}
       \field{sortinithash}{4d103a86280481745c9c897c925753c0}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-1608070573}
-      \field{title}{The Micro-Doppler Effect in Radar}
-      \field{year}{2011}
+      \field{journaltitle}{Sensors}
+      \field{number}{15}
+      \field{title}{Detection and Classification of Multirotor Drones in Radar Sensor Networks: A Review}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{volume}{20}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \field{pages}{4172}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s20154172
+      \endverb
+      \verb{urlraw}
+      \verb https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7435842/
+      \endverb
+      \verb{url}
+      \verb https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7435842/
+      \endverb
     \endentry
     \entry{conduit2017-superalloy-nn}{article}{}{}
       \name{author}{4}{}{%
@@ -293,47 +351,6 @@
       \field{labeltitlesource}{title}
       \field{title}{EASA Artificial Intelligence Concept Paper, Issue 2}
       \field{year}{2024}
-    \endentry
-    \entry{feigl-phd-deadreckoning}{thesis}{}{}
-      \name{author}{1}{}{%
-        {{hash=dc6aecf77104e43a6b4b0e9ce396e301}{%
-           family={Feigl},
-           familyi={F\bibinitperiod},
-           given={Tobias},
-           giveni={T\bibinitperiod}}}%
-      }
-      \list{institution}{1}{%
-        {Friedrich-Alexander-Universität Erlangen-Nürnberg}%
-      }
-      \list{location}{1}{%
-        {Erlangen}%
-      }
-      \strng{namehash}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{fullhash}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{fullhashraw}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{bibnamehash}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{authorbibnamehash}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{authornamehash}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{authorfullhash}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \strng{authorfullhashraw}{dc6aecf77104e43a6b4b0e9ce396e301}
-      \field{sortinit}{F}
-      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{langid}{german}
-      \field{subtitle}{Data-driven methods for determining position and orientation in radio- and inertial-based dead reckoning systems}
-      \field{title}{Datengetriebene Methoden zur Bestimmung von Position und Orientierung in funk- und trägheitsbasierter Koppelnavigation}
-      \field{type}{Dr.-Ing. dissertation}
-      \field{urlday}{19}
-      \field{urlmonth}{10}
-      \field{urlyear}{2025}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://www.researchgate.net/profile/Tobias-Feigl-2/publication/355425244_Datengetriebene_Methoden_zur_Bestimmung_von_Position_und_Orientierung_in_funk-_und_tragheitsbasierter_Koppelnavigation/links/617f20b3a767a03c14dab58b/Datengetriebene-Methoden-zur-Bestimmung-von-Position-und-Orientierung-in-funk-und-traegheitsbasierter-Koppelnavigation.pdf
-      \endverb
-      \verb{url}
-      \verb https://www.researchgate.net/profile/Tobias-Feigl-2/publication/355425244_Datengetriebene_Methoden_zur_Bestimmung_von_Position_und_Orientierung_in_funk-_und_tragheitsbasierter_Koppelnavigation/links/617f20b3a767a03c14dab58b/Datengetriebene-Methoden-zur-Bestimmung-von-Position-und-Orientierung-in-funk-und-traegheitsbasierter-Koppelnavigation.pdf
-      \endverb
     \endentry
     \entry{Bosch_FrontRadar_2025}{online}{}{}
       \list{organization}{1}{%
@@ -490,18 +507,8 @@
       \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
       \field{labeltitlesource}{title}
       \field{note}{Teil 1 Begriffe; Teil 6 Softwareentwicklung}
-      \field{title}{ISO 26262 — Road vehicles — Functional safety (Parts 1–12)}
+      \field{title}{ISO 26262 — Road vehicles — Functional safety}
       \field{year}{2018}
-    \endentry
-    \entry{iso-iec-22989}{standard}{}{}
-      \list{organization}{1}{%
-        {ISO/IEC JTC 1/SC 42}%
-      }
-      \field{sortinit}{I}
-      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
-      \field{labeltitlesource}{title}
-      \field{title}{ISO/IEC 22989 — Artificial Intelligence — Concepts and Terminology}
-      \field{year}{2022}
     \endentry
     \entry{iso-iec-tr-5469-2024}{report}{}{}
       \list{institution}{1}{%
@@ -738,69 +745,6 @@
       \field{title}{MLEAP Final Report — Machine Learning Application Approval}
       \field{year}{2024}
     \endentry
-    \entry{radartutorial-cfar}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=f2063b1ee4ce5822f4d9a6c3f3843606}{%
-           family={{Radartutorial}},
-           familyi={R\bibinitperiod}}}%
-      }
-      \strng{namehash}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{fullhash}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{fullhashraw}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{bibnamehash}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{authorbibnamehash}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{authornamehash}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{authorfullhash}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \strng{authorfullhashraw}{f2063b1ee4ce5822f4d9a6c3f3843606}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Abgerufen am: 23.\,10.\,2025}
-      \field{title}{CFAR — Constant False Alarm Rate}
-      \field{year}{n.d.}
-      \verb{urlraw}
-      \verb https://www.radartutorial.eu/11.coherent/co04.en.html
-      \endverb
-      \verb{url}
-      \verb https://www.radartutorial.eu/11.coherent/co04.en.html
-      \endverb
-    \endentry
-    \entry{collinsWXR2100Guide2016}{manual}{}{}
-      \name{author}{1}{}{%
-        {{hash=e7c22f851e356f406b4d4c14d4c1524f}{%
-           family={{Rockwell Collins}},
-           familyi={R\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {Rockwell Collins}%
-      }
-      \strng{namehash}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{fullhash}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{fullhashraw}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{bibnamehash}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{authorbibnamehash}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{authornamehash}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{authorfullhash}{e7c22f851e356f406b4d4c14d4c1524f}
-      \strng{authorfullhashraw}{e7c22f851e356f406b4d4c14d4c1524f}
-      \field{sortinit}{R}
-      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{note}{Operator's Guide (PDF)}
-      \field{title}{WXR-2100 MultiScan Weather Radar Operator's Guide}
-      \field{urlday}{19}
-      \field{urlmonth}{10}
-      \field{urlyear}{2025}
-      \field{year}{2016}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://aviation4all.wordpress.com/wp-content/uploads/2016/09/collins_wxr-2100_operators_guide.pdf
-      \endverb
-      \verb{url}
-      \verb https://aviation4all.wordpress.com/wp-content/uploads/2016/09/collins_wxr-2100_operators_guide.pdf
-      \endverb
-    \endentry
     \entry{stat-watson-2018}{article}{}{}
       \name{author}{2}{}{%
         {{hash=9080f1afcfd81f40b0c5f11e9df8cc18}{%
@@ -853,33 +797,44 @@
       \verb https://jpt.spe.org/shell-scales-predictive-maintenance-to-10-000-pieces
       \endverb
     \endentry
-    \entry{skolnik2001-intro-radar}{book}{}{}
+    \entry{Stewart2016Autopilot80}{online}{}{}
       \name{author}{1}{}{%
-        {{hash=24ee3ef297142fd740713cee92e5bd15}{%
-           family={Skolnik},
+        {{hash=532976eb85c96b7fb8dc0f398753c569}{%
+           family={Stewart},
            familyi={S\bibinitperiod},
-           given={Merrill\bibnamedelima I.},
-           giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+           given={Jack},
+           giveni={J\bibinitperiod}}}%
       }
       \list{publisher}{1}{%
-        {McGraw-Hill}%
+        {WIRED}%
       }
-      \strng{namehash}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{fullhash}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{fullhashraw}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{bibnamehash}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{authorbibnamehash}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{authornamehash}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{authorfullhash}{24ee3ef297142fd740713cee92e5bd15}
-      \strng{authorfullhashraw}{24ee3ef297142fd740713cee92e5bd15}
+      \strng{namehash}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{fullhash}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{fullhashraw}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{bibnamehash}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{authorbibnamehash}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{authornamehash}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{authorfullhash}{532976eb85c96b7fb8dc0f398753c569}
+      \strng{authorfullhashraw}{532976eb85c96b7fb8dc0f398753c569}
       \field{sortinit}{S}
       \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{3}
-      \field{note}{Kapitel \emph{Detection of Signals in Noise}}
-      \field{title}{Introduction to Radar Systems}
-      \field{year}{2001}
+      \field{day}{11}
+      \field{month}{9}
+      \field{title}{Tesla’s Self-Driving Software Gets a Major Update}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2025}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.wired.com/2016/09/teslas-self-driving-software-gets-major-update/
+      \endverb
+      \verb{url}
+      \verb https://www.wired.com/2016/09/teslas-self-driving-software-gets-major-update/
+      \endverb
     \endentry
     \entry{KaggleTitanic}{online}{}{}
       \list{organization}{1}{%
