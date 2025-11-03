@@ -10,48 +10,51 @@ Die folgenden Empfehlungen verdichten die in dieser Arbeit gewonnenen Befunde au
 ISO/PAS~8800 und der beispielbezogenen Analyse zu einem pragmatischen Handlungsrahmen.
 Ziel ist kein neues Regelwerk, sondern eine kompakte Orientierung, wie KI-Funktionen (hier: RF-gestützte
 Wetterphänomen-Klassifikation) schrittweise, nachvollziehbar und zulassungskonform in der Praxis
-aufgesetzt werden können. Die Punkte sind bewusst tool- und domänenneutral formuliert, knüpfen
-aber an luftfahrtspezifische Anforderungen (ODD, Human-in-the-Loop, Assurance) an. Sie richten sich
+aufgesetzt werden können. 
+
+Die Punkte sind bewusst tool- und domänenneutral formuliert, knüpfen
+aber an luftfahrtspezifische Anforderungen (ODD, Human-in-the-Loop, Nachweise) an. Sie richten sich
 an Projekte, die mit einem klar abgegrenzten Scope starten, Datenqualität früh adressieren, Evidenz
 systematisch aufbauen und Dokumentation als integralen Produktbestandteil verstehen. Der Katalog ist
 als Checkliste mit Prioritäten zu lesen: Erst Einsatzgrenzen und Datenbasis klären, dann
-Assurance und HMI konkretisieren, Nutzen messen und Reife schrittweise erhöhen.
+Nachweise und HMI konkretisieren, Nutzen messen und Reife schrittweise erhöhen.
 
 
 \paragraph{Empfehlungskatalog}
 
+\medskip
 \begin{itemize}
-  \item \textbf{ODD-Disziplin zuerst.}
+  \item \textbf{ODD-Disziplin zuerst:}
         Einsatzbereich eindeutig definieren (inkl.\ Übergangsregeln Abstain/Degrade) und alle Evidenzen darauf beziehen.
 
-  \item \textbf{Frühe Data-Readiness.}
+  \item \textbf{Frühe Data-Readiness:}
         Repräsentativität, Label-Qualität und Imbalance aktiv managen; Datenartefakte (Bias, Lücken) dokumentieren und adressieren.
 
-  \item \textbf{Assurance-Argumentation sauber führen.}
+  \item \textbf{Nachweis-Argumentation sauber führen:}
         Je komplexer das Thema, desto wichtiger sind nachvollziehbare, konsistente Nachweise und eine klare Begründungslinie.
 
-  \item \textbf{Human-in-the-Loop pragmatisch halten.}
+  \item \textbf{Human-in-the-Loop pragmatisch halten:}
         Rollen und Eingriffsrechte eindeutig festlegen; HMI so gestalten, dass Hinweise knapp, erklärbar und übersteuerbar sind.
         Falls projektseitig gewünscht: Konkretisieren, z.\,B.\ Anforderung, dass KI-Hinweise eine Wahrscheinlichkeitsangabe (in~\%) enthalten.
 
-  \item \textbf{Scope klein halten, Nutzen klar messen.}
+  \item \textbf{Scope klein halten, Nutzen klar messen:}
         Enge, beobachtbare Use-Cases wählen; KPIs vorab definieren (z.\,B.\ Fehlalarmrate) und im Betrieb überprüfen.
 
-  \item \textbf{Wiederverwendung mit Augenmaß.}
+  \item \textbf{Wiederverwendung mit Augenmaß:}
         Methoden/Artefakte aus anderen Domänen (z.B. Automotive und militärische Luftfahrt) übernehmen, ODD- und HMI-Spezifika der zivilen Luftfahrt jedoch explizit nachziehen.
 
-  \item \textbf{Schrittweise Reife statt „Big Bang“.}
+  \item \textbf{Schrittweise Reife statt plötzlicher Umstieg:}
         Mit L1-Assistenz starten, Evidenz aufbauen, erst dann Autorität ausweiten; jede Stufe mit klaren Gate-Kriterien abschließen.
 
-  \item \textbf{Dokumentation als Produktbestandteil.}
+  \item \textbf{Dokumentation als Produktbestandteil:}
         Neue Themenfelder (hier: KI) haben geringe Betriebserfahrung und erfordern entsprechend ausführliche, auditfähige Dokumentation.
 
-  \item \textbf{An den Grundlagen orientieren (``take it slow'').}
+  \item \textbf{An den Grundlagen orientieren, bedachte Vorgehensweise:}
       Kernprinzipien und stabile Basistechniken (klare Anforderungen, einfache Architekturen, überprüfbare Regeln, deterministische Pfade) priorisieren; das senkt Pflegeaufwand und reduziert Obsoleszenzrisiken bei wechselnden Tools und Bibliotheken.
 
 \end{itemize}
 
-\paragraph{Abschluss und Überleitung.}
+\paragraph{Abschluss und Überleitung:}
 Der Empfehlungskatalog zielt nicht auf Geschwindigkeit, sondern auf Nachvollziehbarkeit und Schrittfolgen, die
 sich in der Praxis bewähren: Zuerst Einsatzgrenzen (ODD) und Datenlage stabilisieren, dann Evidenz und HMI konkretisieren,
 anschließend Autorität maßvoll erhöhen. Zwei erprobte Grundsätze aus der Data Science bleiben leitend: (I) 80\,\% der Arbeit
@@ -82,7 +85,7 @@ Damit liegt eine belastbare Grundlage vor, um KI-Funktionen im Umfeld luftfahrtn
 zielgerichtet einzuordnen und abzusichern.
 \medskip
 
-Die Coverage-Analyse zeigt: Die ISO/PAS~8800 adressiert wesentliche Assurance-Bausteine 
+Die Coverage-Analyse zeigt: Die ISO/PAS~8800 adressiert wesentliche Nachweis-Bausteine 
 (u.\,a.\ ODD, Daten-/Label-Governance, Robustheit, Monitoring), deckt sie im luftfahrtspezifischen 
 Sinn jedoch oftmals nur teilweise ab; projekt- und domänenspezifische Präzisierungen bleiben nötig.
 \footnote{Vgl.\ Diskussion und Zwischenfazit zur Abdeckung.} Gleichwohl ergibt sich unter realistischen 
@@ -90,7 +93,7 @@ Annahmen eine tragfähige Brücke: Die in der Luftfahrt geforderten Ansätze las
 Lücken sind identifiziert und explizit adressierbar.
 \medskip
 
-Für das gewählte Beispiel (Random-Forest-gestützte Wetterphänomen-Klassifikation) gilt: Unter den definierten Einsatzgrenzen 
+Für das gewählte Beispiel der Random-Forest-gestützten Wetterphänomen-Klassifikation gilt: Unter den definierten Einsatzgrenzen 
 (Assistenzfunktion \textit{Level~1}, klarer ODD, kein Online-Lernen) und mit den skizzierten Evidenzen 
 (u.\,a.\ OOD-Indikatoren, Kalibrierung, Feature-Evidenz, deterministische Auswertung) erscheint eine 
 zulassungsfähige L1-Assistenz erreichbar. Offene Punkte betreffen primär die 
@@ -101,45 +104,48 @@ nicht die grundsätzliche Machbarkeit.
 Regelwerksseitig bleibt die Unterscheidung zentral: Läuft das Modell als Bordfunktion, greift DO-178C mit 
 hazardbasierter DAL-Skalierung und der geforderten Unabhängigkeit/Strenge; wird es als Entwicklungs-/Verifikationswerkzeug 
 genutzt, sind Credit-Ansprüche und TQL nach DO-330 maßgeblich (alternativ: Dokumentierte ``Confidence in Use'' ohne Credit). 
-In beiden Pfaden gilt: Kein ``Assurance-Rabatt''—ML-Erkenntnisse sind klassisch zu verifizieren und in den Safety Case einzubetten.
+In beiden Pfaden gilt: Kein ``Nachweis-Rabatt''—ML-Erkenntnisse sind klassisch zu verifizieren und in den Safety Case einzubetten.
 
 
 \section{Einordnung der Risiken}
 Die Analyse der allgemeinen Risiken und der beispielbezogenen Limitierungen unterstreicht, dass verbleibende 
 Unsicherheiten (Generalisierung/OOD, Testabdeckung auf Szenarioebene, Lebenszyklus- und Änderungsmanagement) 
 weniger Grundsatzprobleme als vielmehr Umsetzungs- und Nachweisfragen sind. Für die Wetterdomäne verstärken 
-Ground-Truth-Knappheit, Imbalance und Sensorartefakte den Bedarf an klaren Policies 
+Ground-Truth-Knappheit, Ungleichgewicht und Sensorartefakte den Bedarf an klaren Policies 
 (Unknown/Abstain), konservativer Betriebslogik und kontinuierlichem Monitoring. 
 
 
 \section{Ausblick}
 Kurz- bis mittelfristig empfiehlt sich ein schrittweises Vorgehen: Mit enger Funktion, klarer ODD-Disziplin, 
-expliziter Human-in-the-Loop-Rolle und messbaren KPIs starten; Evidenzketten stabilisieren, Betriebsdaten strukturiert 
-rückspiegeln und die Autorität erst nach belastbaren Erfahrungen erweitern. Der vorgelegte Empfehlungskatalog bietet 
+expliziter Human-in-the-Loop-Rolle und messbaren KPIs starten; Evidenzketten stabilisieren, Betriebsdaten strukturiert zurückführen 
+und die Autorität erst nach belastbaren Erfahrungen erweitern. Der vorgelegte Empfehlungskatalog bietet 
 hierfür eine praxistaugliche Leitplanke.
 \medskip
 
 Forschung und Standardisierung sollten etablierte Best-Practice-Verfahren gezielt
 nachweisfähig machen und zugleich verbleibende generische Lücken schließen. Dazu zählen
-insbesondere (I) \textbf{Hardware-} und \textbf{Tool-Zulassungen}, (II) ein geregelter Umgang mit 
-\textbf{Re-Training} bereits freigegebener oder im Einsatz befindlicher Modelle sowie (III) robuste
-\textbf{Betriebsindikatoren} für OOD/Qualität. Langfristig sind darüber hinaus die
+insbesondere (I) Hardware- und Tool-Zulassungen, (II) ein geregelter Umgang mit 
+Re-Training bereits freigegebener oder im Einsatz befindlicher Modelle sowie (III) robuste
+Betriebsindikatoren für OOD/Qualität. Langfristig sind darüber hinaus die
 Grundlagen höherer Automatisierungsgrade (z.\,B.\ L3: Autoritätsgrenzen, Updates, Oversight)
 methodisch und regulativ zu präzisieren. 
 
 \paragraph{Pragmatische Leitlinie}
 Zwei Grundsätze aus der Data Science bleiben leitend: (1) Datenarbeit dominiert den Aufwand— typisch entfallen 
-\(\approx 80\,\%\) auf Beschaffung, Bereinigung, Labeling und Governance. (2) Kleine, gut gefasste Schritte 
-schlagen große Sprünge—enge Scopes mit klaren Metriken liefern verlässlichere Evidenz als breit angelegte Funktionen. 
+\(\approx 80\,\%\) auf Beschaffung, Bereinigung, Labeling und Governance. (2) kleine, klar definierte Schritte 
+sind zielführender als große Sprünge. Enge Scopes mit klaren Metriken liefern verlässlichere Evidenz als breit angelegte Funktionen. 
 Beides spricht für frühe Data-Readiness, konservative Betriebsregeln (Abstain/Degrade) und konsequentes 
 Lifecycle-Management.
 
-\section{Schlussbild und Antwort auf die Leitfrage}
+\section{Schlussbild und Antwort auf die Forschungsfrage}
 Unter realistischen Rahmenbedingungen und mit disziplinierter Evidenzführung ist KI im Radarumfeld als
-Level-1-Assistenz hinreichend sicher machbar. Die Leitfrage „Ist KI sicher genug für ein Flugzeug?“
-beantworte ich daher konkret wie folgt: \textbf{Ja—für klar eingegrenzte, assistierende Funktionen} mit
-\textbf{stabilem ODD}, \textbf{kein Online-Lernen im Betrieb}, \textbf{konservativem Verhalten (Abstain/Degrade)},
-\textbf{menschlicher Entscheidungsverantwortung} und einer \textbf{durchgängigen Evidenzkette}. 
+Level-1-Assistenz hinreichend sicher machbar. 
+Die Forschungsfrage ob KI sicher genug für ein Flugzeug ist, lässt sich wie folgt beantworten:
+
+Ja, für klar eingegrenzte, assistierende Funktionen mit
+stabilem ODD, kein Online-Lernen im Betrieb, konservativem Verhalten (Abstain/Degrade),
+menschlicher Entscheidungsverantwortung und einer durchgängigen Evidenzkette. 
+
 In diesem Rahmen sind die typischen Nachweisziele (DAL-proportional) realistisch erreichbar, etwa für die hier
 betrachtete Random-Forest-gestützte Wetterphänomen-Assistenz.
 

@@ -32,9 +32,9 @@ nicht KI-spezifisch, bilden aber den verbindlichen Nachweisrahmen.
 
 \medskip
 \begin{itemize}
-  \item \textbf{DO-178C (Software Assurance) \footnote{\citetitle{do-178c} \parencite{do-178c}}} \\
+  \item \textbf{DO-178C (Software Nachweis) \footnote{\citetitle{do-178c} \parencite{do-178c}}} \\
   Liefert auditierbare Objectives über den gesamten SW-Lebenszyklus und DAL-Logik, jedoch sind ML-spezifische Aspekte nicht adressiert
-  \item \textbf{DO-330 (Tool Qualification) \footnote{\citetitle{do-330} \parencite{do-330}}} \\
+  \item \textbf{DO-330 (Werkzeug Qualifikation) \footnote{\citetitle{do-330} \parencite{do-330}}} \\
   Ermöglicht proportionale Tool-Qualifizierung mit klaren Artefakten, jedoch müssen KI-spezifische Toolrisiken projektspezifisch hergeleitet werden.
 \end{itemize}
 
@@ -78,7 +78,7 @@ zusätzlich etablierte Normen betrachtet.
 
 
 \section{Luftfahrt-Standards \& ihre Rolle im KI-Kontext}
-DO-178C bleibt die Baseline für Software-Assurance in der Avionik. Ziele und Evidenzen skalieren mit 
+DO-178C bleibt die Baseline für Software-Nachweise in der Avionik. Ziele und Evidenzen skalieren mit 
 DAL A–E. EASA verweist explizit auf die DO-178C als Nachweisgrundlage. 
 KI-spezifische Guidance kommt zusätzlich obenauf, ändert aber die Software-Pflichten nicht. 
 Zudem berühren Daten-/Modell-Pipelines die Tool-Qualifikation (DO-330).
@@ -96,7 +96,7 @@ steigen die Anforderungen an die Nachweisführung.
 \section{EASA AI-Roadmap }\footnote{\citetitle{easa-ai-roadmap-2-2023} \parencite{easa-ai-roadmap-2-2023}}
 Die EASA positioniert KI als menschzentriert und staffelt Anwendungen nach Autorität: \textbf{Level 1} (Assistenz), 
 \textbf{Level 2} (Human-AI-Teaming) und später \textbf{Level 3} (fortgeschrittene Automatisierung). 
-Roadmap 2.0 definiert Vertrauenswürdigkeits-Bausteine (u.\,a. Learning Assurance, Erklärbarkeit, Human Oversight) 
+Roadmap 2.0 definiert Vertrauenswürdigkeits-Bausteine (u.\,a. Learning-Assurance, Erklärbarkeit, Human Oversight) 
 und skizziert einen gestuften Zulassungspfad. Betont wird, dass KI das bestehende Safety-Regelwerk ergänzt aber nicht ersetzt.
 \paragraph{Was das praktisch bedeutet}
 \begin{itemize}
@@ -110,16 +110,16 @@ und skizziert einen gestuften Zulassungspfad. Betont wird, dass KI das bestehend
 \section{EASA AI-Guidance 2024 (Concept Paper Issue 2) – Level 1 \& 2} \footnote{\citetitle{easa-ai-concept-issue2-2024} \parencite{easa-ai-concept-issue2-2024}}
 Das Concept Paper beschreibt die schrittweise Einführung von KI in sicherheitsrelevanten Anwendungen: 
 zuerst \textbf{Level 1} (Assistenzfunktionen), anschließend ausgewählte \textbf{Level 2}-Anwendungen (Human–AI Teaming). 
-Die Guidance ergänzt das bestehende Safety-Regelwerk (z.\,B.\ DO-178C) um KI-spezifische Bausteine wie Learning Assurance, 
+Die Guidance ergänzt das bestehende Safety-Regelwerk (z.\,B.\ DO-178C) um KI-spezifische Bausteine wie Learning-Assurance, 
 Erklärbarkeit, präzise Einsatzgrenzen (ODD) und betriebliches Monitoring – ohne die klassischen Nachweise zu ersetzen.
 
 \paragraph{Kernpunkte:}
 \begin{itemize}
-  \item \textbf{Level-Feinbild \& „statisches“ AI-Level:} Unterscheidung L1A/L1B sowie L2A (cooperation, directed) und L2B (collaboration, supervised); das höchste erreichte Fähigkeitsniveau legt ein statisches Level fest und steuert die Proportionalität der Nachweise.
+  \item \textbf{Level-Feinbild \& statisches KI-Level:} Unterscheidung L1A/L1B sowie L2A (cooperation, directed) und L2B (collaboration, supervised); das höchste erreichte Fähigkeitsniveau legt ein statisches Level fest und steuert die Proportionalität der Nachweise.
   \item \textbf{ConOps \& Aufgabenallokation (HAT):} Endnutzerzentrierte ConOps mit klaren ``task Allocation Patterns'' (Rollen, Autorität, Übersteuerbarkeit) als verbindliche Grundlage für Design, V\&V und Betrieb.
   \item \textbf{OD vs.\ ODD (Einsatzgrenzen):} Zweistufige Scope-Führung: ``Operational Domain'' auf Systemebene und verfeinertes ODD für AI/ML-Constituents; außerhalb davon gilt abstain/degradation.
   \item \textbf{Methodenumfang \& Trainingsmodus:} Fokus auf überwachtes (und initial unüberwachtes) Lernen; kein Reinforcement Learning in L1/L2; Modelle werden ``offline'' trainiert und zur Freigabe eingefroren (kein Online-Lernen im Betrieb).
-  \item \textbf{Kritikalitätsgrenzen \& Assurance:} In der Anfangsphase kein Einsatz von AI/ML-Constituents in höchsten Kritikalitäten wie DAL~A/B; keine Reduktion klassischer Assurance-Anforderungen innerhalb der AI/ML-Teile.
+  \item \textbf{Kritikalitätsgrenzen \& Nachweise:} In der Anfangsphase kein Einsatz von AI/ML-Bestandteil in höchsten Kritikalitäten wie DAL~A/B; keine Reduktion klassischer Nachweis-Anforderungen innerhalb der AI/ML-Teile.
   \item \textbf{Funktionsanalyse bis zum AI/ML-Item:} Systematische Zerlegung bis zur Trennlinie AI/ML-Item vs.\ traditionelle Komponenten, Anforderungen und V\&V zielgenau führen zu können.
 \end{itemize}
 
@@ -128,7 +128,7 @@ Erklärbarkeit, präzise Einsatzgrenzen (ODD) und betriebliches Monitoring – o
 
 \section{MLEAP Final Report (2024)} \footnote{\citetitle{easa-mleap-final-2024} \parencite{easa-mleap-final-2024}}
 Der \emph{Final Report} des EASA-Forschungsprojekts MLEAP (Machine Learning Application Approval) bündelt Methoden- und 
-Werkzeugempfehlungen zur Learning Assurance und zeigt, wie der EASA-W-Shape (lernprozessspezifische Ergänzung zum V-Modell) 
+Werkzeugempfehlungen zur Learning-Assurance und zeigt, wie der EASA-W-Shape (lernprozessspezifische Ergänzung zum V-Modell) 
 praktisch umgesetzt werden kann. Schwerpunkte sind Datenrepräsentativität, Generalisierung und Robustheit/Stabilität 
 von ML-Modellen; ergänzt wird dies durch eine generische Entwicklungs-Pipeline im Sinne des W-Shape. Die Ergebnisse fließen 
 in das \emph{EASA AI Concept Paper Issue 2} ein.
@@ -145,44 +145,50 @@ in das \emph{EASA AI Concept Paper Issue 2} ein.
 
 
 \section{Forderungen aus der Luftfahrt}
-Im Folgenden sind die Forderungen zur Zulassung einer KI aus der Roadmap, dem Concept Paper und dem MLEAP Report 
+Im Folgenden sind die Forderungen zur Zulassung einer KI aus der 
+Roadmap \textbf{(R)}, dem Concept Paper \textbf{(C)} und dem MLEAP Report \textbf{(M)} 
 zusammengetragen und mit IDs zum späteren Vergleich markiert.
 
 \paragraph {F-Avi-01 Human-centric, Level \& ConOps/HAT (Human-AI-Teaming)}
-  {KI wird human-zentriert ausgelegt; statisches AI-Level (L1A/B, L2A/B) richtet die Prüftiefe aus. Eine endnutzerzentrierte ConOps mit klaren ask Allocation Patterns (Rollen, Autorität, Übersteuerbarkeit) ist verbindlich. \textit{Roadmap, Concept}}
+  {KI wird mensch-zentriert ausgelegt; statisches KI-Level (L1A/B, L2A/B) richtet die Prüftiefe aus. 
+  Eine endnutzerzentrierte ConOps mit klaren Zuordnungen und Erklärbarkeit (Rollen, Autorität, Übersteuerbarkeit) ist verbindlich. 
+  \textbf{(R, C)}}
 
 \paragraph {F-Avi-02 OD/ODD \& Abstain/Degradation}
-  {Einsatzgrenzen sind zweistufig zu führen: OD (System) und verfeinertes ODD (AI/ML-Constituent). Außerhalb des ODD verhält sich die KI konservativ (Abstain/Degradation). \textit{Roadmap, Concept}}
+  {Einsatzgrenzen sind zweistufig zu führen: OD (System) und verfeinertes ODD (ML-Bestandteil). 
+  Unsicherheiten und verlassen des ODD löst konservatives Verhalten aus (Abstain/Degradation). 
+   \textbf{(R)}}
 
 \paragraph {F-Avi-03 Knowledge \& Data Governance (ODD→Daten)}
-  {Daten- und Wissensbasen werden vor dem Training qualifiziert (Provenienz, Repräsentativität) und explizit aus dem ODD abgeleitet; Methodenwahl wird dokumentiert (z.\,B.\ Selection Grid). \textit{Roadmap, Concept, MLEAP}}
+  {Daten- und Wissensbasen werden vor dem Training qualifiziert (z.B. Repräsentativität) 
+  und explizit aus dem ODD abgeleitet. Seltene Ereignisse werden systematisch erfasst und die Methodenwahl dokumentiert. 
+  \textbf{(R, C, M)}}
 
-\paragraph {F-Avi-04 AI Assurance (Learning \& Explainability)}
-  {Der Übergang von Programmieren zu Lernen wird abgesichert; Erklärbarkeit ist technisch (Dev/Review) und operativ (nutzerverständlich, rechtzeitig) vorzusehen. \textit{Roadmap, Concept}}
+\paragraph {F-Avi-04 Betriebs-Recording}
+  {Bord-/Betriebsaufzeichnungen unterstützen kontinuierliches Sicherheitsmonitoring und Vorfallanalysen; 
+  sie sind Bestandteil des Safety Case. 
+  \textbf{(R)}}
 
-\paragraph {F-Avi-05 Betriebs-Recording}
-  {Bord-/Betriebsaufzeichnungen unterstützen kontinuierliches Sicherheitsmonitoring und Vorfallanalysen; sie sind Bestandteil des Safety Case. \textit{Roadmap}}
+\paragraph {F-Avi-05 Generalisierung, Robustheit \& Stabilität}
+  {Generalisierung ist nachzuweisen (zeit-/raumgetrennte Splits); Stabilität (kleine Perturbationen) 
+  und Robustheit (adverse Bedingungen) werden mit getrennten Test-Suiten geprüft; ein Komplexitätsbudget 
+  verhindert Under-/Overfit. 
+   \textbf{(M)}}
 
-\paragraph {F-Avi-06 OOD \& Unvorhersagbarkeit}
-  {Verteilungswechsel werden erkannt; Unsicherheit wird gemanagt und löst konservatives Verhalten aus. Runtime-Indikatoren/Monitore sind vorzusehen. \textit{Roadmap, MLEAP}}
+\paragraph {F-Avi-06 Lebenszyklus \& W-Shape}
+  {Der Safety Case umfasst Aktivitäten vor dem Training und nach der Zulassung 
+  (Monitoring, kontrollierte Änderungen). Der EASA-W-Shape dient als Governance-Rahmen mit klaren Gates/Artefakten. 
+  \textbf{(R, M)}}
 
-\paragraph {F-Avi-07 Generalisierung, Robustheit \& Stabilität}
-  {Generalisierung ist nachzuweisen (zeit-/raumgetrennte Splits); Stabilität (kleine Perturbationen) und Robustheit (adverse Bedingungen) werden mit getrennten Test-Suiten geprüft; ein Komplexitätsbudget verhindert Under-/Overfit. \textit{Roadmap, MLEAP}}
+\paragraph {F-Avi-07 Kein Online-Lernen im Betrieb}
+  {Modelle sind offline trainiert und zur Freigabe eingefroren; Online-Learning in der 
+  Operation ist ausgeschlossen. 
+  \textbf{(R, C)}}
 
-\paragraph {F-Avi-08 Lebenszyklus \& W-Shape}
-  {Der Safety Case umfasst Aktivitäten vor dem Training und nach der Zulassung (Monitoring, kontrollierte Änderungen). Der EASA-W-Shape dient als Governance-Rahmen mit klaren Gates/Artefakten. \textit{Roadmap, MLEAP}}
-
-\paragraph {F-Avi-09 Kein Online-Lernen im Betrieb}
-  {Modelle sind offline trainiert und zur Freigabe eingefroren; Online-/Continual-Learning in der Operation ist ausgeschlossen. \textit{Roadmap, Concept}}
-
-\paragraph {F-Avi-10 Einbettung in Safety-Systeme/Plattform}
-  {Die Semantik des Modells bleibt bei Portierung/Optimierung erhalten; Plattform-/Hardware-Aspekte (inkl. Beschleuniger) sind qualifikationsfähig auszulegen. \textit{Roadmap}}
-
-\paragraph {F-Avi-11 Rare-Events-Management}
-  {Seltene/novel Situationen werden systematisch erfasst (Taxonomie, Katalog) und für Tests sowie Datenpflege genutzt. \textit{MLEAP}}
-
-\paragraph {F-Avi-12 Use-Case-Verankerung}
-  {Methoden- und Metrikentscheidungen sind an Use-Case-Anforderungen gebunden; operative Übergabeartefakte (KPIs, Monitoring-Hooks, Logging) sind vor Einsatz definiert. \textit{MLEAP}}
+\paragraph {F-Avi-08 Use-Case-Verankerung}
+  {Methoden- und Metrikentscheidungen sind an Use-Case-Anforderungen gebunden; operative Übergabeartefakte 
+  (KPIs, Monitoring-Hooks) sind vor Einsatz definiert. 
+  \textbf{(M)}}
 
 
 
@@ -197,7 +203,8 @@ zusammengetragen und mit IDs zum späteren Vergleich markiert.
 \chapter{Luftfahrt \(\leftrightarrow\) Automotive}\label{chap:automotiv}
 
 Um zu verstehen in wiefern man die Übertragbarkeit von Automotive Standards gegenüber der Luftfahrt betrachten kann, 
-hilft es zu verstehen in wiefern diese sich bezüglich KI, Sicherheitsnachweisen oder allgemein als Branche unterscheiden oder sogar ähneln. 
+hilft es zu verstehen in wiefern diese sich bezüglich KI, Sicherheitsnachweisen oder allgemein als Branche unterscheiden oder ähneln.
+
 Was als erstes ins Auge sticht, ist eine gefahrskalierende Nachweisstrenge. In der Luftfahrt als DAL-Level und 
 im Automotive als ASIL-Level bezeichnet. DAL berücksichtigt ausschließlich den Schweregrad, ASIL hingegen 
 berücksichtigt zusätzlich die Eintrittswahrscheinlichkeit und die Beherrschbarkeit.
@@ -216,61 +223,99 @@ DAL D (minor) & ASIL A (niedrig)  \\
 \end{tabular}
 \end{table}
 
-\section{KI abgeleitet nach Referenzen}
-Was nach erstmaligen überfliegen der bereits genannten Referenzen deutlich wird, ist dass sowohl 
-in der Luftfahrt als auch im Automotive zum Sicherheitsnachweis für KI kein Nachweisrabatt 
-gewährt wird beziehungsweise die bereits etablierten Standards bezüglich KI ergänzt werden müssen. 
-Zudem ist in der Luftfahrt eine Menschzentrietheit und Einstufung nach Autorität erkennbar, während 
-im Automotive eine Unterscheidung nach Automatisierungsgrad gemacht wird. Der Automatisierungsgrad 
-unterscheidet zwar ob Mensch oder Maschine entscheidet, setzt diesen aber nicht in den Mittelpunkt.
+\section{KI-Anforderungen auf Basis der Referenzen}
+
+Die ausgewerteten Quellen machen deutlich, dass es für KI keinen Rabatt beim Sicherheitsnachweis gibt. 
+Bestehende Standards sind um KI-spezifische Punkte zu erweitern, damit KI-Systeme den gleichen 
+Nachweisumfang erreichen wie klassische Software.
+
+In der Luftfahrt steht der Mensch stärker im Mittelpunkt und behördliche Einstufungen prägen den Rahmen. 
+Im Automotive-Bereich erfolgt die Einordnung vor allem über Automatisierungsgrade, die zwar zwischen 
+menschlicher und maschineller Entscheidung unterscheiden, den Menschen jedoch weniger in den Mittelpunkt rücken.
 
 \section{Regulatorik}
-Die ersten Unterschiede werden hingegen bereits in der Regulatorik sichtbar, während die Luftfahrt 
-mit einer starken Behördenbindung eine Zulassung vor dem Betrieb vorraussetzt, kann im Automotive 
-mit Typengenehmigungen und in der USA sogar mit Selbstzertifizierungen gearbeitet werden.
 
-\section{Betrieb, Umgebung und Skalierung}
-Weitere deutliche Unterschiede sind auch im Betrieb, der Umgebung und den Skalen sowohl physikalisch als auch 
-in der Produktion erkennbar. Während Flugzeuge nicht einfach nur fliegen und Autos am Boden fahren sind Flugzeuge 
-auch an Zeitpläne gebunden und werden oft mit einer mehrköpfigen Crew betrieben, Autos hingegen werden oft 
-von Einzelpersonen überall auf der Welt spontan für Privatfahrten benutzt. Das sorgt dafür, dass Flugzeuge eher 
-vorhersehbare Einsatzgrenzen haben und Autos in sehr unterschiedlichen Umgebungen benutzt werden. Was auch deutlich 
-erkennbar ist, dass in der Luftfahrt man jeden Tag von einer kleien Drone bis hin zum Airbus A380 begegnenn kann, wohingegen 
-im Automotive eher vom Fußgänger bis hin zum LKW ausgegangen wird. Weiter kann man im Automotive 
-auf Sicht ein annäherndes Fahrzeug auch auf der Autobahn mit ein bis zweihundert km/h vorbei fahren sehen, 
-in der Luftfahrt kann man ein weit entferntes Überschall Flugzeug eher nur erahnen. Was nicht sofort erkennbar ist, 
-dass die meistgebaute Fluzeugserie gut 12.000 Flugzeuge umfasst und Automobilzulieferer mit Serien 
-von Einhundertmillionen rechnen. 
+Erste Unterschiede zeigen sich bereits in der Regulierung. In der Luftfahrt ist die behördliche 
+Einbindung stark und eine formale Zulassung vor dem Betrieb verpflichtend. Im Automotive-Bereich 
+erfolgt die Freigabe meist über Typgenehmigungen, in den USA sind teils auch Selbstzertifizierungen möglich.
 
-\section{Software- und Hardware}
-Für diese Arbeit wichtig ist das handhaben von Updates im Betrieb, während Automotive Beobachtungen im Feld 
-und regelmäßige Updates sowie zur Not Rückrufaktionen in Betracht zieht, ist die Praxis in der Luftfahrt, 
-diese in den Anforderungen und erneute Freigaben einzuplanen. 
 
-Ähnlich ist hingegen die Kostenplanung zum 
-Einsatz von Radarsystemen im allgemeinen, zur Veranschulichung eine Beispielformel:
-\[\min_{\tau}\; J(\tau)
-= \underbrace{c_{\mathrm{FA}}\;P_{\mathrm{FA}}(\tau)}_{\text{Kosten falscher Alarm}}
-+ \underbrace{c_{\mathrm{FN}}\;P_{\mathrm{FN}}(\tau)}_{\text{Kosten False Negative}}
-+ \underbrace{c_{\mathrm{sys}}(\tau)}_{\text{Systemkosten}} 
+\section{Betrieb und Umgebung}
+
+Deutliche Unterschiede zeigen sich im Betrieb und der Einsatzumgebung. 
+Flugzeuge folgen festen Umläufen und werden häufig von einer mehrköpfigen Crew betrieben. 
+Autos werden meist von Einzelpersonen genutzt, spontan und weltweit in sehr unterschiedlichen 
+Kontexten. Daraus ergeben sich eher vorhersehbare Einsatzgrenzen in der Luftfahrt, während im 
+Automotive in unterschiedlichen Umgebungen agiert.
+
+Auch die Ziel- und Objektklassen unterscheiden sich. In der Luftfahrt reicht das Spektrum 
+von kleinen Drohnen bis hin zu Großraumflugzeugen, im Straßenverkehr typischerweise von 
+Fußgängern bis zum Lkw. Wahrnehmung und Entfernungen sind ebenfalls 
+anders gelagert: Auf der Autobahn sind sich nähernde Fahrzeuge oft sichtbar und gut einschätzbar, 
+wohingegen weit entfernte Luftziele, in großen Höhen oder mit Überschall, optisch kaum erfassbar sind.
+
+Einsatzprofile und Objektklassen prägen direkt die verfügbare Datenlage. 
+Seltene Ereignisse liefern nur wenige Beispiele, was das Training einer KI erschwert 
+und das Risiko von Overfitting erhöht. Zugleich behindert eine hohe intra- 
+und interklassen-Variabilität die Generalisierung, weil sich die gelernten 
+Muster nicht stabil auf neue Situationen übertragen lassen.
+
+
+
+\section{Software und Hardware}
+
+Für diese Arbeit ist der Umgang mit Updates im Betrieb wichtig. Im Automotive werden Felddaten 
+ausgewertet und Funktionen regelmäßig aktualisiert, zur Not auch per Rückruf. In der 
+Luftfahrt werden Updates frühzeitig in den Anforderungen berücksichtigt und vor dem Einsatz erneut freigegeben.
+
+\subsection*{Kostenorientierte Auslegung der Detektion}
+Zur Veranschaulichung der Abwägung zwischen Schwellenwahl und Gesamtkosten von Radarsystemen wird eine einfache Zielfunktion verwendet.
+\[
+\min_{\tau}\; J(\tau)
+= c_{\mathrm{FA}}\,P_{\mathrm{FA}}(\tau)
++ c_{\mathrm{FN}}\,P_{\mathrm{FN}}(\tau)
++ c_{\mathrm{sys}}(\tau)
 \]
-Es geht darum die Kosten des Systems im Einsatz zu reduzieren. Minimiert werden soll die Summe der Kosten eines falschen Alarms, 
-die Kosten etwas nicht erkannt zu haben und die Kosten das System zu verbauen. 
-Zivil priorisiert das Vermeiden von Personenschäden. Im militärischen Kontext muss mit Personenschäden gerechnet werden. 
-Weiter kommt hier die Frage auf, ob man die Fehlerwahrscheinlichkeit von Menschen im Vergleich  
-zu einer Maschine berücksichtigen sollte.
+\begin{itemize}
+  \item $\tau$ — Detektionsschwelle
+  \item $P_{\mathrm{FA}}(\tau)$ — Wahrscheinlichkeit eines Fehlalarms
+  \item $P_{\mathrm{FN}}(\tau)$ — Wahrscheinlichkeit das Ziel zu verpassen
+  \item $c_{\mathrm{FA}},\,c_{\mathrm{FN}}$ — Kosten pro Fehlalarm bzw.\ pro verpasstem Ziel
+  \item $c_{\mathrm{sys}}(\tau)$ — Systemkosten
+\end{itemize}
+$\tau$ wird so gewählt, dass die Summe aus Fehlalarmkosten, Kosten verpasster Ereignisse 
+und Systemkosten minimal wird. 
+In KI-gestützten Radarsystemen wird die Detektionsschwelle oft gesenkt, um schwache Ziele früher zu erkennen. 
+Die zusätzlichen Fehlalarme bleiben bei wirksamer Nachklassifikation gering, was die Gesamtkosten trotz niedrigerer Schwelle reduzieren kann.
 
-Auch die Hardware Zulassung sollte betrachtet werden. Im Automotive werden bespielsweise GPUs aufgrund ihrer Unsicherheit 
-redundant verbaut um Sicherheit zu gewährleisten. In der Luftfahrt, wo ein System ohnehin redundant verbaut wird, 
-würde man diese nach dieser Vorgehensweise ``stapeln''. Eine Beispielrechnung, warum ein solcher demokratischer Entscheider 
-problematisch sein kann ist: Wenn man für eine Entscheidung 11 
-unabhängige Klassifizierer verbaut, welche jeweils 9 unabhängige GPUs haben, würde man eine 30 aus 99 Entscheidung treffen
-(6 aus 11 notwendige Klassifizierer für eine Entscheidung, mit jeweils 5 aus 9 GPUs) 
+In zivilen Anwendungen wird die Vermeidung von Personenschäden priorisiert. 
+Im militärischen Kontext muss mit Personenschäden gerechnet werden.
+
+\subsection*{Hardwareanforderungen für KI}
+
+KI-Verfahren stellen oft höhere Anforderungen an die Rechenplattform als klassische Algorithmen. 
+Je nach Ansatz sind mehrere aktive CPU-Kerne nötig, teilweise auch GPUs. 
+In hochkritischen Inline-Pfaden der Luftfahrt (DAL A/B) werden mehrere CPU-Kerne erst seit wenigen Jahren, gestützt durch 
+neuere behördliche Guidance, tatsächlich genutzt. Zuvor wurden Kerne häufig stillgelegt, um den Nachweis zu 
+vereinfachen. Der Einsatz von GPUs in solchen Pfaden bleibt selten und findet überwiegend in 
+weniger kritischen Bereichen oder in der Entwicklung statt.
+
+\subsection*{Hardware und Redundanz}
+
+Im Automotive wird technische Unsicherheit häufig durch Redundanz abgefedert, indem beispielsweise 
+rechenstarke Komponenten wie GPUs mehrfach verbaut und per Mehrheitsentscheid zusammengeführt 
+werden. Das verbessert die Verfügbarkeit ohne die Grundarchitektur zu ändern.
+
+In der Luftfahrt ist dieser Ansatz nur eingeschränkt übertragbar. Redundanzen ``stapeln'' 
+sich hier nicht beliebig, da gemeinsame Ursachen den erhofften Sicherheitsgewinn schmälern 
+und die Nachweisführung deutlich erschweren. 
 
 
 \section{Anforderungen}
-Komplexer hingegen sind zum Beispiel konkrete Zahlen in den Anforderungen. Zunächst dient eine 
-Beispielrechnung der Größenordnungen zur Veranschaulichung:
+Konkrete Zielgrößen in Anforderungen lassen sich am besten über einfache Größenordnungen verdeutlichen. 
+Die folgende Tabelle stellt ein vereinfachtes Rechenbeispiel gegenüber und zeigt, wie sich Flottengröße 
+und Lebensdauer auf die erwartete Ausfallzahl auswirken.
+
 
 \begin{table}[H]
 \centering
@@ -294,7 +339,12 @@ Im Automotive werden beispielsweise Fehlereintrittsraten bezügliche der Einstuf
 von Robustheitsanforderungen überschattet. Auch wenn theoretisch eine höhere Eintrittsrate das einzelne Fahrzeug 
 nicht unangemessen unsicherer machen würde, kann dies zu Rückrufaktionen führen und somit hohe Kosten verursachen. 
 Daher und zur Vermeidung zusätzlicher Redundanz werden im Automotive die Fehlereintrittsraten oft relativ streng gesetzt. 
-Die Luftfahrt hat allgemein hohe Anforderungen und erhöht die Sicherheit zusätzlich durch Redundanz. 
+
+
+
+
+
+
 
 
 
@@ -304,10 +354,13 @@ Die Luftfahrt hat allgemein hohe Anforderungen und erhöht die Sicherheit zusät
 
 
 \chapter{Deep-Dive: ISO/PAS 8800}\label{chap:iso-8800}
-Die ISO 8800 \parencite{iso-pas-8800-2024} ist sehr Dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
+Die ISO 8800 \footnote{\citetitle{iso-pas-8800-2024} \parencite{iso-pas-8800-2024}}, versteht sich als Konkretisierung der ISO 26262 für KI.
+Sie ist sehr Dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
 sicher wird. Diese Norm beschreibt was zu tun ist und wie man begründet, dass eine KI sicher genug ist. 
 Detailprozesse und Risikobeurteilungen sind nicht enthalten. Stattdessen wie existierende Normen 
 angepasst oder erweitert werden müssen.
+
+
 \newcommand{\dotG}{{\color{green}\large$\bullet$}}
 \newcommand{\dotY}{{\color{blue}\large$\bullet$}}
 \newcommand{\dotR}{{\color{red}\large$\bullet$}}
@@ -317,7 +370,7 @@ angepasst oder erweitert werden müssen.
 \section{Inhalte (nach Annex A) und Bemerkungen}
 \paragraph{Legende zur Einstufung der Relevanz bezüglich dieser Arbeit}
 \begin{itemize}[leftmargin=2.5cm,labelsep=0.8em]
-  \item[\dotG] relevant
+  \item[\dotG] relevant für diese Arbeit
   \item[\dotY] teilweise relevant
   \item[\dotR] nicht besonders relevant
 \end{itemize}
@@ -338,14 +391,14 @@ angepasst oder erweitert werden müssen.
     (a) Lebenszyklus festlegen, um unvertretbare Risiken zu vermeiden auf Fahrzeugebene;\\
     (b) geeignete organisatorische und projektspezifische Sicherheitsmanagementprozesse sicherstellen;\\
     (c) KI-Sicherheitsaktivitäten planen, initiieren und durchführen.
-  \item[\dotY] (8) \textbf{Assurance-Argumente für KI-Systeme:} Die Ziele sind:\\ 
-    (a) Assurance-Argument entwickeln, das die Erfüllung der zugewiesenen Sicherheitsanforderungen belegt;\\
+  \item[\dotY] (8) \textbf{Nachweis-Argumente für KI-Systeme:} Die Ziele sind:\\ 
+    (a) Nachweis-Argument entwickeln, das die Erfüllung der zugewiesenen Sicherheitsanforderungen belegt;\\
     (b) prüfen, ob das Argument das tatsächliche Restrisiko eines Verstoßes gegen die Sicherheitsanforderungen korrekt abbildet.
   \item[\dotG] (9) \textbf{Ableitung von KI-Sicherheitsanforderungen:} Die Ziele sind:\\
     (a) Vollständige, konsistente Sicherheitsanforderungen an das KI-System spezifizieren;\\
     (b) Anforderungen auf Basis von Entwicklung/Verifikation/Validierung verfeinern;\\
     (c) Einschränkungen des KI-Systems über seinen Eingaberaum definieren und an den übergeordneten Entwicklungsprozess eskalieren;\\
-    (d) erforderliche Off-board- und On-board-Maßnahmen gemäß Abschnitt 14 spezifizieren.
+    (d) erforderliche Off-/On-board-Maßnahmen gemäß Abschnitt 14 spezifizieren.
   \item[\dotY] (10) \textbf{Auswahl von KI-Technologien sowie Architektur- und Entwicklungsmaßnahmen:} Die Ziele sind:\\
     (a) Geeignete KI-Technologien auswählen und begründen;\\
     (b) Architektur- und Entwicklungsmaßnahmen zur Erfüllung der Sicherheitsanforderungen vor dem Einsatz identifizieren;\\
@@ -364,7 +417,7 @@ angepasst oder erweitert werden müssen.
     (a) Sicherheitsrelevante Faults und KI-Fehler identifizieren, die KI-Sicherheitsanforderungen verletzen können;\\
     (b) potenzielle Ursachen identifizieren;\\
     (c) Sicherheitsmaßnahmen zur Vermeidung oder Beherrschung sicherheitsrelevanter KI-Fehler definieren unterstützen;\\
-    (d) Verifikation der KI-Sicherheitsanforderungen unterstützen – durch Anpassung bzw. Neuableitung von Anforderungen zu Daten-, Entwurfs- und Test­spezifikationen.
+    (d) Verifikation der KI-Sicherheitsanforderungen unterstützen, durch Anpassung bzw. Neuableitung von Anforderungen zu Daten-, Entwurfs- und Test­spezifikationen.
   \item[\dotR] (14) \textbf{Maßnahmen im Betrieb:} Maßnahmen im Betrieb außerhalb des Scopes dieser Arbeit.\\ 
     (a) Prozessanforderungen für die kontinuierliche Sicherstellung der KI-Sicherheit nach dem Einsatz;\\
     (b) Maßnahmen aus Abschnitt 8 und/oder zusätzliche Maßnahmen zur Risikofindung und zum Erhalt der KI-Sicherheit im Betrieb nutzen;\\
@@ -375,7 +428,7 @@ angepasst oder erweitert werden müssen.
    Bereitstellung sicherheitsrelevanter KI-Modelle genutzt werden.
   \item[\dotY] (A-H) \textbf{Anhänge (A–H):}\\
     (A){\dotR} Überblick und Ablauf dieses Dokuments\\
-    (B){\dotR} Beispielstruktur eines Assurance-Arguments für ein KI-System\\
+    (B){\dotR} Beispielstruktur eines Nachweis-Arguments für ein KI-System\\
     (C){\dotG} ISO 26262-Lückenanalyse für ML\\
     (D){\dotG} Detaillierte Betrachtungen zu sicherheitsrelevanten Eigenschaften von KI-Systemen\\
     (E){\dotR} STAMP/STPA-Beispiel\\
@@ -391,33 +444,35 @@ angepasst oder erweitert werden müssen.
 Die ISO 8800 passt die ISO 26262 und ISO 21448 gezielt für KI an und ergänzt sie um ein 
 kausales Modell für KI-bedingte Unzulänglichkeiten, daraus abgeleitete Sicherheitsanforderungen sowie 
 Risikominderungs­maßnahmen. Weil Anwendungen und Stand der Technik stark variieren, werden weniger starre 
-Prozessvorgaben gemacht und stärker auf projekt­spezifische Assurance-Argumente mit iterativer Risikoreduktion 
-gesetzt. Das Dokument ist u. a. mit ISO/IEC 22989, TR 5469 abgestimmt und zeigt, wann seine Leitlinien gelten: immer 
+Prozessvorgaben gemacht und stärker auf projekt­spezifische Nachweis-Argumente mit iterativer Risikoreduktion 
+gesetzt. Die ISO 8800 ist u. a. mit ISO/IEC 22989, TR 5469 abgestimmt und zeigt, wann seine Leitlinien gelten: immer 
 dann, wenn Sicherheitsanforderungen entweder einer KI-Funktion oder einer KI-Sicherheitsmaßnahme zugeordnet sind.
 
 \subsection*{Schlüsselpunkte}
 \begin{itemize}
  \item Zuschnitt/Erweiterung von ISO 26262 und ISO 21448 speziell für KI.
  \item Kausales Modell für Quellen funktionaler Unzulänglichkeiten in KI; daraus abgeleitete KI-Sicherheitsanforderungen und Maßnahmen.
- \item Fokus auf projektspezifisches Assurance-Argument statt detaillierter Prozessvorgaben; iterative Risikoreduktion.
- \item Hazard/Risk-Analysen auf Fahrzeugebene sind nicht enthalten (bleiben ISO 26262/ISO 21448/ISO TS 5083 vorbehalten).
- \item Enge Anbindung an ISO/IEC 22989, TR 5469; Klassen/Usage-Levels werden nicht explizit verwendet, dienen aber der Anforderungsermittlung.
+ \item Fokus auf projektspezifisches Nachweis-Argument statt detaillierter Prozessvorgaben; iterative Risikoreduktion.
+ \item Gefährdungs/Risko-Analysen auf Fahrzeugebene sind nicht enthalten (bleiben ISO 26262/ISO 21448/ISO TS 5083 vorbehalten).
+ \item Enge Anbindung an ISO/IEC 22989, TR 5469; Automatisierungs-Levels werden nicht explizit verwendet, dienen aber der Anforderungsermittlung.
  \item Gültig für KI als Funktion oder als Sicherheitsmechanismus – auch außerhalb des unmittelbaren SOTIF-Scopes.
 \end{itemize}
 
 \section{(2) Scope}
 Das Dokument gilt für sicherheitsrelevante Systeme in Serienfahrzeugen (ohne Mopeds), 
 die E/E-Systeme mit KI einsetzen. Es adressiert fahrzeugseitige Sicherheitsrisiken, die durch Ausgabemängel, 
-systematische Fehler und zufällige Hardwarefehler von KI-Elementen entstehen – 
-inklusive Wechselwirkungen mit KI-Elementen außerhalb des Fahrzeugs, sofern diese Sicherheit direkt (z. B. 
+systematische Fehler und zufällige Hardwarefehler von KI-Elementen entstehen. 
+Enthalten sind Wechselwirkungen mit KI-Elementen außerhalb des Fahrzeugs, sofern diese Sicherheit direkt (z. B. 
 externe Objekterkennung) oder indirekt (z. B. Felddaten-Monitoring) beeinflussen. Es beschreibt sicherheitsrelevante Eigenschaften 
 von KI-Systemen zur Untermauerung eines belastbaren Safety-Assurance-Claims, gibt aber keine spezifischen Leitlinien 
 für KI-basierte Softwaretools. Schwerpunktmäßig behandelt es ML-basierte Ansätze auf Prinzipienebene, ohne in methodische 
 Details zu gehen (z. B. konkrete DNN-Architekturen).
 
-\section{Kapitel Deep-Dive}
+
+
+\section{Tiefer Einblick in die Kapitel}
 \subsection{(6) KI im Kontext der Systemsicherheitsentwicklung}
-ISO/PAS~8800 ergänzt die ISO~26262, sobald ML\slash KI als Bestandteil der sicherheitsrelevanten 
+ISO/PAS~8800 ergänzt die ISO~26262, sobald ML/KI als Bestandteil der sicherheitsrelevanten 
 Verarbeitung genutzt wird. Eine typische Architektur gliedert sich in Vorverarbeitung, 
 ML-Modell (Detektion/Klassifikation/Tracking) und Nachverarbeitung/Monitoring. 
 Klassische Deploy\-ment-Schritte  werden durch ISO~26262 abgedeckt; daten- und 
@@ -438,14 +493,14 @@ ODD, (II) Performance-Grenzen, (III) systematische Trainings-/SW-Fehler
 sowie (IV) zufällige Hardwarefehler.
 
 
-\subsection{(8)Assurance-Argumente für KI-Systeme}
-Ein Assurance-Argument ist eine strukturierte, nachvollziehbare Begründung, dass ein System ausreichend sicher ist. 
+\subsection{(8) Nachweis-Argumente für KI-Systeme}
+Ein Nachweis-Argument ist eine strukturierte, nachvollziehbare Begründung, dass ein System ausreichend sicher ist. 
 Es verknüpft Sicherheits-Behauptungen (Claims) mit der Argumentationsstrategie und konkreter Evidenz 
 (Tests, Analysen, Reviews), inklusive der Annahmen und Geltungsbereich. Dadurch wird nachvollziehbar, 
 warum die Risiken als beherrscht gelten und welches Restrisiko bleibt. Für den Nachweis der Sicherheit 
 ist es zentral, weil es Prüfern und Behörden eine transparente, prüfbare Kette von Anforderungen → Maßnahmen → Nachweisen liefert.
 
-Die folgenden Punkte sind die in ISO/PAS~8800 geforderten Anforderungen um ein Assurance-Argument zu erstellen:
+Die folgenden Punkte sind die in ISO/PAS~8800 geforderten Anforderungen um ein Nachweis-Argument zu erstellen:
 
 \begin{itemize}
   \item \textbf{(a) Definition des KI-Systems} (aus externen Quellen), einschließlich:
@@ -454,14 +509,14 @@ Die folgenden Punkte sind die in ISO/PAS~8800 geforderten Anforderungen um ein A
       \item Definition des technischen Kontexts innerhalb des übergeordneten Systems (z.\,B.\ Schnittstellen, Bedingungen/Trigger, unter denen die KI-Funktion aktiviert wird, usw.);
       \item Spezifikation des Eingaberaums.
     \end{enumerate}
-  \item \textbf{(b) Anforderungen an das Assurance-Argument und die Arbeitsprodukte} für das KI-System (aus externen Quellen). Diese Anforderungen können aus dem Assurance-Argument des übergeordneten Systems sowie aus den Sicherheitsmanagement-Prozessen abgeleitet werden.
+  \item \textbf{(b) Anforderungen an das Nachweis-Argument und die Arbeitsprodukte} für das KI-System (aus externen Quellen). Diese Anforderungen können aus dem Nachweis-Argument des übergeordneten Systems sowie aus den Sicherheitsmanagement-Prozessen abgeleitet werden.
   \item \textbf{(c) Die Arbeitsprodukte des KI-Lebenszyklus}
 \end{itemize}
 
 \subsection{(9) Ableitung von KI-Sicherheitsanforderungen}
 Es wird der Ablauf und Methoden beschrieben, wie Anforderungen abgeleitet werden können. 
-Da diese sich nicht auf Systeme, in der eine KI eingebettet wird beziehen oder wie diese 
-konkret auf KI Modelle angewendet werden können, ist diser Abschnitt sehr high-level. 
+Da sich diese nicht auf Systeme beziehen, in die eine KI integriert wird, oder darauf, 
+wie sie konkret auf KI-Modelle angewendet werden können, ist dieser Abschnitt allgemein gehalten. 
 Ein essentielles Beispiel, wie Anforderungen verändert werden müssen ist folgendes:
 
 \[
@@ -515,37 +570,33 @@ dies eine erst Version ist und daher noch keine iterativen Schritte seit der Ers
 
 \paragraph{Beispiel von Architektur- und Entwicklungsmaßnahmen}
 Weiter befinden sich in diesem Abschnitt Beispiele wie Architektur- und Entwicklungsmaßnahmen aussehen können. 
-Konkrete Maßnahmen bezüglich Robustheit, Zuverlässigkeit, etc. stützen auf bestpractise Methoden und 
+Konkrete Maßnahmen bezüglich Robustheit, Zuverlässigkeit, etc. stützen auf Best-Practise-Methoden und 
 liefern daher keine zusätzlichen Erkenntnisse wann eine KI sicher ist.
 
 \subsection{(11) Datenbezogene Aspekte}
-Die hier beschriebenen Aspekte beziehen sich hauptsächlich auf: un-/ semi- und supervised learning. 
-Da diese sich ebenfalls auf bestpractise Methoden stützen, werden sie in dieser Arbeit nicht zusätzlich 
-aufgeführt, da diese nur wenig zur Erkenntnissgewinnung beitragen. Diese Methoden sind allgemein beim 
-Arbeiten mit großen Datenmengen und auch bei ML von essentieller Bedeutung. Sie sind weitverbreitete 
-Standards verschiedener Industrien und haben auch Einfluss auf verschiedene Punkte dieser Arbeit.
+Die hier beschriebenen Aspekte beziehen sich hauptsächlich auf supervised, semi-supervised und unsupervised learning. 
+Diese Methoden sind beim Arbeiten mit großen Datenmengen und Machine Learning essenziell. 
+Sie sind weit verbreitete Standards in vielen Industrien und haben ebenfalls Einfluss auf verschiedene Punkte 
+dieser Arbeit, werden im Einzelnen aber nicht weiter betrachtet.
 
 \subsection{(12) Verifikation und Validierung des KI-Systems}
-Diese Kapitel geht sehr ``highlevel'' auf Verifikation und Validierung ein. Unter anderem mit einigen Anforderungen 
-an benötigten Tests und des Workflows mit wichtigen Stichpunkte wie, dass SOTIF Trigger Bedingungen beschreibt. 
+Dieses Kapitel vermittelt einen allgemeinen Überblick über Verifikation und Validierung. Unter anderem mit einigen Anforderungen 
+an benötigten Tests und des Workflows mit wichtigen Stichpunkten wie, dass SOTIF Trigger Bedingungen beschreibt. 
 Desweiteren wird auch eine Liste möglicher Testmethoden vorgeschlagen um Komponenten zu testen. Für diese 
 Arbeit sind folgende Punkte wichtig:
 
 \paragraph{KI spezifische Herausforderungen mit Erklärungen}
 \begin{itemize}
-  \item fehlen von präzisen Sicherheitsanforderungen
-  \item vielfältige Eingaben aus verschiedenen Quellen (z.B. Kombination aus Radar und Kamera)
+  \item Fehlen von präzisen Sicherheitsanforderungen
+  \item Vielfältige Eingaben aus verschiedenen Quellen (z.B. Kombination aus Radar und Kamera)
   \item DNNs haben komplexe Architekturen und werden heuristische Trainiert (basierend auf Erfahrungswerten)
-  \item das Basieren auf großen Datensätzen
-  \item nicht vorhersagbares fehlerhaftes Verhalten
+  \item Das Basieren auf großen Datensätzen
+  \item Nicht vorhersagbares fehlerhaftes Verhalten
   \item Einschränkung struktureller Abdeckung
-  \item kleine Änderungen (Umwelt) bringen große Auswirkungen mit sich (input VS output)
-  \item nicht ausreichende Datensätze führen zu ungewollten Verhalten
+  \item Kleine Änderungen (Umwelt) bringen große Auswirkungen mit sich (input VS output)
+  \item Nicht ausreichende Datensätze führen zu ungewollten Verhalten
 \end{itemize}
 
-Weiter wird ein Beispiel zur Objekterkennung angeführt, dass sowohl ein Lidar als auch eine 
-Kamera ein Objekt nicht erkennen können durch einen Absorptionseffekt eines Objektes. 
-Um zu zeigen, dass diese nicht stochastisch unabhängig sind.
 
 \subsection{(13) Sicherheitsanalyse von KI-Systemen}
 Es werden recht allgemein Sicherheitsanalysen und Workflows beschrieben mit berücksichtigung von KI. 
@@ -573,31 +624,34 @@ Speziell angesprochene Punkte, sind:
 
 
 \subsection{(15) Vertrauen in die Nutzung von KI-Entwicklungsframeworks und -Softwaretools}
-In diesem Kapitel beschrieben sind bestpractise Methoden gestützt mit Beispielen und ein Fokus auf 
+In diesem Kapitel beschrieben sind Best-Practise-Methoden gestützt mit Beispielen und ein Fokus auf 
 PFMEA (Potential Failure Modes and Affects Analysis). 
 
 
 \section{Annex}
 Im Anhang befinden sich wichtige Beispiele und Zusatzinformationen. Folgend sind die 
 für diese Arbeit wichtigsten Punkte:
+
 \paragraph{Annex - C; ISO 26262 Lückenanalyse für ML}
 Für den Einsatz von ML wird Hardware von einem oder mehreren CPUs empfohlen und 
 für Neuronale Netze GPUs. \\
-Vorallem bei der Verifikation, Analyse, etc. wird auf Simulationen und Heuristische 
-bzw. Experten Aswertung verwiesen.\\
+Vor allem bei der Verifikation, Analyse, etc. wird auf Simulationen und Heuristische 
+bzw. Experten Auswertung verwiesen.\\
 Die Anforderung an die Richtigkeit der Ausführung des Codes und Datenfluss muss entfernt 
 werden, was auf den Probabilistischen Output einer KI zurückzuführen ist. Das bedeutet, 
 dass der Code nicht mehr deterministisch sein kann und eine MC/DC Coverage (Modified Condition/Decision Coverage) 
 nicht mehr möglich ist. (MC/DC ist eine Anforderung an die Eindeutigkeit des Codes; Jeder Ja/Nein Input oder 
 Bedingung hat einen Eindeutigen Output.)
+
 \paragraph{Annex - D; Detaillierte Betrachtungen zu sicherheitsrelevanten Eigenschaften von KI-Systemen}
-Hier werden Sicherheits bezogene Eigenschafte beschrieben und zugeordnet, diese hier wiederzugeben 
-wäre exessiv und trägt nicht unmittelbar dem Verständnis bei.
+Hier werden sicherheitsrelevante Eigenschaften beschrieben und zugeordnet. 
+Eine detaillierte Wiedergabe dieser ist jedoch zu umfangreich und trägt nicht unmittelbar zum Verständnis dieser Arbeit bei.
+
 \paragraph{Annex - G; Architektur- und Entwicklungsmaßnahmen für KI-Systeme}
 Hier werden Detailbeschreibungen angeführt zu folgenden Themen, welche jeweils untergliedert sind:
 \begin{itemize}
   \item Beispiele für Architektur und Entwicklungsmaßnahmen für KI
-  \item Qualitative und qantitative Analyse von KI Architekturen
+  \item Qualitative und quantitative Analyse von KI Architekturen
   \item Datenverteilungen und ihr Einfluss auf KI Modelle
   \item Trainingssicherheitsmaßnahmen
   \item Überwachung und KI System Modifikationen
@@ -606,17 +660,18 @@ Hier werden Detailbeschreibungen angeführt zu folgenden Themen, welche jeweils 
 \end{itemize}
 
 
+
+
+
+
+
 % -------------------------
 % CHAPTER 6: Coverage-Analyse entlang ISO/PAS 8800
 % -------------------------
 \chapter{Coverage-Analyse}\label{chap:coverage}
 
-\section{Vorgehen der Analyse}\label{sec:analyse-vorgehen}
 Die Analyse fokussiert nicht die Wirksamkeit einzelner Techniken, sondern welche Ansätze zur Absicherung gefordert werden
 (u.\,a.\ aus ISO/PAS~8800 sowie konzeptionellen Leitlinien) und in welchem Umfang Abdeckung erkennbar ist.
-Als Anker dienen die in Kapitel~\ref{chap:anforderungen} definierten Anforderungsfelder. 
-
-
 
 
 \newcommand{\covV}{\textcolor{green!40!black}{\textbf{V}}} % voll
@@ -648,25 +703,17 @@ F-Avi-01 & Human-centric, Level \& ConOps/HAT & 6, 7 & \covT \\[2pt]
 
 F-Avi-02 & OD/ODD \& Abstain/Degradation & 9, 12, 14 & \covV \\[2pt]
 
-F-Avi-03 & Knowledge \& Data Governance (ODD→Daten) & 11, 9, 8 & \covV \\[2pt]
+F-Avi-03 & Knowledge \& Data Governance (ODD→Daten) & 11, 9, 8, 12 & \covV \\[2pt]
 
-F-Avi-04 & AI Assurance (Learning \& Explainability) & 8, 12, 15 & \covT \\[2pt]
+F-Avi-04 & Betriebs-Recording & 14 & \covV \\[2pt]
 
-F-Avi-05 & Betriebs-Recording & 14 & \covV \\[2pt]
+F-Avi-05 & Generalisierung, Robustheit \& Stabilität & 9, 12 & \covV \\[2pt]
 
-F-Avi-06 & OOD \& Unvorhersagbarkeit& 9, 12, 14 & \covT \\[2pt]
+F-Avi-06 & Lebenszyklus \& W-Shape (Gates/Artefakte) & 7, 8, 14 & \covT \\[2pt]
 
-F-Avi-07 & Generalisierung, Robustheit \& Stabilität & 9, 12 & \covV \\[2pt]
+F-Avi-07 & Kein Online-Lernen im Betrieb & 14, 10 & \covT \\[2pt]
 
-F-Avi-08 & Lebenszyklus \& W-Shape (Gates/Artefakte) & 7, 8, 14 & \covT \\[2pt]
-
-F-Avi-09 & Kein Online-Lernen im Betrieb & 14, 10 & \covT \\[2pt]
-
-F-Avi-10 & Einbettung in Safety-Systeme/Plattform & 10, 6 & \covV \\[2pt]
-
-F-Avi-11 & Rare-Events-Management (Taxonomie/Katalog) & 11, 12, 9 & \covT \\[2pt]
-
-F-Avi-12 & Use-Case-Verankerung (KPIs/Übergabe in Betrieb) & 6, 8, 12, 14 & \covT \\
+F-Avi-08 & Use-Case-Verankerung (KPIs/Übergabe in Betrieb) & 6, 8, 12, 14 & \covT \\
 
 \end{longtable}
 
@@ -675,7 +722,6 @@ F-Avi-12 & Use-Case-Verankerung (KPIs/Übergabe in Betrieb) & 6, 8, 12, 14 & \co
 
 \section{Diskussion der Abdeckung (EASA \& ISO 8800)}
 
-\subsection{Überblick}
 Die Gegenüberstellung zeigt eine solide Abdeckung zentraler Lebenszyklus- und Technikthemen durch die ISO/PAS~8800. 
 Insbesondere Datenführung, V\&V sowie Betriebsmaßnahmen sind deutlich adressiert. 
 Demgegenüber bleiben Aspekte mit starkem Human-Fokus (HAT/ConOps), genaue Ausprägungen von Erklärbarkeit, 
@@ -686,13 +732,11 @@ explizite Runtime-Indikatoren und organisatorische Governance-Elemente nur teilw
   \item \textbf{F-Avi-02 OD/ODD \& Abstain/Degradation} (9, 12, 14): \\
   ISO verknüpft ODD/Unsicherheit mit Ableitung von Anforderungen, Test/Validierung und Maßnahmen im Betrieb. 
   Domänenabgrenzungen und der Umgang mit Degradation wird methodisch behandelt, gilt es aber projektspezifisch auszuarbeiten.
-  \item \textbf{F-Avi-03 Knowledge \& Data Governance} (11, 9, 8): \\
-  Vollständiger Dataset-Lebenszyklus mit Safety-Analyse, Validierung, Pflege und Rückführung in den Assurance-Nachweis. 
-  \item \textbf{F-Avi-05 Betriebs-Recording} (14): Feld-Datenerhebung, Nutzung für Monitoring, Re-Bewertung/Änderungen sind fest verankert.
-  \item \textbf{F-Avi-07 Generalisierung, Robustheit \& Stabilität} (9, 12): \\
+  \item \textbf{F-Avi-03 Knowledge \& Data Governance} (11, 9, 8, 12): \\
+  Vollständiger Dataset-Lebenszyklus mit Safety-Analyse, Validierung, Pflege und Rückführung in den Nachweis. 
+  \item \textbf{F-Avi-04 Betriebs-Recording} (14): Feld-Datenerhebung, Nutzung für Monitoring, Re-Bewertung/Änderungen sind fest verankert.
+  \item \textbf{F-Avi-05 Generalisierung, Robustheit \& Stabilität} (9, 12): \\
   Prüfziele, Methoden und Bewertungslogik für Performance/Robustheit sind vorhanden (inkl.\ Testebenen und Integrationssicht).
-  \item \textbf{F-Avi-10 Einbettung in Safety-Systeme/Plattform} (10, 6): \\
-  Architektur- und Entwicklungsmaßnahmen, sowie Systemkontext und Einbettung werden adressiert.
 \end{itemize}
 
 \subsection{Teilabdeckungen (Lücken, \covT)}
@@ -702,27 +746,13 @@ explizite Runtime-Indikatoren und organisatorische Governance-Elemente nur teilw
   und konkrete Aufgabenverteilungen sind nicht explizit vorgegeben. Diese sind in den Anforderungen 
   oder Domänenabgrenzungen zu betrachten. Der Mensch wird bezüglich des Automatisierungsgrad berücksichtigt 
   und soll hier in die Anforderungen einfließen, wird aber nicht in den Mittelpunkt gestellt.
-  \item \textbf{F-Avi-04 AI Assurance (Learning \& Explainability)} (8, 12, 15): \\
-  Assurance-Argumente sind vollständig dargestellt. Erklärbarkeit wird ausdrücklich 
-  gefordert, bleibt aber offen und ist projektspezifisch zu betrachten. Diese sind sehr offen 
-  und nur beispielhaft konkretisiert.
-  \item \textbf{F-Avi-06 OOD \& Unvorhersagbarkeit} (9, 12, 14): \\
-  OOD/Unsicherheiten werden definiert und im Test/Betrieb behandelt. 
-  Spezifische Runtime-Monitore/Trigger sind gefordert zu dokumentieren aber als Aufgabe der 
-  SOTIF und mit Hinweisen zum ``living safety-case'' vermerkt. In der Luftfahrt werden z.B. 
-  in den Anforderungen explizite Update Zeitpunkte festgehalten, im Automotive werden diese 
-  unter anderem gesondert betrachtet.
-  \item \textbf{F-Avi-08 Lebenszyklus \& W-Shape} (7, 8, 14): \\
+  \item \textbf{F-Avi-06 Lebenszyklus \& W-Shape} (7, 8, 14): \\
   Ein vollständiger AI-Safety-Lebenszyklus ist vorhanden; das EASA-spezifische W-Shape (Gates/Artefakte) 
   als formale Struktur ist nicht Teil der ISO. Statdessen wird die klassische V-Shape als Struktur verwendet.
-  \item \textbf{F-Avi-09 Kein Online-Lernen im Betrieb} (14, 10): \\
+  \item \textbf{F-Avi-07 Kein Online-Lernen im Betrieb} (14, 10): \\
   ISO fordert Re-Training/Re-Validation/Re-Approval bei Änderungen, verbietet Online-Lernen jedoch nicht explizit. 
   Die EASA hingegen rät vom Online-Lernen stark ab.
-  \item \textbf{F-Avi-11 Rare-Events-Management} (11, 12, 9): \\
-  Edge-Case-Handling ist vorgesehen; ein verpflichtender Taxonomie-/Katalog-Mechanismus ist nicht vorgegeben. 
-  Edge-cases sind fest zu halten, zu definieren, wie damit umzugehen ist, etc.. Sie sind aber projektspezifisch, 
-  daher wird ein allgemeiner Katalog nicht gefordert und ist für jedes Projekt einzeln anzufertigen.
-  \item \textbf{F-Avi-12 Use-Case-Verankerung} (6, 8, 12, 14): \\
+  \item \textbf{F-Avi-08 Use-Case-Verankerung} (6, 8, 12, 14): \\
   Kontext, KPIs, Validierung und Betriebsübergang sind vorhanden; projektinterne Use-Case-Artefakte/KPIs 
   müssen konkretisiert werden. Diese sind hier zwar gefordert, es wird aber darauf hingewiesen, 
   dass diese Projektabhängig sind.
@@ -734,7 +764,7 @@ Gestaltungsspielraum für projektspezifische Ausprägungen (z.\,B.\ HAT/HMI, Mon
 Die ausgewiesenen Teilabdeckungen (\covT) sind daher Erwartungsräume, die im Projektkontext präzisiert werden sollten, 
 ohne der ISO zu widersprechen.
 
-\subsection{Zwischenfazit}
+\subsection{Zwischenfazit der Abdeckung}
 Der Abgleich der EASA-Dokumente mit der ISO/PAS~8800 zeigt, dass die in dieser Arbeit behandelten Aspekte von der Norm
 entweder vollständig oder zumindest teilweise abgedeckt werden. Die ISO/PAS~8800 ist bewusst
 prinzipienbasiert angelegt und lässt projektspezifischen Interpretations- und Gestaltungsspielraum. Zugleich treten

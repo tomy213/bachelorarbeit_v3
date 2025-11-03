@@ -10,9 +10,9 @@ Entscheidend sind neben Leistungsgewinnen vor allem belastbare Nachweise zur Sic
 KI lernt Muster in hochdimensionalen Daten und adressiert damit Nichtlinearität und Adaptivität 
 (z.\,B.\ Re-Training statt Neuentwurf). Im Radar-Kontext kann KI Muster im Clutter erkennen, 
 während klassische Verfahren Clutter primär unterdrücken und schwache Ziele ggf.\ erst später sichtbar werden. 
-Jüngste Ereignisse vom 02.10.25 am Münchner Flughafen, der wegen Drohnensichtungen den Betrieb einstellen musste, 
-verdeutlichen, dass die Luftfahrt von verbesserter Mustererkennung und damit einhergehender frühzeitiger 
-Erkennung profitieren kann.
+Anfang Oktober 2025 verdeutlichten jüngste Vorfälle am Münchner Flughafen, bei denen der Betrieb aufgrund von 
+Drohnensichtungen eingestellt werden musste, dass die Luftfahrt durch eine verbesserte Mustererkennung 
+und eine damit verbundene frühzeitige Identifikation von Gefährdungen profitieren kann.
 
 \medskip
 Dieses Kapitel skizziert den aktuellen Einsatz von KI – mit klarem Fokus auf die Luftfahrt, jedoch nicht exklusiv –,
@@ -36,109 +36,7 @@ bilden den Grundstock, stoßen jedoch sichtbar an Grenzen:
 
 
 
-% ----------------------------------------------------
-\section{KI in der Praxis}\label{sec:praxis}
-KI ist bereits im industriellen Alltag angekommen und 2025 wird als Beschleunigerjahr bezeichnet.
-Auf Leitmessen wie der Hannover Messe zeigen Hersteller, wie KI in Serienprozesse wandert.
-Laut einer Bitkom-Befragung  \footnote{\citetitle{handelsblatt-hannovermesse-2025} \parencite{handelsblatt-hannovermesse-2025}} 
-setzen bereits rund 42\,\% der deutschen Industrieunternehmen KI in der Produktion ein,
-weitere 35\,\% planen den baldigen Einsatz.
 
-\paragraph{Erfahrungsbeispiel: Titanik-Datensatz} \footnote{\citetitle{KaggleTitanic} \parencite{KaggleTitanic}}
-Dieses Beispiel unterstreicht die Verständlichkeit, Nachvollziehbarkeit und Reproduzierbarkeit von ML-Modellen wie 
-z.B. Random Forest. Zudem zeigt es, wie wertvoll maschinelles Lernen für die Arbeit mit großen Datensätzen ist. 
-Details und Erklärungen zu diesem Beispiel sind auf Seiten wie Kaggle zu finden und werden in Vorlesungen wie 
-Einführung autonomes Fahren und Maschinelles lernen als Einstiegsbeispiel behandelt.
-
-
-\subsection{KI-Praxis in der Luftfahrt}
-\begin{itemize}
-  \item \textbf{Predictive Maintenance \footnote{\citetitle{handelsblatt-hannovermesse-2025} \parencite{handelsblatt-hannovermesse-2025}}:}
-    Rolls-Royce plant „Two-Way-Comms“, um Telemetrie bis auf Komponentenebene aus Triebwerken zu erfassen.
-    KI (u.\,a. Microsoft Copilot) soll Anomalien frühzeitig erkennen, so dass Ingenieure gezielt zusätzliche Sensordaten anfordern können.
-    Der Marktstart wurde für das erste Halbjahr 2025 angekündigt. Recherchen deuten auf Einordnung in das Intelligent Engine-Programm hin,
-    konkrete belastbare Hinweise auf den produktiven Einsatz dieser KI waren jedoch nicht auffindbar.
-  \item \textbf{Design of a nickel-base superalloy \footnote{\citetitle{conduit2017-superalloy-nn} \parencite{conduit2017-superalloy-nn}}:}
-    In der Kooperation von Rolls-Royce und der University of Cambridge wurde ein Deep-Learning-Ansatz verwendet, um eine neue
-    Nickelbasis-Superlegierung für Triebwerkskomponenten vorzuschlagen. Experimente bestätigten die Vorhersagen -- die Legierung erfüllte
-    alle Zielkriterien und übertraf insbesondere Oxidationsbeständigkeit und Streckgrenze etablierter Alternativen (z.\,B.\ RR1000).
-    Öffentliche Informationen zum realen Einsatz dieser Legierung sind derzeit nicht verfügbar.
-  \item \textbf{Eurofighter \footnote{\citetitle{ecrs-mk1-release} \parencite{ecrs-mk1-release}}:}
-    Im Eurofighter Jet wird eine von HENSOLDT entwickelte KI zur Objektklassifikation im Radar genannt.
-    Aufgrund der militärischen Einordnung sind Umsetzungsdetails und Spezifikationen nicht öffentlich.
-    Der Fall unterstreicht jedoch das Potenzial KI-basierter Objektklassifikation in Luftfahrt-Radarsystemen.
-\end{itemize}
-
-\subsection{Blick über den Tellerrand}
-Da KI in der Luftfahrt zwar vorhanden, aber im praktischen Einsatz oft schwer nachzuvollziehen ist, 
-lohnt der Blick in andere Branchen, um belastbare Informationen zu erhalten.
-
-\begin{itemize}
-  \item \textbf{Shell – Predictive Maintenance in großem Maßstab \footnote{\citetitle{shell-jpt-2022} \parencite{shell-jpt-2022}}:}
-    ML-/KI-Modelle überwachen weltweit Ventile, Pumpen und Kompressoren großer Aggregatflotten und unterstützen die
-    zustandsorientierte Wartung aller ausgestatteten Anlagen. Dies führt zu weniger ungeplanten Ausfällen und besser planbareren Einsätzen.
-    Mit der erfolgreichen Überwachung von über 10.000 Ausrüstungsteilen plant Shell die Ausweitung dieser Systeme.
-  \item \textbf{AlphaFold – Struktur- \& Interaktionsvorhersage \footnote{\citetitle{alphafold-nature-2021} \parencite{alphafold-nature-2021}}:}
-    Ist breit als Forschungs- und Design-Tool etabliert und hat einen hohen wissenschaftlichen Impact und ist in der Industrie als Enabler akzeptiert. 
-    Es verdeutlicht die Rolle von KI als Entscheidungsunterstützung. 
-    Die dadurch gefundenen Medikamente bleiben weiterhin nachweispflichtig.
-  \item \textbf{IBM Watson for Oncology \footnote{\citetitle{stat-watson-2018} \parencite{stat-watson-2018}}:}
-    Berichte über falsche klinische Therapieempfehlungen führten zu Rücknahmen prominenter Partnerschaften und deuten auf eine Einstellung des Systems hin.
-  \item \textbf{IBM Deep Blue (1997):}
-    IBMs Schachcomputer Deep Blue besiegte 1997 den amtierenden Weltmeister Garri Kasparow. 
-    Die praktische Erfahrung zeigte, dass großskalige Suche und Mustererkennung Stärken von KI sind. 
-    Wahrnehmung, Kontext und Transfer zeichnen sich nachwievor als menschliche Stärke ab.
-    Die unterschiedlich enkennbaren Fähigkeiten empfehlen somit komplementär statt konkurrierend zu Handeln.
-\end{itemize}
-
-\subsection{Sicherheitsrelevante Praxisvorfälle}\label{sec:praxis-vorfaelle}
-Die folgenden, öffentlich diskutierten Vorfälle rücken die Bedeutung von KI-Sicherheit in den Vordergrund. 
-Insbesondere die Automobilbranche steht als treibender Sektor unter hoher öffentlicher Aufmerksamkeit – auch im Hinblick auf 
-eAI (Embodied Artificial Intelligence) als operierendes Gesamtsystem.
-
-\medskip
-\begin{itemize}
-  \item \textbf{Tesla Autopilot \footnote{\citetitle{NTSB_HWY18FH011} \parencite{NTSB_HWY18FH011}}:}
-  Wiederholt kursieren Berichte und Videos zu unerwartetem Bremsen (sog.\ Phantom Braking) oder das Abkommen von der Straße
-  im Zusammenhang mit dem Tesla Autopiloten im Netz. Der Autopilot ist ein Fahrerassistenzsystem und kein 
-  wie der Name es vermuten lässt, autonomes Fahrzeug. 
-  Verantwortung und Überwachung verbleiben daher beim Fahrer. Erkenntnisse betreffen vor allem 
-  HMI und Automation Bias/Übervertrauen. 
-  \item \textbf{Robotaxis (Cruise, San Francisco, 02.10.2023) \footnote{\citetitle{Koopman:2025:EAI} \parencite{Koopman:2025:EAI}}:}
-  Nach einer Kollision zwischen einer Fußgängerin und einem anderen Fahrzeug wurde die Fußgängerin unter ein Robotaxi geschleudert. 
-  Das Fahrzeug hielt zunächst an, setzte anschließend jedoch kurz an und schleifte die Person einige Meter mit, bevor es erneut stoppte. 
-  Dieser Vorfall war unter anderem eine Inspiration für das Buch Embodied AI Safety \footnote{\citetitle{Koopman:2025:EAI} \parencite{Koopman:2025:EAI}}, 
-  das Lessons Learned und offene Fragen zur AI Safety aufarbeitet.
-\end{itemize}
-
-\medskip
-Diese sicherheitsrelevanten Praxisvorfälle werfen zusätzliche Fragen auf. Deutlich wird insbesondere die rechtliche Komplexität --  
-es ist auch zu klären, wer wann die Verantwortung trägt, der Fahrer, Betreiber oder Hersteller.
-
-
-\section{Wie sicher sind KIs heute?}
-Um Sicherheit bewerten und vergleichen zu können, wird sie in Zahlen ausgedrückt. 
-Solche Kennzahlen fließen in Anforderungen ein, etwa als zulässige Fehler pro Stunde. 
-Konkrete Grenzwerte ergeben sich aus der jeweiligen Einstufung.
-
-Bei vollautonomen Fahrzeugen werden viele Funktionen pauschal als ASIL D eingestuft. 
-Der Grund ist, dass es keine Fahrerkontrolle gibt und somit die Beherrschbarkeit praktisch null ist. 
-Zudem ist davon auszugehen, dass ein Fehler dazu führen kann, dass das Fahrzeug von der Straße 
-abkommt und es potenziell zu schweren Personenschäden kommen kann.
-
-Konkrete Zahlen zur eingesetzten KI veröffentlichen Unternehmen meist nicht. 
-Als grobe Orientierung kann daher folgende Statistik dienen: \footnote{\citetitle{herger2024disengagements} \parencite{herger2024disengagements}}
-
-Im Zeitraum Dezember 2022 bis November 2023 legten in Kalifornien eingesetzte autonome Fahrzeuge mit 
-Sicherheitsfahrer insgesamt 9.282.681 km zurück. Die Firmen meldeten dabei 6.570 Eingriffe. Das 
-entspricht ungefähr 1.412 km pro Eingriff. Nimmt man eine Durchschnittsgeschwindigkeit von 50 km/h 
-an, ergibt sich daraus etwa ein Eingriff alle 28 Stunden.
-Somit kann man grob davon ausgehen, dass mit einer Wahrschlichkeit von 99,96 \% nicht eingegriffen wird in einer Stunde.
-Zu beachten ist, dass hier das Gesamtsystem betrachtet wurde und ein Eingriff nicht zwingend 
-auf den Ausfall einer sicherheitskritischen Funktion zurückgeht. Einzelkomponenten sind daher 
-strenger zu bewerten. Geht man von mehreren Dutzend beteiligten Komponenten aus und nimmt eine 
-Unabhängigkeit der Fehler an, kann man als Zielgröße pro Komponente eine 
-Fehlerquote von $ 1\times10^{-6}$/h annehmen.
 
 % ----------------------------------------------------
 \section{Einsatzfelder in der Luftfahrt}\label{sec:sop-ueberblick}
@@ -154,13 +52,33 @@ zeigt folgende Schwerpunkte:
   \item \textbf{Luftverkehrsmanagement (4\,\%):} Sequencing/Staffelung, Slot-/Flow-Optimierung, Bodenbewegungen.
 \end{itemize}
 
-\paragraph{Einordnung für Radar/Klassifikation}
-Für diese Arbeit ist  die KI-gestützte Auswertung von Radardaten (z.\,B.\ Objektklassifikation, Clutter-Trennung, 
-Mikrodoppler) relevant. Da luftfahrtspezifische, öffentlich zugängliche Fachquellen dazu derzeit sehr begrenzt sind,
-müssen externe Referenzen herangezogen und mit Blick auf die luftfahrttypischen Randbedingungen übertragen werden.
+
+
+\subsection{KI-Praxis in der Luftfahrt}
+Im Folgenden werden exemplarische Projekte vorgestellt, die den aktuellen Stand von KI-Anwendungen in der Luftfahrt illustrieren:
+
+\medskip
+\begin{itemize}
+  \item \textbf{Predictive Maintenance \footnote{\citetitle{handelsblatt-hannovermesse-2025} \parencite{handelsblatt-hannovermesse-2025}}:}
+    Rolls-Royce plant „Two-Way-Comms“, um Telemetrie bis auf Komponentenebene aus Triebwerken zu erfassen.
+    KI (u.\,a. Microsoft Copilot) soll Anomalien frühzeitig erkennen, so dass Ingenieure gezielt zusätzliche Sensordaten anfordern können.
+    Der Marktstart wurde für das erste Halbjahr 2025 angekündigt. Recherchen deuten auf Einordnung in das Intelligent Engine-Programm hin,
+    belastbare Hinweise auf den produktiven Einsatz dieser KI waren jedoch nicht auffindbar.
+  \item \textbf{Design of a nickel-base superalloy \footnote{\citetitle{conduit2017-superalloy-nn} \parencite{conduit2017-superalloy-nn}}:}
+    In der Kooperation von Rolls-Royce und der University of Cambridge wurde ein Deep-Learning-Ansatz verwendet, um eine neue
+    Nickelbasis-Superlegierung für Triebwerkskomponenten vorzuschlagen. Experimente bestätigten die Vorhersagen -- die Legierung erfüllte
+    alle Zielkriterien und übertraf insbesondere Oxidationsbeständigkeit und Streckgrenze etablierter Alternativen (z.\,B.\ RR1000).
+    Öffentliche Informationen zum realen Einsatz dieser Legierung sind derzeit nicht verfügbar.
+  \item \textbf{Eurofighter \footnote{\citetitle{ecrs-mk1-release} \parencite{ecrs-mk1-release}}:}
+    Im Eurofighter Jet wird eine von HENSOLDT entwickelte KI zur Objektklassifikation im Radar genannt.
+    Aufgrund der militärischen Einordnung sind Umsetzungsdetails und Spezifikationen nicht öffentlich.
+    Der Fall unterstreicht jedoch das Potenzial KI-basierter Objektklassifikation in Luftfahrt-Radarsystemen.
+\end{itemize}
+
+
 
 % ----------------------------------------------------
-\section{KI in (Luftfahrt-)Radarsystemen}\label{sec:ki-radar-stand}
+\subsection{KI in (Luftfahrt-)Radarsystemen}\label{sec:ki-radar-stand}
 In Radarsystemen erscheint KI derzeit in zwei grundsätzlichen Rollen: 
 (1) zur Nutzung in der Entwicklung, Test und Evidenzerzeugung sowie 
 (2) als inline Funktion mit unmittelbarer Wirkung im Betrieb. 
@@ -177,28 +95,44 @@ KIs werden oft eingesetzt, um bei einer gesenkten Schwelle innerhalb des Rausche
 Muster zu erkennen.
 
 
+% ----------------------------------------------------
+\section{Blick über den Tellerrand}\label{sec:praxis}
+KI ist mittlerweile im industriellen Alltag etabliert. Insbesondere seit 2025 ist eine deutliche 
+Beschleunigung der Implementierung zu beobachten. Auf Leitmessen wie der Hannover Messe zeigen Hersteller, wie KI in Serienprozesse wandert.
+Laut einer Bitkom-Befragung  \footnote{\citetitle{handelsblatt-hannovermesse-2025} \parencite{handelsblatt-hannovermesse-2025}} 
+setzen bereits rund 42\,\% der deutschen Industrieunternehmen KI in der Produktion ein,
+weitere 35\,\% planen den baldigen Einsatz.
 
-\section{Besonderheiten der Luftfahrt für KI}\label{sec:ki-besonderheiten}
-Erfahrungsgemäß benötigen KIs relativ viel Rechenleistung und haben oft Schwierigkeiten mit sehr 
-unausgewogenen Klassen beim Training, daher lassen sich folgenden Punkte ableiten.
+\subsection{Erfahrungsbeispiel: Titanik-Datensatz} \footnote{\citetitle{KaggleTitanic} \parencite{KaggleTitanic}}
+Ein einführendes Beispiel, welches in Vorlesungen wie Einführung autonomes Fahren und Maschinelles lernen 
+den Datensatz der Überlebenden der Titanik dazu benutzt verschiedene ML-Modelle zu verwenden, diesen auf 
+Zusammenhänge zu untersuchen.
+Dieses Beispiel unterstreicht die Verständlichkeit, Nachvollziehbarkeit und Reproduzierbarkeit von ML-Modellen wie 
+z.B. Random Forest. Zudem zeigt es, wie wertvoll maschinelles Lernen für die Arbeit mit großen Datensätzen ist. 
+Details und Erklärungen zu diesem Beispiel sind auf Seiten wie Kaggle zu finden. 
 
-\subsection{Datenherausforderungen}\label{subsec:data-challenges}
-Die Luftfahrt ist geprägt von seltenen Ereignissen und unausgewogenen Klassen:
+\subsection{Praxis Beispiele anderer Industrien}
+Da KI in der Luftfahrt zwar vorhanden, aber im praktischen Einsatz oft schwer nachzuvollziehen ist, 
+lohnt sich der Blick in andere Branchen, um belastbare Informationen zu erhalten.
+
+\medskip
 \begin{itemize}
-  \item \textbf{Seltene kritische Situationen} (z.\,B.\ Near-Miss),
-  \item \textbf{starke Größen-/Signaturunterschiede} (z.\,B.\ Airbus~A380 vs.\ Vogel),
-  \item \textbf{große Geschwindigkeitsvariationen} (Schweben bis Überschall).
+  \item \textbf{Shell – Predictive Maintenance in großem Maßstab \footnote{\citetitle{shell-jpt-2022} \parencite{shell-jpt-2022}}:}
+    ML-/KI-Modelle überwachen weltweit Ventile, Pumpen und Kompressoren großer Aggregatflotten und unterstützen die
+    zustandsorientierte Wartung aller ausgestatteten Anlagen. Dies führt zu weniger ungeplanten Ausfällen und besser planbareren Einsätzen.
+    Mit der erfolgreichen Überwachung von über 10.000 Ausrüstungsteilen plant Shell die Ausweitung dieser Systeme.
+  \item \textbf{AlphaFold – Struktur- \& Interaktionsvorhersage \footnote{\citetitle{alphafold-nature-2021} \parencite{alphafold-nature-2021}}:}
+    Ist breit als Forschungs- und Design-Tool etabliert und hat einen hohen wissenschaftlichen Einfluss und ist in der Industrie als Enabler akzeptiert. 
+    Es verdeutlicht die Rolle von KI als Entscheidungsunterstützung. 
+    Die dadurch gefundenen Medikamente bleiben weiterhin nachweispflichtig.
+  \item \textbf{IBM Watson for Oncology \footnote{\citetitle{stat-watson-2018} \parencite{stat-watson-2018}}:}
+    Berichte über falsche klinische Therapieempfehlungen führten zu Rücknahmen prominenter Partnerschaften und deuten auf eine Einstellung des Systems hin.
+  \item \textbf{IBM Deep Blue (1997):}
+    IBMs Schachcomputer Deep Blue besiegte 1997 den amtierenden Weltmeister Garri Kasparow. 
+    Die praktische Erfahrung zeigte, dass großskalige Suche und Mustererkennung Stärken von KI sind. 
+    Wahrnehmung, Kontext und Transfer zeichnen sich nachwievor als menschliche Stärke ab.
+    Die unterschiedlich enkennbaren Fähigkeiten empfehlen somit komplementär statt konkurrierend zu Handeln.
 \end{itemize}
-Seltene Ereignisse erschweren das Training und erhöhen das Overfitting-Risiko. 
-Hohe intra-/interklassen-Variabilität erschwert Generalisierung.
-
-\subsection{Hardware}\label{subsec:hardware}
-Je nach Ansatz sind die Anforderungen an die Hardware höher als bei klassischen Verfahren und können 
-mehrere CPU-Kerne oder gegebenenfalls eine GPU/Accelerator benötigen. In hochkritischen Inline-Pfaden 
-(DAL A/B) werden mehrere aktive CPU-Kerne erst seit wenigen Jahren, durch 
-jüngerer Behörden-Guidance häufiger tatsächlich eingesetzt; zuvor wurden sie oft deaktiviert, um Nachweise zu vermeiden. 
-GPU-/Accelerator-Einsätze sind in solchen Pfaden weiterhin sehr selten. Sie finden daher überwiegend in weniger kritischen Partitionen 
-oder in der Entwicklung Anwendung.
 
 
 
@@ -234,7 +168,7 @@ Technologieradar, nicht als direkte Referenz für die Zertifizierung.
 
 
 
-\section{Potentielle Chancen}\label{sec:ki-chancen-risiken}
+\section{Potentielle Chancen für Radar und Objektklassifizierung}\label{sec:ki-chancen-risiken}
 
 Anhand der betrachteten Technologien sind Chancen erkennbar, KI kann die Trennung von Ziel und 
 Clutter \footnote{\citetitle{Coluccia2020Sensors4172} \parencite{Coluccia2020Sensors4172}}
@@ -254,7 +188,54 @@ ist, einen Fokus auf Nachweisbarkeit zu legen.
 
 
 
+\section{Wie sicher sind KIs heute?}
+Um Sicherheit bewerten und vergleichen zu können, wird sie in Zahlen ausgedrückt. 
+Solche Kennzahlen fließen in Anforderungen ein, etwa als zulässige Fehler pro Stunde. 
+Konkrete Grenzwerte ergeben sich aus der jeweiligen Einstufung.
 
+Bei vollautonomen Fahrzeugen werden viele Funktionen pauschal als ASIL D eingestuft. 
+Der Grund ist, dass es keine Fahrerkontrolle gibt und somit die Beherrschbarkeit praktisch null ist. 
+Zudem ist davon auszugehen, dass ein Fehler dazu führen kann, dass das Fahrzeug von der Straße 
+abkommt und es potenziell zu schweren Personenschäden kommen kann.
+
+Konkrete Zahlen zur eingesetzten KI veröffentlichen Unternehmen meist nicht. 
+Als grobe Orientierung kann daher folgende Statistik dienen: \footnote{\citetitle{herger2024disengagements} \parencite{herger2024disengagements}}
+
+Innerhalb eines Jahres legten in Kalifornien eingesetzte autonome Fahrzeuge mit 
+Sicherheitsfahrer insgesamt 9.282.681 km zurück. Die Firmen meldeten dabei 6.570 Eingriffe. Das 
+entspricht ungefähr 1.412 km pro Eingriff. Nimmt man eine Durchschnittsgeschwindigkeit von 50 km/h 
+an, ergibt sich daraus etwa ein Eingriff alle 28 Stunden.
+Somit kann man grob davon ausgehen, dass mit einer Wahrschlichkeit von 99,96 \% nicht eingegriffen wird in einer Stunde.
+Zu beachten ist, dass hier das Gesamtsystem betrachtet wurde und ein Eingriff nicht zwingend 
+auf den Ausfall einer sicherheitskritischen Funktion zurückgeht. Einzelkomponenten sind daher 
+strenger zu bewerten. Geht man von mehreren Dutzend beteiligten Komponenten aus und nimmt eine 
+Unabhängigkeit der Fehler an, kann man als Zielgröße pro Komponente eine 
+Fehlerquote von $ 1\times10^{-6}$/h annehmen.
+
+
+\subsection*{Sicherheitsrelevante Praxisvorfälle}\label{sec:praxis-vorfaelle}
+Die folgenden, öffentlich diskutierten Vorfälle rücken die Bedeutung von KI-Sicherheit in den Vordergrund. 
+Insbesondere die Automobilbranche steht als treibender Sektor unter hoher öffentlicher Aufmerksamkeit – auch im Hinblick auf 
+eAI (Embodied Artificial Intelligence) als operierendes Gesamtsystem.
+
+\medskip
+\begin{itemize}
+  \item \textbf{Tesla Autopilot \footnote{\citetitle{NTSB_HWY18FH011} \parencite{NTSB_HWY18FH011}}:}
+  Wiederholt kursieren Berichte und Videos zu unerwartetem Bremsen (sog.\ Phantom Braking) oder das Abkommen von der Straße
+  im Zusammenhang mit dem Tesla Autopiloten im Netz. Der Autopilot ist ein Fahrerassistenzsystem und kein, 
+  wie der Name es vermuten lässt, autonomes Fahrzeug. 
+  Verantwortung und Überwachung verbleiben daher beim Fahrer. Erkenntnisse betreffen vor allem 
+  HMI und Automation Bias/Übervertrauen. 
+  \item \textbf{Robotaxis (Cruise, San Francisco, Oktober 2023) \footnote{\citetitle{Koopman:2025:EAI} \parencite{Koopman:2025:EAI}}:}
+  Nach einer Kollision zwischen einer Fußgängerin und einem anderen Fahrzeug wurde die Fußgängerin unter ein Robotaxi geschleudert. 
+  Das Fahrzeug hielt zunächst an, setzte anschließend jedoch kurz an und schleifte die Person einige Meter mit, bevor es erneut stoppte. 
+  Dieser Vorfall war unter anderem eine Inspiration für das Buch Embodied AI Safety \footnote{\citetitle{Koopman:2025:EAI} \parencite{Koopman:2025:EAI}}, 
+  das Lessons Learned und offene Fragen zur AI Safety aufarbeitet.
+\end{itemize}
+
+\medskip
+Diese sicherheitsrelevanten Praxisvorfälle werfen zusätzliche Fragen auf. Deutlich wird insbesondere die rechtliche Komplexität --  
+es ist auch zu klären, wer wann die Verantwortung trägt, der Fahrer, Betreiber oder Hersteller.
 
 
 
@@ -276,53 +257,69 @@ Zulassungsverfahren sind nicht Gegenstand dieses Abschnitts. Es werden keine neu
 eingeführt, sondern bestehende Themenfelder systematisch strukturiert. Eine Zuordnung zum später 
 verwendeten Beispiel erfolgt erst im Anschluss.
 
-
-\section{Lückenanalyse: Zertifizierungsfähigkeit von KI in der Luftfahrt}
 Die nachfolgenden Punkte stammen überwiegend aus \citetitle{ml-meets-aerospace-2024} 
 \footnote{\citetitle{ml-meets-aerospace-2024} \parencite{ml-meets-aerospace-2024}} und bündeln 
 die aus Sicht dieser Arbeit wichtigsten, komprimierten Herausforderungen/Limitierungen für die Zertifizierbarkeit.
 
-\subsection{Überlegungen}
+\section{Bedenken zur Zertifizierung und Betrieb}
+Folgende Punkte werden als Bedenken und Anstöße für weitere Forschung angeführt.
+
+\medskip
 \begin{itemize}
-  \item \textbf{AI-Level \& Übersteuerbarkeit (L1/L2).}
-        Übersteuerbarkeit durch die Crew ist als Prinzip gefordert; wie dies konkret erfolgt, ist projektspezifisch festzulegen und nachzuweisen (klare HMI-Mittel, sichtbar/greifbar; Priorisierung bei konkurrierenden Eingriffen).
-  \item \textbf{Geltung heutiger Prozesse (Anwendbarkeit).}
-        Klassische Nachweise decken „eingefrorene“ Leistung ab, nicht Verhalten auf unbekannten Daten/bei Drift; ODD allein genügt nicht bei wandernden Verteilungen.
-  \item \textbf{Safety-Aspekte.}
-        Unsichere Übertragbarkeit auf unbekannte Daten; unklare Einbindung probabilistischer Zuverlässigkeitsgrößen in Safety-Analysen; Redundanz/Monitoring $\rightarrow$ höherer DAL („DALgebra“) nur begrenzt übertragbar.
-  \item \textbf{System-Aspekte.}
-        Unklar, was hinreichend dissimilar bei ML bedeutet (Daten/Architektur/Hyperparameter); Runtime Assurance verlangt zuverlässige Fehlererkennung, Konfidenzen und OOD-Detektion.
-  \item \textbf{Software-Aspekte (DO-178C-Logik).}
+  \item \textbf{AI-Level \& Übersteuerbarkeit (L1/L2):}
+        Übersteuerbarkeit durch die Crew ist als Prinzip gefordert. Wie dies konkret erfolgt, 
+        ist projektspezifisch festzulegen und nachzuweisen.
+  \item \textbf{Geltung heutiger Prozesse (Anwendbarkeit):}
+        Klassische Nachweise decken nur eingefrorene Modelle ab, aber 
+        nicht das Verhalten auf unbekannten Daten bei Drift. ODD Abdeckung allein genügt nicht bei wandernden Verteilungen.
+  \item \textbf{Safety-Aspekte:}
+        Unsichere Übertragbarkeit auf unbekannte Daten; unklare Einbindung probabilistischer Zuverlässigkeitsgrößen 
+        in Safety-Analysen. Redundanz/Monitoring $\rightarrow$ höhere DAL Einstufung ist nur begrenzt übertragbar.
+  \item \textbf{System-Aspekte:}
+        Unklar, was hinreichend dissimilar bei ML bedeutet (Daten/Architektur/Hyperparameter); 
+        Runtime-Assurance verlangt zuverlässige Fehlererkennung, Konfidenzen und OOD-Detektion.
+  \item \textbf{Software-Aspekte (DO-178C-Logik):}
         Zwischen-Spezifikation via Daten/Metriken unscharf; Lücken in Traceability bis zu Datenanforderungen; Testtiefe/ML-Coverage unklar.
-  \item \textbf{Probabilistische Systeme (Analogie).}
-        Fehlende, anerkannte Verfahren für „genug“ Testen und probabilistische Leistungsargumente (inkl.\ OOD/Drift).
-  \item \textbf{Zertifizierungsprozess.}
-        „Henne–Ei“ Praxis $\leftrightarrow$ Zulassung; Standardisierungszyklen vs.\ ML-Tempo; fehlende Leitplanken für kontinuierliche Re-Zertifizierung.
-  \item \textbf{Tool-Qualifikation (DO-330).}
-        ML-Toolchains passen schlecht in die klassische Tool-Taxonomie; „Output prüfen statt Tool qualifizieren“ skaliert bei Massendaten schlecht (ggf.\ qualifizierte Checker-Tools).
-  \item \textbf{Sicherheit verlangt Vorhersagbarkeit.}
-        Safety Cases setzen vorhersagbares Verhalten voraus; KI/ML liefert jedoch primär probabilistische Aussagen, die an Datenverteilungen gebunden sind. Vorhersagbarkeit muss daher operationalisiert werden: Klarer ODD (außerhalb Abstain/Degrade), kalibrierte Unsicherheit (reliability), Runtime-Assurance (OOD-Detektion) sowie eng begrenzte Inferenzpfade auf der Zielplattform (feste Pipelines, Worst-Case-Timing).
+  \item \textbf{Probabilistische Systeme (Analogie):}
+        Fehlende anerkannte Verfahrenn, die bestimmen, dass ausreichend getest wurde.
+  \item \textbf{Zertifizierungsprozess:}
+        ``Henne–Ei'' Praxis, dass im Betrieb gezeigt werden soll, dass ein System sicher genug ist, aber dieser Nachweis 
+        für die Zulassung für den Betrieb benötigt wird.
+        Fehlende Leitplanken für kontinuierliche Re-Zertifizierung.
+  \item \textbf{Tool-Qualifikation (DO-330):}
+        ML-Toolchains passen schwer in die klassische Tool-Taxonomie. Den Output zu prüfen statt Werkzeuge zu qualifizieren 
+        skaliert bei Massendaten nur eingeschränkt.
+  \item \textbf{Sicherheit verlangt Vorhersagbarkeit:}
+        Safety Cases setzen vorhersagbares Verhalten voraus; KI/ML liefert jedoch primär probabilistische Aussagen, 
+        die an Datenverteilungen gebunden sind. Vorhersagbarkeit muss daher operationalisiert werden: Klarer ODD, 
+        Zuverlässigkeit, OOD-Detektion sowie eng begrenzte Inferenzpfade auf der Zielplattform.
 \end{itemize}
 
-\subsection{Limitierungen}
-\begin{itemize}
-  \item \textbf{Spezifikation.}
-        ML-Verhalten nur indirekt (Daten/Metriken) beschreibbar; ODD unvollständig bei Rand-/Übergangsfällen.
-  \item \textbf{Datenabhängigkeit \& Nachvollziehbarkeit.}
-        Leistung folgt den Daten (Bias/Lücken/Rauschen); komplexe Pipelines erschweren Reproduzierbarkeit/Traceability.
-  \item \textbf{Verifikation.}
-        Kein Konsens zu „ausreichendem“ Testen; formale Verfahren skalieren schlecht; XAI hilft, ersetzt aber keine Robustheits-/Generalisierungsnachweise; OOD bleibt offen.
-  \item \textbf{Safety-getriebenes Lernen.}
-        Optimierung oft auf Performance statt Sicherheit/Robustheit; unsichere Konfidenzen auf OOD; einfache, verifizierbare Fallbacks in komplexen Systemen schwer.
-  \item \textbf{Nichtdeterminismus.}
-        Variabilität durch Eingangsrauschen, Parallelhardware, Stochastik; Rest-Nichtdeterminismus ist zu begrenzen und nachzuweisen.
-  \item \textbf{Transfer Learning.}
-        Risiken (negativer Transfer, Privatsphäre, Interpretierbarkeit); fehlende Benchmarks für V\&V-Vergleichbarkeit.
-  \item \textbf{Kontinuierliche Entwicklung (MLOps).}
-        Bedarf an Regeln für Retraining-Trigger und V\&V-Tiefe vor/nach Deployment (kontinuierliche Re-Zertifizierung).
-  \item \textbf{Hardware-Constraints \& Skalierung.} 
-        Größere/komplexere Modelle (mehr Parameter, höhere Eingangsauflösung) benötigen deutlich mehr Rechenleistung, Speicher/Bandbreite und Energie. Auf avionischen Zielplattformen kann dies Latenz- und Determinismusrisiken, Kühl- und Integrationsaufwand erhöhen.
+\section{Limitierungen}
+Folgend aufgelistet sind derzeitige Begrenzungen, die es noch zu klären gilt.
 
+\medskip
+\begin{itemize}
+  \item \textbf{Spezifikation:}
+        ML-Verhalten ist nur indirekt beschreibbar. ODD Grenzen sind bei Rand-/Übergangsfällen noch unvollständig.
+  \item \textbf{Datenabhängigkeit \& Nachvollziehbarkeit:}
+        Leistung folgt den Daten (Bias/Lücken/Rauschen); komplexe Pipelines erschweren Reproduzierbarkeit/Traceability.
+  \item \textbf{Verifikation:}
+        Kein Konsens zu ausreichendem Testen; formale Verfahren skalieren schwer. 
+        XAI hilft, ersetzt aber keine Robustheits-/Generalisierungsnachweise; OOD bleibt offen.
+  \item \textbf{Safety-getriebenes Lernen:}
+        Optimierung oft auf Performance statt Sicherheit/Robustheit; unsichere Konfidenzen auf OOD; 
+        einfache, verifizierbare Fallbacks in komplexen Systemen schwer.
+  \item \textbf{Nichtdeterminismus:}
+        Variabilität durch Eingangsrauschen, Parallelhardware, Stochastik; Rest-Nichtdeterminismus ist zu begrenzen und nachzuweisen.
+  \item \textbf{Transfer Learning:}
+        Risiken (negativer Transfer, Privatsphäre, Interpretierbarkeit); fehlende Benchmarks für V\&V-Vergleichbarkeit.
+  \item \textbf{Kontinuierliche Entwicklung (MLOps):}
+        Bedarf an Regeln für Retraining-Trigger und V\&V-Tiefe vor/nach Deployment (kontinuierliche Re-Zertifizierung).
+  \item \textbf{Hardware-Constraints \& Skalierung:} 
+        Größere/komplexere Modelle (mehr Parameter, höhere Eingangsauflösung) benötigen deutlich mehr 
+        Rechenleistung, Speicher/Bandbreite und Energie. Auf avionischen Zielplattformen kann dies Latenz- und 
+        Determinismusrisiken, Kühl- und Integrationsaufwand erhöhen.
 \end{itemize}
 
 
@@ -338,12 +335,14 @@ Um von KIs im Einsatz lernen zu können wird im Kontext von Robotaxis das Buch
 Embodied AI Safety von Philipp Koopman \footnote{\citetitle{Koopman:2025:EAI} \parencite{Koopman:2025:EAI}}
 betrachtet.Die Leitidee ist, Sicherheit für KI-Systeme 
 in der physischen Welt neu zu denken: statt nur auf Komponenten oder Fehlertypen 
-zu blicken, rückt er das beobachtbare Verhalten und eine rechtlich-ethische 
-„duty of care“ in den Mittelpunkt. Daraus folgt: Sicherheit entsteht aus dem 
+zu blicken, rückt er das beobachtbare Verhalten und eine rechtliche und ethische Pflicht 
+(``duty of care'') in den Mittelpunkt. Daraus folgt: Sicherheit entsteht aus dem 
 Zusammenspiel mehrerer Disziplinen — System Safety, Cybersecurity, Machine Learning 
 und Human-Computer-Interaction.
 
 \section{Überblick}
+Die folgenden Kapitel des Buches geben einen Überblick über die zentralen Aspekte von eAI Safety.
+
 \paragraph{Kapitel 1 Introduction}
 Beschreibt was mit eAI gemeint ist, safety im Allgemeinen und wie Robotaxis funktionieren. 
 Zudem wird der Cruise Unfall im Jahr 2023 als Motivation angeführt (genauer beschrieben in: \nameref{sec:praxis-vorfaelle}).
@@ -355,7 +354,7 @@ bei denen ein Computer einen Fehler macht, welcher zu Schaden führen kann.
 
 \paragraph{Kapitel 3 Cybersecurity engineering concepts}
 Betrachtet werden, wie diese Konzepte in Computer angewendet und in anderen Produkten eigenbettet werden. 
-Dieses Kapitel wird nicht genauer betrachtet, da es den Scope dieser Arbeit verlässt.
+Dieses Kapitel übersteigt den Umfang dieser Arbeit und wird daher nicht näher betrachtet.
 
 \paragraph{Kapitel 4 Machine learning concepts}
 Diese werden auf einer ``high-level'' Basis betrachtet und vorallem die Funktionalität untersucht. 
@@ -363,8 +362,8 @@ Betrachtet werden Klassifikationen, ``end-to-end'' Ansätze und generative KI.
 
 \paragraph{Kapitel 5 The role of humans in eAI safety}
 Betont wird, dass es noch ein weiter Weg bis zur kompletten ``human-free'' eAI in der echten Welt ist. 
-Es wird zu einem von der Sicht, dass der Mensch die KI unterstützt und zum anderen, dass die KI den Mensch unterstützt 
-betrachtet. Hervorgehoben wird zudem, dass der Mensch oftmals die Schuld bekommt und das dies nicht richtig sei.
+Es wird aus zwei Richtungen betrachtet, einerseits unterstützt der Mensch die KI und zum anderen, unterstützt die KI den Menschen. 
+Hervorgehoben wird zudem, dass der Mensch oftmals die Schuld bekommt und das dies nicht richtig sei.
 
 \paragraph{Kapitel 6 eAI safety issues in the wild}
 Begründet werden diese Probleme an Beispielen von Robotaxis in der echten Welt. Betont wird hier, 
@@ -373,7 +372,7 @@ Aber dass in Nachrichten eine Flut an Berichten über Verkehrsstörungen, Unfäl
 das Vertrauen in die Technologie untergraben.
 
 \paragraph{Kapitel 7 Acceptable risk}
-Es wird über vertretbare Risiken anhand von Auffälligkeiten und Unglücken mit Robotaxis geredet. 
+Es wird über vertretbare Risiken anhand von Auffälligkeiten und Unglücken mit Robotaxis diskutiert. 
 Und dass allein statistisch gesehen, dass das System weniger Fehler als Menschen macht, nicht genügt.
 
 \paragraph{Kapitel 8 Re-imagining safety engineering}

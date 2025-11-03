@@ -2,134 +2,86 @@
 \chapterimage{Bilder_und_Co/analyse.jpg} % Chapter heading image
 %----------------------------------------------------------------------------------------
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
-\chapter{Radarsystem Auswahl}\label{chap:szenarien}
-Radarsysteme werden in der Luftfahrt an verschiedensten Orten und für verschiedenste Zwecke eingesetzt. 
-Diese tragen dabei essentiell zur Flugsicherheit sowohl am Boden als auch an Bord bei.
+\chapter{Radarauswahl \& Wetterklassifikation}\label{chap:szenarien}
 
 Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem ausgewählt und genauer betrachtet.
 Da sonst alles nur sehr vage Umschreibungen ohne konkretes Ziel wären. 
 Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
 
 \section{Verschiedene Radarsysteme}
-In Flugzeugen sind meist mehrere Radare für verschieden Verwendungszwecke verbaut. Im folgenden werden 
-beispielhaft verschiedene Flugzeuge betrachtet. Zu untersuchen sind die dort verwendeten Radarsysteme, 
-deren Profile bzw. was man versucht zu erkennen und die entsprechenden Anforderungen. Um die Dimensionen 
-zu verstehen je eine kleine Listen der Spezifikationen.
 
+In Flugzeugen sind meist mehrere Radare für unterschiedliche Zwecke verbaut. 
+Im Folgenden werden exemplarisch vier Systeme betrachtet. Gezeigt werden jeweils Radartyp, 
+typische Einsatzprofile und eine kurze Spezifikationsliste.
 
+Hinweis zu Quellenangaben: 
+\textbf{(N)} = Daten aus nicht belastbaren Quellen (z.\,B.\ Wikipedia oder Foren), 
+\textbf{(T)} = typische Werte bekannt aus Vorlesungen wie Einführung autonomes Fahren.
 
-% ===================== MiG-25 =====================
-\subsection{MiG-25 \parencite{MiGAlley_Smerch}}
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{p{3.9cm} p{10.7cm}}
-\hline
-\textbf{Parameter} & \textbf{Wert} \\
-\hline
-Rolle/Typ & Bordradar Luftzielsuche/-verfolgung; Seitensichtradar Aufklärung/Bodenkartierung \\
-Bezeichnungen & Smerch-A \\
-Plattformen & MiG-25P; frühe Prototypen mit Smerch-A1 \\
-Frequenz/ Band/ Wellenlänge & Grundwellenlänge \(\sim\)3\,cm; Smerch-A1 zusätzlich 2\,cm-Betriebsart \\
-Sendeleistung (Spitze) & \textbf{(N)} 600 kW \\
-Sendeleistung (Durchschnitt) & \textbf{(N)} 1-6 kW \\
-Wellenform/Puls & \textbf{(N)} pulse-only radar with no look-down/shoot-down capability; \textbf{(N)} 25 Nano Sekunden \\
-Reichweite/Detektion & Bomber-Detektion \(\approx 100\) km; Tracking \(\approx 50\) km (A1) \\
-Scan/Abdeckung & fortlaufende Verbesserungen in Störfestigkeit und Tiefflug-Cluttertoleranz ab Serienstand \\
-Antenne (Typ/Größe/Gain) & --- \\
-Gewicht (System) & ca.\ 500\,kg (RP-25) \\
-Abmessungen (H\(\times\)B\(\times\)T)/ Volumen & --- \\
-Hinweise & --- \\
-\hline
-\end{tabular}
-\caption{MiG-25}
-\end{table}
+\subsection*{MiG\textendash25 (Smerch--A, Kampfjet)\footnote{\citetitle{MiGAlley_Smerch} \parencite{MiGAlley_Smerch}}}
+\begin{itemize}
+  \item \textbf{Rolle/Typ:} Bordradar zur Luftzielsuche und \-verfolgung
+  \item \textbf{Bezeichnung:} Smerch\textendash A
+  \item \textbf{Frequenz/Band/Wellenlänge:} 10\,GHz (3\,cm); Variante A1: 15\,GHz (2\,cm)
+  \item \textbf{Sendeleistung (Spitze):} \textbf{(N)} 600\,kW
+  \item \textbf{Sendeleistung (Durchschnitt):} \textbf{(N)} 1–6\,kW
+  \item \textbf{Wellenform/Puls:} \textbf{(N)} Pulsradar, Pulsbreite 0{,}025\,\textmu s
+  \item \textbf{Reichweite/Detektion:} Bomber \(\approx\) 100\,km; Tracking \(\approx\) 50\,km (A1)
+  \item \textbf{Scan/Abdeckung:} Fortlaufende Verbesserungen in Störfestigkeit und Tiefflug\-Clutter\-toleranz ab Serienstand
+  \item \textbf{Antenne (Typ/Größe/Gain):} ---
+  \item \textbf{Gewicht (System):} ca. 500\,kg
+  \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} ---
+  \item \textbf{Hinweise:} \textbf{(N)} keine Look\-down/Shoot\-down\-Fähigkeit
+\end{itemize}
 
-% ===================== F-14 =====================
-\subsection{F-14 \parencite{Forecast1999_AWG9_APG71}}
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{p{3.9cm} p{10.7cm}}
-\hline
-\textbf{Parameter} & \textbf{Wert} \\
-\hline
-Rolle/Typ & Bordradar; Mehrzielfähigkeit (TWS) \\
-Bezeichnungen & AWG-9 \\
-Plattformen & F-14 \\
-Frequenz/ Band/ Wellenlänge & 8--12\,GHz (X-Band) \\
-Sendeleistung (Spitze) & 10\,kW \\
-Sendeleistung (Durchschnitt) & ca.\ 7\,kW (Pulse-Doppler), 500\,W (Pulsmodus) \\
-Wellenform/Puls & Pulsbreite: Puls 0.4/50\,\(\mu\)s; Pulse-Doppler 0.4/1.3/2.0/2.7\,\(\mu\)s \\
-Reichweite/Detektion & Max.\ Suche 213\,km (115\,NM) \\
-Scan/Abdeckung & 80\(^\circ\)/s (horizontal); 2 Scans/s (vertikal) \\
-Antenne (Typ/Größe/Gain) & Slotted planar array; 14.2\,cm / 36\,in (Angabe inkonsistent) \\
-Gewicht (System) & 590\,kg (1{,}300\,lb) \\
-Abmessungen (H\(\times\)B\(\times\)T)/ Volumen & 0.78\,m\(^3\) (28\,ft\(^3\)) \\
-Hinweise & TWS bis 24 Ziele; Raketenstarts gegen bis zu 6 Ziele; Zielverfolgbarer Höhenbereich 50\,ft bis 80{,}000\,ft; Zielgeschwindigkeit von niedriger Unterschall bis \(>\) Mach 3 \\
-\hline
-\end{tabular}
-\caption{F-14 (AWG-9)}
-\end{table}
+\subsection*{F\textendash14 (AWG\textendash9, Kampfjet)\footnote{\citetitle{Forecast1999_AWG9_APG71} \parencite{Forecast1999_AWG9_APG71}}}
+\begin{itemize}
+  \item \textbf{Rolle/Typ:} Bordradar
+  \item \textbf{Bezeichnung:} AWG\-9
+  \item \textbf{Frequenz/Band/Wellenlänge:} 8–12\,GHz (X\-Band)
+  \item \textbf{Sendeleistung (Spitze):} 10\,kW
+  \item \textbf{Sendeleistung (Durchschnitt):} 7\,kW (Pulse\-Doppler), 0{,}5\,kW (Pulsmodus)
+  \item \textbf{Wellenform/Puls:} Pulsbreiten: Puls 0{,}4/50\,\textmu s; Pulse\-Doppler 0{,}4/1{,}3/2{,}0/2{,}7\,\textmu s
+  \item \textbf{Reichweite/Detektion:} maximale Suche 213\,km
+  \item \textbf{Scan/Abdeckung:} 80\(^\circ\)/s (horizontal); 2 Scans/s (vertikal)
+  \item \textbf{Antenne (Typ/Größe/Gain):} \textbf{(N)} Slotted planar array; 14{,}2\,cm
+  \item \textbf{Gewicht (System):} 590\,kg
+  \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} 0{,}79\,m\(^3\)
+  \item \textbf{Hinweise:} \textbf{(N)} Zielhöhenbereich ca. 50\,ft bis 80{,}000\,ft; Zielgeschwindigkeiten von niedriger Unterschall bis \(>\) Mach\,3
+\end{itemize}
 
-% ===================== A-320 =====================
-\subsection{A-320 \parencite{Honeywell_RDR4000_Specs}}
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{p{3.9cm} p{10.7cm}}
-\hline
-\textbf{Parameter} & \textbf{Wert} \\
-\hline
-Rolle/Typ & Wetterradar (Flugzeug zusätzlich: Radar-Höhenmesser) \\
-Bezeichnungen & Honeywell RDR-4000 \\
-Plattformen & A-320 \\
-Frequenz/ Band/ Wellenlänge & Transmitter Frequency 9.375\,GHz \\
-Sendeleistung (Spitze) & \textbf{(N)} 900 W, 12 mükro Sekunden \\
-Sendeleistung (Durchschnitt) & \textbf{(N)} 40 W, 275 mükro Sekunden \\
-Wellenform/Puls & Pulse Compression \\
-Reichweite/Detektion & 320\,NM (Weather \& Ground Map); 60\,NM (Turbulence); 5\,NM (Windshear) \\
-Scan/Abdeckung & Azimuth \(\pm 80^\circ\) (Weather/Ground Map), \(\pm 40^\circ\) (Windshear); Scanrate bis 90\(^\circ\)/s \\
-Antenne (Typ/Größe/Gain) & Flat-Plate-Optionen: 30''/24''/18''; Gain 34.8/33.0/31.0\,dBi; 3-dB 3.0/4.2/5.6\(^\circ\) \\
-Gewicht (System) & Processor 4.76\,kg; Transmitter/Receiver 2.31\,kg; Antenne 16\,lb (Single), 29.5\,lb (Dual) \\
-Abmessungen (H\(\times\)B\(\times\)T)/ Volumen & --- \\
-Hinweise & 115\,VAC (96--134\,VAC), 360--800\,Hz; Power Dissipated 150\,VA (nom.); DO-160E (\(-55^\circ\)C bis \(+70^\circ\)C); Software: RTCA DO-178B Level C; Noise Figure 1.9\,dB; Minimum Discernable Signal \(-124\)\,dBm \\
-\hline
-\end{tabular}
-\caption{A-320 (RDR-4000)}
-\end{table}
+\subsection*{A\textendash320 (Honeywell RDR\textendash4000, Passagierflugzeug)\footnote{\citetitle{Honeywell_RDR4000_Specs} \parencite{Honeywell_RDR4000_Specs}}}
+\begin{itemize}
+  \item \textbf{Rolle/Typ:} Wetterradar
+  \item \textbf{Bezeichnung:} Honeywell RDR\-4000
+  \item \textbf{Frequenz/Band/Wellenlänge:} Senderfrequenz 9{,}375\,GHz
+  \item \textbf{Sendeleistung (Spitze):} \textbf{(N)} 900\,W, Pulsbreite 12\,\textmu s
+  \item \textbf{Sendeleistung (Durchschnitt):} \textbf{(N)} 40\,W, Pulszüge 275\,\textmu s
+  \item \textbf{Wellenform/Puls:} Pulse Compression
+  \item \textbf{Reichweite/Detektion:} 593\,km (Weather \& Ground Map); 111\,km (Turbulence); 9\,km (Windshear)
+  \item \textbf{Scan/Abdeckung:} Azimut \(\pm 80^\circ\) (Weather/Ground Map), \(\pm 40^\circ\) (Windshear); Scanrate bis 90\(^\circ\)/s
+  \item \textbf{Antenne (Typ/Größe/Gain):} Flat\-Plate\-Optionen 30"/24"/18"; Gain 34{,}8/33{,}0/31{,}0\,dBi; 3\-dB\-Breite 3{,}0/4{,}2/5{,}6\(^\circ\)
+  \item \textbf{Gewicht (System):} Processor 4{,}76\,kg; Transmitter/Receiver 2{,}31\,kg; Antenne 7{,}3\,kg (Single), 13{,}4\,kg (Dual)
+  \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} ---
+  \item \textbf{Hinweise:} Umgebung \(-55^\circ\)C bis \(+70^\circ\)C; Software nach RTCA DO\-178B Level C; Minimum Discernible Signal \(-124\)\,dBm
+\end{itemize}
 
-% ===================== Referenz (Automotive) =====================
-% ===================== Referenz (Automotive) =====================
-\subsection{Referenz (Automotive) \parencite{Bosch_FrontRadar_2025}}
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{p{3.9cm} p{10.7cm}}
-\hline
-\textbf{Parameter} & \textbf{Wert} \\
-\hline
-Rolle/Typ & Abstandsmessung; Toterwinkel-Assistent \\
-Bezeichnungen & Frontradar \\
-Plattformen & Automotive \\
-Frequenz/ Band/ Wellenlänge & 76--77\,GHz und 77--81\,GHz \\
-Sendeleistung (Spitze) & $\leq$\,55\,dBm EIRP (regulatorischer Grenzwert, 77--81\,GHz, ETSI EN 302\,264) \footnote{\citetitle{ETSI_EN_302_264_V2_1_1} \parencite{ETSI_EN_302_264_V2_1_1}.} \\
-Sendeleistung (Durchschnitt) & \textbf{(T)} 0.1--1\,W \\
-Wellenform/Puls & \textbf{(T)} FMCW \\
-Reichweite/Detektion & bis zu 530\,m \\
-Scan/Abdeckung & --- \\
-Antenne (Typ/Größe/Gain) & --- \\
-Gewicht (System) & --- \\
-Abmessungen (H\(\times\)B\(\times\)T)/ Volumen & 56\,mm \(\times\) 76\,mm \(\times\) 20\,mm \\
-Hinweise & Chirp-Sequenz ca.\ 10\, \textmu s pro Rampe; Vollausstattung optional 5 Sensoren im Fahrzeug; Gesamtverbrauch < 3.5\,W \\
-\hline
-\end{tabular}
-\caption{Automotive-Referenz (Frontradar)}
-\end{table}
+\subsection*{Referenz (Automotive, Frontradar)\footnote{\citetitle{Bosch_FrontRadar_2025} \parencite{Bosch_FrontRadar_2025}}}
+\begin{itemize}
+  \item \textbf{Rolle/Typ:} Abstandsmessung
+  \item \textbf{Bezeichnung:} Frontradar
+  \item \textbf{Frequenz/Band/Wellenlänge:} 76–81\,GHz
+  \item \textbf{Sendeleistung (Spitze):} ---
+  \item \textbf{Sendeleistung (Durchschnitt):} \textbf{(T)} 0{,}1–1\,W
+  \item \textbf{Wellenform/Puls:} \textbf{(T)} FMCW, Chirp\-Sequenz ca. 10\,\textmu s pro Rampe
+  \item \textbf{Reichweite/Detektion:} bis zu 530\,m
+  \item \textbf{Scan/Abdeckung:} \textbf{(N)} horizontal \(\pm 38^\circ\)
+  \item \textbf{Antenne (Typ/Größe/Gain):} \textbf{(N)} 10 Elemente, jeweils \(d=3{,}2\) mm
+  \item \textbf{Gewicht (System):} ---
+  \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} 56\,mm \(\times\) 76\,mm \(\times\) 20\,mm
+  \item \textbf{Hinweise:} Gesamtverbrauch < 3{,}5\,W; optional 5 Sensoren im Fahrzeug
+\end{itemize}
 
-
-\textbf{Anmerkung:} \textbf{(N)} Sind Daten aus nicht belastbaren Quellen wie Wikipedia oder Fachforenbeiträge. 
-\textbf{(T)} Sind typische/übliche oder abgelitete Werte vergleichbarer Systeme.
 
 
 \section{Auswahl des Radarsystems}
@@ -141,102 +93,55 @@ klassische Methoden schnell an ihre Grenzen geraten. Und zusätzliche Informatio
 die Crew bei Entscheidungen wie der Routenplanung unterstützen kann.
 
 
-\section{Szenarien beim Einsatz eines Klassifikations-Radars für Wetterphänomene}
+\section{Wetterklassifikation}
 
+Ein Bordwetterradar dient der frühzeitigen Erkennung konvektiver Wetterlagen, 
+um die Flugbahn vorausschauend zu planen und gefährliche Bereiche zu meiden. 
+Die folgenden Grundlagen stützen sich überwiegend auf das Airbus-Magazin 
+\enquote{Safety First}\footnote{\citetitle{marconnet2016optimumWeatherRadar} \parencite{marconnet2016optimumWeatherRadar}}.
 
-% --- Risikobadges ---
-\newcommand{\riskbadge}[2]{\colorbox{#1!15}{\textcolor{#1!70!black}{\scriptsize\textbf{#2}}}}
-\newcommand{\risklow}{\riskbadge{green}{NIEDRIG}}
-\newcommand{\riskmed}{\riskbadge{orange}{MITTEL}}
-\newcommand{\riskhigh}{\riskbadge{red}{HOCH}}
-% --- Scope-Badges (zusätzlich zu den Risk-Badges) ---
-\newcommand{\scopeon}{\colorbox{cyan!15}{\textcolor{cyan!60!black}{\scriptsize\textbf{ONBOARD}}}}
-\newcommand{\scopeapt}{\colorbox{violet!15}{\textcolor{violet!60!black}{\scriptsize\textbf{FLUGHAFEN}}}}
-\newcommand{\scopeboth}{\colorbox{gray!20}{\textcolor{black!70}{\scriptsize\textbf{BEIDES}}}}
+\subsection*{Grundlagen und Physik}
+Die drei Hauptgefahren sind Turbulenzen, Hagel und Windscherungen. Die Anzeige 
+beruht auf der Reflexion flüssigen Wassers. Eis, trockener Hagel oder Schnee 
+reflektieren schwächer und können trotz realer Gefahr unauffällig erscheinen. 
+Die Stärke eines Echos entspricht daher nicht in jedem Fall der tatsächlichen Gefährdung. 
+Das Echo hängt von Tropfengröße, Zusammensetzung und Menge ab. Ein Gewitter zeigt je 
+nach Höhe unterschiedliche Reflektivität, da die Konzentration flüssigen Wassers mit der Höhe abnimmt.
 
-\subsection*{Legende}
-\begin{itemize}[leftmargin=2.2em,itemsep=0.2em]
-  \item \risklow\ \,geringes Fehlklassifikations-/Folgerisiko
-  \item \riskmed\ \,moderates Risiko
-  \item \riskhigh\ \,hohes Risiko (operativ kritisch)
-  \item \scopeon\ \,relevant primär für Onboard-Wetterradar / Cockpit
-  \item \scopeapt\ \,relevant primär für Flughafen-/Bodenradar
-  \item \scopeboth\ \,für beide Betriebsarten relevant
-\end{itemize}
+\subsection*{Grenzen und typische Fehlinterpretationen}
+Starke Niederschläge können Abschattungen verursachen, sodass scheinbar leere 
+Bereiche hinter intensiven Echos entstehen. Turbulenz ohne Niederschlag wird nicht erfasst. 
+Die Turbulenzanzeige bezieht sich auf niederschlagsgebundene Bereiche (Dopplereffekt). 
+Form- und Strukturhinweise (z.\,B. ausgeprägte Kerne mit schwächeren Bereichen darüber) 
+deuten auf starke Auf- und Abwinde hin. Schwach reflektierende Wolken über Land können auf starke Turbulenzen 
+hinweisen, während nasse Wolken über dem Meer typischerweise weniger riskant sind.
 
-\subsection*{Meteorologische Szenarien}
-\begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
-  \item \riskhigh\ \scopeboth\ Konvektive Gewitterzellen / TS-Kerne (Thunderstorm cores) (Starkregen, Graupel, Hagel; starken Auf-/Abwinde).
-  \item \riskhigh\ \scopeboth\ Eingelagerte Konvektion in Stratiformbereichen (kleinere Gewitterzellen versteckt in großflächigen harmlosen Wolken).
-  \item \riskhigh\ \scopeboth\ Vereisungsrelevante Phasen: Schnee/Schneeregen (Vereisungsgefahr).
-  \item \riskmed\ \scopeboth\ Graupelschauer / Wintergewitter (gemischte Wasser- und Eisteilchen, schnelle Klassendynamik).
-  \item \riskmed\ \scopeboth\ Anvil-Blowoff, Virga, (Eispartikel, die von einer Gewitterwolke weggeweht wurden; Verdunstung bevor der Boden berührt wurde); (Echo ohne Bodenniederschlag; starker lokaler Abwind (Downburst) durch Verdunstungskühlung).
-  \item \riskhigh\ \scopeon\ Pfadabschattung hinter Starkzellen (black hole/gap illusion): starke Dämpfung erzeugt scheinbar „freie“ Korridore hinter einer Zelle → hohes Risiko für Fehlrouting durch vermeintliche Lücken.
-\end{itemize}
+\subsection*{Bedienhinweise und Scan-Empfehlungen}
+Empfohlen wird, unterhalb der Gefriergrenze zu scannen und anschließend durch vertikale 
+Scans sowie die Reflektivität aus höheren Regionen weitere Rückschlüsse zu ziehen. 
+Turbulenzen sind nicht auf das Innere von Wolken begrenzt. Die Anwesenheit von Hagel 
+variiert mit der Höhenlage. Hagel außerhalb von Wolken deutet auf starke Abwinde hin, 
+feuchte Luft dagegen auf eine eher geringe Hagelwahrscheinlichkeit.
 
-\subsection*{Mess- und Auswerteartefakte}
-\begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
-  \item \riskhigh\ \scopeboth\ Abschwächung / Dämpfung (v.\,a.\ Schatten hinter Starkzellen).
-  \item \riskmed\ \scopeboth\ Strahlenaufweitung / Beam Overshooting (bodennahe Schichten/Schmelzschicht verfehlt durch Erdkrümmung; Fernbereich bzw.\ falscher Tilt).
-  \item \riskmed\ \scopeboth\ Partielle Volumenfüllung (großes Strahlvolumen und kleine Zellen $\rightarrow$ wird gemittelt).
-  \item \riskhigh\ \scopeapt\  Drift (z.\,B.\ Saisonales Wetter).
-\end{itemize}
+\subsection*{Erkennungsmerkmale}
+Turbulenzen können anhand von Wolkenformen und häufigen Blitzen erkannt werden. Bestimmte 
+Wolkenformen lassen auf schweren Hagel und starke Vertikalwinde schließen. Schnelle 
+Formänderungen weisen auf hohe Wetteraktivität hin.
 
-\subsection*{Operative Anwendungsszenarien}
-\begin{itemize}[leftmargin=2.2em,itemsep=0.35em]
-  \item \riskhigh\ \scopeboth\ TS-Avoidance (Klassifikation von Hagel/Starkregen; Routen-/Holding-Entscheidungen).
-  \item \riskhigh\ \scopeboth\ Vereisungsmanagement (Erkennen von z.B. SLD (supercooled large droplets); kann zu schneller Leistungsdegradation führen).
-  \item \riskhigh\ \scopeboth\ Mikroburst Erkennung (Kurzlebige, starke Abwinde) (start-/landekritisch).
-\end{itemize}
+\subsection*{Taktische Ableitung und Abstände}
+Grundsatz ist das weiträumige Meiden konvektiver Zellen, bevorzugt seitlich statt vertikal. 
+Gefahren konvektiven Wetters sollten innerhalb von mindestens 40\,NM erkannt werden; Anpassungen 
+im Flug erfolgen innerhalb von 80\,NM, und im Reiseflug wird eine Wettervermeidung innerhalb 
+von 160\,NM angestrebt. Niemals unterhalb einer konvektiven Wolke fliegen, da dort sehr starke 
+Turbulenzen auftreten können. Ein Überflug kommt nur in Betracht, wenn ein Ausweichen nicht möglich ist.
 
 
 
-\section{Anforderungen an Wetterklassifikation für Onboard-Radare  \parencite{marconnet2016optimumWeatherRadar}}
 
-\subsection{Zielbild}
-Das Bordwetterradar soll konvektive Wetterlagen frühzeitig erkennen, nach Gefährdung einordnen 
-(Bedrohungs\-klassifikation) und Cockpit-Entscheidungen zu strategischer (Routenwahl) und taktischer 
-(Ausweichmanöver) Planung unterstützen. Es dient der Vermeidung, nicht der Penetration, gefährlicher Zellen.
 
-\subsection{Funktionale Anforderungen}
-\begin{itemize}
-  \item \textbf{Reflexionsbasierte Detektion und Intensitätsdarstellung}: Farbkodierte Anzeige nach Reflektivität (rot = hoch, grün = niedrig); Interpretation muss Tropfengröße/Phase berücksichtigen. Reflektivität ist nicht direkt proportional zum Risiko.
-  \item \textbf{Phänomen-Erfassbarkeit}: 
-  \begin{itemize}
-    \item Erkennbar: Regen, nasser Hagel, nasse Turbulenz, (prädiktiv) Windscherung je nach System. 
-    \item Nicht direkt erkennbar: Eis\-kristalle, trockener Hagel, Schnee, Clear-Air-Turbulenz, Sandstürme; Blitz nicht direkt, nur Vorhersagefunktionen.
-  \end{itemize}
-  \item \textbf{Turbulenzanzeige (Doppler/TURB)}: Anzeige nasser Turbulenz (typisch bis 40\,NM, je nach Standard bis 60\,NM).
-  \item \textbf{Bedrohungs-/Gefahrenklassifikation}: Automatische Auswertung/Tracking von Zellen mit Hagel- und Blitz-Prädiktion, Predictive Overflight, erweiterte Turbulenzstufen; REACT zur Dämpfungskompensation.
-\end{itemize}
 
-\subsection{Bedien- und Anzeigeanforderungen}
-\begin{itemize}
-  \item \textbf{Automatik mit manueller Übersteuerung}: Autotilt/Auto-Gain als Default; regelmäßige manuelle Vertikal-/Horizontalscans (Tilt/Range) zur Strukturanalyse der Zellen sind erforderlich.
-  \item \textbf{Reichweitenmanagement im Cockpit}: Unterschiedliche ND-Ranges für PF/PM (z.\,B. 80/160\,NM) zur gleichzeitigen Nah-/Fernwetter-Situationsübersicht; Vermeidung des blind alley-Effekts.
-  \item \textbf{Bodenclutter-Unterdrückung (GCS)} und sinnvolle Gain-Anpassung (z.\,B. Reduktion bei sehr feuchter, reflektiver Luft), um aktive Zellkerne herauszuarbeiten.
-\end{itemize}
 
-\subsection{Grenzen und Fehlermodi (für Klassifikationslogik zu berücksichtigen)}
-\begin{itemize}
-  \item \textbf{Phasenabhängigkeit}: Abnehmende Flüssigwasseranteile mit Höhe → schwächere Echos trotz signifikantem Gefahrenpotenzial oberhalb des Radar-Tops.
-  \item \textbf{Dämpfung/Abschattung}: Starke Niederschläge verursachen Attenuation; „schwarze Löcher“ hinter roten Echos als potenziell aktive, verdeckte Bereiche behandeln. Anforderung: Klassifikator muss Abschattung als Unsicherheitsindikator berücksichtigen (z.\,B. REACT nutzen).
-  \item \textbf{Kontextabhängigkeit}: Feuchte Meeresluft → hohe Reflektivität bei moderater Gefahr; trockene Konvektion (Tropen/Überland) → niedrige Reflektivität bei hoher Turbulenz. Meteorologisches Kontextwissen ist Teil der Entscheidungslogik.
-\end{itemize}
 
-\subsection{Leitlinien für Schwellen und Warngeometrie}
-\begin{itemize}
-  \item \textbf{Ausweichmargen}: Lateral typ.\ $\geq$\,20\,NM zu identifizierten Gewitterzellen (frühzeitig ab $\geq$\,40\,NM planen); vertikal $\geq$\,5{,}000\,ft, falls Überflug unvermeidbar. (Zur operationellen Nutzung der Klassifikation.)
-\end{itemize}
-
-\subsection{Beispielhafte Klassenausgabe}
-\begin{itemize}
-  \item No/Low Threat: Stratiform/Niesel; grün, keine Turbulenzen 
-  \item Moderate Convective: gelb; strukturierte Gradienten/„Scalloped Edges“ 
-  \item Severe Convective: rot; Finger/Hook/U-Shape; Turbulenzen magenta 
-  \item Severe + Hail/Lightning Risk: Gefahrenlayer aktiv 
-  \item Shadowed/Unknown: Attenuation/„black hole“ hinter rot 
-\end{itemize}
 
 
 % -------------------------
@@ -245,17 +150,17 @@ Das Bordwetterradar soll konvektive Wetterlagen frühzeitig erkennen, nach Gefä
 \chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
 
 Dieses Kapitel dient dazu einzelne relevante KI Modelle besser zu verstehen und eines davon 
-auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu untersuchen.
+auszuwählen, um dieses im Kontext der gewählten Wetterklassifikation weiter zu untersuchen.
 
 
 \section{Modell-Steckbriefe}
 
-\subsection*{CNN (Convolutional Neural Networks)}
+\subsection*{CNN (Convolutional Neural Networks)} 
 \begin{itemize}
   \item \textbf{Zweck:} Pixel/Region-Segmentierung \& Detektion.
   \item \textbf{Typische Variante:} YOLO
   \item \textbf{Input/Features:} 2D Radardaten (z.B. Winkel, Distanz), Radarrohdaten möglich.
-  \item \textbf{Stärken:} Hohe Genauigkeit; lernt komplexe Muster; edge-tauglich mit  Quantisierung.
+  \item \textbf{Stärken:} Hohe Genauigkeit; lernt komplexe räumliche Muster; edge-tauglich mit  Quantisierung.
   \item \textbf{Schwächen:} Daten-/Label-intensiv; geringere Erklärbarkeit.
   \item \textbf{Latenz/Compute:} 10--100\,ms
   \item \textbf{Modellgröße:} ca. 2.000.000 Parameter.
@@ -265,8 +170,8 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \begin{itemize}
   \item \textbf{Zweck:} Tabellarische Klassifikation auf Feature-Vektoren.
   \item \textbf{Typische Variante:} Random Forest
-  \item \textbf{Input/Features:} Texturen, Spektralbreite, SNR/Attenuation/Geometrie, Kontext (Temperatur/Höhe).
-  \item \textbf{Stärken:} Schnell, robust bei kleinen/mittelgroßen Datensätzen; gut erklärbar; sehr geringe Latenz.
+  \item \textbf{Input/Features:} Texturen, SNR/Geometrie, Kontext (Temperatur/Höhe).
+  \item \textbf{Stärken:} Schnell, robust bei kleinen/mittelgroßen Datensätzen; gut erklärbar; geringe Latenz.
   \item \textbf{Schwächen:} Räumliche Nachbarschaft nur indirekt; ungeeignet für rohe Bilder/Sequenzen.
   \item \textbf{Latenz/Compute:} $< 5$\,ms/Objekt; Echtzeitfähig
   \item \textbf{Modellgröße:} ca. 10.000 Knoten/Blätter.
@@ -275,10 +180,10 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \subsection*{Vision Transformer}
 
 \begin{itemize}
-  \item \textbf{Zweck:} Patch-/Bildbasierte Klassifikation, Segmentierung und Detektion auf Radar-„Bildern“;.
-  \item \textbf{Typische Variante:} DeiT-Small bei mehr Daten/Compute.
+  \item \textbf{Zweck:} Patch-/Bildbasierte Klassifikation, Segmentierung und Detektion.
+  \item \textbf{Typische Variante:} ViT-B.
   \item \textbf{Input/Features:} Mehrkanal-Radar-Slices (z.\,B.\ Reflektivität, Spektralbreite, \text{SNR}).
-  \item \textbf{Stärken:} Globaler Kontext durch Self-Attention; flexible Tokenisierung (auflösungsrobust).
+  \item \textbf{Stärken:} Globaler Kontext durch Self-Attention; durch Tokenisierung auflösungsrobust.
   \item \textbf{Schwächen:} Hoher Daten- und Compute-Bedarf; Sensitivität gegenüber Patch-/Token-Design.
   \item \textbf{Latenz/Compute:}  $\sim$10--40\,ms pro 512$\times$512 (auf einer GPU).
   \item \textbf{Modellgröße:} ca. 20.000.000 Parameter.
@@ -289,9 +194,9 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \begin{itemize}
   \item \textbf{Zweck:} Objektbildung, Vor-/Nachverarbeitung, Tracking.
   \item \textbf{Typische Variante:} DBSCAN
-  \item \textbf{Input/Features:} (Reflektivität, Spektralbreite, Textur) + Koordinaten; für Zeitindex/Track-Kontext.
+  \item \textbf{Input/Features:} (Reflektivität, Textur) und Koordinaten; für Track-Kontext.
   \item \textbf{Stärken:} Formflexibel, label-arm; stabilisiert Objekte/Tracks und verbessert nachgelagerte Klassifikationen.
-  \item \textbf{Schwächen:} Parameter-sensitiv ($\varepsilon$/minPts); keine semantischen Labels.
+  \item \textbf{Schwächen:} Parameter-sensitiv; keine semantischen Labels.
   \item \textbf{Latenz:} Optional echtzeitfähig
   \item \textbf{Modellgröße:} Feature anhängig.
 \end{itemize}
@@ -299,7 +204,7 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \section{Modellvergleich und Auswahl}
 
 \small
-\begin{longtable}{p{0.16\linewidth}p{0.21\linewidth}p{0.2\linewidth}p{0.21\linewidth}p{0.2\linewidth}}
+\begin{longtable}{p{0.16\linewidth}p{0.17\linewidth}p{0.16\linewidth}p{0.18\linewidth}p{0.2\linewidth}}
 \caption{Vergleich der Modelle mit Anforderungen}\\
 \toprule
 \textbf{Kriterium} &
@@ -328,26 +233,26 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \endlastfoot
 
 \textbf{Passung zu Szenarien} &
-\textbf{Hoch} lernt komplexe räumliche Muster \& Kerne &
-\textbf{Hoch} (mit guten Features) keine Rohdaten &
-\textbf{Hoch} auf bei großräumigen Mustern &
+\textbf{Hoch} &
+\textbf{Hoch} mit guten Features &
+\textbf{Hoch} auch großräumige Muster &
 \textbf{Niedrig als Primär} formt Objekte, aber keine Klassen \\
 
 \textbf{Leistung (F1, $P_d$/FAR)} &
 \textbf{Hoch} bei genügend Daten &
-\textbf{Hoch} (mit guten Features) &
+\textbf{Hoch} mit guten Features &
 \textbf{Hoch} bei genügend Daten &
 \textbf{Parameterabhängig} \\
 
 \textbf{Latenz} &
 \textbf{Erfüllbar}&
-\textbf{Sehr gut} ($<\,$ms/Objekt) &
-\textbf{mittel} (GPU notwendig) &
+\textbf{Sehr gut} &
+\textbf{mittel} &
 \textbf{Gut} \\
 
 \textbf{Datenbedarf/ Labeling} &
 \textbf{Hoch}  &
-\textbf{Mittel} (Objekt-Feature-Labels) &
+\textbf{Mittel} &
 \textbf{Hoch} &
 \textbf{Gering} \\
 
@@ -355,7 +260,7 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \textbf{Mittel}  &
 \textbf{Gut}  &
 \textbf{Schlecht}  &
-\textbf{Schlecht} (keine Labels) \\
+\textbf{Schlecht} keine Labels \\
 
 \textbf{Harware- anforderung} &
 \textbf{Mittel}  &
@@ -367,9 +272,10 @@ auszuwählen, um dieses im Kontext der gewählten Objektklassifikation weiter zu
 \textbf{Ja}  &
 \textbf{Ja} bei guten Features &
 \textbf{Ja}  &
-\textbf{Nein} Vor-/Nachverarbeitung \\
+\textbf{Nein} Vor-/ Nachverarbeitung \\
 \end{longtable}
 
+\medskip
 Als alleinstehendes Modell empfehlen sich Baummodelle (sofern man gute Features hat), als typisches Modell wird Random Forest verwendet. 
 Diese sind alleinstellungsfähig, was für diese Arbeit wichtig ist, um zusätzliche Komplexität zu vermeiden. 
 Zudem sind sie echtzeitfähig, gut erklärbar und haben eine relativ geringe Anforderung an die Leistung der Hardware. 
@@ -408,85 +314,96 @@ voneinander unabhängiger, die Streuung sinkt, und die Gesamtvorhersage wird rob
 \caption{Einfache Skizze eines Entscheidungsbaums: An jedem Knoten wird eine Schwellenfrage gestellt; am Blatt steht die Klassenentscheidung.}
 \end{figure}
 
-\subsection{Sicherheitsbezug}
-Random Forest ist für sicherheitsrelevante Kontexte geeignet, da das Bagging-Ensemble 
-aus vielen Entscheidbäumen die Modellvarianz senkt und dadurch robust gegen Overfitting 
-ist. Die baumstrukturierten Regeln ermöglichen eine hohe Erklärbarkeit: Entscheidungen lassen 
-sich auf konkrete Feature-Schwellen und Pfade zurückführen. Zugleich ist die 
-Nachverfolgbarkeit sicherheitskritischer Unterscheidungen gegeben, da Edge-Cases und knappe 
-Entscheidungsmargen über Blattverteilungen, Knoten bzw. Schwellen und fallbezogene Pfade identifiziert 
-und auditiert werden können; damit sind kritische Fälle transparent analysierbar.
+\subsection*{Random Forest im Sicherheitskontext}
 
+Random Forest eignet sich für sicherheitsrelevante Anwendungen, da das Verfahren von Natur aus 
+robust gegen Overfitting ist. Die baumstrukturierten Regeln fördern die Erklärbarkeit: 
+Entscheidungen lassen sich auf konkrete Feature-Schwellen und Pfade zurückführen. 
+Gleichzeitig ist die Nachverfolgbarkeit sicherheitskritischer Unterscheidungen gegeben, 
+weil Randfälle und knappe Entscheidungsmargen über Blattverteilungen, Knoten beziehungsweise 
+Schwellen sowie fallbezogene Pfade identifiziert und auditiert werden können; kritische Fälle sind dadurch transparent analysierbar.
 
-\subsection{Wichtige Punkte}
+Zu weiteren Vorteilen zählt eine solide Basisleistung mit wenig Tuning, 
+zudem ist das Modell über Feature-Wichtigkeiten gut erklärbar. Auf der anderen Seite ist Random Forest 
+für eine Pixel-Segmentierung wenig geeignet. Bei vielen irrelevanten Features können tiefe Bäume Rauschen 
+aufsammeln. Ohne geeignete Klassengewichte oder Sampling-Strategien können zudem Minderheitsklassen leicht benachteiligt werden.
 
-\paragraph{Zentrale Hyperparameter (Klassifikation)}
-
-\paragraph{Vorteile}
-\begin{itemize}
-  \item Geringes Overfitting-Risiko; solide Basisleistung mit wenig Tuning.
-  \item Sehr schnelle Inferenz auf Objekt-/Patch-Features (ms-Bereich).
-  \item Erklärbar über Feature-Wichtigkeiten.
-\end{itemize}
-
-\paragraph{Nachteile}
-\begin{itemize}
-  \item Für reine Pixel-Segmentierung wenig geeignet.
-  \item Empfindlich bei vielen irrelevanten Features: Tiefe Bäume können Rauschen „aufsammeln“.
-  \item Klassengewichte/Imbalance: Ohne passende class-weight/Sampling-Strategien werden Minderheitsklassen leicht benachteiligt.
-\end{itemize}
 
 \section{Einbindungsmöglichkeiten}
-Ein Random Forest kann an verschiedenen Stellen eingesetzt werden. Mögliche Einsatzfelder sind:
+Ein Random Forest lässt sich entlang des gesamten Lebenszyklus eines Radarsystems nutzen. 
+Er kann von der datengetriebenen Analyse in der Entwicklung bis zur begleitenden Entscheidungsunterstützung an Bord eingesetzt werden. 
+Die folgenden Beispiele zeigen mögliche Integrationspunkte.
 
+\medskip
 \begin{itemize}
   \item \textbf{Musteridentifikation \& Datendarstellung in der Entwicklung}\\
   Wiederkehrende Strukturen in Radardaten können systematisch erkannt und als
-  verständliche Merkmalsbilder aufbereitet werden. Hierzu werden geeignete Features (z.\,B.\ Intensitäts-, Textur-
-  und Kontextgrößen) definiert, Daten explorativ visualisiert und ein konsistenter „Musterkatalog“ erstellt,
-  der später als Grundlage für die Klassifikation dient.
+  verständliche Merkmalsbilder aufbereitet werden. 
+  Daten können visualisiert und ein konsistenten Musterkatalog 
+  der später als Grundlage für die Klassifikation überführt werden.
 
   \item \textbf{Assistierendes System neben dem klassischen Radar}\\
-  Das Modell läuft parallel und liefert zusätzliche, verdichtete Informationen zur Wetterlage
-  (z.\,B.\ Klassenhinweise, Trends, Qualitätsmerkmale). Die Ausgabe ergänzt die bestehende Anzeige,
-  ohne deren Logik zu ersetzen, und unterstützt die Crew mit klaren, kompakten Hinweisen für die
+  Das Modell läuft parallel und liefert zusätzliche Informationen zur Wetterlage
+  z.\,B.\ Klassenhinweise oder Trends. Die Ausgabe ergänzt die bestehende Anzeige,
+  ohne deren Logik zu ersetzen und unterstützt die Crew mit klaren, kompakten Hinweisen für die
   taktische Entscheidungsfindung.
 
   \item \textbf{Ersatz/Ergänzung klassischer Schwellen-Entscheidungsbäume}\\
   Anstelle fest verdrahteter Schwellwerte werden datengetriebene Entscheidungsgrenzen verwendet,
-  die sich aus gelabelten Beispielen ableiten lassen. Das reduziert manuelles Tuning, erhöht die
-  Konsistenz über verschiedene Wetterregime und ermöglicht feinere Trennungen zwischen ähnlichen Phänomenen.
+  die sich aus gelabelten Beispielen ableiten lassen. Das reduziert manuelles Tuning und 
+  ermöglicht feinere Trennungen zwischen ähnlichen Phänomenen.
 
   \item \textbf{Kombination mit Kalman-Filter}\\
   Das Modell ersetzt die Zustandsschätzung klassischer Filter nicht, sondern füttert sie:
-  Es liefert stabilisierte Beobachtungen und Klassifikationsergebnisse (inkl.\ Qualitätsmerkmalen),
-  die anschließend von einem Schätzer weiterverarbeitet werden. So verbleibt die Bahn-/Zellverfolgung im
+  Es liefert stabilisierte Beobachtungen und Klassifikationsergebnisse,
+  die anschließend von einem Schätzer weiterverarbeitet werden. So verbleibt die Bahnverfolgung im
   Filter, während die inhaltliche Deutung der Echos und ihre zeitliche Glättung modellbasiert verbessert werden.
-  Der Kalman-Filter (ähnlich in der Zielsetzung zu Hidden-Markov-Modellen) wurde gewählt, da dessen Output
+  Der Kalman-Filter wurde gewählt, da dessen Output
   probabilistisch ist und durch die Ergänzung eines ebenfalls probabilistischen Algorithmus nicht
   zwangsläufig in seiner Stabilität beeinträchtigt wird.
 \end{itemize}
 
-Auch wenn eine Anwendung in der Entwicklung zum verarbeiten großer Datenmengen große Vorteile bringen kann, 
-wird in dieser Arbeit der Onbord Einsatz untersucht. Eine enge Kopplung oder gar ein Ersatz
-etablierter Software würde zusätzliche Komplexität einführen und potentielle Fragen nach Sinnhaftigkeit und Mehrwert aufwerfen,
-die hier nicht im Fokus stehen. Daher wird der Einsatz als separate Onbordassistenz betrachtet.
+\medskip
+Für diese Arbeit steht der Einsatz an Bord als eigenständige Assistenz im Fokus. 
+Eine enge Kopplung oder gar ein Ersatz etablierter Software würde zusätzliche Komplexität 
+und Zertifizierungsaufwand erzeugen, ohne den Mehrwert in diesem Rahmen zu klären. 
+
+
 
 
 \section{Mögliche Szenarien beim Einsatz}
-Wenn man das klassische System und die KI parallel laufen lässt, kann es passieren, dass entweder das klassische 
-System oder die KI etwas erkennen kann. Dabei gilt es auch zu betrachten, ob diese übereinstimmen mit dem was sie 
-erkennen bzw. welcher Gefahrenlage das erkannte zuzuordnen ist.
+Beim parallelen Betrieb des klassischen Verfahrens und des Random-Forest ergeben sich wiederkehrende Entscheidungssituationen.
+Die folgenden Punkte skizzieren naheliegende Optionen.
 
-\medskip
-\begin{itemize}
-  \item Die KI sieht etwas und das klassische System nicht. Hier muss von Fall zu Fall unterschieden werden was sinnvoller ist. 
-  \item Das klassische System sieht etwas aber die KI nicht, hier wäre eine konsevative Entscheidung sinnvoll.
-  \item beide sehen nichts, hier kann man davon ausgehen, dass auch nichts da ist.
-  \item beide sehen etwas und schätzen es gleich ein, hier wären zusätzliche Informationen, die die KI möglicherweise liefern kann von Mehrwert, aber nicht unbeding essentiell.
-  \item beide sehen etwas und wiedersprechen sich, hier muss auch wieder unterschieden werden ob eine konsevative Entscheidung sinnvoll ist 
-    und man entsprechend der höheren Gefahrenlage handelt oder man das klassische System als Fallback strategie betrachtet. 
-\end{itemize}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{p{0.36\linewidth} p{0.58\linewidth}}
+\toprule
+\textbf{Situation} & \textbf{Empfehlung} \\
+\midrule
+ML-Pfad meldet ein Ziel, der klassische Pfad nicht &
+Möglich sind Frühtreffer oder ein Fehlalarm. Eine vorsichtige Meldung und Bestätigung über mehrere Messungen ist sinnvoll. \\
+\addlinespace[4pt]
+Klassischer Pfad meldet ein Ziel, der ML-Pfad nicht &
+Konservativ entscheiden und den Befund des klassischen Pfads bevorzugen. \\
+\addlinespace[4pt]
+Beide melden kein Ziel &
+Es kann davon ausgegangen werden, dass kein Ziel erkennbar ist und der Normalbetrieb kann fortgeführt werden. \\
+\addlinespace[4pt]
+Beide melden ein Ziel und stimmen überein &
+Der Befund kann übernommenwerden und Zusatzinformationen aus dem ML-Pfad können unterstützen. \\
+\addlinespace[4pt]
+Beide melden ein Ziel, aber mit abweichender Einstufung &
+Je nach Gefahrenlage konservativ entscheiden, im Zweifel die höhere Einstufung wählen oder den klassischen Pfad bevorzugen. \\
+\bottomrule
+\end{tabular}
+\caption{Paralleler Betrieb von klassischem Verfahren und ML-Pfad: Entscheidungssituationen und Handlungsempfehlungen}
+\end{table}
+
+
+
 
 
 
@@ -494,111 +411,62 @@ erkennen bzw. welcher Gefahrenlage das erkannte zuzuordnen ist.
 % Anforderungsfelder & Referenzrahmen
 % -------------------------
 \chapter{Anforderungen \& Zuordnung}\label{chap:anforderungen}
+In diesem Kapitel werden Anforderungen an das Beispiel des Randomforest zur Onbord-Wetterklassifikation gestellt 
+und den Anforderungen aus der Luftfahrt zugeordnet.
 
 
-
-
-\section{Beispielbezogene Herausforderungen}
-
-\subsection{Allgemein}
-Die allgemeinen Herausforderungen wurden bereits behandelt; nachfolgend ein paar beispielhafte Punkte:
-\begin{itemize}
-  \item \textbf{Nachweislogik \& Probabilistik:} Fragen zu klassischen Software-Nachweisen (z.\,B.\ MC/DC) sowie zum Umgang mit probabilistischem Modellverhalten müssen geklärt werden.
-  \item \textbf{Werkzeuge/Toolchain:} Trainings- und Datentools müssen bei beanspruchtem Credit ebenfalls qualifiziert werden; sonst „Confidence in Use“/Gegenprüfung.
-  \item \textbf{Projektbezug:} Diese Arbeit betrachtet kein konkretes Bordprodukt; projektspezifische Ausprägungen (z.\,B.\ HMI, Eingriffslogik) sind sicher auszulegen und nachzuweisen.
-\end{itemize}
-
-\subsection{Random-Forest-bezogen}
-Aus dem gewählten Modell hervorgehende Herausforderungen (die größten Schwierigkeiten betreffen Daten und Labels):
-\begin{itemize}
-  \item \textbf{Daten \& Labeling:} Repräsentativität über das ODD, Klassenungleichgewichte und hochdimensionale Feature-Sets erhöhen den Aufwand für sinnvolle Features/Labels.
-  \item \textbf{Modellgröße:} Je nach Anzahl der Bäume, Tiefe und Feature-Anzahl typischerweise mehrere~MB bis mehrere hundert~MB.
-  \item \textbf{Rechenbedarf:} Für Onbord abhängig von der Baumtiefe und Feature-Anzahl relativ hoch (kann höher als bei Kalman-Filtern oder FFT sein)
-\end{itemize}
-
-\subsection{Wetterphänomen-Klassifikation}
-Aus der Anwendung hervorgehende Herausforderungen (mit Blick auf das Modell):
-\begin{itemize}
-  \item \textbf{Begrenzter ``Ground Truth'':} Wenige perfekte Labels; häufig Expertenannotation.
-  \item \textbf{Regime-Drift:} Regionale/saisonale Unterschiede führen zu Verteilungswechseln; Modelle können außerhalb ihres Trainingsregimes degradieren.
-  \item \textbf{Imbalance:} Seltene Phänomene (z.\,B.\ Hagel, Superzellen) sind unterrepräsentiert und verschärfen Fehlklassifikationsrisiken.
-  \item \textbf{Sensorartefakte:} Abschattung/Attenuation (z.\,B.\ hinter Starkniederschlag), Boden-/See-Clutter, Bright-Band, Mixed-Phase erschweren die Merkmalsbildung.
-  \item \textbf{Uneindeutige Klassengrenzen:} Überlappende/mehrdeutige Klassen (z.\,B.\ Starkregen vs.\ Hagel) erschweren eine saubere Unterscheidung und das Labeling.
-\end{itemize}
-
-
-\paragraph{Hinweis.}
-Für einen Bord-Einsatz sind zusätzlich ODD-Grenzen, Degradationsregeln (Abstain/Unknown) und operative Kalibrierungs-/Qualitätsanzeigen zu definieren; im reinen Entwicklungssetting verschiebt sich der Fokus auf Daten-/Modell-Governance und reproduzierbare Trainingspipelines.
-
-
-Dieses Kapitel fasst wiederkehrende Sicherheitsbedarfe als Anforderungsfelder zusammen und ordnet ihnen
-typische Erwartungen aus etablierten Leitlinien und Standards zu.
-
-\section{Radar\,\texorpdfstring{$\times$}{x}\,KI: Anforderungen für Klassifikation}
+\section{Anforderungen Wetterklassifikation und Random Forest}
 \label{sec:req-radar-ki}
 
 Dieser Abschnitt beschreibt Anforderungen an ein Klassifikationssystem auf Basis eines Bordwetterradars in Kombination 
 mit einem Random Forest. Die Anforderungen sind einsatzzweckbezogen, qualitativ formuliert 
 und mit IDs versehen, um sie später mit der Abdeckung der ISO 8800 abzugleichen.
 
-\subsection{Daten, ODD und Abdeckung}
-\begin{description}
-  \item[\textbf{R-KI-01 (ODD-Geltungsbereich):}] Das System darf nur innerhalb eines dokumentierten ODD aktiv sein (Geographie, Flughöhe/\-phase, Sensor-Konfiguration, Wetterregime) und muss außerhalb automatisch in einen sicheren Degradationsmodus wechseln.\\
-  
-  \item[\textbf{R-KI-02 (Datenrepräsentativität):}] Trainings-/Validierungsdaten müssen die im ODD typischen Kombinationen (Region×Saison×Tageszeit×Sensor-Modus) abdecken; erkannte Lücken sind als „unbekannt“ zu kennzeichnen.\\
+\subsection*{ODD — Geltungsbereich}
+\textbf{R-KI-01 ODD definieren und prüfen:} \\
+Betriebsmodi des Radars, relevante Höhen- und Reichweitenbänder sowie Scanverfahren müssen festgelegt und laufend geprüft werden; außerhalb dieses Rahmens ist die Ausgabe als unsicher zu kennzeichnen.
 
-  \item[\textbf{R-KI-03 (Edge-Cases sichtbar):}] Attenuation/Shadow, Bodenclutter, trockene Konvektion, Eiskristalle u.\,ä. müssen als eigenständige Fallgruppen erfasst und im Betrieb erkennbar gemacht werden (Flag/„Unknown“).\\
-\end{description}
+\subsection*{Robustheit}
+\textbf{R-KI-02 Konservative Behandlung schwacher oder fehlender Echos:}\\
+Bereiche mit geringer Reflektivität oder möglicher Abschattung müssen als potenziell risikobehaftet erkannt und konservativ bewertet werden.
 
-\subsection{Reproduzierbarkeit und Rückverfolgbarkeit}
-\begin{description}
-  \item[\textbf{R-KI-04 (Build-Reproduzierbarkeit):}] Die Trainingspipeline muss deterministisch rekonstruierbar sein (Seeds, Artefakte, Container/Umgebung).\\
+\textbf{R-KI-03 Vertikalstruktur als Gefahrenhinweis:} \\
+Aus Tilt- und Vertikalscans abgeleitete Muster wie starke Kerne unten und schwächere Echos darüber müssen als Hinweis auf starke Auf- und Abwinde erkannt werden.
 
-  \item[\textbf{R-KI-05 (Traceability):}] Jede Modellversion muss Datenquellen, Label-Regeln, Feature-Versionen und Hyperparameter referenzierbar verlinken.\\
-\end{description}
+\textbf{R-KI-04 Form- und Dynamikmuster:} \\
+Charakteristische Zellformen sowie schnelle Formänderungen müssen als erhöhte Wetteraktivität erkannt und mit erhöhter Priorität ausgegeben werden.
 
-\subsection{Performance, Kalibrierung und Schwellen}
-\begin{description}
-  \item[\textbf{R-KI-06 (Primärmetrik passend):}] Für seltene Phänomene muss eine Imbalance-taugliche Hauptmetrik (z.\,B.\ Recall \& Precision) genutzt werden; der gewählte Operating Point (Schwelle~$\tau$) ist fachlich zu begründen.\\
+\textbf{R-KI-05 Turbulenz richtig einordnen:} \\
+Niederschlagsgebundene Turbulenz muss erkannt werden; Turbulenz ohne Niederschlag ist als nicht detektierbar zu kennzeichnen und darf nicht als Entwarnung ausgelegt werden.
 
-  \item[\textbf{R-KI-07 (Wahrscheinlichkeitstreue):}] Ausgaben müssen kalibriert sein; Unsicherheitsbereiche sind kenntlich zu machen und beeinflussen die Entscheidungslogik (konservatives Verhalten statt „sicher“).\\
-\end{description}
+\subsection*{OOD — Randfälle und Abweichungen}
+\textbf{R-KI-06 Randfälle explizit behandeln:} \\
+Konstellationen wie Hagel außerhalb von Wolken, schwach reflektierende Wolken über Land oder starke Abschattungen müssen als Randfälle markiert und konservativ bewertet werden.
 
-\subsection{Robustheit und Out-of-Distribution (OOD)}
-\begin{description}
-  \item[\textbf{R-KI-08 (OOD-Erkennung):}] Verteilungen außerhalb des Trainings müssen erkannt werden (z.\,B.\ Distanzmaß/Ensemble-Spread) und zu Degradation oder „Unknown“ führen.\\
+\textbf{R-KI-07 Drift überwachen:} \\
+Änderungen der Datenlage durch Jahreszeit, Region oder Flughöhe müssen als Verteilungsdrift erkennbar sein; bis zur Klärung ist die Ausgabe konservativ zu halten und der Geltungsbereich bei Bedarf einzuschränken.
 
-  \item[\textbf{R-KI-09 (Attenuation-Achtung):}] Abschattung hinter starken Echos muss als unsicherer Bereich markiert werden und darf nicht als „sicher“ klassifiziert werden.\\
-\end{description}
+\subsection*{Betrieb und HMI}
+\textbf{R-KI-08 Ausgabe auf Meiden ausrichten:} \\
+Die Anzeige muss klare, kompakte Hinweise für seitliches Ausweichen liefern und keine Durchflugentscheidung ableiten.
 
-\subsection{Erklärbarkeit und Validierung}
-\begin{description}
-  \item[\textbf{R-KI-10 (Feature-Evidenz):}] Globale und lokale Beitragsanalysen (z.\,B.\ Permutation oder Leaf-Pfad-Inspection (Regeln pro Blatt)) müssen für Reviews verfügbar sein.\\
+\textbf{R-KI-09 Erklärbarkeit sicherstellen:} \\
+Entscheidungen müssen auf Feature-Schwellen und Entscheidungswege zurückführbar sein; beitragende Merkmale sind zur Auditierbarkeit zu protokollieren.
 
-  \item[\textbf{R-KI-11 (Zeit-/Raum-getrennte Tests):}] Validierung muss zeitlich und räumlich getrennt erfolgen; tatsächlich getestete ODD-Zellen sind zu protokollieren.\\
-\end{description}
-
-\subsection{Betrieb (Avionik)}
-\begin{description}
-  \item[\textbf{R-KI-12 (Echtzeit/Determinismus):}] Inferenz und Feature-Extraktion müssen innerhalb des vorgesehenen Latenzbudgets deterministisch erfolgen; bei Eingangs-QC-Fehlern ist auf eine sichere Default-Strategie zu wechseln.\\
-
-  \item[\textbf{R-KI-13 (Monitoring/Drift):}] Im Betrieb muss Monitoring für Daten- und Kalibrier-Drift vorhanden sein; Befunde lösen Wartungsaktionen aus.\\
-\end{description}
+\textbf{R-KI-10 Reproduzierbarkeit gewährleisten:} \\
+Gleiche Eingaben müssen bei gleicher Modell- und Datenversion zu gleichen Ausgaben führen; Modell-, Daten- und Parameterstände sind mitzuloggen.
 
 
 
 % -------------------------
-% CHAPTER 6: Coverage-Analyse entlang ISO/PAS 8800
 % -------------------------
-
-
-
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \section{Zuordnung Random-Forest-Anforderungen zu Luftfahrt-Forderungen}
 
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
 \begin{longtable}{L{0.13\linewidth}L{0.42\linewidth}L{0.22\linewidth}}
-\caption{Mapping der RF-spezifischen Anforderungen (R-KI-01…13) auf die Luftfahrt-Forderungen (F-Avi-01…12).}\\
+\caption{Mapping der RF-spezifischen Anforderungen (R-KI-01…10) auf die Luftfahrt-Forderungen (F-Avi-01…08).}\\
 \toprule
 \textbf{RF-Req ID} & \textbf{RF-Anforderung (Kurztext)} & \textbf{Zuordnung F-Avi (IDs)} \\
 \midrule
@@ -614,35 +482,30 @@ und mit IDs versehen, um sie später mit der Abdeckung der ISO 8800 abzugleichen
 \bottomrule
 \endlastfoot
 
-R-KI-01 & ODD-Geltungsbereich (aktiv nur im ODD, sonst Degradation) & F-Avi-02 \\[2pt]
+R-KI-01 & ODD definieren und prüfen (außerhalb ODD als unsicher kennzeichnen) & F-Avi-02 \\[2pt]
 
-R-KI-02 & Datenrepräsentativität (ODD-Kombinationen sichtbar) & F-Avi-03, F-Avi-11 \\[2pt]
+R-KI-02 & Konservative Behandlung schwacher/fehlender Echos (Abschattung berücksichtigen) & F-Avi-05, F-Avi-02 \\[2pt]
 
-R-KI-03 & Edge-Cases sichtbar/flaggen (Shadow/Clutter/…) & F-Avi-11, F-Avi-02 \\[2pt]
+R-KI-03 & Vertikalstruktur als Gefahrenhinweis (Tilt-/Vertikalscans) & F-Avi-05 \\[2pt]
 
-R-KI-04 & Build-Reproduzierbarkeit (deterministischer Rebuild) & F-Avi-08, F-Avi-04 \\[2pt]
+R-KI-04 & Form- und Dynamikmuster als erhöhte Aktivität priorisieren & F-Avi-05, F-Avi-08 \\[2pt]
 
-R-KI-05 & Traceability End-to-End (Daten→Modell→Test) & F-Avi-04, F-Avi-08 \\[2pt]
+R-KI-05 & Turbulenz richtig einordnen (nur niederschlagsgebunden detektierbar) & F-Avi-05, F-Avi-08 \\[2pt]
 
-R-KI-06 & Primärmetrik/Operating Point (Imbalance-tauglich) & F-Avi-07, F-Avi-04, F-Avi-12  \\[2pt]
+R-KI-06 & Randfälle explizit behandeln (Hagel außerhalb Wolken, schwache Landwolken, Abschattung) & F-Avi-03, F-Avi-02 \\[2pt]
 
-R-KI-07 & Kalibrierung \& Unsicherheitssteuerung & F-Avi-04  \\[2pt]
+R-KI-07 & Drift überwachen und konservativ reagieren & F-Avi-06, F-Avi-04 \\[2pt]
 
-R-KI-08 & OOD-Erkennung \& Reaktion (konservativ) & F-Avi-06, F-Avi-02  \\[2pt]
+R-KI-08 & Ausgabe auf Meiden ausrichten (klare, kompakte Hinweise; keine Durchflugentscheidung) & F-Avi-01, F-Avi-08 \\[2pt]
 
-R-KI-09 & Attenuation ``ist nicht'' Sicher (Shadow als Unknown) & F-Avi-11, F-Avi-02 \\[2pt]
+R-KI-09 & Erklärbarkeit sicherstellen (Feature-Schwellen/Pfade protokollieren) & F-Avi-01 \\[2pt]
 
-R-KI-10 & Feature-Evidenz (global/lokal, SHAP/Permutation) & F-Avi-04, F-Avi-01  \\[2pt]
-
-R-KI-11 & Zeit-/Raum-getrennte Tests (ODD-Protokoll) & F-Avi-07, F-Avi-08  \\[2pt]
-
-R-KI-12 & Echtzeit \& Determinismus (Latenzbudget, Fallback) & F-Avi-10, F-Avi-08  \\[2pt]
-
-R-KI-13 & Monitoring \& Drift (Betrieb, Wartungstrigger) & F-Avi-05, F-Avi-06, F-Avi-08  \\
+R-KI-10 & Reproduzierbarkeit gewährleisten (gleiche Eingabe → gleiche Ausgabe; Versionen loggen) & F-Avi-06 \\
 
 \end{longtable}
 
-In Summe sind alle Random-Forest-Anforderungen den Luftfahrt-Forderungen (F-Avi-01…12) zuordenbar, eine echte
+\medskip
+In Summe sind alle Random-Forest-Anforderungen den Luftfahrt-Forderungen zuordenbar, eine echte
 „Nicht-Zuordnung“ ergibt sich nicht. Projektspezifische Präzisierungen sind zu berücksichtigen, in den allgemeinen 
 Forderungen sind sie lediglich konzeptionell gehalten.
 
@@ -664,15 +527,16 @@ eines Onboard Radarsystems in einem Flugzeug betrachtet werden.
 
 
 
-
 \section{Abgeleitete ISO~8800-Abdeckung (aus R-KI \texorpdfstring{$\rightarrow$}{→} F-Avi)}
 
 \subsection*{Methode}
-Die Abdeckung pro RF-Anforderung wird aus der Zuordnung R-KI \(\rightarrow\) F-Avi und der dortigen ISO-Abdeckung hergeleitet:
-Falls alle zugeordneten F-Avi-Punkte „voll“ sind \(\Rightarrow\) \covV; andernfalls \covT\ (konservativ).
+Die Abdeckung pro RF-Anforderung wird aus der Zuordnung R-KI \(\rightarrow\) F-Avi und der dort ausgewiesenen ISO-Abdeckung hergeleitet:
+Sind alle zugeordneten F-Avi-Punkte „voll“, dann \covV; andernfalls \covT\ (konservativ).
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 \begin{longtable}{L{0.12\linewidth}L{0.36\linewidth}L{0.24\linewidth}L{0.08\linewidth}L{0.18\linewidth}}
-\caption{Abgeleitete Abdeckung der ISO/PAS~8800 nach RF-Anforderungen (R-KI-01…13).}\\
+\caption{Abgeleitete Abdeckung der ISO/PAS~8800 nach RF-Anforderungen (R-KI-01…10).}\\
 \toprule
 \textbf{R-KI} & \textbf{Kurztext} & \textbf{ISO~8800 (Kapitel, abgeleitet)} & \textbf{Abd.} & \textbf{Hinweis} \\
 \midrule
@@ -688,145 +552,112 @@ Falls alle zugeordneten F-Avi-Punkte „voll“ sind \(\Rightarrow\) \covV; ande
 \bottomrule
 \endlastfoot
 
-R-KI-01 & ODD-Geltungsbereich (aktiv nur im ODD, sonst Degradation) & 9, 12, 14 & \covV & aus F-Avi-02 \\[2pt]
+R-KI-01 & ODD definieren und prüfen (außerhalb ODD als unsicher kennzeichnen) & 9, 12, 14 & \covV & F-Avi-02 \covV \\[2pt]
 
-R-KI-02 & Datenrepräsentativität (ODD-Kombinationen sichtbar) & 11, 9, 8, 12 & \covT & F-Avi-03 (V) + F-Avi-11 (T) \\[2pt]
+R-KI-02 & Konservative Behandlung schwacher/fehlender Echos (Abschattung berücksichtigen) & 9, 12, 14 & \covV & F-Avi-05 \covV; F-Avi-02 \covV \\[2pt]
 
-R-KI-03 & Edge-Cases sichtbar/flaggen (Shadow/Clutter/…) & 11, 12, 9, 14 & \covT & F-Avi-11 (T) + F-Avi-02 (V) \\[2pt]
+R-KI-03 & Vertikalstruktur als Gefahrenhinweis (Tilt-/Vertikalscans) & 9, 12 & \covV & F-Avi-05 \covV \\[2pt]
 
-R-KI-04 & Build-Reproduzierbarkeit (deterministischer Rebuild) & 7, 8, 12, 14, 15 & \covT & F-Avi-08 (T), F-Avi-04 (T) \\[2pt]
+R-KI-04 & Form- und Dynamikmuster als erhöhte Aktivität priorisieren & 6, 8, 9, 12, 14 & \covT & F-Avi-05 \covV; F-Avi-08 \covT \\[2pt]
 
-R-KI-05 & Traceability End-to-End (Daten→Modell→Test) & 7, 8, 12, 14, 15 & \covT & F-Avi-04/08 beide (T) \\[2pt]
+R-KI-05 & Turbulenz richtig einordnen (nur niederschlagsgebunden detektierbar) & 6, 8, 9, 12, 14 & \covT & F-Avi-05 \covV; F-Avi-08 \covT \\[2pt]
 
-R-KI-06 & Primärmetrik/Operating Point (Imbalance-tauglich) & 6, 8, 9, 12, 14, 15 & \covT & Mix F-Avi-07 (V) + F-Avi-04/12 (T) \\[2pt]
+R-KI-06 & Randfälle explizit behandeln (Hagel außerhalb Wolken, schwache Landwolken, Abschattung) & 8, 9, 11, 12, 14 & \covV & F-Avi-03 \covV; F-Avi-02 \covV \\[2pt]
 
-R-KI-07 & Kalibrierung \& Unsicherheitssteuerung & 8, 12, 15 & \covT & aus F-Avi-04 (T) \\[2pt]
+R-KI-07 & Drift überwachen und konservativ reagieren & 7, 8, 14 & \covT & F-Avi-06 \covT; F-Avi-04 \covV \\[2pt]
 
-R-KI-08 & OOD-Erkennung \& Reaktion (konservativ) & 9, 12, 14 & \covT & F-Avi-06 (T) + F-Avi-02 (V) \\[2pt]
+R-KI-08 & Ausgabe auf Meiden ausrichten (klare Hinweise, keine Durchflugentscheidung) & 6, 7, 8, 12, 14 & \covT & F-Avi-01 \covT; F-Avi-08 \covT \\[2pt]
 
-R-KI-09 & Attenuation ``nicht gleich'' „Safe“ (Shadow als Unknown) & 9, 11, 12, 14 & \covT & F-Avi-11 (T) + F-Avi-02 (V) \\[2pt]
+R-KI-09 & Erklärbarkeit sicherstellen (Feature-Schwellen/Pfade protokollieren) & 6, 7 & \covT & F-Avi-01 \covT \\[2pt]
 
-R-KI-10 & Feature-Evidenz (global/lokal) & 8, 12, 15, 6, 7 & \covT & F-Avi-04 (T) \\[2pt]
+R-KI-10 & Reproduzierbarkeit gewährleisten (Versionen loggen) & 7, 8, 14 & \covT & F-Avi-06 \covT \\
 
-R-KI-11 & Zeit-/Raum-getrennte Tests (ODD-Protokoll) & 7, 8, 9, 12, 14 & \covT & F-Avi-07 (V) + F-Avi-08 (T) \\[2pt]
-
-R-KI-12 & Echtzeit \& Determinismus (Latenzbudget, Fallback) & 6, 7, 8, 10, 14 & \covT & F-Avi-10 (V) + F-Avi-08 (T) \\[2pt]
-
-R-KI-13 & Monitoring \& Drift (Betrieb, Wartungstrigger) & 7, 8, 9, 12, 14 & \covT & F-Avi-05 (V) + F-Avi-06/08 (T) \\
 \end{longtable}
 
-\subsection*{Kurzfazit}
-Die RF-Anforderungen lassen sich durch die ISO/PAS~8800 überwiegend teilweise abdecken, 
-eine volle Abdeckung ergibt sich direkt nur für \textbf{R-KI-01} (ODD/Degradation). 
-Die verbleibenden Punkte sind meist eine Mischung aus voll und teilweise abgedeckten Forderungen. 
-Die Norm erfordert bei diesen Punkten oft projektspezifische Präzisierungen 
-(z.\,B.\ operative Erklärbarkeit, radarspezifische Edge-Case-Policies), 
-um den prinzipienbasierten Rahmen der Norm in konkrete Nachweise zu überführen.
+
+\subsection*{Abdeckungs–Zwischenfazit}
+Die RF-Anforderungen werden durch die ISO 8800 weitgehend adressiert, 
+mit \textbf{voller Abdeckung} für den ODD-Rahmen samt konservativem Verhalten 
+(Abstain/Degradation), für Datenaspekte und Randfälle (Repräsentativität, 
+Abschattung/Unsicherheitszonen) sowie Vorgehensempfohlene Informationsgewinne 
+(für strukturelle Wetterhinweise aus Vertikal-/Tilt-Scans). 
+
+\medskip
+\textbf{Teilweise abgedeckt} bleiben anwendungsnahe Punkte wie Form-/Dynamikmuster, 
+die spezifische Einordnung der Turbulenzanzeige, Drift-Überwachung im Betrieb, HMI-gerechte 
+Ausgabe (Meiden statt Durchflug), Erklärbarkeit (Feature-Schwellen/Pfade) und Reproduzierbarkeit 
+über Versionen. Hier sind projektspezifische Präzisierungen nötig, um den prinzipienbasierten Rahmen 
+der Norm in konkrete, radar- und einsatzbezogene Nachweise zu überführen.
 
 
-\section{Harte „Gatekeeper“}
+\section{Untersuchung der teilweise abgedeckten Punkte}
+
+Im Folgenden werden die in der Abdeckungstabelle als \covT gekennzeichneten RF-Anforderungen kurz diskutiert. 
+
+\begin{itemize}
+  \item \textbf{R-KI-04 Form- und Dynamikmuster priorisieren:}\\
+  Gut erfüllbar. Wenn in den Merkmalen beispielsweise Formänderung (Reflektivität- und Ausdehnungs-Unterschiede über die Zeit) enthalten sind.
+
+  \item \textbf{R-KI-05 Turbulenz richtig einordnen:}\\
+  Mittelmäßig erfüllbar. Nicht erkennbare Turbulenzen können zumindest regelbasiert als nicht detektierbar gekennzeichnet werden.
+
+  \item \textbf{R-KI-07 Drift überwachen und konservativ reagieren:}\\
+  Mittelmäßig erfüllbar. Konsevative Schwellen können zwar gesetzt werden, aber Drift muss zusätzlich geprüft werden.
+
+  \item \textbf{R-KI-08 Ausgabe auf Meiden ausrichten:}\\
+  Gut erfüllbar. Random Forest Ausgaben können auf risikoorientierte Klassen übertragen werden.
+
+  \item \textbf{R-KI-09 Erklärbarkeit sicherstellen:}\\
+  Sehr gut erfüllbar. Entlang der Pfade beziehungsweise Knoten können Unterscheidungen nachverfolgt und auditiert werden.
+
+  \item \textbf{R-KI-10 Reproduzierbarkeit gewährleisten:}\\
+  Sehr gut erfüllbar. Ein Random Forest nimmt erfahrungsgemäß bei gleichen Umgebungen und Inputs die gleiche Struktur beziehungsweise Knoten und Unterscheidungen an.
+\end{itemize}
+
+\section{KO-Kriterien}
 Die folgenden Punkte sind Mindestvoraussetzungen, damit die Funktion grundsätzlich für eine Zulassung
 als Bordfunktion in Betracht kommt. Sie adressieren den Onboard-Einsatz, ein reiner Entwicklungsbetrieb
 (ohne Bordfunktion) fällt nicht darunter.
 
+\medskip
 \begin{itemize}
-  \item \textbf{AI-Level \& Autorität (EASA L1/L2).}
-        L1 – Assistenz: Wenn das Modell optional für zusätzliche Hinweise/Warnungen eingesetzt wird
-         und somit jederzeit übersteuerbar bleibt.
+  \item \textbf{AI-Level \& Autorität (EASA L1/L2):}
+        Unterstützendes Modell für den Menschen, welches jederzeit übersteuerbar bleibt.\\
+        Ist als Bordassistenzsystem entsprechend gewählt worden und somit umsetzbar.
 
-  \item \textbf{System-Safety-Zuordnung \& DAL (DO-178C).}
-        Pilot-Assistenz: Entscheidung verbleibt beim Menschen
-        $\rightarrow$ typischerweise \textbf{DAL C–D}.
-        Die daraus abgeleiteten Zielgrößen/Fehlerraten sind erfahrungsgemäß realistisch erreichbar,
-        müssen jedoch use-case-spezifisch festgelegt und nachgewiesen werden.
+  \item \textbf{DAL Level C/D:}
+        Empfehlungsgemäß soll keine KI in hoch Risiko Bereichen verwendet werden (DAL A/B). \\
+        Die Zielgrößen gilt es auszuarbeiten, sollte aber mit verhältnismäßigen Aufwand möglich sein. 
+        Eine Wetterklassifikation entspricht typischerweise DAL C und liegt somit in einem realistischen Bereich.
 
-  \item \textbf{Kein Online-Lernen im Betrieb.}
+  \item \textbf{Kein Online-Lernen im Betrieb:}
         Eingefrorenes Modell: Das Modell wird offline trainiert und zur Freigabe „gefroren“;
-        Laufzeitanpassungen sind ausgeschlossen. Für einen Random Forest ist dies unproblematisch umsetzbar.
+        Laufzeitanpassungen sind ausgeschlossen.\\ 
+        Für einen Random Forest ist dies unproblematisch umsetzbar.
 
-  \item \textbf{Kein Assurance-Rabatt.}
+  \item \textbf{Kein Nachweis-Rabatt:}
         ML-Erkenntnisse ersetzen keine klassischen Nachweise: Jede abgeleitete Regel/Muster wird
-        mit etablierten Verfahren verifiziert und in den Safety Case integriert (vollständige Nachweiskette).
+        mit etablierten Verfahren verifiziert und in den Safety Case integriert (vollständige Nachweiskette). \\
+        Dies gilt es auszuarbeiten, sollte aber mit verhältnismäßigen Aufwand möglich sein.
+
+  \item \textbf{Zugelassene Hardware und Werkzeuge:}
+        Ohne entsprechend zugelassene Hardware und Werkzeuge ist die Erbringung eines belastbaren 
+        Sicherheitsnachweises erheblich erschwert.\\
+        Ein Random Forest sollte mit derzeit zugelassener Hardware lauffähig sein. 
+        Zugelassene Werkzeuge oder Nachweise für verwendete Werzeuge sollte in absehbarer Zeit beziehungsweise Aufwand möglich sein.
 \end{itemize}
 
-\noindent \textbf{Vergleich:} Wird die Funktion ausschließlich als Entwicklungswerkzeug eingesetzt (kein Bordprodukt),
-gilt statt der DAL-Logik die Toolqualifikation nach DO-330 (TQL, Credit-basiert).
 
+\section{Fazit der Übertragbarkeit}
+Die Zuordnung zeigt, dass die für den betrachteten Anforderungen 
+durch ISO 8800 mindestens teilweise und in der Praxis gut erfüllbar abgedeckt werden. 
+Mit Blick auf eine Bordfunktion sind die KO-Kriterien realistisch erfüllbar. 
+Ein Random Forest eignet sich dafür: rechnerisch leicht, deterministisch, erklärbar und mit etablierten Evidenzformen. 
+Die noch teilabgedeckten Punkte sind projektspezifisch zu präzisieren, stellen jedoch keine prinzipiellen 
+Hürden dar.
 
-
-\section{Untersuchung der teilweise abgedeckten Punkte}
-Im Folgenden werden die nicht vollständig abgedeckten Punkte knapp bewertet (Erfüllbarkeit und kurze Begründung).
-
-\begin{itemize}
-  \item \textbf{R-KI-02 (Datenrepräsentativität):} \emph{Erfüllbarkeit: Hoch.}
-      Für die L1-Assistenz genügt eine ODD-geleitete, einsatzangemessene Abdeckung; fehlende Kombinationen 
-      werden ausdrücklich als ``Unknown'' gekennzeichnet und konservativ behandelt. 
-
-  \item \textbf{R-KI-03 (Edge-Cases sicht-/markierbar):} \emph{Erfüllbarkeit: Hoch.}
-        Typische Radar-Edge-Cases (Shadow, Clutter etc.) sind fachlich bekannt und können konsistent markiert werden.
-
-  \item \textbf{R-KI-04 (Build-Reproduzierbarkeit):} \emph{Erfüllbarkeit: Hoch.}
-        Random-Forest-Pipelines liefern stabil replizierbare Ergebnisse und identische Builds sind erfahrungsgemäß zuverlässig erreichbar.
-
-  \item \textbf{R-KI-05 (End-to-End-Traceability):} \emph{Erfüllbarkeit: Hoch.}
-        Anforderungen, Daten/Labels, Trainingsläufe, Modelle und Testergebnisse lassen sich mit Standard-Werkzeugen 
-        durchgängig verknüpfen.
-
-  \item \textbf{R-KI-06 (Primärmetrik/Operating Point):} \emph{Erfüllbarkeit: Hoch.}
-        Imbalance-taugliche Kennzahlen (z.\,B.\ Recall oder Precision) sind etabliert; 
-        der Schwellenwert kann einsatzbezogen (Crew-Workload/False-Alarm-Rate) begründet werden.
-
-  \item \textbf{R-KI-07 (Kalibrierung/Unsicherheit):} \emph{Erfüllbarkeit: Mittel–Hoch.}
-        Kalibrierung ist technisch gut machbar; die \emph{operative} Nutzung (z.\,B.\ Anzeige/Regeln) ist kontextabhängig.
-
-  \item \textbf{R-KI-08 (OOD-Erkennung/Reaktion):} \emph{Erfüllbarkeit: Mittel–Hoch.}
-        OOD-Indikatoren sind verfügbar; die konservative Reaktion ist definierbar, bleibt aber projektspezifisch.
-
-  \item \textbf{R-KI-09 (Attenuation \(\neq\) „Safe“):} \emph{Erfüllbarkeit: Hoch.}
-        Schattenzonen hinter starken Echos können als \emph{Unknown} markiert werden; 
-        die konservative Behandlung ist unabhängig von der Modellgüte zulassungskonform.
-
-  \item \textbf{R-KI-10 (Feature-Evidenz):} \emph{Erfüllbarkeit: Hoch.}
-        Globale/lokale Beitragsanalysen sind für RF etabliert und review-fähig.
-
-  \item \textbf{R-KI-11 (Zeit-/Raum-getrennte Tests):} \emph{Erfüllbarkeit: Hoch.}
-        Zeit-/Regions-Splits sind organisatorisch gut umsetzbar und fachlich angemessen.
-
-  \item \textbf{R-KI-12 (Echtzeit/Determinismus):} \emph{Erfüllbarkeit: Hoch.}
-        Die Auswertung mit Random Forest ist rechnerisch leicht; mit fest definierten Verarbeitungsschritten 
-        und Puffergrößen lassen sich die vorgesehenen Reaktionszeiten verlässlich einhalten.
-
-  \item \textbf{R-KI-13 (Monitoring/Drift):} \emph{Erfüllbarkeit: Mittel–Hoch.}
-        Drift-Indikatoren sind verfügbar; Schwellen und Reaktionswege sind projektbezogen festzulegen, aber realistisch.
-\end{itemize}
-
-\paragraph{Zwischenfazit}
-Die nur teilweise abgedeckten Punkte gelten überwiegend als gut erfüllbar, verbleibende Unschärfen betreffen
-vor allem projektspezifisches, nicht die grundsätzliche Machbarkeit.
-
-\section{Fazit}
-Die Zuordnung zeigt: Die für den hier betrachteten Entwicklungs-Use-Case relevanten Anforderungen werden durch
-ISO/PAS~8800 mindestens teilweise und in der Praxis gut erfüllbar abgedeckt. Mit Blick auf eine
-spätere Bordfunktion sind die harten Gatekeeper (AI-Level/Autorität, hazardbasierte DAL-Zuordnung, ODD mit
-konservativem Verhalten, kein Online-Lernen sowie vollständige Nachweiskette) adressierbar und für eine
-L1-Assistenz realistisch nachweisbar.
-
-Ein Random Forest erweist sich hierfür als geeignetes Verfahren: Rechnerisch leicht, deterministisch,
-erklärbar und mit etablierten Evidenzformen (Kalibrierung, OOD-Indikatoren, Feature-Evidenz). Die noch
-teilabgedeckten Punkte (z.\,B.\ ODD\(\rightarrow\)Daten-Ableitung, Edge-Case-Policy, Operating-Point,
-Betriebs-Monitoring) sind projektspezifisch zu präzisieren, stellen jedoch keine prinzipiellen Hürden dar.
-
-\textbf{Einordnung Tool vs.\ Bordfunktion.} Wird das Modell ausschließlich als Entwicklungswerkzeug genutzt,
-genügt eine Credit-basierte Toolqualifikation (DO-330/TQL) bzw.\ eine dokumentierte Confidence in Use;
-für eine Bordfunktion greift die DO-178C-Logik mit hazardbasiertem DAL (typisch DAL~C–D bei Pilot-Assistenz)
-und denselben Evidenzbausteinen. In beiden Pfaden gilt: Kein ``Assurance-Rabatt'' — ML-Erkenntnisse sind
-klassisch zu verifizieren und in den Safety Case einzubetten.
-
-\textbf{Bottom line:} Unter den definierten Einsatzgrenzen (L1, ODD, kein Online-Lernen) und mit den skizzierten
-Evidenzen ist die Übertragbarkeit ausreichend für eine zulassungsfähige Assistenzfunktion; offene Punkte
-betreffen die projektspezifische Ausgestaltung, nicht die grundsätzliche Machbarkeit.
-
-
-\textbf{Wichtig:} Den Dokumenten von Honeywell bezüglich des Wetterradar eines A320, fällt es 
-nach der DO 178B (Vorgänger der DO 178C) in den Bereich von DAL Level C und kann nach EASA 
-Empfehlungen eine Anwendung finden.
+Den Honeywell-Dokumenten zum A320-Wetterradar zufolge fällt die Software nach DO-178B 
+(Vorgänger von DO-178C) in DAL~C und kann nach EASA-Empfehlungen Anwendung finden. Insgesamt ist die Übertragbarkeit 
+unter den definierten Einsatzgrenzen (L1, ODD, kein Online-Lernen) und mit den skizzierten Evidenzen ausreichend für 
+eine zulassungsfähige Assistenzfunktion. Offene Punkte betreffen primär die projektspezifische Ausgestaltung, nicht 
+die grundsätzliche Machbarkeit.

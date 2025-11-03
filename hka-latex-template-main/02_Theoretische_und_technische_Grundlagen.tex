@@ -63,9 +63,9 @@ Anwendungen von Transformer-Modellen.
 
 
 \section{Lernparadigmen}\label{sec:lernparadigmen}
-\textbf{Supervised Learning (SL)} : Eingabe–Ausgabe-Paare (z.\,B. Klassifikation, Regression).\\
-\textbf{Unsupervised Learning (UL)} : Strukturentdeckung ohne Labels (z.\,B. Clustering).\\
-\textbf{Reinforcement Learning (RL)} : Lernen durch Interaktion und Belohnungen.
+\textbf{Supervised Learning (SL)}: Eingabe–Ausgabe-Paare (z.\,B. Klassifikation, Regression).\\
+\textbf{Unsupervised Learning (UL)}: Strukturentdeckung ohne Labels (z.\,B. Clustering).\\
+\textbf{Reinforcement Learning (RL)}: Lernen durch Interaktion und Belohnungen.
 \smallskip
 
 Diese drei Lernparadigmen bilden die Hauptansätze für modernes maschinelles Lernen. 
@@ -99,11 +99,11 @@ Diese Grundlagen stellen die Basis für das im späteren Verlauf dieser Arbeit v
 
 \section{Aufgaben und Einsatzspektrum}\label{sec:radar-aufgaben}
 Radarsysteme liefern zum Beispiel wetter- und umgebungsbezogene Informationen und unterstützen taktische sowie operationelle Entscheidungen.
-Typische Aufgaben umfassen:
+Eine solche Entscheidung kann das umfliegen von Wolken bedeuten. Typische Aufgaben umfassen:
 
 \medskip
 \begin{itemize}
-  \item \textbf{Detektion und Verfolgung von Objekten:} Erkennung, Lokalisierung und Bahn-/Geschwindigkeitsschätzung (z.\,B.\ Luftfahrzeuge, Hindernisse, UAS).
+  \item \textbf{Detektion und Verfolgung von Objekten:} Erkennung, Lokalisierung und Bahn-/Geschwindigkeitsschätzung (z.\,B.\ Hindernisse oder Dronen).
   \item \textbf{Wettererfassung und -darstellung:} Identifikation von Niederschlagszonen, Turbulenzindikatoren und Gewitterzellen zur Routen-/Höhenplanung.
   \item \textbf{Kartierung und Navigationsunterstützung:} Boden-/Geländedarstellung (Mapping) als Ergänzung zu weiteren Navigationsquellen.
   \item \textbf{Luftraum- und Bodenüberwachung:} Unterstützung von Verkehrsfluss, Staffelung und Situational Awareness am Boden und in der Luft.
@@ -221,10 +221,12 @@ Betriebs essenziell sind abgeleitet werden.
 
 
 \section{Radar–Grundlagen für Objektklassifikation}\label{sec:radar-objklass}
-Eine vereinfachte Darstellung klassischer Radar-Klassifikation ist, die empfangenen Rohdaten aufzubereiteten 
-und in eine verarbeitbare Form zu bringen. Weiter wird eine deterministische Heuristik einprogrammiert, 
-die anhand dieser aufbereiteten Daten und den dort definierten Mustern die Objekte unterscheidet. 
-Diese werden anschließend dem Operator angezeigt.
+Folgendes Diagramm zeigt eine Vereinfachte Form des Signalpfades und verdeutlicht, die Einbindungspunkte 
+von Mustererkennung beziehungsweise, an welcher Stelle KI ein hohes Potential zeigt eingebunden zu werden.
+Zunächst werden die Inputdaten unter anderem mittels Filter aufbereitet und in eine verarbeitbare Form gebracht.
+Klassisch wird anschließend eine deterministische Heuristik einprogrammiert, 
+die anhand dieser aufbereiteten Daten und den dort definierten Mustern die Objekte unterscheidet, 
+welche anschließend dem Operator angezeigt werden.
 
 \usetikzlibrary{arrows.meta,positioning}
 
@@ -235,7 +237,7 @@ Diese werden anschließend dem Operator angezeigt.
   node distance=5mm,
   box/.style={draw, rounded corners, align=center, inner sep=4pt, minimum height=7mm}
 ]
-\node[box] (in)   {Daten rein\\\footnotesize (Radar-Rohdaten)};
+\node[box] (in)   {Input\\\footnotesize (Radar-Rohdaten)};
 \node[box, right=of in]   (prep) {Aufbereiten\\\footnotesize (Filter, FFT)};
 \node[box, right=of prep] (pattern) {Muster erkennen\\\footnotesize (Regeln/Features)};
 \node[box, right=of pattern] (class) {Ziel klassifizieren\\\footnotesize (Label + Konfidenz)};
@@ -257,13 +259,13 @@ Diese werden anschließend dem Operator angezeigt.
 
 
 Ein Radar erkennt Objekte, indem es mehrere Merkmale gemeinsam bewertet. 
-Zum Beispiel spielt die Echo-Stärke beziehungsweise der Radarquerschnitt eine Rolle, 
-echte Ziele heben sich mit stabiler Signalreserve vom Hintergrund ab. Aus dem Doppler 
+Zum Beispiel spielt die Echo-Stärke beziehungsweise der Radarquerschnitt eine Rolle. 
+Echte Ziele heben sich mit stabiler Signalreserve vom Hintergrund ab. Aus dem Doppler 
 ergibt sich zusammen mit einem Bewegungsmodell eine plausible Bahn, die sich 
 deutlich von Umgebungsrefexionen unterscheidet. 
 Signale, die sich deutlich von der Umgebung abheben, werden meist als punktförmige Ziele behandelt.
-Alternativ zum rein punktförmigen Zielen, kann man anhand wiederkehrende Muster wie zum 
-Beispiel Mikro-Doppler Ziele erkennen.
+Alternativ zu punktförmigen Zielen, kann man anhand wiederkehrende Muster wie zum 
+Beispiel mittel Mikro-Doppler-Signaturen Ziele erkennen.
 Entscheidend ist schließlich die zeitliche Konsistenz, was über viele Messungen wiederkehrt und sich sauber tracken lässt, 
 wird erkannt. Dabei sorgen meist CFAR und Clutter-Filter dafür, dass Rauschen und Umgebung möglichst wenig stören.
 
@@ -280,7 +282,7 @@ wird erkannt. Dabei sorgen meist CFAR und Clutter-Filter dafür, dass Rauschen u
 
 \chapter{Sicherheit}\label{sec:safety-aviation}
 Im vorliegenden Kapitel werden Begrifflichkeiten wie Safety und Reliability definiert. 
-Sowie Vorgehen zum Nachweis der Sicherheit beziehungsweise das Vorgehen bei Assurance Cases beschrieben. 
+Sowie Vorgehen zum Nachweis der Sicherheit beziehungsweise das Vorgehen bei Assurance-Cases beschrieben. 
 
 
 
@@ -322,7 +324,7 @@ oder sicher beherrschen:
 \end{itemize}
 
 \paragraph{Sicherheitsnachweis}
-Ein Assurance Case begründet systematisch, dass ein System unter definierten Einsatzbedingungen
+Ein Assurance-Case begründet systematisch, dass ein System unter definierten Einsatzbedingungen
 sicher genug ist. Es beantwortet vier Fragen:
 \begin{itemize}
   \item Was wird behauptet? \hfill(\textbf{Claim/Goal})
@@ -357,6 +359,7 @@ Safety-Zielen, abgeleiteten Anforderungen und einem Plan für deren Nachweis.
 \end{itemize}
 
 \section{Architekturprinzipien der funktionalen Sicherheit}\label{sec:arch-fusa}
+Bei den folgenden Architekturprinzipien geht es um technische/strukturelle Umsetzung der zuvor beschriebenen Risikomaßnahmen.
 Ziel dieser Prinzipien ist es, Risiken durch die Systemarchitektur zu senken. Fehler sollen gar nicht erst wirken,
 früh erkannt oder sicher beherrscht werden. Im Fokus stehen klare Strukturen, vorhersehbares Verhalten und
 kontrollierte Degradation statt Überraschungen.
@@ -388,15 +391,14 @@ Alive-Checks, Ressourcenmonitoring, HW/SW-Watchdogs. \\
 
 
 \section{Kernelemente der KI\,-Sicherheit}\label{sec:ai-safety-kern}
-Folgend werden begriffliche und methodische Grundlagen für die spätere Bewertung
-der Sicherheit von KI im Radar-Kontext etabliert. Die nachfolgenden Kernelemente bündeln wiederkehrende
-Anforderungen an die Absicherung von KI-Systemen.
+Folgenden Punkte, sind bezüglich KI-Sicherheit häufig auftauchende allgemeine Begrifflichkeiten und Methoden. 
 
+\medskip
 \begin{itemize}
   \item \textbf{ODD und Annahmen:} Präzise Festlegung des Einsatzbereichs, der Bedingungen und der
         Einschränkungen, die für Anforderungen, Daten und Annahmen gelten.
   \item \textbf{Nachweis statt „viel hilft viel“:} Eine Erhöhung von Parameterzahl oder Datenmenge
-        kann Metriken verbessern, ersetzt jedoch nicht Assurance bzw.\ belastbare Nachweise
+        kann Metriken verbessern, ersetzt jedoch nicht belastbare Nachweise
         zur Sicherheit.
   \item \textbf{Erklärbarkeit und Auditierbarkeit:} Erklärbarkeit (XAI) unterstützt fachliche
         Plausibilisierung, Reviews sowie Audits und macht Grenzen sichtbar.
@@ -406,7 +408,7 @@ Anforderungen an die Absicherung von KI-Systemen.
         Gefährdungen/Schutzziele, Datenstände, Modell-/Konfigurationsversionen, Trainingsläufe,
         Auswertungen und Releases; Reproduzierbarkeit (identische Ergebnisse bei kontrolliertem Neuaufbau)
         erhöht die Beweiskraft der Evidenz.
-  \item \textbf{Betrieb, Monitoring und Änderungen (Lifecycle):} Assurance endet nicht mit der
+  \item \textbf{Betrieb, Monitoring und Änderungen (Lifecycle):} Nachweise enden nicht mit der
         Inbetriebnahme; Umgebungsveränderungen können eine heute freigegebene KI morgen unsicher
         werden lassen und erfordern Monitoring sowie geregelte Änderungen (z.\,B.\ Retraining).
 \end{itemize}

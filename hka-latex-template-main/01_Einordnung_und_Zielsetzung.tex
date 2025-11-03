@@ -133,6 +133,69 @@ Anforderungen und Szenarien für ein Radarsystem definiert und die Übertragbark
 
 Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlungen abgeleitet.
 
+
+
+
+
+
+\section{Zielbild der Arbeit}
+\tikzset{ghost/.style={draw=none, fill=none, text opacity=0}}
+% 3×3-Boxen im Stil deiner Definition — du kannst die Trennlinien selbst zeichnen.
+\begin{tikzpicture}[
+  node distance=18mm and 18mm,
+  box/.style={draw, rounded corners, align=center, minimum width=32mm, minimum height=8mm, fill=gray!5},
+  arrow/.style={-{Latex}, thick}
+]
+
+% --- 3×3 Boxen platzieren (oben links beginnend) ---
+% Zeile 1, Spalte 1
+\node[box, ghost] (b11) {~};            
+\node[box, right=of b11] (b12) {\textbf{Automotive}};
+\node[box, right=of b12] (b13) {\textbf{Aviation}};
+
+% Zeile 2
+\node[box, below=of b11] (b21) {\textbf{Anforderungen an KI}}; 
+\node[box, below=of b12, ghost] (b22) {~};
+\node[box, below=of b13] (b23) {fordert? (EASA)};
+
+% Zeile 3
+\node[box, below=of b21] (b31) {\shortstack[c]{\textbf{Maßnahmen /}\\ \textbf{Standards zu KI}}}; 
+\node[box, below=of b22] (b32) {liefert! (ISO 8800)};
+\node[box, below=of b23] (b33) {Ziel dieser Arbeit};
+
+% --- Hilfskoordinaten für Tic-Tac-Toe-Linien (du zeichnest sie selbst) ---
+% (benötigt \usetikzlibrary{calc})
+% Vertikale Mittellinien zwischen den Spalten:
+\coordinate (x12) at ($(b11.east)!0.5!(b12.west)$);
+\coordinate (x23) at ($(b12.east)!0.5!(b13.west)$);
+
+% Horizontale Mittellinien zwischen den Zeilen:
+\coordinate (y12) at ($(b11.south)!0.5!(b21.north)$);
+\coordinate (y23) at ($(b21.south)!0.5!(b31.north)$);
+
+% --- So malst du das Tic-Tac-Toe-Raster (auskommentiert lassen, wenn du selbst zeichnen willst) ---
+ \draw (x12 |- b11.north) -- (x12 |- b31.south);
+ \draw (x23 |- b11.north) -- (x23 |- b31.south);
+ \draw (b11.west |- y12) -- (b13.east |- y12);
+ \draw (b11.west |- y23) -- (b13.east |- y23);
+
+ \draw[arrow] (b23) -- (b33);
+ \draw[arrow] (b32) -- (b33);
+\end{tikzpicture}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \newpage
 \section{Aufbau der Arbeit}
 
