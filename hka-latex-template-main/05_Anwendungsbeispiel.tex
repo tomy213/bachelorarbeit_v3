@@ -4,11 +4,11 @@
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
 \chapter{Radarauswahl \& Wetterklassifikation}\label{chap:szenarien}
 
-Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem ausgewählt und genauer betrachtet.
-Da sonst alles nur sehr vage Umschreibungen ohne konkretes Ziel wären. 
+Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem ausgewählt und genauer betrachtet, 
+da sonst alles nur sehr vage Umschreibungen ohne konkretes Ziel wären. 
 Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
 
-\section{Verschiedene Radarsysteme}
+\section{Radar Steckbriefe} \label{sec:radar_steckbrief}
 
 In Flugzeugen sind meist mehrere Radare für unterschiedliche Zwecke verbaut. 
 Im Folgenden werden exemplarisch vier Systeme betrachtet. Gezeigt werden jeweils Radartyp, 
@@ -147,13 +147,13 @@ Turbulenzen auftreten können. Ein Überflug kommt nur in Betracht, wenn ein Aus
 % -------------------------
 % NEW CHAPTER: Ausgewählte KI-Modelle
 % -------------------------
-\chapter{Ausgewählte KI-Modelle}\label{chap:modelle}
+\chapter{KI-Modell Auswahl}\label{chap:modelle}
 
-Dieses Kapitel dient dazu einzelne relevante KI Modelle besser zu verstehen und eines davon 
+Dieses Kapitel dient dazu, einzelne relevante KI Modelle besser zu verstehen und eines davon 
 auszuwählen, um dieses im Kontext der gewählten Wetterklassifikation weiter zu untersuchen.
 
 
-\section{Modell-Steckbriefe}
+\section{Modell-Steckbriefe} \label{sec:modell_steckbrief}
 
 \subsection*{CNN (Convolutional Neural Networks)} 
 \begin{itemize}
@@ -281,7 +281,7 @@ Diese sind alleinstellungsfähig, was für diese Arbeit wichtig ist, um zusätzl
 Zudem sind sie echtzeitfähig, gut erklärbar und haben eine relativ geringe Anforderung an die Leistung der Hardware. 
 Das hat den Vorteil, dass es nicht bereits an der Hardwarezulassung scheitert.
 
-\section{Erklärung eines Random Forest}
+\section{Erklärung eines Random Forest}\label{sec:erklaer_rf}
 Ein Random Forest ist ein Ensemble vieler Entscheidungsbäume. Jeder Baum wird aus einer zufälligen Stichprobe 
 der Trainingsdaten aufgebaut und betrachtet an jedem Knoten nur eine zufällige Auswahl der Merkmale. Der Baum 
 stellt einfache Schwellenfragen, teilt die Daten Schritt für Schritt und gibt am Blatt eine Klassenentscheidung 
@@ -317,7 +317,7 @@ voneinander unabhängiger, die Streuung sinkt, und die Gesamtvorhersage wird rob
 \subsection*{Random Forest im Sicherheitskontext}
 
 Random Forest eignet sich für sicherheitsrelevante Anwendungen, da das Verfahren von Natur aus 
-robust gegen Overfitting ist. Die baumstrukturierten Regeln fördern die Erklärbarkeit: 
+robust gegen Overfitting ist und eingefroren werden kann. Die baumstrukturierten Regeln fördern die Erklärbarkeit: 
 Entscheidungen lassen sich auf konkrete Feature-Schwellen und Pfade zurückführen. 
 Gleichzeitig ist die Nachverfolgbarkeit sicherheitskritischer Unterscheidungen gegeben, 
 weil Randfälle und knappe Entscheidungsmargen über Blattverteilungen, Knoten beziehungsweise 
@@ -616,48 +616,49 @@ Im Folgenden werden die in der Abdeckungstabelle als \covT gekennzeichneten RF-A
 
 \section{KO-Kriterien}
 Die folgenden Punkte sind Mindestvoraussetzungen, damit die Funktion grundsätzlich für eine Zulassung
-als Bordfunktion in Betracht kommt. Sie adressieren den Onboard-Einsatz, ein reiner Entwicklungsbetrieb
-(ohne Bordfunktion) fällt nicht darunter.
+als Bordfunktion in Betracht kommt. 
 
 \medskip
 \begin{itemize}
   \item \textbf{AI-Level \& Autorität (EASA L1/L2):}
-        Unterstützendes Modell für den Menschen, welches jederzeit übersteuerbar bleibt.\\
-        Ist als Bordassistenzsystem entsprechend gewählt worden und somit umsetzbar.
+        Unterstützendes Modell für den Menschen, welches jederzeit übersteuerbar bleibt.
 
-  \item \textbf{DAL Level C/D:}
-        Empfehlungsgemäß soll keine KI in hoch Risiko Bereichen verwendet werden (DAL A/B). \\
-        Die Zielgrößen gilt es auszuarbeiten, sollte aber mit verhältnismäßigen Aufwand möglich sein. 
-        Eine Wetterklassifikation entspricht typischerweise DAL C und liegt somit in einem realistischen Bereich.
+  \item \textbf{Kritikallitätsgrenze:}
+        Empfehlungsgemäß soll KI noch nicht in hoch Risiko Bereichen verwendet werden (DAL A/B),
+        der Fokus liegt auf geringerer Kritikalität (DAL Level C/D). 
 
   \item \textbf{Kein Online-Lernen im Betrieb:}
         Eingefrorenes Modell: Das Modell wird offline trainiert und zur Freigabe „gefroren“;
-        Laufzeitanpassungen sind ausgeschlossen.\\ 
-        Für einen Random Forest ist dies unproblematisch umsetzbar.
+        Laufzeitanpassungen sind ausgeschlossen. 
 
   \item \textbf{Kein Nachweis-Rabatt:}
         ML-Erkenntnisse ersetzen keine klassischen Nachweise: Jede abgeleitete Regel/Muster wird
-        mit etablierten Verfahren verifiziert und in den Safety Case integriert (vollständige Nachweiskette). \\
-        Dies gilt es auszuarbeiten, sollte aber mit verhältnismäßigen Aufwand möglich sein.
+        mit etablierten Verfahren verifiziert und in den Safety Case integriert (vollständige Nachweiskette). 
 
   \item \textbf{Zugelassene Hardware und Werkzeuge:}
         Ohne entsprechend zugelassene Hardware und Werkzeuge ist die Erbringung eines belastbaren 
-        Sicherheitsnachweises erheblich erschwert.\\
-        Ein Random Forest sollte mit derzeit zugelassener Hardware lauffähig sein. 
-        Zugelassene Werkzeuge oder Nachweise für verwendete Werzeuge sollte in absehbarer Zeit beziehungsweise Aufwand möglich sein.
+        Sicherheitsnachweises erheblich erschwert.
 \end{itemize}
 
 
 \section{Fazit der Übertragbarkeit}
-Die Zuordnung zeigt, dass die für den betrachteten Anforderungen 
-durch ISO 8800 mindestens teilweise und in der Praxis gut erfüllbar abgedeckt werden. 
-Mit Blick auf eine Bordfunktion sind die KO-Kriterien realistisch erfüllbar. 
-Ein Random Forest eignet sich dafür: rechnerisch leicht, deterministisch, erklärbar und mit etablierten Evidenzformen. 
-Die noch teilabgedeckten Punkte sind projektspezifisch zu präzisieren, stellen jedoch keine prinzipiellen 
-Hürden dar.
+Ausgehend von den KO-Kriterien erfüllt das betrachtete Beispiel alle maßgeblichen Voraussetzungen. 
+Es handelt sich um ein Onboard-Assistenzsystem für ein Wetterklassifikationsradar auf Basis eines Random-Forest. 
+Die Funktion wird unterstützend eingesetzt und entspricht damit Autoritätslevel 1. 
+In einem Airbus A320 \footnote{\ref{sec:radar_steckbrief} \nameref{sec:radar_steckbrief}} 
+ist die Wetterklassifikation mit der Kritikalität DAL C bewertet. 
+Die Hardwareanforderungen des Random-Forest lassen sich mit in der Praxis gebräuchlicher und zugelassener Hardware \footnote{\ref{sec:sw_u_hw} \nameref{sec:sw_u_hw}} 
+erfüllen\footnote{\ref{sec:modell_steckbrief} \nameref{sec:modell_steckbrief}}. 
+Das Modell kann vor der Inbetriebnahme eingefroren werden \footnote{\ref{sec:erklaer_rf} \nameref{sec:erklaer_rf}}, 
+und die erforderlichen Sicherheitsnachweise sind dank der 
+guten Nachvollziehbarkeit und Auditierbarkeit mit vertretbarem Aufwand zu erbringen \footnote{\ref{sec:erklaer_rf} \nameref{sec:erklaer_rf}}. 
+Als verbleibender Punkt gilt der Nachweis der Werkzeugsicherheit, der erfahrungsgemäß erreichbar ist.
 
-Den Honeywell-Dokumenten zum A320-Wetterradar zufolge fällt die Software nach DO-178B 
-(Vorgänger von DO-178C) in DAL~C und kann nach EASA-Empfehlungen Anwendung finden. Insgesamt ist die Übertragbarkeit 
-unter den definierten Einsatzgrenzen (L1, ODD, kein Online-Lernen) und mit den skizzierten Evidenzen ausreichend für 
-eine zulassungsfähige Assistenzfunktion. Offene Punkte betreffen primär die projektspezifische Ausgestaltung, nicht 
-die grundsätzliche Machbarkeit.
+Die Zuordnung der beispielbezogen abgeleiteten Anforderungen zeigt, dass diese durch ISO~8800 mindestens
+teilweise abgedeckt werden und in der Praxis gut erfüllbar sind. Die nur teilabgedeckten Aspekte sind
+projektspezifisch zu präzisieren, stellen jedoch keine prinzipiellen Hürden dar.
+
+Insgesamt ist die Übertragbarkeit unter den definierten Anforderungen und mit den aus ISO~8800
+hervorgehenden Evidenzen als ausreichend für eine zulassungsfähige Onbordassistenzfunktion zu bewerten.
+Offene Punkte betreffen primär die projektspezifische Ausgestaltung, nicht die
+grundsätzliche Machbarkeit.

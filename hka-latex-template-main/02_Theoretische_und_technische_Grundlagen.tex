@@ -36,8 +36,8 @@ Die Beispiele in den Kästen sind illustrativ, nicht abschließend.
     % Oberer Bezugspunkt
     \coordinate (topA) at (0,0);
     % AI
-    \node[draw, minimum width=14cm, minimum height=10.5cm, anchor=north] (A) at (topA) {};
-    \node[anchor=north] at (A.north) [yshift=-5pt] {\textbf{Künstliche Intelligenz (KI)}};
+    \node[draw, minimum width=14cm, minimum height=11.3cm, anchor=north] (A) at (topA) {};
+    \node[anchor=north, align=center] at (A.north) [yshift=-5pt] {\textbf{Künstliche Intelligenz (KI)} \\[25em] -- A*-Zielsuche};
     % ML
     \coordinate (topB) at ([yshift=-1cm]A.north);
     \node[draw, fill=blue!10, minimum width=13cm, minimum height=9cm, anchor=north] (B) at (topB) {};
@@ -78,11 +78,13 @@ Beim überwachten Lernen liegen zu jedem Eingabebeispiel passende Labels vor. Da
 Schichten mit Gewichten und Aktivierungsfunktionen (z.\,B.\ ReLU), die Eingaben schrittweise in
 aussagekräftige Repräsentationen überführen.
 
-Trainingsablauf (Kernidee): Daten in Mini-Batches durch das Netz schicken (Forward Pass) \(\rightarrow\) Loss mit den
+\medskip
+Trainingsablauf: Daten in Mini-Batches durch das Netz schicken (Forward Pass) \(\rightarrow\) Loss mit den
 Labels berechnen \(\rightarrow\) Backpropagation bestimmt Gradienten \(\rightarrow\) ein Optimierer aktualisiert
-die Gewichte. Viele Wiederholungen über alle Trainingsdaten heißen Epochen. Daten werden in Train/Valid/Test aufgeteilt:
+die Gewichte. Viele Wiederholungen über alle Trainingsdaten heißen Epochen. Daten werden in Train/Valid/Test aufgeteilt.
 Training passt Gewichte an, Validierung steuert Hyperparameter/Frühes Stoppen, Test schätzt die finale Leistung.
 
+\medskip
 Überanpassung (Overfitting) wird mit Regularisierung reduziert: Dropout, Weight Decay und Early Stopping.
 Metriken hängen von der Aufgabe ab: bei Klassifikation u.\,a.\ Accuracy, Precision/Recall/F\(_1\), ROC; bei
 Regression typischerweise MSE. Optional kann Transfer Learning genutzt werden, um vortrainierte Netze an neue Daten anzupassen.
@@ -281,8 +283,9 @@ wird erkannt. Dabei sorgen meist CFAR und Clutter-Filter dafür, dass Rauschen u
 %--------------------------------------------------------
 
 \chapter{Sicherheit}\label{sec:safety-aviation}
-Im vorliegenden Kapitel werden Begrifflichkeiten wie Safety und Reliability definiert. 
-Sowie Vorgehen zum Nachweis der Sicherheit beziehungsweise das Vorgehen bei Assurance-Cases beschrieben. 
+Im vorliegenden Kapitel werden die Grundzüge eines Sicherheitsnachweises skizziert, 
+welche mittels Begriffllichkeitsklärungen zu Sicherheit und Reliability gestützt wird. 
+Anschließend werden wiederholt auftretende Begriffe zu KI-Sicherheit geklärt. 
 
 
 

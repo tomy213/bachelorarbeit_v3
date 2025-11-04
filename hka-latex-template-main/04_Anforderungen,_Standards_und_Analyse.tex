@@ -3,16 +3,16 @@
 %----------------------------------------------------------------------------------------
 % Anforderungsfelder & Referenzrahmen
 % -------------------------
-\chapter{Referenzrahmen}\label{chap:anforderungen}
+\chapter{Referenzrahmen}\label{chap:referenz}
 
-Im Folgenden werden welche der wichtigsten Quellen für diese Artbeit eingeordnet. 
-Diese umfassen etablierte Standards aus der Automobil und Luftfahrtbranche und 
+Im Folgenden werden einige der wichtigsten Quellen für diese Arbeit eingeordnet. 
+Diese umfassen etablierte Standards aus der Automobil- und Luftfahrtbranche und 
 werden um Zertifizierungsempfehlungen internationaler Behörden wie EASA und 
 Forschungsbeiträge bezüglich der Zertifizierung in der Luftfahrt ergänzt.
 
 \section{Automotive-Standards}
-Die Automotive-Normen liefern gereifte Prozesse und eine skalierte Sicherheitslogik; 
-sie sind teils nicht KI-spezifisch, liefern aber eine belastbare KI spezifische Vergleichsfolie.
+Die Automotive-Normen liefern gereifte Prozesse und eine skalierte Sicherheitslogik. 
+Sie sind teils nicht KI-spezifisch, liefern aber eine belastbare KI-spezifische Vergleichsfolie.
 
 \medskip
 \begin{itemize}
@@ -20,7 +20,7 @@ sie sind teils nicht KI-spezifisch, liefern aber eine belastbare KI spezifische 
   Liefert eine domänenneutrale Argumentationsstruktur für KI, jedoch auf hohem Abstraktionsniveau und ohne direkte Bindung oder Domänenkonkretisierung.
   \item \textbf{ISO 26262 (Functional Safety) \footnote{\citetitle{iso-26262} \parencite{iso-26262}}} \\
   Bietet klare Rollen- und ASIL-Logik, jedoch ohne Abdeckung von ML/Daten-Themen und nur begrenzt auf die Luftfahrt übertragbar.
-  \item \textbf{ISO 21448 (SOTIF) \footnote{\citetitle{iso-21448-sotif} \parencite{iso-21448-sotif}}} — nicht KI-spezifisch, aber wahrnehmungsnah.\\
+  \item \textbf{ISO 21448 (SOTIF) \footnote{\citetitle{iso-21448-sotif} \parencite{iso-21448-sotif}}} \\
   Passt mit ODD-/Szenario-Logik gut zur Abdeckungsargumentation, jedoch ohne eigenen KI-Nachweisweg und primär für Automotive gedacht.
   \item \textbf{ISO/PAS 8800 \footnote{\citetitle{iso-pas-8800-2024} \parencite{iso-pas-8800-2024}}} \\
   Versteht sich als Konkretisierung der ISO 26262 für KI. Setzt praxisnahe Leitplanken für KI, jedoch mit von der Luftfahrt abweichender Zulassungslogik.
@@ -71,7 +71,8 @@ Die Forschungsarbeiten schließen Lücken mit KI-fokussierten Konzepten und Chec
 \chapter{Luftfahrtrahmenbedingungen}\label{chap:anf-avi}
 
 Folgend werden systematisch EASA Dokumente auf Forderungen an die Nachweise für KI untersucht und 
-zusätzlich etablierte Normen betrachtet. 
+zusätzlich etablierte Normen betrachtet. Die EASA Dokumente egänzen sich inhaltlich und besitzen 
+daher erkennabre Überlappungen.
 
 
 
@@ -80,7 +81,7 @@ zusätzlich etablierte Normen betrachtet.
 \section{Luftfahrt-Standards \& ihre Rolle im KI-Kontext}
 DO-178C bleibt die Baseline für Software-Nachweise in der Avionik. Ziele und Evidenzen skalieren mit 
 DAL A–E. EASA verweist explizit auf die DO-178C als Nachweisgrundlage. 
-KI-spezifische Guidance kommt zusätzlich obenauf, ändert aber die Software-Pflichten nicht. 
+KI-spezifische Guidance ergänzt, ändert aber die Software-Pflichten nicht. 
 Zudem berühren Daten-/Modell-Pipelines die Tool-Qualifikation (DO-330).
 
 DO-178C und DO-330 beziehen sich nicht spezifisch auf KI, sondern allgemein auf Software und Tools. Deterministischer Code 
@@ -117,9 +118,9 @@ Erklärbarkeit, präzise Einsatzgrenzen (ODD) und betriebliches Monitoring – o
 \begin{itemize}
   \item \textbf{Level-Feinbild \& statisches KI-Level:} Unterscheidung L1A/L1B sowie L2A (cooperation, directed) und L2B (collaboration, supervised); das höchste erreichte Fähigkeitsniveau legt ein statisches Level fest und steuert die Proportionalität der Nachweise.
   \item \textbf{ConOps \& Aufgabenallokation (HAT):} Endnutzerzentrierte ConOps mit klaren ``task Allocation Patterns'' (Rollen, Autorität, Übersteuerbarkeit) als verbindliche Grundlage für Design, V\&V und Betrieb.
-  \item \textbf{OD vs.\ ODD (Einsatzgrenzen):} Zweistufige Scope-Führung: ``Operational Domain'' auf Systemebene und verfeinertes ODD für AI/ML-Constituents; außerhalb davon gilt abstain/degradation.
+  \item \textbf{OD vs.\ ODD (Einsatzgrenzen):} Zweistufige Scope-Führung: ``Operational Domain'' auf Systemebene und verfeinertes ODD für KI/ML-Bestandteile; außerhalb davon gilt abstain/degradation.
   \item \textbf{Methodenumfang \& Trainingsmodus:} Fokus auf überwachtes (und initial unüberwachtes) Lernen; kein Reinforcement Learning in L1/L2; Modelle werden ``offline'' trainiert und zur Freigabe eingefroren (kein Online-Lernen im Betrieb).
-  \item \textbf{Kritikalitätsgrenzen \& Nachweise:} In der Anfangsphase kein Einsatz von AI/ML-Bestandteil in höchsten Kritikalitäten wie DAL~A/B; keine Reduktion klassischer Nachweis-Anforderungen innerhalb der AI/ML-Teile.
+  \item \textbf{Kritikalitätsgrenzen \& Nachweise:} In der Anfangsphase kein Einsatz von KI/ML-Bestandteil in höchsten Kritikalitäten wie DAL~A/B; keine Reduktion klassischer Nachweis-Anforderungen innerhalb der AI/ML-Teile.
   \item \textbf{Funktionsanalyse bis zum AI/ML-Item:} Systematische Zerlegung bis zur Trennlinie AI/ML-Item vs.\ traditionelle Komponenten, Anforderungen und V\&V zielgenau führen zu können.
 \end{itemize}
 
@@ -202,10 +203,14 @@ zusammengetragen und mit IDs zum späteren Vergleich markiert.
 %------------------------------------------------------------------------------
 \chapter{Luftfahrt \(\leftrightarrow\) Automotive}\label{chap:automotiv}
 
-Um zu verstehen in wiefern man die Übertragbarkeit von Automotive Standards gegenüber der Luftfahrt betrachten kann, 
-hilft es zu verstehen in wiefern diese sich bezüglich KI, Sicherheitsnachweisen oder allgemein als Branche unterscheiden oder ähneln.
+Automotive-Standards bieten mit der relativ neuen ISO 8800 formal dokumentierte Ansätze zur KI-Sicherheit. 
+Die Domäne weist strukturelle Parallelen zur Luftfahrt auf, wie im Folgenden gezeigt wird. 
 
-Was als erstes ins Auge sticht, ist eine gefahrskalierende Nachweisstrenge. In der Luftfahrt als DAL-Level und 
+Um zu verstehen, inwiefern man die Übertragbarkeit von Automotive Standards gegenüber der Luftfahrt betrachten kann, 
+hilft es zu verstehen inwiefern diese sich bezüglich KI, Sicherheitsnachweisen oder allgemein als Branche unterscheiden oder ähneln.
+
+Auf den ersten Blick zeigt sich, dass die Nachweisstrenge nach Gefahreneistufung skaliert wird. Die Skalierung wird 
+in der Luftfahrt als DAL-Level und 
 im Automotive als ASIL-Level bezeichnet. DAL berücksichtigt ausschließlich den Schweregrad, ASIL hingegen 
 berücksichtigt zusätzlich die Eintrittswahrscheinlichkeit und die Beherrschbarkeit.
 \begin{table}[h]
@@ -249,8 +254,8 @@ Kontexten. Daraus ergeben sich eher vorhersehbare Einsatzgrenzen in der Luftfahr
 Automotive in unterschiedlichen Umgebungen agiert.
 
 Auch die Ziel- und Objektklassen unterscheiden sich. In der Luftfahrt reicht das Spektrum 
-von kleinen Drohnen bis hin zu Großraumflugzeugen, im Straßenverkehr typischerweise von 
-Fußgängern bis zum Lkw. Wahrnehmung und Entfernungen sind ebenfalls 
+von kleinen Drohnen bis hin zu Großraumflugzeugen, während im Straßenverkehr typischerweise von 
+Fußgängern bis zu LKW ausgegangen wird. Wahrnehmung und Entfernungen sind ebenfalls 
 anders gelagert: Auf der Autobahn sind sich nähernde Fahrzeuge oft sichtbar und gut einschätzbar, 
 wohingegen weit entfernte Luftziele, in großen Höhen oder mit Überschall, optisch kaum erfassbar sind.
 
@@ -262,7 +267,7 @@ Muster nicht stabil auf neue Situationen übertragen lassen.
 
 
 
-\section{Software und Hardware}
+\section{Software und Hardware} \label{sec:sw_u_hw}
 
 Für diese Arbeit ist der Umgang mit Updates im Betrieb wichtig. Im Automotive werden Felddaten 
 ausgewertet und Funktionen regelmäßig aktualisiert, zur Not auch per Rückruf. In der 
@@ -283,6 +288,8 @@ Zur Veranschaulichung der Abwägung zwischen Schwellenwahl und Gesamtkosten von 
   \item $c_{\mathrm{FA}},\,c_{\mathrm{FN}}$ — Kosten pro Fehlalarm bzw.\ pro verpasstem Ziel
   \item $c_{\mathrm{sys}}(\tau)$ — Systemkosten
 \end{itemize}
+
+\medskip
 $\tau$ wird so gewählt, dass die Summe aus Fehlalarmkosten, Kosten verpasster Ereignisse 
 und Systemkosten minimal wird. 
 In KI-gestützten Radarsystemen wird die Detektionsschwelle oft gesenkt, um schwache Ziele früher zu erkennen. 
@@ -291,7 +298,7 @@ Die zusätzlichen Fehlalarme bleiben bei wirksamer Nachklassifikation gering, wa
 In zivilen Anwendungen wird die Vermeidung von Personenschäden priorisiert. 
 Im militärischen Kontext muss mit Personenschäden gerechnet werden.
 
-\subsection*{Hardwareanforderungen für KI}
+\subsection*{Hardwareanforderungen an KI}
 
 KI-Verfahren stellen oft höhere Anforderungen an die Rechenplattform als klassische Algorithmen. 
 Je nach Ansatz sind mehrere aktive CPU-Kerne nötig, teilweise auch GPUs. 
@@ -335,7 +342,7 @@ und Lebensdauer auf die erwartete Ausfallzahl auswirken.
 
 
 In der Luftfahrt sind Fehlereintrittsraten nach Anwendung und Gefahreneinstufung oft eindeutig festgehalten. 
-Im Automotive werden beispielsweise Fehlereintrittsraten bezügliche der Einstufung, vorallem bei niedriger Einstufung, unteranderem 
+Im Automotive werden beispielsweise Fehlereintrittsraten bezügliche der Einstufung, vorallem bei niedriger Einstufung, unter anderem 
 von Robustheitsanforderungen überschattet. Auch wenn theoretisch eine höhere Eintrittsrate das einzelne Fahrzeug 
 nicht unangemessen unsicherer machen würde, kann dies zu Rückrufaktionen führen und somit hohe Kosten verursachen. 
 Daher und zur Vermeidung zusätzlicher Redundanz werden im Automotive die Fehlereintrittsraten oft relativ streng gesetzt. 
@@ -354,10 +361,15 @@ Daher und zur Vermeidung zusätzlicher Redundanz werden im Automotive die Fehler
 
 
 \chapter{Deep-Dive: ISO/PAS 8800}\label{chap:iso-8800}
-Die ISO 8800 \footnote{\citetitle{iso-pas-8800-2024} \parencite{iso-pas-8800-2024}}, versteht sich als Konkretisierung der ISO 26262 für KI.
-Sie ist sehr Dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
+Mit der seit Dezember 2024 vorliegenden ISO 8800 \footnote{\citetitle{iso-pas-8800-2024} \parencite{iso-pas-8800-2024}} 
+als KI-bezogenem Baustein lassen sich belastbare 
+Prinzipien und Evidenzarten systematisch identifizieren, was im Anschluss hinsichtlich der 
+Übertragbarkeit auf die Luftfahrt näher zu untersuchen ist.
+
+Die ISO 8800, versteht sich als Konkretisierung der ISO 26262 für KI.
+Sie ist sehr dokumentationslastig und beschreibt \textbf{nicht} wann eine KI sicher ist oder wie sie 
 sicher wird. Diese Norm beschreibt was zu tun ist und wie man begründet, dass eine KI sicher genug ist. 
-Detailprozesse und Risikobeurteilungen sind nicht enthalten. Stattdessen wie existierende Normen 
+Detailprozesse und Risikobeurteilungen sind nicht enthalten, stattdessen wie existierende Normen 
 angepasst oder erweitert werden müssen.
 
 

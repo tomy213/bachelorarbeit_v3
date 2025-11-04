@@ -15,9 +15,9 @@
 Ein Bild, das sich jeder sofort vorstellen kann: Ein Pilot fragt „Hey Siri, wie ist das Wetter?“ 
 – die Bordassistenz antwortet: „In 200 km liegt mit 80 \% Wahrscheinlichkeit Starkregen.“ 
 Genau daran knüpft diese Arbeit an: Ist KI für solche Funktionen im Flugzeug bereits sicher 
-– oder zumindest sicher \emph{genug}? 
+– oder zumindest sicher genug? 
 
-Die zunehmende Integration Künstlicher Intelligenz (KI) in technische Systeme eröffnet 
+Die zunehmende Integration Künstlicher Intelligenz in technische Systeme eröffnet 
 neue Möglichkeiten für Effizienzsteigerungen, Automatisierung und verbesserte 
 Entscheidungsunterstützung. Während KI in Bereichen wie der Datenanalyse, der 
 Bilderkennung oder der Sprachverarbeitung bereits weit verbreitet ist, stellt 
@@ -28,7 +28,7 @@ Robustheit und Nachweisführung bestehen. Fehler oder Fehlfunktionen haben nicht
 
 Ein Bereich, in dem der Einsatz von KI großes Potenzial bietet, sind Radarsysteme 
 in der Luftfahrt. Sie sind essenziell für die Detektion und Klassifizierung von 
-Objekten, die Wetterbeobachtung und die Unterstützung der Navigation. Klassische 
+Objekten, die Wetterbeobachtung und der Navigationsunterstützung. Klassische 
 Verfahren stoßen in komplexen oder dynamischen Umgebungen zunehmend an ihre Grenzen, 
 sodass KI-basierte Methoden einen Mehrwert in Form verbesserter Erkennungsleistungen 
 versprechen.
@@ -42,7 +42,7 @@ Auch etablierte Sicherheitsstandards wie die ISO 8800 aus dem Automotive-Sektor
 bieten einen Referenzrahmen.
 
 Vor diesem Hintergrund gewinnt die Frage nach der Sicherheit von KI-Systemen in 
-Luftfahrtradarsystemen zunehmend an Bedeutung: Sind die bestehenden Konzepte und 
+Luftfahrtradarsystemen zunehmend an Bedeutung -- sind die bestehenden Konzepte und 
 Rahmenbedingungen ausreichend, um Vertrauen in die Technologie zu schaffen, 
 oder besteht weiterhin wesentlicher Forschungs- und Entwicklungsbedarf, bevor KI 
 zuverlässig in sicherheitskritischen Anwendungen eingesetzt werden kann?
@@ -54,17 +54,17 @@ zuverlässig in sicherheitskritischen Anwendungen eingesetzt werden kann?
 Im sicherheitskritischen Umfeld der Luftfahrt bleibt offen, ob KI-basierte Systeme 
 bereits als hinreichend sicher gelten können. Während KI in vielen Domänen erprobte 
 Vorteile zeigt, treffen ihre Nutzungsmöglichkeiten in der Luftfahrt auf besonders 
-hohe Anforderungen an Zuverlässigkeit, Robustheit und Nachweisführung. Zuständige 
+hohe Anforderungen. Zuständige 
 Luftfahrtbehörden adressieren diese Herausforderungen derzeit über konzeptionelle 
-Leitlinien; etablierte Sicherheitsstandards aus anderen Bereichen, wie etwa die ISO 8800 
+Leitlinien. Etablierte Sicherheitsstandards aus anderen Bereichen, wie etwa die ISO 8800 
 im Automotive, bieten einen bewährten Bezugsrahmen.
 
 Ungeklärt bleibt jedoch, in welchem Ausmaß vorhandene Konzepte, Vorgehensmodelle 
-und Rahmenbedingungen geeignet erscheinen, Vertrauen in KI-basierte Funktionen zu 
+und Rahmenbedingungen geeignet erscheinen, um Vertrauen in KI-basierte Funktionen zu 
 stiften, wenn diese in luftfahrtrelevanten Anwendungen eingesetzt werden. 
 Da Radarsysteme sicherheitskritische Komponenten der Luftfahrt sind, lässt 
 sich diese Fragestellung exemplarisch an diesem Anwendungsfeld einordnen, 
-ohne eine Detailbewertung einzelner Verfahren vorzunehmen: Im Vordergrund steht die 
+ohne eine Detailbewertung einzelner Verfahren vorzunehmen. Im Vordergrund steht die 
 übergeordnete Einschätzung, welche Ansätze gefordert sind und inwieweit deren 
 Abdeckung gegeben ist.
 
@@ -105,6 +105,58 @@ Vorgehensweisen im Radar-Kontext. Daraus resultieren:
 \end{itemize}
 
 
+
+
+
+\begin{figure}[h!]
+\tikzset{ghost/.style={draw=none, fill=none, text opacity=0}}
+% 3×3-Boxen im Stil deiner Definition — du kannst die Trennlinien selbst zeichnen.
+\begin{tikzpicture}[
+  node distance=18mm and 18mm,
+  box/.style={draw, rounded corners, align=center, minimum width=32mm, minimum height=8mm, fill=gray!5},
+  arrow/.style={-{Latex}, thick}
+]
+
+% --- 3×3 Boxen platzieren (oben links beginnend) ---
+% Zeile 1, Spalte 1
+\node[box, ghost] (b11) {~};            
+\node[box, right=of b11] (b12) {\textbf{Automotive}};
+\node[box, right=of b12] (b13) {\textbf{Luftfahrt}};
+
+% Zeile 2
+\node[box, below=of b11] (b21) {\textbf{Anforderungen an KI}}; 
+\node[box, below=of b12, ghost] (b22) {~};
+\node[box, below=of b13] (b23) {fordert? (EASA)};
+
+% Zeile 3
+\node[box, below=of b21] (b31) {\shortstack[c]{\textbf{Maßnahmen /}\\ \textbf{Standards zu KI}}}; 
+\node[box, below=of b22] (b32) {liefert! (ISO 8800)};
+\node[box, below=of b23] (b33) {Untersuchung einer \\ möglichen Abdeckung};
+
+% --- Hilfskoordinaten für Tic-Tac-Toe-Linien (du zeichnest sie selbst) ---
+
+\coordinate (x12) at ($(b11.east)!0.5!(b12.west)$);
+\coordinate (x23) at ($(b12.east)!0.5!(b13.west)$);
+
+% Horizontale Mittellinien zwischen den Zeilen:
+\coordinate (y12) at ($(b11.south)!0.5!(b21.north)$);
+\coordinate (y23) at ($(b21.south)!0.5!(b31.north)$);
+
+% --- So malst du das Tic-Tac-Toe-Raster (auskommentiert lassen, wenn du selbst zeichnen willst) ---
+ \draw (x12 |- b11.north) -- (x12 |- b31.south);
+ \draw (x23 |- b11.north) -- (x23 |- b31.south);
+ \draw (b11.west |- y12) -- (b13.east |- y12);
+ \draw (b11.west |- y23) -- (b13.east |- y23);
+
+ \draw[arrow] (b23) -- (b33);
+ \draw[arrow] (b32) -- (b33);
+\end{tikzpicture}
+\caption{Erläuterung der Ausgangslage dieser Arbeit}
+\end{figure}
+
+
+
+
 \subsection*{Abgrenzung}
 Nicht Gegenstand dieser Arbeit ist die Detailbewertung oder 
 Zertifizierung einzelner Algorithmen oder Produkte.
@@ -135,70 +187,7 @@ Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlu
 
 
 
-
-
-
-\section{Zielbild der Arbeit}
-\tikzset{ghost/.style={draw=none, fill=none, text opacity=0}}
-% 3×3-Boxen im Stil deiner Definition — du kannst die Trennlinien selbst zeichnen.
-\begin{tikzpicture}[
-  node distance=18mm and 18mm,
-  box/.style={draw, rounded corners, align=center, minimum width=32mm, minimum height=8mm, fill=gray!5},
-  arrow/.style={-{Latex}, thick}
-]
-
-% --- 3×3 Boxen platzieren (oben links beginnend) ---
-% Zeile 1, Spalte 1
-\node[box, ghost] (b11) {~};            
-\node[box, right=of b11] (b12) {\textbf{Automotive}};
-\node[box, right=of b12] (b13) {\textbf{Aviation}};
-
-% Zeile 2
-\node[box, below=of b11] (b21) {\textbf{Anforderungen an KI}}; 
-\node[box, below=of b12, ghost] (b22) {~};
-\node[box, below=of b13] (b23) {fordert? (EASA)};
-
-% Zeile 3
-\node[box, below=of b21] (b31) {\shortstack[c]{\textbf{Maßnahmen /}\\ \textbf{Standards zu KI}}}; 
-\node[box, below=of b22] (b32) {liefert! (ISO 8800)};
-\node[box, below=of b23] (b33) {Ziel dieser Arbeit};
-
-% --- Hilfskoordinaten für Tic-Tac-Toe-Linien (du zeichnest sie selbst) ---
-% (benötigt \usetikzlibrary{calc})
-% Vertikale Mittellinien zwischen den Spalten:
-\coordinate (x12) at ($(b11.east)!0.5!(b12.west)$);
-\coordinate (x23) at ($(b12.east)!0.5!(b13.west)$);
-
-% Horizontale Mittellinien zwischen den Zeilen:
-\coordinate (y12) at ($(b11.south)!0.5!(b21.north)$);
-\coordinate (y23) at ($(b21.south)!0.5!(b31.north)$);
-
-% --- So malst du das Tic-Tac-Toe-Raster (auskommentiert lassen, wenn du selbst zeichnen willst) ---
- \draw (x12 |- b11.north) -- (x12 |- b31.south);
- \draw (x23 |- b11.north) -- (x23 |- b31.south);
- \draw (b11.west |- y12) -- (b13.east |- y12);
- \draw (b11.west |- y23) -- (b13.east |- y23);
-
- \draw[arrow] (b23) -- (b33);
- \draw[arrow] (b32) -- (b33);
-\end{tikzpicture}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \newpage
-\section{Aufbau der Arbeit}
-
 \begin{figure}[h!]
 \centering
 \begin{tikzpicture}[
@@ -211,14 +200,14 @@ Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlu
 
 % --- Obere Reihe ---
 \node[box, markpos, label={[marknode]north east:{\textbf{1}}}] (auto) {\nameref{chap:automotiv}};
-\node[box, right=of auto, xshift=-12mm, markpos, label={[marknode]north east:{\textbf{2}}}] (ref) {\nameref{chap:anforderungen}\\(Referenzrahmen)};
+\node[box, right=of auto, xshift=-12mm, markpos, label={[marknode]north east:{\textbf{2}}}] (ref) {\nameref{chap:referenz}\\};
 \node[box, right=of ref, xshift=-12mm, markpos, label={[marknode]north east:{\textbf{3}}}] (radar) {\nameref{chap:szenarien}};
 \node[box, right=of radar, xshift=-12mm, markpos, label={[marknode]north east:{\textbf{4}}}] (models) {\nameref{chap:modelle}};
 
 % --- Zweite Reihe ---
 \node[box, below=of auto, yshift=5mm, markpos, label={[marknode]north east:{\textbf{5}}}] (iso) {\nameref{chap:iso-8800}};
 \node[box, below=of ref, yshift=5mm, markpos, label={[marknode]north east:{\textbf{6}}}] (avi) {Luftfahrt-\\rahmen-\\bedingungen}; %\nameref{chap:anf-avi}
-\node[box, below=of radar, yshift=-10mm, markpos, label={[marknode]north east:{\textbf{7}}}] (anfref) {\nameref{chap:anforderungen}\\(Anforderungen)};
+\node[box, below=of radar, yshift=-10mm, markpos, label={[marknode]north east:{\textbf{7}}}] (anfref) {\nameref{chap:anforderungen}\\};
 
 % --- Dritte Reihe ---
 \node[box, below=of avi, markpos, label={[marknode]north east:{\textbf{8}}}] (cov) {\nameref{chap:coverage}};
