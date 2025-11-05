@@ -206,10 +206,10 @@ zusammengetragen und mit IDs zum späteren Vergleich markiert.
 Automotive-Standards bieten mit der relativ neuen ISO 8800 formal dokumentierte Ansätze zur KI-Sicherheit. 
 Die Domäne weist strukturelle Parallelen zur Luftfahrt auf, wie im Folgenden gezeigt wird. 
 
-Um zu verstehen, inwiefern man die Übertragbarkeit von Automotive Standards gegenüber der Luftfahrt betrachten kann, 
-hilft es zu verstehen inwiefern diese sich bezüglich KI, Sicherheitsnachweisen oder allgemein als Branche unterscheiden oder ähneln.
+Um die Übertragbarkeit von Automotive-Standards auf die Luftfahrt bewerten zu können, ist ein Vergleich ihrer Unterschiede 
+und Gemeinsamkeiten im Bezug auf KI, Sicherheitsnachweise und Branchencharakteristika nützlich.
 
-Auf den ersten Blick zeigt sich, dass die Nachweisstrenge nach Gefahreneistufung skaliert wird. Die Skalierung wird 
+Auf den ersten Blick zeigt sich, dass die Nachweisstrenge nach Gefahreneinstufung skaliert wird. Die Skalierung wird 
 in der Luftfahrt als DAL-Level und 
 im Automotive als ASIL-Level bezeichnet. DAL berücksichtigt ausschließlich den Schweregrad, ASIL hingegen 
 berücksichtigt zusätzlich die Eintrittswahrscheinlichkeit und die Beherrschbarkeit.
@@ -220,10 +220,10 @@ berücksichtigt zusätzlich die Eintrittswahrscheinlichkeit und die Beherrschbar
 \toprule
 \textbf{Luftfahrt (DAL)} & \textbf{Automotive (ASIL)} \\
 \midrule
-DAL A (catastrophic) & ASIL D (sehr hoch)\\
-DAL B (hazardous) & ASIL C (hoch) \\
-DAL C (major) & ASIL B (mittel)\\
-DAL D (minor) & ASIL A (niedrig)  \\
+DAL A (katastrophal) & ASIL D (sehr hoch)\\
+DAL B (gefährlich) & ASIL C (hoch) \\
+DAL C (bedeutend) & ASIL B (mittel)\\
+DAL D (unerheblich) & ASIL A (niedrig)  \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -241,17 +241,17 @@ menschlicher und maschineller Entscheidung unterscheiden, den Menschen jedoch we
 \section{Regulatorik}
 
 Erste Unterschiede zeigen sich bereits in der Regulierung. In der Luftfahrt ist die behördliche 
-Einbindung stark und eine formale Zulassung vor dem Betrieb verpflichtend. Im Automotive-Bereich 
+Einbindung stark ausgeprägt und eine formale Zulassung vor dem Betrieb verpflichtend. Im Automotive-Bereich 
 erfolgt die Freigabe meist über Typgenehmigungen, in den USA sind teils auch Selbstzertifizierungen möglich.
 
 
 \section{Betrieb und Umgebung}
 
-Deutliche Unterschiede zeigen sich im Betrieb und der Einsatzumgebung. 
+Im Betrieb und der Einsatzumgebung werden weitere Unterschiede deutlich. 
 Flugzeuge folgen festen Umläufen und werden häufig von einer mehrköpfigen Crew betrieben. 
-Autos werden meist von Einzelpersonen genutzt, spontan und weltweit in sehr unterschiedlichen 
-Kontexten. Daraus ergeben sich eher vorhersehbare Einsatzgrenzen in der Luftfahrt, während im 
-Automotive in unterschiedlichen Umgebungen agiert.
+Autos werden meist von Einzelpersonen genutzt, oft spontan und weltweit in sehr unterschiedlichen 
+Kontexten. Daraus ergeben sich in der Luftfahrt vorhersehbare Einsatzgrenzen, während im 
+Automotive-Bereich unterschiedliche Umgebungen berücksichtigt werden müssen.
 
 Auch die Ziel- und Objektklassen unterscheiden sich. In der Luftfahrt reicht das Spektrum 
 von kleinen Drohnen bis hin zu Großraumflugzeugen, während im Straßenverkehr typischerweise von 
@@ -261,16 +261,16 @@ wohingegen weit entfernte Luftziele, in großen Höhen oder mit Überschall, opt
 
 Einsatzprofile und Objektklassen prägen direkt die verfügbare Datenlage. 
 Seltene Ereignisse liefern nur wenige Beispiele, was das Training einer KI erschwert 
-und das Risiko von Overfitting erhöht. Zugleich behindert eine hohe intra- 
-und interklassen-Variabilität die Generalisierung, weil sich die gelernten 
+und das Risiko von Overfitting erhöht. Zugleich behindert eine hohe Intra- 
+und Interklassenvariabilität die Generalisierung, weil sich die gelernten 
 Muster nicht stabil auf neue Situationen übertragen lassen.
 
 
 
 \section{Software und Hardware} \label{sec:sw_u_hw}
 
-Für diese Arbeit ist der Umgang mit Updates im Betrieb wichtig. Im Automotive werden Felddaten 
-ausgewertet und Funktionen regelmäßig aktualisiert, zur Not auch per Rückruf. In der 
+Ein zentraler Aspekt ist der Umgang mit Updates im laufenden Betrieb. Im Automotive werden Felddaten 
+ausgewertet und Funktionen regelmäßig aktualisiert, gegebenenfalls auch per Rückruf. In der 
 Luftfahrt werden Updates frühzeitig in den Anforderungen berücksichtigt und vor dem Einsatz erneut freigegeben.
 
 \subsection*{Kostenorientierte Auslegung der Detektion}
@@ -303,24 +303,24 @@ Im militärischen Kontext muss mit Personenschäden gerechnet werden.
 KI-Verfahren stellen oft höhere Anforderungen an die Rechenplattform als klassische Algorithmen. 
 Je nach Ansatz sind mehrere aktive CPU-Kerne nötig, teilweise auch GPUs. 
 In hochkritischen Inline-Pfaden der Luftfahrt (DAL A/B) werden mehrere CPU-Kerne erst seit wenigen Jahren, gestützt durch 
-neuere behördliche Guidance, tatsächlich genutzt. Zuvor wurden Kerne häufig stillgelegt, um den Nachweis zu 
+neuere behördliche Guidance, tatsächlich genutzt. Zuvor wurden Kerne häufig deaktiviert, um den Nachweis zu 
 vereinfachen. Der Einsatz von GPUs in solchen Pfaden bleibt selten und findet überwiegend in 
 weniger kritischen Bereichen oder in der Entwicklung statt.
 
 \subsection*{Hardware und Redundanz}
 
-Im Automotive wird technische Unsicherheit häufig durch Redundanz abgefedert, indem beispielsweise 
+Im Automotive wird technische Unsicherheit häufig durch Redundanz kompensiert, indem beispielsweise 
 rechenstarke Komponenten wie GPUs mehrfach verbaut und per Mehrheitsentscheid zusammengeführt 
 werden. Das verbessert die Verfügbarkeit ohne die Grundarchitektur zu ändern.
 
-In der Luftfahrt ist dieser Ansatz nur eingeschränkt übertragbar. Redundanzen ``stapeln'' 
+In der Luftfahrt ist dieser Ansatz nur eingeschränkt übertragbar. Redundanzen kumulieren 
 sich hier nicht beliebig, da gemeinsame Ursachen den erhofften Sicherheitsgewinn schmälern 
 und die Nachweisführung deutlich erschweren. 
 
 
 \section{Anforderungen}
 Konkrete Zielgrößen in Anforderungen lassen sich am besten über einfache Größenordnungen verdeutlichen. 
-Die folgende Tabelle stellt ein vereinfachtes Rechenbeispiel gegenüber und zeigt, wie sich Flottengröße 
+Die folgende Tabelle zeigt anhand eines vereinfachten Rechenbeispiels, wie sich Flottengröße 
 und Lebensdauer auf die erwartete Ausfallzahl auswirken.
 
 
@@ -341,11 +341,11 @@ und Lebensdauer auf die erwartete Ausfallzahl auswirken.
 \end{table}
 
 
-In der Luftfahrt sind Fehlereintrittsraten nach Anwendung und Gefahreneinstufung oft eindeutig festgehalten. 
-Im Automotive werden beispielsweise Fehlereintrittsraten bezügliche der Einstufung, vorallem bei niedriger Einstufung, unter anderem 
-von Robustheitsanforderungen überschattet. Auch wenn theoretisch eine höhere Eintrittsrate das einzelne Fahrzeug 
+In der Luftfahrt sind Fehlereintrittsraten nach Anwendung und Gefahreneinstufung typischerweise klar festgehalten. 
+Im Automotive-Bereich werden beispielsweise Fehlereintrittsraten in Bezug auf die Einstufung, insbesondere bei niedriger 
+Einstufung, unter anderem durch Robustheitsanforderungen überschattet. Auch wenn theoretisch eine höhere Eintrittsrate das einzelne Fahrzeug 
 nicht unangemessen unsicherer machen würde, kann dies zu Rückrufaktionen führen und somit hohe Kosten verursachen. 
-Daher und zur Vermeidung zusätzlicher Redundanz werden im Automotive die Fehlereintrittsraten oft relativ streng gesetzt. 
+Daher und zur Vermeidung zusätzlicher Redundanz werden im Automotive die Fehlereintrittsraten oft vergleichsweise streng gesetzt. 
 
 
 

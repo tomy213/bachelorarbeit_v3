@@ -4,9 +4,11 @@
 % --- KAPITEL: ANFORDERUNGEN UND SZENARIEN ---
 \chapter{Radarauswahl \& Wetterklassifikation}\label{chap:szenarien}
 
-Um in dieser Arbeit etwas konkreter zu werden, wird ein Radarsystem ausgewählt und genauer betrachtet, 
-da sonst alles nur sehr vage Umschreibungen ohne konkretes Ziel wären. 
-Dieses Kapitel definiert Szenarien und Anforderungen für ein ausgewähltes Radarsystem.
+Für die weitere Analyse werden exemplarisch konkrete Radarsysteme ausgewählt und 
+die Grundlagen der Wetterklassifikation festgelegt. Darauf aufbauend werden 
+realistische Anforderungen und Szenarien für ein Beispiel definiert, das die 
+bisherigen Erkenntnisse veranschaulicht. Hierfür wird ein Radarsystem mit klarer 
+Einsatzaufgabe sowie ein geeignetes KI-Modell mit definierter Funktion ausgewählt.
 
 \section{Radar Steckbriefe} \label{sec:radar_steckbrief}
 
@@ -14,24 +16,21 @@ In Flugzeugen sind meist mehrere Radare für unterschiedliche Zwecke verbaut.
 Im Folgenden werden exemplarisch vier Systeme betrachtet. Gezeigt werden jeweils Radartyp, 
 typische Einsatzprofile und eine kurze Spezifikationsliste.
 
-Hinweis zu Quellenangaben: 
-\textbf{(N)} = Daten aus nicht belastbaren Quellen (z.\,B.\ Wikipedia oder Foren), 
-\textbf{(T)} = typische Werte bekannt aus Vorlesungen wie Einführung autonomes Fahren.
 
 \subsection*{MiG\textendash25 (Smerch--A, Kampfjet)\footnote{\citetitle{MiGAlley_Smerch} \parencite{MiGAlley_Smerch}}}
 \begin{itemize}
   \item \textbf{Rolle/Typ:} Bordradar zur Luftzielsuche und \-verfolgung
   \item \textbf{Bezeichnung:} Smerch\textendash A
   \item \textbf{Frequenz/Band/Wellenlänge:} 10\,GHz (3\,cm); Variante A1: 15\,GHz (2\,cm)
-  \item \textbf{Sendeleistung (Spitze):} \textbf{(N)} 600\,kW
-  \item \textbf{Sendeleistung (Durchschnitt):} \textbf{(N)} 1–6\,kW
-  \item \textbf{Wellenform/Puls:} \textbf{(N)} Pulsradar, Pulsbreite 0{,}025\,\textmu s
+  \item \textbf{Sendeleistung (Spitze):} 600\,kW \footnote{ \label{fn:nicht_belastbar} Die aufgeführten Werte entstammen öffentlich verfügbaren und potenziell nicht verifizierten Quellen.}
+  \item \textbf{Sendeleistung (Durchschnitt):}  1–6\,kW \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
+  \item \textbf{Wellenform/Puls:}  Pulsradar, Pulsbreite 0{,}025\,\textmu s \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
   \item \textbf{Reichweite/Detektion:} Bomber \(\approx\) 100\,km; Tracking \(\approx\) 50\,km (A1)
   \item \textbf{Scan/Abdeckung:} Fortlaufende Verbesserungen in Störfestigkeit und Tiefflug\-Clutter\-toleranz ab Serienstand
   \item \textbf{Antenne (Typ/Größe/Gain):} ---
   \item \textbf{Gewicht (System):} ca. 500\,kg
   \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} ---
-  \item \textbf{Hinweise:} \textbf{(N)} keine Look\-down/Shoot\-down\-Fähigkeit
+  \item \textbf{Hinweise:}  keine Look\-down/Shoot\-down\-Fähigkeit 
 \end{itemize}
 
 \subsection*{F\textendash14 (AWG\textendash9, Kampfjet)\footnote{\citetitle{Forecast1999_AWG9_APG71} \parencite{Forecast1999_AWG9_APG71}}}
@@ -44,10 +43,10 @@ Hinweis zu Quellenangaben:
   \item \textbf{Wellenform/Puls:} Pulsbreiten: Puls 0{,}4/50\,\textmu s; Pulse\-Doppler 0{,}4/1{,}3/2{,}0/2{,}7\,\textmu s
   \item \textbf{Reichweite/Detektion:} maximale Suche 213\,km
   \item \textbf{Scan/Abdeckung:} 80\(^\circ\)/s (horizontal); 2 Scans/s (vertikal)
-  \item \textbf{Antenne (Typ/Größe/Gain):} \textbf{(N)} Slotted planar array; 14{,}2\,cm
+  \item \textbf{Antenne (Typ/Größe/Gain):}  Slotted planar array; 14{,}2\,cm \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
   \item \textbf{Gewicht (System):} 590\,kg
   \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} 0{,}79\,m\(^3\)
-  \item \textbf{Hinweise:} \textbf{(N)} Zielhöhenbereich ca. 50\,ft bis 80{,}000\,ft; Zielgeschwindigkeiten von niedriger Unterschall bis \(>\) Mach\,3
+  \item \textbf{Hinweise:}  Zielhöhenbereich ca. 50\,ft bis 80{,}000\,ft; Zielgeschwindigkeiten von niedriger Unterschall bis \(>\) Mach\,3 \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
 \end{itemize}
 
 \subsection*{A\textendash320 (Honeywell RDR\textendash4000, Passagierflugzeug)\footnote{\citetitle{Honeywell_RDR4000_Specs} \parencite{Honeywell_RDR4000_Specs}}}
@@ -55,8 +54,8 @@ Hinweis zu Quellenangaben:
   \item \textbf{Rolle/Typ:} Wetterradar
   \item \textbf{Bezeichnung:} Honeywell RDR\-4000
   \item \textbf{Frequenz/Band/Wellenlänge:} Senderfrequenz 9{,}375\,GHz
-  \item \textbf{Sendeleistung (Spitze):} \textbf{(N)} 900\,W, Pulsbreite 12\,\textmu s
-  \item \textbf{Sendeleistung (Durchschnitt):} \textbf{(N)} 40\,W, Pulszüge 275\,\textmu s
+  \item \textbf{Sendeleistung (Spitze):}  900\,W, Pulsbreite 12\,\textmu s \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
+  \item \textbf{Sendeleistung (Durchschnitt):}  40\,W, Pulszüge 275\,\textmu s \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
   \item \textbf{Wellenform/Puls:} Pulse Compression
   \item \textbf{Reichweite/Detektion:} 593\,km (Weather \& Ground Map); 111\,km (Turbulence); 9\,km (Windshear)
   \item \textbf{Scan/Abdeckung:} Azimut \(\pm 80^\circ\) (Weather/Ground Map), \(\pm 40^\circ\) (Windshear); Scanrate bis 90\(^\circ\)/s
@@ -72,11 +71,11 @@ Hinweis zu Quellenangaben:
   \item \textbf{Bezeichnung:} Frontradar
   \item \textbf{Frequenz/Band/Wellenlänge:} 76–81\,GHz
   \item \textbf{Sendeleistung (Spitze):} ---
-  \item \textbf{Sendeleistung (Durchschnitt):} \textbf{(T)} 0{,}1–1\,W
-  \item \textbf{Wellenform/Puls:} \textbf{(T)} FMCW, Chirp\-Sequenz ca. 10\,\textmu s pro Rampe
+  \item \textbf{Sendeleistung (Durchschnitt):}  0{,}1–1\,W \footnote{ \label{fn:typisch} Diese Werte basieren auf typischen Erfahrungswerten aus der Lehre.}
+  \item \textbf{Wellenform/Puls:}  FMCW, Chirp\-Sequenz ca. 10\,\textmu s pro Rampe \footnote{Siehe Fußnote \ref{fn:typisch}}
   \item \textbf{Reichweite/Detektion:} bis zu 530\,m
-  \item \textbf{Scan/Abdeckung:} \textbf{(N)} horizontal \(\pm 38^\circ\)
-  \item \textbf{Antenne (Typ/Größe/Gain):} \textbf{(N)} 10 Elemente, jeweils \(d=3{,}2\) mm
+  \item \textbf{Scan/Abdeckung:}  horizontal \(\pm 38^\circ\) \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
+  \item \textbf{Antenne (Typ/Größe/Gain):}  10 Elemente, jeweils \(d=3{,}2\) mm \footnote{Siehe Fußnote \ref{fn:nicht_belastbar}}
   \item \textbf{Gewicht (System):} ---
   \item \textbf{Abmessungen (H\(\times\)B\(\times\)T)/Volumen:} 56\,mm \(\times\) 76\,mm \(\times\) 20\,mm
   \item \textbf{Hinweise:} Gesamtverbrauch < 3{,}5\,W; optional 5 Sensoren im Fahrzeug
@@ -85,13 +84,12 @@ Hinweis zu Quellenangaben:
 
 
 \section{Auswahl des Radarsystems}
-Da das System beispielhaft dienen soll, sind Einsatzzweck oder Art des Systems zweitrangig. 
-Die Objektklassifikation wird für diese Arbeit aufgrund dessen gewählt, dass sie verhältnismäßig verständlich 
-und nachvollziehbar ist. In dieser Arbeit wird beispielhaft eine Onboard-Wetterphänomensklassifikation als 
-Funktion ausgewählt. Wetterphänomene zu identifizieren bietet hohes Potential, da aufgrund der Komplexität 
-klassische Methoden schnell an ihre Grenzen geraten. Und zusätzliche Informationen über das Wetter 
-die Crew bei Entscheidungen wie der Routenplanung unterstützen kann.
-
+Da das System beispielhaft zur Veranschaulichung dient, sind spezifischer Einsatzzweck und Art des Systems zweitrangig. 
+Die Objektklassifikation wurde gewählt, da sie verhältnismäßig leicht nachzuvollziehen ist. 
+In dieser Arbeit wird beispielhaft eine Onboard-Wetterphänomensklassifikation für den zivilen Einsatz (z.B. Airbus A320) 
+als Funktion ausgewählt. Wetterphänomene zu identifizieren bietet hohes Potential, da aufgrund der Komplexität 
+klassische Methoden schnell an ihre Grenzen geraten. 
+Zusätzliche Wetterinformationen können die Crew zudem bei Entscheidungen wie der Routenplanung unterstützen.
 
 \section{Wetterklassifikation}
 
@@ -100,7 +98,7 @@ um die Flugbahn vorausschauend zu planen und gefährliche Bereiche zu meiden.
 Die folgenden Grundlagen stützen sich überwiegend auf das Airbus-Magazin 
 \enquote{Safety First}\footnote{\citetitle{marconnet2016optimumWeatherRadar} \parencite{marconnet2016optimumWeatherRadar}}.
 
-\subsection*{Grundlagen und Physik}
+\subsection*{Gefahren und Physik}
 Die drei Hauptgefahren sind Turbulenzen, Hagel und Windscherungen. Die Anzeige 
 beruht auf der Reflexion flüssigen Wassers. Eis, trockener Hagel oder Schnee 
 reflektieren schwächer und können trotz realer Gefahr unauffällig erscheinen. 
@@ -132,7 +130,7 @@ Formänderungen weisen auf hohe Wetteraktivität hin.
 Grundsatz ist das weiträumige Meiden konvektiver Zellen, bevorzugt seitlich statt vertikal. 
 Gefahren konvektiven Wetters sollten innerhalb von mindestens 40\,NM erkannt werden; Anpassungen 
 im Flug erfolgen innerhalb von 80\,NM, und im Reiseflug wird eine Wettervermeidung innerhalb 
-von 160\,NM angestrebt. Niemals unterhalb einer konvektiven Wolke fliegen, da dort sehr starke 
+von 160\,NM angestrebt. Es sollte vermieden werden unterhalb einer konvektiven Wolke fliegen, da dort sehr starke 
 Turbulenzen auftreten können. Ein Überflug kommt nur in Betracht, wenn ein Ausweichen nicht möglich ist.
 
 
@@ -149,9 +147,12 @@ Turbulenzen auftreten können. Ein Überflug kommt nur in Betracht, wenn ein Aus
 % -------------------------
 \chapter{KI-Modell Auswahl}\label{chap:modelle}
 
-Dieses Kapitel dient dazu, einzelne relevante KI Modelle besser zu verstehen und eines davon 
-auszuwählen, um dieses im Kontext der gewählten Wetterklassifikation weiter zu untersuchen.
-
+Aufbauend auf dem gewählten System, einem Wetterklassifikationsradar in einem zivilen Flugzeug, 
+folgt die Auswahl des KI-Modells und seiner Zielfunktion. 
+Dieses Kapitel stellt hierfür Steckbriefe potenzieller Modelle vor, beschreibt 
+Einbindungsmöglichkeiten in das Radarsystem und skizziert mögliche Einsatzszenarien.
+Die Ergebnisse bilden eine nachvollziehbare Basis, die in die im nächsten Kapitel 
+definierten Anforderungen einfließt.
 
 \section{Modell-Steckbriefe} \label{sec:modell_steckbrief}
 
@@ -277,7 +278,7 @@ auszuwählen, um dieses im Kontext der gewählten Wetterklassifikation weiter zu
 
 \medskip
 Als alleinstehendes Modell empfehlen sich Baummodelle (sofern man gute Features hat), als typisches Modell wird Random Forest verwendet. 
-Diese sind alleinstellungsfähig, was für diese Arbeit wichtig ist, um zusätzliche Komplexität zu vermeiden. 
+Die Alleinstellungsfähigkeit dieses Modell dient dazu zusätzliche Komplexität zu vermeiden. 
 Zudem sind sie echtzeitfähig, gut erklärbar und haben eine relativ geringe Anforderung an die Leistung der Hardware. 
 Das hat den Vorteil, dass es nicht bereits an der Hardwarezulassung scheitert.
 
@@ -364,7 +365,7 @@ Die folgenden Beispiele zeigen mögliche Integrationspunkte.
 \end{itemize}
 
 \medskip
-Für diese Arbeit steht der Einsatz an Bord als eigenständige Assistenz im Fokus. 
+Der Einsatz an Bord als eigenständige Assistenz erfüllt die Beschreibung einer Level 1 Funktion nach EASA. 
 Eine enge Kopplung oder gar ein Ersatz etablierter Software würde zusätzliche Komplexität 
 und Zertifizierungsaufwand erzeugen, ohne den Mehrwert in diesem Rahmen zu klären. 
 
@@ -411,8 +412,10 @@ Je nach Gefahrenlage konservativ entscheiden, im Zweifel die höhere Einstufung 
 % Anforderungsfelder & Referenzrahmen
 % -------------------------
 \chapter{Anforderungen \& Zuordnung}\label{chap:anforderungen}
-In diesem Kapitel werden Anforderungen an das Beispiel des Randomforest zur Onbord-Wetterklassifikation gestellt 
-und den Anforderungen aus der Luftfahrt zugeordnet.
+In diesem Kapitel werden die beispielbezogenen Anforderungen für ein 
+Onboard-Assistenzsystem zur Wetterklassifikation im zivilen Flugzeug definiert. 
+Anschließend erfolgt die Zuordnung der zuvor eingeführten allgemeinen Luftfahrtanforderungen auf das Beispiel. 
+So entsteht die Grundlage, die Abdeckung aus ISO 8800 abzuleiten und die Übertragbarkeit am Beispiel zu bewerten.
 
 
 \section{Anforderungen Wetterklassifikation und Random Forest}
@@ -465,7 +468,7 @@ Gleiche Eingaben müssen bei gleicher Modell- und Datenversion zu gleichen Ausga
 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
-\begin{longtable}{L{0.13\linewidth}L{0.42\linewidth}L{0.22\linewidth}}
+\begin{longtable}{L{0.13\linewidth}L{0.48\linewidth}L{0.16\linewidth}}
 \caption{Mapping der RF-spezifischen Anforderungen (R-KI-01…10) auf die Luftfahrt-Forderungen (F-Avi-01…08).}\\
 \toprule
 \textbf{RF-Req ID} & \textbf{RF-Anforderung (Kurztext)} & \textbf{Zuordnung F-Avi (IDs)} \\
@@ -519,11 +522,9 @@ Forderungen sind sie lediglich konzeptionell gehalten.
 % CHAPTER 7: Bewertung der Übertragbarkeit
 % -------------------------
 \chapter{Bewertung der Übertragbarkeit}\label{chap:uebertragbarkeit}
-In diesem Kapitel geht es darum die Übertragbarkeit des gewählten Beispiels auf existierende Normen zu 
-übertragen. Das in dieser Arbeit gewählte Beispiel ist ein Random Forest KI Modell, um 
-Muster und Datensätze in der Entwicklung zu erkennen und darzustellen. Für die Klassifikation von  
-Wetterphänomenen soll es unter den Vorraussetzungen
-eines Onboard Radarsystems in einem Flugzeug betrachtet werden.
+In diesem Kapitel wird bewertet, inwieweit etablierte Automotive-Standards 
+auf das gewählte Beispiel übertragbar sind. Betrachtet wird ein Random-Forest-Modell 
+zur Wetterklassifikation unter den Voraussetzungen eines Onboard-Radarsystems in einem zivilen Flugzeug.
 
 
 
