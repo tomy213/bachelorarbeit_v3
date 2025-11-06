@@ -81,12 +81,12 @@ unter den aktuell verfügbaren Sicherheitskonzepten und regulatorischen Rahmenbe
 als hinreichend sicher zu betrachten?
 
 \subsection*{Weitere Fragen}
-\textbf{Luftfahrtforderungen}\\
+Luftfahrtforderungen:\\
 Welche Anforderungen und Leitlinien werden derzeit von 
 luftfahrtspezifischen Institutionen wie EASA an KI-Sicherheit gestellt?
 
 \medskip
-\textbf{Maßnahmen etablierter Standards}\\
+Maßnahmen etablierter Standards:\\
 Welche Maßnahmen werden von etablierten internationalen Standards wie die ISO 8800 aus der Automotivebranche 
 an die Sicherheit von KI-Systemen definiert?
 
@@ -152,7 +152,7 @@ Da für die Luftfahrt bislang keine eigenständigen KI-Sicherheitsstandards etab
 \label{tab:ausgangslage}
 \end{table}
 
-* (Zur Vollständigkeit aufgeführt, jedoch nicht Gegenstand der vertieften Analyse.)
+* (Nicht Teil der Arbeit.)
 
 
 
@@ -209,21 +209,19 @@ Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlu
 
 % --- Zweite Reihe ---
 \node[box, below=of auto, yshift=5mm, markpos, label={[marknode]north east:{\textbf{5}}}] (iso) {\nameref{chap:iso-8800}};
-\node[box, below=of ref, yshift=5mm, markpos, label={[marknode]north east:{\textbf{6}}}] (avi) {Luftfahrt-\\rahmen-\\bedingungen}; %\nameref{chap:anf-avi}
-\node[box, below=of radar, yshift=-10mm, markpos, label={[marknode]north east:{\textbf{7}}}] (anfref) {\nameref{chap:anforderungen}\\};
+\node[box, below=of ref, yshift=5mm, xshift=5mm, markpos, label={[marknode]north east:{\textbf{6}}}] (avi) {Luftfahrt-\\rahmen-\\bedingungen}; %\nameref{chap:anf-avi}
+\node[box, below=of radar, yshift=7mm, xshift=15mm, markpos, label={[marknode]north east:{\textbf{7}}}] (anfref) {\nameref{chap:anforderungen}\\ (Anforderungen)};
 
 % --- Dritte Reihe ---
-\node[box, below=of avi, markpos, label={[marknode]north east:{\textbf{8}}}] (cov) {\nameref{chap:coverage}};
+\node[box, below=of avi, xshift=-15mm, markpos, label={[marknode]north east:{\textbf{8}}}] (cov) {\nameref{chap:coverage}};
+\node[box, below=of anfref, yshift=7mm, xshift=-18mm, markpos, label={[marknode]north east:{\textbf{9}}}] (zuord) {\nameref{chap:anforderungen}\\ (Zuordnung)};
 
 % --- Vierte Reihe ---
-\node[box, below=of cov, xshift=10mm, markpos, label={[marknode]north east:{\textbf{9}}}] (ueber) {\nameref{chap:uebertragbarkeit}};
-\node[box, right=of ueber, xshift=-10mm, markpos, label={[marknode]north east:{\textbf{10}}}] (risk) {\nameref{chap:risiken}};
+\node[box, below=of cov, xshift=23mm, markpos, label={[marknode]north east:{\textbf{10}}}] (ueber) {\nameref{chap:uebertragbarkeit}};
 
 % --- Fünfte Reihe ---
 \node[box, below=of ueber, yshift=6mm, markpos, label={[marknode]north east:{\textbf{11}}}] (empf) {\nameref{chap:empfehlungen}};
 
-% --- Sechste Reihe ---
-\node[box, below=of empf, yshift=6mm, markpos, label={[marknode]north east:{\textbf{12}}}] (faz) {\nameref{chap:fazit-ausblick}};
 
 % --- Pfeile ---
 \draw[arrow] (auto) -- (iso);
@@ -232,11 +230,11 @@ Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlu
 \draw[arrow] (models) -- (anfref);
 \draw[arrow] (iso) -- (cov);
 \draw[arrow] (avi) -- (cov);
-\draw[arrow] (anfref) -- (ueber);
+\draw[arrow] (avi) -- (zuord);
+\draw[arrow] (anfref) -- (zuord);
+\draw[arrow] (zuord) -- (ueber);
 \draw[arrow] (cov) -- (ueber);
 \draw[arrow] (ueber) -- (empf);
-\draw[arrow] (risk) -- (empf);
-\draw[arrow] (empf) -- (faz);
 
 \end{tikzpicture}
 \caption{Illustration des Aufbaus der Arbeit: Kapitelbezüge und Datenfluss.}
@@ -245,17 +243,20 @@ Schließlich werden die so gewonnenen Erkenntnisse Zusammengetragen und Empfehlu
 
 Zunächst werden die notwendigen Grundlagen zu KI, Radarsystemen und Sicherheit
 skizziert.
-Darauf aufbauend folgt eine Einordnung des heutigen KI-Einsatzes und ein Blick auf die
-Automobilbranche \textbf{1} mit ihren jüngst eingeführten Standards \textbf{5} sowie luftfahrtspezifische
-Referenzrahmen \textbf{2}, \textbf{6}.
-Für eine konkrete Beispielbetrachtung wird anschließend ein Radarsystem \textbf{3} samt
-Einsatzzweck sowie ein passendes KI-Modell \textbf{4} gewählt; hierfür werden spezifische
-Anforderungen \textbf{7} definiert und mit luftfahrtspezifischen Referenzrahmen 
-abgeglichen. 
+Darauf aufbauend folgt eine Einordnung des heutigen KI-Einsatzes zusammen mit 
+Herausforderungen und Risiken.
+Anschließend werden Referenzrahmen \textbf{2} aufgeführt und die luftfahrtspezifischen 
+Rahmenbedingungen\textbf{6} genauer betrachtet. 
+Hinzu kommt ein Vergleich der Automobil- und Luftfahrtbranche \textbf{1} mit Blick auf 
+KI spezifissche Sicherheitsanforderungen mit einer vertiefung zu jüngst eingeführten 
+Automobilstandards \textbf{5}. 
 Die so identifizierten allgemeinen Luftfahrtanforderungen werden den
 Automobilstandards gegenübergestellt, um Übereinstimmungen und Lücken mittels einer \nameref{chap:coverage} \textbf{8} aufzuzeigen.
-Die Abdeckung der Beispielanforderungen wird daraus abgeleitet \textbf{9}.
-Anschließend werden Herausforderungen und Risiken für KI in der Luftfahrt
-\textbf{10} ausgearbeitet und Empfehlungen \textbf{11} formuliert. Den Abschluss bildet ein
-Fazit \textbf{12} mit den zentralen Erkenntnissen.
+Für eine konkrete Beispielbetrachtung wird anschließend ein Radarsystem \textbf{3} samt
+Einsatzzweck sowie ein KI-Modell \textbf{4} mit passender Funktion gewählt; hierfür werden spezifische
+Anforderungen \textbf{7} definiert und mit luftfahrtspezifischen Referenzrahmen 
+abgeglichen \textbf{9}. 
+Die Abdeckung der Beispielanforderungen wird daraus abgeleitet \textbf{10}.
+Anschließend werden und Empfehlungen \textbf{11} formuliert. Den Abschluss bildet ein
+Fazit mit den zentralen Erkenntnissen.
 

@@ -70,9 +70,11 @@ Die Forschungsarbeiten schließen Lücken mit KI-fokussierten Konzepten und Chec
 
 \chapter{Luftfahrtrahmenbedingungen}\label{chap:anf-avi}
 
-Folgend werden systematisch EASA Dokumente auf Forderungen an die Nachweise für KI untersucht und 
-zusätzlich etablierte Normen betrachtet. Die EASA Dokumente egänzen sich inhaltlich und besitzen 
-daher erkennabre Überlappungen.
+Die EASA ist als zuständige europäische Luftfahrtbehörde regulatorisch maßgeblich. 
+Ihre Veröffentlichungen setzen den Referenzrahmen für Anforderungen und Nachweise. 
+Im Folgenden werden die entsprechenden Dokumente systematisch auf Forderungen an 
+KI-Nachweise untersucht und zusätzlich etablierte Normen betrachtet. Diese Dokumente 
+ergänzen sich inhaltlich und weisen daher erkennbare Überlappungen auf.
 
 
 
@@ -108,7 +110,7 @@ und skizziert einen gestuften Zulassungspfad. Betont wird, dass KI das bestehend
 
 
 
-\section{EASA AI-Guidance 2024 (Concept Paper Issue 2) – Level 1 \& 2} \footnote{\citetitle{easa-ai-concept-issue2-2024} \parencite{easa-ai-concept-issue2-2024}}
+\section{EASA AI-Guidance 2024 (Concept Paper Issue 2) – Level 1 \& 2} \footnote{\citetitle{easa-ai-concept-issue2-2024} \parencite{easa-ai-concept-issue2-2024}} \label{sec:concept_paper}
 Das Concept Paper beschreibt die schrittweise Einführung von KI in sicherheitsrelevanten Anwendungen: 
 zuerst \textbf{Level 1} (Assistenzfunktionen), anschließend ausgewählte \textbf{Level 2}-Anwendungen (Human–AI Teaming). 
 Die Guidance ergänzt das bestehende Safety-Regelwerk (z.\,B.\ DO-178C) um KI-spezifische Bausteine wie Learning-Assurance, 
@@ -236,7 +238,7 @@ Nachweisumfang erreichen wie klassische Software.
 
 In der Luftfahrt steht der Mensch stärker im Mittelpunkt und behördliche Einstufungen prägen den Rahmen. 
 Im Automotive-Bereich erfolgt die Einordnung vor allem über Automatisierungsgrade, die zwar zwischen 
-menschlicher und maschineller Entscheidung unterscheiden, den Menschen jedoch weniger in den Mittelpunkt rücken.
+menschlicher und maschineller Entscheidung unterscheiden, den Menschen jedoch weniger in den Mittelpunkt rücken. 
 
 \section{Regulatorik}
 
@@ -732,12 +734,15 @@ F-Avi-08 & Use-Case-Verankerung (KPIs/Übergabe in Betrieb) & 6, 8, 12, 14 & \co
 
 
 
-\section{Diskussion der Abdeckung (EASA \& ISO 8800)}
+\section{Diskussion der Abdeckung (EASA \& ISO 8800)} \label{sec:abdeck_easa_iso}
 
 Die Gegenüberstellung zeigt eine solide Abdeckung zentraler Lebenszyklus- und Technikthemen durch die ISO/PAS~8800. 
 Insbesondere Datenführung, V\&V sowie Betriebsmaßnahmen sind deutlich adressiert. 
 Demgegenüber bleiben Aspekte mit starkem Human-Fokus (HAT/ConOps), genaue Ausprägungen von Erklärbarkeit, 
-explizite Runtime-Indikatoren und organisatorische Governance-Elemente nur teilweise oder rahmenhaft geregelt.
+explizite Runtime-Indikatoren und organisatorische Governance-Elemente nur teilweise oder rahmenhaft geregelt. 
+
+\medskip
+Hinweis zur Wirksamkeit: ISO/PAS 8800 verweist auf ISO 21448 (SOTIF). Einen expliziten SOTIF-Standard gibt es in der Luftfahrt nicht.
 
 \subsection{Stärken (voll abgedeckt, \covV)}
 \begin{itemize}

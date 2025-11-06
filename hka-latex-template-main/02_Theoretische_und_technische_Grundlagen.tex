@@ -63,13 +63,17 @@ Anwendungen von Transformer-Modellen.
 
 
 \section{Lernparadigmen}\label{sec:lernparadigmen}
-\textbf{Supervised Learning (SL)}: Eingabe–Ausgabe-Paare (z.\,B. Klassifikation, Regression).\\
-\textbf{Unsupervised Learning (UL)}: Strukturentdeckung ohne Labels (z.\,B. Clustering).\\
-\textbf{Reinforcement Learning (RL)}: Lernen durch Interaktion und Belohnungen.
-\smallskip
+Diese drei Lernparadigmen bilden die Hauptansätze für modernes maschinelles Lernen: 
 
-Diese drei Lernparadigmen bilden die Hauptansätze für modernes maschinelles Lernen. 
-Für diese Arbeit sind SL und UL am wichtigsten, da RL nach EASA-Empfehlungen \footnote{\citetitle{easa-ai-concept-issue2-2024} \parencite{easa-ai-concept-issue2-2024}} 
+\medskip
+\begin{itemize}
+  \item \textbf{Supervised Learning (SL)}:\\ Eingabe–Ausgabe-Paare der Daten (z.\,B. Random Forest).
+  \item \textbf{Unsupervised Learning (UL)}:\\ Strukturentdeckung ohne gekennzeichnete Daten (z.\,B. Clustering).
+  \item \textbf{Reinforcement Learning (RL)}:\\ Lernt nicht aus Datensätzen, sondern aus Interaktion und Rewards.
+\end{itemize}
+\medskip
+
+Am wichtigsten sind SL und UL, da RL nach EASA-Empfehlungen \footnote{\citetitle{easa-ai-concept-issue2-2024} \parencite{easa-ai-concept-issue2-2024}} 
 aufgrund der erschwerten Nachweisbarkeit und unvorhersehbaren Risiken beim online-learning als nicht geeignet eingestuft wird.
 
 \section{Beispiel: Training eines ML-Modells mit neuronalen Netzen}\label{sec:nn-train-kompakt}
